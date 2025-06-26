@@ -1,0 +1,22 @@
+{
+  "name": "Mehmet Temel - Front End Engineer & Travel Enthusiast",
+  "short_name": "Mehmet Temel",
+  "description": "Front End Engineer specializing in React, Vue.js, and e-commerce development. Based in Adana, Turkey, but always traveling.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
