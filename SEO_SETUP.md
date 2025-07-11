@@ -106,7 +106,7 @@ links: {
   twitter: 'https://x.com/temelbusiness',
   github: 'https://github.com/mehmettemel',      // Add your GitHub
   linkedin: 'https://linkedin.com/in/mehmettemel', // Add your LinkedIn
-  instagram: 'https://instagram.com/mehmettemel',  // Add your Instagram
+  instagram: 'https://instagram.com/mehmettemelim',  // Add your Instagram
 },
 ```
 

@@ -123,7 +123,7 @@ export default function About() {
               Follow on GitHub
             </SocialLink>
             <SocialLink
-              href="https://www.linkedin.com/in/mehmettemel"
+              href="https://www.linkedin.com/in/mehmettemelim"
               icon={LinkedInIcon}
               className="mt-4"
             >

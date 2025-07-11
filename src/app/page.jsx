@@ -319,17 +319,17 @@ export default async function Home() {
               icon={XIcon}
             />
             <SocialLink
-              href="#"
+              href="https://www.instagram.com/mehmettemelim"
               aria-label="Follow on Instagram"
               icon={InstagramIcon}
             />
             <SocialLink
-              href="#"
+              href="https://github.com/mehmettemel"
               aria-label="Follow on GitHub"
               icon={GitHubIcon}
             />
             <SocialLink
-              href="#"
+              href="https://www.linkedin.com/in/mehmettemelim"
               aria-label="Follow on LinkedIn"
               icon={LinkedInIcon}
             />

@@ -7,9 +7,9 @@ export const siteConfig = {
   ogImage: '/og-image.jpg',
   links: {
     twitter: 'https://x.com/temelbusiness',
-    github: 'https://github.com/mehmettemelim',
-    linkedin: 'https://linkedin.com/in/mehmettemel',
-    instagram: 'https://instagram.com/mehmettemel',
+    github: 'https://github.com/mehmettemel',
+    linkedin: 'https://www.linkedin.com/in/mehmettemelim',
+    instagram: 'https://www.instagram.com/mehmettemelim',
   },
   keywords: [
     // Personal branding
