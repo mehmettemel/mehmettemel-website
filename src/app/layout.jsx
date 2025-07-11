@@ -63,7 +63,7 @@ export const metadata = {
   },
   verification: {
     // Add these when you have them from Search Console
-    // google: 'your-google-verification-code',
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
     // yandex: 'your-yandex-verification-code',
     // yahoo: 'your-yahoo-verification-code',
     // bing: 'your-bing-verification-code',
