@@ -3,7 +3,6 @@ import Link from 'next/link'
 import clsx from 'clsx'
 
 import { Button } from '../components/Button'
-import { Card } from '../components/Card'
 import { Container } from '../components/Container'
 import {
   GitHubIcon,
@@ -18,8 +17,6 @@ import logoVendrops from '../images/logos/vendrops.jpg'
 // import image3 from '../images/photos/3.jpeg'
 // import image4 from '../images/photos/4.jpeg'
 // import image5 from '../images/photos/5.jpg'
-import { getAllArticles } from '../lib/articles'
-import { formatDate } from '../lib/formatDate'
 
 // SEO metadata for the home page
 export const metadata = {
@@ -143,21 +140,6 @@ function ArrowDownIcon(props) {
         strokeLinejoin="round"
       />
     </svg>
-  )
-}
-
-function Article({ article }) {
-  return (
-    <Card as="article">
-      <Card.Title href={`/articles/${article.slug}`}>
-        {article.title}
-      </Card.Title>
-      <Card.Eyebrow as="time" dateTime={article.date} decorate>
-        {formatDate(article.date)}
-      </Card.Eyebrow>
-      <Card.Description>{article.description}</Card.Description>
-      <Card.Cta>Read article</Card.Cta>
-    </Card>
   )
 }
 
@@ -295,9 +277,7 @@ function Resume() {
 //   )
 // }
 
-export default async function Home() {
-  let articles = (await getAllArticles()).slice(0, 4)
-
+export default function Home() {
   return (
     <>
       <Container className="mt-9">
@@ -339,11 +319,7 @@ export default async function Home() {
       {/* <Photos /> */}
       <Container className="mt-24 md:mt-28">
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
-          <div className="flex flex-col gap-16">
-            {articles.map((article) => (
-              <Article key={article.slug} article={article} />
-            ))}
-          </div>
+          <div className="flex flex-col gap-16"></div>
           <div className="space-y-10 lg:pl-16 xl:pl-24">
             <Newsletter />
             <Resume />

@@ -1,15 +1,6 @@
-import rehypePrism from '@mapbox/rehype-prism'
-import nextMDX from '@next/mdx'
-import remarkGfm from 'remark-gfm'
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
-  experimental: {
-    outputFileTracingIncludes: {
-      '/articles/*': ['./src/app/articles/**/*.mdx'],
-    },
-  },
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
   images: {
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
@@ -42,12 +33,4 @@ const nextConfig = {
   },
 }
 
-const withMDX = nextMDX({
-  extension: /\.mdx?$/,
-  options: {
-    remarkPlugins: [remarkGfm],
-    rehypePlugins: [rehypePrism],
-  },
-})
-
-export default withMDX(nextConfig)
+export default nextConfig
