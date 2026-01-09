@@ -1,6 +1,5 @@
-import Image from 'next/image'
 import Link from 'next/link'
-import clsx from 'clsx'
+import { format } from 'date-fns'
 
 import { Button } from '../components/Button'
 import { Container } from '../components/Container'
@@ -10,13 +9,7 @@ import {
   LinkedInIcon,
   XIcon,
 } from '../components/SocialIcons'
-import logoClemta from '../images/logos/clemta.jpg'
-import logoVendrops from '../images/logos/vendrops.jpg'
-// import image1 from '../images/photos/1.jpg'
-// import image2 from '../images/photos/2.jpeg'
-// import image3 from '../images/photos/3.jpeg'
-// import image4 from '../images/photos/4.jpeg'
-// import image5 from '../images/photos/5.jpg'
+import { getAllPosts } from '../lib/blog'
 
 // SEO metadata for the home page
 export const metadata = {
@@ -84,65 +77,6 @@ export const metadata = {
   },
 }
 
-function MailIcon(props) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <path
-        d="M2.75 7.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
-        className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
-      />
-      <path
-        d="m4 6 6.024 5.479a2.915 2.915 0 0 0 3.952 0L20 6"
-        className="stroke-zinc-400 dark:stroke-zinc-500"
-      />
-    </svg>
-  )
-}
-
-function BriefcaseIcon(props) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <path
-        d="M2.75 9.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
-        className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
-      />
-      <path
-        d="M3 14.25h6.249c.484 0 .952-.002 1.316-.319l.777-.682a.996.996 0 0 1 1.316 0l.777.682c.364.317.832.319 1.316.319H21M8.75 6.5V4.75a2 2 0 0 1 2-2h2.5a2 2 0 0 1 2 2V6.5"
-        className="stroke-zinc-400 dark:stroke-zinc-500"
-      />
-    </svg>
-  )
-}
-
-function ArrowDownIcon(props) {
-  return (
-    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
-      <path
-        d="M4.75 8.75 8 12.25m0 0 3.25-3.5M8 12.25v-8.5"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
-
 function SocialLink({ icon: Icon, ...props }) {
   return (
     <Link className="group -m-1 p-1" {...props}>
@@ -151,143 +85,67 @@ function SocialLink({ icon: Icon, ...props }) {
   )
 }
 
-function Newsletter() {
+function Article({ post }) {
   return (
-    <form
-      action="/thank-you"
-      className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40"
-    >
-      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        <MailIcon className="h-6 w-6 flex-none" />
-        <span className="ml-3">Stay up to date</span>
+    <article className="group relative flex flex-col items-start">
+      <h2 className="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
+        <div className="absolute -inset-x-4 -inset-y-6 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 sm:-inset-x-6 sm:rounded-2xl dark:bg-zinc-800/50" />
+        <Link href={`/blog/${post.slug}`}>
+          <span className="absolute -inset-x-4 -inset-y-6 z-20 sm:-inset-x-6 sm:rounded-2xl" />
+          <span className="relative z-10">{post.title}</span>
+        </Link>
       </h2>
-      <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-        Get notified when I publish something new about travel, food, and the
-        occasional frontend development tip.
+      <time
+        className="relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400 pl-3.5 dark:text-zinc-500"
+        dateTime={post.date}
+      >
+        <span
+          className="absolute inset-y-0 left-0 flex items-center"
+          aria-hidden="true"
+        >
+          <span className="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500" />
+        </span>
+        {format(new Date(post.date), 'MMMM d, yyyy')}
+      </time>
+      <p className="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+        {post.description}
       </p>
-      <div className="mt-6 flex">
-        <input
-          type="email"
-          placeholder="Email address"
-          aria-label="Email address"
-          required
-          className="min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] placeholder-zinc-500 shadow-md shadow-zinc-800/5 focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 focus:outline-none sm:text-sm dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10"
-        />
-        <Button type="submit" className="ml-4 flex-none">
-          Join
-        </Button>
+      <div
+        aria-hidden="true"
+        className="relative z-10 mt-4 flex items-center text-sm font-medium text-teal-500"
+      >
+        Read article
+        <svg
+          viewBox="0 0 16 16"
+          fill="none"
+          aria-hidden="true"
+          className="ml-1 h-4 w-4 stroke-current"
+        >
+          <path
+            d="M6.75 5.75 9.25 8l-2.5 2.25"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
       </div>
-    </form>
+    </article>
   )
 }
-
-function Resume() {
-  let resume = [
-    {
-      company: 'Clemta',
-      title: 'Senior Frontend Developer',
-      logo: logoClemta,
-      start: '2021',
-      end: {
-        label: 'Present',
-        dateTime: new Date().getFullYear().toString(),
-      },
-    },
-    {
-      company: 'Vendrops',
-      title: 'Frontend Developer',
-      logo: logoVendrops,
-      start: '2020',
-      end: '2021',
-    },
-  ]
-
-  return (
-    <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
-      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        <BriefcaseIcon className="h-6 w-6 flex-none" />
-        <span className="ml-3">Work</span>
-      </h2>
-      <ol className="mt-6 space-y-4">
-        {resume.map((role, roleIndex) => (
-          <li key={roleIndex} className="flex gap-4">
-            <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md ring-1 shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-              <Image src={role.logo} alt="" className="h-7 w-7" unoptimized />
-            </div>
-            <dl className="flex flex-auto flex-wrap gap-x-2">
-              <dt className="sr-only">Company</dt>
-              <dd className="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
-                {role.company}
-              </dd>
-              <dt className="sr-only">Role</dt>
-              <dd className="text-xs text-zinc-500 dark:text-zinc-400">
-                {role.title}
-              </dd>
-              <dt className="sr-only">Date</dt>
-              <dd
-                className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
-                aria-label={`${role.start.label ?? role.start} until ${
-                  role.end.label ?? role.end
-                }`}
-              >
-                <time dateTime={role.start.dateTime ?? role.start}>
-                  {role.start.label ?? role.start}
-                </time>{' '}
-                <span aria-hidden="true">—</span>{' '}
-                <time dateTime={role.end.dateTime ?? role.end}>
-                  {role.end.label ?? role.end}
-                </time>
-              </dd>
-            </dl>
-          </li>
-        ))}
-      </ol>
-      <Button href="#" variant="secondary" className="group mt-6 w-full">
-        Download CV
-        <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
-      </Button>
-    </div>
-  )
-}
-
-// function Photos() {
-//   let rotations = ['rotate-2', '-rotate-2', 'rotate-2', 'rotate-2', '-rotate-2']
-
-//   return (
-//     <div className="mt-16 sm:mt-20">
-//       <div className="-my-4 flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
-//         {[image1, image2, image3, image4, image5].map((image, imageIndex) => (
-//           <div
-//             key={image.src}
-//             className={clsx(
-//               'relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 sm:w-72 sm:rounded-2xl dark:bg-zinc-800',
-//               rotations[imageIndex % rotations.length],
-//             )}
-//           >
-//             <Image
-//               src={image}
-//               alt=""
-//               sizes="(min-width: 640px) 18rem, 11rem"
-//               className="absolute inset-0 h-full w-full object-cover"
-//             />
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   )
-// }
 
 export default function Home() {
+  const posts = getAllPosts().slice(0, 3)
+
   return (
     <>
       <Container className="mt-9">
         <div className="max-w-2xl">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-            Xin chào!
+            Travel & Food Blogger
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I&apos;m Mehmet Temel, a passionate traveler and food enthusiast
-            who&apos;s been exploring the world one dish at a time. Based in
+            I'm Mehmet Temel, a passionate traveler and food enthusiast
+            who's been exploring the world one dish at a time. Based in
             Adana, Turkey, but always on the move, I share authentic travel
             experiences, hidden food gems, and honest restaurant reviews from my
             adventures around the globe.
@@ -316,13 +174,37 @@ export default function Home() {
           </div>
         </div>
       </Container>
-      {/* <Photos /> */}
       <Container className="mt-24 md:mt-28">
-        <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
-          <div className="flex flex-col gap-16"></div>
-          <div className="space-y-10 lg:pl-16 xl:pl-24">
-            <Newsletter />
-            <Resume />
+        <div className="mx-auto max-w-2xl">
+          <div className="flex flex-col gap-16">
+            <div>
+              <div className="flex items-center justify-between mb-8">
+                <h2 className="text-2xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100">
+                  Latest Posts
+                </h2>
+                {posts.length > 0 && (
+                  <Button href="/blog" variant="secondary">
+                    View all
+                  </Button>
+                )}
+              </div>
+              {posts.length === 0 ? (
+                <div className="text-center py-12">
+                  <p className="text-zinc-600 dark:text-zinc-400">
+                    No blog posts yet. Check back soon for exciting travel and food
+                    stories!
+                  </p>
+                </div>
+              ) : (
+                <div className="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
+                  <div className="flex flex-col space-y-16">
+                    {posts.map((post) => (
+                      <Article key={post.slug} post={post} />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </Container>
