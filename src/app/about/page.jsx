@@ -62,31 +62,35 @@ export default function About() {
           </h1>
           <div className="mt-6 space-y-7 text-base text-muted-foreground">
             <p>
-              I'm a passionate traveler and food enthusiast who believes that the best way
-              to understand a culture is through its cuisine. Based in Adana, Turkey, but
-              always on the move, I've spent years exploring hidden food gems and authentic
-              local experiences around the world.
+              I'm a passionate traveler and food enthusiast who believes that
+              the best way to understand a culture is through its cuisine. Based
+              in Adana, Turkey, but always on the move, I've spent years
+              exploring hidden food gems and authentic local experiences around
+              the world.
             </p>
             <p>
-              What started as a personal journey to document my favorite food spots has
-              grown into a platform where I share honest restaurant reviews, travel tips,
-              and stories from my adventures. From street food stalls to fine dining
-              restaurants, I'm always searching for that next unforgettable meal.
+              What started as a personal journey to document my favorite food
+              spots has grown into a platform where I share honest restaurant
+              reviews, travel tips, and stories from my adventures. From street
+              food stalls to fine dining restaurants, I'm always searching for
+              that next unforgettable meal.
             </p>
             <p>
-              My approach is simple: eat like a local, travel with an open mind, and share
-              genuine experiences. No pretense, no filters—just real stories about real
-              food and the amazing people I meet along the way.
+              My approach is simple: eat like a local, travel with an open mind,
+              and share genuine experiences. No pretense, no filters—just real
+              stories about real food and the amazing people I meet along the
+              way.
             </p>
             <p>
-              When I'm not traveling or eating my way through a new city, I work as a
-              Senior Frontend Developer, building digital experiences that connect people.
-              This unique combination of technical expertise and creative storytelling
-              helps me bring my adventures to life on this blog.
+              When I'm not traveling or eating my way through a new city, I work
+              as a Senior Frontend Developer, building digital experiences that
+              connect people. This unique combination of technical expertise and
+              creative storytelling helps me bring my adventures to life on this
+              blog.
             </p>
             <p>
-              Join me on this culinary journey as we discover authentic flavors, hidden
-              gems, and unforgettable experiences from around the globe.
+              Join me on this culinary journey as we discover authentic flavors,
+              hidden gems, and unforgettable experiences from around the globe.
             </p>
           </div>
         </div>

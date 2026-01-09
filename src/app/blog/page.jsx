@@ -27,6 +27,7 @@ export default function BlogIndex() {
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
+                prefetch={false}
                 className="flex items-center justify-between py-3 group border-b border-border last:border-b-0 hover:bg-secondary/20 -mx-3 px-3 transition"
               >
                 <span className="text-[15px] text-foreground group-hover:text-primary transition flex-1 pr-4">
