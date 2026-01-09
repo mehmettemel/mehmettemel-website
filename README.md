@@ -1,42 +1,150 @@
-# Spotlight
+# Mehmet Temel - Travel & Food Blog
 
-Spotlight is a [Tailwind Plus](https://tailwindcss.com/plus) site template built using [Tailwind CSS](https://tailwindcss.com) and [Next.js](https://nextjs.org).
+A modern, SEO-optimized blog built with Next.js 16, focused on travel stories and food adventures.
 
-## Getting started
+## 🚀 Tech Stack
 
-To get started with this template, first install the npm dependencies:
+- **Framework**: Next.js 16.1.1 (App Router)
+- **React**: 19.2.3
+- **Styling**: Tailwind CSS 4.1.18
+- **Content**: Markdown with gray-matter
+- **Typography**: @tailwindcss/typography
+- **Theme**: next-themes (Dark/Light mode)
+- **Animations**: Framer Motion
+
+## 📦 Blog Features
+
+- **Markdown Support**: Write blog posts in Markdown format
+- **Reading Time**: Automatic reading time calculation
+- **SEO Optimized**: Full metadata, Open Graph, and structured data
+- **Responsive Design**: Mobile-first approach
+- **Dark Mode**: System preference detection with manual toggle
+- **Fast Performance**: Optimized images and static generation
+
+## 📝 Writing Blog Posts
+
+Create new blog posts in the `content/blog` directory with `.md` extension.
+
+### Example Post
+
+Create a file `content/blog/my-first-post.md`:
+
+```markdown
+---
+title: "My First Food Adventure in Istanbul"
+date: "2026-01-09"
+description: "Exploring the hidden gems of Istanbul's street food scene"
+tags: ["Turkey", "Street Food", "Istanbul"]
+author: "Mehmet Temel"
+---
+
+# My First Food Adventure in Istanbul
+
+Your content here...
+```
+
+### Frontmatter Fields
+
+- `title` (required): Post title
+- `date` (required): Publication date (YYYY-MM-DD)
+- `description` (required): Brief description for previews
+- `tags` (optional): Array of tags
+- `author` (optional): Author name (defaults to "Mehmet Temel")
+
+## 🛠️ Development
 
 ```bash
+# Install dependencies
 npm install
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
 ```
 
-Next, create a `.env.local` file in the root of your project and set the `NEXT_PUBLIC_SITE_URL` variable to your site's public URL:
+## 📁 Project Structure
 
 ```
-NEXT_PUBLIC_SITE_URL=https://example.com
+├── content/
+│   └── blog/           # Markdown blog posts
+├── public/             # Static assets
+├── src/
+│   ├── app/            # Next.js App Router
+│   │   ├── blog/       # Blog pages
+│   │   │   ├── page.jsx          # Blog list
+│   │   │   └── [slug]/page.jsx   # Blog post detail
+│   │   ├── about/      # About page
+│   │   ├── layout.jsx  # Root layout
+│   │   └── page.jsx    # Homepage
+│   ├── components/     # Reusable components
+│   ├── images/         # Image assets
+│   ├── lib/
+│   │   ├── blog.js     # Blog utilities
+│   │   └── seo.js      # SEO utilities
+│   └── styles/         # Global styles
+├── next.config.mjs
+├── package.json
+└── tailwind.config.js
 ```
 
-Next, run the development server:
+## 🎨 Customization
+
+### Colors
+
+Edit `src/styles/tailwind.css` to customize the color palette.
+
+### Navigation
+
+Update navigation links in:
+- `src/components/Header.jsx`
+- `src/components/Footer.jsx`
+
+### SEO
+
+Configure SEO settings in:
+- `src/lib/seo.js` (Global SEO config)
+- `src/app/layout.jsx` (Root metadata)
+
+## 🌐 Deployment
+
+This project is optimized for deployment on Vercel:
 
 ```bash
-npm run dev
+# Deploy to Vercel
+vercel
+
+# Or push to your git repository
+git push origin main
 ```
 
-Finally, open [http://localhost:3000](http://localhost:3000) in your browser to view the website.
+## 📄 Environment Variables
 
-## Customizing
+Create a `.env.local` file:
 
-You can start editing this template by modifying the files in the `/src` folder. The site will auto-update as you edit these files.
+```env
+NEXT_PUBLIC_SITE_URL=https://mehmettemel.com
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+```
 
-## License
+## 📝 License
 
-This site template is a commercial product and is licensed under the [Tailwind Plus license](https://tailwindcss.com/plus/license).
+MIT License - See LICENSE.md for details
 
-## Learn more
+## 👤 Author
 
-To learn more about the technologies used in this site template, see the following resources:
+**Mehmet Temel**
 
-- [Tailwind CSS](https://tailwindcss.com/docs) - the official Tailwind CSS documentation
-- [Next.js](https://nextjs.org/docs) - the official Next.js documentation
-- [Headless UI](https://headlessui.dev) - the official Headless UI documentation
-- [MDX](https://mdxjs.com) - the MDX documentation
+- Website: [mehmettemel.com](https://mehmettemel.com)
+- Twitter: [@temelbusiness](https://x.com/temelbusiness)
+- Instagram: [@mehmettemelim](https://instagram.com/mehmettemelim)
+- GitHub: [@mehmettemel](https://github.com/mehmettemel)
+- LinkedIn: [mehmettemelim](https://linkedin.com/in/mehmettemelim)
+
+---
+
+Built with ❤️ using Next.js
