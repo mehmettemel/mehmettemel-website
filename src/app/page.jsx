@@ -110,15 +110,15 @@ export default function Home() {
           </Link>
         </div>
 
-        {/* Blog Section */}
+        {/* Rabbit Holes Section */}
         <section className="mt-12">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-[22px] font-bold text-foreground">Blog</h2>
+            <h2 className="text-[22px] font-bold text-foreground">Rabbit Holes</h2>
             <Link
               href="/blog"
               className="text-sm text-muted hover:text-primary transition inline-flex items-center gap-1"
             >
-              View all blog posts
+              View all
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
@@ -144,7 +144,7 @@ export default function Home() {
             </div>
           ) : (
             <p className="text-muted-foreground text-sm">
-              No blog posts yet. Check back soon!
+              No rabbit holes explored yet. Check back soon!
             </p>
           )}
         </section>

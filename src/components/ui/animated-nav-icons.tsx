@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 interface AnimatedNavIconProps {
   href: string
   label: string
-  icon: "home" | "blog" | "contact"
+  icon: "home" | "blog" | "contact" | "gems"
   onClick?: () => void
 }
 
@@ -31,6 +31,7 @@ export function AnimatedNavIcon({ href, label, icon, onClick }: AnimatedNavIconP
       {icon === "home" && <HomeIcon isActive={isActive} />}
       {icon === "blog" && <BlogIcon isActive={isActive} />}
       {icon === "contact" && <ContactIcon isActive={isActive} />}
+      {icon === "gems" && <GemsIcon isActive={isActive} />}
     </Link>
   )
 }
@@ -211,6 +212,68 @@ function ContactIcon({ isActive }: { isActive: boolean }) {
             animate={{
               scale: [0.8, 1, 0.9],
               opacity: [0.5, 0.8, 0.6]
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+        </motion.g>
+      </motion.svg>
+    </motion.div>
+  )
+}
+
+function GemsIcon({ isActive }: { isActive: boolean }) {
+  const duration = 0.7
+
+  return (
+    <motion.div animate={isActive ? "active" : "inactive"}>
+      <motion.svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {/* Diamond outline - inactive */}
+        <motion.path
+          d="M6 3h12l4 6-10 12L2 9l4-6z"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          variants={{
+            active: { opacity: 0, scale: 0.8 },
+            inactive: { opacity: 1, scale: 1 }
+          }}
+          transition={{ duration }}
+        />
+        {/* Diamond filled - active */}
+        <motion.g
+          variants={{
+            active: { opacity: 1, scale: 1 },
+            inactive: { opacity: 0, scale: 0.8 }
+          }}
+          transition={{ duration }}
+        >
+          <motion.path
+            d="M6 3h12l4 6-10 12L2 9l4-6z"
+            fill="currentColor"
+            fillOpacity="0.2"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <motion.path
+            d="M12 3l0 18M2 9h20"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            animate={{
+              opacity: [0.5, 1, 0.5]
             }}
             transition={{
               duration: 2,

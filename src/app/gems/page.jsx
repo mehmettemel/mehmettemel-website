@@ -1,0 +1,416 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import { Container } from '../../components/Container'
+import { GridGems, GemDetailsPanel } from '../../components/OrbitingGems'
+
+// Sample gems data
+const gems = [
+  {
+    id: 1,
+    title: 'The Design of Everyday Things',
+    description: 'A classic book about design principles that shape our daily interactions with objects and interfaces.',
+    type: 'book',
+    author: 'Don Norman',
+    color: '#3b82f6',
+    url: 'https://www.amazon.com/Design-Everyday-Things-Revised-Expanded/dp/0465050654',
+  },
+  {
+    id: 2,
+    title: 'Fireship - Web Dev Tutorials',
+    description: 'High-intensity code tutorials and tech news in 100 seconds.',
+    type: 'video',
+    author: 'Fireship',
+    color: '#ef4444',
+    url: 'https://www.youtube.com/@Fireship',
+  },
+  {
+    id: 3,
+    title: 'Laws of UX',
+    description: 'Collection of best practices for designing user interfaces.',
+    type: 'article',
+    color: '#8b5cf6',
+    url: 'https://lawsofux.com/',
+  },
+  {
+    id: 4,
+    title: 'Refactoring UI',
+    description: 'Learn how to design beautiful user interfaces by yourself using specific tactics.',
+    type: 'book',
+    author: 'Adam Wathan & Steve Schoger',
+    color: '#10b981',
+    url: 'https://www.refactoringui.com/',
+  },
+  {
+    id: 5,
+    title: 'Josh Comeau Blog',
+    description: 'In-depth articles about CSS, React, and web development.',
+    type: 'article',
+    color: '#f59e0b',
+    url: 'https://www.joshwcomeau.com/',
+  },
+  {
+    id: 6,
+    title: 'TypeScript Deep Dive',
+    description: 'The definitive guide to TypeScript and its best practices.',
+    type: 'article',
+    author: 'Basarat Ali Syed',
+    color: '#3b82f6',
+    url: 'https://basarat.gitbook.io/typescript',
+  },
+  {
+    id: 7,
+    title: 'Atomic Habits',
+    description: 'An easy and proven way to build good habits and break bad ones.',
+    type: 'book',
+    author: 'James Clear',
+    color: '#ec4899',
+    url: 'https://jamesclear.com/atomic-habits',
+  },
+  {
+    id: 8,
+    title: 'CSS for JavaScript Developers',
+    description: 'The interactive learning experience designed to help JavaScript devs become confident with CSS.',
+    type: 'article',
+    author: 'Josh Comeau',
+    color: '#06b6d4',
+    url: 'https://css-for-js.dev/',
+  },
+  {
+    id: 9,
+    title: 'React Patterns',
+    description: 'Common design patterns for React applications.',
+    type: 'article',
+    color: '#14b8a6',
+    url: 'https://reactpatterns.com/',
+  },
+  {
+    id: 10,
+    title: 'JavaScript.info',
+    description: 'The Modern JavaScript Tutorial - comprehensive guide.',
+    type: 'article',
+    color: '#eab308',
+    url: 'https://javascript.info/',
+  },
+  {
+    id: 11,
+    title: 'Clean Code',
+    description: 'A Handbook of Agile Software Craftsmanship by Robert C. Martin.',
+    type: 'book',
+    author: 'Robert C. Martin',
+    color: '#f97316',
+    url: 'https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882',
+  },
+  {
+    id: 12,
+    title: 'Figma for Developers',
+    description: 'Learn how to use Figma as a developer.',
+    type: 'video',
+    color: '#a855f7',
+    url: 'https://www.youtube.com/results?search_query=figma+for+developers',
+  },
+  {
+    id: 13,
+    title: 'Web.dev by Google',
+    description: 'Guidance to build modern web experiences.',
+    type: 'article',
+    color: '#4285f4',
+    url: 'https://web.dev/',
+  },
+  {
+    id: 14,
+    title: 'CSS Tricks',
+    description: 'Daily articles about CSS, HTML, JavaScript, and web design.',
+    type: 'article',
+    color: '#d75a4a',
+    url: 'https://css-tricks.com/',
+  },
+  {
+    id: 15,
+    title: 'Refactoring Guru',
+    description: 'Learn design patterns and refactoring techniques.',
+    type: 'article',
+    color: '#ff6b6b',
+    url: 'https://refactoring.guru/',
+  },
+  {
+    id: 16,
+    title: 'System Design Primer',
+    description: 'Learn how to design large-scale systems.',
+    type: 'article',
+    color: '#51cf66',
+    url: 'https://github.com/donnemartin/system-design-primer',
+  },
+  {
+    id: 17,
+    title: 'The Pragmatic Programmer',
+    description: 'Your journey to mastery - essential reading for developers.',
+    type: 'book',
+    author: 'Andrew Hunt',
+    color: '#845ef7',
+    url: 'https://pragprog.com/titles/tpp20/',
+  },
+  {
+    id: 18,
+    title: 'Fireship Courses',
+    description: 'Advanced full-stack development courses.',
+    type: 'video',
+    color: '#fa5252',
+    url: 'https://fireship.io/',
+  },
+  {
+    id: 19,
+    title: 'MDN Web Docs',
+    description: 'The ultimate web development documentation.',
+    type: 'article',
+    color: '#228be6',
+    url: 'https://developer.mozilla.org/',
+  },
+  {
+    id: 20,
+    title: 'Frontend Masters',
+    description: 'Advance your skills with in-depth courses.',
+    type: 'video',
+    color: '#c92a2a',
+    url: 'https://frontendmasters.com/',
+  },
+  {
+    id: 21,
+    title: 'Stripe Design',
+    description: 'Beautiful design inspiration from Stripe.',
+    type: 'article',
+    color: '#635bff',
+    url: 'https://stripe.com/blog/category/design',
+  },
+  {
+    id: 22,
+    title: 'React Docs',
+    description: 'Official React documentation and guides.',
+    type: 'article',
+    color: '#61dafb',
+    url: 'https://react.dev/',
+  },
+  {
+    id: 23,
+    title: 'You Don\'t Know JS',
+    description: 'Deep dive into JavaScript core mechanisms.',
+    type: 'book',
+    author: 'Kyle Simpson',
+    color: '#f59f00',
+    url: 'https://github.com/getify/You-Dont-Know-JS',
+  },
+  {
+    id: 24,
+    title: 'Tailwind Labs',
+    description: 'Resources and insights from Tailwind creators.',
+    type: 'article',
+    color: '#06b6d4',
+    url: 'https://tailwindcss.com/blog',
+  },
+  {
+    id: 25,
+    title: 'Next.js Conf Videos',
+    description: 'Latest talks from Next.js conferences.',
+    type: 'video',
+    color: '#000000',
+    url: 'https://www.youtube.com/@VercelHQ',
+  },
+  {
+    id: 26,
+    title: 'Smashing Magazine',
+    description: 'Quality content for web designers and developers.',
+    type: 'article',
+    color: '#e74c3c',
+    url: 'https://www.smashingmagazine.com/',
+  },
+  {
+    id: 27,
+    title: 'Don\'t Make Me Think',
+    description: 'Common sense approach to web usability.',
+    type: 'book',
+    author: 'Steve Krug',
+    color: '#e67e22',
+    url: 'https://sensible.com/dont-make-me-think/',
+  },
+  {
+    id: 28,
+    title: 'Web Performance 101',
+    description: 'Essential performance optimization techniques.',
+    type: 'video',
+    color: '#16a085',
+    url: 'https://www.youtube.com/watch?v=0fONene3OIA',
+  },
+  {
+    id: 29,
+    title: 'A11y Project',
+    description: 'Community-driven resource for web accessibility.',
+    type: 'article',
+    color: '#9b59b6',
+    url: 'https://www.a11yproject.com/',
+  },
+  {
+    id: 30,
+    title: 'Vercel Design',
+    description: 'Minimalist design philosophy and examples.',
+    type: 'article',
+    color: '#000000',
+    url: 'https://vercel.com/design',
+  },
+  {
+    id: 31,
+    title: 'Eloquent JavaScript',
+    description: 'Modern introduction to programming with JavaScript.',
+    type: 'book',
+    author: 'Marijn Haverbeke',
+    color: '#f39c12',
+    url: 'https://eloquentjavascript.net/',
+  },
+  {
+    id: 32,
+    title: 'ThePrimeagen',
+    description: 'Vim, coding, and developer productivity videos.',
+    type: 'video',
+    color: '#8e44ad',
+    url: 'https://www.youtube.com/@ThePrimeagen',
+  },
+  {
+    id: 33,
+    title: 'Inclusive Components',
+    description: 'Blog about accessible web interface components.',
+    type: 'article',
+    color: '#27ae60',
+    url: 'https://inclusive-components.design/',
+  },
+  {
+    id: 34,
+    title: 'Microinteractions',
+    description: 'The details that make great interfaces.',
+    type: 'book',
+    author: 'Dan Saffer',
+    color: '#3498db',
+    url: 'https://microinteractions.com/',
+  },
+  {
+    id: 35,
+    title: 'Kent C. Dodds',
+    description: 'React, testing, and software quality tutorials.',
+    type: 'video',
+    color: '#e74c3c',
+    url: 'https://kentcdodds.com/',
+  },
+  {
+    id: 36,
+    title: 'Every Layout',
+    description: 'Solving layout problems with CSS.',
+    type: 'article',
+    color: '#f368e0',
+    url: 'https://every-layout.dev/',
+  },
+  {
+    id: 37,
+    title: 'Site.js',
+    description: 'Modern web development best practices.',
+    type: 'article',
+    color: '#ff6348',
+    url: 'https://sitejs.org/',
+  },
+  {
+    id: 38,
+    title: 'Shape Up',
+    description: 'How Basecamp approaches product development.',
+    type: 'book',
+    author: 'Ryan Singer',
+    color: '#5f27cd',
+    url: 'https://basecamp.com/shapeup',
+  },
+  {
+    id: 39,
+    title: 'Web Components',
+    description: 'Building reusable web components guide.',
+    type: 'video',
+    color: '#00d2d3',
+    url: 'https://www.youtube.com/watch?v=PCWaFLy3VUo',
+  },
+  {
+    id: 40,
+    title: 'Can I Use',
+    description: 'Browser support tables for modern web technologies.',
+    type: 'article',
+    color: '#f9ca24',
+    url: 'https://caniuse.com/',
+  },
+]
+
+export default function Gems() {
+  const [currentGem, setCurrentGem] = useState(null)
+  const [showDetails, setShowDetails] = useState(false)
+  const [shuffledGems, setShuffledGems] = useState([])
+
+  // Shuffle gems on mount
+  useEffect(() => {
+    const shuffled = [...gems].sort(() => Math.random() - 0.5)
+    setShuffledGems(shuffled)
+  }, [])
+
+  // Prevent body scroll when details panel is open
+  useEffect(() => {
+    if (showDetails) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [showDetails])
+
+  const handleGemClick = (index) => {
+    const isMobile = window.innerWidth < 768
+    const circlesPerRow = isMobile ? 5 : 7
+    const rows = isMobile ? 8 : 10
+    const totalCircles = Math.min(circlesPerRow * rows, shuffledGems.length)
+    const displayedGems = shuffledGems.slice(0, totalCircles)
+    setCurrentGem(displayedGems[index])
+    setShowDetails(true)
+  }
+
+  const handleVisit = () => {
+    if (currentGem?.url) {
+      window.open(currentGem.url, '_blank', 'noopener,noreferrer')
+    }
+  }
+
+  if (shuffledGems.length === 0) return null
+
+  return (
+    <>
+      <Container>
+        <div className="h-screen flex flex-col overflow-hidden">
+          {/* Header */}
+          <div className="pt-6 pb-2 text-center flex-shrink-0">
+            <h1 className="mb-1 text-2xl md:text-3xl font-bold tracking-tight text-foreground">
+              Internet Gems
+            </h1>
+            <p className="text-xs md:text-sm text-muted-foreground">
+              Hover to preview • Click to explore
+            </p>
+          </div>
+
+          {/* Grid Layout */}
+          <div className="flex-1 min-h-0 overflow-hidden">
+            <GridGems gems={shuffledGems} onGemClick={handleGemClick} />
+          </div>
+        </div>
+      </Container>
+
+      {/* Gem Details Panel */}
+      {showDetails && currentGem && (
+        <GemDetailsPanel
+          gem={currentGem}
+          onClose={() => setShowDetails(false)}
+          onVisit={handleVisit}
+        />
+      )}
+    </>
+  )
+}

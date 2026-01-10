@@ -1,9 +1,10 @@
 ---
-title: "Welcome to My Travel & Food Blog"
+title: "Atomic Habits - Tiny Changes, Remarkable Results"
 date: "2026-01-09"
-description: "An introduction to my journey of exploring the world through food and travel, one authentic experience at a time."
-tags: ["Travel", "Food", "Introduction"]
+description: "Deep dive into James Clear's masterpiece on building better habits through small, incremental changes. Key insights on habit formation and breaking bad patterns."
+tags: ["Self-Improvement", "Productivity", "Habits"]
 author: "Mehmet Temel"
+type: "book"
 ---
 
 # Welcome to My Travel & Food Blog

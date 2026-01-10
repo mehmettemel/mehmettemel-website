@@ -15,6 +15,7 @@ function DesktopNav() {
   return (
     <nav className="hidden md:flex items-center gap-1">
       <AnimatedNavIcon href="/blog" label="Blog" icon="blog" />
+      <AnimatedNavIcon href="/gems" label="Gems" icon="gems" />
       <AnimatedNavIcon href="/contact" label="Contact" icon="contact" />
     </nav>
   )
@@ -40,6 +41,10 @@ function MobileNav() {
           <div className="flex items-center gap-2 px-2">
             <AnimatedNavIcon href="/blog" label="Blog" icon="blog" onClick={closeSheet} />
             <span className="text-sm font-medium text-muted">Blog</span>
+          </div>
+          <div className="flex items-center gap-2 px-2">
+            <AnimatedNavIcon href="/gems" label="Gems" icon="gems" onClick={closeSheet} />
+            <span className="text-sm font-medium text-muted">Gems</span>
           </div>
           <div className="flex items-center gap-2 px-2">
             <AnimatedNavIcon href="/contact" label="Contact" icon="contact" onClick={closeSheet} />
