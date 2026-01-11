@@ -69,7 +69,31 @@ Complete guide to all files and their purposes in this Next.js portfolio project
 
 #### `page.jsx`
 **Purpose:** Homepage
-**Content:** Hero section with bio and social links
+**Content:**
+- Hero section identity (Gıda Mühendisi × Frontend Developer)
+- Latest Signals items (2-3)
+- Recent Researches posts (2-3)
+- Featured Gems (4-6)
+
+#### `researches/`
+**Purpose:** Deep-dive research articles about food, nutrition, and biology
+**Files:**
+- `page.jsx` - List page with filtering (Tümü, Gıdalar, Besinler, Mekanizmalar)
+- `[slug]/page.jsx` - Individual research post page
+
+#### `signals/`
+**Purpose:** Weekly updated content page
+**Files:**
+- `page.jsx` - Shows current week's findings (updated every Monday)
+
+#### `gems/`
+**Purpose:** Curated resources list
+**Files:**
+- `page.jsx` - Grid/list view with filtering and search
+
+#### `contact/`
+**Purpose:** Contact page with communication channels
+**Content:** Email and social media links
 
 #### `template.jsx`
 **Purpose:** Page transition animations
@@ -84,9 +108,16 @@ Complete guide to all files and their purposes in this Next.js portfolio project
 
 #### `sitemap.js`
 **Purpose:** Dynamic XML sitemap generation for SEO
+**Includes:** All researches posts, gems, signals, and static pages
 
 #### `robots.js`
 **Purpose:** Dynamic robots.txt generation for SEO
+
+#### `feed.xml/` (to be created)
+**Purpose:** RSS feed for Researches posts
+
+#### `signals.xml/` (optional, to be created)
+**Purpose:** RSS feed for Signals updates
 
 ### Components (`src/components/`)
 
@@ -124,8 +155,22 @@ Complete guide to all files and their purposes in this Next.js portfolio project
 - Business information for local SEO
 
 #### `blog.js`
-**Purpose:** Blog post utilities
-**Functions:** Get all posts, get post by slug, markdown processing
+**Purpose:** Research post utilities
+**Functions:**
+- Get all posts (recursive directory traversal)
+- Get post by slug (with category detection)
+- Get posts by category
+- Markdown processing
+- Category filtering
+- Auto-detect category from folder structure
+
+#### `gems.js` (to be created)
+**Purpose:** Gems management utilities
+**Functions:** Get all gems, filter by category/type, search gems
+
+#### `signals.js` (to be created)
+**Purpose:** Signals content utilities
+**Functions:** Get current signals content, get last update date
 
 #### `utils.js`
 **Purpose:** Utility functions
@@ -153,9 +198,67 @@ Complete guide to all files and their purposes in this Next.js portfolio project
 
 ## Content (`content/`)
 
-### `content/blog/`
-**Purpose:** Blog post markdown/MDX files
-**Example:** `sample-post.md`
+### `content/researches/`
+**Purpose:** Research post markdown/MDX files (deep-dive articles about food, nutrition, and biology)
+**Format:** MDX with frontmatter
+**Structure:** Category-based tree structure
+
+**Tree Structure:**
+```
+content/researches/
+├── gidalar/                    # Foods category
+│   ├── zeytinyagi-gercekten-mucize-mi.mdx
+│   ├── kahve-ve-kortizol.mdx
+│   └── sut-ve-laktozun-gercegi.mdx
+├── besinler/                   # Nutrients category
+│   ├── protein-ne-kadar-cok.mdx
+│   ├── vitamin-d-eksikligi.mdx
+│   └── omega-3-kaynaklar.mdx
+└── mekanizmalar/               # Mechanisms category
+    ├── inflamasyon-nedir.mdx
+    ├── metabolizma-hizi.mdx
+    └── hormonlar-ve-beslenme.mdx
+```
+
+**Categories:**
+- `gidalar` - Specific foods (olive oil, coffee, milk, etc.)
+- `besinler` - Nutrients (protein, vitamins, minerals, etc.)
+- `mekanizmalar` - Biological mechanisms (inflammation, metabolism, hormones, etc.)
+
+**Frontmatter:**
+```yaml
+title: "Post title"
+description: "Post description"
+date: "2025-01-13"
+category: "gidalar" # Auto-detected from folder, or manual override
+tags: ["tag1", "tag2"]
+readingTime: 8  # Auto-calculated
+featured: true
+```
+
+### `content/signals/`
+**Purpose:** Weekly updated content with interesting finds
+**Format:** Single MDX file that gets updated weekly (no archive)
+**File:** `current.mdx`
+**Update Schedule:** Every Monday
+**Content:** 3-5 short items with sources (2-3 sentences + link)
+
+### `content/gems/`
+**Purpose:** Curated list of valuable resources from the internet
+**Format:** JSON or individual MDX files
+**Example:** `gems.json` or individual `.mdx` files
+**Data Structure:**
+```typescript
+{
+  title: string,
+  url: string,
+  type: 'tool' | 'article' | 'video' | 'podcast' | 'site' | 'thread',
+  description: string, // Max 280 characters
+  dateAdded: string,
+  category: string[],
+  language: 'tr' | 'en'
+}
+```
 
 ## Public Assets (`public/`)
 
@@ -215,6 +318,32 @@ Complete guide to all files and their purposes in this Next.js portfolio project
 - `env.example` (duplicate of `.env.example`)
 - Possibly `src/components/SEO.jsx` (if using Next.js metadata API)
 - `docs/structure.md` (overlaps with this file)
+
+## Completed Implementation
+
+### Content Management
+- `content/researches/` - Research posts organized by category
+  - Category subfolders: `gidalar/`, `besinler/`, `mekanizmalar/`
+- `content/signals/current.mdx` - Weekly signals content
+- `content/gems/gems.json` - Curated resources list
+
+### App Pages
+- `src/app/researches/` - Research posts section
+- `src/app/signals/` - Weekly updates page
+- `src/app/gems/` - Curated resources page
+- `src/app/feed.xml/route.js` - RSS feed for Researches posts (to be created)
+- `src/app/signals.xml/route.js` - RSS feed for Signals (optional)
+
+### Utilities
+- `src/lib/blog.js` - Research post management functions
+- `src/lib/gems.js` - Gems management functions (to be created)
+- `src/lib/signals.js` - Signals content functions (to be created)
+
+### Components (if needed)
+- `src/components/GemCard.jsx` - Card component for gems
+- `src/components/SignalItem.jsx` - Item component for signals
+- `src/components/CategoryFilter.jsx` - Category filtering component
+- `src/components/SearchBar.jsx` - Search functionality for gems
 
 ## Generated/Cache Directories (not committed)
 

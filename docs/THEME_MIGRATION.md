@@ -1,14 +1,16 @@
-# Tema Migrasyonu - Earth Tone Color Scheme
+# Tema ve İçerik Migrasyonu - Food Decoded
 
-Bu dokümanda, projenin standart renklerden benzersiz toprak tonlarına geçişi ve yapılan tüm değişiklikler anlatılmaktadır.
+Bu dokümanda, projenin standart portfolio sitesinden "Food Decoded" konseptine geçişi, renk değişiklikleri ve yapılacak tüm güncellemeler anlatılmaktadır.
 
-## 📅 Geçiş Tarihi
-9 Ocak 2026
+## 📅 Geçiş Tarihleri
 
-## 🎨 Yeni Renk Paleti
+**Renk Migrasyonu:** 9 Ocak 2026
+**Food Decoded Konsept Migrasyonu:** 11 Ocak 2026 (Planlanıyor)
+
+## 🎨 Renk Paleti (Tamamlandı)
 
 ### Renk Felsefesi
-Proje, standart mavi/gri tonlardan doğal ve sıcak toprak tonlarına geçiş yapılmıştır. Bu palet özellikle yiyecek, seyahat ve doğa içerikleri için idealdir.
+Proje, standart mavi/gri tonlardan doğal ve sıcak toprak tonlarına geçiş yapılmıştır. Bu palet özellikle **Food Decoded** konsepti için mükemmel: gıda, beslenme, sağlık ve bilim içerikleri.
 
 ### Ana Renkler
 
@@ -200,6 +202,91 @@ dark:text-zinc-200
    - [ ] Keyboard navigation
    - [ ] Screen reader uyumluluğu
 
+## 🔄 Food Decoded İçerik Migrasyonu (Yapılacak)
+
+### Planlanan Değişiklikler
+
+#### 1. Navigasyon Güncellemesi
+**Mevcut:**
+```
+Home | Blog | Gems
+```
+
+**Yeni:**
+```
+[Logo: MT] | Decoded | Gems | Signals | Hakkımda
+```
+
+#### 2. Ana Sayfa Hero Section
+**Mevcut:**
+```
+Hi 👋, I'm Mehmet Temel!
+Senior Frontend Developer From Turkey, based in Adana
+Food Engineering & Software Building user-friendly interfaces
+```
+
+**Yeni:**
+```
+Hi, I'm Mehmet Temel
+
+Gıda Mühendisi × Frontend Developer
+
+İnternetin derinliklerinden beslenme ve insan biyolojisi hakkında
+az bilinen değerli kaynakları çıkarıyor, anlaşılır hale getiriyorum.
+
+[Twitter'da Takip Et] [Signals'a Abone Ol]
+```
+
+#### 3. Sayfa Yapısı Değişiklikleri
+
+**Yeniden Adlandırma:**
+- `/blog` → `/decoded`
+- `content/blog/` → `content/decoded/`
+- `src/lib/blog.js` → `src/lib/decoded.js`
+
+**Yeni Sayfalar:**
+- `/signals` - Haftalık güncellemeler (Her Pazartesi)
+- `/gems` - Küratörlük listesi (zaten var, güncellenecek)
+
+#### 4. Footer Güncellemesi
+```
+Mehmet Temel
+Gıda Mühendisi × Frontend Developer
+
+[Twitter] [Instagram] [GitHub] [RSS]
+
+Her Pazartesi yeni Signals yayınlanır.
+© 2025
+```
+
+### Migrasyon Kontrol Listesi
+
+#### Phase 1: Temel Yapı ✅ (Renk Migrasyonu Tamamlandı)
+- [x] CSS değişkenleri güncellendi
+- [x] Tüm component'ler semantic token kullanıyor
+- [x] Dark mode optimize edildi
+- [x] Dokümantasyon güncellendi
+
+#### Phase 2: İçerik Yapısı (Yapılacak)
+- [ ] Navigation güncellemesi
+- [ ] `/blog` → `/decoded` yeniden adlandırma
+- [ ] `/signals` sayfası oluşturma
+- [ ] Ana sayfa hero section güncelleme
+- [ ] Footer güncelleme
+
+#### Phase 3: İçerik Sistemi (Yapılacak)
+- [ ] Decoded frontmatter şeması güncelleme
+- [ ] Kategori filtreleme (Gıdalar, Besinler, Mekanizmalar)
+- [ ] Signals MDX yapısı oluşturma
+- [ ] Gems veri yapısı güncelleme
+
+#### Phase 4: Özellikler (Yapılacak)
+- [ ] RSS feed (/feed.xml)
+- [ ] Signals RSS feed (/signals.xml) - opsiyonel
+- [ ] Dynamic OG image generation
+- [ ] Search functionality (Gems)
+- [ ] Category filtering (Decoded, Gems)
+
 ## 🔍 Bilinen Sorunlar
 
 Henüz bilinen sorun yok.
@@ -207,7 +294,10 @@ Henüz bilinen sorun yok.
 ## 🚀 Gelecek İyileştirmeler
 
 1. **Animasyonlar**: Tema geçişlerinde daha smooth animasyonlar
-2. **Custom Renkler**: Kullanıcı tercihi ile renk özelleştirme
+2. **İçerik Özellikler**:
+   - Reading progress indicator (Decoded posts)
+   - Social share buttons
+   - Related posts algorithm
 3. **Seasonal Themes**: Mevsimsel varyasyonlar (örn: sonbahar tonları)
 4. **Accessibility**: Yüksek kontrast modu seçeneği
 
@@ -250,13 +340,31 @@ Henüz bilinen sorun yok.
 }
 ```
 
+## 📚 İlgili Dokümantasyon
+
+- [Project Overview](./project-overview.md) - Food Decoded konsept detayları
+- [Priorities](./priorities.md) - Implementation roadmap
+- [Color Scheme](./COLOR_SCHEME.md) - Detaylı renk paleti
+- [File Structure](./FILE_STRUCTURE.md) - Yeni dosya yapısı
+- [SEO Setup](./SEO_SETUP.md) - Food Decoded SEO stratejisi
+
 ## 🎉 Sonuç
 
+### Tamamlanan: Renk Migrasyonu
 Proje artık benzersiz ve modern bir earth-tone renk paletine sahip. Bu palet özellikle:
-- Yiyecek ve seyahat içeriklerine uygun
-- Gözü yormayan, doğal tonlar
-- Her iki modda da tutarlı deneyim
-- WCAG standartlarına uygun kontrast
-- Profesyonel ve modern görünüm
+- ✅ Gıda ve beslenme içeriklerine mükemmel uyum
+- ✅ Gözü yormayan, doğal tonlar
+- ✅ Her iki modda da tutarlı deneyim
+- ✅ WCAG standartlarına uygun kontrast
+- ✅ Profesyonel ve modern görünüm
 
-sağlamaktadır.
+### Yapılacak: Food Decoded İçerik Migrasyonu
+İçerik yapısı "Food Decoded" konseptine göre güncellenecek:
+- 🔄 Sayfa yapısı değişiklikleri (/decoded, /signals, /gems)
+- 🔄 İçerik sistemi (kategoriler, filtreleme, arama)
+- 🔄 SEO optimizasyonu (RSS, OG images, structured data)
+- 🔄 Analytics tracking (custom events)
+- 🔄 İlk içerik oluşturma
+
+**Tahmini Tamamlanma:** 4-6 hafta
+**Öncelik:** HIGH (Phase 1-2), MEDIUM (Phase 3-4)

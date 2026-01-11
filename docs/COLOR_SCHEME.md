@@ -1,14 +1,16 @@
-# Renk Şeması Dokümantasyonu
+# Renk Şeması Dokümantasyonu - Food Decoded
 
 Bu proje, alışılmışın dışında doğal ve toprak tonlarından oluşan benzersiz bir renk paletine sahiptir. Renk şeması, modern minimalizmi doğal tonlarla birleştirerek sıcak ve otantik bir kullanıcı deneyimi sunar.
 
+**Food Decoded için mükemmel:** Bu renk paleti özellikle gıda, beslenme, sağlık ve doğa temalı içerikler için tasarlanmıştır. Toprak tonları, doğallık ve sıcaklık hissi vererek içeriğin güvenilirliğini ve otantikliğini artırır.
+
 ## Renk Paleti Felsefesi
 
-Projede kullanılan renkler, doğadan ilham alınarak seçilmiştir:
+Projede kullanılan renkler, doğadan ve gıda dünyasından ilham alınarak seçilmiştir:
 
-- **Light Mode**: Keten kumaşının sıcak ve doğal tonu
-- **Dark Mode**: Zeytin ağacının huzur veren koyu yeşili
-- **Vurgu Renkleri**: Adaçayı (Sage) ve kil (Clay) tonları
+- **Light Mode**: Keten kumaşının sıcak ve doğal tonu (organik, ham, doğal gıdalar)
+- **Dark Mode**: Zeytin ağacının huzur veren koyu yeşili (Akdeniz, zeytinyağı, sağlık)
+- **Vurgu Renkleri**: Adaçayı (Sage) ve kil (Clay) tonları (otlar, baharatlar, toprak)
 
 ## Renk Tanımları
 
@@ -152,12 +154,38 @@ Proje genelinde renkleri değiştirmek için `src/styles/tailwind.css` dosyasın
 
 ## Renk Psikolojisi
 
-- **Linen (Keten)**: Sıcaklık, doğallık, konfor
-- **Olive (Zeytin)**: Huzur, denge, sofistike
-- **Sage (Adaçayı)**: Büyüme, yenilenme, sakinlik
-- **Clay (Kil)**: Topraklılık, güvenilirlik, sıcaklık
+- **Linen (Keten)**: Sıcaklık, doğallık, konfor, saflık
+- **Olive (Zeytin)**: Huzur, denge, sofistike, Akdeniz, sağlık
+- **Sage (Adaçayı)**: Büyüme, yenilenme, sakinlik, şifalı bitkiler
+- **Clay (Kil)**: Topraklılık, güvenilirlik, sıcaklık, organik
 
-Bu renk paleti özellikle yiyecek, seyahat ve doğa temalı içerikler için idealdir.
+Bu renk paleti özellikle **Food Decoded** gibi gıda, beslenme, sağlık ve bilim temalı içerikler için idealdir.
+
+## Food Decoded İçin Renk Kullanımı
+
+### İçerik Kategorileri İçin Önerilen Vurgular
+
+**Gıdalar (Foods):**
+- Primary accent (Sage/Clay) kullanın
+- Doğal, organik hissi veren yeşil tonlar
+
+**Besinler (Nutrients):**
+- Muted tones ile bilimsel, objektif görünüm
+- Border ve card kullanımıyla ayrıştırma
+
+**Mekanizmalar (Mechanisms):**
+- Secondary background ile vurgulama
+- Bilimsel içerik için nötr arka planlar
+
+### Signals & Gems İçin Renk Önerileri
+
+**Signals (Haftalık Güncellemeler):**
+- Fresh, yeni içerik hissi için primary accent kullanın
+- Son güncelleme tarihi için muted-foreground
+
+**Gems (Küratörlük):**
+- External link ikonları için primary
+- Kategori badge'leri için primary/10 opacity background
 
 ## Özel Durumlar
 

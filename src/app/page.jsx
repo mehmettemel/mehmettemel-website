@@ -47,11 +47,11 @@ export default function Home() {
       <div className="max-w-[620px] mx-auto pt-12 pb-16">
         {/* Hero Section */}
         <h1 className="text-[32px] leading-[1.2] font-bold tracking-tight text-foreground mb-2">
-          Hi, I'm Mehmet Temel
+          Merhaba, Ben Mehmet Temel
         </h1>
 
         <p className="text-[20px] font-semibold text-foreground/90 mb-4">
-          Food Engineer × Frontend Developer
+          Gida Muhendisi × Frontend Developer
         </p>
 
         <p className="text-base text-muted-foreground leading-relaxed max-w-[580px] mb-6">
@@ -84,12 +84,12 @@ export default function Home() {
           </Link>
         </div>
 
-        {/* Decoded Section */}
+        {/* Researches Section */}
         <section className="mt-12">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-[22px] font-bold text-foreground">Son Decoded Yazıları</h2>
+            <h2 className="text-[22px] font-bold text-foreground">Son Araştırmalar</h2>
             <Link
-              href="/decoded"
+              href="/researches"
               className="text-sm text-muted hover:text-primary transition inline-flex items-center gap-1"
             >
               Tümünü Gör
@@ -104,7 +104,7 @@ export default function Home() {
               {recentPosts.slice(0, 3).map((post) => (
                 <Link
                   key={post.slug}
-                  href={`/decoded/${post.slug}`}
+                  href={`/researches/${post.slug}`}
                   className="flex items-center justify-between py-3 group border-b border-border last:border-b-0 hover:bg-secondary/20 -mx-3 px-3 transition"
                 >
                   <span className="text-[15px] text-foreground group-hover:text-primary transition flex-1 pr-4">

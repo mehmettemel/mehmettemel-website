@@ -1,10 +1,13 @@
-'use client'
-
-import { useState, useEffect } from 'react'
 import { Container } from '../../components/Container'
-import { GridGems, GemDetailsPanel } from '../../components/OrbitingGems'
+import { GemsList } from '../../components/GemsList'
 
-// Sample gems data
+export const metadata = {
+  title: 'Degerli Kaynaklar | Mehmet Temel',
+  description:
+    'Internette buldigum degerli kaynaklar. Kitaplar, makaleler, videolar ve daha fazlasi.',
+}
+
+// Gems data
 const gems = [
   {
     id: 1,
@@ -342,75 +345,23 @@ const gems = [
 ]
 
 export default function Gems() {
-  const [currentGem, setCurrentGem] = useState(null)
-  const [showDetails, setShowDetails] = useState(false)
-  const [shuffledGems, setShuffledGems] = useState([])
-
-  // Shuffle gems on mount
-  useEffect(() => {
-    const shuffled = [...gems].sort(() => Math.random() - 0.5)
-    setShuffledGems(shuffled)
-  }, [])
-
-  // Prevent body scroll when details panel is open
-  useEffect(() => {
-    if (showDetails) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'unset'
-    }
-    return () => {
-      document.body.style.overflow = 'unset'
-    }
-  }, [showDetails])
-
-  const handleGemClick = (index) => {
-    const isMobile = window.innerWidth < 768
-    const circlesPerRow = isMobile ? 5 : 7
-    const rows = isMobile ? 8 : 10
-    const totalCircles = Math.min(circlesPerRow * rows, shuffledGems.length)
-    const displayedGems = shuffledGems.slice(0, totalCircles)
-    setCurrentGem(displayedGems[index])
-    setShowDetails(true)
-  }
-
-  const handleVisit = () => {
-    if (currentGem?.url) {
-      window.open(currentGem.url, '_blank', 'noopener,noreferrer')
-    }
-  }
-
-  if (shuffledGems.length === 0) return null
-
   return (
-    <>
-      <Container>
-        <div className="h-screen flex flex-col overflow-hidden">
-          {/* Header */}
-          <div className="pt-6 pb-2 text-center flex-shrink-0">
-            <h1 className="mb-1 text-2xl md:text-3xl font-bold tracking-tight text-foreground">
-              Internet Gems
-            </h1>
-            <p className="text-xs md:text-sm text-muted-foreground">
-              Hover to preview • Click to explore
-            </p>
-          </div>
-
-          {/* Grid Layout */}
-          <div className="flex-1 min-h-0 overflow-hidden">
-            <GridGems gems={shuffledGems} onGemClick={handleGemClick} />
-          </div>
+    <Container>
+      <div className="max-w-[620px] mx-auto pt-12 pb-16">
+        {/* Header */}
+        <div className="mb-8">
+          <h1 className="text-[32px] leading-[1.2] font-bold tracking-tight text-foreground mb-3">
+            Degerli Kaynaklar
+          </h1>
+          <p className="text-base text-muted-foreground">
+            Internette buldigum degerli kaynaklar. Kitaplar, makaleler,
+            videolar ve daha fazlasi.
+          </p>
         </div>
-      </Container>
 
-      {/* Gem Details Panel */}
-      {showDetails && currentGem && (
-        <GemDetailsPanel
-          gem={currentGem}
-          onClose={() => setShowDetails(false)}
-          onVisit={handleVisit}
-        />
-      )}
-    </>
+        {/* Client Component for Filtering */}
+        <GemsList gems={gems} />
+      </div>
+    </Container>
   )
 }

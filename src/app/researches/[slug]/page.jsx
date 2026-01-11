@@ -57,8 +57,8 @@ export default async function BlogPost({ params }) {
     <Container>
       <div className="max-w-[620px] mx-auto pt-12 pb-16">
           <Link
-            href="/decoded"
-            aria-label="Go back to decoded"
+            href="/researches"
+            aria-label="Go back to researches"
             className="group mb-6 inline-flex items-center gap-2 text-sm text-muted hover:text-foreground transition"
           >
             <ArrowLeftIcon className="h-4 w-4 stroke-current" />
