@@ -1,8 +1,10 @@
 import { NextResponse } from 'next/server'
-import fs from 'fs/promises'
-import path from 'path'
 
 const GEMINI_KEY = process.env.GEMINI_API_KEY
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN
+const GITHUB_REPO = process.env.GITHUB_REPO || 'mehmettemel/mehmettemel-blog' // repo adınızı güncelleyin
+const GITHUB_BRANCH = process.env.GITHUB_BRANCH || 'main'
+const FILE_PATH = 'src/data/kesifler.js'
 
 // Link mi Not mu tespit et
 function isURL(text) {
@@ -67,7 +69,9 @@ URL: ${url}
 
   // Markdown kod bloklarını temizle
   let cleanResponse = aiResponse.trim()
-  cleanResponse = cleanResponse.replace(/```json\n?/g, '').replace(/```\n?/g, '')
+  cleanResponse = cleanResponse
+    .replace(/```json\n?/g, '')
+    .replace(/```\n?/g, '')
 
   const linkData = JSON.parse(cleanResponse)
 
@@ -101,7 +105,9 @@ Not: ${text}
 
   // Markdown kod bloklarını temizle
   let cleanResponse = aiResponse.trim()
-  cleanResponse = cleanResponse.replace(/```json\n?/g, '').replace(/```\n?/g, '')
+  cleanResponse = cleanResponse
+    .replace(/```json\n?/g, '')
+    .replace(/```\n?/g, '')
 
   const noteData = JSON.parse(cleanResponse)
 
@@ -115,12 +121,69 @@ Not: ${text}
   }
 }
 
-// kesifler.js dosyasını güncelle
-async function updateKesiflerFile(type, newData) {
-  const filePath = path.join(process.cwd(), 'src/data/kesifler.js')
+// GitHub'dan dosya içeriğini oku
+async function getFileFromGitHub() {
+  const url = `https://api.github.com/repos/${GITHUB_REPO}/contents/${FILE_PATH}?ref=${GITHUB_BRANCH}`
 
-  // Dosyayı oku
-  const fileContent = await fs.readFile(filePath, 'utf-8')
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${GITHUB_TOKEN}`,
+      Accept: 'application/vnd.github.v3+json',
+      'X-GitHub-Api-Version': '2022-11-28',
+    },
+  })
+
+  if (!response.ok) {
+    const error = await response.text()
+    throw new Error(`GitHub dosya okuma hatası: ${error}`)
+  }
+
+  const data = await response.json()
+
+  // Base64'den decode et
+  const content = Buffer.from(data.content, 'base64').toString('utf-8')
+
+  return {
+    content,
+    sha: data.sha, // Güncelleme için gerekli
+  }
+}
+
+// GitHub'a dosya yaz
+async function updateFileOnGitHub(newContent, sha, commitMessage) {
+  const url = `https://api.github.com/repos/${GITHUB_REPO}/contents/${FILE_PATH}`
+
+  // Base64'e encode et
+  const contentBase64 = Buffer.from(newContent).toString('base64')
+
+  const response = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${GITHUB_TOKEN}`,
+      Accept: 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json',
+      'X-GitHub-Api-Version': '2022-11-28',
+    },
+    body: JSON.stringify({
+      message: commitMessage,
+      content: contentBase64,
+      sha: sha,
+      branch: GITHUB_BRANCH,
+    }),
+  })
+
+  if (!response.ok) {
+    const error = await response.text()
+    throw new Error(`GitHub dosya yazma hatası: ${error}`)
+  }
+
+  return await response.json()
+}
+
+// kesifler.js dosyasını GitHub üzerinden güncelle
+async function updateKesiflerFile(type, newData) {
+  // 1. Mevcut dosyayı GitHub'dan oku
+  const { content: fileContent, sha } = await getFileFromGitHub()
 
   let updatedContent = fileContent
 
@@ -140,7 +203,7 @@ async function updateKesiflerFile(type, newData) {
       (match, p1, p2, p3) => {
         // Eğer array boş değilse sonuna ekle, boşsa direkt ekle
         return `${p1}${p2}${p2.trim() ? '\n' : ''}${newLink}${p3}`
-      }
+      },
     )
   } else if (type === 'note') {
     // inspirationalQuotes array'ine ekle
@@ -157,12 +220,17 @@ async function updateKesiflerFile(type, newData) {
       /(export const inspirationalQuotes = \[)([\s\S]*?)(\n\])/,
       (match, p1, p2, p3) => {
         return `${p1}${p2}${p2.trim() ? '\n' : ''}${newNote}${p3}`
-      }
+      },
     )
   }
 
-  // Dosyaya yaz
-  await fs.writeFile(filePath, updatedContent, 'utf-8')
+  // 2. GitHub'a commit et
+  const commitMessage =
+    type === 'link'
+      ? `🔗 Yeni link eklendi: ${newData.title}`
+      : `💭 Yeni not eklendi: ${newData.text.substring(0, 50)}...`
+
+  await updateFileOnGitHub(updatedContent, sha, commitMessage)
 
   return true
 }
@@ -170,10 +238,21 @@ async function updateKesiflerFile(type, newData) {
 // API endpoint
 export async function POST(request) {
   try {
+    // GitHub token kontrolü
+    if (!GITHUB_TOKEN) {
+      return NextResponse.json(
+        { error: 'GITHUB_TOKEN environment variable tanımlı değil' },
+        { status: 500 },
+      )
+    }
+
     const { text } = await request.json()
 
     if (!text) {
-      return NextResponse.json({ error: 'Mesaj metni gerekli' }, { status: 400 })
+      return NextResponse.json(
+        { error: 'Mesaj metni gerekli' },
+        { status: 400 },
+      )
     }
 
     // Link mi Not mu kontrol et
@@ -196,7 +275,7 @@ export async function POST(request) {
       success: true,
       type,
       data: result,
-      message: `${type === 'link' ? 'Link' : 'Not'} başarıyla eklendi!`,
+      message: `${type === 'link' ? 'Link' : 'Not'} başarıyla eklendi! (GitHub'a commit edildi)`,
     })
   } catch (error) {
     console.error('API Hatası:', error)
