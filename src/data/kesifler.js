@@ -10,14 +10,26 @@ export const usefulLinks = [
   },
 ]
 
-// Link Kategorileri - Sadece website
+// Link Kategorileri
 export const linkCategories = [
   { id: 'all', name: 'Tümü', icon: '📚' },
   { id: 'website', name: 'Website', icon: '🌐' },
+  { id: 'book', name: 'Kitap', icon: '📖' },
+  { id: 'article', name: 'Makale', icon: '📄' },
+  { id: 'video', name: 'Video', icon: '🎥' },
 ]
 
-// Not Kategorileri - Boş
-export const quoteCategories = [{ id: 'all', name: 'Tümü', icon: '📚' }]
+// Not Kategorileri
+export const quoteCategories = [
+  { id: 'all', name: 'Tümü', icon: '📚' },
+  { id: 'motivasyon', name: 'Motivasyon', icon: '💪' },
+  { id: 'yazilim', name: 'Yazılım', icon: '⚡' },
+  { id: 'tasarim', name: 'Tasarım', icon: '🎨' },
+  { id: 'teknoloji', name: 'Teknoloji', icon: '💻' },
+  { id: 'saglik', name: 'Sağlık', icon: '🏥' },
+  { id: 'gida', name: 'Gıda', icon: '🍎' },
+  { id: 'seyahat', name: 'Seyahat', icon: '✈️' },
+]
 
 // Notlar ve Alıntılar - Boş
 export const inspirationalQuotes = []
