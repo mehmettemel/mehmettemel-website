@@ -118,7 +118,6 @@ export function QuotesList({ quotes }) {
                     description={displayText}
                     author={quote.author}
                     source={quote.source}
-                    tags={quote.tags || []}
                     url={quote.url}
                     isExternal={false}
                     index={index}

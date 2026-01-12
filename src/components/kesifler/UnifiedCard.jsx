@@ -23,7 +23,6 @@ export function UnifiedCard({
   badge,
   author,
   source,
-  tags = [],
   url,
   isExternal = false,
   index = 0,
@@ -83,47 +82,31 @@ export function UnifiedCard({
         </p>
       )}
 
-      {/* Author & Source */}
-      {(author || source) && (
-        <div className="mb-3 flex flex-wrap items-center gap-2 text-sm text-muted">
-          {author && (
-            <span className="font-medium">
-              {title ? `Yazar: ${author}` : `— ${author}`}
-            </span>
-          )}
-          {source && (
-            <>
-              {author && <span className="text-muted-foreground/50">•</span>}
-              <TooltipProvider>
-                <Tooltip delayDuration={200}>
-                  <TooltipTrigger asChild>
-                    <span className="inline-flex items-center gap-1 italic cursor-help border-b border-dashed border-muted-foreground/30 hover:border-muted-foreground/60 transition-colors">
-                      {source}
-                      <Info className="h-3 w-3 opacity-50" />
-                    </span>
-                  </TooltipTrigger>
-                  <TooltipContent side="top" className="max-w-xs">
-                    <p className="text-xs">Kaynak: {source}</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            </>
-          )}
-        </div>
-      )}
-
-      {/* Tags */}
-      {tags.length > 0 && (
-        <div className="flex flex-wrap gap-2">
-          {tags.map((tag, i) => (
-            <span
-              key={i}
-              className="rounded-md bg-secondary/70 px-2.5 py-1 text-xs font-medium text-foreground"
-            >
-              #{tag}
-            </span>
-          ))}
-        </div>
+      {/* Info Icon for Author/Source (for quotes without links) */}
+      {!isExternal && (author || source) && (
+        <TooltipProvider>
+          <Tooltip delayDuration={200}>
+            <TooltipTrigger asChild>
+              <div className="absolute top-6 right-6 text-muted-foreground/40 cursor-help transition-colors hover:text-muted-foreground">
+                <Info className="h-5 w-5" />
+              </div>
+            </TooltipTrigger>
+            <TooltipContent side="left" className="max-w-xs">
+              <div className="space-y-1">
+                {author && (
+                  <p className="text-xs">
+                    <span className="font-semibold">Kimden:</span> {author}
+                  </p>
+                )}
+                {source && (
+                  <p className="text-xs">
+                    <span className="font-semibold">Nereden:</span> {source}
+                  </p>
+                )}
+              </div>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       )}
 
       {/* External Link Icon */}
