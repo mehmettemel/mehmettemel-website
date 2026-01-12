@@ -1,7 +1,12 @@
 import { forwardRef } from 'react'
 import clsx from 'clsx'
 
-// Simple container like Rishi's - just horizontal padding and centering
+/**
+ * Full Width Container Component
+ * - Always full width with responsive padding
+ * - Content inside manages its own max-width
+ * - Provides consistent horizontal spacing
+ */
 export const Container = forwardRef(function Container(
   { className, children, ...props },
   ref,
@@ -9,7 +14,12 @@ export const Container = forwardRef(function Container(
   return (
     <div
       ref={ref}
-      className={clsx('mx-auto w-full px-6 sm:px-8', className)}
+      className={clsx(
+        'w-full',
+        // Responsive horizontal padding
+        'px-4 sm:px-6 lg:px-8 xl:px-12',
+        className,
+      )}
       {...props}
     >
       {children}

@@ -2,19 +2,30 @@
 
 import { useState, useId } from 'react'
 import { motion } from 'framer-motion'
-import { Pagination } from './Pagination'
-import { ResearchCategorySidebar } from './ResearchCategorySidebar'
-import { RabbitHoleCard } from './RabbitHoleCard'
+import { Pagination } from '../Pagination'
+import { linkCategories } from '../../data/kesifler'
+import { CategorySidebar } from './CategorySidebar'
+import { UnifiedCard } from './UnifiedCard'
 
 const ITEMS_PER_PAGE = 12
 
-// Research categories with icons
-const researchCategories = [
-  { id: 'all', name: 'Tümü', icon: '📚' },
-  { id: 'gidalar', name: 'Gıdalar', icon: '🍎' },
-  { id: 'besinler', name: 'Besinler', icon: '💊' },
-  { id: 'mekanizmalar', name: 'Mekanizmalar', icon: '🧬' },
-]
+const typeConfig = {
+  book: {
+    label: 'Kitap',
+    icon: '📖',
+    color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400',
+  },
+  video: {
+    label: 'Video',
+    icon: '🎥',
+    color: 'bg-red-500/10 text-red-600 dark:text-red-400',
+  },
+  article: {
+    label: 'Makale',
+    icon: '📄',
+    color: 'bg-green-500/10 text-green-600 dark:text-green-400',
+  },
+}
 
 // Animation variants for the container
 const containerVariants = {
@@ -28,32 +39,32 @@ const containerVariants = {
   },
 }
 
-export function ResearchesList({ posts }) {
+export function LinksList({ links }) {
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedCategory, setSelectedCategory] = useState('all')
   const listId = useId()
 
-  if (!posts || posts.length === 0) {
+  if (!links || links.length === 0) {
     return (
       <div className="py-12 text-center">
         <div className="mb-4 text-6xl">📚</div>
         <p className="text-base text-muted-foreground">
-          Henüz araştırma eklenmedi. Yakında yeni içerikler eklenecek!
+          Henüz link eklenmedi. Yakında faydalı kaynaklar eklenecek!
         </p>
       </div>
     )
   }
 
-  // Filter posts by category
-  const filteredPosts =
+  // Filter links by category (type)
+  const filteredLinks =
     selectedCategory === 'all'
-      ? posts
-      : posts.filter((post) => post.category === selectedCategory)
+      ? links
+      : links.filter((link) => link.type === selectedCategory)
 
-  const totalPages = Math.ceil(filteredPosts.length / ITEMS_PER_PAGE)
+  const totalPages = Math.ceil(filteredLinks.length / ITEMS_PER_PAGE)
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
   const endIndex = startIndex + ITEMS_PER_PAGE
-  const currentPosts = filteredPosts.slice(startIndex, endIndex)
+  const currentLinks = filteredLinks.slice(startIndex, endIndex)
 
   const handlePageChange = (page) => {
     setCurrentPage(page)
@@ -67,12 +78,12 @@ export function ResearchesList({ posts }) {
 
   // Get count for each category
   const getCategoryCount = (categoryId) => {
-    if (categoryId === 'all') return posts.length
-    return posts.filter((p) => p.category === categoryId).length
+    if (categoryId === 'all') return links.length
+    return links.filter((l) => l.type === categoryId).length
   }
 
   // Prepare categories with counts
-  const categoriesWithCounts = researchCategories.map((cat) => ({
+  const categoriesWithCounts = linkCategories.map((cat) => ({
     ...cat,
     count: getCategoryCount(cat.id),
   }))
@@ -80,7 +91,7 @@ export function ResearchesList({ posts }) {
   return (
     <div className="lg:flex lg:gap-8 xl:gap-12">
       {/* Sidebar Navigation */}
-      <ResearchCategorySidebar
+      <CategorySidebar
         categories={categoriesWithCounts}
         selectedCategory={selectedCategory}
         onCategoryChange={handleCategoryChange}
@@ -92,9 +103,9 @@ export function ResearchesList({ posts }) {
         <div className="mb-6 flex items-center justify-between">
           <p className="text-sm text-muted-foreground sm:text-base">
             <span className="font-semibold text-foreground">
-              {filteredPosts.length}
+              {filteredLinks.length}
             </span>{' '}
-            araştırma
+            kaynak
           </p>
           {totalPages > 1 && (
             <p className="text-sm text-muted-foreground">
@@ -103,19 +114,32 @@ export function ResearchesList({ posts }) {
           )}
         </div>
 
-        {/* Posts List */}
-        {filteredPosts.length > 0 ? (
+        {/* Links List */}
+        {filteredLinks.length > 0 ? (
           <>
             <motion.div
               key={`${listId}-${selectedCategory}-${currentPage}`}
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className="space-y-3 sm:space-y-4"
+              className="space-y-4"
             >
-              {currentPosts.map((post, index) => (
-                <RabbitHoleCard key={post.slug} post={post} index={index} />
-              ))}
+              {currentLinks.map((gem, index) => {
+                const config = typeConfig[gem.type] || typeConfig.article
+                return (
+                  <UnifiedCard
+                    key={gem.id}
+                    title={gem.title}
+                    description={gem.description}
+                    icon={config.icon}
+                    badge={config}
+                    author={gem.author}
+                    url={gem.url}
+                    isExternal={true}
+                    index={index}
+                  />
+                )
+              })}
             </motion.div>
 
             {/* Pagination */}
@@ -130,7 +154,7 @@ export function ResearchesList({ posts }) {
         ) : (
           <div className="rounded-lg border border-dashed border-border bg-secondary/20 py-16 text-center">
             <p className="text-base text-muted-foreground">
-              Bu kategoride henüz araştırma yok.
+              Bu kategoride henüz içerik yok.
             </p>
           </div>
         )}

@@ -2,19 +2,12 @@
 
 import { useState, useId } from 'react'
 import { motion } from 'framer-motion'
-import { Pagination } from './Pagination'
-import { ResearchCategorySidebar } from './ResearchCategorySidebar'
-import { RabbitHoleCard } from './RabbitHoleCard'
+import { Pagination } from '../Pagination'
+import { quoteCategories } from '../../data/kesifler'
+import { CategorySidebar } from './CategorySidebar'
+import { UnifiedCard } from './UnifiedCard'
 
 const ITEMS_PER_PAGE = 12
-
-// Research categories with icons
-const researchCategories = [
-  { id: 'all', name: 'Tümü', icon: '📚' },
-  { id: 'gidalar', name: 'Gıdalar', icon: '🍎' },
-  { id: 'besinler', name: 'Besinler', icon: '💊' },
-  { id: 'mekanizmalar', name: 'Mekanizmalar', icon: '🧬' },
-]
 
 // Animation variants for the container
 const containerVariants = {
@@ -28,32 +21,32 @@ const containerVariants = {
   },
 }
 
-export function ResearchesList({ posts }) {
+export function QuotesList({ quotes }) {
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedCategory, setSelectedCategory] = useState('all')
   const listId = useId()
 
-  if (!posts || posts.length === 0) {
+  if (!quotes || quotes.length === 0) {
     return (
       <div className="py-12 text-center">
-        <div className="mb-4 text-6xl">📚</div>
+        <div className="mb-4 text-6xl">💭</div>
         <p className="text-base text-muted-foreground">
-          Henüz araştırma eklenmedi. Yakında yeni içerikler eklenecek!
+          Henüz alıntı eklenmedi. Yakında ilham verici notlar eklenecek!
         </p>
       </div>
     )
   }
 
-  // Filter posts by category
-  const filteredPosts =
+  // Filter quotes by category
+  const filteredQuotes =
     selectedCategory === 'all'
-      ? posts
-      : posts.filter((post) => post.category === selectedCategory)
+      ? quotes
+      : quotes.filter((quote) => quote.category === selectedCategory)
 
-  const totalPages = Math.ceil(filteredPosts.length / ITEMS_PER_PAGE)
+  const totalPages = Math.ceil(filteredQuotes.length / ITEMS_PER_PAGE)
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
   const endIndex = startIndex + ITEMS_PER_PAGE
-  const currentPosts = filteredPosts.slice(startIndex, endIndex)
+  const currentQuotes = filteredQuotes.slice(startIndex, endIndex)
 
   const handlePageChange = (page) => {
     setCurrentPage(page)
@@ -67,12 +60,12 @@ export function ResearchesList({ posts }) {
 
   // Get count for each category
   const getCategoryCount = (categoryId) => {
-    if (categoryId === 'all') return posts.length
-    return posts.filter((p) => p.category === categoryId).length
+    if (categoryId === 'all') return quotes.length
+    return quotes.filter((q) => q.category === categoryId).length
   }
 
   // Prepare categories with counts
-  const categoriesWithCounts = researchCategories.map((cat) => ({
+  const categoriesWithCounts = quoteCategories.map((cat) => ({
     ...cat,
     count: getCategoryCount(cat.id),
   }))
@@ -80,7 +73,7 @@ export function ResearchesList({ posts }) {
   return (
     <div className="lg:flex lg:gap-8 xl:gap-12">
       {/* Sidebar Navigation */}
-      <ResearchCategorySidebar
+      <CategorySidebar
         categories={categoriesWithCounts}
         selectedCategory={selectedCategory}
         onCategoryChange={handleCategoryChange}
@@ -92,9 +85,9 @@ export function ResearchesList({ posts }) {
         <div className="mb-6 flex items-center justify-between">
           <p className="text-sm text-muted-foreground sm:text-base">
             <span className="font-semibold text-foreground">
-              {filteredPosts.length}
+              {filteredQuotes.length}
             </span>{' '}
-            araştırma
+            not/alıntı
           </p>
           {totalPages > 1 && (
             <p className="text-sm text-muted-foreground">
@@ -103,19 +96,35 @@ export function ResearchesList({ posts }) {
           )}
         </div>
 
-        {/* Posts List */}
-        {filteredPosts.length > 0 ? (
+        {/* Quotes List */}
+        {filteredQuotes.length > 0 ? (
           <>
             <motion.div
               key={`${listId}-${selectedCategory}-${currentPage}`}
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className="space-y-3 sm:space-y-4"
+              className="space-y-4"
             >
-              {currentPosts.map((post, index) => (
-                <RabbitHoleCard key={post.slug} post={post} index={index} />
-              ))}
+              {currentQuotes.map((quote, index) => {
+                // Check if text has quotes already
+                const hasQuotes =
+                  quote.text.startsWith('"') || quote.text.includes('\n')
+                const displayText = hasQuotes ? quote.text : `"${quote.text}"`
+
+                return (
+                  <UnifiedCard
+                    key={quote.id}
+                    description={displayText}
+                    author={quote.author}
+                    source={quote.source}
+                    tags={quote.tags || []}
+                    url={quote.url}
+                    isExternal={false}
+                    index={index}
+                  />
+                )
+              })}
             </motion.div>
 
             {/* Pagination */}
@@ -130,7 +139,7 @@ export function ResearchesList({ posts }) {
         ) : (
           <div className="rounded-lg border border-dashed border-border bg-secondary/20 py-16 text-center">
             <p className="text-base text-muted-foreground">
-              Bu kategoride henüz araştırma yok.
+              Bu kategoride henüz not/alıntı yok.
             </p>
           </div>
         )}

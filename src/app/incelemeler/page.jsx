@@ -3,9 +3,9 @@ import { ResearchesList } from '../../components/ResearchesList'
 import { getAllPosts } from '../../lib/blog'
 
 export const metadata = {
-  title: 'Arastirmalar | Mehmet Temel',
+  title: 'Araştırmalar | Mehmet Temel',
   description:
-    'Beslenme, gida ve insan biyolojisi uzerine derinlemesine arastirmalarim. Her konuda detayli analiz ve kisisel yorumlar.',
+    'Beslenme, gıda ve insan biyolojisi üzerine derinlemesine araştırmalarım. Her konuda detaylı analiz ve kişisel yorumlar.',
 }
 
 export default function ResearchesIndex() {
@@ -13,16 +13,16 @@ export default function ResearchesIndex() {
 
   return (
     <Container>
-      <div className="max-w-[620px] mx-auto pt-12 pb-16">
+      <div className="mx-auto max-w-7xl py-12 sm:py-16 lg:py-20">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-[32px] leading-[1.2] font-bold tracking-tight text-foreground mb-3">
-            Arastirmalar
+        <div className="mb-10 sm:mb-14">
+          <h1 className="mb-5 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+            Araştırmalar
           </h1>
-          <p className="text-base text-muted-foreground">
-            Beslenme, gida ve insan biyolojisi uzerine arastirmalarim. Her bir
-            konuda derinlemesine analiz, bilimsel kaynaklar ve kisisel
-            yorumlarimi bulabilirsiniz.
+          <p className="max-w-3xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
+            Beslenme, gıda ve insan biyolojisi üzerine araştırmalarım. Her bir
+            konuda derinlemesine analiz, bilimsel kaynaklar ve kişisel
+            yorumlarımı bulabilirsiniz.
           </p>
         </div>
 

@@ -45,28 +45,30 @@ export default function Home() {
 
   return (
     <Container>
-      <div className="mx-auto max-w-[620px] pt-12 pb-16">
+      <div className="mx-auto max-w-5xl py-12 sm:py-16 lg:py-20">
         {/* Hero Section */}
-        <h1 className="mb-2 text-[32px] leading-[1.2] font-bold tracking-tight text-foreground">
-          Merhaba, Ben Mehmet Temel
-        </h1>
+        <div className="mb-12 sm:mb-16">
+          <h1 className="mb-4 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground">
+            Merhaba, Ben Mehmet Temel
+          </h1>
 
-        <p className="mb-4 text-[20px] font-semibold text-foreground/90">
-          Gida Muhendisi × Frontend Developer
-        </p>
+          <p className="mb-4 text-xl sm:text-2xl font-semibold text-foreground/90">
+            Gıda Mühendisi × Frontend Developer
+          </p>
 
-        <p className="mb-6 max-w-[580px] text-base leading-relaxed text-muted-foreground">
-          İnternetin derinliklerinden beslenme ve insan biyolojisi hakkında az
-          bilinen değerli kaynakları çıkarıyor, anlaşılır hale getiriyorum.
-        </p>
+          <p className="max-w-3xl text-base sm:text-lg lg:text-xl leading-relaxed text-muted-foreground">
+            İnternetin derinliklerinden beslenme ve insan biyolojisi hakkında az
+            bilinen değerli kaynakları çıkarıyor, anlaşılır hale getiriyorum.
+          </p>
+        </div>
 
         {/* CTA Buttons */}
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-3 sm:gap-4 mb-16 sm:mb-20">
           <Link
             href="https://x.com/temelbusiness"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:bg-primary/90"
+            className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm sm:text-base font-medium text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-md active:scale-95"
           >
             <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
               <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -75,7 +77,7 @@ export default function Home() {
           </Link>
           <Link
             href="/bu-hafta"
-            className="inline-flex items-center gap-2 rounded-lg bg-secondary px-4 py-2 text-sm font-medium text-foreground transition hover:bg-secondary/80"
+            className="inline-flex items-center gap-2 rounded-lg bg-secondary px-5 py-2.5 text-sm sm:text-base font-medium text-foreground transition-all hover:bg-secondary/80 hover:shadow-md active:scale-95"
           >
             <svg
               className="h-4 w-4"
@@ -96,18 +98,18 @@ export default function Home() {
         </div>
 
         {/* Researches Section */}
-        <section className="mt-12">
-          <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-[22px] font-bold text-foreground">
+        <section className="max-w-4xl">
+          <div className="mb-8 flex items-center justify-between">
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
               Son Araştırmalar
             </h2>
             <Link
               href="/incelemeler"
-              className="inline-flex items-center gap-1 text-sm text-muted transition hover:text-primary"
+              className="inline-flex items-center gap-2 text-sm sm:text-base font-medium text-muted transition-all hover:text-primary hover:gap-3"
             >
               Tümünü Gör
               <svg
-                className="h-4 w-4"
+                className="h-4 w-4 sm:h-5 sm:w-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -123,26 +125,28 @@ export default function Home() {
           </div>
 
           {recentPosts.length > 0 ? (
-            <div className="space-y-0">
+            <div className="space-y-0 rounded-xl border border-border overflow-hidden bg-card">
               {recentPosts.slice(0, 3).map((post) => (
                 <Link
                   key={post.slug}
                   href={`/incelemeler/${post.slug}`}
-                  className="group -mx-3 flex items-center justify-between border-b border-border px-3 py-3 transition last:border-b-0 hover:bg-secondary/20"
+                  className="group flex items-center justify-between border-b border-border px-5 py-5 sm:px-6 sm:py-6 transition-all last:border-b-0 hover:bg-secondary/30 active:bg-secondary/40"
                 >
-                  <span className="flex-1 pr-4 text-[15px] text-foreground transition group-hover:text-primary">
+                  <span className="flex-1 pr-4 text-base sm:text-lg text-foreground transition-colors group-hover:text-primary line-clamp-2 font-medium">
                     {post.title}
                   </span>
-                  <span className="text-[13px] whitespace-nowrap text-muted">
+                  <span className="text-sm whitespace-nowrap text-muted flex-shrink-0">
                     {format(new Date(post.date), 'MMM d, yyyy')}
                   </span>
                 </Link>
               ))}
             </div>
           ) : (
-            <p className="text-sm text-muted-foreground">
-              Henüz yazı yok. Yakında ilk araştırmalar yayınlanacak!
-            </p>
+            <div className="rounded-lg border border-dashed border-border bg-secondary/20 p-8 text-center">
+              <p className="text-sm sm:text-base text-muted-foreground">
+                Henüz yazı yok. Yakında ilk araştırmalar yayınlanacak!
+              </p>
+            </div>
           )}
         </section>
       </div>

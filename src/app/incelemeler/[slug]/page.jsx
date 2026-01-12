@@ -55,37 +55,37 @@ export default async function BlogPost({ params }) {
 
   return (
     <Container>
-      <div className="mx-auto max-w-[620px] pt-12 pb-16">
+      <div className="mx-auto max-w-4xl py-12 sm:py-16 lg:py-20">
         <Link
           href="/incelemeler"
           aria-label="Go back to incelemeler"
-          className="group mb-6 inline-flex items-center gap-2 text-sm text-muted transition hover:text-foreground"
+          className="group mb-10 inline-flex items-center gap-2 text-base sm:text-lg text-muted transition-all hover:text-foreground hover:gap-3"
         >
-          <ArrowLeftIcon className="h-4 w-4 stroke-current" />
+          <ArrowLeftIcon className="h-4 w-4 sm:h-5 sm:w-5 stroke-current transition-transform group-hover:-translate-x-1" />
           <span>Geri Dön</span>
         </Link>
         <article>
-          <header className="mb-8 flex flex-col">
-            <h1 className="text-[32px] leading-[1.2] font-bold tracking-tight text-foreground">
+          <header className="mb-12 sm:mb-16 flex flex-col">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl leading-tight font-bold tracking-tight text-foreground mb-8">
               {post.title}
             </h1>
-            <div className="mt-4 flex items-center gap-3 text-sm text-muted">
+            <div className="flex flex-wrap items-center gap-4 text-base sm:text-lg text-muted">
               <time dateTime={post.date}>
-                {format(new Date(post.date), 'MMM d, yyyy')}
+                {format(new Date(post.date), 'd MMMM yyyy', { locale: require('date-fns/locale/tr') })}
               </time>
               {post.readingTime && (
                 <>
-                  <span>•</span>
+                  <span className="text-muted-foreground/50">•</span>
                   <span>{post.readingTime}</span>
                 </>
               )}
             </div>
             {post.tags && post.tags.length > 0 && (
-              <div className="mt-4 flex flex-wrap gap-2">
+              <div className="mt-8 flex flex-wrap gap-2">
                 {post.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-md bg-secondary px-2.5 py-1 text-xs text-foreground"
+                    className="rounded-lg bg-secondary px-4 py-2 text-sm sm:text-base font-medium text-foreground"
                   >
                     {tag}
                   </span>
@@ -94,7 +94,7 @@ export default async function BlogPost({ params }) {
             )}
           </header>
           <div
-            className="prose max-w-none"
+            className="prose prose-lg sm:prose-xl max-w-none"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
         </article>

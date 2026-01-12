@@ -1,366 +1,62 @@
+'use client'
+
 import { Container } from '../../components/Container'
-import { GemsList } from '../../components/GemsList'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../components/ui/tabs'
+import { LinksList } from '../../components/kesifler/LinksList'
+import { QuotesList } from '../../components/kesifler/QuotesList'
+import { usefulLinks, inspirationalQuotes } from '../../data/kesifler'
 
-export const metadata = {
-  title: 'Degerli Kaynaklar | Mehmet Temel',
-  description:
-    'Internette buldigum degerli kaynaklar. Kitaplar, makaleler, videolar ve daha fazlasi.',
-}
-
-// Gems data
-const gems = [
-  {
-    id: 1,
-    title: 'The Design of Everyday Things',
-    description: 'A classic book about design principles that shape our daily interactions with objects and interfaces.',
-    type: 'book',
-    author: 'Don Norman',
-    color: '#3b82f6',
-    url: 'https://www.amazon.com/Design-Everyday-Things-Revised-Expanded/dp/0465050654',
-  },
-  {
-    id: 2,
-    title: 'Fireship - Web Dev Tutorials',
-    description: 'High-intensity code tutorials and tech news in 100 seconds.',
-    type: 'video',
-    author: 'Fireship',
-    color: '#ef4444',
-    url: 'https://www.youtube.com/@Fireship',
-  },
-  {
-    id: 3,
-    title: 'Laws of UX',
-    description: 'Collection of best practices for designing user interfaces.',
-    type: 'article',
-    color: '#8b5cf6',
-    url: 'https://lawsofux.com/',
-  },
-  {
-    id: 4,
-    title: 'Refactoring UI',
-    description: 'Learn how to design beautiful user interfaces by yourself using specific tactics.',
-    type: 'book',
-    author: 'Adam Wathan & Steve Schoger',
-    color: '#10b981',
-    url: 'https://www.refactoringui.com/',
-  },
-  {
-    id: 5,
-    title: 'Josh Comeau Blog',
-    description: 'In-depth articles about CSS, React, and web development.',
-    type: 'article',
-    color: '#f59e0b',
-    url: 'https://www.joshwcomeau.com/',
-  },
-  {
-    id: 6,
-    title: 'TypeScript Deep Dive',
-    description: 'The definitive guide to TypeScript and its best practices.',
-    type: 'article',
-    author: 'Basarat Ali Syed',
-    color: '#3b82f6',
-    url: 'https://basarat.gitbook.io/typescript',
-  },
-  {
-    id: 7,
-    title: 'Atomic Habits',
-    description: 'An easy and proven way to build good habits and break bad ones.',
-    type: 'book',
-    author: 'James Clear',
-    color: '#ec4899',
-    url: 'https://jamesclear.com/atomic-habits',
-  },
-  {
-    id: 8,
-    title: 'CSS for JavaScript Developers',
-    description: 'The interactive learning experience designed to help JavaScript devs become confident with CSS.',
-    type: 'article',
-    author: 'Josh Comeau',
-    color: '#06b6d4',
-    url: 'https://css-for-js.dev/',
-  },
-  {
-    id: 9,
-    title: 'React Patterns',
-    description: 'Common design patterns for React applications.',
-    type: 'article',
-    color: '#14b8a6',
-    url: 'https://reactpatterns.com/',
-  },
-  {
-    id: 10,
-    title: 'JavaScript.info',
-    description: 'The Modern JavaScript Tutorial - comprehensive guide.',
-    type: 'article',
-    color: '#eab308',
-    url: 'https://javascript.info/',
-  },
-  {
-    id: 11,
-    title: 'Clean Code',
-    description: 'A Handbook of Agile Software Craftsmanship by Robert C. Martin.',
-    type: 'book',
-    author: 'Robert C. Martin',
-    color: '#f97316',
-    url: 'https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882',
-  },
-  {
-    id: 12,
-    title: 'Figma for Developers',
-    description: 'Learn how to use Figma as a developer.',
-    type: 'video',
-    color: '#a855f7',
-    url: 'https://www.youtube.com/results?search_query=figma+for+developers',
-  },
-  {
-    id: 13,
-    title: 'Web.dev by Google',
-    description: 'Guidance to build modern web experiences.',
-    type: 'article',
-    color: '#4285f4',
-    url: 'https://web.dev/',
-  },
-  {
-    id: 14,
-    title: 'CSS Tricks',
-    description: 'Daily articles about CSS, HTML, JavaScript, and web design.',
-    type: 'article',
-    color: '#d75a4a',
-    url: 'https://css-tricks.com/',
-  },
-  {
-    id: 15,
-    title: 'Refactoring Guru',
-    description: 'Learn design patterns and refactoring techniques.',
-    type: 'article',
-    color: '#ff6b6b',
-    url: 'https://refactoring.guru/',
-  },
-  {
-    id: 16,
-    title: 'System Design Primer',
-    description: 'Learn how to design large-scale systems.',
-    type: 'article',
-    color: '#51cf66',
-    url: 'https://github.com/donnemartin/system-design-primer',
-  },
-  {
-    id: 17,
-    title: 'The Pragmatic Programmer',
-    description: 'Your journey to mastery - essential reading for developers.',
-    type: 'book',
-    author: 'Andrew Hunt',
-    color: '#845ef7',
-    url: 'https://pragprog.com/titles/tpp20/',
-  },
-  {
-    id: 18,
-    title: 'Fireship Courses',
-    description: 'Advanced full-stack development courses.',
-    type: 'video',
-    color: '#fa5252',
-    url: 'https://fireship.io/',
-  },
-  {
-    id: 19,
-    title: 'MDN Web Docs',
-    description: 'The ultimate web development documentation.',
-    type: 'article',
-    color: '#228be6',
-    url: 'https://developer.mozilla.org/',
-  },
-  {
-    id: 20,
-    title: 'Frontend Masters',
-    description: 'Advance your skills with in-depth courses.',
-    type: 'video',
-    color: '#c92a2a',
-    url: 'https://frontendmasters.com/',
-  },
-  {
-    id: 21,
-    title: 'Stripe Design',
-    description: 'Beautiful design inspiration from Stripe.',
-    type: 'article',
-    color: '#635bff',
-    url: 'https://stripe.com/blog/category/design',
-  },
-  {
-    id: 22,
-    title: 'React Docs',
-    description: 'Official React documentation and guides.',
-    type: 'article',
-    color: '#61dafb',
-    url: 'https://react.dev/',
-  },
-  {
-    id: 23,
-    title: 'You Don\'t Know JS',
-    description: 'Deep dive into JavaScript core mechanisms.',
-    type: 'book',
-    author: 'Kyle Simpson',
-    color: '#f59f00',
-    url: 'https://github.com/getify/You-Dont-Know-JS',
-  },
-  {
-    id: 24,
-    title: 'Tailwind Labs',
-    description: 'Resources and insights from Tailwind creators.',
-    type: 'article',
-    color: '#06b6d4',
-    url: 'https://tailwindcss.com/blog',
-  },
-  {
-    id: 25,
-    title: 'Next.js Conf Videos',
-    description: 'Latest talks from Next.js conferences.',
-    type: 'video',
-    color: '#000000',
-    url: 'https://www.youtube.com/@VercelHQ',
-  },
-  {
-    id: 26,
-    title: 'Smashing Magazine',
-    description: 'Quality content for web designers and developers.',
-    type: 'article',
-    color: '#e74c3c',
-    url: 'https://www.smashingmagazine.com/',
-  },
-  {
-    id: 27,
-    title: 'Don\'t Make Me Think',
-    description: 'Common sense approach to web usability.',
-    type: 'book',
-    author: 'Steve Krug',
-    color: '#e67e22',
-    url: 'https://sensible.com/dont-make-me-think/',
-  },
-  {
-    id: 28,
-    title: 'Web Performance 101',
-    description: 'Essential performance optimization techniques.',
-    type: 'video',
-    color: '#16a085',
-    url: 'https://www.youtube.com/watch?v=0fONene3OIA',
-  },
-  {
-    id: 29,
-    title: 'A11y Project',
-    description: 'Community-driven resource for web accessibility.',
-    type: 'article',
-    color: '#9b59b6',
-    url: 'https://www.a11yproject.com/',
-  },
-  {
-    id: 30,
-    title: 'Vercel Design',
-    description: 'Minimalist design philosophy and examples.',
-    type: 'article',
-    color: '#000000',
-    url: 'https://vercel.com/design',
-  },
-  {
-    id: 31,
-    title: 'Eloquent JavaScript',
-    description: 'Modern introduction to programming with JavaScript.',
-    type: 'book',
-    author: 'Marijn Haverbeke',
-    color: '#f39c12',
-    url: 'https://eloquentjavascript.net/',
-  },
-  {
-    id: 32,
-    title: 'ThePrimeagen',
-    description: 'Vim, coding, and developer productivity videos.',
-    type: 'video',
-    color: '#8e44ad',
-    url: 'https://www.youtube.com/@ThePrimeagen',
-  },
-  {
-    id: 33,
-    title: 'Inclusive Components',
-    description: 'Blog about accessible web interface components.',
-    type: 'article',
-    color: '#27ae60',
-    url: 'https://inclusive-components.design/',
-  },
-  {
-    id: 34,
-    title: 'Microinteractions',
-    description: 'The details that make great interfaces.',
-    type: 'book',
-    author: 'Dan Saffer',
-    color: '#3498db',
-    url: 'https://microinteractions.com/',
-  },
-  {
-    id: 35,
-    title: 'Kent C. Dodds',
-    description: 'React, testing, and software quality tutorials.',
-    type: 'video',
-    color: '#e74c3c',
-    url: 'https://kentcdodds.com/',
-  },
-  {
-    id: 36,
-    title: 'Every Layout',
-    description: 'Solving layout problems with CSS.',
-    type: 'article',
-    color: '#f368e0',
-    url: 'https://every-layout.dev/',
-  },
-  {
-    id: 37,
-    title: 'Site.js',
-    description: 'Modern web development best practices.',
-    type: 'article',
-    color: '#ff6348',
-    url: 'https://sitejs.org/',
-  },
-  {
-    id: 38,
-    title: 'Shape Up',
-    description: 'How Basecamp approaches product development.',
-    type: 'book',
-    author: 'Ryan Singer',
-    color: '#5f27cd',
-    url: 'https://basecamp.com/shapeup',
-  },
-  {
-    id: 39,
-    title: 'Web Components',
-    description: 'Building reusable web components guide.',
-    type: 'video',
-    color: '#00d2d3',
-    url: 'https://www.youtube.com/watch?v=PCWaFLy3VUo',
-  },
-  {
-    id: 40,
-    title: 'Can I Use',
-    description: 'Browser support tables for modern web technologies.',
-    type: 'article',
-    color: '#f9ca24',
-    url: 'https://caniuse.com/',
-  },
-]
-
-export default function Gems() {
+export default function Kesifler() {
   return (
     <Container>
-      <div className="max-w-[620px] mx-auto pt-12 pb-16">
+      <div className="mx-auto max-w-7xl py-12 sm:py-16 lg:py-20">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-[32px] leading-[1.2] font-bold tracking-tight text-foreground mb-3">
-            Degerli Kaynaklar
+        <div className="mb-10 sm:mb-14">
+          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground mb-5">
+            Keşifler
           </h1>
-          <p className="text-base text-muted-foreground">
-            Internette buldigum degerli kaynaklar. Kitaplar, makaleler,
-            videolar ve daha fazlasi.
+          <p className="text-lg sm:text-xl leading-relaxed text-muted-foreground max-w-3xl">
+            İnternette bulduğum değerli kaynaklar ve topladığım notlar.
           </p>
         </div>
 
-        {/* Client Component for Filtering */}
-        <GemsList gems={gems} />
+        {/* Tabs Navigation */}
+        <Tabs defaultValue="links" className="w-full">
+          <TabsList className="w-full grid grid-cols-2 sm:w-auto sm:inline-flex mb-6 sm:mb-8">
+            <TabsTrigger value="links" className="text-sm sm:text-base">
+              📚 Faydalı Linkler
+            </TabsTrigger>
+            <TabsTrigger value="notes" className="text-sm sm:text-base">
+              💭 Notlarım
+            </TabsTrigger>
+          </TabsList>
+
+          {/* Faydalı Linkler Tab */}
+          <TabsContent value="links" className="mt-0">
+            <div className="mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl font-semibold text-foreground mb-2 sm:mb-3">
+                Faydalı Kaynaklar
+              </h2>
+              <p className="text-sm sm:text-base leading-relaxed text-muted-foreground">
+                Web development, tasarım ve kişisel gelişim hakkında faydalı bulduğum kitaplar, makaleler ve videolar.
+              </p>
+            </div>
+            <LinksList links={usefulLinks} />
+          </TabsContent>
+
+          {/* Notlar ve Alıntılar Tab */}
+          <TabsContent value="notes" className="mt-0">
+            <div className="mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl font-semibold text-foreground mb-2 sm:mb-3">
+                Notlar ve Alıntılar
+              </h2>
+              <p className="text-sm sm:text-base leading-relaxed text-muted-foreground">
+                İnternetin derinliklerinden topladığım notlar, düşünceler ve ilham veren alıntılar. Seyahat, gıda, sağlık ve daha fazlası...
+              </p>
+            </div>
+            <QuotesList quotes={inspirationalQuotes} />
+          </TabsContent>
+        </Tabs>
       </div>
     </Container>
   )
