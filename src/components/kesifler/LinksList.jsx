@@ -10,20 +10,20 @@ import { UnifiedCard } from './UnifiedCard'
 const ITEMS_PER_PAGE = 12
 
 const typeConfig = {
-  website: {
-    label: 'Website',
-    icon: '🌐',
-    color: 'bg-purple-500/10 text-purple-600 dark:text-purple-400',
+  teknik: {
+    label: 'Teknik',
+    icon: '🚀',
+    color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400',
   },
-  article: {
-    label: 'Makale',
-    icon: '📄',
+  icerik: {
+    label: 'İçerik',
+    icon: '📖',
     color: 'bg-green-500/10 text-green-600 dark:text-green-400',
   },
-  video: {
-    label: 'Video',
-    icon: '🎥',
-    color: 'bg-red-500/10 text-red-600 dark:text-red-400',
+  diger: {
+    label: 'Diğer',
+    icon: '🌍',
+    color: 'bg-purple-500/10 text-purple-600 dark:text-purple-400',
   },
 }
 
@@ -125,7 +125,7 @@ export function LinksList({ links }) {
               className="space-y-4"
             >
               {currentLinks.map((gem, index) => {
-                const config = typeConfig[gem.type] || typeConfig.website
+                const config = typeConfig[gem.type] || typeConfig.teknik
                 return (
                   <UnifiedCard
                     key={gem.id}

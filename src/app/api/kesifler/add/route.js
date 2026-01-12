@@ -80,17 +80,22 @@ async function handleLink(url) {
 {
   "title": "Link başlığı",
   "description": "Kısa açıklama (max 150 karakter)",
-  "type": "website/article/video seçeneklerinden en uygun olanı"
+  "type": "teknik/icerik/diger seçeneklerinden en uygun olanı"
 }
 
 URL: ${url}
 
-KATEGORİ SEÇİMİ:
-- "website": Tüm web siteleri (ana sayfalar, kurumsal siteler, haber siteleri, online araçlar, web uygulamaları)
-- "article": Blog yazıları, teknik dökümanlar, makaleler, rehberler, tutorial'lar
-- "video": YouTube videoları, video kursları, webinar kayıtları
+KATEGORİ SEÇİMİ (3 ana kategori):
+- "teknik": Yazılım, kodlama, programlama dilleri, framework'ler, developer tools, tasarım araçları, UI/UX, Figma, Adobe, online araçlar, web uygulamaları, üretkenlik araçları, teknik konular
+- "icerik": Blog yazıları, makaleler, tutorial'lar, rehberler, Medium yazıları, haber siteleri, içerik platformları, eğitim kaynakları, podcast'ler, YouTube kanalları, video kursları
+- "diger": Yukarıdaki kategorilere uymayan diğer tüm linkler (genel konular, hobi, eğlence, vs.)
 
-ÖNEMLI: Sadece düz JSON döndür, \`\`\`json gibi markdown formatı kullanma.`
+ÖNEMLI KURALLAR:
+- GitHub repo, npm package, kod kütüphanesi → "teknik"
+- Medium/Dev.to yazısı konusu teknik ise → "icerik"
+- Figma, Notion, tasarım araçları → "teknik"
+- YouTube tutorial/kurs → "icerik"
+- Sadece düz JSON döndür, \`\`\`json gibi markdown formatı kullanma.`
 
   const aiResponse = await callGemini(prompt)
 
