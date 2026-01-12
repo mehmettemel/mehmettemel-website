@@ -45,4 +45,13 @@ export const quoteCategories = [
 ]
 
 // Notlar ve Alıntılar - Boş
-export const inspirationalQuotes = []
+export const inspirationalQuotes = [
+  {
+    id: 1768243881702,
+    text: 'Bağışıklık takviyesinde 1 numaraya D vitaminini koyun',
+    author: 'Osman Müftüoğlu',
+    source: null,
+    category: 'saglik',
+    tags: ["bağışıklık","D vitamini","sağlık","takviye"],
+  },
+]
