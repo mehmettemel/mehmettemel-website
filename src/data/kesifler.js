@@ -15,6 +15,13 @@ export const usefulLinks = [
     type: 'website',
     url: 'https://react.dev',
   },
+  {
+    id: 1768228879814,
+    title: 'Zoom Earth | Canlı Hava Durumu, Uydu Görüntüleri ve Orman Yangınları',
+    description: 'Zoom Earth, canlı hava durumu, uydu görüntüleri, tropikal fırtınalar ve orman yangınlarını dünya genelinde gösteren interaktif bir harita uygulamasıdır.',
+    type: 'tool',
+    url: 'https://zoom.earth',
+  },
 ]
 
 // Link Kategorileri
