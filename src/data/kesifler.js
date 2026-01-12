@@ -50,7 +50,16 @@ export const inspirationalQuotes = [
     author: 'Osman Müftüoğlu',
     source: null,
     category: 'saglik',
-    tags: ['bağışıklık', 'D vitamini', 'sağlık', 'takviye'],
+    tags: ['bağışıklık', 'D vitamini', 'sağlık', 'takviye'
+  {
+    id: 1768245528120,
+    text: 'Your leg strength predicts how long you\'ll live. Not your weight.',
+    author: null,
+    source: 'https://x.com/Wegiveyouhealt1/status/2010616904231346567?s=20',
+    category: 'saglik',
+    tags: ["bacak gücü","ömür","sağlık"],
+  },
+],
   },
   {
     id: 1768243962225,
