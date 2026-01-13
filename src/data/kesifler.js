@@ -9,16 +9,11 @@ export const usefulLinks = [
     url: 'https://www.ui-skills.com/',
   },
   {
-    id: 1768223924093,
-    title: 'React – A JavaScript library for building user interfaces',
-    description: 'The official website for React, a JavaScript library for building user interfaces. Find documentation, tutorials, and resources here.',
-    type: 'teknik',
-    url: 'https://react.dev',
-  },
-  {
     id: 1768228879814,
-    title: 'Zoom Earth | Canlı Hava Durumu, Uydu Görüntüleri ve Orman Yangınları',
-    description: 'Zoom Earth, canlı hava durumu, uydu görüntüleri, tropikal fırtınalar ve orman yangınlarını dünya genelinde gösteren interaktif bir harita uygulamasıdır.',
+    title:
+      'Zoom Earth | Canlı Hava Durumu, Uydu Görüntüleri ve Orman Yangınları',
+    description:
+      'Zoom Earth, canlı hava durumu, uydu görüntüleri, tropikal fırtınalar ve orman yangınlarını dünya genelinde gösteren interaktif bir harita uygulamasıdır.',
     type: 'diger',
     url: 'https://zoom.earth',
   },
