@@ -117,6 +117,7 @@ export function VideoNotesList({ notes }) {
                   source={note.source}
                   url={note.url}
                   isExternal={false}
+                  enableModal={true}
                   index={index}
                 />
               )

@@ -1,16 +1,17 @@
 import { NextResponse } from 'next/server'
 import { createNote, updateNoteGithubPath } from '@/lib/db'
 import { createMarkdownFile } from '@/lib/github'
-import { handleLink, handleNote, isURL } from '@/lib/gemini'
+import { handleLink, handleNote, handleVideo, handleBook, isURL } from '@/lib/gemini'
 
 /**
  * POST /api/kesifler/add
- * Add a new note (link or quote) to the system
+ * Add a new note (link, quote, video, or book) to the system
  *
  * This endpoint is used by the Google Apps Script Telegram bot
  * Flow: Telegram → Google Apps Script → This API → Neon DB + GitHub
  *
  * Body: { text: string }
+ * Commands: /link, /alinti, /video, /kitap
  * Response: { success: boolean, type: string, data: object, message: string }
  */
 export async function POST(request) {
@@ -27,18 +28,55 @@ export async function POST(request) {
 
     console.log(`📩 New request: ${text.substring(0, 50)}...`)
 
-    // Detect if it's a link or note
-    const isLink = isURL(text)
+    // Check for commands
+    let noteType = null
+    let content = text
+
+    if (text.startsWith('/link ')) {
+      noteType = 'link'
+      content = text.replace('/link ', '').trim()
+    } else if (text.startsWith('/alinti ')) {
+      noteType = 'quote'
+      content = text.replace('/alinti ', '').trim()
+    } else if (text.startsWith('/video ')) {
+      noteType = 'video'
+      content = text.replace('/video ', '').trim()
+    } else if (text.startsWith('/kitap ')) {
+      noteType = 'book'
+      content = text.replace('/kitap ', '').trim()
+    }
+
+    // Auto-detect if no command
+    if (!noteType) {
+      if (isURL(content)) {
+        noteType = 'link'
+      } else {
+        noteType = 'quote' // Default to quote
+      }
+    }
+
+    // Process based on type
     let categorizedData
 
-    if (isLink) {
-      // Handle link with Gemini AI
-      categorizedData = await handleLink(text)
-      console.log(`🔗 Detected as link: ${categorizedData.title}`)
-    } else {
-      // Handle note/quote with Gemini AI
-      categorizedData = await handleNote(text)
-      console.log(`💭 Detected as quote/note: ${categorizedData.category}`)
+    switch (noteType) {
+      case 'link':
+        categorizedData = await handleLink(content)
+        console.log(`🔗 Detected as link: ${categorizedData.title}`)
+        break
+      case 'quote':
+        categorizedData = await handleNote(content)
+        console.log(`💭 Detected as quote: ${categorizedData.category}`)
+        break
+      case 'video':
+        categorizedData = await handleVideo(content)
+        console.log(`🎬 Detected as video: ${categorizedData.category}`)
+        break
+      case 'book':
+        categorizedData = await handleBook(content)
+        console.log(`📖 Detected as book: ${categorizedData.category}`)
+        break
+      default:
+        throw new Error(`Unknown note type: ${noteType}`)
     }
 
     // Save to Neon database
@@ -53,9 +91,16 @@ export async function POST(request) {
     await updateNoteGithubPath(note.id, github.path, github.sha)
 
     // Return success response (compatible with Google Apps Script bot)
+    const typeNames = {
+      link: 'Link',
+      quote: 'Alıntı',
+      video: 'Video',
+      book: 'Kitap'
+    }
+
     return NextResponse.json({
       success: true,
-      type: isLink ? 'link' : 'note',
+      type: noteType,
       data: {
         id: note.id,
         title: categorizedData.title || null,
@@ -68,7 +113,7 @@ export async function POST(request) {
         tags: categorizedData.tags || [],
         github_path: github.path,
       },
-      message: `${isLink ? 'Link' : 'Not'} başarıyla eklendi! (DB + GitHub)`,
+      message: `${typeNames[noteType]} başarıyla eklendi! (DB + GitHub)`,
     })
   } catch (error) {
     console.error('❌ API Error:', error)

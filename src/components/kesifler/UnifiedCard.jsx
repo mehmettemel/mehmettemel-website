@@ -18,11 +18,12 @@ import {
 } from '@/components/ui/dialog.tsx'
 
 /**
- * Unified Card Component for both Links and Quotes
+ * Unified Card Component for Links, Quotes, Videos, and Books
  * - Consistent design across kesifler section
  * - Smooth framer-motion animations without flickering
  * - Smooth hover interactions
- * - Modal for long quotes
+ * - Optional modal for videos and books
+ * - Tooltip for quotes
  */
 export function UnifiedCard({
   title,
@@ -33,13 +34,13 @@ export function UnifiedCard({
   source,
   url,
   isExternal = false,
+  enableModal = false, // Only true for videos and books
   index = 0,
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  // Check if quote is long (more than ~100 characters or has multiple lines)
-  // Treat all quotes (items without title) as interactive to allow modal and tooltip
-  const isLongQuote = !title && description
+  // Check if it's a note (no title = quote/video/book)
+  const isNote = !title && description
 
   const CardWrapper = isExternal ? motion.a : motion.div
   const cardProps = isExternal
@@ -48,7 +49,7 @@ export function UnifiedCard({
         target: '_blank',
         rel: 'noopener noreferrer',
       }
-    : isLongQuote
+    : isNote && enableModal
       ? {
           onClick: () => setIsModalOpen(true),
           style: { cursor: 'pointer' },
@@ -88,7 +89,7 @@ export function UnifiedCard({
             <h3 className="line-clamp-3 text-sm leading-tight font-semibold text-foreground transition-colors group-hover:text-primary">
               {title}
             </h3>
-          ) : isLongQuote ? (
+          ) : isNote ? (
             <TooltipProvider>
               <Tooltip delayDuration={300}>
                 <TooltipTrigger asChild>
@@ -171,8 +172,8 @@ export function UnifiedCard({
         )}
       </CardWrapper>
 
-      {/* Modal for long quotes */}
-      {isLongQuote && (
+      {/* Modal for videos and books (only when enableModal is true) */}
+      {isNote && enableModal && (
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
           <DialogContent className="max-h-[80vh] max-w-2xl overflow-auto">
             <DialogHeader>
