@@ -27,7 +27,7 @@ export const linkCategories = [
   { id: 'diger', name: 'Diğer', icon: '🌍' },
 ]
 
-// Not Kategorileri
+// Alıntı Kategorileri
 export const quoteCategories = [
   { id: 'all', name: 'Tümü', icon: '📚' },
   { id: 'kisisel', name: 'Kişisel', icon: '💭' },
@@ -37,8 +37,8 @@ export const quoteCategories = [
   { id: 'genel', name: 'Genel', icon: '📝' },
 ]
 
-// Notlar ve Alıntılar
-export const inspirationalQuotes = [
+// Alıntılar (kısa notlar)
+export const quotes = [
   {
     id: 1768243881702,
     text: 'Bağışıklık takviyesinde 1 numaraya D vitaminini koyun',
@@ -72,3 +72,28 @@ export const inspirationalQuotes = [
     tags: ['yürüyüş', 'sağlık', 'egzersiz'],
   },
 ]
+
+// Video Kategorileri
+export const videoCategories = [
+  { id: 'all', name: 'Tümü', icon: '📚' },
+  { id: 'youtube', name: 'YouTube', icon: '▶️' },
+  { id: 'documentary', name: 'Belgesel', icon: '🎬' },
+  { id: 'course', name: 'Kurs', icon: '🎓' },
+  { id: 'podcast', name: 'Podcast', icon: '🎙️' },
+]
+
+// Video Notları
+export const videoNotes = []
+
+// Kitap Kategorileri
+export const bookCategories = [
+  { id: 'all', name: 'Tümü', icon: '📚' },
+  { id: 'science', name: 'Bilim', icon: '🔬' },
+  { id: 'selfhelp', name: 'Kişisel Gelişim', icon: '🌱' },
+  { id: 'biography', name: 'Biyografi', icon: '👤' },
+  { id: 'fiction', name: 'Kurgu', icon: '📖' },
+  { id: 'health', name: 'Sağlık', icon: '🏥' },
+]
+
+// Kitap Notları
+export const bookNotes = []

@@ -26,7 +26,8 @@ export function HomeHero() {
         className="mx-auto max-w-2xl text-base text-muted-foreground sm:text-lg"
       >
         <p className="text-center leading-relaxed">
-          Kişisel dijital koleksiyonum. Ayrıca
+          Kişisel dijital koleksiyonum.Site üzerinde her şeyin otomasyonla
+          organize edilmesi üzerine denemeler yapıyorum. Ayrıca
           <motion.a
             href="https://x.com/temelbusiness"
             target="_blank"

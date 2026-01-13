@@ -2,10 +2,17 @@
 
 import { motion } from 'framer-motion'
 import { Container } from '../../components/Container'
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../components/ui/tabs'
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from '../../components/ui/tabs'
 import { LinksList } from '../../components/kesifler/LinksList'
 import { QuotesList } from '../../components/kesifler/QuotesList'
-import { usefulLinks, inspirationalQuotes } from '../../data/kesifler'
+import { VideoNotesList } from '../../components/kesifler/VideoNotesList'
+import { BookNotesList } from '../../components/kesifler/BookNotesList'
+import { usefulLinks, quotes, videoNotes, bookNotes } from '../../data/kesifler'
 
 export default function Kesifler() {
   return (
@@ -45,11 +52,29 @@ export default function Kesifler() {
           <Tabs defaultValue="links" className="w-full">
             <div className="mb-6 flex justify-center">
               <TabsList className="inline-flex">
-                <TabsTrigger value="links" className="text-xs py-2 px-4 sm:text-sm">
+                <TabsTrigger
+                  value="links"
+                  className="px-3 py-2 text-xs sm:px-4 sm:text-sm"
+                >
                   📚 Linkler
                 </TabsTrigger>
-                <TabsTrigger value="notes" className="text-xs py-2 px-4 sm:text-sm">
-                  💭 Notlar
+                <TabsTrigger
+                  value="quotes"
+                  className="px-3 py-2 text-xs sm:px-4 sm:text-sm"
+                >
+                  💭 Alıntılar
+                </TabsTrigger>
+                <TabsTrigger
+                  value="video"
+                  className="px-3 py-2 text-xs sm:px-4 sm:text-sm"
+                >
+                  🎬 Video
+                </TabsTrigger>
+                <TabsTrigger
+                  value="books"
+                  className="px-3 py-2 text-xs sm:px-4 sm:text-sm"
+                >
+                  📖 Kitap
                 </TabsTrigger>
               </TabsList>
             </div>
@@ -59,9 +84,19 @@ export default function Kesifler() {
               <LinksList links={usefulLinks} />
             </TabsContent>
 
-            {/* Notlar ve Alıntılar Tab */}
-            <TabsContent value="notes" className="mt-0">
-              <QuotesList quotes={inspirationalQuotes} />
+            {/* Alıntılar Tab */}
+            <TabsContent value="quotes" className="mt-0">
+              <QuotesList quotes={quotes} />
+            </TabsContent>
+
+            {/* Video Notları Tab */}
+            <TabsContent value="video" className="mt-0">
+              <VideoNotesList notes={videoNotes} />
+            </TabsContent>
+
+            {/* Kitap Notları Tab */}
+            <TabsContent value="books" className="mt-0">
+              <BookNotesList notes={bookNotes} />
             </TabsContent>
           </Tabs>
         </motion.div>
