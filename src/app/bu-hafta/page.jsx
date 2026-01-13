@@ -7,6 +7,7 @@ import remarkGfm from 'remark-gfm'
 import { format } from 'date-fns'
 import { tr } from 'date-fns/locale'
 import { Container } from '../../components/Container'
+import { PageHeader } from '../../components/PageHeader'
 
 export const metadata = {
   title: 'Signals - Bu Haftanin Kesifleri | Mehmet Temel',
@@ -44,17 +45,13 @@ export default async function SignalsPage() {
   if (!signals) {
     return (
       <Container>
-        <div className="mx-auto max-w-7xl py-4 sm:py-6">
-          <div className="mb-6">
-            <h1 className="mb-1.5 text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
-              Bu Hafta
-            </h1>
-            <p className="text-xs sm:text-sm leading-relaxed text-muted-foreground">
-              Her hafta dikkatimi çeken kaynaklar ve bilgiler.
-            </p>
-          </div>
-          <div className="rounded-xl border border-dashed border-border bg-secondary/20 py-12 sm:py-16 text-center">
-            <p className="text-sm sm:text-base text-muted-foreground">
+        <div className="mx-auto max-w-7xl py-8 sm:py-12">
+          <PageHeader
+            title="Bu Hafta"
+            description="Her hafta dikkatimi çeken kaynaklar ve bilgiler."
+          />
+          <div className="rounded-xl border border-dashed border-border bg-secondary/20 py-16 text-center sm:py-20">
+            <p className="text-sm text-muted-foreground sm:text-base">
               Bu hafta henüz içerik yok. Pazartesi günü yeni içerik yayınlanacak!
             </p>
           </div>
@@ -65,21 +62,17 @@ export default async function SignalsPage() {
 
   return (
     <Container>
-      <div className="mx-auto max-w-7xl py-4 sm:py-6">
+      <div className="mx-auto max-w-7xl py-8 sm:py-12">
         {/* Header */}
-        <div className="mb-6">
-          <h1 className="mb-1.5 text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
-            Bu Hafta
-          </h1>
-          <p className="text-xs sm:text-sm leading-relaxed text-muted-foreground mb-2">
-            Bu hafta dikkatimi çeken kaynaklar ve bilgiler.
-          </p>
-          <div className="text-xs sm:text-sm text-muted">
-            Son güncelleme:{' '}
-            <time dateTime={signals.lastUpdated}>
-              {format(new Date(signals.lastUpdated), "d MMMM yyyy, EEEE", { locale: tr })}
-            </time>
-          </div>
+        <PageHeader
+          title="Bu Hafta"
+          description="Bu hafta dikkatimi çeken kaynaklar ve bilgiler."
+        />
+        <div className="mb-6 text-center text-xs text-muted sm:text-sm">
+          Son güncelleme:{' '}
+          <time dateTime={signals.lastUpdated}>
+            {format(new Date(signals.lastUpdated), "d MMMM yyyy, EEEE", { locale: tr })}
+          </time>
         </div>
 
         {/* Content */}
