@@ -10,14 +10,14 @@ const container = {
     opacity: 1,
     transition: {
       staggerChildren: 0.1,
-      delayChildren: 0.4
-    }
-  }
+      delayChildren: 0.4,
+    },
+  },
 }
 
 const item = {
   hidden: { opacity: 0, x: -20 },
-  show: { opacity: 1, x: 0 }
+  show: { opacity: 1, x: 0 },
 }
 
 export function HomeResearches({ posts }) {
@@ -28,8 +28,7 @@ export function HomeResearches({ posts }) {
   return (
     <motion.section
       initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
       <div className="mb-6 flex items-center justify-between">
@@ -62,8 +61,7 @@ export function HomeResearches({ posts }) {
       <motion.div
         variants={container}
         initial="hidden"
-        whileInView="show"
-        viewport={{ once: true }}
+        animate="show"
         className="space-y-0 overflow-hidden rounded-xl border border-border bg-card shadow-lg"
       >
         {posts.map((post, index) => (
@@ -76,7 +74,7 @@ export function HomeResearches({ posts }) {
                 {post.title}
               </span>
               <motion.span
-                className="flex-shrink-0 whitespace-nowrap text-xs text-muted"
+                className="flex-shrink-0 text-xs whitespace-nowrap text-muted"
                 whileHover={{ scale: 1.05 }}
               >
                 {format(new Date(post.date), 'MMM d, yyyy')}

@@ -22,22 +22,6 @@ const typeConfig = {
   },
 }
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.3
-    }
-  }
-}
-
-const item = {
-  hidden: { opacity: 0, scale: 0.9 },
-  show: { opacity: 1, scale: 1 }
-}
-
 export function HomeGems({ gems }) {
   if (!gems || gems.length === 0) {
     return null
@@ -46,8 +30,7 @@ export function HomeGems({ gems }) {
   return (
     <motion.section
       initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
       <div className="mb-6 flex items-center justify-between">
@@ -77,13 +60,7 @@ export function HomeGems({ gems }) {
         </Link>
       </div>
 
-      <motion.div
-        variants={container}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true }}
-        className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3"
-      >
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {gems.map((gem, index) => {
           const config = typeConfig[gem.type] || typeConfig.teknik
           return (
@@ -92,11 +69,43 @@ export function HomeGems({ gems }) {
               href={gem.url}
               target="_blank"
               rel="noopener noreferrer"
-              variants={item}
-              whileHover={{ y: -4, scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="group relative flex flex-col overflow-hidden rounded-lg border border-border bg-card p-4 shadow-md transition-all hover:border-primary/40 hover:shadow-lg"
+              initial="initial"
+              whileHover="hover"
+              className="group relative flex flex-col overflow-hidden rounded-lg border border-border bg-card p-4 shadow-md transition-all hover:z-10 hover:shadow-lg"
             >
+              {/* Animated Drawing Border */}
+              <div className="pointer-events-none absolute inset-0">
+                <svg
+                  className="h-full w-full text-primary"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <motion.rect
+                    x="1.5"
+                    y="1.5"
+                    style={{
+                      width: 'calc(100% - 3px)',
+                      height: 'calc(100% - 3px)',
+                    }}
+                    rx="6.5"
+                    ry="6.5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    variants={{
+                      initial: { pathLength: 0, opacity: 0 },
+                      hover: {
+                        pathLength: 1,
+                        opacity: 1,
+                        transition: {
+                          pathLength: { duration: 0.6, ease: 'easeInOut' },
+                          opacity: { duration: 0.2 },
+                        },
+                      },
+                    }}
+                  />
+                </svg>
+              </div>
+
               <motion.div
                 className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100"
                 initial={false}
@@ -123,16 +132,13 @@ export function HomeGems({ gems }) {
                 </p>
               )}
 
-              <motion.div
-                className="absolute right-3 top-3 text-muted-foreground/40 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary"
-                whileHover={{ rotate: 45 }}
-              >
+              <div className="absolute top-3 right-3 text-muted-foreground/40 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary">
                 <ExternalLink className="h-3.5 w-3.5" />
-              </motion.div>
+              </div>
             </motion.a>
           )
         })}
-      </motion.div>
+      </div>
     </motion.section>
   )
 }

@@ -4,7 +4,7 @@ import { getAllPosts } from '../lib/blog'
 import { usefulLinks } from '../data/kesifler'
 import { format } from 'date-fns'
 import { HomeHero } from '../components/home/HomeHero'
-import { HomeButtons } from '../components/home/HomeButtons'
+
 import { HomeResearches } from '../components/home/HomeResearches'
 import { HomeGems } from '../components/home/HomeGems'
 
@@ -54,9 +54,6 @@ export default function Home() {
       <div className="mx-auto max-w-7xl py-8 sm:py-12">
         {/* Hero Section - Centered */}
         <HomeHero />
-
-        {/* CTA Buttons - Centered */}
-        <HomeButtons />
 
         <div className="space-y-12 sm:space-y-16">
           {/* Researches Section */}
