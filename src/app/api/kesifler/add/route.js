@@ -1,7 +1,13 @@
 import { NextResponse } from 'next/server'
 import { createNote, updateNoteGithubPath } from '@/lib/db'
 import { createMarkdownFile } from '@/lib/github'
-import { handleLink, handleNote, handleVideo, handleBook, isURL } from '@/lib/gemini'
+import {
+  handleLink,
+  handleNote,
+  handleVideo,
+  handleBook,
+  isURL,
+} from '@/lib/gemini'
 
 /**
  * POST /api/kesifler/add
@@ -28,22 +34,29 @@ export async function POST(request) {
 
     console.log(`📩 New request: ${text.substring(0, 50)}...`)
 
-    // Check for commands
+    // Check for commands (support both "/cmd text" and "/cmd\ntext" formats)
     let noteType = null
     let content = text
 
-    if (text.startsWith('/link ')) {
+    // Helper to extract content after command
+    const extractContent = (cmd) => {
+      // Match command with space or newline
+      const regex = new RegExp(`^${cmd}[\\s\\n]+`, 'i')
+      return text.replace(regex, '').trim()
+    }
+
+    if (text.startsWith('/link ') || text.startsWith('/link\n')) {
       noteType = 'link'
-      content = text.replace('/link ', '').trim()
-    } else if (text.startsWith('/alinti ')) {
+      content = extractContent('/link')
+    } else if (text.startsWith('/alinti ') || text.startsWith('/alinti\n')) {
       noteType = 'quote'
-      content = text.replace('/alinti ', '').trim()
-    } else if (text.startsWith('/video ')) {
+      content = extractContent('/alinti')
+    } else if (text.startsWith('/video ') || text.startsWith('/video\n')) {
       noteType = 'video'
-      content = text.replace('/video ', '').trim()
-    } else if (text.startsWith('/kitap ')) {
+      content = extractContent('/video')
+    } else if (text.startsWith('/kitap ') || text.startsWith('/kitap\n')) {
       noteType = 'book'
-      content = text.replace('/kitap ', '').trim()
+      content = extractContent('/kitap')
     }
 
     // Auto-detect if no command
@@ -95,7 +108,7 @@ export async function POST(request) {
       link: 'Link',
       quote: 'Alıntı',
       video: 'Video',
-      book: 'Kitap'
+      book: 'Kitap',
     }
 
     return NextResponse.json({
