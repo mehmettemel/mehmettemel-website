@@ -8,6 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog.tsx'
+import { VideoPreview } from './VideoPreview'
 
 /**
  * SourceCard Component - Groups notes by source (video/book)
@@ -40,6 +41,11 @@ export function SourceCard({
         onClick={() => setIsModalOpen(true)}
         className="group flex animate-[fade-in-up_0.3s_ease-out_forwards] cursor-pointer flex-col rounded-xl border border-border bg-card p-5 transition-all duration-200 hover:border-primary/40 hover:bg-secondary/20 hover:shadow-lg"
       >
+        {/* Video Preview (only for videos with URL) */}
+        {type === 'video' && url && (
+          <VideoPreview url={url} title={source} />
+        )}
+
         {/* Title - Source name (full text) */}
         <div className="mb-3 flex items-start gap-3">
           <span className="mt-0.5 flex-shrink-0 text-primary/70">{icon}</span>
@@ -86,6 +92,13 @@ export function SourceCard({
 
           {/* Notes list - Responsive grid */}
           <div className="flex-1 overflow-auto py-4 pb-8">
+            {/* Video Preview in Modal */}
+            {type === 'video' && url && (
+              <div className="mb-6 group">
+                <VideoPreview url={url} title={source} />
+              </div>
+            )}
+
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               {notes.map((note, idx) => (
                 <div
