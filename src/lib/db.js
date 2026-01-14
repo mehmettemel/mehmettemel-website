@@ -66,7 +66,7 @@ export async function getNotes({ type, category, page = 1, limit = 12 }) {
       notes = await sql`
         SELECT * FROM notes
         WHERE note_type = ${type} AND category = ${category}
-        ORDER BY created_at DESC
+        ORDER BY created_at ASC
         LIMIT ${limit} OFFSET ${offset}
       `
 
@@ -79,7 +79,7 @@ export async function getNotes({ type, category, page = 1, limit = 12 }) {
       notes = await sql`
         SELECT * FROM notes
         WHERE note_type = ${type}
-        ORDER BY created_at DESC
+        ORDER BY created_at ASC
         LIMIT ${limit} OFFSET ${offset}
       `
 

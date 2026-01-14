@@ -75,13 +75,13 @@ export function UnifiedCard({
           <TooltipProvider>
             <Tooltip delayDuration={300}>
               <TooltipTrigger asChild>
-                <blockquote className="line-clamp-3 text-xs leading-snug whitespace-pre-line text-foreground">
+                <blockquote className="line-clamp-3 pr-6 text-xs leading-snug whitespace-pre-line text-foreground">
                   {description}
                 </blockquote>
               </TooltipTrigger>
               <TooltipContent
                 side="top"
-                className="max-h-96 max-w-md overflow-auto"
+                className="z-[100] max-h-96 max-w-md overflow-auto"
               >
                 <p className="text-xs leading-relaxed whitespace-pre-line">
                   {description}
@@ -105,7 +105,7 @@ export function UnifiedCard({
                 <Info className="h-3.5 w-3.5" />
               </div>
             </TooltipTrigger>
-            <TooltipContent side="left" className="max-w-xs">
+            <TooltipContent side="left" className="z-[100] max-w-xs">
               <div className="space-y-1">
                 {author && (
                   <p className="text-xs">
