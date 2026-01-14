@@ -45,6 +45,17 @@ function DesktopNav() {
           <NavigationMenuTrigger>Keşifler</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[200px] gap-1 p-2">
+              <li>
+                <NavigationMenuLink asChild>
+                  <Link
+                    href="/kesifler"
+                    className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold transition-colors hover:bg-secondary"
+                  >
+                    <span>📂</span>
+                    <span>Tümü</span>
+                  </Link>
+                </NavigationMenuLink>
+              </li>
               {kesiflerItems.map((item) => (
                 <li key={item.href}>
                   <NavigationMenuLink asChild>
