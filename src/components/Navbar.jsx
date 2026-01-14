@@ -42,7 +42,9 @@ function DesktopNav() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Keşifler</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="px-3 py-1.5 text-xs font-medium">
+            Keşifler
+          </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[200px] gap-1 p-2">
               <li>
