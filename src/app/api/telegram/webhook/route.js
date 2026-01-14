@@ -210,7 +210,50 @@ Source: Atomic Habits
         throw new Error(`Unknown note type: ${parsed.type}`)
     }
 
-    // Save to database
+    // Check if multi-note (video/book can return arrays)
+    const isMultiNote = Array.isArray(categorizedData)
+
+    if (isMultiNote) {
+      // Handle multiple notes
+      const savedNotes = []
+
+      for (const noteData of categorizedData) {
+        const note = await createNote(noteData)
+        console.log(
+          `Created note #${note.id} (${note.note_type}/${note.category})`,
+        )
+
+        const github = await createMarkdownFile(note)
+        await updateNoteGithubPath(note.id, github.path, github.sha)
+        console.log(`GitHub sync complete: ${github.path}`)
+
+        savedNotes.push({
+          id: note.id,
+          github_path: github.path,
+        })
+      }
+
+      // Send success message for multiple notes
+      const emoji = { link: '🔗', quote: '💭', video: '🎬', book: '📖' }[
+        parsed.type
+      ]
+
+      const successMessage = `✅ ${emoji} *${savedNotes.length} not eklendi!*
+
+📁 Kategori: ${categorizedData[0]?.category}
+📖 Kaynak: ${categorizedData[0]?.source || 'Belirtilmemiş'}
+✍️ Yazar: ${categorizedData[0]?.author || 'Belirtilmemiş'}
+🆔 ID'ler: ${savedNotes.map((n) => n.id).join(', ')}`
+
+      await sendTelegramMessage(chatId, successMessage)
+
+      return NextResponse.json({
+        ok: true,
+        noteIds: savedNotes.map((n) => n.id),
+      })
+    }
+
+    // Save single note to database
     const note = await createNote(categorizedData)
 
     console.log(`Created note #${note.id} (${note.note_type}/${note.category})`)
