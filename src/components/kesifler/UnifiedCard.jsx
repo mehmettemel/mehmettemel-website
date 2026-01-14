@@ -33,9 +33,23 @@ export function UnifiedCard({
   url,
   isExternal = false,
   enableModal = false, // Only true for videos and books
+  showFavicon = false, // Show favicon instead of icon
   index = 0,
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [faviconError, setFaviconError] = useState(false)
+
+  // Extract domain from URL for favicon
+  const getFaviconUrl = (url) => {
+    try {
+      const domain = new URL(url).hostname
+      return `https://www.google.com/s2/favicons?domain=${domain}&sz=64`
+    } catch {
+      return null
+    }
+  }
+
+  const faviconUrl = showFavicon && url ? getFaviconUrl(url) : null
 
   // Check if it's a note (no title = quote/video/book)
   const isNote = !title && description
@@ -51,12 +65,23 @@ export function UnifiedCard({
 
   const CardContent = (
     <>
-      {/* Icon Badge - More compact */}
-      {icon && badge && (
+      {/* Icon Badge or Favicon - More compact */}
+      {(icon || faviconUrl) && badge && (
         <div className="mb-2 flex items-center gap-1.5">
-          <span className="text-base" role="img" aria-label={badge.label}>
-            {icon}
-          </span>
+          {faviconUrl && !faviconError ? (
+            <div className="flex h-5 w-5 items-center justify-center overflow-hidden rounded-sm bg-muted">
+              <img
+                src={faviconUrl}
+                alt=""
+                className="h-4 w-4 object-contain"
+                onError={() => setFaviconError(true)}
+              />
+            </div>
+          ) : (
+            <span className="text-base" role="img" aria-label={badge.label}>
+              {icon}
+            </span>
+          )}
           <span
             className={`rounded-full px-1.5 py-0.5 text-[10px] font-medium ${badge.color}`}
           >

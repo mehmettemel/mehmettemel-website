@@ -118,6 +118,7 @@ export function LinksList({ links }) {
                   author={gem.author}
                   url={gem.url}
                   isExternal={true}
+                  showFavicon={true}
                   index={index}
                 />
               )

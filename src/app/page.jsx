@@ -1,12 +1,9 @@
-import Link from 'next/link'
 import { Container } from '../components/Container'
 import { getAllPosts } from '../lib/blog'
-import { usefulLinks } from '../data/kesifler'
-import { format } from 'date-fns'
+import { getRecentNotes } from '../lib/db'
 import { HomeHero } from '../components/home/HomeHero'
-
 import { HomeResearches } from '../components/home/HomeResearches'
-import { HomeGems } from '../components/home/HomeGems'
+import { RecentDiscoveries } from '../components/home/RecentDiscoveries'
 
 // SEO metadata for the home page
 export const metadata = {
@@ -44,10 +41,17 @@ export const metadata = {
   },
 }
 
-export default function Home() {
+export default async function Home() {
   const allPosts = getAllPosts()
   const recentPosts = allPosts.slice(0, 3)
-  const recentGems = usefulLinks.slice(0, 6)
+
+  // Fetch recent notes from database
+  let recentNotes = []
+  try {
+    recentNotes = await getRecentNotes(8)
+  } catch (error) {
+    console.error('Failed to fetch recent notes:', error)
+  }
 
   return (
     <Container>
@@ -59,8 +63,8 @@ export default function Home() {
           {/* Researches Section */}
           <HomeResearches posts={recentPosts} />
 
-          {/* Gems Section */}
-          <HomeGems gems={recentGems} />
+          {/* Recent Discoveries Section */}
+          <RecentDiscoveries notes={recentNotes} />
         </div>
       </div>
     </Container>

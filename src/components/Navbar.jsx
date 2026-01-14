@@ -16,10 +16,10 @@ import {
 } from './ui/navigation-menu'
 
 const kesiflerItems = [
-  { href: '/kesifler?tab=links', label: 'Linkler', emoji: '📚' },
-  { href: '/kesifler?tab=quotes', label: 'Alıntılar', emoji: '💭' },
-  { href: '/kesifler?tab=video', label: 'Video', emoji: '🎬' },
-  { href: '/kesifler?tab=books', label: 'Kitap', emoji: '📖' },
+  { href: '/kesifler/linkler', label: 'Linkler', emoji: '🔗' },
+  { href: '/kesifler/alintilar', label: 'Alıntılar', emoji: '💭' },
+  { href: '/kesifler/videolar', label: 'Videolar', emoji: '🎬' },
+  { href: '/kesifler/kitaplar', label: 'Kitaplar', emoji: '📖' },
 ]
 
 function NavLink({ href, children }) {
