@@ -209,14 +209,29 @@ Source: Atomic Habits
         throw new Error(`Unknown note type: ${parsed.type}`)
     }
 
+    // Validate categorizedData
+    if (!categorizedData) {
+      throw new Error('Not verisi oluşturulamadı. Lütfen tekrar deneyin.')
+    }
+
     // Check if multi-note (video/book can return arrays)
     const isMultiNote = Array.isArray(categorizedData)
+
+    // Validate array has items
+    if (isMultiNote && categorizedData.length === 0) {
+      throw new Error('Hiçbir not bulunamadı. Lütfen formatı kontrol edin.')
+    }
 
     if (isMultiNote) {
       // Handle multiple notes
       const savedNotes = []
 
       for (const noteData of categorizedData) {
+        if (!noteData || !noteData.type || !noteData.text) {
+          console.warn('Invalid note data, skipping:', noteData)
+          continue
+        }
+
         const note = await createNote(noteData)
         console.log(
           `Created note #${note.id} (${note.note_type}/${note.category})`,
@@ -227,16 +242,22 @@ Source: Atomic Habits
         })
       }
 
+      // Check if any notes were saved
+      if (savedNotes.length === 0) {
+        throw new Error('Notlar kaydedilemedi. Lütfen formatı kontrol edin.')
+      }
+
       // Send success message for multiple notes
       const emoji = { link: '🔗', quote: '💭', video: '🎬', book: '📖' }[
         parsed.type
       ]
 
+      const firstNote = categorizedData[0] || {}
       const successMessage = `✅ ${emoji} *${savedNotes.length} not eklendi!*
 
-📁 Kategori: ${categorizedData[0]?.category}
-📖 Kaynak: ${categorizedData[0]?.source || 'Belirtilmemiş'}
-✍️ Yazar: ${categorizedData[0]?.author || 'Belirtilmemiş'}
+📁 Kategori: ${firstNote.category || 'Belirtilmemiş'}
+📖 Kaynak: ${firstNote.source || 'Belirtilmemiş'}
+✍️ Yazar: ${firstNote.author || 'Belirtilmemiş'}
 🆔 ID'ler: ${savedNotes.map((n) => n.id).join(', ')}`
 
       await sendTelegramMessage(chatId, successMessage)
@@ -245,6 +266,11 @@ Source: Atomic Habits
         ok: true,
         noteIds: savedNotes.map((n) => n.id),
       })
+    }
+
+    // Validate single note data
+    if (!categorizedData.type || !categorizedData.category) {
+      throw new Error('Not formatı hatalı. Lütfen tekrar deneyin.')
     }
 
     // Save single note to database
@@ -259,7 +285,7 @@ Source: Atomic Habits
 
     const successMessage = `✅ ${emoji} *Not eklendi!*
 
-📁 Kategori: ${categorizedData.category}
+📁 Kategori: ${categorizedData.category || 'Belirtilmemiş'}
 🆔 ID: ${note.id}`
 
     await sendTelegramMessage(chatId, successMessage)
@@ -267,14 +293,26 @@ Source: Atomic Habits
     return NextResponse.json({ ok: true, noteId: note.id })
   } catch (error) {
     console.error('Telegram webhook error:', error)
+    console.error('Error stack:', error.stack)
 
     // Send error message to user
     if (chatId) {
+      // Get user-friendly error message
+      let userMessage = error.message || 'Bilinmeyen bir hata oluştu.'
+
+      // Add hints based on error type
+      let hint = ''
+      if (userMessage.includes('parse')) {
+        hint = '\n\n💡 İpucu: Mesajınızın formatını kontrol edin.'
+      } else if (userMessage.includes('length')) {
+        hint = '\n\n💡 İpucu: Not eklerken doğru formatı kullanın.'
+      }
+
       const errorMessage = `❌ *Hata oluştu*
 
-${error.message}
+${userMessage}${hint}
 
-💡 /help komutu ile kullanım kılavuzunu görebilirsiniz.`
+📖 /help komutu ile kullanım kılavuzunu görebilirsiniz.`
 
       await sendTelegramMessage(chatId, errorMessage)
     }

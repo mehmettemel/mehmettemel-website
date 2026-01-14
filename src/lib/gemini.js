@@ -285,22 +285,36 @@ KATEGORİ SEÇİMİ (4 kategori):
     }
   }
 
-  // Ensure notes is an array
-  let notesArray = videoData.notes
-  if (!Array.isArray(notesArray)) {
+  // Ensure notes is an array and not empty
+  let notesArray = videoData?.notes
+
+  if (!Array.isArray(notesArray) || notesArray.length === 0) {
     // If text field exists (old format), convert to array
-    notesArray = videoData.text ? [videoData.text] : [text]
+    if (videoData?.text) {
+      notesArray = [videoData.text]
+    } else {
+      // Last fallback: use original input text
+      notesArray = [text]
+    }
+  }
+
+  // Filter out empty notes
+  notesArray = notesArray.filter((note) => note && note.trim().length > 0)
+
+  // If still no valid notes, throw error
+  if (notesArray.length === 0) {
+    throw new Error('Video notunu parse edemedik. Lütfen formatı kontrol edin.')
   }
 
   // Return array of note objects
   return notesArray.map((noteText) => ({
     type: 'video',
-    category: videoData.category,
+    category: videoData?.category || 'youtube',
     title: null,
-    text: noteText,
-    url: videoData.url,
-    author: videoData.author,
-    source: videoData.source,
+    text: noteText.trim(),
+    url: videoData?.url || null,
+    author: videoData?.author || null,
+    source: videoData?.source || null,
   }))
 }
 
@@ -368,22 +382,36 @@ KATEGORİ SEÇİMİ (5 kategori):
     }
   }
 
-  // Ensure notes is an array
-  let notesArray = bookData.notes
-  if (!Array.isArray(notesArray)) {
+  // Ensure notes is an array and not empty
+  let notesArray = bookData?.notes
+
+  if (!Array.isArray(notesArray) || notesArray.length === 0) {
     // If text field exists (old format), convert to array
-    notesArray = bookData.text ? [bookData.text] : [text]
+    if (bookData?.text) {
+      notesArray = [bookData.text]
+    } else {
+      // Last fallback: use original input text
+      notesArray = [text]
+    }
+  }
+
+  // Filter out empty notes
+  notesArray = notesArray.filter((note) => note && note.trim().length > 0)
+
+  // If still no valid notes, throw error
+  if (notesArray.length === 0) {
+    throw new Error('Kitap notunu parse edemedik. Lütfen formatı kontrol edin.')
   }
 
   // Return array of note objects
   return notesArray.map((noteText) => ({
     type: 'book',
-    category: bookData.category,
+    category: bookData?.category || 'selfhelp',
     title: null,
-    text: noteText,
-    url: bookData.url,
-    author: bookData.author,
-    source: bookData.source,
+    text: noteText.trim(),
+    url: bookData?.url || null,
+    author: bookData?.author || null,
+    source: bookData?.source || null,
   }))
 }
 
