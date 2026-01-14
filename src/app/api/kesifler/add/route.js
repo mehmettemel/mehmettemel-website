@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
-import { createNote, updateNoteGithubPath } from '@/lib/db'
-import { createMarkdownFile } from '@/lib/github'
+import { createNote } from '@/lib/db'
 import {
   handleLink,
   handleNote,
@@ -14,7 +13,7 @@ import {
  * Add a new note (link, quote, video, or book) to the system
  *
  * This endpoint is used by the Google Apps Script Telegram bot
- * Flow: Telegram → Google Apps Script → This API → Neon DB + GitHub
+ * Flow: Telegram → Google Apps Script → This API → Neon DB
  *
  * Body: { text: string }
  * Commands: /link, /alinti, /video, /kitap
@@ -108,17 +107,9 @@ export async function POST(request) {
         const note = await createNote(noteData)
         console.log(`✅ Saved to DB: note #${note.id}`)
 
-        // Create markdown file in GitHub
-        const github = await createMarkdownFile(note)
-        console.log(`📁 Created GitHub file: ${github.path}`)
-
-        // Update note with GitHub info
-        await updateNoteGithubPath(note.id, github.path, github.sha)
-
         savedNotes.push({
           id: note.id,
           text: noteData.text,
-          github_path: github.path,
         })
       }
 
@@ -148,13 +139,6 @@ export async function POST(request) {
     const note = await createNote(categorizedData)
     console.log(`✅ Saved to DB: note #${note.id}`)
 
-    // Create markdown file in GitHub
-    const github = await createMarkdownFile(note)
-    console.log(`📁 Created GitHub file: ${github.path}`)
-
-    // Update note with GitHub info
-    await updateNoteGithubPath(note.id, github.path, github.sha)
-
     // Return success response (compatible with Google Apps Script bot)
     const typeNames = {
       link: 'Link',
@@ -176,9 +160,8 @@ export async function POST(request) {
         author: categorizedData.author || null,
         source: categorizedData.source || null,
         tags: categorizedData.tags || [],
-        github_path: github.path,
       },
-      message: `${typeNames[noteType]} başarıyla eklendi! (DB + GitHub)`,
+      message: `${typeNames[noteType]} başarıyla eklendi!`,
     })
   } catch (error) {
     console.error('❌ API Error:', error)

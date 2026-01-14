@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
-import { createNote, updateNoteGithubPath, getNotesStats } from '@/lib/db'
-import { createMarkdownFile } from '@/lib/github'
+import { createNote, getNotesStats } from '@/lib/db'
 import {
   callGemini,
   handleLink,
@@ -223,13 +222,8 @@ Source: Atomic Habits
           `Created note #${note.id} (${note.note_type}/${note.category})`,
         )
 
-        const github = await createMarkdownFile(note)
-        await updateNoteGithubPath(note.id, github.path, github.sha)
-        console.log(`GitHub sync complete: ${github.path}`)
-
         savedNotes.push({
           id: note.id,
-          github_path: github.path,
         })
       }
 
@@ -258,12 +252,6 @@ Source: Atomic Habits
 
     console.log(`Created note #${note.id} (${note.note_type}/${note.category})`)
 
-    // Push to GitHub
-    const github = await createMarkdownFile(note)
-    await updateNoteGithubPath(note.id, github.path, github.sha)
-
-    console.log(`GitHub sync complete: ${github.path}`)
-
     // Send success message
     const emoji = { link: '🔗', quote: '💭', video: '🎬', book: '📖' }[
       parsed.type
@@ -272,7 +260,6 @@ Source: Atomic Habits
     const successMessage = `✅ ${emoji} *Not eklendi!*
 
 📁 Kategori: ${categorizedData.category}
-🔗 GitHub: \`${github.path}\`
 🆔 ID: ${note.id}`
 
     await sendTelegramMessage(chatId, successMessage)

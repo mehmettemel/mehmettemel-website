@@ -123,29 +123,6 @@ export async function getNoteById(id) {
 }
 
 /**
- * Update GitHub sync information for a note
- * @param {number} noteId - Note ID
- * @param {string} path - GitHub file path
- * @param {string} sha - Commit SHA
- * @returns {Promise<void>}
- */
-export async function updateNoteGithubPath(noteId, path, sha) {
-  try {
-    await sql`
-      UPDATE notes
-      SET
-        github_path = ${path},
-        github_commit_sha = ${sha},
-        updated_at = NOW()
-      WHERE id = ${noteId}
-    `
-  } catch (error) {
-    console.error('Database error in updateNoteGithubPath:', error)
-    throw new Error(`Failed to update GitHub path: ${error.message}`)
-  }
-}
-
-/**
  * Get statistics about notes
  * @returns {Promise<Object>} Statistics
  */
