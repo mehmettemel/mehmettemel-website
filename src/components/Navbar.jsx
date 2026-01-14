@@ -42,7 +42,7 @@ function DesktopNav() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="px-3 py-1.5 text-xs font-medium">
+          <NavigationMenuTrigger className="px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground data-[state=open]:text-foreground bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent">
             Keşifler
           </NavigationMenuTrigger>
           <NavigationMenuContent>
