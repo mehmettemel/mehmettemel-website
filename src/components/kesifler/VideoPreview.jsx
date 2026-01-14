@@ -33,7 +33,9 @@ export function VideoPreview({ url, title }) {
         if (videoId) {
           return {
             platform: 'youtube',
-            thumbnail: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
+            videoId: videoId,
+            // Try maxresdefault first, fallback to hqdefault
+            thumbnail: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
             embedUrl: `https://www.youtube.com/embed/${videoId}`,
           }
         }
@@ -61,6 +63,13 @@ export function VideoPreview({ url, title }) {
 
   const videoInfo = getVideoInfo(url)
 
+  // Debug logging
+  if (typeof window !== 'undefined') {
+    console.log('VideoPreview - URL:', url)
+    console.log('VideoPreview - videoInfo:', videoInfo)
+    console.log('VideoPreview - imageError:', imageError)
+  }
+
   if (!videoInfo || !videoInfo.thumbnail || imageError) {
     return null
   }
@@ -71,7 +80,10 @@ export function VideoPreview({ url, title }) {
         src={videoInfo.thumbnail}
         alt={title || 'Video thumbnail'}
         className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-        onError={() => setImageError(true)}
+        onError={(e) => {
+          console.error('Video thumbnail failed to load:', videoInfo.thumbnail)
+          setImageError(true)
+        }}
       />
       {/* Play overlay */}
       <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-opacity group-hover:bg-black/30">
