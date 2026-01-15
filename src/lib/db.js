@@ -270,8 +270,8 @@ export async function getCacheItems(type, status = 'all') {
 export async function createCacheItem(data) {
   try {
     const result = await sql`
-      INSERT INTO cache_items (name, cache_type)
-      VALUES (${data.name}, ${data.cache_type})
+      INSERT INTO cache_items (name, cache_type, author)
+      VALUES (${data.name}, ${data.cache_type}, ${data.author || null})
       RETURNING *
     `
     return result[0]
@@ -324,12 +324,25 @@ export async function toggleCacheCheckbox(id, field) {
     }
 
     // Normal toggle
-    const result = await sql`
-      UPDATE cache_items
-      SET ${sql(field)} = ${newValue}, updated_at = NOW()
-      WHERE id = ${id}
-      RETURNING *
-    `
+    // Use conditional query based on field (safest approach with Neon's new API)
+    let result
+    if (field === 'is_completed') {
+      result = await sql`
+        UPDATE cache_items
+        SET is_completed = ${newValue}, updated_at = NOW()
+        WHERE id = ${id}
+        RETURNING *
+      `
+    } else if (field === 'is_liked') {
+      result = await sql`
+        UPDATE cache_items
+        SET is_liked = ${newValue}, updated_at = NOW()
+        WHERE id = ${id}
+        RETURNING *
+      `
+    } else {
+      throw new Error('Invalid field')
+    }
 
     return result[0]
   } catch (error) {

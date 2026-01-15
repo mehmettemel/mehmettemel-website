@@ -3,6 +3,8 @@
  * Extracted from existing /api/kesifler/add/route.js
  */
 
+import { toTitleCase } from './utils'
+
 const GEMINI_KEY = process.env.GEMINI_API_KEY
 
 if (!GEMINI_KEY) {
@@ -470,16 +472,20 @@ Important: Return ONLY the JSON object, nothing else.`
 
     console.log('[AI Cache] Enriched cache item:', data)
 
+    // Apply title case formatting to name and author
+    const name = toTitleCase(data.name || trimmedText)
+    const author = data.author ? toTitleCase(data.author) : null
+
     return {
-      name: data.name || trimmedText,
-      author: data.author || null,
+      name,
+      author,
       cache_type: type,
     }
   } catch (error) {
     console.error('[AI Cache] Failed to enrich cache item:', error)
-    // Fallback: return without author
+    // Fallback: return without author (still apply title case)
     return {
-      name: trimmedText,
+      name: toTitleCase(trimmedText),
       author: null,
       cache_type: type,
     }
@@ -494,7 +500,7 @@ Important: Return ONLY the JSON object, nothing else.`
  */
 export function handleCacheItem(type, text) {
   return {
-    name: text.trim(),
+    name: toTitleCase(text.trim()),
     cache_type: type,
   }
 }

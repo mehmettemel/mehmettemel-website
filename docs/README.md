@@ -1,74 +1,87 @@
-# Keşifler Sistemi
-
-Telegram bot ile not toplama ve lokal data yönetimi.
+# 📚 Dokümantasyon
 
 ## 🚀 Hızlı Başlangıç
 
-### 1. Environment Variables
+**Yeni misin? Buradan başla:**
 
-```bash
-# .env.local
-GEMINI_API_KEY=xxx  # AI kategorilendirme için
-```
+1. **[TELEGRAM_QUICK_START.md](./TELEGRAM_QUICK_START.md)** - Telegram bot komutları (1 sayfa özet)
+2. **[CURRENT_SYSTEM.md](./CURRENT_SYSTEM.md)** - Güncel sistem durumu (v2.0.0)
 
-### 2. Development
+---
 
-```bash
-npm run dev
-# http://localhost:3000/kesifler
-```
+## 📖 Detaylı Dokümantasyon
 
-## 📁 Veri Yönetimi
+### Telegram Entegrasyonu
+- **[TELEGRAM_QUICK_START.md](./TELEGRAM_QUICK_START.md)** - Kısa komut referansı
+- **[TELEGRAM_AUTOMATION.md](./TELEGRAM_AUTOMATION.md)** - Detaylı otomasyon açıklaması (Türkçe)
+- **[TELEGRAM_COMMANDS.md](./TELEGRAM_COMMANDS.md)** - Tüm komutlar ve test senaryoları
 
-Tüm veriler `src/data/kesifler.js` dosyasında saklanır:
+### Cache Sistemi
+- **[CACHE_SYSTEM.md](./CACHE_SYSTEM.md)** - Cache sistemi detaylı dokümantasyonu (Türkçe)
 
-```javascript
-// Linkler
-export const links = [{ id: 1, title: '...', url: '...', category: 'website' }]
+### Genel
+- **[CURRENT_SYSTEM.md](./CURRENT_SYSTEM.md)** - Sistem durumu ve değişiklik geçmişi
 
-// Alıntılar
-export const quotes = [{ id: 1, text: '...', author: '...', category: 'genel' }]
+---
 
-// Video Notları
-export const videoNotes = []
+## 🎯 Hangi Dosyayı Okumalıyım?
 
-// Kitap Notları
-export const bookNotes = []
-```
+### Telegram botunu kullanacaksam:
+→ **[TELEGRAM_QUICK_START.md](./TELEGRAM_QUICK_START.md)** ile başla
 
-## 📝 Telegram Komutları
+### Cache sistemi nasıl çalışıyor?
+→ **[CACHE_SYSTEM.md](./CACHE_SYSTEM.md)** oku
 
-```
-/link https://example.com    # Link ekle
-/alinti Alıntı metni         # Alıntı ekle
-/video Video notu            # Video notu ekle
-/kitap Kitap notu            # Kitap notu ekle
-```
+### Sistem neler değişti?
+→ **[CURRENT_SYSTEM.md](./CURRENT_SYSTEM.md)** oku
 
-## 🗄️ Veri Tipleri
+### Tüm komutları görmek istiyorum:
+→ **[TELEGRAM_COMMANDS.md](./TELEGRAM_COMMANDS.md)** oku
 
-| Tip   | Açıklama         |
-| ----- | ---------------- |
-| link  | Dış bağlantılar  |
-| quote | Alıntılar/sözler |
-| video | Video notları    |
-| book  | Kitap notları    |
+### AI nasıl çalışıyor?
+→ **[TELEGRAM_AUTOMATION.md](./TELEGRAM_AUTOMATION.md)** oku (AI Kategorilendirme bölümü)
 
-## 📁 Proje Yapısı
+---
 
-```
-src/
-├── data/
-│   └── kesifler.js          # Tüm veriler
-├── app/
-│   ├── api/kesifler/add/    # Telegram bot endpoint
-│   └── kesifler/page.jsx    # Sayfa bileşeni
-└── components/kesifler/     # UI bileşenleri
-```
+## 🆕 v2.0.0 Değişiklikleri (15 Ocak 2026)
 
-## 🐛 Sorun Giderme
+### ✅ Yeni Özellikler
+- Kısa komutlar: `/k`, `/f`, `/u`, `/l`, `/a`, `/v`, `/b`
+- AI ile otomatik yazar/yönetmen/marka bulma
+- Direkt Vercel webhook (Google Apps Script kapatıldı)
+- Detaylı debug logları
 
-| Sorun          | Çözüm                     |
-| -------------- | ------------------------- |
-| API hatası     | GEMINI_API_KEY kontrol et |
-| Bot çalışmıyor | Vercel deploy kontrolü    |
+### 🔧 Düzeltmeler
+- SQL syntax Neon'un yeni API'sine uyarlandı
+- Author field cache sistemine eklendi
+- parseMessage() fonksiyonu tamamen yeniden yazıldı
+
+### 📋 Değişiklikler
+- `/cache-kitap` → `/k` (eski hala çalışıyor)
+- `/link` → `/l` (eski hala çalışıyor)
+- `/quote` → `/a` (eski hala çalışıyor)
+
+---
+
+## 📞 Yardım
+
+Sorun mu var?
+
+1. **[DEBUG_STEPS.md](../DEBUG_STEPS.md)** dosyasına bak
+2. **[CURRENT_SYSTEM.md](./CURRENT_SYSTEM.md)** → "Bilinen Sorunlar" bölümü
+3. Webhook kontrolü: `curl https://mehmettemel.com/api/telegram/webhook`
+
+---
+
+## 📝 Diğer Dokümantasyon
+
+- `COLOR_SCHEME.md` - Renk paleti
+- `FONT_SETUP.md` - Font yapılandırması
+- `SEO_SETUP.md` - SEO en iyi pratikler
+- `ANALYTICS_SETUP.md` - Analytics kurulumu
+- `FILE_STRUCTURE.md` - Dosya yapısı
+- `project-overview.md` - Proje mimarisi
+
+---
+
+**Son Güncelleme:** 15 Ocak 2026 | **Versiyon:** v2.0.0

@@ -319,14 +319,21 @@ Configure SEO settings in:
 ### Documentation
 
 Complete documentation available in `/docs`:
+
+**🚀 Quick Start:**
+- `TELEGRAM_QUICK_START.md` - Telegram bot commands (quick reference)
+- `CURRENT_SYSTEM.md` - Current system status (v2.0.0)
+
+**📖 Detailed Docs:**
+- `CACHE_SYSTEM.md` - Cache system documentation (Turkish)
+- `TELEGRAM_AUTOMATION.md` - Telegram bot automation (Turkish)
+- `TELEGRAM_COMMANDS.md` - All commands and test scenarios
 - `COLOR_SCHEME.md` - Color palette and usage guide
 - `FONT_SETUP.md` - Font configuration
 - `SEO_SETUP.md` - SEO best practices
 - `ANALYTICS_SETUP.md` - Analytics setup
 - `FILE_STRUCTURE.md` - Complete file structure
 - `project-overview.md` - Project architecture
-- `CACHE_SYSTEM.md` - Cache system documentation (Turkish)
-- `TELEGRAM_AUTOMATION.md` - Telegram bot setup and automation (Turkish)
 
 ## 🔌 API Routes
 
