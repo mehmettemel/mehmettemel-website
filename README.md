@@ -25,9 +25,10 @@ A modern, SEO-optimized blog built with Next.js 16, focused on nutrition researc
 
 ### Content Management
 - **Markdown/MDX Support**: Write research posts in Markdown/MDX format
-- **Telegram Bot Integration**: Add content via Telegram commands (/link, /quote, /video, /kitap)
+- **Telegram Bot Integration**: Add content via Telegram commands (/link, /quote, /video, /kitap, /cache-*)
 - **AI-Powered Categorization**: Automatic content categorization with Gemini AI
 - **Multi-Type Notes**: Support for links, quotes, video notes, and book notes
+- **Cache System**: Track books, movies/shows, and products with completion and like status
 - **GitHub Auto-Sync**: Automatic markdown file creation and commits to GitHub
 - **Database-Driven**: Neon PostgreSQL for dynamic content storage
 - **ISR (Incremental Static Regeneration)**: 60-second revalidation for fresh content
@@ -105,10 +106,18 @@ You can add content to the Kesifler section using Telegram bot commands:
 
 #### Available Commands
 
+**Kesifler (Discoveries):**
 - `/link [URL]` - Add a link with AI-powered metadata extraction
 - `/quote [text]` or `/alinti [text]` - Add a quote
 - `/video [text]` - Add video notes (supports multiple notes in one message)
 - `/kitap [text]` - Add book notes (supports multiple notes in one message)
+
+**Cache System:**
+- `/cache-kitap [name]` - Add a book to your reading list
+- `/cache-film [name]` - Add a movie/show to your watch list
+- `/cache-urun [name]` - Add a product to your shopping list
+
+**Other:**
 - `/help` - Show help message
 - `/stats` - Show content statistics
 
@@ -174,6 +183,10 @@ npm start
 | `/incelemeler` | Research blog index - List of all research posts |
 | `/incelemeler/[slug]` | Individual research post |
 | `/kesifler` | Discoveries - Dynamic content from database (links, quotes, videos, books) |
+| `/cache` | Cache dashboard - Overview of all tracked items |
+| `/cache/kitap` | Books cache - Reading list with completion tracking |
+| `/cache/film` | Movies/Shows cache - Watch list with completion tracking |
+| `/cache/urun` | Products cache - Shopping list with completion tracking |
 | `/bu-hafta` | Weekly signals - Current week's curated content |
 | `/iletisim` | Contact page - Social links and email |
 | `/sitemap.xml` | Auto-generated sitemap |
@@ -192,6 +205,13 @@ npm start
 - AI-categorized with Gemini
 - ISR with 60-second revalidation
 
+**Cache System:**
+- Track items to read, watch, or buy
+- 3 categories: Books (Kitap), Movies/Shows (Film & Dizi), Products (Ürünler)
+- Checkbox tracking: Completed and Liked status
+- Real-time updates with PATCH API
+- ISR with 60-second revalidation
+
 ## 📁 Project Structure
 
 ```
@@ -204,11 +224,14 @@ npm start
 │       └── current.md       # Current week's content
 ├── public/                  # Static assets
 ├── scripts/                 # Automation scripts
-│   ├── init-db.sql         # Database schema
+│   ├── init-db.sql         # Database schema (notes table)
+│   ├── create-cache-table.sql  # Cache table schema
 │   └── telegram-bot-updated.gs  # Google Apps Script for Telegram
 ├── src/
 │   ├── app/                # Next.js App Router
 │   │   ├── api/            # API routes
+│   │   │   ├── cache/      # Cache API
+│   │   │   │   └── [id]/toggle/  # Toggle checkboxes
 │   │   │   ├── notes/list/ # Fetch notes from DB
 │   │   │   ├── kesifler/add/  # Add notes (legacy endpoint)
 │   │   │   └── telegram/webhook/  # Telegram webhook
@@ -217,6 +240,11 @@ npm start
 │   │   │   └── [slug]/page.jsx  # Individual post
 │   │   ├── kesifler/       # Discoveries page
 │   │   │   └── page.jsx    # Dynamic content from DB
+│   │   ├── cache/          # Cache system pages
+│   │   │   ├── page.jsx    # Cache dashboard
+│   │   │   ├── kitap/page.jsx   # Books cache
+│   │   │   ├── film/page.jsx    # Movies/Shows cache
+│   │   │   └── urun/page.jsx    # Products cache
 │   │   ├── bu-hafta/       # Weekly signals page
 │   │   ├── iletisim/       # Contact page
 │   │   ├── layout.jsx      # Root layout with SEO
@@ -230,6 +258,9 @@ npm start
 │   │   ├── ui/            # Radix UI components (shadcn)
 │   │   ├── home/          # Home page components
 │   │   ├── kesifler/      # Discovery page components
+│   │   ├── cache/         # Cache system components
+│   │   │   ├── CacheList.jsx   # Cache items list
+│   │   │   └── CacheItem.jsx   # Individual cache item
 │   │   └── [various].jsx  # Navbar, Footer, etc.
 │   ├── lib/               # Utilities & integrations
 │   │   ├── blog.js        # Blog post utilities
@@ -239,7 +270,8 @@ npm start
 │   │   ├── seo.js         # SEO utilities
 │   │   └── utils.js       # General utilities
 │   ├── data/              # Static data
-│   │   └── kesifler.js    # Fallback data & categories
+│   │   ├── kesifler.js    # Fallback data & categories
+│   │   └── cache.js       # Cache categories config
 │   ├── styles/            # Global styles
 │   │   ├── tailwind.css   # Tailwind config & custom styles
 │   │   └── prism.css      # Code syntax highlighting
@@ -293,10 +325,12 @@ Complete documentation available in `/docs`:
 - `ANALYTICS_SETUP.md` - Analytics setup
 - `FILE_STRUCTURE.md` - Complete file structure
 - `project-overview.md` - Project architecture
+- `CACHE_SYSTEM.md` - Cache system documentation (Turkish)
+- `TELEGRAM_AUTOMATION.md` - Telegram bot setup and automation (Turkish)
 
 ## 🔌 API Routes
 
-The project includes three API endpoints:
+The project includes four main API endpoints:
 
 ### GET `/api/notes/list`
 Fetch notes from Neon database with filtering and pagination.
@@ -348,10 +382,43 @@ Direct Telegram webhook integration for bot commands.
 - `/alinti [text]` - Add quote (Turkish)
 - `/video [text]` - Add video notes
 - `/kitap [text]` - Add book notes
+- `/cache-kitap [name]` - Add book to cache
+- `/cache-film [name]` - Add movie/show to cache
+- `/cache-urun [name]` - Add product to cache
 - `/help` - Show help
 - `/stats` - Show statistics
 
 **Authentication:** Validates user ID against `TELEGRAM_ALLOWED_USER_IDS`
+
+### PATCH `/api/cache/[id]/toggle`
+Toggle completion and like status for cache items.
+
+**Request Body:**
+```json
+{
+  "field": "is_completed" | "is_liked"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "item": {
+    "id": 1,
+    "name": "Atomic Habits",
+    "cache_type": "kitap",
+    "is_completed": true,
+    "is_liked": false,
+    "created_at": "2026-01-15T10:00:00Z",
+    "updated_at": "2026-01-15T11:00:00Z"
+  }
+}
+```
+
+**Business Logic:**
+- An item must be completed before it can be liked
+- If an item is marked as not completed, it will automatically be unmarked as liked
 
 ## 🗄️ Database Setup
 
@@ -381,6 +448,11 @@ Or manually execute the SQL in `scripts/init-db.sql`.
 - **notes** - Main content table
   - Fields: id, note_type, category, title, text, author, source, url, tags, created_at, updated_at, github_path, github_commit_sha
   - Indexes: note_type, category, created_at, composite indexes
+
+- **cache_items** - Cache tracking table
+  - Fields: id, name, cache_type, is_completed, is_liked, created_at, updated_at
+  - Types: kitap (books), film (movies/shows), urun (products)
+  - Constraint: is_liked requires is_completed to be true
 
 - **valid_categories** - Category reference table
   - Pre-populated with valid categories for each note type

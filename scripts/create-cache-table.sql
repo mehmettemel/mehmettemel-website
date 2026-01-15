@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS cache_items (
   -- Core fields
   name VARCHAR(500) NOT NULL,
   cache_type VARCHAR(20) NOT NULL CHECK (cache_type IN ('kitap', 'film', 'urun')),
+  author VARCHAR(200),  -- Author/creator/brand (optional)
 
   -- Checkbox states
   is_completed BOOLEAN DEFAULT FALSE NOT NULL,

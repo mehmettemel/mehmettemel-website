@@ -86,6 +86,11 @@ function parseMessage(text) {
     '/video': 'video',
     '/book': 'book',
     '/kitap': 'book',
+    // Short cache commands (new)
+    '/k': 'cache-kitap',
+    '/f': 'cache-film',
+    '/u': 'cache-urun',
+    // Long cache commands (backward compatibility)
     '/cache-kitap': 'cache-kitap',
     '/cache-film': 'cache-film',
     '/cache-urun': 'cache-urun',
@@ -150,39 +155,43 @@ export async function POST(request) {
         chatId,
         `📚 <b>Keşifler Bot Kullanım Kılavuzu</b>
 
-<b>Komutlar:</b>
+<b>Not Komutları:</b>
 /link [url] - Link ekle
 /quote [text] - Alıntı/not ekle
 /video [text] - Video notu ekle
 /book [text] - Kitap notu ekle
-/cache-kitap [name] - Kitap ekle (Cache)
-/cache-film [name] - Film/dizi ekle (Cache)
-/cache-urun [name] - Ürün ekle (Cache)
+
+<b>Cache Komutları (Kısa):</b>
+/k [isim -yazar] - Kitap ekle
+/f [isim -yönetmen] - Film/dizi ekle
+/u [isim -marka] - Ürün ekle
+
+<b>Cache Komutları (Uzun):</b>
+/cache-kitap [isim] - Kitap ekle
+/cache-film [isim] - Film/dizi ekle
+/cache-urun [isim] - Ürün ekle
+
+<b>Diğer:</b>
 /stats - İstatistikler
 /help - Bu mesaj
 
 <b>Örnekler:</b>
 <pre>
-/link https://ui-skills.com
+/k zero to one -peter thiel
+/k atomic habits -james clear
+/f inception -christopher nolan
+/u iphone 15 pro -apple
 
-/quote D vitamini bağışıklık için önemlidir
-Yazar: Osman Müftüoğlu
-
-/video https://youtube.com/watch?v=xxx
-"First insight from video"
-Author: Speaker Name
-Source: Video Title
-
-/book Consistency is key
-Author: James Clear
-Source: Atomic Habits
-
-/cache-kitap Atomic Habits
+/cache-kitap Sapiens
 /cache-film Breaking Bad
-/cache-urun iPhone 15 Pro
+
+/link https://ui-skills.com
+/quote D vitamini bağışıklık için önemlidir
 </pre>
 
-<b>Not:</b> URL gönderirseniz otomatik link olarak algılanır.`,
+<b>İpucu:</b>
+• "-" işaretiyle yazar/yönetmen ekleyebilirsiniz
+• URL gönderirseniz otomatik link olarak algılanır`,
       )
       return NextResponse.json({ ok: true })
     }
@@ -238,9 +247,10 @@ Source: Atomic Habits
         const emoji = { kitap: '📚', film: '🎬', urun: '🛍️' }[cacheType] || '📋'
         const categoryName = { kitap: 'Kitap', film: 'Film/Dizi', urun: 'Ürün' }[cacheType] || 'Cache'
 
+        const authorText = cacheItem.author ? `\n✍️ ${cacheItem.author}` : ''
         await sendTelegramMessage(
           chatId,
-          `✅ ${emoji} <b>${categoryName} eklendi!</b>\n\n${cacheItem.name}\n\nID: ${cacheItem.id}`
+          `✅ ${emoji} <b>${categoryName} eklendi!</b>\n\n📝 ${cacheItem.name}${authorText}\n\nID: ${cacheItem.id}`
         )
 
         return NextResponse.json({ ok: true, cacheId: cacheItem.id })

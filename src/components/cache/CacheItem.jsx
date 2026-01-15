@@ -74,7 +74,7 @@ export function CacheItem({ item }) {
         />
       </div>
 
-      {/* Item Name */}
+      {/* Item Name and Author */}
       <div className="flex-1 min-w-0">
         <p
           className={`
@@ -84,6 +84,11 @@ export function CacheItem({ item }) {
         >
           {item.name}
         </p>
+        {item.author && (
+          <p className="text-xs text-muted-foreground mt-0.5">
+            {item.author}
+          </p>
+        )}
       </div>
 
       {/* Liked Button */}
