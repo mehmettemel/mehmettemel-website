@@ -438,23 +438,29 @@ export async function handleCacheItemWithAI(type, text) {
   const prompt = `Find information about this ${type === 'kitap' ? 'book' : type === 'film' ? 'movie or TV show' : 'product'}:
 "${trimmedText}"
 
-${type === 'kitap' ? 'Find the author of this book.' : ''}
-${type === 'film' ? 'Find the director of this movie or TV show.' : ''}
-${type === 'urun' ? 'Find the brand or manufacturer of this product.' : ''}
+${type === 'kitap' ? 'Find the author and a short description of this book.' : ''}
+${type === 'film' ? 'Find the director and a short description of this movie or TV show.' : ''}
+${type === 'urun' ? 'Find the brand/manufacturer and a short description of this product.' : ''}
 
 Return ONLY a JSON object with this exact format (no markdown, no explanation):
 {
   "name": "full correct name of the ${type === 'kitap' ? 'book' : type === 'film' ? 'movie/show' : 'product'}",
-  "author": "${type === 'kitap' ? 'author name' : type === 'film' ? 'director name' : 'brand name'}"
+  "author": "${type === 'kitap' ? 'author name' : type === 'film' ? 'director name' : 'brand name'}",
+  "description": "3-4 lines describing what this ${type === 'kitap' ? 'book' : type === 'film' ? 'movie/show' : 'product'} is about (in Turkish)"
 }
 
 If you cannot find the ${searchType}, return:
 {
   "name": "${trimmedText}",
-  "author": null
+  "author": null,
+  "description": null
 }
 
-Important: Return ONLY the JSON object, nothing else.`
+Important:
+- Return ONLY the JSON object, nothing else
+- Description must be in Turkish (Türkçe)
+- Description should be 3-4 lines maximum
+- Description should explain what the ${type === 'kitap' ? 'book' : type === 'film' ? 'movie/show' : 'product'} is about`
 
   try {
     const response = await callGemini(prompt, 3, 2000)
@@ -475,18 +481,21 @@ Important: Return ONLY the JSON object, nothing else.`
     // Apply title case formatting to name and author
     const name = toTitleCase(data.name || trimmedText)
     const author = data.author ? toTitleCase(data.author) : null
+    const description = data.description || null
 
     return {
       name,
       author,
+      description,
       cache_type: type,
     }
   } catch (error) {
     console.error('[AI Cache] Failed to enrich cache item:', error)
-    // Fallback: return without author (still apply title case)
+    // Fallback: return without author and description (still apply title case)
     return {
       name: toTitleCase(trimmedText),
       author: null,
+      description: null,
       cache_type: type,
     }
   }

@@ -265,13 +265,15 @@ export async function getCacheItems(type, status = 'all') {
  * @param {Object} data - Cache item data
  * @param {string} data.name - Item name
  * @param {string} data.cache_type - Type: 'kitap', 'film', or 'urun'
+ * @param {string} data.author - Author/Director/Brand name (optional)
+ * @param {string} data.description - AI-generated description (optional)
  * @returns {Promise<Object>} Created cache item
  */
 export async function createCacheItem(data) {
   try {
     const result = await sql`
-      INSERT INTO cache_items (name, cache_type, author)
-      VALUES (${data.name}, ${data.cache_type}, ${data.author || null})
+      INSERT INTO cache_items (name, cache_type, author, description)
+      VALUES (${data.name}, ${data.cache_type}, ${data.author || null}, ${data.description || null})
       RETURNING *
     `
     return result[0]

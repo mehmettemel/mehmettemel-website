@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Heart } from 'lucide-react'
+import { Heart, Info } from 'lucide-react'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
   Tooltip,
@@ -97,19 +97,38 @@ export function CacheItem({ item, onUpdate }) {
 
       {/* Item Name and Author - Flexible width */}
       <div className="flex-1 min-w-0 py-0.5">
-        <p
-          className={`
-            text-sm sm:text-base font-medium
-            transition-all duration-200
-            break-words
-            ${isCompleted
-              ? 'line-through text-muted-foreground dark:text-muted-foreground/80'
-              : 'text-foreground dark:text-foreground'
-            }
-          `}
-        >
-          {item.name}
-        </p>
+        <div className="flex items-start gap-1.5">
+          <p
+            className={`
+              flex-1 text-sm sm:text-base font-medium
+              transition-all duration-200
+              break-words
+              ${isCompleted
+                ? 'line-through text-muted-foreground dark:text-muted-foreground/80'
+                : 'text-foreground dark:text-foreground'
+              }
+            `}
+          >
+            {item.name}
+          </p>
+          {/* Info icon with description tooltip */}
+          {item.description && (
+            <TooltipProvider delayDuration={200}>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button className="shrink-0 mt-0.5 text-muted-foreground/60 hover:text-muted-foreground dark:text-muted-foreground/40 dark:hover:text-muted-foreground/80 transition-colors">
+                    <Info className="h-4 w-4" />
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent side="top" align="start" className="max-w-xs sm:max-w-sm">
+                  <p className="text-xs sm:text-sm leading-relaxed whitespace-pre-wrap">
+                    {item.description}
+                  </p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
+        </div>
         {item.author && (
           <TooltipProvider delayDuration={300}>
             <Tooltip>

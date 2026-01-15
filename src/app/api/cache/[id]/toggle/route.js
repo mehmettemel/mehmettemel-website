@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { toggleCacheCheckbox } from '@/lib/db'
 
 /**
@@ -30,6 +31,12 @@ export async function PATCH(request, { params }) {
 
     // Toggle checkbox
     const updatedItem = await toggleCacheCheckbox(itemId, field)
+
+    // Revalidate all cache pages to reflect the update
+    revalidatePath('/cache/kitap')
+    revalidatePath('/cache/film')
+    revalidatePath('/cache/urun')
+    revalidatePath('/cache')
 
     return NextResponse.json({
       success: true,
