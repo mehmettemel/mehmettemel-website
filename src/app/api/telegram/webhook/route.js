@@ -87,26 +87,43 @@ function parseMessage(text) {
     ['/cache-kitap', 'cache-kitap'],
     ['/cache-film', 'cache-film'],
     ['/cache-urun', 'cache-urun'],
-    // Medium length commands
-    ['/kitap', 'book'],
+    // Medium length commands (but NOT /kitap - must come after /k check)
     ['/alinti', 'quote'],
     ['/video', 'video'],
     ['/quote', 'quote'],
     ['/book', 'book'],
     ['/link', 'link'],
-    // Short cache commands last (single letter)
+    // Short cache commands (BEFORE /kitap to avoid conflict)
     ['/k', 'cache-kitap'],
     ['/f', 'cache-film'],
     ['/u', 'cache-urun'],
+    // /kitap comes AFTER /k to avoid /k being matched as /kitap
+    ['/kitap', 'book'],
   ]
+
+  console.log('[parseMessage] Input text:', text)
 
   // Check for commands (support both "/cmd text" and "/cmd\ntext" formats)
   for (const [cmd, type] of commands) {
-    if (text.startsWith(cmd + ' ') || text.startsWith(cmd + '\n')) {
-      // Extract content after command (remove command and leading whitespace/newlines)
-      const regex = new RegExp(`^${cmd.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[\\s\\n]+`, 'i')
-      const content = text.replace(regex, '').trim()
-      return { type, content }
+    // For single-letter commands, ensure we're not matching longer commands
+    // e.g., /k should not match /kitap
+    if (cmd.length === 2 && cmd.startsWith('/')) {
+      // Single letter command like /k, /f, /u
+      // Must be followed by space, newline, or end of string
+      const singleLetterPattern = new RegExp(`^${cmd.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(\\s|\\n|$)`)
+      if (singleLetterPattern.test(text)) {
+        const content = text.slice(cmd.length).trim()
+        console.log(`[parseMessage] Matched command: ${cmd} → type: ${type}, content: "${content}"`)
+        return { type, content }
+      }
+    } else {
+      // Regular command matching
+      if (text.startsWith(cmd + ' ') || text.startsWith(cmd + '\n')) {
+        const regex = new RegExp(`^${cmd.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[\\s\\n]+`, 'i')
+        const content = text.replace(regex, '').trim()
+        console.log(`[parseMessage] Matched command: ${cmd} → type: ${type}, content: "${content}"`)
+        return { type, content }
+      }
     }
   }
 
@@ -235,8 +252,11 @@ export async function POST(request) {
     // Parse message
     let parsed = parseMessage(text)
 
+    console.log('[Telegram] Parsed result:', parsed)
+
     // If no command found, default to quote
     if (!parsed) {
+      console.log('[Telegram] No command found, defaulting to quote')
       parsed = { type: 'quote', content: text }
     }
 
