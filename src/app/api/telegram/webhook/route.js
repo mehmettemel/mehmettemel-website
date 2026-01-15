@@ -80,51 +80,88 @@ async function sendTelegramMessage(chatId, text) {
  * @returns {Object|null} { type, content } or null if needs AI detection
  */
 function parseMessage(text) {
-  // IMPORTANT: Order commands by length (longest first) to avoid conflicts
-  // For example: /cache-kitap before /kitap, /kitap before /k
-  const commands = [
-    // Long cache commands first
-    ['/cache-kitap', 'cache-kitap'],
-    ['/cache-film', 'cache-film'],
-    ['/cache-urun', 'cache-urun'],
-    // Medium length commands (but NOT /kitap - must come after /k check)
-    ['/alinti', 'quote'],
-    ['/video', 'video'],
-    ['/quote', 'quote'],
-    ['/book', 'book'],
-    ['/link', 'link'],
-    // Short cache commands (BEFORE /kitap to avoid conflict)
-    ['/k', 'cache-kitap'],
-    ['/f', 'cache-film'],
-    ['/u', 'cache-urun'],
-    // /kitap comes AFTER /k to avoid /k being matched as /kitap
-    ['/kitap', 'book'],
-  ]
-
   console.log('[parseMessage] Input text:', text)
 
-  // Check for commands (support both "/cmd text" and "/cmd\ntext" formats)
-  for (const [cmd, type] of commands) {
-    // For single-letter commands, ensure we're not matching longer commands
-    // e.g., /k should not match /kitap
-    if (cmd.length === 2 && cmd.startsWith('/')) {
-      // Single letter command like /k, /f, /u
-      // Must be followed by space, newline, or end of string
-      const singleLetterPattern = new RegExp(`^${cmd.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(\\s|\\n|$)`)
-      if (singleLetterPattern.test(text)) {
-        const content = text.slice(cmd.length).trim()
-        console.log(`[parseMessage] Matched command: ${cmd} → type: ${type}, content: "${content}"`)
-        return { type, content }
-      }
-    } else {
-      // Regular command matching
-      if (text.startsWith(cmd + ' ') || text.startsWith(cmd + '\n')) {
-        const regex = new RegExp(`^${cmd.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[\\s\\n]+`, 'i')
-        const content = text.replace(regex, '').trim()
-        console.log(`[parseMessage] Matched command: ${cmd} → type: ${type}, content: "${content}"`)
-        return { type, content }
-      }
-    }
+  // CLEAN COMMAND STRUCTURE - NO CONFLICTS
+  // Commands are organized by purpose, not length
+
+  // CACHE COMMANDS (Okuma/İzleme/Alışveriş Listesi)
+  // These go to cache_items table
+  if (text.startsWith('/k ') || text === '/k') {
+    const content = text.slice(2).trim()
+    console.log('[parseMessage] Matched: /k → cache-kitap')
+    return { type: 'cache-kitap', content }
+  }
+  if (text.startsWith('/f ') || text === '/f') {
+    const content = text.slice(2).trim()
+    console.log('[parseMessage] Matched: /f → cache-film')
+    return { type: 'cache-film', content }
+  }
+  if (text.startsWith('/u ') || text === '/u') {
+    const content = text.slice(2).trim()
+    console.log('[parseMessage] Matched: /u → cache-urun')
+    return { type: 'cache-urun', content }
+  }
+
+  // KEŞİFLER COMMANDS (Notlar/İçerik)
+  // These go to notes table
+  if (text.startsWith('/l ')) {
+    const content = text.slice(2).trim()
+    console.log('[parseMessage] Matched: /l → link')
+    return { type: 'link', content }
+  }
+  if (text.startsWith('/a ')) {
+    const content = text.slice(2).trim()
+    console.log('[parseMessage] Matched: /a → quote')
+    return { type: 'quote', content }
+  }
+  if (text.startsWith('/v ') || text.startsWith('/v\n')) {
+    const content = text.slice(2).trim()
+    console.log('[parseMessage] Matched: /v → video')
+    return { type: 'video', content }
+  }
+  if (text.startsWith('/b ') || text.startsWith('/b\n')) {
+    const content = text.slice(2).trim()
+    console.log('[parseMessage] Matched: /b → book')
+    return { type: 'book', content }
+  }
+
+  // LEGACY LONG COMMANDS (backward compatibility)
+  if (text.startsWith('/link ')) {
+    const content = text.slice(5).trim()
+    console.log('[parseMessage] Matched: /link → link')
+    return { type: 'link', content }
+  }
+  if (text.startsWith('/quote ') || text.startsWith('/alinti ')) {
+    const cmd = text.startsWith('/quote') ? '/quote' : '/alinti'
+    const content = text.slice(cmd.length).trim()
+    console.log(`[parseMessage] Matched: ${cmd} → quote`)
+    return { type: 'quote', content }
+  }
+  if (text.startsWith('/video ') || text.startsWith('/video\n')) {
+    const content = text.slice(6).trim()
+    console.log('[parseMessage] Matched: /video → video')
+    return { type: 'video', content }
+  }
+  if (text.startsWith('/book ') || text.startsWith('/book\n')) {
+    const content = text.slice(5).trim()
+    console.log('[parseMessage] Matched: /book → book')
+    return { type: 'book', content }
+  }
+  if (text.startsWith('/cache-kitap ')) {
+    const content = text.slice(12).trim()
+    console.log('[parseMessage] Matched: /cache-kitap → cache-kitap')
+    return { type: 'cache-kitap', content }
+  }
+  if (text.startsWith('/cache-film ')) {
+    const content = text.slice(11).trim()
+    console.log('[parseMessage] Matched: /cache-film → cache-film')
+    return { type: 'cache-film', content }
+  }
+  if (text.startsWith('/cache-urun ')) {
+    const content = text.slice(11).trim()
+    console.log('[parseMessage] Matched: /cache-urun → cache-urun')
+    return { type: 'cache-urun', content }
   }
 
   // Auto-detect URL as link
@@ -174,45 +211,43 @@ export async function POST(request) {
     if (text === '/help') {
       await sendTelegramMessage(
         chatId,
-        `📚 <b>Keşifler Bot Kullanım Kılavuzu</b>
+        `🤖 <b>Bot Komutları</b>
 
-<b>Not Komutları:</b>
-/link [url] - Link ekle
-/quote [text] - Alıntı/not ekle
-/video [text] - Video notu ekle
-/book [text] - Kitap notu ekle
+📚 <b>CACHE (Okuma/İzleme/Alışveriş Listesi)</b>
+AI otomatik yazar/yönetmen/marka bulur:
+• /k [isim] - Kitap ekle
+• /f [isim] - Film/dizi ekle
+• /u [isim] - Ürün ekle
 
-<b>Cache Komutları (Kısa):</b>
-/k [isim -yazar] - Kitap ekle
-/f [isim -yönetmen] - Film/dizi ekle
-/u [isim -marka] - Ürün ekle
+📝 <b>KEŞİFLER (Notlar/İçerik)</b>
+• /l [url] - Link ekle
+• /a [metin] - Alıntı ekle
+• /v [metin] - Video notu ekle
+• /b [metin] - Kitap notu ekle
 
-<b>Cache Komutları (Uzun):</b>
-/cache-kitap [isim] - Kitap ekle
-/cache-film [isim] - Film/dizi ekle
-/cache-urun [isim] - Ürün ekle
+📊 <b>DİĞER</b>
+• /stats - İstatistikler
+• /help - Bu mesaj
 
-<b>Diğer:</b>
-/stats - İstatistikler
-/help - Bu mesaj
+💡 <b>ÖRNEKLER:</b>
 
-<b>Örnekler:</b>
-<pre>
-/k zero to one -peter thiel
-/k atomic habits -james clear
-/f inception -christopher nolan
-/u iphone 15 pro -apple
+<b>Cache (AI ile):</b>
+<code>/k zero to one</code>
+→ AI bulur: Peter Thiel
 
-/cache-kitap Sapiens
-/cache-film Breaking Bad
+<code>/f inception</code>
+→ AI bulur: Christopher Nolan
 
-/link https://ui-skills.com
-/quote D vitamini bağışıklık için önemlidir
-</pre>
+<code>/u iphone 15 pro</code>
+→ AI bulur: Apple
 
-<b>İpucu:</b>
-• "-" işaretiyle yazar/yönetmen ekleyebilirsiniz
-• URL gönderirseniz otomatik link olarak algılanır`,
+<b>Keşifler:</b>
+<code>/l https://example.com</code>
+<code>/a Tutarlılık başarının anahtarı</code>
+<code>/v Huberman Lab: Sleep tips</code>
+<code>/b Focus is everything</code>
+
+✨ <b>İPUCU:</b> URL gönderirseniz otomatik link olarak algılanır.`,
       )
       return NextResponse.json({ ok: true })
     }
