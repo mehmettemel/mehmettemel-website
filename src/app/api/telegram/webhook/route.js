@@ -80,7 +80,12 @@ async function sendTelegramMessage(chatId, text) {
  * @returns {Object|null} { type, content } or null if needs AI detection
  */
 function parseMessage(text) {
-  console.log('[parseMessage] Input text:', text)
+  console.log('==== PARSE MESSAGE START ====')
+  console.log('[parseMessage] Input text:', JSON.stringify(text))
+  console.log('[parseMessage] Text length:', text.length)
+  console.log('[parseMessage] First 10 chars:', text.substring(0, 10))
+  console.log('[parseMessage] Starts with "/k "?', text.startsWith('/k '))
+  console.log('[parseMessage] Equals "/k"?', text === '/k')
 
   // CLEAN COMMAND STRUCTURE - NO CONFLICTS
   // Commands are organized by purpose, not length
@@ -89,7 +94,9 @@ function parseMessage(text) {
   // These go to cache_items table
   if (text.startsWith('/k ') || text === '/k') {
     const content = text.slice(2).trim()
-    console.log('[parseMessage] Matched: /k → cache-kitap')
+    console.log('[parseMessage] ✅ MATCHED: /k → cache-kitap')
+    console.log('[parseMessage] Content:', content)
+    console.log('==== PARSE MESSAGE END ====')
     return { type: 'cache-kitap', content }
   }
   if (text.startsWith('/f ') || text === '/f') {
@@ -197,9 +204,13 @@ export async function POST(request) {
     const userId = message.from.id
     const text = message.text
 
-    console.log(
-      `Telegram message from user ${userId}: ${text.substring(0, 50)}...`,
-    )
+    console.log('=' .repeat(80))
+    console.log('[TELEGRAM WEBHOOK] New message received')
+    console.log('[TELEGRAM WEBHOOK] User ID:', userId)
+    console.log('[TELEGRAM WEBHOOK] Full text:', text)
+    console.log('[TELEGRAM WEBHOOK] Text length:', text.length)
+    console.log('[TELEGRAM WEBHOOK] First char code:', text.charCodeAt(0))
+    console.log('=' .repeat(80))
 
     // Check user authorization
     if (ALLOWED_USER_IDS.length > 0 && !ALLOWED_USER_IDS.includes(userId)) {
@@ -287,22 +298,33 @@ AI otomatik yazar/yönetmen/marka bulur:
     // Parse message
     let parsed = parseMessage(text)
 
-    console.log('[Telegram] Parsed result:', parsed)
+    console.log('🔍 [TELEGRAM] Parsed result:', JSON.stringify(parsed))
 
     // If no command found, default to quote
     if (!parsed) {
-      console.log('[Telegram] No command found, defaulting to quote')
+      console.log('⚠️ [TELEGRAM] No command found, defaulting to quote')
       parsed = { type: 'quote', content: text }
+    } else {
+      console.log('✅ [TELEGRAM] Command recognized:', parsed.type)
     }
 
     // Handle cache items with AI enrichment
     if (parsed.type === 'cache-kitap' || parsed.type === 'cache-film' || parsed.type === 'cache-urun') {
+      console.log('🎯 [CACHE] Cache command detected!')
+      console.log('🎯 [CACHE] Type:', parsed.type)
+      console.log('🎯 [CACHE] Content:', parsed.content)
+
       const cacheType = parsed.type.replace('cache-', '')
 
       try {
+        console.log('🤖 [CACHE] Calling AI to enrich item...')
         // Use AI to find author/director/brand
         const cacheData = await handleCacheItemWithAI(cacheType, parsed.content)
+        console.log('🤖 [CACHE] AI result:', cacheData)
+
+        console.log('💾 [CACHE] Saving to database...')
         const cacheItem = await createCacheItem(cacheData)
+        console.log('💾 [CACHE] Saved successfully! ID:', cacheItem.id)
 
         const emoji = { kitap: '📚', film: '🎬', urun: '🛍️' }[cacheType] || '📋'
         const categoryName = { kitap: 'Kitap', film: 'Film/Dizi', urun: 'Ürün' }[cacheType] || 'Cache'
@@ -579,10 +601,15 @@ ${userMessage}${hint}
  * Health check endpoint
  */
 export async function GET() {
+  const timestamp = new Date().toISOString()
   return NextResponse.json({
     status: 'ok',
     message: 'Telegram webhook is active',
+    timestamp,
+    version: '2.0.0-cache-fix',
     botConfigured: !!TELEGRAM_BOT_TOKEN,
     userFilterEnabled: ALLOWED_USER_IDS.length > 0,
+    allowedUsers: ALLOWED_USER_IDS.length,
+    commandsParsed: ['/k', '/f', '/u', '/l', '/a', '/v', '/b'],
   })
 }
