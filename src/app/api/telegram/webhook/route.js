@@ -607,7 +607,7 @@ export async function GET() {
     status: 'ok',
     message: 'Telegram webhook is active',
     timestamp,
-    version: '2.0.0-cache-fix',
+    version: '2.0.1-description-fix',
     botConfigured: !!TELEGRAM_BOT_TOKEN,
     userFilterEnabled: ALLOWED_USER_IDS.length > 0,
     allowedUsers: ALLOWED_USER_IDS.length,
