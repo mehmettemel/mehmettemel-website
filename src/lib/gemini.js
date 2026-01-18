@@ -165,8 +165,9 @@ export async function handleNote(text) {
   let authorHint = null
 
   // Check if text ends with "- Author Name" pattern (on last line)
-  // Match: everything before the last "- Something" at the end
-  const dashMatch = text.match(/^([\s\S]+?)\n?\s*-\s*([^\n-]+)$/)
+  // The dash must be preceded by whitespace or newline (not mid-word like "Omega-3")
+  // Match: text + (newline or spaces) + dash + spaces + author name at the end
+  const dashMatch = text.match(/^([\s\S]+?)(?:\n|[ \t]+)-\s*([^\n]+)$/)
   if (dashMatch) {
     // Keep original whitespace/line breaks, only trim the very edges
     mainText = dashMatch[1].replace(/^\s+|\s+$/g, '')
