@@ -6,8 +6,18 @@ import { getListCategory } from '@/data/list'
 export const revalidate = 60
 
 export const metadata = {
-  title: 'Film & Dizi - Listeler',
-  description: 'İzlemek istediğim ve izlediğim filmler ve diziler',
+  title: 'Film & Dizi - Listeler | Mehmet Temel',
+  description:
+    'İzlemek istediğim ve izlediğim filmler ve diziler. Kişisel izleme listem ve puanlamalarım.',
+  alternates: {
+    canonical: 'https://mehmettemel.com/listeler/film',
+  },
+  openGraph: {
+    title: 'Film & Dizi - Listeler | Mehmet Temel',
+    description: 'İzlemek istediğim ve izlediğim filmler ve diziler.',
+    url: 'https://mehmettemel.com/listeler/film',
+    type: 'website',
+  },
 }
 
 export default async function FilmListePage() {

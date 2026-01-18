@@ -6,8 +6,18 @@ import { getListCategory } from '@/data/list'
 export const revalidate = 60
 
 export const metadata = {
-  title: 'Kitaplar - Listeler',
-  description: 'Okumak istediğim ve okuduğum kitaplar',
+  title: 'Kitaplar - Listeler | Mehmet Temel',
+  description:
+    'Okumak istediğim ve okuduğum kitaplar. Kişisel kitap listem ve değerlendirmelerim.',
+  alternates: {
+    canonical: 'https://mehmettemel.com/listeler/kitap',
+  },
+  openGraph: {
+    title: 'Kitaplar - Listeler | Mehmet Temel',
+    description: 'Okumak istediğim ve okuduğum kitaplar.',
+    url: 'https://mehmettemel.com/listeler/kitap',
+    type: 'website',
+  },
 }
 
 export default async function KitapListePage() {

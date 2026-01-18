@@ -3,6 +3,12 @@
 import Link from 'next/link'
 import { formatDistanceToNow } from 'date-fns'
 import { tr } from 'date-fns/locale'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 
 const typeConfig = {
   link: {
@@ -79,7 +85,7 @@ export function RecentDiscoveries({ notes }) {
     <section className="fade-in">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-xl font-bold text-foreground sm:text-2xl">
-          Son Gelişmeler
+          Son Eklemeler
         </h2>
         <Link
           href="/kesifler"
@@ -95,6 +101,7 @@ export function RecentDiscoveries({ notes }) {
             const config = typeConfig[note.note_type] || typeConfig.quote
             const categoryLabel = categoryLabels[note.category] || note.category
             const displayText = getDisplayText(note)
+            const fullText = note.text || note.title || ''
             const relativeTime = formatDistanceToNow(
               new Date(note.created_at),
               {
@@ -123,9 +130,30 @@ export function RecentDiscoveries({ notes }) {
 
                   {/* Content */}
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium text-foreground transition-colors group-hover:text-primary">
-                      {displayText}
-                    </p>
+                    <TooltipProvider>
+                      <Tooltip delayDuration={300}>
+                        <TooltipTrigger asChild>
+                          <p className="truncate text-sm font-medium text-foreground transition-colors group-hover:text-primary">
+                            {displayText}
+                          </p>
+                        </TooltipTrigger>
+                        <TooltipContent
+                          side="top"
+                          align="start"
+                          className="z-[100] max-h-64 max-w-sm overflow-auto"
+                        >
+                          <p className="text-xs leading-relaxed whitespace-pre-line">
+                            {fullText}
+                          </p>
+                          {(note.author || note.source) && (
+                            <div className="mt-2 border-t border-border/50 pt-2 text-[10px] text-muted-foreground">
+                              {note.author && <div>👤 {note.author}</div>}
+                              {note.source && <div>📚 {note.source}</div>}
+                            </div>
+                          )}
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
                     <p className="mt-0.5 text-xs text-muted-foreground transition-colors group-hover:text-foreground/70">
                       {categoryLabel}
                     </p>

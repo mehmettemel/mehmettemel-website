@@ -6,9 +6,19 @@ import { listCategories } from '@/data/list'
 export const revalidate = 60
 
 export const metadata = {
-  title: 'Listeler - Takip Listelerim',
+  title: 'Listeler - Takip Listelerim | Mehmet Temel',
   description:
-    'Okumak/izlemek/almak istediğim ve tamamladığım kitaplar, filmler, diziler ve ürünler.',
+    'Okumak/izlemek/almak istediğim ve tamamladığım kitaplar, filmler, diziler ve ürünler. Kişisel takip listelerim ve önerilerim.',
+  alternates: {
+    canonical: 'https://mehmettemel.com/listeler',
+  },
+  openGraph: {
+    title: 'Listeler - Takip Listelerim | Mehmet Temel',
+    description:
+      'Okumak/izlemek/almak istediğim ve tamamladığım kitaplar, filmler, diziler ve ürünler.',
+    url: 'https://mehmettemel.com/listeler',
+    type: 'website',
+  },
 }
 
 export default async function ListelerPage() {
