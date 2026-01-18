@@ -25,6 +25,14 @@ export const listCategories = [
     icon: '📦',
     description: 'Almak istediğim veya aldığım ürünler',
   },
+  {
+    id: 'rusca',
+    name: 'Rusça',
+    emoji: '🇷🇺',
+    icon: '🗣️',
+    description: 'Rusça kelime ve cümleler',
+    isStatic: true, // Database'den çekilmiyor
+  },
 ]
 
 /**

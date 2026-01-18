@@ -33,16 +33,18 @@ function SocialLink({ href, icon: Icon, children, index }) {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="group flex items-center gap-2.5 sm:gap-3 rounded-lg border border-border bg-card p-3 transition-all hover:border-primary/40 hover:bg-secondary/30 hover:shadow-md active:scale-[0.99]"
+        className="group flex items-center gap-2.5 rounded-lg border border-border bg-card p-3 transition-all hover:border-primary/40 hover:bg-secondary/30 hover:shadow-md active:scale-[0.99] sm:gap-3"
       >
         <motion.div
           whileHover={{ scale: 1.1, rotate: 5 }}
-          className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-secondary/50 transition-all duration-300 group-hover:bg-primary/10"
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary/50 transition-all duration-300 group-hover:bg-primary/10 sm:h-11 sm:w-11"
         >
-          <Icon className="h-5 w-5 sm:h-5.5 sm:w-5.5 fill-muted-foreground transition-colors duration-300 group-hover:fill-primary" />
+          <Icon className="h-5 w-5 fill-muted-foreground transition-colors duration-300 group-hover:fill-primary sm:h-5.5 sm:w-5.5" />
         </motion.div>
         <div className="flex-1">
-          <p className="text-xs sm:text-sm font-medium text-foreground">{children}</p>
+          <p className="text-xs font-medium text-foreground sm:text-sm">
+            {children}
+          </p>
         </div>
         <motion.svg
           className="h-4 w-4 flex-shrink-0 text-muted-foreground opacity-50 transition-all duration-300 group-hover:opacity-100"
@@ -102,7 +104,7 @@ export default function Contact() {
           >
             <Link
               href="mailto:contact@mehmettemel.com"
-              className="group flex items-center gap-2.5 sm:gap-3 rounded-lg border border-border bg-card p-4 shadow-lg transition-all hover:border-primary/40 hover:bg-secondary/30 hover:shadow-xl active:scale-[0.99]"
+              className="group flex items-center gap-2.5 rounded-lg border border-border bg-card p-4 shadow-lg transition-all hover:border-primary/40 hover:bg-secondary/30 hover:shadow-xl active:scale-[0.99] sm:gap-3"
             >
               <motion.div
                 whileHover={{ scale: 1.1, rotate: 5 }}
@@ -110,10 +112,12 @@ export default function Contact() {
               >
                 <MailIcon className="h-6 w-6 fill-muted-foreground transition-colors duration-300 group-hover:fill-primary" />
               </motion.div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-foreground mb-0.5 sm:text-base">Email</p>
-                <p className="text-xs text-muted-foreground truncate sm:text-sm">
-                  contact@mehmettemel.com
+              <div className="min-w-0 flex-1">
+                <p className="mb-0.5 text-sm font-medium text-foreground sm:text-base">
+                  Email
+                </p>
+                <p className="truncate text-xs text-muted-foreground sm:text-sm">
+                  mehmettemel789@gmail.com
                 </p>
               </div>
               <motion.svg
@@ -145,7 +149,11 @@ export default function Contact() {
               Sosyal Medya
             </motion.h2>
             <div className="space-y-3">
-              <SocialLink href="https://x.com/temelbusiness" icon={XIcon} index={0}>
+              <SocialLink
+                href="https://x.com/temelbusiness"
+                icon={XIcon}
+                index={0}
+              >
                 Twitter / X
               </SocialLink>
               <SocialLink

@@ -46,11 +46,11 @@ export default async function ListelerPage() {
         {/* Category Cards */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {listCategories.map((category) => {
-            const categoryStats = stats[category.id] || {
-              total: 0,
-              completed: 0,
-              liked: 0,
-            }
+            // Russian uses static data
+            const isStatic = category.isStatic
+            const categoryStats = isStatic
+              ? { total: 41, completed: 0, liked: 0 } // Russian has 41 phrases
+              : stats[category.id] || { total: 0, completed: 0, liked: 0 }
 
             return (
               <Link
@@ -80,7 +80,7 @@ export default async function ListelerPage() {
                 {/* Stats */}
                 <div className="mt-auto flex flex-wrap gap-2">
                   <span className="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
-                    {categoryStats.total} item
+                    {categoryStats.total} {isStatic ? 'kelime' : 'item'}
                   </span>
                   {categoryStats.completed > 0 && (
                     <span className="rounded-full bg-secondary px-2.5 py-1 text-xs font-medium text-foreground">
