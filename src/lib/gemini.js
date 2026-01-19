@@ -563,22 +563,42 @@ export function isURL(text) {
 export async function handleTravelPlace(text) {
   const trimmedText = text.trim()
 
-  const prompt = `Analyze this travel location and return a JSON object:
+  const prompt = `Analyze this travel input and extract location + optional activity/note:
 "${trimmedText}"
 
 Return ONLY a JSON object with this exact format (no markdown, no explanation):
 {
   "continent": "continent name in Turkish (Avrupa, Asya, Afrika, Kuzey Amerika, Güney Amerika, Okyanusya)",
   "country": "country name in Turkish",
-  "place_name": "specific place name (city, attraction, or region)",
+  "place_name": "specific place name (city, attraction, or region) OR country name if only country mentioned",
   "place_type": "city|attraction|region",
-  "description": "2-3 line description in Turkish about what makes this place special"
+  "description": "user's activity/note if provided, otherwise brief place description"
 }
 
+PARSING RULES (VERY IMPORTANT):
+1. If input contains a location + activity (e.g., "Roma'da gece 4'te scooterla gez"):
+   - place_name = location only ("Roma")
+   - description = activity only ("gece 4'te scooterla gez")
+
+2. If input is ONLY a country name (e.g., "İtalya"):
+   - place_name = country name ("İtalya")
+   - place_type = "region"
+   - description = brief description of the country
+
+3. If input is ONLY a city/place (e.g., "Roma"):
+   - place_name = city name ("Roma")
+   - place_type = "city"
+   - description = brief description (NOT user activity)
+
+4. Detect activity patterns:
+   - "X'da/da Y" = location X, activity Y
+   - "X'de/de Y" = location X, activity Y
+   - "X ve Y yap" = location X, activity "Y yap"
+
 CLASSIFICATION RULES:
-- place_type "city": Paris, Tokyo, Istanbul (urban areas)
+- place_type "city": Paris, Tokyo, Istanbul, Roma (urban areas)
 - place_type "attraction": Eiffel Tower, Colosseum, Great Wall (specific landmarks/monuments)
-- place_type "region": Cappadocia, Tuscany, Provence (geographic regions/areas)
+- place_type "region": Cappadocia, Tuscany, Provence, İtalya (geographic regions/areas or countries)
 
 CONTINENT MAPPING (ONLY use these exact Turkish values):
 - Avrupa: All European countries
@@ -600,20 +620,25 @@ COUNTRY NAMES (use Turkish names):
 - etc.
 
 Examples:
-Input: "Eiffel Tower"
-Output: {"continent": "Avrupa", "country": "Fransa", "place_name": "Eiffel Tower", "place_type": "attraction", "description": "Paris'in simgesi olan 330 metre yüksekliğindeki demir kule. 1889'da inşa edildi ve yılda 7 milyon turisti ağırlıyor."}
+Input: "İtalya Roma'da gece 4'te scooterla gez"
+Output: {"continent": "Avrupa", "country": "İtalya", "place_name": "Roma", "place_type": "city", "description": "gece 4'te scooterla gez"}
 
-Input: "Tokyo"
-Output: {"continent": "Asya", "country": "Japonya", "place_name": "Tokyo", "place_type": "city", "description": "Japonya'nın başkenti ve dünyanın en büyük metropollerinden biri. Modern teknoloji ile geleneksel kültürün birleşimi."}
+Input: "İtalya"
+Output: {"continent": "Avrupa", "country": "İtalya", "place_name": "İtalya", "place_type": "region", "description": "Avrupa'nın güney kesiminde yer alan tarihi ve kültürel zenginlikleriyle ünlü ülke."}
 
-Input: "Cappadocia"
-Output: {"continent": "Asya", "country": "Türkiye", "place_name": "Kapadokya", "place_type": "region", "description": "Nevşehir'de yer alan volkanik kayalıklar ve peri bacaları ile ünlü tarihi bölge. Balon turları ve yer altı şehirleri ile meşhur."}
+Input: "Roma"
+Output: {"continent": "Avrupa", "country": "İtalya", "place_name": "Roma", "place_type": "city", "description": "İtalya'nın başkenti ve tarihi İmparatorluğun merkezi. Colosseum ve Vatikan ile ünlü."}
 
-Input: "Grand Canyon"
-Output: {"continent": "Kuzey Amerika", "country": "Amerika Birleşik Devletleri", "place_name": "Grand Canyon", "place_type": "region", "description": "Arizona'da Colorado Nehri tarafından oyulmuş 446 km uzunluğunda muhteşem kanyon. Dünyanın en büyük doğal harikalarından biri."}
+Input: "Paris'te Eiffel Tower'ı ziyaret et"
+Output: {"continent": "Avrupa", "country": "Fransa", "place_name": "Paris", "place_type": "city", "description": "Eiffel Tower'ı ziyaret et"}
+
+Input: "Kapadokya'da balon turu yap"
+Output: {"continent": "Asya", "country": "Türkiye", "place_name": "Kapadokya", "place_type": "region", "description": "balon turu yap"}
 
 Important:
-- description must be in Turkish
+- ALWAYS separate user activities from location names
+- description should contain user's custom note/activity if provided
+- If no activity provided, give brief place info
 - Use exact continent names from the list above
 - Return ONLY the JSON object`
 
