@@ -530,19 +530,6 @@ Important:
 }
 
 /**
- * Handle list item (no AI needed, simple text extraction)
- * @param {string} type - List type: 'kitap', 'film', or 'urun'
- * @param {string} text - Item name
- * @returns {Object} List item data
- */
-export function handleListItem(type, text) {
-  return {
-    name: toTitleCase(text.trim()),
-    list_type: type,
-  }
-}
-
-/**
  * Detect if text is a URL
  * @param {string} text - Text to check
  * @returns {boolean} True if URL

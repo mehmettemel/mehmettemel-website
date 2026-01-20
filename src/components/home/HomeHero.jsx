@@ -26,7 +26,7 @@ export function HomeHero() {
         className="mx-auto max-w-2xl text-base text-muted-foreground sm:text-lg"
       >
         <p className="text-center leading-relaxed">
-          Dijital koleksiyonum.Site üzerinde her şeyin otomasyonla organize
+          dijital koleksiyonum.Site üzerinde her şeyin otomasyonla organize
           edilmesi üzerine denemeler yapıyorum. Ayrıca
           <motion.a
             href="https://x.com/temelbusiness"
@@ -45,7 +45,7 @@ export function HomeHero() {
               <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
             </svg>
           </motion.a>
-          platformunda düşüncelerimi yazıyorum.
+          platformunda düşüncelerimi bulabilirsiniz.
         </p>
       </motion.div>
     </motion.div>

@@ -15,13 +15,11 @@ import { getNotes } from '@/lib/db'
  */
 export async function GET(request) {
   try {
-    const { searchParams } = new URL(request.url)
-
-    // Get query parameters
-    const type = searchParams.get('type')
-    const category = searchParams.get('category') || 'all'
-    const page = parseInt(searchParams.get('page')) || 1
-    const limit = parseInt(searchParams.get('limit')) || 12
+    // Get query parameters from NextRequest
+    const type = request.nextUrl.searchParams.get('type')
+    const category = request.nextUrl.searchParams.get('category') || 'all'
+    const page = parseInt(request.nextUrl.searchParams.get('page')) || 1
+    const limit = parseInt(request.nextUrl.searchParams.get('limit')) || 12
 
     // Validate type parameter
     if (!type) {

@@ -5,12 +5,10 @@ import {
   createListItem,
 } from '@/lib/db'
 import {
-  callGemini,
   handleLink,
   handleNote,
   handleVideo,
   handleBook,
-  handleListItem,
   handleListItemWithAI,
   isURL,
 } from '@/lib/gemini'
