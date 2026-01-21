@@ -112,10 +112,10 @@ You can add content to the Kesifler section using Telegram bot commands:
 - `/video [text]` - Add video notes (supports multiple notes in one message)
 - `/kitap [text]` - Add book notes (supports multiple notes in one message)
 
-**Cache System:**
-- `/cache-kitap [name]` - Add a book to your reading list
-- `/cache-film [name]` - Add a movie/show to your watch list
-- `/cache-urun [name]` - Add a product to your shopping list
+**Lists System:**
+- `/k [name]` - Add a book to your reading list (AI finds author)
+- `/f [name]` - Add a movie/show to your watch list (AI finds director)
+- `/tarif [recipe text]` - Add a recipe (AI parses and formats everything)
 
 **Other:**
 - `/help` - Show help message
@@ -133,9 +133,21 @@ AI will automatically extract title, description, and categorize it
 1. Video title - Key insight #1
 2. Another video - Key insight #2
 
-/kitap
-1. Book Name by Author - Important quote or note
-2. Another Book - Another insight
+/k Zero to One
+AI finds: Author: Peter Thiel, Description: ...
+
+/tarif
+Tavuk Sote
+
+Malzemeler:
+- 500g tavuk göğsü
+- 2 soğan
+
+Yapılışı:
+1. Tavukları doğrayın
+2. Soğanları kavurun
+
+AI parses everything: ingredients, instructions, timings, category, difficulty
 ```
 
 #### Content Flow
@@ -183,10 +195,10 @@ npm start
 | `/incelemeler` | Research blog index - List of all research posts |
 | `/incelemeler/[slug]` | Individual research post |
 | `/kesifler` | Discoveries - Dynamic content from database (links, quotes, videos, books) |
-| `/cache` | Cache dashboard - Overview of all tracked items |
-| `/cache/kitap` | Books cache - Reading list with completion tracking |
-| `/cache/film` | Movies/Shows cache - Watch list with completion tracking |
-| `/cache/urun` | Products cache - Shopping list with completion tracking |
+| `/listeler` | Lists dashboard - Overview of all tracked items |
+| `/listeler/kitap` | Books list - Reading list with completion tracking |
+| `/listeler/film` | Movies/Shows list - Watch list with completion tracking |
+| `/listeler/tarif` | Recipes list - Recipe collection with AI-parsed content |
 | `/bu-hafta` | Weekly signals - Current week's curated content |
 | `/iletisim` | Contact page - Social links and email |
 | `/sitemap.xml` | Auto-generated sitemap |
@@ -205,10 +217,12 @@ npm start
 - AI-categorized with Gemini
 - ISR with 60-second revalidation
 
-**Cache System:**
-- Track items to read, watch, or buy
-- 3 categories: Books (Kitap), Movies/Shows (Film & Dizi), Products (Ürünler)
-- Checkbox tracking: Completed and Liked status
+**Lists System:**
+- Track items to read, watch, or cook
+- 3 categories: Books (Kitap), Movies/Shows (Film & Dizi), Recipes (Tarifler)
+- Checkbox tracking: Completed and Liked status (books/movies)
+- Recipe modal view: Full recipe with ingredients, instructions, timings
+- AI-powered parsing for recipes
 - Real-time updates with PATCH API
 - ISR with 60-second revalidation
 
@@ -258,20 +272,24 @@ npm start
 │   │   ├── ui/            # Radix UI components (shadcn)
 │   │   ├── home/          # Home page components
 │   │   ├── kesifler/      # Discovery page components
-│   │   ├── cache/         # Cache system components
-│   │   │   ├── CacheList.jsx   # Cache items list
-│   │   │   └── CacheItem.jsx   # Individual cache item
+│   │   ├── cache/         # Lists system components
+│   │   │   ├── CacheList.jsx   # List items list
+│   │   │   └── CacheItem.jsx   # Individual list item
+│   │   ├── recipes/       # Recipe components (NEW!)
+│   │   │   ├── RecipeCard.jsx  # Recipe card preview
+│   │   │   ├── RecipeModal.jsx # Full recipe modal
+│   │   │   └── RecipeList.jsx  # Recipe list with filters
 │   │   └── [various].jsx  # Navbar, Footer, etc.
 │   ├── lib/               # Utilities & integrations
 │   │   ├── blog.js        # Blog post utilities
 │   │   ├── db.js          # Neon database functions
 │   │   ├── github.js      # GitHub API integration
-│   │   ├── gemini.js      # Gemini AI integration
+│   │   ├── gemini.js      # Gemini AI integration (includes handleRecipe)
 │   │   ├── seo.js         # SEO utilities
 │   │   └── utils.js       # General utilities
 │   ├── data/              # Static data
 │   │   ├── kesifler.js    # Fallback data & categories
-│   │   └── cache.js       # Cache categories config
+│   │   └── list.js        # List categories config (includes tarif)
 │   ├── styles/            # Global styles
 │   │   ├── tailwind.css   # Tailwind config & custom styles
 │   │   └── prism.css      # Code syntax highlighting
@@ -384,14 +402,13 @@ Add new notes to the database (legacy endpoint for Google Apps Script).
 Direct Telegram webhook integration for bot commands.
 
 **Supported Commands:**
-- `/link [url]` - Add link with AI metadata extraction
-- `/quote [text]` - Add quote
-- `/alinti [text]` - Add quote (Turkish)
-- `/video [text]` - Add video notes
-- `/kitap [text]` - Add book notes
-- `/cache-kitap [name]` - Add book to cache
-- `/cache-film [name]` - Add movie/show to cache
-- `/cache-urun [name]` - Add product to cache
+- `/link [url]` or `/l [url]` - Add link with AI metadata extraction
+- `/quote [text]` or `/a [text]` - Add quote with AI categorization
+- `/video [text]` or `/v [text]` - Add video notes
+- `/book [text]` or `/b [text]` - Add book notes
+- `/k [name]` - Add book to reading list (AI finds author & description)
+- `/f [name]` - Add movie/show to watch list (AI finds director & description)
+- `/tarif [recipe text]` - Add recipe (AI parses ingredients, instructions, timings, category)
 - `/help` - Show help
 - `/stats` - Show statistics
 
@@ -456,10 +473,15 @@ Or manually execute the SQL in `scripts/init-db.sql`.
   - Fields: id, note_type, category, title, text, author, source, url, tags, created_at, updated_at, github_path, github_commit_sha
   - Indexes: note_type, category, created_at, composite indexes
 
-- **cache_items** - Cache tracking table
-  - Fields: id, name, cache_type, is_completed, is_liked, created_at, updated_at
-  - Types: kitap (books), film (movies/shows), urun (products)
+- **list_items** - List tracking table
+  - Fields: id, name, list_type, author, description, is_completed, is_liked, created_at, updated_at
+  - Types: kitap (books), film (movies/shows)
   - Constraint: is_liked requires is_completed to be true
+
+- **recipes** - Recipes table
+  - Fields: id, name, description, ingredients, instructions, category, prep_time, cook_time, servings, difficulty, tags, created_at, updated_at
+  - Categories: Ana yemek, Tatlı, Çorba, Salata, Aperatif, İçecek, Kahvaltı
+  - AI-parsed and formatted content
 
 - **valid_categories** - Category reference table
   - Pre-populated with valid categories for each note type

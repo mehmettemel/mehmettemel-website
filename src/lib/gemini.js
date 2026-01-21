@@ -520,6 +520,97 @@ Important:
 }
 
 /**
+ * Handle recipe parsing and formatting with Gemini AI
+ * Parses recipe text and extracts structured data
+ * @param {string} text - Recipe text from Telegram
+ * @returns {Promise<Object>} Structured recipe data
+ */
+export async function handleRecipe(text) {
+  const prompt = `Aşağıdaki tarif metnini analiz et ve yapılandırılmış JSON formatında döndür.
+MUTLAKA tüm bilgileri eksiksiz çıkar ve düzenle. Eksik bilgi bırakma!
+
+${text}
+
+Şu JSON formatında döndür (sadece JSON döndür, markdown kod bloğu kullanma):
+{
+  "name": "Tarif adı (kısa ve açıklayıcı)",
+  "description": "Tarif hakkında 2-3 cümlelik açıklama",
+  "ingredients": "Malzemeler listesi (her malzeme yeni satırda, ölçü birimleri ile)",
+  "instructions": "Yapılış adımları (her adım numaralandırılmış ve detaylı)",
+  "category": "Ana yemek/Tatlı/Çorba/Salata/Aperatif/İçecek/Kahvaltı kategorilerinden uygun olanı",
+  "prep_time": 15,
+  "cook_time": 30,
+  "servings": 4,
+  "difficulty": "Kolay/Orta/Zor",
+  "tags": ["etiket1", "etiket2", "etiket3"]
+}
+
+KURALLAR:
+1. Tüm metni dikkatlice oku ve eksik bilgi bırakma
+2. Malzemeler listesini düzenli formatta yaz (her satırda bir malzeme)
+3. Yapılış adımlarını numaralandır ve detaylı açıkla
+4. Süreleri dakika cinsinden yaz (sayı olarak)
+5. Porsiyon sayısını tahmin et (yoksa 4 kişilik varsay)
+6. Zorluk seviyesini içeriğe göre belirle
+7. En az 3-5 etiket ekle (örn: ["pratik", "hızlı", "lezzetli", "tavuk"])
+8. category alanı MUTLAKA listeden biri olmalı
+9. description MUTLAKA olmalı (tarifte yoksa sen yaz)
+10. ingredients ve instructions MUTLAKA tam ve eksiksiz olmalı
+
+KATEGORİ SEÇİMİ:
+- Ana yemek: Et, tavuk, balık, sebze yemekleri
+- Tatlı: Pasta, kurabiye, dondurma, şerbetli tatlılar
+- Çorba: Tüm çorba çeşitleri
+- Salata: Yeşil salatalar, meze salatalar
+- Aperatif: Atıştırmalıklar, mezeler
+- İçecek: Smoothie, kahve, çay, kokteyl
+- Kahvaltı: Kahvaltılık tarifler
+
+ÖNEMLI: Sadece düz JSON döndür, \`\`\`json gibi markdown formatı kullanma.`
+
+  const aiResponse = await callGemini(prompt, 3, 2000)
+
+  // Clean markdown code blocks if present
+  let cleanResponse = aiResponse.trim()
+  cleanResponse = cleanResponse
+    .replace(/```json\n?/g, '')
+    .replace(/```\n?/g, '')
+
+  // Try to extract JSON from response
+  const jsonMatch = cleanResponse.match(/\{[\s\S]*\}/)
+  if (jsonMatch) {
+    cleanResponse = jsonMatch[0]
+  }
+
+  let recipeData
+  try {
+    recipeData = JSON.parse(cleanResponse)
+  } catch (parseError) {
+    console.error('Failed to parse recipe JSON:', cleanResponse)
+    throw new Error('Tarif formatı okunamadı. Lütfen tarifinizi düzgün formatta yazın.')
+  }
+
+  // Validate required fields
+  if (!recipeData.name || !recipeData.ingredients || !recipeData.instructions) {
+    throw new Error('Tarif eksik bilgi içeriyor. Malzemeler ve yapılış mutlaka olmalı.')
+  }
+
+  // Ensure numeric fields are numbers
+  return {
+    name: recipeData.name,
+    description: recipeData.description || 'Lezzetli bir tarif',
+    ingredients: recipeData.ingredients,
+    instructions: recipeData.instructions,
+    category: recipeData.category || 'Ana yemek',
+    prep_time: parseInt(recipeData.prep_time) || 15,
+    cook_time: parseInt(recipeData.cook_time) || 30,
+    servings: parseInt(recipeData.servings) || 4,
+    difficulty: recipeData.difficulty || 'Orta',
+    tags: Array.isArray(recipeData.tags) ? recipeData.tags : [],
+  }
+}
+
+/**
  * Detect if text is a URL
  * @param {string} text - Text to check
  * @returns {boolean} True if URL

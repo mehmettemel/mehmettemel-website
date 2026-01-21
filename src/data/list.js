@@ -33,6 +33,13 @@ export const listCategories = [
     description: 'Rusça kelime ve cümleler',
     isStatic: true, // Database'den çekilmiyor
   },
+  {
+    id: 'tarif',
+    name: 'Tarifler',
+    emoji: '🍳',
+    icon: '👨‍🍳',
+    description: 'Yemek tarifleri ve mutfak notları',
+  },
 ]
 
 /**

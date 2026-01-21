@@ -11,6 +11,7 @@ Kişisel web sitesi - Telegram bot entegrasyonu, listeler sistemi, ve keşifler 
 ```bash
 /k zero to one          # Kitap ekle (AI yazar bulur)
 /f inception            # Film ekle (AI yönetmen bulur)
+/tarif Tavuk Sote...    # Tarif ekle (AI parse edip formatlar)
 /l https://example.com  # Link ekle
 /a güzel bir alıntı     # Alıntı ekle
 ```
@@ -32,9 +33,10 @@ Kişisel web sitesi - Telegram bot entegrasyonu, listeler sistemi, ve keşifler 
 
 **1. Listeler Sistemi** (`/listeler/*`)
 
-- Kitap, film/dizi, ürün okuma/izleme listesi
-- Checkbox ile tamamlama ve beğeni takibi
-- AI ile otomatik yazar/yönetmen/marka bulma
+- Kitap, film/dizi, tarifler listesi
+- Checkbox ile tamamlama ve beğeni takibi (kitap/film)
+- AI ile otomatik yazar/yönetmen bulma
+- Tarifler için tam AI parse ve formatla (malzemeler, yapılış, süreler, vs.)
 - Description generation
 
 **2. Keşifler** (`/kesifler`)
@@ -46,8 +48,8 @@ Kişisel web sitesi - Telegram bot entegrasyonu, listeler sistemi, ve keşifler 
 **3. Telegram Bot**
 
 - Hızlı not ekleme
-- 8 kısa komut: `/k /f /u /l /a /v /b /help`
-- AI ile zenginleştirme
+- 9 kısa komut: `/k /f /tarif /l /a /v /b /help /stats`
+- AI ile zenginleştirme ve otomatik formatla
 - User authentication
 
 ---
@@ -128,23 +130,32 @@ docs/
 src/
 ├── app/
 │   ├── listeler/   # Listeler sayfaları
+│   │   ├── kitap/
+│   │   ├── film/
+│   │   └── tarif/  # Tarifler sayfası (YENİ!)
 │   ├── kesifler/   # Keşifler sayfası
 │   └── api/
 │       ├── telegram/webhook/    # Telegram webhook (GÜNCELLENDİ)
 │       └── listeler/[id]/toggle/  # Checkbox API
 ├── lib/
-│   ├── db.js       # Database fonksiyonları (GÜNCELLENDİ)
-│   └── gemini.js   # AI kategorilendirme (GÜNCELLENDİ)
+│   ├── db.js       # Database fonksiyonları (GÜNCELLENDİ - recipes CRUD)
+│   └── gemini.js   # AI kategorilendirme (GÜNCELLENDİ - handleRecipe)
 ├── components/
-│   └── kesifler/   # Keşifler UI bileşenleri (GÜNCELLENDİ)
+│   ├── kesifler/   # Keşifler UI bileşenleri
+│   └── recipes/    # Tarifler UI bileşenleri (YENİ!)
+│       ├── RecipeCard.jsx
+│       ├── RecipeModal.jsx
+│       └── RecipeList.jsx
 └── data/
-    └── kesifler.js # Kategori tanımları (GÜNCELLENDİ)
+    ├── kesifler.js # Kategori tanımları
+    └── list.js     # Liste kategorileri (GÜNCELLENDİ - tarif eklendi)
 
 scripts/
-├── migrate-schema.sql      # v3.0.0 Schema migration (YENİ!)
-├── migrate-categories.js   # v3.0.0 Data migration (YENİ!)
+├── migrate-schema.sql      # v3.0.0 Schema migration
+├── migrate-categories.js   # v3.0.0 Data migration
 ├── create-cache-table.sql
-└── add-description-to-cache.sql
+├── add-description-to-cache.sql
+└── create-recipes-table.sql # Tarifler tablosu (YENİ!)
 ```
 
 ---
@@ -169,5 +180,52 @@ node scripts/migrate-categories.js --verify
 
 ---
 
-**Versiyon:** v3.0.0
+## 🍳 v3.1.0 - Tarifler Sistemi Eklendi (21 Ocak 2026)
+
+### Yeni Özellik: Tarifler
+
+**Telegram ile Tarif Ekleme:**
+```bash
+/tarif
+Tavuk Sote
+
+Malzemeler:
+- 500g tavuk göğsü
+- 2 soğan
+- 3 domates
+
+Yapılışı:
+1. Tavukları doğrayın
+2. Soğanları kavurun
+3. 20 dakika pişirin
+
+15 dakika hazırlık, 30 dakika pişirme
+```
+
+**Gemini AI Özellikleri:**
+- ✅ Tüm tarif metnini analiz eder
+- ✅ Malzemeleri düzenli formata çevirir
+- ✅ Yapılış adımlarını numaralandırır
+- ✅ Süreleri, porsiyon sayısını çıkarır
+- ✅ Kategori belirler (Ana yemek, Tatlı, Çorba, vs.)
+- ✅ Zorluk seviyesi tahmin eder
+- ✅ Etiketler oluşturur
+- ✅ Eksik bilgi bırakmaz!
+
+**UI Özellikleri:**
+- Modal ile tam tarif görüntüleme
+- Kategori filtreleme
+- Süre, porsiyon, zorluk gösterimi
+- Mobil responsive tasarım
+- Dark mode desteği
+
+**Database:**
+- Yeni `recipes` tablosu
+- Tam tarif bilgileri (ingredients, instructions, timings, category, difficulty, tags)
+
+**Sayfa:** `/listeler/tarif`
+
+---
+
+**Versiyon:** v3.1.0
 **Son Güncelleme:** 21 Ocak 2026

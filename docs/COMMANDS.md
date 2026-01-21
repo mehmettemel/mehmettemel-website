@@ -39,19 +39,41 @@ AI otomatik olarak yazar/yönetmen/marka/description bulur ve ekler.
 
 ---
 
-### `/u [isim]` - Ürün Ekle
+### `/tarif [metin]` - Tarif Ekle
 
 ```bash
-/u iphone 15 pro
-/u sony wh-1000xm5
+/tarif
+Tavuk Sote
+
+Malzemeler:
+- 500g tavuk göğsü
+- 2 soğan
+- 3 domates
+- Zeytinyağı
+
+Yapılışı:
+1. Tavukları küp şeklinde doğrayın
+2. Soğanları kavurun
+3. Tavukları ekleyin
+4. 20 dakika pişirin
+
+15 dakika hazırlık, 30 dakika pişirme, 4 kişilik
 ```
 
-**AI bulur:**
+**AI bulur ve düzenler:**
 
-- Marka: Apple
-- Description: Ürün hakkında kısa açıklama... (3-4 satır Türkçe)
+- Tarif adı
+- Malzemeler listesi (düzenli formatta)
+- Yapılış adımları (numaralandırılmış)
+- Hazırlık süresi, pişirme süresi
+- Porsiyon sayısı
+- Kategori (Ana yemek, Tatlı, Çorba, vs.)
+- Zorluk seviyesi (Kolay/Orta/Zor)
+- Etiketler
 
-**Gider:** `/listeler/urun`
+**Gider:** `/listeler/tarif`
+
+**Not:** Gemini AI tüm tarif metnini analiz edip yapılandırılmış formata çevirir. Eksik bilgi bırakmaz!
 
 ---
 
@@ -67,6 +89,8 @@ Tüm keşifler (alıntı, kitap, video) aynı 4 kategoriyi kullanır:
 - 🏥 **Sağlık** - Fitness, bağışıklık, wellness, mental sağlık
 - 💭 **Kişisel** - Motivasyon, üretkenlik, gelişim, alışkanlıklar
 - 📝 **Genel** - Diğer tüm konular
+
+---
 
 ---
 
@@ -246,11 +270,11 @@ Bir sistemi analiz ederken "söylenen amaçlara" değil, "oyuncuların çıkarla
 ## 🎯 Komut Karşılaştırma
 
 ### Listeler
-| Komut | Tablo        | Sayfa             | AI Özelliği        |
-| ----- | ------------ | ----------------- | ------------------ |
-| `/k`  | `list_items` | `/listeler/kitap` | Yazar + Description|
-| `/f`  | `list_items` | `/listeler/film`  | Yönetmen + Desc    |
-| `/u`  | `list_items` | `/listeler/urun`  | Marka + Description|
+| Komut    | Tablo        | Sayfa             | AI Özelliği        |
+| -------- | ------------ | ----------------- | ------------------ |
+| `/k`     | `list_items` | `/listeler/kitap` | Yazar + Description|
+| `/f`     | `list_items` | `/listeler/film`  | Yönetmen + Desc    |
+| `/tarif` | `recipes`    | `/listeler/tarif` | Tam formatla + Parse|
 
 ### Keşifler (Kategori ile)
 | Tip    | Gıda  | Sağlık | Kişisel | AI 🤖 | Tablo   | Sayfa              |
@@ -297,6 +321,7 @@ Eski komutlar hala çalışır (backward compatibility):
 7. **Video/Kitap çoklu** - `/v` ve `/b` komutlarında `"..."` tırnak içi metinler ayrı notlar olarak kaydedilir
 8. **Description otomatik** - Liste komutları için AI 3-4 satır Türkçe açıklama üretir
 9. **Linkler kategorisiz** - Artık teknik/içerik/diğer kategorileri yok, hepsi bir arada
+10. **Tarif formatı serbest** - `/tarif` ile tarif eklerken format serbest, Gemini AI tüm bilgileri otomatik çıkarır ve düzenler
 
 ---
 

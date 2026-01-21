@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Container } from '@/components/Container'
-import { getListStats } from '@/lib/db'
+import { getListStats, getRecipeStats } from '@/lib/db'
 import { listCategories } from '@/data/list'
 
 export const revalidate = 60
@@ -24,8 +24,10 @@ export const metadata = {
 export default async function ListelerPage() {
   // Get stats for all categories
   let stats = {}
+  let recipeStats = null
   try {
     stats = await getListStats()
+    recipeStats = await getRecipeStats()
   } catch (error) {
     console.error('Failed to fetch list stats:', error)
   }
@@ -48,9 +50,13 @@ export default async function ListelerPage() {
           {listCategories.map((category) => {
             // Russian uses static data
             const isStatic = category.isStatic
+            // Recipe stats come from separate table
+            const isRecipe = category.id === 'tarif'
             const categoryStats = isStatic
               ? { total: 41, completed: 0, liked: 0 } // Russian has 41 phrases
-              : stats[category.id] || { total: 0, completed: 0, liked: 0 }
+              : isRecipe
+                ? { total: recipeStats?.total || 0, completed: 0, liked: 0 }
+                : stats[category.id] || { total: 0, completed: 0, liked: 0 }
 
             return (
               <Link
@@ -80,7 +86,7 @@ export default async function ListelerPage() {
                 {/* Stats */}
                 <div className="mt-auto flex flex-wrap gap-2">
                   <span className="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
-                    {categoryStats.total} {isStatic ? 'kelime' : 'item'}
+                    {categoryStats.total} {isStatic ? 'kelime' : isRecipe ? 'tarif' : 'item'}
                   </span>
                   {categoryStats.completed > 0 && (
                     <span className="rounded-full bg-secondary px-2.5 py-1 text-xs font-medium text-foreground">

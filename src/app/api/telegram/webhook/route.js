@@ -3,6 +3,7 @@ import {
   createNote,
   getNotesStats,
   createListItem,
+  createRecipe,
 } from '@/lib/db'
 import {
   handleLink,
@@ -10,6 +11,7 @@ import {
   handleVideo,
   handleBook,
   handleListItemWithAI,
+  handleRecipe,
   isURL,
 } from '@/lib/gemini'
 
@@ -117,6 +119,15 @@ function parseMessage(text) {
     console.log('[parseMessage] Content:', content)
     console.log('==== PARSE MESSAGE END ====')
     return { type: 'list-kitap', content }
+  }
+
+  // RECIPE COMMAND (Tarifler)
+  // Goes to recipes table
+  if (text.startsWith('/tarif ') || text === '/tarif' || text.startsWith('/tarif\n')) {
+    const content = text.replace(/^\/tarif[\s\n]*/, '').trim()
+    console.log('[parseMessage] Matched: /tarif → recipe')
+    console.log('[parseMessage] Content:', content)
+    return { type: 'recipe', content }
   }
 
   // KEŞİFLER COMMANDS (Notlar/İçerik)
@@ -294,6 +305,12 @@ AI otomatik yazar/yönetmen/marka bulur:
 • /f [isim] - Film/dizi ekle
 • /u [isim] - Ürün ekle
 
+🍳 <b>TARİFLER</b>
+AI tüm detayları analiz edip düzenler:
+• /tarif [tarif metni] - Tarif ekle
+  Örnek: /tarif Patates kızartması için...
+  AI otomatik malzemeleri, yapılışı, süreyi analiz eder
+
 📝 <b>KEŞİFLER - ALINTILAR</b>
 • /ag [metin] - Alıntı (Gıda 🍎)
 • /as [metin] - Alıntı (Sağlık 🏥)
@@ -328,7 +345,8 @@ AI otomatik yazar/yönetmen/marka bulur:
 ✨ <b>İPUCU:</b>
 • Kategori belirtilmezse (/a, /b, /v) AI içeriği analiz edip otomatik kategoriler
 • Kategori belirtilirse (/ag, /bg, /vg) o kategoriye sabitlenir
-• URL gönderirseniz otomatik link olarak algılanır`,
+• URL gönderirseniz otomatik link olarak algılanır
+• /tarif ile tarif eklerken Gemini AI tüm detayları analiz edip düzenler`,
       )
       return NextResponse.json({ ok: true })
     }
@@ -420,6 +438,50 @@ AI otomatik yazar/yönetmen/marka bulur:
         return NextResponse.json({ ok: true, listId: listItem.id })
       } catch (error) {
         throw new Error(`Liste item eklenemedi: ${error.message}`)
+      }
+    }
+
+    // Handle recipe with AI parsing
+    if (parsed.type === 'recipe') {
+      console.log('🍳 [RECIPE] Recipe command detected!')
+      console.log('🍳 [RECIPE] Content:', parsed.content)
+
+      try {
+        console.log('🤖 [RECIPE] Calling Gemini AI to parse recipe...')
+        // Use Gemini AI to parse and structure recipe data
+        const recipeData = await handleRecipe(parsed.content)
+        console.log('🤖 [RECIPE] AI result:', recipeData)
+
+        console.log('💾 [RECIPE] Saving to database...')
+        const recipe = await createRecipe(recipeData)
+        console.log('💾 [RECIPE] Saved successfully! ID:', recipe.id)
+
+        const prepCookTime = `⏱️ Hazırlık: ${recipe.prep_time}dk | Pişirme: ${recipe.cook_time}dk`
+        const servingsText = `👥 ${recipe.servings} kişilik`
+        const difficultyText = `📊 Zorluk: ${recipe.difficulty}`
+        const categoryText = recipe.category ? `🏷️ ${recipe.category}` : ''
+
+        await sendTelegramMessage(
+          chatId,
+          `✅ 🍳 <b>Tarif eklendi!</b>
+
+📝 <b>${recipe.name}</b>
+${recipe.description}
+
+${categoryText}
+${prepCookTime}
+${servingsText}
+${difficultyText}
+
+ID: ${recipe.id}
+
+🔗 Tarife buradan ulaşabilirsiniz:
+mehmettemel.com/listeler/tarif`,
+        )
+
+        return NextResponse.json({ ok: true, recipeId: recipe.id })
+      } catch (error) {
+        throw new Error(`Tarif eklenemedi: ${error.message}`)
       }
     }
 

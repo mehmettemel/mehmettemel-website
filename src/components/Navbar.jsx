@@ -26,7 +26,7 @@ const kesiflerItems = [
 const listelerItems = [
   { href: '/listeler/kitap', label: 'Kitap', emoji: '📚' },
   { href: '/listeler/film', label: 'Film & Dizi', emoji: '🎬' },
-  { href: '/listeler/urun', label: 'Ürünler', emoji: '🛍️' },
+  { href: '/listeler/tarif', label: 'Tarifler', emoji: '🍳' },
   { href: '/listeler/rusca', label: 'Rusça', emoji: '🇷🇺' },
 ]
 
