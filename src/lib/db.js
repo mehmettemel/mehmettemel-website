@@ -22,11 +22,14 @@ const sql = neon(process.env.DATABASE_URL)
  */
 export async function createNote(data) {
   try {
+    // Links can have NULL category
+    const category = data.type === 'link' ? null : (data.category || null)
+
     const result = await sql`
       INSERT INTO notes (note_type, category, title, text, author, source, url, tags, is_migrated)
       VALUES (
         ${data.type},
-        ${data.category},
+        ${category},
         ${data.title || null},
         ${data.text},
         ${data.author || null},
@@ -61,7 +64,20 @@ export async function getNotes({ type, category, page = 1, limit = 12 }) {
     let notes
     let countResult
 
-    if (category && category !== 'all') {
+    // Links don't have categories - ignore category filter
+    if (type === 'link') {
+      notes = await sql`
+        SELECT * FROM notes
+        WHERE note_type = ${type}
+        ORDER BY created_at DESC
+        LIMIT ${limit} OFFSET ${offset}
+      `
+
+      countResult = await sql`
+        SELECT COUNT(*) as count FROM notes
+        WHERE note_type = ${type}
+      `
+    } else if (category && category !== 'all') {
       // Filter by both type and category
       notes = await sql`
         SELECT * FROM notes

@@ -96,16 +96,10 @@ function parseMessage(text) {
 
   // CLEAN COMMAND STRUCTURE - NO CONFLICTS
   // Commands are organized by purpose, not length
+  // IMPORTANT: Specific commands (with category) must come BEFORE generic ones
 
   // LIST COMMANDS (Okuma/İzleme/Alışveriş Listesi)
   // These go to list_items table
-  if (text.startsWith('/k ') || text === '/k') {
-    const content = text.slice(2).trim()
-    console.log('[parseMessage] ✅ MATCHED: /k → list-kitap')
-    console.log('[parseMessage] Content:', content)
-    console.log('==== PARSE MESSAGE END ====')
-    return { type: 'list-kitap', content }
-  }
   if (text.startsWith('/f ') || text === '/f') {
     const content = text.slice(2).trim()
     console.log('[parseMessage] Matched: /f → list-film')
@@ -116,64 +110,126 @@ function parseMessage(text) {
     console.log('[parseMessage] Matched: /u → list-urun')
     return { type: 'list-urun', content }
   }
+  // /k must come AFTER category-specific book commands (/kg, /ks, /kk)
+  if (text.startsWith('/k ') || text === '/k') {
+    const content = text.slice(2).trim()
+    console.log('[parseMessage] ✅ MATCHED: /k → list-kitap')
+    console.log('[parseMessage] Content:', content)
+    console.log('==== PARSE MESSAGE END ====')
+    return { type: 'list-kitap', content }
+  }
 
   // KEŞİFLER COMMANDS (Notlar/İçerik)
   // These go to notes table
-  if (text.startsWith('/l ')) {
-    const content = text.slice(2).trim()
-    console.log('[parseMessage] Matched: /l → link')
-    return { type: 'link', content }
+  // Category-specific commands BEFORE generic ones
+
+  // QUOTE COMMANDS (with categories)
+  if (text.startsWith('/ag ')) {
+    const content = text.slice(4).trim()
+    console.log('[parseMessage] Matched: /ag → quote + gida')
+    return { type: 'quote', category: 'gida', content }
+  }
+  if (text.startsWith('/as ')) {
+    const content = text.slice(4).trim()
+    console.log('[parseMessage] Matched: /as → quote + saglik')
+    return { type: 'quote', category: 'saglik', content }
+  }
+  if (text.startsWith('/ak ')) {
+    const content = text.slice(4).trim()
+    console.log('[parseMessage] Matched: /ak → quote + kisisel')
+    return { type: 'quote', category: 'kisisel', content }
   }
   if (text.startsWith('/a ')) {
-    const content = text.slice(2).trim()
-    console.log('[parseMessage] Matched: /a → quote')
-    return { type: 'quote', content }
+    const content = text.slice(3).trim()
+    console.log('[parseMessage] Matched: /a → quote + genel')
+    return { type: 'quote', category: 'genel', content }
   }
-  if (text.startsWith('/v ') || text.startsWith('/v\n')) {
-    const content = text.slice(2).trim()
-    console.log('[parseMessage] Matched: /v → video')
-    return { type: 'video', content }
+
+  // BOOK NOTE COMMANDS (with categories)
+  if (text.startsWith('/kg ')) {
+    const content = text.slice(4).trim()
+    console.log('[parseMessage] Matched: /kg → book + gida')
+    return { type: 'book', category: 'gida', content }
+  }
+  if (text.startsWith('/ks ')) {
+    const content = text.slice(4).trim()
+    console.log('[parseMessage] Matched: /ks → book + saglik')
+    return { type: 'book', category: 'saglik', content }
+  }
+  if (text.startsWith('/kk ')) {
+    const content = text.slice(4).trim()
+    console.log('[parseMessage] Matched: /kk → book + kisisel')
+    return { type: 'book', category: 'kisisel', content }
   }
   if (text.startsWith('/b ') || text.startsWith('/b\n')) {
-    const content = text.slice(2).trim()
-    console.log('[parseMessage] Matched: /b → book')
-    return { type: 'book', content }
+    const content = text.slice(3).trim()
+    console.log('[parseMessage] Matched: /b → book + genel')
+    return { type: 'book', category: 'genel', content }
+  }
+
+  // VIDEO NOTE COMMANDS (with categories)
+  if (text.startsWith('/vg ')) {
+    const content = text.slice(4).trim()
+    console.log('[parseMessage] Matched: /vg → video + gida')
+    return { type: 'video', category: 'gida', content }
+  }
+  if (text.startsWith('/vs ')) {
+    const content = text.slice(4).trim()
+    console.log('[parseMessage] Matched: /vs → video + saglik')
+    return { type: 'video', category: 'saglik', content }
+  }
+  if (text.startsWith('/vk ')) {
+    const content = text.slice(4).trim()
+    console.log('[parseMessage] Matched: /vk → video + kisisel')
+    return { type: 'video', category: 'kisisel', content }
+  }
+  if (text.startsWith('/v ') || text.startsWith('/v\n')) {
+    const content = text.slice(3).trim()
+    console.log('[parseMessage] Matched: /v → video + genel')
+    return { type: 'video', category: 'genel', content }
+  }
+
+  // LINK COMMAND (NO category)
+  if (text.startsWith('/l ')) {
+    const content = text.slice(3).trim()
+    console.log('[parseMessage] Matched: /l → link')
+    return { type: 'link', category: null, content }
   }
 
   // LEGACY LONG COMMANDS (backward compatibility)
   if (text.startsWith('/link ')) {
-    const content = text.slice(5).trim()
+    const content = text.slice(6).trim()
     console.log('[parseMessage] Matched: /link → link')
-    return { type: 'link', content }
+    return { type: 'link', category: null, content }
   }
   if (text.startsWith('/quote ') || text.startsWith('/alinti ')) {
     const cmd = text.startsWith('/quote') ? '/quote' : '/alinti'
-    const content = text.slice(cmd.length).trim()
-    console.log(`[parseMessage] Matched: ${cmd} → quote`)
-    return { type: 'quote', content }
+    const content = text.slice(cmd.length + 1).trim()
+    console.log(`[parseMessage] Matched: ${cmd} → quote + genel`)
+    return { type: 'quote', category: 'genel', content }
   }
   if (text.startsWith('/video ') || text.startsWith('/video\n')) {
-    const content = text.slice(6).trim()
-    console.log('[parseMessage] Matched: /video → video')
-    return { type: 'video', content }
+    const content = text.slice(7).trim()
+    console.log('[parseMessage] Matched: /video → video + genel')
+    return { type: 'video', category: 'genel', content }
   }
   if (text.startsWith('/book ') || text.startsWith('/book\n')) {
-    const content = text.slice(5).trim()
-    console.log('[parseMessage] Matched: /book → book')
-    return { type: 'book', content }
+    const content = text.slice(6).trim()
+    console.log('[parseMessage] Matched: /book → book + genel')
+    return { type: 'book', category: 'genel', content }
   }
   if (text.startsWith('/cache-kitap ')) {
-    const content = text.slice(12).trim()
+    const content = text.slice(13).trim()
     console.log('[parseMessage] Matched: /cache-kitap → list-kitap')
     return { type: 'list-kitap', content }
   }
   if (text.startsWith('/cache-film ')) {
-    const content = text.slice(11).trim()
+    const content = text.slice(12).trim()
     console.log('[parseMessage] Matched: /cache-film → list-film')
     return { type: 'list-film', content }
   }
   if (text.startsWith('/cache-urun ')) {
-    const content = text.slice(11).trim()
+    const content = text.slice(12).trim()
     console.log('[parseMessage] Matched: /cache-urun → list-urun')
     return { type: 'list-urun', content }
   }
@@ -182,6 +238,7 @@ function parseMessage(text) {
   if (isURL(text)) {
     return {
       type: 'link',
+      category: null,
       content: text.trim(),
     }
   }
@@ -237,33 +294,36 @@ AI otomatik yazar/yönetmen/marka bulur:
 • /f [isim] - Film/dizi ekle
 • /u [isim] - Ürün ekle
 
-📝 <b>KEŞİFLER (Notlar/İçerik)</b>
-• /l [url] - Link ekle
-• /a [metin] - Alıntı ekle
-• /v [metin] - Video notu ekle
-• /b [metin] - Kitap notu ekle
+📝 <b>KEŞİFLER - ALINTILAR</b>
+• /ag [metin] - Alıntı (Gıda 🍎)
+• /as [metin] - Alıntı (Sağlık 🏥)
+• /ak [metin] - Alıntı (Kişisel 💭)
+• /a [metin] - Alıntı (Genel 📝)
+
+📖 <b>KEŞİFLER - KİTAP NOTLARI</b>
+• /kg [metin] - Kitap notu (Gıda 🍎)
+• /ks [metin] - Kitap notu (Sağlık 🏥)
+• /kk [metin] - Kitap notu (Kişisel 💭)
+• /b [metin] - Kitap notu (Genel 📝)
+
+🎬 <b>KEŞİFLER - VİDEO NOTLARI</b>
+• /vg [metin] - Video notu (Gıda 🍎)
+• /vs [metin] - Video notu (Sağlık 🏥)
+• /vk [metin] - Video notu (Kişisel 💭)
+• /v [metin] - Video notu (Genel 📝)
+
+🔗 <b>KEŞİFLER - LİNKLER</b>
+• /l [url] - Link ekle (kategori yok)
 
 📊 <b>DİĞER</b>
 • /stats - İstatistikler
 • /help - Bu mesaj
 
-💡 <b>ÖRNEKLER:</b>
-
-<b>Cache (AI ile):</b>
-<code>/k zero to one</code>
-→ AI bulur: Peter Thiel
-
-<code>/f inception</code>
-→ AI bulur: Christopher Nolan
-
-<code>/u iphone 15 pro</code>
-→ AI bulur: Apple
-
-<b>Keşifler:</b>
-<code>/l https://example.com</code>
-<code>/a Tutarlılık başarının anahtarı</code>
-<code>/v Huberman Lab: Sleep tips</code>
-<code>/b Focus is everything</code>
+💡 <b>KATEGORİLER:</b>
+🍎 Gıda: Yemek, beslenme, tarif
+🏥 Sağlık: Fitness, bağışıklık, wellness
+💭 Kişisel: Motivasyon, üretkenlik, gelişim
+📝 Genel: Diğer tüm konular
 
 ✨ <b>İPUCU:</b> URL gönderirseniz otomatik link olarak algılanır.`,
       )
@@ -307,12 +367,15 @@ AI otomatik yazar/yönetmen/marka bulur:
 
     console.log('🔍 [TELEGRAM] Parsed result:', JSON.stringify(parsed))
 
-    // If no command found, default to quote
+    // If no command found, default to quote with genel category
     if (!parsed) {
-      console.log('⚠️ [TELEGRAM] No command found, defaulting to quote')
-      parsed = { type: 'quote', content: text }
+      console.log('⚠️ [TELEGRAM] No command found, defaulting to quote + genel')
+      parsed = { type: 'quote', category: 'genel', content: text }
     } else {
       console.log('✅ [TELEGRAM] Command recognized:', parsed.type)
+      if (parsed.category) {
+        console.log('✅ [TELEGRAM] Category specified:', parsed.category)
+      }
     }
 
     // Handle list items with AI enrichment
@@ -358,23 +421,60 @@ AI otomatik yazar/yönetmen/marka bulur:
     }
 
     // Categorize content with Gemini AI
+    // If category is already specified, skip AI categorization (but still use AI for metadata extraction)
     let categorizedData
 
-    switch (parsed.type) {
-      case 'link':
-        categorizedData = await handleLink(parsed.content)
-        break
-      case 'quote':
-        categorizedData = await handleNote(parsed.content)
-        break
-      case 'video':
-        categorizedData = await handleVideo(parsed.content)
-        break
-      case 'book':
-        categorizedData = await handleBook(parsed.content)
-        break
-      default:
-        throw new Error(`Unknown note type: ${parsed.type}`)
+    if (parsed.category !== undefined && parsed.category !== null) {
+      // Category specified by command - use AI only for metadata extraction
+      console.log('📝 [TELEGRAM] Category pre-specified, using minimal AI processing')
+
+      switch (parsed.type) {
+        case 'link':
+          // Links don't need AI at all
+          categorizedData = await handleLink(parsed.content)
+          break
+        case 'quote':
+          // For quotes, still use AI to extract author/source but keep the specified category
+          const quoteData = await handleNote(parsed.content)
+          categorizedData = { ...quoteData, category: parsed.category }
+          break
+        case 'video':
+          // For videos, still use AI for parsing but override category
+          const videoData = await handleVideo(parsed.content)
+          categorizedData = Array.isArray(videoData)
+            ? videoData.map(note => ({ ...note, category: parsed.category }))
+            : { ...videoData, category: parsed.category }
+          break
+        case 'book':
+          // For books, still use AI for parsing but override category
+          const bookData = await handleBook(parsed.content)
+          categorizedData = Array.isArray(bookData)
+            ? bookData.map(note => ({ ...note, category: parsed.category }))
+            : { ...bookData, category: parsed.category }
+          break
+        default:
+          throw new Error(`Unknown note type: ${parsed.type}`)
+      }
+    } else {
+      // No category specified - use full AI categorization
+      console.log('🤖 [TELEGRAM] No category specified, using full AI categorization')
+
+      switch (parsed.type) {
+        case 'link':
+          categorizedData = await handleLink(parsed.content)
+          break
+        case 'quote':
+          categorizedData = await handleNote(parsed.content)
+          break
+        case 'video':
+          categorizedData = await handleVideo(parsed.content)
+          break
+        case 'book':
+          categorizedData = await handleBook(parsed.content)
+          break
+        default:
+          throw new Error(`Unknown note type: ${parsed.type}`)
+      }
     }
 
     // Validate categorizedData

@@ -9,13 +9,10 @@ export const metadata = {
   description: 'İnternette bulduğum faydalı kaynaklar.',
 }
 
-export default async function LinksPage({ searchParams }) {
-  const params = await searchParams
-  const category = params?.category || 'all'
-
+export default async function LinksPage() {
+  // Links don't have categories
   const linksData = await getNotes({
     type: 'link',
-    category: category !== 'all' ? category : undefined,
     limit: 1000,
   }).catch(() => ({
     notes: [],

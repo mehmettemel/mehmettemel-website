@@ -19,21 +19,17 @@ export const usefulLinks = [
   },
 ]
 
-// Link Kategorileri
+// Link Kategorileri (kategori sistemi yok)
 export const linkCategories = [
   { id: 'all', name: 'Tümü', icon: '📚' },
-  { id: 'teknik', name: 'Teknik', icon: '🚀' },
-  { id: 'icerik', name: 'İçerik', icon: '📖' },
-  { id: 'diger', name: 'Diğer', icon: '🌍' },
 ]
 
-// Alıntı Kategorileri
+// Alıntı Kategorileri (4 yekpare kategori)
 export const quoteCategories = [
   { id: 'all', name: 'Tümü', icon: '📚' },
-  { id: 'kisisel', name: 'Kişisel', icon: '💭' },
-  { id: 'saglik', name: 'Sağlık', icon: '🏥' },
   { id: 'gida', name: 'Gıda', icon: '🍎' },
-  { id: 'seyahat', name: 'Seyahat', icon: '✈️' },
+  { id: 'saglik', name: 'Sağlık', icon: '🏥' },
+  { id: 'kisisel', name: 'Kişisel', icon: '💭' },
   { id: 'genel', name: 'Genel', icon: '📝' },
 ]
 
@@ -73,26 +69,25 @@ export const quotes = [
   },
 ]
 
-// Video Kategorileri
+// Video Kategorileri (4 yekpare kategori)
 export const videoCategories = [
   { id: 'all', name: 'Tümü', icon: '📚' },
-  { id: 'youtube', name: 'YouTube', icon: '▶️' },
-  { id: 'documentary', name: 'Belgesel', icon: '🎬' },
-  { id: 'course', name: 'Kurs', icon: '🎓' },
-  { id: 'podcast', name: 'Podcast', icon: '🎙️' },
+  { id: 'gida', name: 'Gıda', icon: '🍎' },
+  { id: 'saglik', name: 'Sağlık', icon: '🏥' },
+  { id: 'kisisel', name: 'Kişisel', icon: '💭' },
+  { id: 'genel', name: 'Genel', icon: '📝' },
 ]
 
 // Video Notları
 export const videoNotes = []
 
-// Kitap Kategorileri
+// Kitap Kategorileri (4 yekpare kategori)
 export const bookCategories = [
   { id: 'all', name: 'Tümü', icon: '📚' },
-  { id: 'science', name: 'Bilim', icon: '🔬' },
-  { id: 'selfhelp', name: 'Kişisel Gelişim', icon: '🌱' },
-  { id: 'biography', name: 'Biyografi', icon: '👤' },
-  { id: 'fiction', name: 'Kurgu', icon: '📖' },
-  { id: 'health', name: 'Sağlık', icon: '🏥' },
+  { id: 'gida', name: 'Gıda', icon: '🍎' },
+  { id: 'saglik', name: 'Sağlık', icon: '🏥' },
+  { id: 'kisisel', name: 'Kişisel', icon: '💭' },
+  { id: 'genel', name: 'Genel', icon: '📝' },
 ]
 
 // Kitap Notları

@@ -93,23 +93,12 @@ export async function handleLink(url) {
   const prompt = `Aşağıdaki URL'yi analiz et ve JSON formatında şu bilgileri döndür (sadece JSON döndür, markdown kod bloğu kullanma):
 {
   "title": "Link başlığı",
-  "description": "Kısa açıklama (max 150 karakter)",
-  "type": "teknik/icerik/diger seçeneklerinden en uygun olanı"
+  "description": "Kısa açıklama (max 150 karakter)"
 }
 
 URL: ${url}
 
-KATEGORİ SEÇİMİ (3 ana kategori):
-- "teknik": Yazılım, kodlama, programlama dilleri, framework'ler, developer tools, tasarım araçları, UI/UX, Figma, Adobe, online araçlar, web uygulamaları, üretkenlik araçları, teknik konular
-- "icerik": Blog yazıları, makaleler, tutorial'lar, rehberler, Medium yazıları, haber siteleri, içerik platformları, eğitim kaynakları, podcast'ler, YouTube kanalları, video kursları
-- "diger": Yukarıdaki kategorilere uymayan diğer tüm linkler (genel konular, hobi, eğlence, vs.)
-
-ÖNEMLI KURALLAR:
-- GitHub repo, npm package, kod kütüphanesi → "teknik"
-- Medium/Dev.to yazısı konusu teknik ise → "icerik"
-- Figma, Notion, tasarım araçları → "teknik"
-- YouTube tutorial/kurs → "icerik"
-- Sadece düz JSON döndür, \`\`\`json gibi markdown formatı kullanma.`
+ÖNEMLI: Sadece düz JSON döndür, \`\`\`json gibi markdown formatı kullanma.`
 
   const aiResponse = await callGemini(prompt)
 
@@ -135,13 +124,12 @@ KATEGORİ SEÇİMİ (3 ana kategori):
     linkData = {
       title: urlObj.hostname,
       description: url,
-      type: 'diger',
     }
   }
 
   return {
     type: 'link',
-    category: linkData.type,
+    category: null, // Links don't have categories
     title: linkData.title,
     text: linkData.description,
     url: url,
@@ -181,7 +169,7 @@ export async function handleNote(text) {
 {
   "author": "Varsa yazar adı, yoksa null",
   "source": "Varsa kaynak (kitap adı, konuşma, makale vs.), yoksa null",
-  "category": "kisisel/saglik/gida/seyahat/genel kategorilerinden en uygun olanı"
+  "category": "gida/saglik/kisisel/genel kategorilerinden en uygun olanı"
 }
 
 ${authorHint ? `Yazar/Kaynak ipucu: ${authorHint}` : ''}
@@ -189,19 +177,20 @@ ${authorHint ? `Yazar/Kaynak ipucu: ${authorHint}` : ''}
 Metin:
 ${mainText}
 
-KATEGORİ SEÇİMİ (5 kategori):
-- kisisel: Kişisel gelişim, motivasyon, ilham verici alıntılar, hayat dersleri, başarı, mutluluk
-- saglik: Sağlık tavsiyeleri, fitness, bağışıklık, vitaminler, egzersiz, mental sağlık
-- gida: Yemek tarifleri, beslenme, mutfak ipuçları, gıda bilgisi, diyet
-- seyahat: Gezi, tatil, keşif, macera, yer önerileri, seyahat ipuçları
-- genel: Yukarıdaki kategorilere uymayan diğer tüm konular
+KATEGORİ SEÇİMİ (4 kategori):
+- gida: Yemek tarifleri, beslenme, mutfak ipuçları, gıda bilgisi, diyet, yemek kültürü
+- saglik: Sağlık tavsiyeleri, fitness, bağışıklık, vitaminler, egzersiz, mental sağlık, wellness
+- kisisel: Kişisel gelişim, motivasyon, ilham verici alıntılar, hayat dersleri, başarı, mutluluk, alışkanlıklar, üretkenlik
+- genel: Yukarıdaki kategorilere uymayan diğer tüm konular (seyahat, teknoloji, genel bilgi, vs.)
 
 KAYNAK TESPİTİ:
 - İsim varsa → author alanına (örn: "Professor Jiang", "Steve Jobs")
 - Kaynak varsa → source alanına (örn: "Stanford Konuşması", "Atomic Habits")
 - İkisi birlikte varsa ayrı ayrı doldur
 
-ÖNEMLI: Sadece düz JSON döndür, \`\`\`json gibi markdown formatı kullanma`
+ÖNEMLI:
+- "seyahat" kategorisi artık YOK → içeriğe göre "kisisel" veya "genel" seç
+- Sadece düz JSON döndür, \`\`\`json gibi markdown formatı kullanma`
 
   const aiResponse = await callGemini(prompt)
 
@@ -255,7 +244,7 @@ export async function handleVideo(text) {
   "notes": ["Alıntı 1", "Alıntı 2", "Alıntı 3"],
   "author": "Konuşmacı veya içerik üreticisi adı (örn: Jensen Huang, Lex Fridman)",
   "source": "Video başlığı veya konu (örn: AI Bubble Interview, Huberman Lab)",
-  "category": "youtube/documentary/course/podcast kategorilerinden en uygun olanı",
+  "category": "gida/saglik/kisisel/genel kategorilerinden en uygun olanı",
   "url": "Video URL'i varsa, yoksa null"
 }
 
@@ -276,13 +265,14 @@ KAYNAK TESPİTİ (ÖNCELİK SIRASI):
 2. Sadece isim varsa → author alanına
 3. Kanal/program adı (Huberman Lab, Lex Fridman Podcast) → source alanına
 
-KATEGORİ SEÇİMİ (4 kategori):
-- youtube: YouTube videoları, röportajlar, vlogs
-- documentary: Belgeseller, uzun format içerikler
-- course: Kurs, eğitim, tutorial serisi
-- podcast: Podcast'ler, ses içerikleri
+KATEGORİ SEÇİMİ (4 kategori - İÇERİĞE GÖRE):
+- gida: Yemek videoları, tarif, beslenme, mutfak, yemek kültürü
+- saglik: Sağlık, fitness, egzersiz, bağışıklık, mental sağlık, wellness, psikoloji
+- kisisel: Kişisel gelişim, motivasyon, verimlilik, eğitim, kurslar, başarı, kariyer
+- genel: Diğer tüm konular (teknoloji, bilim, haber, eğlence, belgesel, podcast)
 
 ÖNEMLI:
+- Platform (YouTube, podcast vs.) artık ÖNEMLİ DEĞİL - sadece İÇERİK konusuna bak
 - notes bir ARRAY olmalı, her alıntı ayrı bir string
 - Tek alıntı varsa bile array olarak döndür: ["Tek alıntı"]
 - Sadece düz JSON döndür, \`\`\`json gibi markdown formatı kullanma`
@@ -359,7 +349,7 @@ export async function handleBook(text) {
   "notes": ["Alıntı 1", "Alıntı 2", "Alıntı 3"],
   "author": "Kitabın yazarı (örn: James Clear, Yuval Noah Harari)",
   "source": "Kitap adı (örn: Atomic Habits, Sapiens)",
-  "category": "science/selfhelp/biography/fiction/health kategorilerinden en uygun olanı",
+  "category": "gida/saglik/kisisel/genel kategorilerinden en uygun olanı",
   "url": "Kitap link'i varsa (Amazon, Goodreads vs.), yoksa null"
 }
 
@@ -372,14 +362,14 @@ PARSE KURALLARI:
 4. "Kitap:", "Book:", "from", "Kaynak:" ile belirtilen başlıklar source alanına git
 5. Notlar Türkçe veya İngilizce olabilir, her iki dili de destekle
 
-KATEGORİ SEÇİMİ (5 kategori):
-- science: Bilim, araştırma, akademik, tarih, felsefe
-- selfhelp: Kişisel gelişim, self-help, motivasyon, alışkanlıklar
-- biography: Biyografi, otobiyografi, anı
-- fiction: Roman, kurgu, hikaye, edebiyat
-- health: Sağlık, fitness, beslenme, psikoloji
+KATEGORİ SEÇİMİ (4 kategori - İÇERİĞE GÖRE):
+- gida: Yemek kitapları, beslenme, diyet, mutfak, tarif kitapları, yemek kültürü
+- saglik: Sağlık, fitness, psikoloji, wellness, beslenme bilimi, mental sağlık
+- kisisel: Kişisel gelişim, self-help, motivasyon, alışkanlıklar, başarı, kariyer, üretkenlik
+- genel: Diğer tüm konular (bilim, tarih, felsefe, kurgu, biyografi, roman, edebiyat)
 
 ÖNEMLI:
+- Tür (science, biography, fiction) artık ÖNEMLİ DEĞİL - kitabın ana KONUSUNA bak
 - notes bir ARRAY olmalı, her alıntı ayrı bir string
 - Tek alıntı varsa bile array olarak döndür: ["Tek alıntı"]
 - Sadece düz JSON döndür, \`\`\`json gibi markdown formatı kullanma`
