@@ -83,23 +83,25 @@ DATABASE_URL=...
 /ag [metin]  # Gıda
 /as [metin]  # Sağlık
 /ak [metin]  # Kişisel
-/a [metin]   # Genel
+/a [metin]   # AI kategoriler (otomatik)
 
 # Kitap Notları
-/kg [metin]  # Gıda
-/ks [metin]  # Sağlık
-/kk [metin]  # Kişisel
-/b [metin]   # Genel
+/bg [metin]  # Gıda
+/bs [metin]  # Sağlık
+/bk [metin]  # Kişisel
+/b [metin]   # AI kategoriler (otomatik)
 
 # Video Notları
 /vg [metin]  # Gıda
 /vs [metin]  # Sağlık
 /vk [metin]  # Kişisel
-/v [metin]   # Genel
+/v [metin]   # AI kategoriler (otomatik)
 
 # Linkler (kategorisiz)
 /l [url]
 ```
+
+**Not:** Kategori belirtilmezse (`/a`, `/b`, `/v`), AI içeriği analiz edip otomatik kategoriler.
 
 ### Değişiklikler
 

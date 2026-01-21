@@ -87,7 +87,7 @@ Tüm keşifler (alıntı, kitap, video) aynı 4 kategoriyi kullanır:
 /ak Tutarlılık başarının anahtarıdır
 ```
 
-#### `/a [metin]` - Alıntı (Genel - Default)
+#### `/a [metin]` - Alıntı (AI Kategoriler)
 
 **Tek alıntı:**
 
@@ -116,7 +116,7 @@ Bir sistemi analiz ederken "söylenen amaçlara" değil, "oyuncuların çıkarla
 - Metin parçalanmaz, orijinal format korunur
 - "-" işaretinden sonraki metin yazar/kaynak olarak algılanır
 
-**AI bulur:** Yazar, kaynak (kategori zaten belirtilmiş)
+**AI bulur:** Yazar, kaynak ve içeriğe göre kategori (gıda/sağlık/kişisel/genel)
 
 **Gider:** `/kesifler/alintilar`
 
@@ -124,27 +124,27 @@ Bir sistemi analiz ederken "söylenen amaçlara" değil, "oyuncuların çıkarla
 
 ### 📖 Kitap Notu Komutları (Kategori ile)
 
-#### `/kg [metin]` - Kitap Notu (Gıda)
+#### `/bg [metin]` - Kitap Notu (Gıda)
 ```bash
-/kg "Akdeniz diyeti en sağlıklısı" - Michael Pollan
+/bg "Akdeniz diyeti en sağlıklısı" - Michael Pollan
 ```
 
-#### `/ks [metin]` - Kitap Notu (Sağlık)
+#### `/bs [metin]` - Kitap Notu (Sağlık)
 ```bash
-/ks "Uyku her şeydir" - Why We Sleep
+/bs "Uyku her şeydir" - Why We Sleep
 ```
 
-#### `/kk [metin]` - Kitap Notu (Kişisel)
+#### `/bk [metin]` - Kitap Notu (Kişisel)
 ```bash
-/kk "Small habits compound" - Atomic Habits James Clear
+/bk "Small habits compound" - Atomic Habits James Clear
 ```
 
-#### `/b [metin]` - Kitap Notu (Genel - Default)
+#### `/b [metin]` - Kitap Notu (AI Kategoriler)
 ```bash
 /b Focus is the key - Atomic Habits James Clear
 ```
 
-**AI bulur:** Yazar, kaynak (kategori zaten belirtilmiş)
+**AI bulur:** Yazar, kaynak ve içeriğe göre kategori (gıda/sağlık/kişisel/genel)
 
 **Gider:** `/kesifler/kitaplar`
 
@@ -167,7 +167,7 @@ Bir sistemi analiz ederken "söylenen amaçlara" değil, "oyuncuların çıkarla
 /vk "Focus is the key to mastery" - Cal Newport Interview
 ```
 
-#### `/v [metin]` - Video Notu (Genel - Default)
+#### `/v [metin]` - Video Notu (AI Kategoriler)
 
 **Tek not:**
 
@@ -191,7 +191,7 @@ Bir sistemi analiz ederken "söylenen amaçlara" değil, "oyuncuların çıkarla
 
 → `notes: ["AI is the future", "Scaling is key", "Data matters"], author: "Jensen Huang", source: "AI Interview"`
 
-**AI bulur:** Konuşmacı, kaynak (kategori zaten belirtilmiş)
+**AI bulur:** Konuşmacı, kaynak ve içeriğe göre kategori (gıda/sağlık/kişisel/genel)
 
 **Gider:** `/kesifler/videolar`
 
@@ -253,12 +253,16 @@ Bir sistemi analiz ederken "söylenen amaçlara" değil, "oyuncuların çıkarla
 | `/u`  | `list_items` | `/listeler/urun`  | Marka + Description|
 
 ### Keşifler (Kategori ile)
-| Tip    | Gıda  | Sağlık | Kişisel | Genel | Tablo   | Sayfa              |
+| Tip    | Gıda  | Sağlık | Kişisel | AI 🤖 | Tablo   | Sayfa              |
 | ------ | ----- | ------ | ------- | ----- | ------- | ------------------ |
 | Alıntı | `/ag` | `/as`  | `/ak`   | `/a`  | `notes` | `/kesifler/alintilar` |
-| Kitap  | `/kg` | `/ks`  | `/kk`   | `/b`  | `notes` | `/kesifler/kitaplar`  |
+| Kitap  | `/bg` | `/bs`  | `/bk`   | `/b`  | `notes` | `/kesifler/kitaplar`  |
 | Video  | `/vg` | `/vs`  | `/vk`   | `/v`  | `notes` | `/kesifler/videolar`  |
 | Link   | -     | -      | -       | `/l`  | `notes` | `/kesifler/linkler`   |
+
+**Not:**
+- **Kategori belirtilirse** (`/ag`, `/bg`, `/vg`) → O kategoriye sabitlenir
+- **AI kullanılırsa** (`/a`, `/b`, `/v`) → İçerik analiz edilip otomatik kategorilenir (gıda/sağlık/kişisel/genel)
 
 ---
 
@@ -286,7 +290,7 @@ Eski komutlar hala çalışır (backward compatibility):
 
 1. **Boşluk önemli** - `/k zero` ✅ `/kzero` ❌
 2. **Kategori harfi ekle** - `/ag` (gıda), `/as` (sağlık), `/ak` (kişisel), `/a` (genel)
-3. **Komut sırası kritik** - `/kg` → kitap+gıda, `/k` → liste-kitap
+3. **Komut sırası kritik** - `/bg` → kitap notu+gıda, `/k` → liste-kitap
 4. **URL otomatik** - Direkt URL gönder, otomatik `/l` olarak algılanır
 5. **"-" = Kaynak** - Alıntılarda tire işaretinden sonra gelen metin yazar/kaynak olarak algılanır
 6. **Alıntılar TEK not** - Tüm metin olduğu gibi tek alıntı olarak kaydedilir (parçalanmaz)
@@ -359,7 +363,7 @@ vercel logs --follow
 **Yeni Sistem (v3.0.0):**
 - ✅ **4 Yekpare Kategori** - Gıda, Sağlık, Kişisel, Genel
 - ✅ **Tek Kategori Sistemi** - Alıntı, kitap, video hepsi aynı kategorileri kullanır
-- ✅ **Kategori Komutları** - `/ag`, `/as`, `/ak`, `/kg`, `/vg` gibi
+- ✅ **Kategori Komutları** - `/ag`, `/as`, `/ak`, `/bg`, `/vg` gibi
 - ✅ **Linkler Kategorisiz** - Artık tüm linkler bir arada
 - ✅ **İçerik Bazlı** - Platform değil, içeriğe göre kategorileme
 

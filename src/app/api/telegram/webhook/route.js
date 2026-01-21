@@ -141,30 +141,30 @@ function parseMessage(text) {
   }
   if (text.startsWith('/a ')) {
     const content = text.slice(3).trim()
-    console.log('[parseMessage] Matched: /a → quote + genel')
-    return { type: 'quote', category: 'genel', content }
+    console.log('[parseMessage] Matched: /a → quote + AI categorization')
+    return { type: 'quote', category: null, content }
   }
 
   // BOOK NOTE COMMANDS (with categories)
-  if (text.startsWith('/kg ')) {
+  if (text.startsWith('/bg ')) {
     const content = text.slice(4).trim()
-    console.log('[parseMessage] Matched: /kg → book + gida')
+    console.log('[parseMessage] Matched: /bg → book + gida')
     return { type: 'book', category: 'gida', content }
   }
-  if (text.startsWith('/ks ')) {
+  if (text.startsWith('/bs ')) {
     const content = text.slice(4).trim()
-    console.log('[parseMessage] Matched: /ks → book + saglik')
+    console.log('[parseMessage] Matched: /bs → book + saglik')
     return { type: 'book', category: 'saglik', content }
   }
-  if (text.startsWith('/kk ')) {
+  if (text.startsWith('/bk ')) {
     const content = text.slice(4).trim()
-    console.log('[parseMessage] Matched: /kk → book + kisisel')
+    console.log('[parseMessage] Matched: /bk → book + kisisel')
     return { type: 'book', category: 'kisisel', content }
   }
   if (text.startsWith('/b ') || text.startsWith('/b\n')) {
     const content = text.slice(3).trim()
-    console.log('[parseMessage] Matched: /b → book + genel')
-    return { type: 'book', category: 'genel', content }
+    console.log('[parseMessage] Matched: /b → book + AI categorization')
+    return { type: 'book', category: null, content }
   }
 
   // VIDEO NOTE COMMANDS (with categories)
@@ -185,8 +185,8 @@ function parseMessage(text) {
   }
   if (text.startsWith('/v ') || text.startsWith('/v\n')) {
     const content = text.slice(3).trim()
-    console.log('[parseMessage] Matched: /v → video + genel')
-    return { type: 'video', category: 'genel', content }
+    console.log('[parseMessage] Matched: /v → video + AI categorization')
+    return { type: 'video', category: null, content }
   }
 
   // LINK COMMAND (NO category)
@@ -205,18 +205,18 @@ function parseMessage(text) {
   if (text.startsWith('/quote ') || text.startsWith('/alinti ')) {
     const cmd = text.startsWith('/quote') ? '/quote' : '/alinti'
     const content = text.slice(cmd.length + 1).trim()
-    console.log(`[parseMessage] Matched: ${cmd} → quote + genel`)
-    return { type: 'quote', category: 'genel', content }
+    console.log(`[parseMessage] Matched: ${cmd} → quote + AI categorization`)
+    return { type: 'quote', category: null, content }
   }
   if (text.startsWith('/video ') || text.startsWith('/video\n')) {
     const content = text.slice(7).trim()
-    console.log('[parseMessage] Matched: /video → video + genel')
-    return { type: 'video', category: 'genel', content }
+    console.log('[parseMessage] Matched: /video → video + AI categorization')
+    return { type: 'video', category: null, content }
   }
   if (text.startsWith('/book ') || text.startsWith('/book\n')) {
     const content = text.slice(6).trim()
-    console.log('[parseMessage] Matched: /book → book + genel')
-    return { type: 'book', category: 'genel', content }
+    console.log('[parseMessage] Matched: /book → book + AI categorization')
+    return { type: 'book', category: null, content }
   }
   if (text.startsWith('/cache-kitap ')) {
     const content = text.slice(13).trim()
@@ -298,19 +298,19 @@ AI otomatik yazar/yönetmen/marka bulur:
 • /ag [metin] - Alıntı (Gıda 🍎)
 • /as [metin] - Alıntı (Sağlık 🏥)
 • /ak [metin] - Alıntı (Kişisel 💭)
-• /a [metin] - Alıntı (Genel 📝)
+• /a [metin] - Alıntı (AI kategoriler 🤖)
 
 📖 <b>KEŞİFLER - KİTAP NOTLARI</b>
-• /kg [metin] - Kitap notu (Gıda 🍎)
-• /ks [metin] - Kitap notu (Sağlık 🏥)
-• /kk [metin] - Kitap notu (Kişisel 💭)
-• /b [metin] - Kitap notu (Genel 📝)
+• /bg [metin] - Kitap notu (Gıda 🍎)
+• /bs [metin] - Kitap notu (Sağlık 🏥)
+• /bk [metin] - Kitap notu (Kişisel 💭)
+• /b [metin] - Kitap notu (AI kategoriler 🤖)
 
 🎬 <b>KEŞİFLER - VİDEO NOTLARI</b>
 • /vg [metin] - Video notu (Gıda 🍎)
 • /vs [metin] - Video notu (Sağlık 🏥)
 • /vk [metin] - Video notu (Kişisel 💭)
-• /v [metin] - Video notu (Genel 📝)
+• /v [metin] - Video notu (AI kategoriler 🤖)
 
 🔗 <b>KEŞİFLER - LİNKLER</b>
 • /l [url] - Link ekle (kategori yok)
@@ -325,7 +325,10 @@ AI otomatik yazar/yönetmen/marka bulur:
 💭 Kişisel: Motivasyon, üretkenlik, gelişim
 📝 Genel: Diğer tüm konular
 
-✨ <b>İPUCU:</b> URL gönderirseniz otomatik link olarak algılanır.`,
+✨ <b>İPUCU:</b>
+• Kategori belirtilmezse (/a, /b, /v) AI içeriği analiz edip otomatik kategoriler
+• Kategori belirtilirse (/ag, /bg, /vg) o kategoriye sabitlenir
+• URL gönderirseniz otomatik link olarak algılanır`,
       )
       return NextResponse.json({ ok: true })
     }

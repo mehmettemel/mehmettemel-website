@@ -74,13 +74,14 @@ INSERT INTO valid_categories (note_type, category_id, category_name, icon) VALUE
 | Tip    | Gıda  | Sağlık | Kişisel | Genel |
 | ------ | ----- | ------ | ------- | ----- |
 | Alıntı | `/ag` | `/as`  | `/ak`   | `/a`  |
-| Kitap  | `/kg` | `/ks`  | `/kk`   | `/b`  |
+| Kitap  | `/bg` | `/bs`  | `/bk`   | `/b`  |
 | Video  | `/vg` | `/vs`  | `/vk`   | `/v`  |
 
 **Özellikler:**
 
-- Kategori komuttan gelirse AI kategorileme skip edilir
-- Legacy komutlar (`/quote`, `/book`, `/video`) hala çalışır → 'genel' kategorisi
+- Kategori komuttan gelirse (`/ag`, `/bg`, `/vg`) AI kategorileme skip edilir
+- Kategori belirtilmezse (`/a`, `/b`, `/v`) AI içeriği analiz edip kategoriler
+- Legacy komutlar (`/quote`, `/book`, `/video`) AI kategorileme yapar
 - `/k` liste-kitap olarak korundu (conflict yok)
 
 ### 3. AI Prompts
@@ -201,7 +202,7 @@ git checkout main
 git add .
 git commit -m "Refactor: Unified 4-category system for discoveries (v3.0.0)
 
-- Add category-specific Telegram commands (/ag, /as, /kg, /vg, etc.)
+- Add category-specific Telegram commands (/ag, /as, /bg, /vg, etc.)
 - Update AI prompts to 4 unified categories
 - Remove categories from links
 - Update frontend category displays
@@ -340,7 +341,7 @@ WHERE note_type = 'link' AND category IS NOT NULL;
 /ag Omega-3 sağlıklı
 /as Günde 10.000 adım
 /ak Tutarlılık önemli
-/kg Akdeniz diyeti - Michael Pollan
+/bg Akdeniz diyeti - Michael Pollan
 /vs Uyku çok önemli - Huberman
 /vk Focus is key - Cal Newport
 
@@ -431,7 +432,7 @@ describe('parseMessage with category commands', () => {
 ### Integration Tests
 
 1. Send `/ag` command → verify category=gida
-2. Send `/kg` command → verify category=gida
+2. Send `/bg` command → verify category=gida
 3. Send `/l` command → verify category=NULL
 4. Check frontend filters work
 5. Check legacy commands work
@@ -456,18 +457,18 @@ ALTER TABLE notes ALTER COLUMN category DROP NOT NULL;
 
 ### "Command not recognized"
 
-**Problem:** `/kg` algılanmıyor
+**Problem:** `/bg` algılanmıyor
 
-**Çözüm:** Komut sırası önemli! `/kg` önce, `/k` sonra parse edilmeli.
+**Çözüm:** Komut sırası önemli! `/bg` önce, `/b` sonra parse edilmeli.
 
 ```javascript
 // ✅ DOĞRU sıra
-if (text.startsWith('/kg ')) { ... }
-if (text.startsWith('/k ')) { ... }
+if (text.startsWith('/bg ')) { ... }
+if (text.startsWith('/b ')) { ... }
 
 // ❌ YANLIŞ sıra
-if (text.startsWith('/k ')) { ... }  // /kg'yi yakalar!
-if (text.startsWith('/kg ')) { ... }
+if (text.startsWith('/b ')) { ... }  // /bg'yi yakalar!
+if (text.startsWith('/bg ')) { ... }
 ```
 
 ### "AI categorization failing"
@@ -498,7 +499,7 @@ vercel deploy --force
 
 ## Başarı Kriterleri
 
-- ✅ Yeni komutlar çalışıyor (`/ag`, `/kg`, `/vg`)
+- ✅ Yeni komutlar çalışıyor (`/ag`, `/bg`, `/vg`)
 - ✅ Linkler kategorisiz
 - ✅ Mevcut veriler migrate edilmiş
 - ✅ Veri kaybı yok
@@ -520,7 +521,7 @@ Alıntılar                      Alıntılar
 
 Kitaplar                       Kitaplar
   - 5 tür (genre)                - 4 içerik kategorisi
-  - science, biography...        - /kg, /ks, /kk, /b
+  - science, biography...        - /bg, /bs, /bk, /b
 
 Videolar                       Videolar
   - 4 platform                   - 4 içerik kategorisi
