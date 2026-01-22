@@ -10,11 +10,25 @@ import {
 
 export default function RussianPage() {
   const [selectedCategory, setSelectedCategory] = useState('cumle')
+  const [currentPhrase, setCurrentPhrase] = useState(null)
 
   // Get data based on selected category
   const currentData = useMemo(() => {
     return getRussianByCategory(selectedCategory)
   }, [selectedCategory])
+
+  // Get random phrase
+  const getRandomPhrase = () => {
+    if (currentData.length > 0) {
+      const randomIndex = Math.floor(Math.random() * currentData.length)
+      setCurrentPhrase(currentData[randomIndex])
+    }
+  }
+
+  // Set initial phrase when category changes
+  useMemo(() => {
+    getRandomPhrase()
+  }, [currentData])
 
   return (
     <Container>
@@ -33,7 +47,7 @@ export default function RussianPage() {
             Günlük hayatta kullanılabilecek Rusça kelime ve cümleler
           </p>
           <p className="mt-2 text-sm text-muted-foreground">
-            💡 Kartların sağ üstündeki ℹ️ ikonuna hover et
+            💡 Kartın sağ üstündeki ℹ️ ikonuna hover et
           </p>
         </div>
 
@@ -57,11 +71,21 @@ export default function RussianPage() {
           })}
         </div>
 
-        {/* Cards Grid */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {currentData.map((phrase) => (
-            <RussianCard key={phrase.id} phrase={phrase} />
-          ))}
+        {/* Random Button */}
+        <div className="mb-8 flex justify-center">
+          <button
+            onClick={getRandomPhrase}
+            className="rounded-full bg-primary px-6 py-3 text-base font-medium text-primary-foreground shadow-lg transition-all hover:bg-primary/90 hover:shadow-xl"
+          >
+            🎲 Rastgele
+          </button>
+        </div>
+
+        {/* Single Card Display */}
+        <div className="flex justify-center">
+          <div className="w-full max-w-2xl">
+            {currentPhrase && <RussianCard phrase={currentPhrase} />}
+          </div>
         </div>
       </div>
     </Container>
