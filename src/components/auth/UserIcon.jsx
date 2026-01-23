@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { LoginDialog } from './LoginDialog'
 import { cn } from '@/lib/utils'
+import { ShieldCheck } from 'lucide-react'
 
 export function UserIcon({ className }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -33,12 +34,12 @@ export function UserIcon({ className }) {
       <button
         className={cn(
           'inline-flex h-9 items-center justify-center rounded-md px-3 py-1.5 text-xs font-medium transition-colors',
-          className
+          className,
         )}
         disabled
         aria-label="Admin"
       >
-        <span className="opacity-0">Admin</span>
+        <ShieldCheck className="h-5 w-5 opacity-0" />
       </button>
     )
   }
@@ -57,12 +58,12 @@ export function UserIcon({ className }) {
         onClick={handleClick}
         className={cn(
           'inline-flex h-9 items-center justify-center rounded-md px-3 py-1.5 text-xs font-medium transition-colors',
-          'text-muted-foreground hover:text-foreground hover:bg-secondary/50',
-          className
+          'text-muted-foreground hover:bg-secondary/50 hover:text-foreground',
+          className,
         )}
         aria-label={isAuthenticated ? 'Go to admin' : 'Login'}
       >
-        Admin
+        <ShieldCheck className="h-5 w-5" />
       </button>
       <LoginDialog open={showLogin} onOpenChange={setShowLogin} />
     </>

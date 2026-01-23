@@ -15,7 +15,8 @@ export async function PUT(request, { params }) {
   }
 
   try {
-    const id = parseInt(params.id)
+    const { id: paramId } = await params
+    const id = parseInt(paramId)
     if (isNaN(id)) {
       return NextResponse.json({ error: 'Invalid item ID' }, { status: 400 })
     }
@@ -55,7 +56,8 @@ export async function DELETE(request, { params }) {
   }
 
   try {
-    const id = parseInt(params.id)
+    const { id: paramId } = await params
+    const id = parseInt(paramId)
     if (isNaN(id)) {
       return NextResponse.json({ error: 'Invalid item ID' }, { status: 400 })
     }

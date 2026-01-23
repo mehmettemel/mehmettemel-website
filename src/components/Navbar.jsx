@@ -193,7 +193,7 @@ function MobileNav() {
           >
             İletişim
           </Link>
-          <div className="mt-6 border-t border-border pt-6 space-y-4">
+          <div className="mt-6 space-y-4 border-t border-border pt-6">
             <div className="flex items-center justify-between px-3">
               <span className="text-sm font-medium text-muted-foreground">
                 Admin
@@ -217,15 +217,17 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50">
       <Container>
-        <div className="mx-auto flex max-w-7xl items-center justify-between py-3 md:justify-center">
+        <div className="relative mx-auto flex max-w-7xl items-center justify-between py-3 md:justify-center">
           <div className="flex items-center">
             <NavLink href="/">Ana Sayfa</NavLink>
             <DesktopNav />
-            <div className="hidden md:flex md:items-center md:gap-2">
-              <UserIcon />
-              <AnimatedThemeToggle />
-            </div>
           </div>
+
+          <div className="hidden md:absolute md:right-0 md:flex md:items-center md:gap-2">
+            <UserIcon />
+            <AnimatedThemeToggle />
+          </div>
+
           <MobileNav />
         </div>
       </Container>

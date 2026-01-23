@@ -2,34 +2,34 @@
 
 import { useState } from 'react'
 import { Container } from '@/components/Container'
-import RandomButton from '@/components/RandomButton'
+import { RandomCircleButton } from '@/components/ui/random-circle-button'
 import Link from 'next/link'
 import { ExternalLink } from 'lucide-react'
 import { CategorySidebar } from '@/components/kesifler/CategorySidebar'
 
-// Unified categories for all discovery types
-const categories = [
-  { id: 'all', name: 'Tümü', icon: '📚' },
-  { id: 'gida', name: 'Gıda', icon: '🍎' },
-  { id: 'saglik', name: 'Sağlık', icon: '🏥' },
-  { id: 'kisisel', name: 'Kişisel', icon: '💭' },
-  { id: 'genel', name: 'Genel', icon: '📝' },
+// Note type categories for filtering
+const noteTypeCategories = [
+  { id: 'all', name: 'Tümü', icon: '🎲' },
+  { id: 'quote', name: 'Alıntı', icon: '💭' },
+  { id: 'video', name: 'Video', icon: '🎬' },
+  { id: 'book', name: 'Kitap', icon: '📖' },
+  { id: 'link', name: 'Link', icon: '🔗' },
 ]
 
 export default function RastgelePage() {
   const [note, setNote] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
-  const [selectedCategory, setSelectedCategory] = useState('all')
+  const [selectedNoteType, setSelectedNoteType] = useState('all')
 
   const fetchRandomNote = async () => {
     setLoading(true)
     setError(null)
 
     try {
-      const url = selectedCategory === 'all'
+      const url = selectedNoteType === 'all'
         ? '/api/notes/random'
-        : `/api/notes/random?category=${selectedCategory}`
+        : `/api/notes/random?type=${selectedNoteType}`
 
       const response = await fetch(url)
 
@@ -47,25 +47,27 @@ export default function RastgelePage() {
     }
   }
 
-  const handleCategoryChange = (categoryId) => {
-    setSelectedCategory(categoryId)
-    setNote(null) // Clear current note when changing category
+  const handleNoteTypeChange = (noteTypeId) => {
+    setSelectedNoteType(noteTypeId)
+    setNote(null) // Clear current note when changing note type
   }
 
-  const getCategoryEmoji = (type) => {
+  const getNoteTypeEmoji = (type) => {
     const emojis = {
       quote: '💭',
       video: '🎬',
       book: '📖',
+      link: '🔗',
     }
     return emojis[type] || '📝'
   }
 
-  const getCategoryName = (type) => {
+  const getNoteTypeName = (type) => {
     const names = {
       quote: 'Alıntı',
       video: 'Video',
       book: 'Kitap',
+      link: 'Link',
     }
     return names[type] || 'Not'
   }
@@ -75,6 +77,7 @@ export default function RastgelePage() {
       quote: '/kesifler/alintilar',
       video: '/kesifler/videolar',
       book: '/kesifler/kitaplar',
+      link: '/kesifler/linkler',
     }
     return urls[type] || '/kesifler'
   }
@@ -91,30 +94,29 @@ export default function RastgelePage() {
                 Rastgele Keşif
               </h1>
               <p className="mt-1 text-sm text-muted-foreground">
-                Alıntılar, videolar ve kitaplardan rastgele bir not keşfet
+                Alıntılar, videolar, kitaplar ve linklerden rastgele bir not keşfet
               </p>
             </div>
           </div>
 
-          {/* Category Filter */}
+          {/* Note Type Filter */}
           <CategorySidebar
-            categories={categories}
-            selectedCategory={selectedCategory}
-            onCategoryChange={handleCategoryChange}
+            categories={noteTypeCategories}
+            selectedCategory={selectedNoteType}
+            onCategoryChange={handleNoteTypeChange}
           />
 
           {/* Random Button */}
           <div className="mt-6 flex flex-col items-center gap-3">
-            <RandomButton
+            <RandomCircleButton
               onClick={fetchRandomNote}
-              disabled={loading}
-              text={loading ? '⏳' : '🎲'}
+              loading={loading}
             />
             {!note && !error && (
               <p className="text-xs text-muted-foreground">
-                {selectedCategory === 'all'
+                {selectedNoteType === 'all'
                   ? 'Rastgele bir not görmek için butona tıkla'
-                  : `${categories.find(c => c.id === selectedCategory)?.name} kategorisinden rastgele not`
+                  : `${noteTypeCategories.find(c => c.id === selectedNoteType)?.name} türünden rastgele not`
                 }
               </p>
             )}
@@ -132,20 +134,19 @@ export default function RastgelePage() {
         {note && (
           <div className="animate-[fade-in-up_0.4s_ease-out_forwards]">
             <div className="rounded-lg border border-border bg-card p-6 shadow-sm transition-all hover:border-primary/40 hover:shadow-md">
-              {/* Category Badge */}
+              {/* Note Type Badge */}
               <div className="mb-4 flex flex-wrap items-center gap-2">
                 <Link
                   href={getTypeUrl(note.note_type)}
                   className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary/90"
                 >
-                  <span>{getCategoryEmoji(note.note_type)}</span>
-                  {getCategoryName(note.note_type)}
+                  <span>{getNoteTypeEmoji(note.note_type)}</span>
+                  {getNoteTypeName(note.note_type)}
                 </Link>
 
                 {note.category && (
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
-                    <span>{categories.find(c => c.id === note.category)?.icon || '📝'}</span>
-                    {categories.find(c => c.id === note.category)?.name || note.category}
+                    {note.category}
                   </span>
                 )}
               </div>
@@ -222,14 +223,11 @@ export default function RastgelePage() {
             </div>
 
             {/* Try Again Button */}
-            <div className="mt-6 text-center">
-              <button
+            <div className="mt-6 flex justify-center">
+              <RandomCircleButton
                 onClick={fetchRandomNote}
-                disabled={loading}
-                className="rounded-lg bg-secondary px-6 py-2.5 text-sm font-medium text-secondary-foreground transition-colors hover:bg-secondary/80 disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                {loading ? 'Yükleniyor...' : 'Başka Bir Tane 🎲'}
-              </button>
+                loading={loading}
+              />
             </div>
           </div>
         )}

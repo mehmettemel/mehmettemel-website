@@ -8,33 +8,55 @@ if (!process.env.DATABASE_URL) {
 const sql = neon(process.env.DATABASE_URL)
 
 /**
- * GET /api/notes/random?category=gida
- * Get a random note from quote, video, or book types
- * Optionally filter by category (gida, saglik, kisisel, genel)
+ * GET /api/notes/random?type=quote&category=gida
+ * Get a random note
+ * Optionally filter by note_type (quote, video, book, link) and/or category (gida, saglik, kisisel, genel)
+ * @param {string} type - Optional note_type filter
  * @param {string} category - Optional category filter
  * @returns {Promise<Object>} Random note
  */
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url)
+    const noteType = searchParams.get('type')
     const category = searchParams.get('category')
 
     let result
 
-    if (category && category !== 'all') {
-      // Get random note filtered by category
+    // Filter by both note_type and category
+    if (noteType && noteType !== 'all' && category && category !== 'all') {
       result = await sql`
         SELECT * FROM notes
-        WHERE note_type IN ('quote', 'video', 'book')
+        WHERE note_type = ${noteType}
         AND category = ${category}
         ORDER BY RANDOM()
         LIMIT 1
       `
-    } else {
-      // Get random note from all categories
+    }
+    // Filter by note_type only
+    else if (noteType && noteType !== 'all') {
       result = await sql`
         SELECT * FROM notes
-        WHERE note_type IN ('quote', 'video', 'book')
+        WHERE note_type = ${noteType}
+        ORDER BY RANDOM()
+        LIMIT 1
+      `
+    }
+    // Filter by category only
+    else if (category && category !== 'all') {
+      result = await sql`
+        SELECT * FROM notes
+        WHERE note_type IN ('quote', 'video', 'book', 'link')
+        AND category = ${category}
+        ORDER BY RANDOM()
+        LIMIT 1
+      `
+    }
+    // No filters - all notes
+    else {
+      result = await sql`
+        SELECT * FROM notes
+        WHERE note_type IN ('quote', 'video', 'book', 'link')
         ORDER BY RANDOM()
         LIMIT 1
       `
