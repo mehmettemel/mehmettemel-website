@@ -85,6 +85,7 @@ async function sendTelegramMessage(chatId, text) {
 
 /**
  * Parse message to determine type and content
+ * NEW SIMPLE SYSTEM: Only 4 commands, AI handles ALL categorization
  * @param {string} text - Message text
  * @returns {Object|null} { type, content } or null if needs AI detection
  */
@@ -93,12 +94,6 @@ function parseMessage(text) {
   console.log('[parseMessage] Input text:', JSON.stringify(text))
   console.log('[parseMessage] Text length:', text.length)
   console.log('[parseMessage] First 10 chars:', text.substring(0, 10))
-  console.log('[parseMessage] Starts with "/k "?', text.startsWith('/k '))
-  console.log('[parseMessage] Equals "/k"?', text === '/k')
-
-  // CLEAN COMMAND STRUCTURE - NO CONFLICTS
-  // Commands are organized by purpose, not length
-  // IMPORTANT: Specific commands (with category) must come BEFORE generic ones
 
   // LIST COMMANDS (Okuma/İzleme/Alışveriş Listesi)
   // These go to list_items table
@@ -112,12 +107,9 @@ function parseMessage(text) {
     console.log('[parseMessage] Matched: /u → list-urun')
     return { type: 'list-urun', content }
   }
-  // /k must come AFTER category-specific book commands (/kg, /ks, /kk)
   if (text.startsWith('/k ') || text === '/k') {
     const content = text.slice(2).trim()
-    console.log('[parseMessage] ✅ MATCHED: /k → list-kitap')
-    console.log('[parseMessage] Content:', content)
-    console.log('==== PARSE MESSAGE END ====')
+    console.log('[parseMessage] Matched: /k → list-kitap')
     return { type: 'list-kitap', content }
   }
 
@@ -126,135 +118,50 @@ function parseMessage(text) {
   if (text.startsWith('/tarif ') || text === '/tarif' || text.startsWith('/tarif\n')) {
     const content = text.replace(/^\/tarif[\s\n]*/, '').trim()
     console.log('[parseMessage] Matched: /tarif → recipe')
-    console.log('[parseMessage] Content:', content)
     return { type: 'recipe', content }
   }
 
-  // KEŞİFLER COMMANDS (Notlar/İçerik)
-  // These go to notes table
-  // Category-specific commands BEFORE generic ones
+  // ========================================
+  // NEW SIMPLE KEŞİFLER COMMANDS
+  // Type is manual, category is AI-determined
+  // ========================================
 
-  // QUOTE COMMANDS (with categories)
-  if (text.startsWith('/ag ')) {
-    const content = text.slice(4).trim()
-    console.log('[parseMessage] Matched: /ag → quote + gida')
-    return { type: 'quote', category: 'gida', content }
-  }
-  if (text.startsWith('/as ')) {
-    const content = text.slice(4).trim()
-    console.log('[parseMessage] Matched: /as → quote + saglik')
-    return { type: 'quote', category: 'saglik', content }
-  }
-  if (text.startsWith('/ak ')) {
-    const content = text.slice(4).trim()
-    console.log('[parseMessage] Matched: /ak → quote + kisisel')
-    return { type: 'quote', category: 'kisisel', content }
-  }
-  if (text.startsWith('/a ')) {
-    const content = text.slice(3).trim()
-    console.log('[parseMessage] Matched: /a → quote + AI categorization')
-    return { type: 'quote', category: null, content }
-  }
-
-  // BOOK NOTE COMMANDS (with categories)
-  if (text.startsWith('/bg ')) {
-    const content = text.slice(4).trim()
-    console.log('[parseMessage] Matched: /bg → book + gida')
-    return { type: 'book', category: 'gida', content }
-  }
-  if (text.startsWith('/bs ')) {
-    const content = text.slice(4).trim()
-    console.log('[parseMessage] Matched: /bs → book + saglik')
-    return { type: 'book', category: 'saglik', content }
-  }
-  if (text.startsWith('/bk ')) {
-    const content = text.slice(4).trim()
-    console.log('[parseMessage] Matched: /bk → book + kisisel')
-    return { type: 'book', category: 'kisisel', content }
-  }
-  if (text.startsWith('/b ') || text.startsWith('/b\n')) {
-    const content = text.slice(3).trim()
-    console.log('[parseMessage] Matched: /b → book + AI categorization')
+  // BOOK NOTES (AI categorizes: gıda/sağlık/kişisel/genel)
+  if (text.startsWith('>kitap ') || text.startsWith('>kitap\n')) {
+    const content = text.replace(/^>kitap[\s\n]*/, '').trim()
+    console.log('[parseMessage] ✅ Matched: >kitap → book (AI will categorize)')
     return { type: 'book', category: null, content }
   }
 
-  // VIDEO NOTE COMMANDS (with categories)
-  if (text.startsWith('/vg ')) {
-    const content = text.slice(4).trim()
-    console.log('[parseMessage] Matched: /vg → video + gida')
-    return { type: 'video', category: 'gida', content }
-  }
-  if (text.startsWith('/vs ')) {
-    const content = text.slice(4).trim()
-    console.log('[parseMessage] Matched: /vs → video + saglik')
-    return { type: 'video', category: 'saglik', content }
-  }
-  if (text.startsWith('/vk ')) {
-    const content = text.slice(4).trim()
-    console.log('[parseMessage] Matched: /vk → video + kisisel')
-    return { type: 'video', category: 'kisisel', content }
-  }
-  if (text.startsWith('/v ') || text.startsWith('/v\n')) {
-    const content = text.slice(3).trim()
-    console.log('[parseMessage] Matched: /v → video + AI categorization')
+  // VIDEO NOTES (AI categorizes: gıda/sağlık/kişisel/genel)
+  if (text.startsWith('>video ') || text.startsWith('>video\n')) {
+    const content = text.replace(/^>video[\s\n]*/, '').trim()
+    console.log('[parseMessage] ✅ Matched: >video → video (AI will categorize)')
     return { type: 'video', category: null, content }
   }
 
-  // LINK COMMAND (NO category)
-  if (text.startsWith('/l ')) {
-    const content = text.slice(3).trim()
-    console.log('[parseMessage] Matched: /l → link')
-    return { type: 'link', category: null, content }
-  }
-
-  // LEGACY LONG COMMANDS (backward compatibility)
-  if (text.startsWith('/link ')) {
-    const content = text.slice(6).trim()
-    console.log('[parseMessage] Matched: /link → link')
-    return { type: 'link', category: null, content }
-  }
-  if (text.startsWith('/quote ') || text.startsWith('/alinti ')) {
-    const cmd = text.startsWith('/quote') ? '/quote' : '/alinti'
-    const content = text.slice(cmd.length + 1).trim()
-    console.log(`[parseMessage] Matched: ${cmd} → quote + AI categorization`)
+  // QUOTES (AI categorizes: gıda/sağlık/kişisel/genel)
+  if (text.startsWith('>alinti ') || text.startsWith('>alinti\n')) {
+    const content = text.replace(/^>alinti[\s\n]*/, '').trim()
+    console.log('[parseMessage] ✅ Matched: >alinti → quote (AI will categorize)')
     return { type: 'quote', category: null, content }
   }
-  if (text.startsWith('/video ') || text.startsWith('/video\n')) {
-    const content = text.slice(7).trim()
-    console.log('[parseMessage] Matched: /video → video + AI categorization')
-    return { type: 'video', category: null, content }
-  }
-  if (text.startsWith('/book ') || text.startsWith('/book\n')) {
-    const content = text.slice(6).trim()
-    console.log('[parseMessage] Matched: /book → book + AI categorization')
-    return { type: 'book', category: null, content }
-  }
-  if (text.startsWith('/cache-kitap ')) {
-    const content = text.slice(13).trim()
-    console.log('[parseMessage] Matched: /cache-kitap → list-kitap')
-    return { type: 'list-kitap', content }
-  }
-  if (text.startsWith('/cache-film ')) {
-    const content = text.slice(12).trim()
-    console.log('[parseMessage] Matched: /cache-film → list-film')
-    return { type: 'list-film', content }
-  }
-  if (text.startsWith('/cache-urun ')) {
-    const content = text.slice(12).trim()
-    console.log('[parseMessage] Matched: /cache-urun → list-urun')
-    return { type: 'list-urun', content }
+
+  // LINKS (no categorization)
+  if (text.startsWith('>link ')) {
+    const content = text.replace(/^>link\s*/, '').trim()
+    console.log('[parseMessage] ✅ Matched: >link → link')
+    return { type: 'link', category: null, content }
   }
 
   // Auto-detect URL as link
   if (isURL(text)) {
-    return {
-      type: 'link',
-      category: null,
-      content: text.trim(),
-    }
+    console.log('[parseMessage] Auto-detected URL → link')
+    return { type: 'link', category: null, content: text.trim() }
   }
 
-  // Need AI detection
+  // Default: treat as quote with AI categorization
+  console.log('[parseMessage] No command found, defaulting to quote + AI categorization')
   return null
 }
 
@@ -297,7 +204,7 @@ export async function POST(request) {
     if (text === '/help') {
       await sendTelegramMessage(
         chatId,
-        `🤖 <b>Bot Komutları</b>
+        `🤖 <b>Bot Komutları</b> - YENİ BASİT SİSTEM
 
 📚 <b>CACHE (Okuma/İzleme/Alışveriş Listesi)</b>
 AI otomatik yazar/yönetmen/marka bulur:
@@ -308,45 +215,42 @@ AI otomatik yazar/yönetmen/marka bulur:
 🍳 <b>TARİFLER</b>
 AI tüm detayları analiz edip düzenler:
 • /tarif [tarif metni] - Tarif ekle
-  Örnek: /tarif Patates kızartması için...
   AI otomatik malzemeleri, yapılışı, süreyi analiz eder
 
-📝 <b>KEŞİFLER - ALINTILAR</b>
-• /ag [metin] - Alıntı (Gıda 🍎)
-• /as [metin] - Alıntı (Sağlık 🏥)
-• /ak [metin] - Alıntı (Kişisel 💭)
-• /a [metin] - Alıntı (AI kategoriler 🤖)
+✨ <b>KEŞİFLER - YENİ SİSTEM (AI Otomatik Kategori)</b>
+Sadece içerik tipini belirtin, AI kategoriyi (Gıda/Sağlık/Kişisel/Genel) otomatik bulur:
 
-📖 <b>KEŞİFLER - KİTAP NOTLARI</b>
-• /bg [metin] - Kitap notu (Gıda 🍎)
-• /bs [metin] - Kitap notu (Sağlık 🏥)
-• /bk [metin] - Kitap notu (Kişisel 💭)
-• /b [metin] - Kitap notu (AI kategoriler 🤖)
+📖 <b>>kitap</b> [metin]
+  Kitap notları için
+  Örnek: >kitap İki düşünce sistemi var... -Daniel Kahneman
 
-🎬 <b>KEŞİFLER - VİDEO NOTLARI</b>
-• /vg [metin] - Video notu (Gıda 🍎)
-• /vs [metin] - Video notu (Sağlık 🏥)
-• /vk [metin] - Video notu (Kişisel 💭)
-• /v [metin] - Video notu (AI kategoriler 🤖)
+🎬 <b>>video</b> [metin]
+  Video/podcast notları için
+  Örnek: >video Andrew Huberman sabah rutini...
 
-🔗 <b>KEŞİFLER - LİNKLER</b>
-• /l [url] - Link ekle (kategori yok)
+💭 <b>>alinti</b> [metin]
+  Alıntılar için
+  Örnek: >alinti Sauna 4x per week = 40% decrease in mortality
+
+🔗 <b>>link</b> [url]
+  Web linkleri için
+  Örnek: >link https://example.com
 
 📊 <b>DİĞER</b>
 • /stats - İstatistikler
 • /help - Bu mesaj
 
-💡 <b>KATEGORİLER:</b>
+💡 <b>AI OTOM ATİK KATEGORİLER:</b>
 🍎 Gıda: Yemek, beslenme, tarif
-🏥 Sağlık: Fitness, bağışıklık, wellness
+🏥 Sağlık: Fitness, bağışıklık, wellness, spor
 💭 Kişisel: Motivasyon, üretkenlik, gelişim
 📝 Genel: Diğer tüm konular
 
-✨ <b>İPUCU:</b>
-• Kategori belirtilmezse (/a, /b, /v) AI içeriği analiz edip otomatik kategoriler
-• Kategori belirtilirse (/ag, /bg, /vg) o kategoriye sabitlenir
-• URL gönderirseniz otomatik link olarak algılanır
-• /tarif ile tarif eklerken Gemini AI tüm detayları analiz edip düzenler`,
+✨ <b>AVANTAJLAR:</b>
+• Basit ve hızlı - sadece 4 komut!
+• AI her zaman doğru kategoriyi bulur
+• Kategori hatası riski YOK
+• Tek yapmam gereken: İçerik tipini belirtmek (kitap/video/alıntı/link)`,
       )
       return NextResponse.json({ ok: true })
     }
@@ -475,60 +379,26 @@ mehmettemel.com/listeler/tarif`,
     }
 
     // Categorize content with Gemini AI
-    // If category is already specified, skip AI categorization (but still use AI for metadata extraction)
+    // AI ALWAYS determines the category (gıda/sağlık/kişisel/genel)
+    console.log('🤖 [TELEGRAM] Using full AI categorization for:', parsed.type)
+
     let categorizedData
 
-    if (parsed.category !== undefined && parsed.category !== null) {
-      // Category specified by command - use AI only for metadata extraction
-      console.log('📝 [TELEGRAM] Category pre-specified, using minimal AI processing')
-
-      switch (parsed.type) {
-        case 'link':
-          // Links don't need AI at all
-          categorizedData = await handleLink(parsed.content)
-          break
-        case 'quote':
-          // For quotes, still use AI to extract author/source but keep the specified category
-          const quoteData = await handleNote(parsed.content)
-          categorizedData = { ...quoteData, category: parsed.category }
-          break
-        case 'video':
-          // For videos, still use AI for parsing but override category
-          const videoData = await handleVideo(parsed.content)
-          categorizedData = Array.isArray(videoData)
-            ? videoData.map(note => ({ ...note, category: parsed.category }))
-            : { ...videoData, category: parsed.category }
-          break
-        case 'book':
-          // For books, still use AI for parsing but override category
-          const bookData = await handleBook(parsed.content)
-          categorizedData = Array.isArray(bookData)
-            ? bookData.map(note => ({ ...note, category: parsed.category }))
-            : { ...bookData, category: parsed.category }
-          break
-        default:
-          throw new Error(`Unknown note type: ${parsed.type}`)
-      }
-    } else {
-      // No category specified - use full AI categorization
-      console.log('🤖 [TELEGRAM] No category specified, using full AI categorization')
-
-      switch (parsed.type) {
-        case 'link':
-          categorizedData = await handleLink(parsed.content)
-          break
-        case 'quote':
-          categorizedData = await handleNote(parsed.content)
-          break
-        case 'video':
-          categorizedData = await handleVideo(parsed.content)
-          break
-        case 'book':
-          categorizedData = await handleBook(parsed.content)
-          break
-        default:
-          throw new Error(`Unknown note type: ${parsed.type}`)
-      }
+    switch (parsed.type) {
+      case 'link':
+        categorizedData = await handleLink(parsed.content)
+        break
+      case 'quote':
+        categorizedData = await handleNote(parsed.content)
+        break
+      case 'video':
+        categorizedData = await handleVideo(parsed.content)
+        break
+      case 'book':
+        categorizedData = await handleBook(parsed.content)
+        break
+      default:
+        throw new Error(`Unknown note type: ${parsed.type}`)
     }
 
     // Validate categorizedData
