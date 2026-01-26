@@ -14,6 +14,7 @@ const researchCategories = [
   { id: 'gidalar', name: 'Gıdalar', icon: '🍎' },
   { id: 'besinler', name: 'Besinler', icon: '💊' },
   { id: 'mekanizmalar', name: 'Mekanizmalar', icon: '🧬' },
+  { id: 'kitaplar', name: 'Kitaplar', icon: '📚' },
 ]
 
 // Animation variants for the container
