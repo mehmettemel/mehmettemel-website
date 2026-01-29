@@ -39,6 +39,14 @@ const discoveryTypes = [
     href: '/kesifler/kitaplar',
     type: 'book',
   },
+  {
+    title: 'Rusça Test',
+    emoji: '📝',
+    description: 'Rusça bilginizi test edin.',
+    href: '/kesifler/rusca-test',
+    type: 'russian-test',
+    staticCount: '96 kelime',
+  },
 ]
 
 export default async function Kesifler() {
@@ -59,9 +67,10 @@ export default async function Kesifler() {
           </p>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {discoveryTypes.map((item) => {
             const count = stats.byType[item.type] || 0
+            const displayText = item.staticCount || `${count} not`
 
             return (
               <Link
@@ -83,7 +92,7 @@ export default async function Kesifler() {
                   </div>
                   <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
                     <span className="rounded-full bg-primary/10 px-2 py-1 font-medium text-primary">
-                      {count} not
+                      {displayText}
                     </span>
                   </div>
                 </div>
