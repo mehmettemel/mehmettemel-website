@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { russianData } from '@/data/russian'
+import { russianPhrases } from '@/data/russian'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -61,12 +61,12 @@ export default function RussianQuiz() {
 
   // Component mount olduğunda soruları oluştur
   useEffect(() => {
-    setQuestions(generateQuestions(russianData))
+    setQuestions(generateQuestions(russianPhrases))
   }, [])
 
   // Yeni test başlat
   const restartQuiz = () => {
-    setQuestions(generateQuestions(russianData))
+    setQuestions(generateQuestions(russianPhrases))
     setCurrentQuestion(0)
     setScore(0)
     setSelectedAnswer(null)
