@@ -174,10 +174,7 @@ export default function RussianQuiz() {
             <div className="mb-2 text-sm text-muted-foreground">
               Aşağıdaki kelimenin Türkçe karşılığı nedir?
             </div>
-            <div className="mb-2 text-4xl font-bold">{current.question}</div>
-            <div className="text-sm text-muted-foreground">
-              (okunuş: {current.pronunciation})
-            </div>
+            <div className="text-4xl font-bold">{current.question}</div>
           </div>
 
           {/* Options */}
