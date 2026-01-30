@@ -19,8 +19,6 @@ import {
 const kesiflerItems = [
   { href: '/kesifler/linkler', label: 'Linkler', emoji: '🔗' },
   { href: '/kesifler/alintilar', label: 'Alıntılar', emoji: '💭' },
-  { href: '/kesifler/videolar', label: 'Videolar', emoji: '🎬' },
-  { href: '/kesifler/kitaplar', label: 'Kitaplar', emoji: '📖' },
   { href: '/kesifler/rusca-test', label: 'Rusça Test', emoji: '📝' },
   { href: '/kesifler/rastgele', label: 'Rastgele', emoji: '🎲' },
 ]

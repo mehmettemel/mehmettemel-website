@@ -7,7 +7,7 @@ export const revalidate = 60
 export const metadata = {
   title: 'Keşifler | Mehmet Temel',
   description:
-    'İnternette bulduğum faydalı kaynaklar, alıntılar, video ve kitap notları.',
+    'İnternette bulduğum faydalı kaynaklar ve alıntılar.',
 }
 
 const discoveryTypes = [
@@ -24,20 +24,6 @@ const discoveryTypes = [
     description: 'İlham veren alıntılar ve notlar.',
     href: '/kesifler/alintilar',
     type: 'quote',
-  },
-  {
-    title: 'Videolar',
-    emoji: '🎬',
-    description: 'Video notları ve öğrendiklerim.',
-    href: '/kesifler/videolar',
-    type: 'video',
-  },
-  {
-    title: 'Kitaplar',
-    emoji: '📖',
-    description: 'Kitaplardan aldığım notlar.',
-    href: '/kesifler/kitaplar',
-    type: 'book',
   },
   {
     title: 'Rusça Test',
@@ -67,7 +53,7 @@ export default async function Kesifler() {
           </p>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {discoveryTypes.map((item) => {
             const count = stats.byType[item.type] || 0
             const displayText = item.staticCount || `${count} not`
