@@ -21,6 +21,7 @@ const kesiflerItems = [
   { href: '/kesifler/alintilar', label: 'Alıntılar', emoji: '💭' },
   { href: '/kesifler/videolar', label: 'Videolar', emoji: '🎬' },
   { href: '/kesifler/kitaplar', label: 'Kitaplar', emoji: '📖' },
+  { href: '/kesifler/rusca-test', label: 'Rusça Test', emoji: '📝' },
   { href: '/kesifler/rastgele', label: 'Rastgele', emoji: '🎲' },
 ]
 
@@ -35,7 +36,7 @@ function NavLink({ href, children }) {
   return (
     <Link
       href={href}
-      className="inline-flex h-9 items-center justify-center rounded-md px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+      className="inline-flex h-9 items-center justify-center rounded-md px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:scale-95"
     >
       {children}
     </Link>
@@ -55,12 +56,12 @@ function DesktopNav() {
             Keşifler
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[200px] gap-1 p-2">
+            <ul className="grid w-[220px] gap-1 p-2">
               <li>
                 <NavigationMenuLink asChild>
                   <Link
                     href="/kesifler"
-                    className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold transition-colors hover:bg-secondary"
+                    className="flex items-center gap-2 rounded-md px-3 py-2.5 text-sm font-semibold transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset active:bg-secondary/80"
                   >
                     <span>📂</span>
                     <span>Tümü</span>
@@ -72,7 +73,7 @@ function DesktopNav() {
                   <NavigationMenuLink asChild>
                     <Link
                       href={item.href}
-                      className="flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors hover:bg-secondary"
+                      className="flex items-center gap-2 rounded-md px-3 py-2.5 text-sm transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset active:bg-secondary/80"
                     >
                       <span>{item.emoji}</span>
                       <span>{item.label}</span>
@@ -89,12 +90,12 @@ function DesktopNav() {
             Listeler
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[200px] gap-1 p-2">
+            <ul className="grid w-[220px] gap-1 p-2">
               <li>
                 <NavigationMenuLink asChild>
                   <Link
                     href="/listeler"
-                    className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold transition-colors hover:bg-secondary"
+                    className="flex items-center gap-2 rounded-md px-3 py-2.5 text-sm font-semibold transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset active:bg-secondary/80"
                   >
                     <span>📋</span>
                     <span>Tümü</span>
@@ -106,7 +107,7 @@ function DesktopNav() {
                   <NavigationMenuLink asChild>
                     <Link
                       href={item.href}
-                      className="flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors hover:bg-secondary"
+                      className="flex items-center gap-2 rounded-md px-3 py-2.5 text-sm transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset active:bg-secondary/80"
                     >
                       <span>{item.emoji}</span>
                       <span>{item.label}</span>
@@ -133,55 +134,71 @@ function MobileNav() {
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger className="-m-2 rounded-lg p-2 text-muted-foreground transition hover:text-foreground md:hidden">
-        <Menu className="h-5 w-5" />
+      <SheetTrigger className="-m-2 rounded-lg p-2 text-muted-foreground transition hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:hidden">
+        <Menu className="h-6 w-6" />
         <span className="sr-only">Toggle menu</span>
       </SheetTrigger>
-      <SheetContent side="right" className="w-56">
-        <nav className="mt-8 flex flex-col gap-1">
+      <SheetContent side="right" className="w-72 sm:w-80">
+        <nav className="mt-6 flex flex-col gap-0.5">
           <Link
             href="/"
             onClick={closeSheet}
-            className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary/50 hover:text-foreground"
+            className="touch-manipulation rounded-lg px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset active:bg-secondary"
           >
             Ana Sayfa
           </Link>
           <Link
             href="/incelemeler"
             onClick={closeSheet}
-            className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary/50 hover:text-foreground"
+            className="touch-manipulation rounded-lg px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset active:bg-secondary"
           >
             İncelemeler
           </Link>
 
           {/* Keşifler Section */}
-          <div className="mt-2 mb-1 px-3 text-xs font-semibold text-muted-foreground/60">
+          <div className="mt-4 mb-1 border-t border-border pt-4 px-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground/70">
             Keşifler
           </div>
+          <Link
+            href="/kesifler"
+            onClick={closeSheet}
+            className="touch-manipulation flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-muted-foreground transition-colors hover:bg-secondary/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset active:bg-secondary"
+          >
+            <span>📂</span>
+            <span>Tümü</span>
+          </Link>
           {kesiflerItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={closeSheet}
-              className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary/50 hover:text-foreground"
+              className="touch-manipulation flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset active:bg-secondary"
             >
-              <span>{item.emoji}</span>
+              <span className="text-base">{item.emoji}</span>
               <span>{item.label}</span>
             </Link>
           ))}
 
           {/* Listeler Section */}
-          <div className="mt-2 mb-1 px-3 text-xs font-semibold text-muted-foreground/60">
+          <div className="mt-4 mb-1 border-t border-border pt-4 px-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground/70">
             Listeler
           </div>
+          <Link
+            href="/listeler"
+            onClick={closeSheet}
+            className="touch-manipulation flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-muted-foreground transition-colors hover:bg-secondary/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset active:bg-secondary"
+          >
+            <span>📋</span>
+            <span>Tümü</span>
+          </Link>
           {listelerItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={closeSheet}
-              className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary/50 hover:text-foreground"
+              className="touch-manipulation flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset active:bg-secondary"
             >
-              <span>{item.emoji}</span>
+              <span className="text-base">{item.emoji}</span>
               <span>{item.label}</span>
             </Link>
           ))}
@@ -189,18 +206,18 @@ function MobileNav() {
           <Link
             href="/iletisim"
             onClick={closeSheet}
-            className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary/50 hover:text-foreground"
+            className="touch-manipulation rounded-lg px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset active:bg-secondary"
           >
             İletişim
           </Link>
-          <div className="mt-6 space-y-4 border-t border-border pt-6">
-            <div className="flex items-center justify-between px-3">
+          <div className="mt-6 space-y-3 border-t border-border pt-6">
+            <div className="flex items-center justify-between rounded-lg px-4 py-3 hover:bg-secondary/30">
               <span className="text-sm font-medium text-muted-foreground">
                 Admin
               </span>
               <UserIcon />
             </div>
-            <div className="flex items-center justify-between px-3">
+            <div className="flex items-center justify-between rounded-lg px-4 py-3 hover:bg-secondary/30">
               <span className="text-sm font-medium text-muted-foreground">
                 Tema
               </span>
@@ -215,7 +232,7 @@ function MobileNav() {
 
 export function Navbar() {
   return (
-    <header className="sticky top-0 z-50">
+    <header className="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
       <Container>
         <div className="relative mx-auto flex max-w-7xl items-center justify-between py-3 md:justify-center">
           <div className="flex items-center">

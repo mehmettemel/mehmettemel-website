@@ -212,6 +212,19 @@
     outline: none;
   }
 
+  /* Touch optimization for mobile */
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Better mobile scrolling */
+  @media (max-width: 768px) {
+    body {
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+
   /* Blog Prose Custom Colors - Light Mode */
   .prose {
     --tw-prose-body: #6b705c;
