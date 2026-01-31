@@ -10,7 +10,7 @@ const sql = neon(process.env.DATABASE_URL)
 /**
  * GET /api/notes/random?type=quote&category=gida
  * Get a random note
- * Optionally filter by note_type (quote, video, book, link) and/or category (gida, saglik, kisisel, genel)
+ * Optionally filter by note_type (quote, link) and/or category (gida, saglik, kisisel, genel)
  * @param {string} type - Optional note_type filter
  * @param {string} category - Optional category filter
  * @returns {Promise<Object>} Random note
@@ -46,7 +46,7 @@ export async function GET(request) {
     else if (category && category !== 'all') {
       result = await sql`
         SELECT * FROM notes
-        WHERE note_type IN ('quote', 'video', 'book', 'link')
+        WHERE note_type IN ('quote', 'link')
         AND category = ${category}
         ORDER BY RANDOM()
         LIMIT 1
@@ -56,7 +56,7 @@ export async function GET(request) {
     else {
       result = await sql`
         SELECT * FROM notes
-        WHERE note_type IN ('quote', 'video', 'book', 'link')
+        WHERE note_type IN ('quote', 'link')
         ORDER BY RANDOM()
         LIMIT 1
       `

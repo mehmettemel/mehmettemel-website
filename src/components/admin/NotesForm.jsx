@@ -23,8 +23,6 @@ import {
 const NOTE_TYPES = [
   { value: 'link', label: 'Link' },
   { value: 'quote', label: 'Quote' },
-  { value: 'video', label: 'Video' },
-  { value: 'book', label: 'Book' },
 ]
 
 const CATEGORIES = [
@@ -96,8 +94,8 @@ export function NotesForm({ note, onSuccess }) {
   }
 
   const showCategory = formData.type !== 'link'
-  const showUrl = formData.type === 'link' || formData.type === 'video'
-  const showSource = formData.type === 'video' || formData.type === 'book'
+  const showUrl = formData.type === 'link'
+  const showSource = false // No longer needed (video/book removed)
   const showAuthor = formData.type !== 'link'
 
   return (

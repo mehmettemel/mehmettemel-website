@@ -21,16 +21,6 @@ const typeConfig = {
     label: 'Alıntı',
     href: '/kesifler/alintilar',
   },
-  video: {
-    icon: '🎬',
-    label: 'Video',
-    href: '/kesifler/videolar',
-  },
-  book: {
-    icon: '📖',
-    label: 'Kitap',
-    href: '/kesifler/kitaplar',
-  },
 }
 
 const categoryLabels = {
@@ -44,28 +34,11 @@ const categoryLabels = {
   gida: 'Gıda',
   seyahat: 'Seyahat',
   genel: 'Genel',
-  // Video categories
-  youtube: 'YouTube',
-  documentary: 'Belgesel',
-  course: 'Kurs',
-  podcast: 'Podcast',
-  // Book categories
-  science: 'Bilim',
-  selfhelp: 'Kişisel Gelişim',
-  biography: 'Biyografi',
-  fiction: 'Kurgu',
-  health: 'Sağlık',
 }
 
 function getDisplayText(note) {
   if (note.note_type === 'link') {
     return note.title || note.text
-  }
-  if (note.note_type === 'book' || note.note_type === 'video') {
-    const source = note.source || note.author
-    if (source) {
-      return `${note.text?.substring(0, 40)}... - ${source}`
-    }
   }
   // Quote or fallback
   if (note.text) {

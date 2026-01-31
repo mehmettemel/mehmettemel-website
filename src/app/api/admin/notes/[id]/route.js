@@ -30,8 +30,6 @@ export async function PUT(request, { params }) {
     revalidatePath('/kesifler')
     revalidatePath('/kesifler/linkler')
     revalidatePath('/kesifler/alintilar')
-    revalidatePath('/kesifler/videolar')
-    revalidatePath('/kesifler/kitaplar')
 
     return NextResponse.json({ note })
   } catch (error) {
@@ -77,10 +75,6 @@ export async function DELETE(request, { params }) {
         revalidatePath('/kesifler/linkler')
       } else if (existingNote.note_type === 'quote') {
         revalidatePath('/kesifler/alintilar')
-      } else if (existingNote.note_type === 'video') {
-        revalidatePath('/kesifler/videolar')
-      } else if (existingNote.note_type === 'book') {
-        revalidatePath('/kesifler/kitaplar')
       }
     }
 

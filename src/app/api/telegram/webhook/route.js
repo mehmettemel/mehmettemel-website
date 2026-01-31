@@ -8,8 +8,6 @@ import {
 import {
   handleLink,
   handleNote,
-  handleVideo,
-  handleBook,
   handleListItemWithAI,
   handleRecipe,
   isURL,
@@ -126,20 +124,6 @@ function parseMessage(text) {
   // Type is manual, category is AI-determined
   // ========================================
 
-  // BOOK NOTES (AI categorizes: gıda/sağlık/kişisel/genel)
-  if (text.startsWith('>ki ') || text.startsWith('>ki\n')) {
-    const content = text.replace(/^>ki[\s\n]*/, '').trim()
-    console.log('[parseMessage] ✅ Matched: >ki → book (AI will categorize)')
-    return { type: 'book', category: null, content }
-  }
-
-  // VIDEO NOTES (AI categorizes: gıda/sağlık/kişisel/genel)
-  if (text.startsWith('>vi ') || text.startsWith('>vi\n')) {
-    const content = text.replace(/^>vi[\s\n]*/, '').trim()
-    console.log('[parseMessage] ✅ Matched: >vi → video (AI will categorize)')
-    return { type: 'video', category: null, content }
-  }
-
   // QUOTES (AI categorizes: gıda/sağlık/kişisel/genel)
   if (text.startsWith('>al ') || text.startsWith('>al\n')) {
     const content = text.replace(/^>al[\s\n]*/, '').trim()
@@ -219,12 +203,6 @@ AI otomatik yazar/yönetmen/marka bulur:
 ✨ <b>KEŞİFLER - ULTRA KISA (AI Otomatik Kategori)</b>
 Sadece 2 karakter! AI kategoriyi otomatik bulur:
 
-📖 <b>>ki</b> [metin] - Kitap notları
-  Örnek: >ki İki düşünce sistemi var... -Daniel Kahneman
-
-🎬 <b>>vi</b> [metin] - Video/Podcast
-  Örnek: >vi Huberman sabah rutini...
-
 💭 <b>>al</b> [metin] - Alıntılar
   Örnek: >al Sauna 40% mortality decrease
 
@@ -238,9 +216,9 @@ Sadece 2 karakter! AI kategoriyi otomatik bulur:
 💡 <b>AI KATEGORİLER:</b>
 🍎 Gıda 🏥 Sağlık 💭 Kişisel 📝 Genel
 
-✨ <b>NEDEN >ki >vi >al >li?</b>
+✨ <b>NEDEN >al >li?</b>
 • Ultra hızlı - 2 karakter!
-• Hatırlama kolay (>kitap, >video, >alıntı, >link)
+• Hatırlama kolay (>alıntı, >link)
 • AI doğru kategoriyi her zaman bulur
 • Sıfır kategori hatası`,
       )
@@ -258,9 +236,7 @@ Sadece 2 karakter! AI kategoriyi otomatik bulur:
 📝 Toplam: ${stats.total} not
 
 🔗 Link: ${byType.link || 0}
-💭 Alıntı: ${byType.quote || 0}
-🎬 Video: ${byType.video || 0}
-📖 Kitap: ${byType.book || 0}`
+💭 Alıntı: ${byType.quote || 0}`
 
         await sendTelegramMessage(chatId, statsText)
       } catch (error) {
@@ -383,12 +359,6 @@ mehmettemel.com/listeler/tarif`,
       case 'quote':
         categorizedData = await handleNote(parsed.content)
         break
-      case 'video':
-        categorizedData = await handleVideo(parsed.content)
-        break
-      case 'book':
-        categorizedData = await handleBook(parsed.content)
-        break
       default:
         throw new Error(`Unknown note type: ${parsed.type}`)
     }
@@ -398,7 +368,7 @@ mehmettemel.com/listeler/tarif`,
       throw new Error('Not verisi oluşturulamadı. Lütfen tekrar deneyin.')
     }
 
-    // Check if multi-note (video/book can return arrays)
+    // Check if multi-note (quotes can return arrays)
     const isMultiNote = Array.isArray(categorizedData)
     console.log('Is multi-note:', isMultiNote)
     console.log(
@@ -448,8 +418,7 @@ mehmettemel.com/listeler/tarif`,
 
       // Send success message for multiple notes
       const emoji =
-        { link: '🔗', quote: '💭', video: '🎬', book: '📖' }[parsed.type] ||
-        '📝'
+        { link: '🔗', quote: '💭' }[parsed.type] || '📝'
 
       const firstNote =
         Array.isArray(categorizedData) && categorizedData.length > 0
@@ -543,7 +512,7 @@ ID: ${noteIds}`
 
     // Send success message
     const emoji =
-      { link: '🔗', quote: '💭', video: '🎬', book: '📖' }[parsed.type] || '📝'
+      { link: '🔗', quote: '💭' }[parsed.type] || '📝'
 
     // Escape HTML special characters
     const escapeHtml = (text) => {

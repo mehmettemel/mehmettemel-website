@@ -9,12 +9,12 @@ const sql = neon(process.env.DATABASE_URL)
 /**
  * Create a new note in the database
  * @param {Object} data - Note data
- * @param {string} data.type - Note type: 'link', 'quote', 'video', 'book'
+ * @param {string} data.type - Note type: 'link', 'quote'
  * @param {string} data.category - Category based on note type
  * @param {string} [data.title] - Title (required for links)
  * @param {string} data.text - Main content
  * @param {string} [data.author] - Author name
- * @param {string} [data.source] - Source (book name, video title, etc.)
+ * @param {string} [data.source] - Source
  * @param {string} [data.url] - URL
  * @param {string[]} [data.tags] - Tags array
  * @param {boolean} [data.is_migrated] - Migration flag
@@ -191,37 +191,14 @@ export async function getValidCategories(noteType) {
 
 /**
  * Get recent notes across all types for homepage display
- * For books and videos, only one note per source is shown
  * @param {number} limit - Number of notes to fetch (default: 10)
  * @returns {Promise<Array>} Recent notes
  */
 export async function getRecentNotes(limit = 10) {
   try {
     const notes = await sql`
-      WITH ranked_notes AS (
-        SELECT
-          id,
-          note_type,
-          category,
-          title,
-          text,
-          author,
-          source,
-          url,
-          created_at,
-          ROW_NUMBER() OVER (
-            PARTITION BY
-              CASE
-                WHEN note_type IN ('book', 'video') THEN source
-                ELSE id::text
-              END
-            ORDER BY created_at DESC
-          ) as rn
-        FROM notes
-      )
       SELECT id, note_type, category, title, text, author, source, url, created_at
-      FROM ranked_notes
-      WHERE rn = 1
+      FROM notes
       ORDER BY created_at DESC
       LIMIT ${limit}
     `

@@ -19,7 +19,7 @@ export function AdminTabs() {
           <div>
             <h3 className="text-lg font-semibold">Notes Management</h3>
             <p className="text-sm text-muted-foreground">
-              Manage links, quotes, videos, and book notes
+              Manage links and quotes
             </p>
           </div>
           <NotesTable />

@@ -4,6 +4,7 @@ import { format } from 'date-fns'
 import { tr } from 'date-fns/locale'
 import { Container } from '../../../components/Container'
 import { getPostBySlug, getAllPostSlugs } from '../../../lib/blog'
+import { RandomParagraphButton } from '../../../components/RandomParagraphButton'
 
 export async function generateStaticParams() {
   const posts = getAllPostSlugs()
@@ -71,6 +72,32 @@ function TableOfContents({ headings }) {
   )
 }
 
+// Extract paragraphs from HTML content for random display
+function extractParagraphs(htmlContent) {
+  if (!htmlContent) return []
+
+  // Remove HTML tags and get clean text
+  const withoutTags = htmlContent
+    .replace(/<h[1-6][^>]*>.*?<\/h[1-6]>/gi, '') // Remove headings
+    .replace(/<[^>]*>/g, ' ') // Remove all HTML tags
+    .replace(/\s+/g, ' ') // Normalize whitespace
+    .trim()
+
+  // Split by periods followed by space and capital letter
+  const sentences = withoutTags.split(/\.\s+/)
+
+  // Group sentences into paragraphs (2-4 sentences each)
+  const paragraphs = []
+  for (let i = 0; i < sentences.length; i += 2) {
+    const paragraph = sentences.slice(i, i + 3).join('. ')
+    if (paragraph.length > 80) {
+      paragraphs.push(paragraph.endsWith('.') ? paragraph : paragraph + '.')
+    }
+  }
+
+  return paragraphs
+}
+
 export default async function BlogPost({ params }) {
   const { slug } = await params
   const post = await getPostBySlug(slug)
@@ -78,6 +105,9 @@ export default async function BlogPost({ params }) {
   if (!post) {
     notFound()
   }
+
+  // Extract paragraphs for random display
+  const paragraphs = extractParagraphs(post.content)
 
   return (
     <Container>
@@ -98,7 +128,7 @@ export default async function BlogPost({ params }) {
               <h1 className="mb-3 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
                 {post.title}
               </h1>
-              <div className="flex items-center gap-3 text-sm text-muted">
+              <div className="mb-4 flex flex-wrap items-center gap-3 text-sm text-muted">
                 <time dateTime={post.date}>
                   {format(new Date(post.date), 'd MMMM yyyy', { locale: tr })}
                 </time>
@@ -109,6 +139,7 @@ export default async function BlogPost({ params }) {
                   </>
                 )}
               </div>
+              <RandomParagraphButton paragraphs={paragraphs} />
             </header>
 
             <div
