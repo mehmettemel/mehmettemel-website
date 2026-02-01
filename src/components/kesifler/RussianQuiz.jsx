@@ -9,12 +9,14 @@ import { X, ArrowRight, RotateCcw, Home } from 'lucide-react'
 import Link from 'next/link'
 
 // Helper: Random 10 soru seç ve 4 seçenekli quiz oluştur
-function generateQuestions(data) {
+function generateQuestions(data, mode = 'ru-to-tr') {
   const shuffled = [...data].sort(() => Math.random() - 0.5)
   const selected = shuffled.slice(0, 10)
 
+  const isRussianToTurkish = mode === 'ru-to-tr'
+
   return selected.map((item) => {
-    const correct = item.turkish
+    const correct = isRussianToTurkish ? item.turkish : item.russian
 
     // Aynı tipten farklı 3 yanlış cevap bul
     const sameType = data.filter(
@@ -25,33 +27,39 @@ function generateQuestions(data) {
         ? sameType
             .sort(() => Math.random() - 0.5)
             .slice(0, 3)
-            .map((r) => r.turkish)
+            .map((r) => (isRussianToTurkish ? r.turkish : r.russian))
         : // Eğer aynı tipten 3 tane yoksa, genel datadan al
           data
             .filter((r) => r.id !== item.id)
             .sort(() => Math.random() - 0.5)
             .slice(0, 3)
-            .map((r) => r.turkish)
+            .map((r) => (isRussianToTurkish ? r.turkish : r.russian))
 
     // Tüm seçenekleri shuffle
     const options = [correct, ...wrongAnswers].sort(() => Math.random() - 0.5)
 
     // Her seçeneğe karşılık gelen tam veriyi bul
-    const optionsData = options.map((opt) => data.find((r) => r.turkish === opt))
+    const optionsData = options.map((opt) =>
+      data.find((r) =>
+        isRussianToTurkish ? r.turkish === opt : r.russian === opt
+      )
+    )
 
     return {
       id: item.id,
-      question: item.russian,
+      question: isRussianToTurkish ? item.russian : item.turkish,
       pronunciation: item.pronunciation,
       correctAnswer: correct,
       options: options,
       fullData: item,
       optionsData: optionsData,
+      mode: mode,
     }
   })
 }
 
 export default function RussianQuiz() {
+  const [mode, setMode] = useState('ru-to-tr') // 'ru-to-tr' or 'tr-to-ru'
   const [questions, setQuestions] = useState([])
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [score, setScore] = useState(0)
@@ -61,12 +69,23 @@ export default function RussianQuiz() {
 
   // Component mount olduğunda soruları oluştur
   useEffect(() => {
-    setQuestions(generateQuestions(russianPhrases))
+    setQuestions(generateQuestions(russianPhrases, mode))
   }, [])
+
+  // Mode değiştir ve testi yenile
+  const handleModeChange = (newMode) => {
+    setMode(newMode)
+    setQuestions(generateQuestions(russianPhrases, newMode))
+    setCurrentQuestion(0)
+    setScore(0)
+    setSelectedAnswer(null)
+    setShowExplanation(false)
+    setQuizCompleted(false)
+  }
 
   // Yeni test başlat
   const restartQuiz = () => {
-    setQuestions(generateQuestions(russianPhrases))
+    setQuestions(generateQuestions(russianPhrases, mode))
     setCurrentQuestion(0)
     setScore(0)
     setSelectedAnswer(null)
@@ -168,13 +187,42 @@ export default function RussianQuiz() {
           </Button>
         </div>
 
+        {/* Mode Tabs */}
+        <div className="border-b bg-background px-6 py-3">
+          <div className="flex gap-2">
+            <Button
+              variant={mode === 'ru-to-tr' ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => handleModeChange('ru-to-tr')}
+              className="flex-1"
+            >
+              🇷🇺 → 🇹🇷 Rusça → Türkçe
+            </Button>
+            <Button
+              variant={mode === 'tr-to-ru' ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => handleModeChange('tr-to-ru')}
+              className="flex-1"
+            >
+              🇹🇷 → 🇷🇺 Türkçe → Rusça
+            </Button>
+          </div>
+        </div>
+
         {/* Question */}
         <div className="p-8">
           <div className="mb-8 text-center">
             <div className="mb-2 text-sm text-muted-foreground">
-              Aşağıdaki kelimenin Türkçe karşılığı nedir?
+              {mode === 'ru-to-tr'
+                ? 'Aşağıdaki kelimenin Türkçe karşılığı nedir?'
+                : 'Aşağıdaki kelimenin Rusça karşılığı nedir?'}
             </div>
             <div className="text-4xl font-bold">{current.question}</div>
+            {mode === 'ru-to-tr' && (
+              <div className="mt-2 text-sm text-muted-foreground">
+                ({current.pronunciation})
+              </div>
+            )}
           </div>
 
           {/* Options */}
@@ -218,9 +266,25 @@ export default function RussianQuiz() {
             })}
           </div>
 
+          {/* Next Question Button - Shown after answer */}
+          {showExplanation && (
+            <div className="mt-6">
+              <Button
+                onClick={handleNextQuestion}
+                className="w-full"
+                size="lg"
+              >
+                {currentQuestion + 1 < questions.length
+                  ? 'Sonraki Soru'
+                  : 'Sonuçları Gör'}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
+          )}
+
           {/* Explanation Panel */}
           {showExplanation && (
-            <div className="mt-6 animate-in fade-in slide-in-from-bottom-4 duration-300">
+            <div className="mt-4 animate-in fade-in slide-in-from-bottom-4 duration-300">
               <Card className="bg-muted/50 p-6">
                 <div className="mb-4 text-center">
                   {selectedAnswer === current.correctAnswer ? (
@@ -277,17 +341,6 @@ export default function RussianQuiz() {
                     })}
                   </div>
                 </div>
-
-                <Button
-                  onClick={handleNextQuestion}
-                  className="mt-6 w-full"
-                  size="lg"
-                >
-                  {currentQuestion + 1 < questions.length
-                    ? 'Sonraki Soru'
-                    : 'Sonuçları Gör'}
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
               </Card>
             </div>
           )}

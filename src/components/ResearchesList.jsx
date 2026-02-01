@@ -81,29 +81,14 @@ export function ResearchesList({ posts }) {
 
   return (
     <div>
-      {/* Category Chips - Horizontal at top */}
+      {/* Category Links - Minimal at top */}
       <ResearchCategorySidebar
         categories={categoriesWithCounts}
         selectedCategory={selectedCategory}
         onCategoryChange={handleCategoryChange}
       />
 
-      {/* Stats */}
-      <div className="mb-3 flex items-center justify-between">
-        <p className="text-xs text-muted-foreground sm:text-sm">
-          <span className="font-semibold text-foreground">
-            {filteredPosts.length}
-          </span>{' '}
-          araştırma
-        </p>
-        {totalPages > 1 && (
-          <p className="text-xs text-muted-foreground">
-            Sayfa {currentPage} / {totalPages}
-          </p>
-        )}
-      </div>
-
-      {/* Posts List */}
+      {/* Posts List - Centered */}
       {filteredPosts.length > 0 ? (
         <>
           <motion.div
@@ -111,7 +96,7 @@ export function ResearchesList({ posts }) {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="space-y-2.5"
+            className="mx-auto max-w-md space-y-3"
           >
             {currentPosts.map((post, index) => (
               <RabbitHoleCard key={post.slug} post={post} index={index} />
@@ -128,8 +113,8 @@ export function ResearchesList({ posts }) {
           )}
         </>
       ) : (
-        <div className="rounded-lg border border-dashed border-border bg-secondary/20 py-12 text-center">
-          <p className="text-xs sm:text-sm text-muted-foreground">
+        <div className="py-12 text-center">
+          <p className="text-xs text-muted-foreground">
             Bu kategoride henüz araştırma yok.
           </p>
         </div>
