@@ -1,17 +1,11 @@
 ---
-title: "The Food Lab Notları - Bilimsel Yemek Pişirme"
+title: "The Food Lab"
 date: "2026-01-21"
 description: "J. Kenji López-Alt'ın The Food Lab kitabından aldığım mutfak bilimi ve teknik notları. Isı transferinden et pişirme tekniklerine, saklama yöntemlerinden sos yapımına kadar."
 category: "kitaplar"
 tags: ["kitap", "mutfak", "bilim", "yemek", "teknik", "the food lab"]
 author: "J. Kenji López-Alt"
-source: "The Food Lab"
 featured: false
----
-
-**Kitap:** The Food Lab: Better Home Cooking Through Science
-**Yazar:** J. Kenji López-Alt
-
 ---
 
 ## Isı ve Pişirme Bilimi Temelleri

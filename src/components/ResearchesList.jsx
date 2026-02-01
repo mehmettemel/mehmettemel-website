@@ -96,7 +96,7 @@ export function ResearchesList({ posts }) {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="mx-auto max-w-md space-y-3"
+            className="mx-auto w-full max-w-md space-y-3"
           >
             {currentPosts.map((post, index) => (
               <RabbitHoleCard key={post.slug} post={post} index={index} />

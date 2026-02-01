@@ -1,17 +1,11 @@
 ---
-title: "The Parasitic Mind Notları - Fikir Parazitleri"
+title: "The Parasitic Mind"
 date: "2026-01-14"
 description: "Gal Saad'ın The Parasitic Mind kitabından aldığım ifade özgürlüğü, bilimsel yöntem, akademik eleştiri ve kişisel cesaret üzerine notlar."
 category: "kitaplar"
 tags: ["kitap", "bilim", "ifade özgürlüğü", "akademi", "eleştirel düşünce", "the parasitic mind"]
 author: "Gal Saad"
-source: "The Parasitic Mind"
 featured: false
----
-
-**Kitap:** The Parasitic Mind: How Infectious Ideas Are Killing Common Sense
-**Yazar:** Gal Saad
-
 ---
 
 ## İfade Özgürlüğü ve Platform Düzenlemeleri

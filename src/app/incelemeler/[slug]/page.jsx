@@ -22,7 +22,7 @@ export async function generateMetadata({ params }) {
   }
 
   return {
-    title: `${post.title} | Mehmet Temel`,
+    title: post.title,
     description: post.description,
     openGraph: {
       title: post.title,

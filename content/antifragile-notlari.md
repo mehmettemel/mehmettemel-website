@@ -1,15 +1,11 @@
 ---
-title: "Antifragile Kitabından Aldığım Notlar"
+title: "Antifragile"
 date: "2026-01-26"
 description: "Nassim Nicholas Taleb'in Antifragile kitabından aldığım notlar. Belirsizlikten güç alan sistemler, halter stratejisi, opsiyonellik ve hayata dair dersler."
 category: "kitaplar"
 tags: ["kitap", "antifragile", "nassim taleb", "felsefe", "risk yönetimi"]
+author: "Nassim Nicholas Taleb"
 featured: true
----
-
-**Kitap:** Antifragile: Things That Gain from Disorder (Antikırılgan: Düzensizlikten Kazanç Sağlayan Şeyler)
-**Yazar:** Nassim Nicholas Taleb
-
 ---
 
 ## Antikırılganlık Nedir?

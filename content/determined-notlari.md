@@ -1,17 +1,11 @@
 ---
-title: "Determined Notları - Özgür İrade Bilimi"
+title: "Determined"
 date: "2026-01-24"
 description: "Robert M. Sapolsky'nin Determined kitabından aldığım determinizm, beyin biyolojisi, çocukluk gelişimi ve adalet sistemi üzerine notlar."
 category: "kitaplar"
 tags: ["kitap", "bilim", "nörobilim", "determinizm", "psikoloji", "özgür irade", "determined"]
 author: "Robert M. Sapolsky"
-source: "Determined: A Science of Life Without Free Will"
 featured: false
----
-
-**Kitap:** Determined: A Science of Life Without Free Will
-**Yazar:** Robert M. Sapolsky
-
 ---
 
 ## Determinizm ve Özgür İrade

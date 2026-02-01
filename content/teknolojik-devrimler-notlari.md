@@ -1,18 +1,11 @@
 ---
-title: "Teknolojik Devrimler ve Finansal Sermaye Notları"
+title: "Teknolojik Devrimler ve Finansal Sermaye"
 date: "2026-01-13"
 description: "Carlota Perez'in Teknolojik Devrimler ve Finansal Sermaye kitabından aldığım teknolojik dönüşüm döngüleri, finansal balonlar ve paradigma değişimleri üzerine notlar."
 category: "kitaplar"
 tags: ["kitap", "ekonomi", "teknoloji", "finans", "devrimler", "paradigma", "carlota perez"]
 author: "Carlota Perez"
-source: "Teknolojik Devrimler ve Finansal Sermaye (Technological Revolutions and Financial Capital)"
 featured: false
----
-
-**Kitap:** Technological Revolutions and Financial Capital
-**Yazar:** Carlota Perez
-**Türkçe Başlık:** Teknolojik Devrimler ve Finansal Sermaye
-
 ---
 
 ## Teknolojik Devrim Teorisi Temelleri
