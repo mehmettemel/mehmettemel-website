@@ -19,7 +19,6 @@ import {
 const kesiflerItems = [
   { href: '/kesifler/linkler', label: 'Linkler', emoji: '🔗' },
   { href: '/kesifler/alintilar', label: 'Alıntılar', emoji: '💭' },
-  { href: '/kesifler/rastgele', label: 'Rastgele', emoji: '🎲' },
 ]
 
 const listelerItems = [
@@ -28,6 +27,7 @@ const listelerItems = [
   { href: '/listeler/tarif', label: 'Tarifler', emoji: '🍳' },
   { href: '/listeler/rusca', label: 'Rusça', emoji: '🇷🇺' },
   { href: '/kesifler/rusca-test', label: 'Rusça Test', emoji: '📝' },
+  { href: '/listeler/personal', label: 'Personal', emoji: '🔒' },
 ]
 
 function NavLink({ href, children }) {

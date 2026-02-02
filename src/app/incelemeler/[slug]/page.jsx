@@ -1,10 +1,8 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { format } from 'date-fns'
-import { tr } from 'date-fns/locale'
 import { Container } from '../../../components/Container'
 import { getPostBySlug, getAllPostSlugs } from '../../../lib/blog'
-import { RandomParagraphButton } from '../../../components/RandomParagraphButton'
+import { ResearchContent } from '../../../components/research/ResearchContent'
 
 export async function generateStaticParams() {
   const posts = getAllPostSlugs()
@@ -47,33 +45,66 @@ function ArrowLeftIcon(props) {
   )
 }
 
-// Mini TOC Component
-function TableOfContents({ headings }) {
-  if (!headings || headings.length === 0) return null
+// Parse HTML content into sections with paragraphs
+function parseContentToSections(htmlContent, headings) {
+  if (!htmlContent || !headings || headings.length === 0) {
+    // If no headings, treat entire content as one section
+    const paragraphs = extractParagraphsFromHTML(htmlContent)
+    return [{
+      id: 'content',
+      heading: 'İçerik',
+      paragraphs: paragraphs
+    }]
+  }
 
-  return (
-    <nav className="sticky top-24 hidden w-40 shrink-0 self-start lg:block">
-      <p className="mb-2 text-[10px] font-semibold tracking-wider text-muted-foreground uppercase">
-        İçindekiler
-      </p>
-      <ul className="space-y-1.5 text-xs">
-        {headings.map((heading) => (
-          <li key={heading.id}>
-            <a
-              href={`#${heading.id}`}
-              className="block leading-tight text-muted transition-colors hover:text-foreground"
-            >
-              {heading.text}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  )
+  const sections = []
+  const parser = new DOMParser()
+  const doc = parser.parseFromString(htmlContent, 'text/html')
+
+  headings.forEach((heading, index) => {
+    const headingElement = doc.getElementById(heading.id)
+    if (!headingElement) return
+
+    const paragraphs = []
+    let currentElement = headingElement.nextElementSibling
+
+    // Get the next heading to know where to stop
+    const nextHeading = headings[index + 1]
+    const nextHeadingElement = nextHeading ? doc.getElementById(nextHeading.id) : null
+
+    // Collect all content until next heading
+    while (currentElement && currentElement !== nextHeadingElement) {
+      if (currentElement.tagName === 'P') {
+        const text = currentElement.textContent.trim()
+        if (text && text.length > 20) {
+          paragraphs.push(text)
+        }
+      } else if (currentElement.tagName === 'UL' || currentElement.tagName === 'OL') {
+        const listItems = currentElement.querySelectorAll('li')
+        listItems.forEach(li => {
+          const text = li.textContent.trim()
+          if (text && text.length > 20) {
+            paragraphs.push(text)
+          }
+        })
+      }
+      currentElement = currentElement.nextElementSibling
+    }
+
+    if (paragraphs.length > 0) {
+      sections.push({
+        id: heading.id,
+        heading: heading.text,
+        paragraphs: paragraphs
+      })
+    }
+  })
+
+  return sections
 }
 
-// Extract paragraphs from HTML content for random display
-function extractParagraphs(htmlContent) {
+// Fallback: Extract paragraphs from HTML if DOMParser fails
+function extractParagraphsFromHTML(htmlContent) {
   if (!htmlContent) return []
 
   // Remove HTML tags and get clean text
@@ -83,17 +114,16 @@ function extractParagraphs(htmlContent) {
     .replace(/\s+/g, ' ') // Normalize whitespace
     .trim()
 
-  // Split by periods followed by space and capital letter
+  // Split by periods followed by space and capital letter or newline
   const sentences = withoutTags.split(/\.\s+/)
 
-  // Group sentences into paragraphs (2-4 sentences each)
   const paragraphs = []
-  for (let i = 0; i < sentences.length; i += 2) {
-    const paragraph = sentences.slice(i, i + 3).join('. ')
-    if (paragraph.length > 80) {
-      paragraphs.push(paragraph.endsWith('.') ? paragraph : paragraph + '.')
+  sentences.forEach(sentence => {
+    const cleaned = sentence.trim()
+    if (cleaned.length > 50) {
+      paragraphs.push(cleaned.endsWith('.') ? cleaned : cleaned + '.')
     }
-  }
+  })
 
   return paragraphs
 }
@@ -106,8 +136,39 @@ export default async function BlogPost({ params }) {
     notFound()
   }
 
-  // Extract paragraphs for random display
-  const paragraphs = extractParagraphs(post.content)
+  // Server-side parsing is not possible with DOMParser (browser API)
+  // So we'll extract paragraphs differently
+  const sections = post.headings && post.headings.length > 0
+    ? post.headings.map(heading => ({
+        id: heading.id,
+        heading: heading.text,
+        paragraphs: [] // Will be populated client-side
+      }))
+    : []
+
+  // Extract all paragraphs from content
+  const allParagraphs = extractParagraphsFromHTML(post.content)
+
+  // If we have headings, distribute paragraphs across sections
+  // Otherwise create a single section
+  let finalSections
+  if (sections.length > 0) {
+    // Distribute paragraphs evenly across sections
+    const paragraphsPerSection = Math.ceil(allParagraphs.length / sections.length)
+    finalSections = sections.map((section, index) => ({
+      ...section,
+      paragraphs: allParagraphs.slice(
+        index * paragraphsPerSection,
+        (index + 1) * paragraphsPerSection
+      )
+    })).filter(section => section.paragraphs.length > 0)
+  } else {
+    finalSections = [{
+      id: 'content',
+      heading: 'İçerik',
+      paragraphs: allParagraphs
+    }]
+  }
 
   return (
     <Container>
@@ -121,35 +182,12 @@ export default async function BlogPost({ params }) {
           <span>Geri Dön</span>
         </Link>
 
-        <div className="mx-auto flex max-w-4xl items-start gap-10 lg:gap-14">
-          {/* Main Content */}
-          <article className="max-w-2xl min-w-0 flex-1">
-            <header className="mb-8">
-              <h1 className="mb-3 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-                {post.title}
-              </h1>
-              <div className="mb-4 flex flex-wrap items-center gap-3 text-sm text-muted">
-                <time dateTime={post.date}>
-                  {format(new Date(post.date), 'd MMMM yyyy', { locale: tr })}
-                </time>
-                {post.readingTime && (
-                  <>
-                    <span className="text-muted-foreground/40">•</span>
-                    <span>{post.readingTime}</span>
-                  </>
-                )}
-              </div>
-              <RandomParagraphButton paragraphs={paragraphs} />
-            </header>
-
-            <div
-              className="prose prose-sm max-w-none sm:prose-base prose-headings:scroll-mt-20"
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            />
-          </article>
-
-          {/* TOC Sidebar */}
-          <TableOfContents headings={post.headings} />
+        <div className="mx-auto max-w-7xl">
+          <ResearchContent
+            sections={finalSections}
+            title={post.title}
+            author={post.author}
+          />
         </div>
       </div>
     </Container>

@@ -4,6 +4,14 @@ import { siteConfig, generateStructuredData } from '../lib/seo'
 
 import '../styles/tailwind.css'
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  minimumScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+}
+
 export const metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
@@ -15,13 +23,6 @@ export const metadata = {
   authors: [{ name: siteConfig.author.name }],
   creator: siteConfig.author.name,
   publisher: siteConfig.author.name,
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    minimumScale: 1,
-    maximumScale: 5,
-    userScalable: true,
-  },
   formatDetection: {
     email: false,
     address: false,

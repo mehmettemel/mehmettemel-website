@@ -614,3 +614,4 @@ export async function deleteRecipe(id) {
     throw new Error(`Failed to delete recipe: ${error.message}`)
   }
 }
+
