@@ -15,6 +15,19 @@ export function UserIcon({ className }) {
   useEffect(() => {
     setMounted(true)
     checkSession()
+
+    // Check if login is required from URL params
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search)
+      const loginParam = urlParams.get('login')
+      if (loginParam === 'required' || loginParam === 'expired') {
+        setShowLogin(true)
+        // Remove the query param from URL
+        urlParams.delete('login')
+        const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '')
+        window.history.replaceState({}, '', newUrl)
+      }
+    }
   }, [])
 
   const checkSession = async () => {
@@ -46,7 +59,7 @@ export function UserIcon({ className }) {
 
   const handleClick = () => {
     if (isAuthenticated) {
-      router.push('/admin')
+      router.push('/listeler/personal')
     } else {
       setShowLogin(true)
     }

@@ -54,6 +54,14 @@ export default async function PersonalPage() {
               </Link>
             </div>
           ))}
+          <div className="w-full text-center pt-4">
+            <Link
+              href="/listeler/personal/rastgele"
+              className="block w-full text-xs font-normal text-foreground transition-opacity hover:opacity-60"
+            >
+              Rastgele
+            </Link>
+          </div>
         </div>
       </div>
     </Container>
