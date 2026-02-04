@@ -591,3 +591,143 @@ export function isURL(text) {
   return urlPattern.test(text.trim())
 }
 
+/**
+ * Handle place parsing with Gemini AI
+ * Parses free text and extracts structured place data
+ * Supports single or multiple places
+ * @param {string} text - Place description from Telegram
+ * @returns {Promise<Array>} Array of structured place data
+ */
+export async function handlePlace(text) {
+  const prompt = `Aşağıdaki metni analiz et ve içindeki TÜM mekanları tespit et. JSON formatında döndür (sadece JSON döndür, markdown kod bloğu kullanma):
+
+{
+  "places": [
+    {
+      "name": "Mekan adı",
+      "city": "Şehir adı",
+      "country": "Ülke adı (Türkçe)",
+      "address": "Adres varsa (yoksa null)",
+      "notes": "Kişisel notlar varsa (yoksa null)",
+      "category": "Kategori (aşağıdaki listeden)",
+      "url": "URL varsa (yoksa null)"
+    }
+  ]
+}
+
+Metin:
+${text}
+
+PARSE KURALLARI:
+1. Metinde KAÇ TANE MEKAN varsa HEPSİNİ tespit et
+2. Her mekan için AYRI bir obje oluştur
+3. Tek mekan varsa bile places array'i içinde döndür
+4. Serbest metinden mekan bilgilerini çıkar
+5. Tırnak içindeki mekanları ("...") ayrı ayrı parse et
+6. Satır satır yazılmış mekanları ayrı ayrı tespit et
+7. Virgül veya tire ile ayrılmış mekanları tespit et
+
+ÖRNEKLER:
+- "Pizzarium Roma" "Kız Kulesi İstanbul" → 2 mekan
+- Pizzarium Roma, Kız Kulesi İstanbul → 2 mekan
+- Dün Roma'da Pizzarium'a gittim harika pizzaları var, sonra Kız Kulesi'nde çay içtik → 2 mekan
+- Pizzarium Roma → 1 mekan
+
+KATEGORİ SEÇİMİ (10 kategori):
+- restoran: Yemek yerleri, restaurant, lokanta
+- kafe: Kahve, cafe, coffee shop, çay bahçesi
+- bar: Bar, pub, gece kulübü, nightlife
+- muze: Müze, galeri, sergi, sanat merkezi
+- park: Park, bahçe, meydan, yeşil alan
+- tarihi: Tarihi mekan, anıt, antik site, kale
+- doga: Doğa, hiking, outdoor, plaj, şelale
+- alisveris: Alışveriş merkezi, mağaza, market, pazar
+- konaklama: Otel, hostel, pansiyon, konaklama
+- diger: Yukarıdakilere uymayan diğer mekanlar
+
+ÜLKELERİ TÜRKÇE YAZ:
+- Turkey → Türkiye
+- Italy → İtalya
+- France → Fransa
+- Spain → İspanya
+- Greece → Yunanistan
+- Germany → Almanya
+- USA → Amerika
+- UK → İngiltere
+- Netherlands → Hollanda
+- Austria → Avusturya
+- Switzerland → İsviçre
+- Japan → Japonya
+- Thailand → Tayland
+- Indonesia → Endonezya
+- Malaysia → Malezya
+(Diğer ülkeleri de Türkçe yazımlarıyla döndür)
+
+ÖNEMLI:
+- places bir ARRAY olmalı
+- Tek mekan bile olsa array içinde döndür: {"places": [{...}]}
+- Her mekan için: name, city, country, category MUTLAKA dolu olmalı
+- address, notes, url opsiyoneldir
+- Ülke adlarını MUTLAKA Türkçe yaz
+- Sadece düz JSON döndür, \`\`\`json gibi markdown formatı kullanma`
+
+  const aiResponse = await callGemini(prompt)
+
+  // Clean markdown code blocks
+  let cleanResponse = aiResponse.trim()
+  cleanResponse = cleanResponse
+    .replace(/```json\n?/g, '')
+    .replace(/```\n?/g, '')
+
+  // Try to extract JSON from response
+  const jsonMatch = cleanResponse.match(/\{[\s\S]*\}/)
+  if (jsonMatch) {
+    cleanResponse = jsonMatch[0]
+  }
+
+  let responseData
+  try {
+    responseData = JSON.parse(cleanResponse)
+  } catch (parseError) {
+    console.error('Failed to parse Gemini response as JSON:', cleanResponse)
+    throw new Error('Mekan bilgisi okunamadı. Lütfen formatı kontrol edin.')
+  }
+
+  // Ensure places is an array
+  let placesArray = responseData?.places
+
+  if (!Array.isArray(placesArray) || placesArray.length === 0) {
+    // Fallback: check if response is a single place object (old format)
+    if (responseData?.name && responseData?.city && responseData?.country) {
+      placesArray = [responseData]
+    } else {
+      throw new Error('Hiçbir mekan bulunamadı. Lütfen formatı kontrol edin.')
+    }
+  }
+
+  // Validate and filter places
+  const validPlaces = placesArray
+    .filter(place => {
+      if (!place || !place.name || !place.city || !place.country || !place.category) {
+        console.warn('Invalid place data, skipping:', place)
+        return false
+      }
+      return true
+    })
+    .map(place => ({
+      name: place.name,
+      city: place.city,
+      country: place.country,
+      address: place.address || null,
+      notes: place.notes || null,
+      category: place.category || 'diger',
+      url: place.url || null,
+    }))
+
+  if (validPlaces.length === 0) {
+    throw new Error('Geçerli mekan bilgisi bulunamadı. İsim, şehir, ülke ve kategori gerekli.')
+  }
+
+  return validPlaces
+}
+

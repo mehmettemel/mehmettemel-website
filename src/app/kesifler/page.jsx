@@ -17,6 +17,10 @@ const discoveryTypes = [
     title: 'Alıntılar',
     href: '/kesifler/alintilar',
   },
+  {
+    title: 'Mekanlar',
+    href: '/kesifler/mekanlar',
+  },
 ]
 
 export default async function Kesifler() {

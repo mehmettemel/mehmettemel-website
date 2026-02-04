@@ -4,12 +4,14 @@ import {
   getNotesStats,
   createListItem,
   createRecipe,
+  createPlace,
 } from '@/lib/db'
 import {
   handleLink,
   handleNote,
   handleListItemWithAI,
   handleRecipe,
+  handlePlace,
   isURL,
 } from '@/lib/gemini'
 
@@ -119,6 +121,15 @@ function parseMessage(text) {
     return { type: 'recipe', content }
   }
 
+  // PLACES (Mekanlar)
+  // Goes to places table
+  if (text.startsWith('>mekan ') || text.startsWith('>mekan\n') ||
+      text.startsWith('/mekan ') || text.startsWith('/mekan\n')) {
+    const content = text.replace(/^(>mekan|\/mekan)[\s\n]*/, '').trim()
+    console.log('[parseMessage] Matched: >mekan or /mekan → place')
+    return { type: 'place', content }
+  }
+
   // ========================================
   // ULTRA-SHORT KEŞİFLER COMMANDS
   // Type is manual, category is AI-determined
@@ -200,6 +211,16 @@ AI otomatik yazar/yönetmen/marka bulur:
 • /tarif [tarif metni]
   AI malzemeleri, yapılışı, süreyi analiz eder
 
+📍 <b>MEKANLAR</b>
+• >mekan [mekan bilgisi]
+  AI otomatik şehir, ülke, kategori bulur
+  TEK veya BİRDEN FAZLA mekan gönderebilirsiniz!
+
+  Örnekler:
+  - Tek: >mekan Pizzarium, Roma, İtalya
+  - Çoklu: >mekan "Pizzarium Roma" "Kız Kulesi İstanbul"
+  - Serbest metin: >mekan Dün Roma'da Pizzarium'a gittik sonra Kız Kulesi'nde çay içtik
+
 ✨ <b>KEŞİFLER - ULTRA KISA (AI Otomatik Kategori)</b>
 Sadece 2 karakter! AI kategoriyi otomatik bulur:
 
@@ -213,14 +234,9 @@ Sadece 2 karakter! AI kategoriyi otomatik bulur:
 • /stats - İstatistikler
 • /help - Bu mesaj
 
-💡 <b>AI KATEGORİLER:</b>
-🍎 Gıda 🏥 Sağlık 💭 Kişisel 📝 Genel
-
-✨ <b>NEDEN >al >li?</b>
-• Ultra hızlı - 2 karakter!
-• Hatırlama kolay (>alıntı, >link)
-• AI doğru kategoriyi her zaman bulur
-• Sıfır kategori hatası`,
+💡 <b>İPUCU:</b>
+Mekanlar için serbest metin yazabilirsiniz!
+AI metninizden tüm mekanları otomatik çıkarır.`,
       )
       return NextResponse.json({ ok: true })
     }
@@ -343,6 +359,100 @@ mehmettemel.com/listeler/tarif`,
         return NextResponse.json({ ok: true, recipeId: recipe.id })
       } catch (error) {
         throw new Error(`Tarif eklenemedi: ${error.message}`)
+      }
+    }
+
+    // Handle place with AI parsing (supports multiple places)
+    if (parsed.type === 'place') {
+      console.log('📍 [PLACE] Place command detected!')
+      console.log('📍 [PLACE] Content:', parsed.content)
+
+      try {
+        console.log('🤖 [PLACE] Calling Gemini AI to parse place(s)...')
+        const placesArray = await handlePlace(parsed.content)
+        console.log('🤖 [PLACE] AI result:', placesArray)
+        console.log('🤖 [PLACE] Found', placesArray.length, 'place(s)')
+
+        // Validate array
+        if (!Array.isArray(placesArray) || placesArray.length === 0) {
+          throw new Error('Hiçbir mekan bulunamadı. Lütfen formatı kontrol edin.')
+        }
+
+        console.log('💾 [PLACE] Saving to database...')
+        const savedPlaces = []
+
+        // Save each place to database
+        for (let i = 0; i < placesArray.length; i++) {
+          const placeData = placesArray[i]
+          console.log(`💾 [PLACE] Saving place ${i + 1}/${placesArray.length}:`, placeData.name)
+
+          const place = await createPlace(placeData)
+          console.log(`💾 [PLACE] Saved successfully! ID: ${place.id}`)
+
+          savedPlaces.push(place)
+        }
+
+        console.log(`✅ [PLACE] All ${savedPlaces.length} place(s) saved successfully!`)
+
+        const categoryEmoji = {
+          restoran: '🍽️',
+          kafe: '☕',
+          bar: '🍺',
+          muze: '🏛️',
+          park: '🌳',
+          tarihi: '🏰',
+          doga: '🏔️',
+          alisveris: '🛍️',
+          konaklama: '🏨',
+          diger: '📍'
+        }
+
+        // Send success message
+        if (savedPlaces.length === 1) {
+          // Single place - detailed message
+          const place = savedPlaces[0]
+          const emoji = categoryEmoji[place.category] || '📍'
+          const addressText = place.address ? `\n📍 ${place.address}` : ''
+          const notesText = place.notes ? `\n\n💭 ${place.notes}` : ''
+          const urlText = place.url ? `\n\n🔗 ${place.url}` : ''
+
+          await sendTelegramMessage(
+            chatId,
+            `✅ ${emoji} <b>Mekan eklendi!</b>
+
+📝 ${place.name}
+🌍 ${place.city}, ${place.country}${addressText}${notesText}${urlText}
+
+ID: ${place.id}`
+          )
+        } else {
+          // Multiple places - summary message
+          const placesList = savedPlaces
+            .map((place, index) => {
+              const emoji = categoryEmoji[place.category] || '📍'
+              return `${index + 1}. ${emoji} ${place.name} - ${place.city}, ${place.country}`
+            })
+            .join('\n')
+
+          const placeIds = savedPlaces.map(p => p.id).join(', ')
+
+          await sendTelegramMessage(
+            chatId,
+            `✅ <b>${savedPlaces.length} mekan eklendi!</b>
+
+${placesList}
+
+ID: ${placeIds}`
+          )
+        }
+
+        return NextResponse.json({
+          ok: true,
+          placeIds: savedPlaces.map(p => p.id),
+          count: savedPlaces.length
+        })
+      } catch (error) {
+        throw new Error(`Mekan eklenemedi: ${error.message}`)
       }
     }
 

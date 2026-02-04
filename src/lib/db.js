@@ -615,3 +615,150 @@ export async function deleteRecipe(id) {
   }
 }
 
+// ===================================
+// PLACES (MEKANLAR) FUNCTIONS
+// ===================================
+
+/**
+ * Create a new place
+ * @param {Object} data - Place data
+ * @param {string} data.name - Place name
+ * @param {string} data.city - City
+ * @param {string} data.country - Country
+ * @param {string} data.category - Category
+ * @param {string} [data.address] - Address (optional)
+ * @param {string} [data.notes] - Notes (optional)
+ * @param {string} [data.url] - URL (optional)
+ * @returns {Promise<Object>} Created place
+ */
+export async function createPlace(data) {
+  try {
+    const result = await sql`
+      INSERT INTO places (name, city, country, category, address, notes, url)
+      VALUES (
+        ${data.name},
+        ${data.city},
+        ${data.country},
+        ${data.category},
+        ${data.address || null},
+        ${data.notes || null},
+        ${data.url || null}
+      )
+      RETURNING *
+    `
+    return result[0]
+  } catch (error) {
+    console.error('Database error in createPlace:', error)
+    throw new Error(`Failed to create place: ${error.message}`)
+  }
+}
+
+/**
+ * Get cities with recently added places, grouped by country
+ * Used for main /kesifler/mekanlar page
+ * @param {string} country - Filter by country (optional)
+ * @param {number} limit - Limit cities per country (default: 100)
+ * @returns {Promise<Array>} Cities with place counts
+ */
+export async function getCitiesWithRecentPlaces(country = null, limit = 100) {
+  try {
+    let cities
+
+    if (country) {
+      cities = await sql`
+        SELECT
+          city,
+          country,
+          COUNT(*) as place_count,
+          MAX(created_at) as last_added
+        FROM places
+        WHERE country = ${country}
+        GROUP BY city, country
+        ORDER BY last_added DESC
+        LIMIT ${limit}
+      `
+    } else {
+      // Get all cities, Turkey first
+      cities = await sql`
+        SELECT
+          city,
+          country,
+          COUNT(*) as place_count,
+          MAX(created_at) as last_added
+        FROM places
+        GROUP BY city, country
+        ORDER BY
+          CASE WHEN country = 'Türkiye' THEN 0 ELSE 1 END,
+          last_added DESC
+      `
+    }
+
+    return cities
+  } catch (error) {
+    console.error('Database error in getCitiesWithRecentPlaces:', error)
+    throw new Error(`Failed to get cities: ${error.message}`)
+  }
+}
+
+/**
+ * Get all places in a specific city
+ * Used for city detail pages
+ * @param {string} city - City name
+ * @param {string} country - Country name
+ * @returns {Promise<Array>} Places in the city
+ */
+export async function getPlacesByCity(city, country) {
+  try {
+    const places = await sql`
+      SELECT * FROM places
+      WHERE city = ${city} AND country = ${country}
+      ORDER BY created_at DESC
+    `
+    return places
+  } catch (error) {
+    console.error('Database error in getPlacesByCity:', error)
+    throw new Error(`Failed to get places: ${error.message}`)
+  }
+}
+
+/**
+ * Get place statistics
+ * @returns {Promise<Object>} Place statistics
+ */
+export async function getPlaceStats() {
+  try {
+    const totalResult = await sql`
+      SELECT COUNT(*) as count FROM places
+    `
+
+    const countryStats = await sql`
+      SELECT country, COUNT(*) as count
+      FROM places
+      GROUP BY country
+      ORDER BY count DESC
+    `
+
+    const categoryStats = await sql`
+      SELECT category, COUNT(*) as count
+      FROM places
+      GROUP BY category
+      ORDER BY count DESC
+    `
+
+    return {
+      total: parseInt(totalResult[0].count),
+      byCountry: countryStats.reduce((acc, row) => {
+        acc[row.country] = parseInt(row.count)
+        return acc
+      }, {}),
+      byCategory: categoryStats.reduce((acc, row) => {
+        acc[row.category] = parseInt(row.count)
+        return acc
+      }, {}),
+    }
+  } catch (error) {
+    console.error('Database error in getPlaceStats:', error)
+    throw new Error(`Failed to get place stats: ${error.message}`)
+  }
+}
+
