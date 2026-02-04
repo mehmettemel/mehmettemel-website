@@ -599,7 +599,7 @@ export function isURL(text) {
  * @returns {Promise<Array>} Array of structured place data
  */
 export async function handlePlace(text) {
-  const prompt = `Aşağıdaki metni analiz et ve içindeki TÜM mekanları tespit et. JSON formatında döndür (sadece JSON döndür, markdown kod bloğu kullanma):
+  const prompt = `Sen bir mekan bilgisi çıkarma asistanısın. Aşağıdaki metni analiz et ve içindeki TÜM mekanları tespit et. JSON formatında döndür (sadece JSON döndür, markdown kod bloğu kullanma):
 
 {
   "places": [
@@ -608,7 +608,7 @@ export async function handlePlace(text) {
       "city": "Şehir adı",
       "country": "Ülke adı (Türkçe)",
       "address": "Adres varsa (yoksa null)",
-      "notes": "Kişisel notlar varsa (yoksa null)",
+      "notes": "Kişisel notlar/değerlendirme varsa (yoksa null)",
       "category": "Kategori (aşağıdaki listeden)",
       "url": "URL varsa (yoksa null)"
     }
@@ -617,6 +617,12 @@ export async function handlePlace(text) {
 
 Metin:
 ${text}
+
+NOT: Eğitim datanda Türkiye'deki ünlü restoranlar, mekanlar var. Bu bilgiyi KULLAN:
+- İskender Konağı → Bursa
+- Cemal Cemil Usta → Bursa
+- Kebapçı İskender → Bursa
+- Bu tür ünlü mekanları BİLİYORSUN, şehirlerini doğru tespit et!
 
 PARSE KURALLARI:
 1. Metinde KAÇ TANE MEKAN varsa HEPSİNİ tespit et
@@ -627,11 +633,29 @@ PARSE KURALLARI:
 6. Satır satır yazılmış mekanları ayrı ayrı tespit et
 7. Virgül veya tire ile ayrılmış mekanları tespit et
 
+ŞEHİR TESPİTİ (ÇOK ÖNEMLİ!):
+1. Metinde şehir ismi VARSA → doğrudan kullan
+2. Metinde şehir ismi YOKSA → Mekan isminden şehri BUL:
+   - Mekan ismini kullanarak EN POPÜLER/ÜNLÜ lokasyonunu tespit et
+   - Eğitim datandaki bilgiyi kullan (ünlü restoranları BİLİYORSUN)
+   - Örnek: "İskender Konağı" → Bursa (ünlü İskender kebap restoranı)
+   - Örnek: "Cemal Cemil Usta" → Bursa (ünlü kebapçı)
+   - Örnek: "Kebapçı İskender" → Bursa (orijinal İskender kebap)
+   - Örnek: "Mavi Dükkan" → Bursa (Bursa'da bilinen restoran)
+3. Aynı bağlamda/listede birden fazla mekan varsa → muhtemelen AYNI ŞEHİRDELER
+4. Liste başlığında "Bursa", "İstanbul" gibi ipucu varsa kullan
+5. Eğer GERÇEKTEN bulamazsan → bağlamdan tahmin et
+
+NOTLAR/DEĞERLENDİRME:
+- "Yüksek Kalite", "Fiyat Performans", "Lezzetli" gibi değerlendirmeler → notes alanına
+- Kullanıcının kişisel yorumları → notes alanına
+- Örnek: "Cemal Cemil Usta" başlığı "Yüksek Kalite, Yüksek Fiyat" altındaysa → notes: "Yüksek Kalite, Yüksek Fiyat"
+
 ÖRNEKLER:
-- "Pizzarium Roma" "Kız Kulesi İstanbul" → 2 mekan
-- Pizzarium Roma, Kız Kulesi İstanbul → 2 mekan
-- Dün Roma'da Pizzarium'a gittim harika pizzaları var, sonra Kız Kulesi'nde çay içtik → 2 mekan
-- Pizzarium Roma → 1 mekan
+- "Pizzarium Roma" → Şehir: Roma (metinde var)
+- "İskender Konağı" → Şehir: Bursa (ünlü İskender restoranı)
+- "Cemal Cemil Usta, Mavi Dükkan" → Her ikisi de Bursa (popüler kebapçılar)
+- Liste: "1. İskender Konağı 2. Kebapçı Tamer" → İkisi de muhtemelen Bursa (bağlam)
 
 KATEGORİ SEÇİMİ (10 kategori):
 - restoran: Yemek yerleri, restaurant, lokanta
@@ -644,6 +668,16 @@ KATEGORİ SEÇİMİ (10 kategori):
 - alisveris: Alışveriş merkezi, mağaza, market, pazar
 - konaklama: Otel, hostel, pansiyon, konaklama
 - diger: Yukarıdakilere uymayan diğer mekanlar
+
+ÜLKE TESPİTİ:
+- Şehir Türkiye'deyse (Bursa, İstanbul, Ankara, İzmir vs.) → Ülke: Türkiye
+- Şehir başka ülkedeyse → O ülkeyi Türkçe yaz
+- Örnekler:
+  * Bursa → Türkiye
+  * İstanbul → Türkiye
+  * Roma → İtalya
+  * Paris → Fransa
+  * Londra → İngiltere
 
 ÜLKELERİ TÜRKÇE YAZ:
 - Turkey → Türkiye
@@ -667,9 +701,18 @@ KATEGORİ SEÇİMİ (10 kategori):
 - places bir ARRAY olmalı
 - Tek mekan bile olsa array içinde döndür: {"places": [{...}]}
 - Her mekan için: name, city, country, category MUTLAKA dolu olmalı
+- ŞEHİR BİLGİSİ ZORUNLU: Metinde yoksa mekan isminden BUL (en popüler lokasyon)
 - address, notes, url opsiyoneldir
 - Ülke adlarını MUTLAKA Türkçe yaz
-- Sadece düz JSON döndür, \`\`\`json gibi markdown formatı kullanma`
+- Sadece düz JSON döndür, \`\`\`json gibi markdown formatı kullanma
+
+BİLGİ KAYNAKLARIN (KULLAN!):
+- Eğitim datanda TÜRKİYE'deki ünlü restoranlar, mekanlar var
+- Bursa İskender kebabıyla ünlüdür: İskender Konağı, Kebapçı İskender, Cemal Cemil Usta
+- Bu mekanları GÖRDÜĞÜNde şehir: Bursa olduğunu BİL
+- Diğer Türkiye şehirlerindeki ünlü mekanları da BİLİYORSUN
+- Bağlamdaki tüm mekanlar aynı listede/kategoride ise → AYNI ŞEHİRDELER
+- ASLA "İstanbul" deme, şehir isminden çıkar veya bağlamdan anla`
 
   const aiResponse = await callGemini(prompt)
 
