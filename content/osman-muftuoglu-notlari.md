@@ -91,3 +91,7 @@ Sizi üşümek değil, 'kurumak' hasta eder. İç ortamınız kuruyunca havadaki
 ### Sabah Limonlu Su
 
 Güne bir bardak ılık limonlu su ile başlamak ağız temizliği için etkili bir ilk adımdır.
+
+
+##Others
+Demir eksikliği tespiti koymak için demir değeri yerine demir bağlama kapasitesini ölçün.

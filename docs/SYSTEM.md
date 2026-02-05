@@ -8,13 +8,13 @@ Teknik detaylar, mimari, database şemaları, ve API referansı.
 
 1. [Sistem Mimarisi](#sistem-mimarisi)
 2. [Database Şemaları](#database-şemaları)
-3. [Kategori Sistemi (v4.0.0)](#kategori-sistemi-v400)
-4. [Listeler Sistemi](#listeler-sistemi)
-5. [Telegram Entegrasyonu](#telegram-entegrasyonu)
-6. [AI Kategorilendirme](#ai-kategorilendirme)
-7. [API Referansı](#api-referansı)
-8. [Deployment](#deployment)
-9. [Troubleshooting](#troubleshooting)
+3. [Mekanlar Sistemi](#mekanlar-sistemi)
+4. [Kategori Sistemi (v4.0.0)](#kategori-sistemi-v400)
+5. [Listeler Sistemi](#listeler-sistemi)
+6. [Telegram Entegrasyonu](#telegram-entegrasyonu)
+7. [AI Kategorilendirme](#ai-kategorilendirme)
+8. [API Referansı](#api-referansı)
+9. [Deployment](#deployment)
 
 ---
 
@@ -26,27 +26,30 @@ Teknik detaylar, mimari, database şemaları, ve API referansı.
 │  User → Telegram → Webhook → Next.js API Route          │
 └──────────────────────┬──────────────────────────────────┘
                        │
-        ┌──────────────┼──────────────┐
-        │              │              │
-        ▼              ▼              ▼
-┌──────────────┐ ┌──────────┐ ┌──────────────┐
-│  LİSTELER   │ │ KEŞİFLER │ │    STATS     │
-│ (Simple DB)  │ │ (AI+DB)  │ │     (DB)     │
-└──────┬───────┘ └────┬─────┘ └──────┬───────┘
-       │              │              │
-       └──────────────┼──────────────┘
+        ┌──────────────┼──────────────┬──────────────┐
+        │              │              │              │
+        ▼              ▼              ▼              ▼
+┌──────────────┐ ┌──────────┐ ┌──────────┐ ┌──────────────┐
+│  LİSTELER   │ │ KEŞİFLER │ │ MEKANLAR │ │    STATS     │
+│ (Simple DB)  │ │ (AI+DB)  │ │ (AI+DB)  │ │     (DB)     │
+└──────┬───────┘ └────┬─────┘ └────┬─────┘ └──────┬───────┘
+       │              │            │              │
+       └──────────────┼────────────┼──────────────┘
                       ▼
          ┌─────────────────────────┐
          │  NEON PostgreSQL        │
-         │  - cache_items          │
+         │  - list_items           │
          │  - notes                │
+         │  - places (NEW)         │
+         │  - recipes              │
          └─────────────────────────┘
                       │
                       ▼
          ┌─────────────────────────┐
          │   WEB PAGES (ISR 60s)   │
          │  - /listeler/*          │
-         │  - /kesifler            │
+         │  - /kesifler/*          │
+         │  - /kesifler/mekanlar   │
          └─────────────────────────┘
 ```
 
@@ -157,6 +160,149 @@ CREATE INDEX idx_notes_category ON notes(category);
 CREATE INDEX idx_notes_created_at ON notes(created_at DESC);
 CREATE INDEX idx_notes_type_category ON notes(note_type, category);
 ```
+
+---
+
+### places
+
+```sql
+CREATE TABLE places (
+  id SERIAL PRIMARY KEY,
+
+  -- Temel Bilgiler
+  name VARCHAR(255) NOT NULL,
+  category VARCHAR(50) NOT NULL,  -- restoran, kafe, bar, muze, park, tarihi, doga, alisveris, konaklama, diger
+
+  -- Konum Bilgileri
+  address TEXT,
+  city VARCHAR(100) NOT NULL,
+  country VARCHAR(100) NOT NULL,
+
+  -- İsteğe Bağlı
+  notes TEXT,                      -- Kişisel notlar/değerlendirme
+  url TEXT,                        -- Website veya Google Maps link
+
+  -- Sistem Alanları
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Coğrafi sorgular için indeksler
+CREATE INDEX idx_places_country ON places(country);
+CREATE INDEX idx_places_city ON places(city);
+CREATE INDEX idx_places_country_city ON places(country, city);
+CREATE INDEX idx_places_category ON places(category);
+CREATE INDEX idx_places_created_at ON places(created_at DESC);
+```
+
+**Kategoriler (10):**
+- `restoran` 🍽️ - Yemek yerleri
+- `kafe` ☕ - Kahve, çay bahçesi
+- `bar` 🍺 - Bar, pub, gece kulübü
+- `muze` 🏛️ - Müze, galeri, sergi
+- `park` 🌳 - Park, bahçe, yeşil alan
+- `tarihi` 🏰 - Tarihi mekan, anıt
+- `doga` 🏔️ - Doğa, plaj, şelale
+- `alisveris` 🛍️ - Alışveriş merkezi
+- `konaklama` 🏨 - Otel, hostel
+- `diger` 📍 - Diğer mekanlar
+
+---
+
+## Mekanlar Sistemi
+
+### Sayfa Yapısı
+
+**Ana Sayfa:** `/kesifler/mekanlar`
+
+**Layout:** Sticky Sidebar + Content
+
+```
+┌─────────────┬──────────────────────┐
+│ Türkiye     │                      │
+│ İstanbul(5) │  İstanbul            │
+│ Bursa (8) ← │  Türkiye · 8 mekan   │
+│ Ankara (3)  │                      │
+│             │  🍽️ Cemal Cemil     │
+│ Dünya       │     Yüksek kalite    │
+│ Roma (2)    │                      │
+│ (sticky)    │  ☕ Mavi Dükkan      │
+└─────────────┴──────────────────────┘
+```
+
+**ISR:** 60 saniye cache (`export const revalidate = 60`)
+
+### Telegram Komutları
+
+**Tek Mekan:**
+```
+>mekan Pizzarium, Roma, İtalya - Harika pizza
+```
+
+**Çoklu Mekan:**
+```
+>mekan
+"Cemal Cemil Usta"
+"Mavi Dükkan"
+"İskender Konağı"
+```
+
+**Serbest Metin (AI Parse):**
+```
+>mekan Dün Roma'da Pizzarium'a gittik. Sonra İstanbul'da Kız Kulesi'nde çay içtik.
+```
+
+AI metinden tüm mekanları çıkarır, her biri ayrı satır olarak eklenir.
+
+### AI Şehir Tespiti
+
+**Öncelik Sırası:**
+
+1. **Metinde şehir var mı?** → Kullan
+2. **Mekan ünlü mü?** → Eğitim datasından bul
+   - "İskender Konağı" → Bursa
+   - "Cemal Cemil Usta" → Bursa
+3. **Liste bağlamı:** Aynı listede/kategoride → Muhtemelen aynı şehir
+4. **Gerçekten bulamazsa:** Mantıklı tahmin
+
+**Ülke:** Şehirden otomatik → Bursa → Türkiye, Roma → İtalya
+
+### Database Fonksiyonları
+
+**createPlace(data)**
+```javascript
+await createPlace({
+  name: 'Cemal Cemil Usta',
+  city: 'Bursa',
+  country: 'Türkiye',
+  category: 'restoran',
+  notes: 'Yüksek Kalite, Yüksek Fiyat',
+  address: null,
+  url: null
+})
+```
+
+**getCitiesWithRecentPlaces(country, limit)**
+```javascript
+// Tüm şehirler (Türkiye önce)
+await getCitiesWithRecentPlaces()
+
+// Sadece Türkiye
+await getCitiesWithRecentPlaces('Türkiye')
+```
+
+**getPlacesByCity(city, country)**
+```javascript
+// Bir şehirdeki tüm mekanlar
+await getPlacesByCity('Bursa', 'Türkiye')
+```
+
+### Frontend Mantığı
+
+1. **Server component** şehir listesini getirir
+2. **Client component** şehir tıklanınca `/api/places` çağırır
+3. **Sticky sidebar** scroll ederken sabit kalır
+4. **Toggle yok** - Başka şehir tıklanınca geçiş yapar
 
 ---
 
@@ -406,16 +552,19 @@ curl "https://api.telegram.org/bot<TOKEN>/getWebhookInfo"
 
 ```javascript
 // Listeler komutları
-'/k '     → 'cache-kitap'
-'/f '     → 'cache-film'
-'/u '     → 'cache-urun'
-'/tarif ' → 'tarif'
+'/k '      → 'list-kitap'
+'/f '      → 'list-film'
+'/u '      → 'list-urun'
+'/tarif '  → 'recipe'
 
 // Keşifler komutları (ULTRA-SHORT)
-'>ki '    → type='book',  category=null (AI belirler)
-'>vi '    → type='video', category=null (AI belirler)
-'>al '    → type='quote', category=null (AI belirler)
-'>li '    → type='link',  category=null (linkler kategorisiz)
+'>ki '     → type='book',  category=null (AI belirler)
+'>vi '     → type='video', category=null (AI belirler)
+'>al '     → type='quote', category=null (AI belirler)
+'>li '     → type='link',  category=null (linkler kategorisiz)
+
+// Mekanlar komutu
+'>mekan '  → type='place' (AI şehir, ülke, kategori bulur)
 
 // Otomatik URL algılama (backward compatibility)
 isURL(text) → type='link', category=null
@@ -530,6 +679,57 @@ Alıntı/not kategorize eder, yazar/kaynak ayıklar.
 
 Array döner.
 
+### handlePlace(text)
+
+**Çoklu mekan desteği.** Tek veya birden fazla mekan parse eder.
+
+**Input:**
+```javascript
+handlePlace('Cemal Cemil Usta\nMavi Dükkan\nİskender Konağı')
+```
+
+**AI Prompt:**
+```
+Metni analiz et, TÜM mekanları tespit et.
+
+PARSE KURALLARI:
+1. Tek veya çoklu mekan destekle
+2. Şehir metinde yoksa → Mekan isminden BUL (ünlü mekan datasından)
+3. Aynı liste/bağlamda → Muhtemelen aynı şehir
+4. Ülkeyi şehirden çıkar (Bursa → Türkiye)
+
+JSON format:
+{
+  "places": [
+    {
+      "name": "Mekan adı",
+      "city": "Şehir",
+      "country": "Ülke (Türkçe)",
+      "category": "10 kategoriden biri",
+      "address": null,
+      "notes": "Değerlendirme varsa",
+      "url": null
+    }
+  ]
+}
+```
+
+**Output:**
+```javascript
+[
+  {
+    name: 'Cemal Cemil Usta',
+    city: 'Bursa',
+    country: 'Türkiye',
+    category: 'restoran',
+    notes: null,
+    address: null,
+    url: null
+  },
+  // ...
+]
+```
+
 ---
 
 ## API Referansı
@@ -612,6 +812,41 @@ Checkbox durumunu değiştirir.
 
 ---
 
+### GET /api/places
+
+Bir şehirdeki mekanları getirir.
+
+**Query Params:**
+- `city` (required) - Şehir adı
+- `country` (required) - Ülke adı
+
+**Request:**
+```
+GET /api/places?city=Bursa&country=T%C3%BCrkiye
+```
+
+**Response:**
+```json
+{
+  "places": [
+    {
+      "id": 1,
+      "name": "Cemal Cemil Usta",
+      "city": "Bursa",
+      "country": "Türkiye",
+      "category": "restoran",
+      "address": null,
+      "notes": "Yüksek Kalite, Yüksek Fiyat",
+      "url": null,
+      "created_at": "2026-02-04T...",
+      "updated_at": "2026-02-04T..."
+    }
+  ]
+}
+```
+
+---
+
 ## Deployment
 
 ### Environment Variables (Vercel)
@@ -659,118 +894,31 @@ curl https://mehmettemel.com/api/telegram/webhook
 
 ---
 
-## Troubleshooting
-
-### Bot yanıt vermiyor
-
-**1. Webhook kontrolü:**
-
-```bash
-curl https://mehmettemel.com/api/telegram/webhook
-# Beklenen: {"status": "ok", "version": "2.0.1"}
-
-curl "https://api.telegram.org/bot<TOKEN>/getWebhookInfo"
-# url: "https://mehmettemel.com/api/telegram/webhook"
-```
-
-**2. User ID yetkili mi?**
-
-```bash
-# Vercel logs kontrol et
-vercel logs --follow
-# "[TELEGRAM WEBHOOK] User ID: 123456789"
-```
-
-**3. Environment variables?**
-
-- Vercel Dashboard → Settings → Environment Variables
-- `TELEGRAM_BOT_TOKEN` var mı?
-- `TELEGRAM_ALLOWED_USER_IDS` doğru mu?
-
----
-
-### Cache komutu keşiflere gidiyor
-
-**Neden:** parseMessage() hatası
-
-**Debug:**
-
-```bash
-# Vercel logs
-vercel logs --follow
-
-# Telegram'da /k test gönder
-# Beklenen log:
-[parseMessage] Matched: /k → cache-kitap
-[AI Cache] Enriched cache item: {...}
-
-# Yanlış log (BUG):
-[parseMessage] No command found, defaulting to quote
-```
-
-**Çözüm:**
-
-- `src/app/api/telegram/webhook/route.js` → `parseMessage()` kontrol et
-- `/k ` (boşluklu) regex doğru çalışıyor mu?
-
----
-
-### AI yazar/description bulmuyor
-
-**Neden:** Gemini API hatası veya quota
-
-**Debug:**
-
-```bash
-# Vercel logs
-[AI Cache] Failed to enrich cache item: Gemini API error
-```
-
-**Çözüm:**
-
-- Fallback çalışır, `author` ve `description` null olur
-- Gemini API key kontrol et
-- Quota kontrol et: https://ai.google.dev/
-
----
-
-### Database constraint hatası
-
-```
-ERROR: new row violates check constraint "check_liked_requires_completed"
-```
-
-**Neden:** `is_liked = true` ama `is_completed = false`
-
-**Çözüm:**
-
-- Önce `is_completed` true yap
-- Sonra `is_liked` true yap
-- Frontend otomatik kontrol eder
-
----
-
-### Checkbox toggle çalışmıyor
-
-**Debug:**
-
-```bash
-# Browser console
-fetch('/api/listeler/123/toggle', {
-  method: 'PATCH',
-  body: JSON.stringify({ field: 'is_completed' })
-})
-```
-
-**Olası hata:**
-
-- `field` parametresi yanlış (sadece `is_completed` veya `is_liked`)
-- ID yanlış
-- Database connection hatası
-
----
-
 ## Değişiklik Geçmişi
+
+### v5.0.0 (4 Şubat 2026) - MEKANLAR SİSTEMİ
+
+**YENİ:**
+
+- ✅ **Mekanlar sistemi** - Telegram'dan mekan ekleme
+- ✅ **AI şehir tespiti** - Ünlü mekanlardan şehir bulma
+- ✅ **Çoklu mekan parse** - Tek mesajda birden fazla mekan
+- ✅ **Serbest metin parse** - Metinden tüm mekanları çıkarma
+- ✅ **Sticky sidebar layout** - Sol şehir listesi, sağ mekanlar
+- ✅ **10 mekan kategorisi** - restoran, kafe, bar, müze, park, tarihi, doğa, alışveriş, konaklama, diğer
+
+**Database:**
+- `places` tablosu eklendi
+- Coğrafi indeksler (country, city, country_city)
+
+**Komutlar:**
+- `>mekan` - Tek veya çoklu mekan
+- AI otomatik şehir, ülke, kategori bulur
+
+**API:**
+- `GET /api/places?city=...&country=...`
+
+---
 
 ### v4.0.0 (24 Ocak 2026) - ULTRA-SHORT SYSTEM
 
@@ -835,5 +983,5 @@ YENİ (v4.0.0):
 
 ---
 
-**Versiyon:** v4.0.0 - Ultra-Short System
-**Son Güncelleme:** 24 Ocak 2026
+**Versiyon:** v5.0.0 - Mekanlar Sistemi
+**Son Güncelleme:** 4 Şubat 2026

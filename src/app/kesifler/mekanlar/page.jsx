@@ -28,7 +28,7 @@ export default async function MekanlarPage() {
 
   return (
     <Container>
-      <div className="mx-auto max-w-7xl py-8 sm:py-12">
+      <div className="mx-auto max-w-5xl py-8 sm:py-12">
         {/* Header */}
         <div className="mb-8 text-center">
           <h1 className="mb-3 text-xl font-bold tracking-tight text-foreground">

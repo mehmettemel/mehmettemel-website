@@ -41,6 +41,9 @@ A modern, SEO-optimized blog built with Next.js 16, focused on nutrition researc
 
 ### Discoveries (Kesifler)
 - **4 Content Types**: Links, Quotes, Video Notes, Book Notes
+- **Places (Mekanlar)**: Discover and track restaurants, cafes, museums
+- **AI Location Detection**: Automatic city/country recognition from famous venues
+- **Multi-place Support**: Add multiple places in single message
 - **Real-time Updates**: ISR with 60-second revalidation
 - **Category Sidebar**: Filter by AI-generated categories
 - **Pagination**: Handle large content collections
