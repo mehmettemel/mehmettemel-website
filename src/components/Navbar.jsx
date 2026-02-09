@@ -209,6 +209,7 @@ function MobileNav() {
           >
             İletişim
           </Link>
+
           <div className="mt-6 space-y-3 border-t border-border pt-6">
             <div className="flex items-center justify-between rounded-lg px-4 py-3 hover:bg-secondary/30">
               <span className="text-sm font-medium text-muted-foreground">

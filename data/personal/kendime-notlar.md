@@ -55,3 +55,4 @@ description: 'Kişisel notlarım ve hatırlatmalarım'
 - Bulunduğun ortamı beğenmiyorsan ağaç değilsin, değiştir.hatta hareket etmedikçe, statik kaldıkça aslında normalde nasıl bir potansiyeli var bunun da farkına varamayabiliyor. Bence insan potansiyelini keşfetmek için bile bir devinim, bir yeni yol arayışında olmalı.
 - You need to leave your house more and allow yourself to run in to chance.it's called luck maxxing. luck is just randomness that goes your way. two variables you can control. increase your exposure to randomness by putting yourself out there. make it go your way by being irrationally resilient. do both and i guarantee your 'luck' will increase.
 - eger karar veremiyorsanız cevap hayır'dır gercek istek nettir. kararsızlık dogrudan hayır'dır.
+- Gelecek, büyük hükümetlerin değil, birbirine bağlı bireylerin ve küçük girişimlerin eseri olacak.

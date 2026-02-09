@@ -107,7 +107,27 @@ function parseContentToSections(htmlContent, headings) {
 function extractParagraphsFromHTML(htmlContent) {
   if (!htmlContent) return []
 
-  // Remove HTML tags and get clean text
+  const paragraphs = []
+
+  // Extract list items (ul/ol > li) as separate paragraphs, preserving inner HTML like <strong>
+  const listItemRegex = /<li[^>]*>(.*?)<\/li>/gi
+  let match
+  while ((match = listItemRegex.exec(htmlContent)) !== null) {
+    const text = match[1]
+      .replace(/\s+/g, ' ') // Normalize whitespace only
+      .trim()
+
+    if (text && text.length > 10) {
+      paragraphs.push(text) // Keep HTML tags for bold, italic, etc.
+    }
+  }
+
+  // If we found list items, return them
+  if (paragraphs.length > 0) {
+    return paragraphs
+  }
+
+  // Otherwise, fallback to paragraph extraction
   const withoutTags = htmlContent
     .replace(/<h[1-6][^>]*>.*?<\/h[1-6]>/gi, '') // Remove headings
     .replace(/<[^>]*>/g, ' ') // Remove all HTML tags
@@ -117,7 +137,6 @@ function extractParagraphsFromHTML(htmlContent) {
   // Split by periods followed by space and capital letter or newline
   const sentences = withoutTags.split(/\.\s+/)
 
-  const paragraphs = []
   sentences.forEach(sentence => {
     const cleaned = sentence.trim()
     if (cleaned.length > 50) {

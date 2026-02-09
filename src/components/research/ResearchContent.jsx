@@ -118,9 +118,10 @@ export function ResearchContent({ sections, title, author }) {
                     {randomNote?.section}
                   </span>
                 </div>
-                <p className="text-sm font-normal text-foreground leading-relaxed">
-                  {randomNote?.content}
-                </p>
+                <p
+                  className="text-sm font-normal text-foreground leading-relaxed"
+                  dangerouslySetInnerHTML={{ __html: randomNote?.content }}
+                />
               </div>
             </div>
           ) : (
@@ -144,9 +145,10 @@ export function ResearchContent({ sections, title, author }) {
                         key={index}
                         className="border-b border-border py-4 last:border-0"
                       >
-                        <p className="text-xs font-normal text-foreground leading-relaxed">
-                          {paragraph}
-                        </p>
+                        <p
+                          className="text-xs font-normal text-foreground leading-relaxed"
+                          dangerouslySetInnerHTML={{ __html: paragraph }}
+                        />
                       </div>
                     ))}
                   </div>

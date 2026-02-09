@@ -8,10 +8,9 @@ export const metadata = {
 
 const commands = [
   // Keşifler
-  { cmd: '>ki', desc: 'Kitap notları', ex: '>ki İki düşünce sistemi var...' },
-  { cmd: '>vi', desc: 'Video notları', ex: '>vi Huberman sabah rutini...' },
   { cmd: '>al', desc: 'Alıntılar', ex: '>al Sauna %40 mortality...' },
   { cmd: '>li', desc: 'Link', ex: '>li https://example.com' },
+  { cmd: '>mekan', desc: 'Mekan ekle', ex: '>mekan Pizzarium, Roma, İtalya' },
 
   // Listeler
   { cmd: '/k', desc: 'Kitap ekle', ex: '/k Thinking Fast and Slow' },
