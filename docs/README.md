@@ -39,6 +39,16 @@ Kişisel web sitesi - Telegram bot entegrasyonu, listeler sistemi, ve keşifler 
 - AI ile otomatik çeviri ve örnek cümle
 - Database yapısı
 - Web sayfası özellikleri
+- Floating widget sistemi
+
+**[WIDGETS.md](./WIDGETS.md)** - Floating language widgets (YENİ!)
+
+- Tüm sayfalarda otomatik gösterim
+- 20 saniyede bir rotasyon
+- Hover ile genişleme
+- İngilizce (🇬🇧) + Rusça (🇷🇺)
+- Light/Dark mode desteği
+- Teknik detaylar ve özelleştirme
 
 ---
 
@@ -67,6 +77,12 @@ Kişisel web sitesi - Telegram bot entegrasyonu, listeler sistemi, ve keşifler 
 - Rastgele kelime/cümle gösterme
 - Örnek cümlelerde kelime highlight
 - Responsive UI
+- **✨ YENİ: Floating Widget Sistemi**
+  - Tüm sayfalarda otomatik gösterim (sol alt: 🇬🇧, sağ alt: 🇷🇺)
+  - 20 saniyede bir otomatik güncelleme
+  - Hover ile genişleme ve detay gösterimi
+  - Light/Dark mode desteği
+  - Mobil uyumlu
 
 **4. Telegram Bot**
 
@@ -89,6 +105,60 @@ TELEGRAM_ALLOWED_USER_IDS=...
 GEMINI_API_KEY=...
 DATABASE_URL=...
 ```
+
+---
+
+## 🆕 v6.0.0 - Floating Language Widgets (12 Şubat 2026)
+
+### YENİ ÖZELLİK: Dil Öğrenme Widget'ları
+
+Tüm sayfalarda otomatik görünen, 20 saniyede bir güncellenen dil öğrenme widget'ları eklendi!
+
+**Özellikler:**
+- ✅ **Sol alt: 🇬🇧 İngilizce** - Database'den rastgele kelime
+- ✅ **Sağ alt: 🇷🇺 Rusça** - Static data'dan rastgele cümle
+- ✅ **20 saniye rotasyon** - Otomatik değişim
+- ✅ **Hover ile genişleme** - Detaylı bilgi gösterimi
+- ✅ **Light/Dark mode** - Her iki temada mükemmel görünüm
+- ✅ **Responsive** - Mobil ve desktop uyumlu
+- ✅ **Smooth animasyonlar** - 500ms transition
+
+**Teknik:**
+- API endpoint: `/api/english-words`
+- Custom hooks: `useEnglishWords`, `useRussianPhrases`
+- Components: `EnglishFloatingWidget`, `RussianFloatingWidget`
+- Global layout entegrasyonu
+
+**Compact view:** Sadece kelime + Türkçe (192px genişlik)
+**Expanded view:** Tam bilgi + örnek + çeviri (320-384px genişlik)
+
+---
+
+## 🆕 v5.1.0 - English Learning System (12 Şubat 2026)
+
+### İngilizce Öğrenme Sistemi Eklendi
+
+**Database Tablosu:**
+- ✅ `english_words` tablosu oluşturuldu
+- ✅ 100+ kelime bulk insert SQL hazırlandı
+- ✅ UNIQUE constraint eklendi (duplicate kontrolü)
+
+**Telegram Bot:**
+- ✅ `.i [kelime]` komutu eklendi
+- ✅ AI ile otomatik Türkçe çeviri
+- ✅ İngilizce örnek cümle oluşturma
+- ✅ Türkçe örnek çevirisi
+
+**Web Sayfası:**
+- ✅ `/listeler/ingilizce` sayfası
+- ✅ Rastgele kelime gösterme
+- ✅ Örnek cümlede kelime highlight
+- ✅ Navbar entegrasyonu
+
+**AI Entegrasyonu:**
+- ✅ Gemini API kullanımı
+- ✅ Otomatik çeviri ve örnek bulma
+- ✅ Retry logic (3 deneme)
 
 ---
 
@@ -151,10 +221,11 @@ AI içeriği analiz edip otomatik kategoriyi belirler:
 ```
 docs/
 ├── README.md       # Bu dosya (giriş)
-├── COMMANDS.md     # Telegram komutları (v4.0.0 - Ultra-short)
+├── COMMANDS.md     # Telegram komutları (v6.0.0 - Widgets + AI)
 ├── SYSTEM.md       # Teknik detaylar (v4.0.0 - AI %100)
 ├── RUSSIAN.md      # Rusça dil öğrenme sistemi
-└── ENGLISH.md      # İngilizce dil öğrenme sistemi
+├── ENGLISH.md      # İngilizce dil öğrenme sistemi
+└── WIDGETS.md      # Floating language widgets (YENİ!)
 
 src/
 ├── app/

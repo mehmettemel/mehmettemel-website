@@ -112,6 +112,18 @@ Yapılışı:
 
 **Gider:** `/listeler/ingilizce`
 
+**✨ BONUS: Floating Widget Sistemi**
+
+Eklediğiniz tüm İngilizce kelimeler (ve Rusça cümleler) otomatik olarak:
+- 🔄 **20 saniyede bir** tüm sayfalarda görünür (sol alt: 🇬🇧 İngilizce, sağ alt: 🇷🇺 Rusça)
+- 👆 **Hover ile genişler** - Detaylı bilgi görüntülenir
+- 🎨 **Light/Dark mode** - Her iki temada da mükemmel görünüm
+- 📱 **Responsive** - Mobil ve desktop uyumlu
+
+Widget'larda kelime veya cümle gösterilir:
+- Compact view: Sadece kelime + Türkçe
+- Expanded view (hover): Örnek cümle + çeviri + okunuş (Rusça için)
+
 ---
 
 ## 📝 Keşifler Komutları - ULTRA KISA SİSTEM
@@ -293,11 +305,12 @@ Tüm keşifler (kitap, video, alıntı) aynı 4 kategoriyi kullanır:
 2. **AI her şeyi halleder** - Kategori, yazar, kaynak otomatik bulunur
 3. **Hatırlama kolay** - >kitap, >video, >alıntı, >link
 4. **İngilizce kelime** - `.i` ile kelime ekle, AI çeviri + örnek bulur
-5. **"-" = Kaynak** - Tire işaretinden sonra gelen metin yazar/kaynak olarak algılanır
-6. **Tek metin** - Tüm metin olduğu gibi kaydedilir, parçalanmaz
-7. **Çoklu not** - `"..."` tırnak içi metinler ayrı notlar (video/kitap)
-8. **URL otomatik** - Direkt URL gönder, otomatik link olarak algılanır
-9. **Sıfır kategori hatası** - Manuel kategori yok, AI %95+ doğru
+5. **Floating widgets** - Eklenen kelimeler otomatik tüm sayfalarda görünür (20 saniyede bir değişir)
+6. **"-" = Kaynak** - Tire işaretinden sonra gelen metin yazar/kaynak olarak algılanır
+7. **Tek metin** - Tüm metin olduğu gibi kaydedilir, parçalanmaz
+8. **Çoklu not** - `"..."` tırnak içi metinler ayrı notlar (video/kitap)
+9. **URL otomatik** - Direkt URL gönder, otomatik link olarak algılanır
+10. **Sıfır kategori hatası** - Manuel kategori yok, AI %95+ doğru
 
 ---
 

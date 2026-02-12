@@ -114,6 +114,105 @@ handleEnglishWord(word)
 3. **Info Tooltip:** Hover/click ile detaylı bilgi
 4. **Responsive Design:** Mobil ve desktop uyumlu
 
+## ✨ Floating Widget Sistemi (YENİ!)
+
+### Genel Bakış
+
+Tüm sayfalarda otomatik olarak görünen dil öğrenme widget'ları:
+
+- **🇬🇧 İngilizce Widget** - Sol alt köşe
+- **🇷🇺 Rusça Widget** - Sağ alt köşe
+
+### Özellikler
+
+**Otomatik Rotasyon:**
+- Her 20 saniyede bir yeni kelime/cümle
+- Rastgele seçim
+- Kesintisiz çalışma
+
+**İki Görünüm Modu:**
+
+1. **Compact (Normal):**
+   - Width: 192px (48 rem)
+   - Sadece kelime + Türkçe karşılık
+   - Minimal, sade görünüm
+
+2. **Expanded (Hover):**
+   - Width: 320-384px (80-96 rem)
+   - Tam bilgi:
+     - İngilizce: Örnek cümle + Türkçe çeviri (kelime vurgulanır)
+     - Rusça: Okunuş + İngilizce + Türkçe + örnek cümle + renk önizleme (renkler için)
+   - Smooth animasyon (500ms)
+
+**Tasarım:**
+- Light mode: Temiz beyaz background, iyi kontrast
+- Dark mode: Gradient background, backdrop blur
+- Border & shadow effects
+- Hover indicator (alt çizgi)
+- Responsive (mobil uyumlu)
+
+### Teknik Detaylar
+
+**İngilizce Widget:**
+```
+Position: fixed bottom-6 left-6
+Border: blue-200/60 (light) | blue-500/30 (dark)
+Background: white/95 (light) | gradient blue-950→slate-900 (dark)
+Highlight: blue-700 (light) | blue-400 (dark)
+```
+
+**Rusça Widget:**
+```
+Position: fixed bottom-6 right-6
+Border: rose-200/60 (light) | red-500/30 (dark)
+Background: white/95 (light) | gradient red-950→slate-900 (dark)
+Highlight: rose-700 (light) | red-400 (dark)
+```
+
+### API Endpoint
+
+**`GET /api/english-words`**
+- Client-side'da widget için kullanılır
+- Tüm İngilizce kelimeleri döner
+- Cache: None (her seferinde fresh data)
+
+### Custom Hooks
+
+**`useEnglishWords()`**
+- İngilizce kelime yönetimi
+- 20 saniyede bir otomatik güncelleme
+- Returns: `{ currentWord, loading }`
+
+**`useRussianPhrases()`**
+- Rusça cümle yönetimi
+- 20 saniyede bir otomatik güncelleme
+- Returns: `{ currentPhrase }`
+
+### Bileşenler
+
+**`EnglishFloatingWidget.jsx`**
+- Sol alt köşe widget
+- Mavi tema
+- Kelime + örnek + çeviri
+
+**`RussianFloatingWidget.jsx`**
+- Sağ alt köşe widget
+- Kırmızı tema
+- Cümle + okunuş + çeviriler + örnek
+
+### Global Entegrasyon
+
+Widget'lar `src/components/Layout.jsx` içinde global olarak eklendi:
+```jsx
+<Layout>
+  {children}
+  <EnglishFloatingWidget />
+  <RussianFloatingWidget />
+</Layout>
+```
+
+Bu sayede her sayfada otomatik görünürler.
+
 ## Database Fonksiyonları
 
 ### createEnglishWord(data)
@@ -265,6 +364,14 @@ curl https://mehmettemel.com/api/telegram/webhook
 - ✅ Responsive UI
 - ✅ Navbar entegrasyonu
 - ✅ Info tooltip
+- ✅ **Floating Widget Sistemi** (12 Şubat 2026)
+  - ✅ Tüm sayfalarda otomatik gösterim
+  - ✅ 20 saniyede bir otomatik rotasyon
+  - ✅ Hover ile genişleme
+  - ✅ Light/Dark mode desteği
+  - ✅ İngilizce (sol alt) + Rusça (sağ alt)
+  - ✅ Smooth animasyonlar
+  - ✅ Mobil uyumlu
 
 ### 🚧 Gelecek Özellikler (Potansiyel)
 
@@ -274,6 +381,8 @@ curl https://mehmettemel.com/api/telegram/webhook
 - ⏳ Kelime sınavı/test modu
 - ⏳ Progress tracking
 - ⏳ Audio pronunciation (TTS)
+- ⏳ Widget'ları kapatma/açma toggle
+- ⏳ Widget pozisyon özelleştirme
 
 ## Karşılaştırma: Rusça vs İngilizce Sistemi
 

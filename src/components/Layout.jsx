@@ -2,6 +2,8 @@
 
 import { usePathname } from 'next/navigation'
 import { Navbar } from './Navbar'
+import { EnglishFloatingWidget } from './language-widgets/EnglishFloatingWidget'
+import { RussianFloatingWidget } from './language-widgets/RussianFloatingWidget'
 
 export function Layout({ children }) {
   const pathname = usePathname()
@@ -14,6 +16,10 @@ export function Layout({ children }) {
           {children}
         </div>
       </main>
+
+      {/* Language Learning Floating Widgets */}
+      <EnglishFloatingWidget />
+      <RussianFloatingWidget />
     </div>
   )
 }
