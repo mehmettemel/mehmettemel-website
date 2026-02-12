@@ -14,6 +14,9 @@ Kişisel web sitesi - Telegram bot entegrasyonu, listeler sistemi, ve keşifler 
 /f inception            # Film ekle (AI yönetmen bulur)
 /tarif Tavuk Sote...    # Tarif ekle (AI parse edip formatlar)
 
+# DİL ÖĞRENME
+.i serendipity          # İngilizce kelime ekle (AI: Türkçe + örnek)
+
 # KEŞİFLER (Ultra-short commands - AI otomatik kategori)
 >ki Atomic Habits notları...  # Kitap notu (AI: kişisel)
 >vi Huberman Lab...           # Video notu (AI: sağlık)
@@ -29,6 +32,13 @@ Kişisel web sitesi - Telegram bot entegrasyonu, listeler sistemi, ve keşifler 
 - Telegram webhook kurulumu
 - Database şemaları
 - AI kategorilendirme
+
+**[ENGLISH.md](./ENGLISH.md)** - İngilizce dil öğrenme sistemi
+
+- Telegram bot ile kelime ekleme (`.i` komutu)
+- AI ile otomatik çeviri ve örnek cümle
+- Database yapısı
+- Web sayfası özellikleri
 
 ---
 
@@ -50,11 +60,20 @@ Kişisel web sitesi - Telegram bot entegrasyonu, listeler sistemi, ve keşifler 
 - AI ile otomatik kategorizasyon
 - Çoklu not desteği (video/kitap)
 
-**3. Telegram Bot**
+**3. Dil Öğrenme** (`/listeler/rusca`, `/listeler/ingilizce`)
+
+- **Rusça:** Static data, 5 kategori (cümle, fiil, isim, sayı, renk)
+- **İngilizce:** Database + Telegram bot (`.i` komutu), AI çeviri + örnek
+- Rastgele kelime/cümle gösterme
+- Örnek cümlelerde kelime highlight
+- Responsive UI
+
+**4. Telegram Bot**
 
 - Hızlı not ekleme
 - Ultra-short commands (2 karakter!): `>ki >vi >al >li`
 - Listeler: `/k /f /tarif`
+- Dil öğrenme: `.i [kelime]`
 - Diğer: `/help /stats`
 - AI %100 otomatik kategori (manuel kategori YOK)
 - AI ile zenginleştirme ve otomatik formatla
@@ -134,7 +153,8 @@ docs/
 ├── README.md       # Bu dosya (giriş)
 ├── COMMANDS.md     # Telegram komutları (v4.0.0 - Ultra-short)
 ├── SYSTEM.md       # Teknik detaylar (v4.0.0 - AI %100)
-└── RUSSIAN.md      # Rusça dil öğrenme sistemi
+├── RUSSIAN.md      # Rusça dil öğrenme sistemi
+└── ENGLISH.md      # İngilizce dil öğrenme sistemi
 
 src/
 ├── app/

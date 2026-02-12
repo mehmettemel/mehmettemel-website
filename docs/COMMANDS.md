@@ -81,6 +81,39 @@ Yapılışı:
 
 ---
 
+## 🇬🇧 Dil Öğrenme Komutları
+
+### `.i [kelime]` - İngilizce Kelime Ekle
+
+💡 İngilizce kelime ekler. AI otomatik Türkçe karşılık ve örnek cümle bulur.
+
+**Basit kullanım:**
+```bash
+.i serendipity
+.i resilient
+.i ambiguous
+```
+
+**AI bulur:**
+- Türkçe karşılık
+- İngilizce örnek cümle (kelime vurgulanır)
+- Örnek cümlenin Türkçe çevirisi
+
+**Örnek:**
+```bash
+.i serendipity
+
+→ AI bulur:
+  📝 serendipity
+  🇹🇷 mutlu tesadüf, beklenmedik keşif
+  💬 Meeting my best friend was pure serendipity.
+  🇹🇷 En iyi arkadaşımla tanışmam tam bir mutlu tesadüftü.
+```
+
+**Gider:** `/listeler/ingilizce`
+
+---
+
 ## 📝 Keşifler Komutları - ULTRA KISA SİSTEM
 
 ### ✨ Sadece 4 Komut (2 Karakter!)
@@ -239,6 +272,11 @@ Tüm keşifler (kitap, video, alıntı) aynı 4 kategoriyi kullanır:
 | `/u`     | Ürün ekle          | Marka + Description    |
 | `/tarif` | Tarif ekle         | Malzemeler + Yapılış   |
 
+### Dil Öğrenme
+| Komut | Açıklama              | AI Özelliği                      |
+| ----- | --------------------- | -------------------------------- |
+| `.i`  | İngilizce kelime ekle | Türkçe + Örnek cümle + Çeviri   |
+
 ### Keşifler (Ultra-Short + AI Kategori)
 | Komut | Tip     | AI Kategoriler                | Sayfa                  |
 | ----- | ------- | ----------------------------- | ---------------------- |
@@ -254,11 +292,12 @@ Tüm keşifler (kitap, video, alıntı) aynı 4 kategoriyi kullanır:
 1. **Ultra hızlı** - Sadece 2 karakter: `>ki`, `>vi`, `>al`, `>li`
 2. **AI her şeyi halleder** - Kategori, yazar, kaynak otomatik bulunur
 3. **Hatırlama kolay** - >kitap, >video, >alıntı, >link
-4. **"-" = Kaynak** - Tire işaretinden sonra gelen metin yazar/kaynak olarak algılanır
-5. **Tek metin** - Tüm metin olduğu gibi kaydedilir, parçalanmaz
-6. **Çoklu not** - `"..."` tırnak içi metinler ayrı notlar (video/kitap)
-7. **URL otomatik** - Direkt URL gönder, otomatik link olarak algılanır
-8. **Sıfır kategori hatası** - Manuel kategori yok, AI %95+ doğru
+4. **İngilizce kelime** - `.i` ile kelime ekle, AI çeviri + örnek bulur
+5. **"-" = Kaynak** - Tire işaretinden sonra gelen metin yazar/kaynak olarak algılanır
+6. **Tek metin** - Tüm metin olduğu gibi kaydedilir, parçalanmaz
+7. **Çoklu not** - `"..."` tırnak içi metinler ayrı notlar (video/kitap)
+8. **URL otomatik** - Direkt URL gönder, otomatik link olarak algılanır
+9. **Sıfır kategori hatası** - Manuel kategori yok, AI %95+ doğru
 
 ---
 

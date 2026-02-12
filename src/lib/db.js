@@ -616,6 +616,161 @@ export async function deleteRecipe(id) {
 }
 
 // ===================================
+// ENGLISH WORDS FUNCTIONS
+// ===================================
+
+/**
+ * Create a new English word
+ * @param {Object} data - Word data
+ * @param {string} data.english - English word
+ * @param {string} data.turkish - Turkish translation
+ * @param {string} data.example - Example sentence in English
+ * @param {string} [data.example_turkish] - Example translation in Turkish (optional)
+ * @returns {Promise<Object>} Created word
+ */
+export async function createEnglishWord(data) {
+  try {
+    const result = await sql`
+      INSERT INTO english_words (english, turkish, example, example_turkish)
+      VALUES (
+        ${data.english},
+        ${data.turkish},
+        ${data.example},
+        ${data.example_turkish || null}
+      )
+      RETURNING *
+    `
+    return result[0]
+  } catch (error) {
+    console.error('Database error in createEnglishWord:', error)
+    throw new Error(`Failed to create English word: ${error.message}`)
+  }
+}
+
+/**
+ * Get all English words
+ * @returns {Promise<Array>} Array of English words
+ */
+export async function getEnglishWords() {
+  try {
+    const words = await sql`
+      SELECT * FROM english_words
+      ORDER BY created_at DESC
+    `
+    return words
+  } catch (error) {
+    console.error('Database error in getEnglishWords:', error)
+    throw new Error(`Failed to get English words: ${error.message}`)
+  }
+}
+
+/**
+ * Get English word by ID
+ * @param {number} id - Word ID
+ * @returns {Promise<Object|null>} Word data or null
+ */
+export async function getEnglishWordById(id) {
+  try {
+    const result = await sql`
+      SELECT * FROM english_words WHERE id = ${id}
+    `
+    return result[0] || null
+  } catch (error) {
+    console.error('Database error in getEnglishWordById:', error)
+    throw new Error(`Failed to get English word: ${error.message}`)
+  }
+}
+
+/**
+ * Search English word by English text
+ * @param {string} word - English word to search
+ * @returns {Promise<Object|null>} Word data or null
+ */
+export async function searchEnglishWord(word) {
+  try {
+    const result = await sql`
+      SELECT * FROM english_words
+      WHERE LOWER(english) = LOWER(${word})
+      LIMIT 1
+    `
+    return result[0] || null
+  } catch (error) {
+    console.error('Database error in searchEnglishWord:', error)
+    throw new Error(`Failed to search English word: ${error.message}`)
+  }
+}
+
+/**
+ * Get English word statistics
+ * @returns {Promise<Object>} Statistics
+ */
+export async function getEnglishWordStats() {
+  try {
+    const totalResult = await sql`
+      SELECT COUNT(*) as count FROM english_words
+    `
+
+    return {
+      total: parseInt(totalResult[0].count),
+    }
+  } catch (error) {
+    console.error('Database error in getEnglishWordStats:', error)
+    throw new Error(`Failed to get English word stats: ${error.message}`)
+  }
+}
+
+/**
+ * Update an English word by ID
+ * @param {number} id - Word ID
+ * @param {Object} data - Fields to update
+ * @returns {Promise<Object>} Updated word
+ */
+export async function updateEnglishWord(id, data) {
+  try {
+    const result = await sql`
+      UPDATE english_words
+      SET
+        english = COALESCE(${data.english !== undefined ? data.english : null}, english),
+        turkish = COALESCE(${data.turkish !== undefined ? data.turkish : null}, turkish),
+        example = COALESCE(${data.example !== undefined ? data.example : null}, example),
+        example_turkish = COALESCE(${data.example_turkish !== undefined ? data.example_turkish : null}, example_turkish),
+        updated_at = NOW()
+      WHERE id = ${id}
+      RETURNING *
+    `
+    if (result.length === 0) {
+      throw new Error('English word not found')
+    }
+    return result[0]
+  } catch (error) {
+    console.error('Database error in updateEnglishWord:', error)
+    throw new Error(`Failed to update English word: ${error.message}`)
+  }
+}
+
+/**
+ * Delete an English word by ID
+ * @param {number} id - Word ID
+ * @returns {Promise<Object>} Deleted word
+ */
+export async function deleteEnglishWord(id) {
+  try {
+    const result = await sql`
+      DELETE FROM english_words
+      WHERE id = ${id}
+      RETURNING *
+    `
+    if (result.length === 0) {
+      throw new Error('English word not found')
+    }
+    return result[0]
+  } catch (error) {
+    console.error('Database error in deleteEnglishWord:', error)
+    throw new Error(`Failed to delete English word: ${error.message}`)
+  }
+}
+
+// ===================================
 // PLACES (MEKANLAR) FUNCTIONS
 // ===================================
 

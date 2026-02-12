@@ -26,6 +26,7 @@ const listelerItems = [
   { href: '/listeler/kitap', label: 'Kitap', emoji: '📚' },
   { href: '/listeler/film', label: 'Film & Dizi', emoji: '🎬' },
   { href: '/listeler/tarif', label: 'Tarifler', emoji: '🍳' },
+  { href: '/listeler/ingilizce', label: 'İngilizce', emoji: '🇬🇧' },
   { href: '/listeler/rusca', label: 'Rusça', emoji: '🇷🇺' },
   { href: '/kesifler/rusca-test', label: 'Rusça Test', emoji: '📝' },
   { href: '/listeler/personal', label: 'Personal', emoji: '🔒' },

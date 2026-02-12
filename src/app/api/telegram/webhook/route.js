@@ -5,6 +5,7 @@ import {
   createListItem,
   createRecipe,
   createPlace,
+  createEnglishWord,
 } from '@/lib/db'
 import {
   handleLink,
@@ -12,6 +13,7 @@ import {
   handleListItemWithAI,
   handleRecipe,
   handlePlace,
+  handleEnglishWord,
   isURL,
 } from '@/lib/gemini'
 
@@ -121,6 +123,14 @@ function parseMessage(text) {
     return { type: 'recipe', content }
   }
 
+  // ENGLISH WORD COMMAND (İngilizce Öğrenme)
+  // Goes to english_words table
+  if (text.startsWith('.i ') || text.startsWith('.i\n')) {
+    const content = text.replace(/^\.i[\s\n]*/, '').trim()
+    console.log('[parseMessage] Matched: .i → english-word')
+    return { type: 'english-word', content }
+  }
+
   // PLACES (Mekanlar)
   // Goes to places table
   if (text.startsWith('>mekan ') || text.startsWith('>mekan\n') ||
@@ -210,6 +220,11 @@ AI otomatik yazar/yönetmen/marka bulur:
 🍳 <b>TARİFLER</b>
 • /tarif [tarif metni]
   AI malzemeleri, yapılışı, süreyi analiz eder
+
+🇬🇧 <b>İNGİLİZCE KELİME</b>
+• .i [kelime] - İngilizce kelime ekle
+  AI Türkçe karşılık ve örnek cümle bulur
+  Örnek: .i serendipity
 
 📍 <b>MEKANLAR</b>
 • >mekan [mekan bilgisi]
@@ -359,6 +374,47 @@ mehmettemel.com/listeler/tarif`,
         return NextResponse.json({ ok: true, recipeId: recipe.id })
       } catch (error) {
         throw new Error(`Tarif eklenemedi: ${error.message}`)
+      }
+    }
+
+    // Handle English word with AI
+    if (parsed.type === 'english-word') {
+      console.log('🇬🇧 [ENGLISH] English word command detected!')
+      console.log('🇬🇧 [ENGLISH] Content:', parsed.content)
+
+      try {
+        console.log('🤖 [ENGLISH] Calling Gemini AI to process word...')
+        // Use Gemini AI to find translation and example
+        const wordData = await handleEnglishWord(parsed.content)
+        console.log('🤖 [ENGLISH] AI result:', wordData)
+
+        console.log('💾 [ENGLISH] Saving to database...')
+        const word = await createEnglishWord(wordData)
+        console.log('💾 [ENGLISH] Saved successfully! ID:', word.id)
+
+        const exampleTurkishText = word.example_turkish
+          ? `\n🇹🇷 ${word.example_turkish}`
+          : ''
+
+        await sendTelegramMessage(
+          chatId,
+          `✅ 🇬🇧 <b>İngilizce kelime eklendi!</b>
+
+📝 <b>${word.english}</b>
+🇹🇷 ${word.turkish}
+
+💬 Örnek:
+${word.example}${exampleTurkishText}
+
+ID: ${word.id}
+
+🔗 Kelimeye buradan ulaşabilirsiniz:
+mehmettemel.com/listeler/ingilizce`,
+        )
+
+        return NextResponse.json({ ok: true, wordId: word.id })
+      } catch (error) {
+        throw new Error(`İngilizce kelime eklenemedi: ${error.message}`)
       }
     }
 

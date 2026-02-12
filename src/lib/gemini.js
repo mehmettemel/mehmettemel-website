@@ -774,3 +774,86 @@ BİLGİ KAYNAKLARIN (KULLAN!):
   return validPlaces
 }
 
+/**
+ * Handle English word with Gemini AI
+ * Finds Turkish translation and example sentence
+ * @param {string} word - English word to translate
+ * @returns {Promise<Object>} Word data with Turkish translation and example
+ */
+export async function handleEnglishWord(word) {
+  const trimmedWord = word.trim()
+
+  const prompt = `Find information about this English word: "${trimmedWord}"
+
+Provide the Turkish translation and an example sentence in English showing how the word is used.
+
+Return ONLY a JSON object with this exact format (no markdown, no explanation):
+{
+  "english": "${trimmedWord}",
+  "turkish": "Turkish translation",
+  "example": "Example sentence in English using the word",
+  "example_turkish": "Turkish translation of the example sentence"
+}
+
+RULES:
+1. turkish: Must be a clear, accurate Turkish translation
+2. example: Must be a natural English sentence that uses the word
+3. example_turkish: Must be a natural Turkish translation of the example
+4. Keep the example sentence simple and practical (daily usage)
+5. If the word has multiple meanings, choose the most common one
+
+Examples:
+- Word: "serendipity"
+  → turkish: "mutlu tesadüf, beklenmedik keşif"
+  → example: "Meeting my best friend was pure serendipity."
+  → example_turkish: "En iyi arkadaşımla tanışmam tam bir mutlu tesadüftü."
+
+- Word: "resilient"
+  → turkish: "dayanıklı, esnek"
+  → example: "She remained resilient despite all the challenges."
+  → example_turkish: "Tüm zorluklara rağmen dayanıklı kaldı."
+
+Important:
+- Return ONLY the JSON object, nothing else
+- Do not use markdown code blocks
+- All translations must be in Turkish (Türkçe)
+- Example sentence must be practical and easy to understand`
+
+  try {
+    const response = await callGemini(prompt, 3, 2000)
+
+    // Clean response
+    let jsonText = response.trim()
+
+    // Remove markdown code blocks if present
+    if (jsonText.startsWith('```')) {
+      jsonText = jsonText.replace(/```json?\n?/g, '').replace(/```\n?$/g, '')
+    }
+
+    // Try to extract JSON from response if it contains extra text
+    const jsonMatch = jsonText.match(/\{[\s\S]*\}/)
+    if (jsonMatch) {
+      jsonText = jsonMatch[0]
+    }
+
+    const data = JSON.parse(jsonText)
+
+    console.log('[AI English] Processed word:', data)
+
+    // Validate required fields
+    if (!data.turkish || !data.example) {
+      throw new Error('AI response missing required fields')
+    }
+
+    return {
+      english: trimmedWord,
+      turkish: data.turkish,
+      example: data.example,
+      example_turkish: data.example_turkish || null,
+    }
+  } catch (error) {
+    console.error('[AI English] Failed to process word:', error)
+    throw new Error(`İngilizce kelime işlenemedi: ${error.message}`)
+  }
+}
+
