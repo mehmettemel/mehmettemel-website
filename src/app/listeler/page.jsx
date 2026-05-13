@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Container } from '@/components/Container'
-import { getListStats, getRecipeStats } from '@/lib/db'
+import { getRecipeStats } from '@/data/recipes'
 import { listCategories } from '@/data/list'
 
 export const revalidate = 60
@@ -8,29 +8,22 @@ export const revalidate = 60
 export const metadata = {
   title: 'Listeler - Takip Listelerim | Mehmet Temel',
   description:
-    'Okumak/izlemek/almak istediğim ve tamamladığım kitaplar, filmler, diziler ve ürünler. Kişisel takip listelerim ve önerilerim.',
+    'Tarifler, dil öğrenimi ve kişisel takip listelerim.',
   alternates: {
     canonical: 'https://mehmettemel.com/listeler',
   },
   openGraph: {
     title: 'Listeler - Takip Listelerim | Mehmet Temel',
     description:
-      'Okumak/izlemek/almak istediğim ve tamamladığım kitaplar, filmler, diziler ve ürünler.',
+      'Tarifler, dil öğrenimi ve kişisel takip listelerim.',
     url: 'https://mehmettemel.com/listeler',
     type: 'website',
   },
 }
 
-export default async function ListelerPage() {
-  // Get stats for all categories
-  let stats = {}
-  let recipeStats = null
-  try {
-    stats = await getListStats()
-    recipeStats = await getRecipeStats()
-  } catch (error) {
-    console.error('Failed to fetch list stats:', error)
-  }
+export default function ListelerPage() {
+  const stats = {}
+  const recipeStats = getRecipeStats()
 
   return (
     <Container>
@@ -41,7 +34,7 @@ export default async function ListelerPage() {
             📋 Listeler
           </h1>
           <p className="text-base text-muted-foreground sm:text-lg">
-            Takip etmek istediğim kitaplar, filmler ve ürünler
+            Tarifler, dil öğrenimi ve kişisel notlarım
           </p>
         </div>
 

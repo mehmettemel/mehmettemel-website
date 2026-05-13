@@ -28,8 +28,6 @@ export async function PUT(request, { params }) {
 
     // Revalidate relevant pages
     revalidatePath('/listeler')
-    revalidatePath('/listeler/kitap')
-    revalidatePath('/listeler/film')
 
     return NextResponse.json({ item })
   } catch (error) {
@@ -67,8 +65,6 @@ export async function DELETE(request, { params }) {
 
     // Revalidate relevant pages
     revalidatePath('/listeler')
-    revalidatePath('/listeler/kitap')
-    revalidatePath('/listeler/film')
 
     return NextResponse.json({ success: true, item })
   } catch (error) {

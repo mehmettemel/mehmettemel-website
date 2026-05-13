@@ -28,7 +28,6 @@ export async function PUT(request, { params }) {
 
     // Revalidate relevant pages
     revalidatePath('/kesifler')
-    revalidatePath('/kesifler/linkler')
     revalidatePath('/kesifler/alintilar')
 
     return NextResponse.json({ note })
@@ -70,12 +69,8 @@ export async function DELETE(request, { params }) {
 
     // Revalidate relevant pages based on note type
     revalidatePath('/kesifler')
-    if (existingNote) {
-      if (existingNote.note_type === 'link') {
-        revalidatePath('/kesifler/linkler')
-      } else if (existingNote.note_type === 'quote') {
-        revalidatePath('/kesifler/alintilar')
-      }
+    if (existingNote?.note_type === 'quote') {
+      revalidatePath('/kesifler/alintilar')
     }
 
     return NextResponse.json({ success: true, note })

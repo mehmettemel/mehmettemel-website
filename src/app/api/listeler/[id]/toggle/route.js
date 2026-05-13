@@ -30,9 +30,6 @@ export async function PATCH(request, { params }) {
     const updatedItem = await toggleListCheckbox(itemId, field)
 
     // Revalidate all list pages to reflect the update
-    revalidatePath('/listeler/kitap')
-    revalidatePath('/listeler/film')
-    revalidatePath('/listeler/urun')
     revalidatePath('/listeler')
 
     return NextResponse.json({

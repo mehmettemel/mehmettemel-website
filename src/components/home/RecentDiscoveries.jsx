@@ -1,9 +1,6 @@
 import Link from 'next/link'
 
 function getDisplayText(note) {
-  if (note.note_type === 'link') {
-    return note.title || note.text
-  }
   if (note.text) {
     const truncated =
       note.text.length > 60 ? note.text.substring(0, 60) + '...' : note.text
@@ -17,11 +14,6 @@ export function RecentDiscoveries({ notes }) {
     return null
   }
 
-  const typeConfig = {
-    link: { href: '/kesifler/linkler' },
-    quote: { href: '/kesifler/alintilar' },
-  }
-
   return (
     <section>
       <div className="mb-6 text-center">
@@ -31,28 +23,21 @@ export function RecentDiscoveries({ notes }) {
       </div>
 
       <div className="mx-auto w-full max-w-md space-y-3">
-        {notes.slice(0, 5).map((note) => {
-          const config = typeConfig[note.note_type] || typeConfig.quote
-          const displayText = getDisplayText(note)
-
-          return (
-            <div key={note.id} className="w-full text-center">
-              <Link
-                href={note.url || config.href}
-                target={note.url ? '_blank' : undefined}
-                rel={note.url ? 'noopener noreferrer' : undefined}
-                className="block w-full text-xs font-normal text-foreground transition-opacity hover:opacity-60"
-              >
-                {displayText}
-              </Link>
-            </div>
-          )
-        })}
+        {notes.slice(0, 5).map((note) => (
+          <div key={note.id} className="w-full text-center">
+            <Link
+              href="/kesifler/alintilar"
+              className="block w-full text-xs font-normal text-foreground transition-opacity hover:opacity-60"
+            >
+              {getDisplayText(note)}
+            </Link>
+          </div>
+        ))}
       </div>
 
       <div className="mt-6 text-center">
         <Link
-          href="/kesifler"
+          href="/kesifler/alintilar"
           className="text-xs text-muted-foreground transition-opacity hover:opacity-60"
         >
           Tümünü Gör →

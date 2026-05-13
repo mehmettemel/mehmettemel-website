@@ -43,19 +43,7 @@ export default function sitemap() {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/listeler/kitap`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/listeler/film`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/listeler/urun`,
+      url: `${baseUrl}/listeler/tarif`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,

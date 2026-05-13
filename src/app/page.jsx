@@ -1,6 +1,6 @@
 import { Container } from '../components/Container'
 import { getAllPosts } from '../lib/blog'
-import { getRecentNotes } from '../lib/db'
+import { getAllNotes } from '../data/notes'
 import { HomeHero } from '../components/home/HomeHero'
 import { HomeResearches } from '../components/home/HomeResearches'
 import { RecentDiscoveries } from '../components/home/RecentDiscoveries'
@@ -41,17 +41,13 @@ export const metadata = {
   },
 }
 
-export default async function Home() {
+export default function Home() {
   const allPosts = getAllPosts()
   const recentPosts = allPosts.slice(0, 3)
 
-  // Fetch recent notes from database
-  let recentNotes = []
-  try {
-    recentNotes = await getRecentNotes(8)
-  } catch (error) {
-    console.error('Failed to fetch recent notes:', error)
-  }
+  // Get recent notes from static data
+  const allNotes = getAllNotes()
+  const recentNotes = allNotes.slice(0, 8)
 
   return (
     <Container>

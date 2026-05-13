@@ -1,18 +1,14 @@
 import { Container } from '@/components/Container'
 import { EnglishPageClient } from './EnglishPageClient'
-import { getEnglishWords } from '@/lib/db'
-
-// ISR: Revalidate every 60 seconds
-export const revalidate = 60
+import { getAllEnglishWords } from '@/data/english-words'
 
 export const metadata = {
   title: 'İngilizce - Mehmet Temel',
   description: 'İngilizce kelime öğrenme sistemi - Günlük kullanılan kelimeler',
 }
 
-export default async function EnglishPage() {
-  // Fetch all words from database
-  const words = await getEnglishWords()
+export default function EnglishPage() {
+  const words = getAllEnglishWords()
 
   return (
     <Container>
@@ -39,22 +35,6 @@ export default async function EnglishPage() {
 
         {/* Client component for interactive functionality */}
         <EnglishPageClient words={words} />
-
-        {/* Info Card */}
-        <div className="mt-12 rounded-xl border border-border bg-secondary/20 p-6">
-          <h2 className="mb-3 text-lg font-semibold text-foreground">
-            💡 Telegram Bot ile Kelime Ekle
-          </h2>
-          <p className="mb-3 text-sm text-muted-foreground">
-            Telegram bot üzerinden <code className="rounded bg-primary/10 px-1.5 py-0.5 font-mono text-primary">.i</code> komutu ile yeni kelimeler ekleyebilirsiniz:
-          </p>
-          <div className="rounded-lg bg-background p-4 font-mono text-sm">
-            <p className="text-muted-foreground">.i serendipity</p>
-          </div>
-          <p className="mt-3 text-xs text-muted-foreground">
-            AI otomatik olarak Türkçe karşılığını ve örnek cümle bulacak.
-          </p>
-        </div>
       </div>
     </Container>
   )

@@ -1,14 +1,11 @@
 import { Container } from '@/components/Container'
-import { getRecipes } from '@/lib/db'
+import { getAllRecipes } from '@/data/recipes'
 import { RecipeList } from '@/components/recipes/RecipeList'
 import { getListCategory } from '@/data/list'
 
-export const revalidate = 60
-
 export const metadata = {
   title: 'Tarifler - Listeler | Mehmet Temel',
-  description:
-    'Yemek tarifleri ve mutfak notları. Telegram botu ile eklenen ve AI tarafından düzenlenen tarifler.',
+  description: 'Yemek tarifleri ve mutfak notları.',
   alternates: {
     canonical: 'https://mehmettemel.com/listeler/tarif',
   },
@@ -20,16 +17,9 @@ export const metadata = {
   },
 }
 
-export default async function TariflerPage() {
+export default function TariflerPage() {
   const category = getListCategory('tarif')
-
-  // Fetch recipes
-  let recipes = []
-  try {
-    recipes = await getRecipes()
-  } catch (error) {
-    console.error('Failed to fetch recipes:', error)
-  }
+  const recipes = getAllRecipes()
 
   return (
     <Container>
@@ -46,10 +36,6 @@ export default async function TariflerPage() {
           </div>
           <p className="text-base text-muted-foreground">
             {category?.description}
-          </p>
-          <p className="mt-2 text-sm text-muted-foreground">
-            💡 Telegram botundan <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs">/tarif</code> komutu ile yeni tarif ekleyebilirsiniz.
-            Gemini AI malzemeleri ve yapılışı analiz edip düzenler.
           </p>
         </div>
 

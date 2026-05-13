@@ -1,9 +1,7 @@
-import { getNotes } from '@/lib/db'
 import { Container } from '@/components/Container'
 import { QuotesContent } from '@/components/kesifler/QuotesContent'
+import { getNotesByCategory } from '@/data/notes'
 import Link from 'next/link'
-
-export const revalidate = 60
 
 export const metadata = {
   title: 'Alıntılar - Keşifler | Mehmet Temel',
@@ -23,18 +21,9 @@ function ArrowLeftIcon(props) {
   )
 }
 
-export default async function QuotesPage({ searchParams }) {
-  const params = await searchParams
-  const category = params?.category || 'all'
-
-  const quotesData = await getNotes({
-    type: 'quote',
-    category: category !== 'all' ? category : undefined,
-    limit: 1000,
-  }).catch(() => ({
-    notes: [],
-    total: 0,
-  }))
+export default function QuotesPage({ searchParams }) {
+  const category = searchParams?.category || 'all'
+  const notes = getNotesByCategory(category)
 
   return (
     <Container>
@@ -49,7 +38,7 @@ export default async function QuotesPage({ searchParams }) {
         </Link>
 
         <div className="mx-auto max-w-7xl">
-          {quotesData.notes.length === 0 ? (
+          {notes.length === 0 ? (
             <div className="py-12 text-center">
               <div className="mb-4 text-6xl">💭</div>
               <p className="text-base text-muted-foreground">
@@ -57,7 +46,7 @@ export default async function QuotesPage({ searchParams }) {
               </p>
             </div>
           ) : (
-            <QuotesContent quotes={quotesData.notes} />
+            <QuotesContent quotes={notes} />
           )}
         </div>
       </div>

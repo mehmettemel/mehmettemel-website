@@ -17,14 +17,10 @@ import {
 } from './ui/navigation-menu'
 
 const kesiflerItems = [
-  { href: '/kesifler/linkler', label: 'Linkler', emoji: '🔗' },
   { href: '/kesifler/alintilar', label: 'Alıntılar', emoji: '💭' },
-  { href: '/kesifler/mekanlar', label: 'Mekanlar', emoji: '📍' },
 ]
 
 const listelerItems = [
-  { href: '/listeler/kitap', label: 'Kitap', emoji: '📚' },
-  { href: '/listeler/film', label: 'Film & Dizi', emoji: '🎬' },
   { href: '/listeler/tarif', label: 'Tarifler', emoji: '🍳' },
   { href: '/listeler/ingilizce', label: 'İngilizce', emoji: '🇬🇧' },
   { href: '/listeler/rusca', label: 'Rusça', emoji: '🇷🇺' },

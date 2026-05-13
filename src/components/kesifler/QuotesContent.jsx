@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Shuffle, Grid3x3 } from 'lucide-react'
-import { quoteCategories } from '../../data/kesifler'
+import { noteCategories as quoteCategories } from '../../data/notes'
 
 const ITEMS_PER_PAGE = 10
 

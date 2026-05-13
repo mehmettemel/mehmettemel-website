@@ -10,16 +10,8 @@ export const metadata = {
 
 const discoveryTypes = [
   {
-    title: 'Linkler',
-    href: '/kesifler/linkler',
-  },
-  {
     title: 'Alıntılar',
     href: '/kesifler/alintilar',
-  },
-  {
-    title: 'Mekanlar',
-    href: '/kesifler/mekanlar',
   },
 ]
 

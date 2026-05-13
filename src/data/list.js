@@ -5,27 +5,6 @@
 
 export const listCategories = [
   {
-    id: 'kitap',
-    name: 'Kitap',
-    emoji: '📚',
-    icon: '📖',
-    description: 'Okumak istediğim veya okuduğum kitaplar',
-  },
-  {
-    id: 'film',
-    name: 'Film & Dizi',
-    emoji: '🎬',
-    icon: '📺',
-    description: 'İzlemek istediğim veya izlediğim filmler ve diziler',
-  },
-  {
-    id: 'urun',
-    name: 'Ürünler',
-    emoji: '🛍️',
-    icon: '📦',
-    description: 'Almak istediğim veya aldığım ürünler',
-  },
-  {
     id: 'rusca',
     name: 'Rusça',
     emoji: '🇷🇺',
