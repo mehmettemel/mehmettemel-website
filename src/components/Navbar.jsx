@@ -16,10 +16,6 @@ import {
   NavigationMenuTrigger,
 } from './ui/navigation-menu'
 
-const kesiflerItems = [
-  { href: '/kesifler/alintilar', label: 'Alıntılar', emoji: '💭' },
-]
-
 const listelerItems = [
   { href: '/listeler/tarif', label: 'Tarifler', emoji: '🍳' },
   { href: '/listeler/ingilizce', label: 'İngilizce', emoji: '🇬🇧' },
@@ -48,37 +44,7 @@ function DesktopNav() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-transparent hover:text-foreground focus:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-foreground">
-            Keşifler
-          </NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid w-[220px] gap-1 p-2">
-              <li>
-                <NavigationMenuLink asChild>
-                  <Link
-                    href="/kesifler"
-                    className="flex items-center gap-2 rounded-md px-3 py-2.5 text-sm font-semibold transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset active:bg-secondary/80"
-                  >
-                    <span>📂</span>
-                    <span>Tümü</span>
-                  </Link>
-                </NavigationMenuLink>
-              </li>
-              {kesiflerItems.map((item) => (
-                <li key={item.href}>
-                  <NavigationMenuLink asChild>
-                    <Link
-                      href={item.href}
-                      className="flex items-center gap-2 rounded-md px-3 py-2.5 text-sm transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset active:bg-secondary/80"
-                    >
-                      <span>{item.emoji}</span>
-                      <span>{item.label}</span>
-                    </Link>
-                  </NavigationMenuLink>
-                </li>
-              ))}
-            </ul>
-          </NavigationMenuContent>
+          <NavLink href="/kesifler/alintilar">Alıntılar</NavLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
@@ -151,29 +117,13 @@ function MobileNav() {
             İncelemeler
           </Link>
 
-          {/* Keşifler Section */}
-          <div className="mt-4 mb-1 border-t border-border pt-4 px-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground/70">
-            Keşifler
-          </div>
           <Link
-            href="/kesifler"
+            href="/kesifler/alintilar"
             onClick={closeSheet}
-            className="touch-manipulation flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-muted-foreground transition-colors hover:bg-secondary/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset active:bg-secondary"
+            className="touch-manipulation rounded-lg px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset active:bg-secondary"
           >
-            <span>📂</span>
-            <span>Tümü</span>
+            Alıntılar
           </Link>
-          {kesiflerItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={closeSheet}
-              className="touch-manipulation flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset active:bg-secondary"
-            >
-              <span className="text-base">{item.emoji}</span>
-              <span>{item.label}</span>
-            </Link>
-          ))}
 
           {/* Listeler Section */}
           <div className="mt-4 mb-1 border-t border-border pt-4 px-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground/70">
