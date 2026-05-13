@@ -1,0 +1,6 @@
+{
+  "version": "0.1.0",
+  "organization": "Mehmet Temel",
+  "date": "May 2026",
+  "abstract": "Kısa not, alıntı veya bilgi eklemek için kullanılan skill. Notları src/data/notes.js dosyasına 4 kategoriden birine (saglik, gida, kisisel, genel) ekler."
+}

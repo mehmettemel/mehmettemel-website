@@ -358,6 +358,11 @@ const genel = [
     text: "Consumerism is the best way to keep people distracted and believing they're free — while quietly shaping their desires to serve the system.",
   },
   {
+    id: 1747136400000,
+    text: 'All profits are privatized. All losses are socialized.',
+    author: 'Professor Jiang',
+  },
+  {
     id: 1706591277060,
     text: 'toplumların başarısının sistemlerinden (demokrasi, komünizm vb.) ziyade, o sistemin "ne kadar açık" olduğuyla ilgili olmasıdır. Bir toplum yükselirken liyakat, eleştiri ve rıza ile beslenir; ancak olgunlaştıkça kaçınılmaz bir bürokratik hantallığa gömülür. Bu aşamada yönetim, sistemi iyileştirmek yerine kendi koltuğunu korumaya odaklandığı için "aldatma" mekanizmasını devreye sokar. Bu, aslında sonun başlangıcıdır; çünkü eleştirinin bastırıldığı bir sistem, hatalarını göremez hale gelir.\n\nAsıl can alıcı nokta ise çöküşün hızıdır. Toplumlar yavaş yavaş geriler ama aniden çökerler. Prof. Jiang\'ın "Mükemmel Fırtına" dediği bu durum; savaş, kıtlık ve salgın gibi dış şokların aynı anda sistemi vurmasıyla gerçekleşir. Otoriterleşen ve eleştiriyi "ihanet" sayan bir yönetim, bu çoklu krizlere esnek bir cevap veremez. Sonuç olarak güç sahipleri, halkın kendilerine isyan etmesini (devrimi) önlemek için dikkat dağıtıcı, anlamsız dış savaşlara yönelirler.\n\nKısacası; önümüzdeki 20 yıl için çizilen tablo, ahlaki bir "doğru-yanlış" meselesi değil, gücün hayatta kalma içgüdüsüdür. Batı dünyasında demokrasinin zayıflaması ve ekonomik krizlerin artması, sistemin rızadan zorlamaya (coercion) geçişinin bir işaretidir. Profesöre göre dünya artık mantık veya ahlakla değil, çıplak güç dinamikleriyle yönetilen bir evreye girmektedir.',
   },

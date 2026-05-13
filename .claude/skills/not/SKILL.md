@@ -1,3 +1,8 @@
+---
+name: not
+description: Kısa not, alıntı veya bilgi eklemek için kullanılır. /not komutu ile tetiklenir. Notları src/data/notes.js dosyasına kategori bazlı ekler (saglik, gida, kisisel, genel).
+---
+
 # Not Ekle
 
 Kullanıcı kısa bir not, alıntı veya bilgi verdiğinde bu notu `src/data/notes.js` dosyasına ekler.

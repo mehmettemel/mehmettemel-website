@@ -1,48 +1,29 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { englishWords } from '@/data/english-words'
 
 /**
- * Hook to fetch and manage English words for the floating widget
+ * Hook to manage English words for the floating widget
  */
 export function useEnglishWords() {
-  const [words, setWords] = useState([])
   const [currentWord, setCurrentWord] = useState(null)
-  const [loading, setLoading] = useState(true)
 
-  // Fetch words on mount
+  // Set initial random word on mount
   useEffect(() => {
-    async function fetchWords() {
-      try {
-        const response = await fetch('/api/english-words')
-        const data = await response.json()
-        if (data.words && data.words.length > 0) {
-          setWords(data.words)
-          // Set initial random word
-          const randomIndex = Math.floor(Math.random() * data.words.length)
-          setCurrentWord(data.words[randomIndex])
-        }
-      } catch (error) {
-        console.error('Failed to fetch English words:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchWords()
+    const randomIndex = Math.floor(Math.random() * englishWords.length)
+    setCurrentWord(englishWords[randomIndex])
   }, [])
 
   // Rotate word every 20 seconds
   useEffect(() => {
-    if (words.length === 0) return
-
     const interval = setInterval(() => {
-      const randomIndex = Math.floor(Math.random() * words.length)
-      setCurrentWord(words[randomIndex])
-    }, 20000) // 20 seconds
+      const randomIndex = Math.floor(Math.random() * englishWords.length)
+      setCurrentWord(englishWords[randomIndex])
+    }, 20000)
 
     return () => clearInterval(interval)
-  }, [words])
+  }, [])
 
-  return { currentWord, loading }
+  return { currentWord, loading: false }
 }
