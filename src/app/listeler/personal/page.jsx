@@ -22,10 +22,6 @@ const personalCategories = [
     title: 'Sağlık',
     href: '/listeler/personal/saglik',
   },
-  {
-    title: 'Komutlar',
-    href: '/admin/telegram',
-  },
 ]
 
 export default async function PersonalPage() {

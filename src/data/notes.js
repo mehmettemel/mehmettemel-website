@@ -128,6 +128,14 @@ const saglik = [
     text: 'Narı kabuğundaki beyaz liflerle birlikte tüketin veya suyunu öyle sıkın. En değerli polifenoller (elajotaninler) o beyaz liflerde ve çekirdektedir.',
     author: 'Osman Müftüoğlu',
   },
+  {
+    id: 1747136800000,
+    text: 'Yemek sonrası oluşan ağır yorgunluk ve uyku halini (postprandiyal somnolans) önlemek için yemekten 30 dakika önce 1 taze limonun suyunu sıkıp, eşit miktarda suyla (1:1 oranında) karıştırarak içmek.',
+  },
+  {
+    id: 1747136800001,
+    text: 'Düzenli kan testi yaptırmayı, özellikle testosteron seviyelerini kontrol etmeyi tavsiye ediyor. Çünkü birçok "zihinsel" sorun (öfke, irritasyon, depresyon gibi) aslında hormonal dengesizlikler, enflamasyon veya besin eksikliklerinden kaynaklanabiliyor. Bunları erken tespit etmek, gereksiz terapi veya ilaç yerine kök nedeni çözmeyi sağlar.',
+  },
 ]
 
 const gida = [
@@ -158,6 +166,34 @@ const gida = [
   {
     id: 1706940187938,
     text: 'Karaciğerin en büyük dostu sülfür zengini gıdalardır: Lahana, turp, brokoli, karnabahar. Karaciğerdeki yağı yakmak için en az 7500 adım atmalısınız.',
+  },
+  {
+    id: 1747136900000,
+    text: "Balık pişirmeden önce içindeki Omega-3'ü korumak için limon, soğan ve karabiber ile marine edin.",
+  },
+  {
+    id: 1747136900001,
+    text: "Balığı fırında hazırlarken küçük balıklarda 150-160 dereceyi, büyük balıklarda ise en fazla 180 dereceyi geçmeyin. Yüksek sıcaklık omega-3'ü yok eder.",
+  },
+  {
+    id: 1747136900002,
+    text: 'Mevsiminde olmayan hiçbir sebze ve meyveyi almayın. Yaz güneşinde yetişen domates ile kışın serada yetişen domates arasında, içerdiği likopen ve polifenol (koruyucu maddeler) açısından en az %25-%30\'luk ciddi bir azalma farkı vardır.',
+  },
+  {
+    id: 1747136900003,
+    text: 'Sebzelerdeki tarım ilaçlarını biraz arındırmak için; 10-15 dk tuzlu suda bekletin, ardından 1 litre suya 1 yemek kaşığı karbonat oranlı suda 15-20 dakika daha bekletin.',
+  },
+  {
+    id: 1747136900004,
+    text: 'Sebzeleri pişirmek veya turşulamak (fermente etmek) üzerlerindeki tarım ilaçlarını büyük oranda inaktive eder (yok eder). Bu yüzden asıl özen çiğ yenilen salatalık malzemelere gösterilmelidir.',
+  },
+  {
+    id: 1747136900005,
+    text: 'Evinizdeki boş saksılarda çiçek yerine maydanoz yetiştirin. Her gün güvendiğiniz topraktan çıkan 3 yaprak maydanoz yemek bile hücreleri harika besler.',
+  },
+  {
+    id: 1747136900006,
+    text: "Marketten alınan sebze meyveler koptuktan 5 gün sonra size ulaşır ve bu 5 gün içinde vitamin/mineral değerlerinin %30'u yok olur. Bu yüzden haftalık pazar alışverişi yerine, azar azar alıp taze tüketmeye çalışın.",
   },
 ]
 
@@ -294,6 +330,40 @@ const kisisel = [
     id: 1706765703754,
     text: 'Güçlü insanların en büyük eksiği "Zaman"dır; onlara zaman kazandıracak tekliflerle gidin.',
   },
+  {
+    id: 1747136500000,
+    text: 'The things you are drawn to naturally matter a lot. They are clues. Your job is to figure out why.',
+  },
+  {
+    id: 1747136500001,
+    text: 'Sadece "daha çok çalışarak" ilerlerseniz, tüm enerjinizi tüketip kesinlikle tükenmişlik (burnout) yaşarsınız. Bu da sarkaç etkisi yaratarak "hiçbir şey yapmak istemiyorum, sadece asalak olmak istiyorum" aşamasına geçmenize neden olur.\n\nÇabalarınızda yapacağınız ufak bir kaydırma/yön değişimi, harcadığınız enerjiden alacağınız verimi (yield) büyük ölçüde değiştirecektir. Çok oyunculu rekabetçi oyunlarda (Dota 2, LoL, Valorant vb.) üst rütbelere çıkmanın yolu sadece çok oynamak değildir. 1-2 yeni mekaniği "anlamak", saatlerce efor sarf etmekten çok daha fazla rütbe kazandırır.',
+  },
+  {
+    id: 1747136500002,
+    text: 'Kıskançlık da sınıfsaldır. Kimse milyarderlerin yatlarını, zenginlerin huzurlu hayatlarını kolay kolay kıskanmaz; çünkü onlar buna "layıktır." Ama komşu Ali işinde ufak bir terfi alsın, sınıf arkadaşı Ayşe kendi kişisel gelişimi ve özgürlüğü için özgür bir karar alsın, hemen dillerine dolarlar.\n\nBu yüzden biri sizi kıskanıyorsa, kendince sizi kendiyle aynı seviyede sanıyordur. Size "bunu yakıştıramadığı" için böyle davranıyordur. Kıskançlık bir tür sınıfsal şiddettir ve muhatapları "sadece" kişinin kendisine eşit sandığı kişilerdir.',
+  },
+  {
+    id: 1747136600000,
+    text: 'Enjoy being while becoming.',
+  },
+  {
+    id: 1747136600001,
+    text: 'Erkek acizleştikçe kadın zalimleşir.',
+  },
+  {
+    id: 1747136600002,
+    text: 'Kasten "Hayır" cevabı alacağınız eylemlere girişin; yeteneksiz olduğunuz işlere başvurun, sizden daha havalı insanlara arkadaşlık/çıkma teklif edin. Sürtünmesiz dijital dünya direnci yok ediyor; sıfırdan başarılı olan tüm girişimcilerin tek ortak özelliği reddedilmeyi sindirip devam edebilmeleridir.\n\nÇocuk yetiştirmek, bir hayır kurumuna adanmak gibi, verdiğiniz emeğin ve sevginin matematiksel olarak size geri dönmesinin imkansız olduğu alanlara yönelin. Kapitalist işlem mantığının bittiği yerde gerçek varoluşsal amaç başlar.',
+    author: 'Scott Galloway',
+  },
+  {
+    id: 1747136600003,
+    text: 'Poor men trust words. Smart men trust patterns. Patterns never lie.',
+  },
+  {
+    id: 1747136700000,
+    text: 'When you arise in the morning think of what a privilege it is to be alive, to think, to enjoy, to love.',
+    author: 'Marcus Aurelius',
+  },
 ]
 
 const genel = [
@@ -361,6 +431,18 @@ const genel = [
     id: 1747136400000,
     text: 'All profits are privatized. All losses are socialized.',
     author: 'Professor Jiang',
+  },
+  {
+    id: 1747136600004,
+    text: 'Güç, insanların dikkatini ve odaklanmasını yönlendirme kapasitesidir. Gerçek servet (wealth) para değil, bizim dikkatimiz ve bilincimizdir. Para sadece bu serveti depolayan bir araçtır.\n\nPara ve sermaye, insan bilincini ve odaklanmış dikkatini emip depolayan ve bunu "zenginliğe" dönüştüren mekanizmalardır. İçinde yaşadığımız gerçeklik, elitler (oyun kurucular) için bizim bilincimizden zenginlik çıkarmak üzere yapılandırılmıştır.',
+  },
+  {
+    id: 1706591277060,
+    text: 'Erkekler milyonlarca yıl boyunca avlanma odaklı olduğu için analitik, mantıksal, kural bazlı (matematik, mühendislik, müzik yapısı) sistemlerde gelişti. Kadınlar bebeği yüzünün önünde tutup eğittiği için linguistik becerilerde, beden dilini okumada, uzun vadeli vizyonda ve empati/güvende gelişti.',
+  },
+  {
+    id: 1747136700002,
+    text: 'The difference between animals and humans is that animals would never allow the dumbest member of the herd to lead them.',
   },
   {
     id: 1706591277060,
