@@ -25,7 +25,7 @@ export async function callGemini(prompt, retries = 3, delay = 2000) {
     throw new Error('GEMINI_API_KEY environment variable is not defined')
   }
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`
 
   const payload = {
     contents: [
@@ -53,6 +53,8 @@ export async function callGemini(prompt, retries = 3, delay = 2000) {
         // Retry on overload or resource exhausted
         if (
           json.error.message.includes('overloaded') ||
+          json.error.message.includes('high demand') ||
+          json.error.message.includes('temporarily') ||
           json.error.status === 'RESOURCE_EXHAUSTED'
         ) {
           if (attempt < retries) {
