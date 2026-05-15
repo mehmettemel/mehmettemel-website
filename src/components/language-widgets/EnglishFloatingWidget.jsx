@@ -19,7 +19,7 @@ export function EnglishFloatingWidget() {
 
   return (
     <div
-      className="group fixed bottom-6 left-6 z-40"
+      className="group fixed bottom-6 left-6 z-40 hidden md:block"
       onMouseEnter={() => setIsExpanded(true)}
       onMouseLeave={() => setIsExpanded(false)}
     >

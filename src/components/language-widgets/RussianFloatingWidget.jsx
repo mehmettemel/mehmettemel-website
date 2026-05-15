@@ -13,7 +13,7 @@ export function RussianFloatingWidget() {
 
   return (
     <div
-      className="group fixed bottom-6 right-6 z-40"
+      className="group fixed bottom-6 right-6 z-40 hidden md:block"
       onMouseEnter={() => setIsExpanded(true)}
       onMouseLeave={() => setIsExpanded(false)}
     >
