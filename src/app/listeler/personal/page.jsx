@@ -22,6 +22,10 @@ const personalCategories = [
     title: 'Sağlık',
     href: '/listeler/personal/saglik',
   },
+  {
+    title: 'Kadınlar',
+    href: '/listeler/personal/kadinlar',
+  },
 ]
 
 export default async function PersonalPage() {

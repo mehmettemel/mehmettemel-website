@@ -136,6 +136,10 @@ const saglik = [
     id: 1747136800001,
     text: 'Düzenli kan testi yaptırmayı, özellikle testosteron seviyelerini kontrol etmeyi tavsiye ediyor. Çünkü birçok "zihinsel" sorun (öfke, irritasyon, depresyon gibi) aslında hormonal dengesizlikler, enflamasyon veya besin eksikliklerinden kaynaklanabiliyor. Bunları erken tespit etmek, gereksiz terapi veya ilaç yerine kök nedeni çözmeyi sağlar.',
   },
+  {
+    id: 1747308000000,
+    text: 'Hastalanmamak için yapılması gerekenler:\n- Telefonunuzu her gün dezenfekte edin. Telefon inanılmaz miktarda mikrop taşır.\n- Küçük çocuklardan uzak durun. Çocuklar (özellikle kreş ve okul çağındakiler) sürekli yeni virüsler getirir.\n- Elleri sık sık yıkayın.\n- Elleri, özellikle yıkanmamışken gözlere, burna veya ağza götürmeyin.\n- Sauna kullanın ama testisleri soğuk tutun. Kalabalık alanlarda N95 maske takın.\n- Bağışıklık güçlendirici karışım: sarımsak, zencefil, bal ve zerdeçal.',
+  },
 ]
 
 const gida = [
@@ -251,10 +255,6 @@ const kisisel = [
     text: "Your salary is based on how hard you are to replace, not how hard you work.",
   },
   {
-    id: 1706968653184,
-    text: "Unpopular but 10/10 recommend learning how to shamelessly ask for all that you want. you'll be surprised at how many people are willing to simply give it to you.",
-  },
-  {
     id: 1706595828520,
     text: '"Ekran süresini" (screen time) "insan süresiyle" (people time) değiştirin.',
   },
@@ -269,10 +269,6 @@ const kisisel = [
   {
     id: 1706833834680,
     text: "If you can't decide, the answer is No.",
-  },
-  {
-    id: 1706680815621,
-    text: 'İki seçenek arasına, birine benzeyen ama ondan daha kötü olan üçüncü bir yem seçenek eklendiğinde insanlar o benzer olan iyi seçeneğe yönelirler. Bir ürünü satmak istiyorsanız yanına daha pahalı ve daha az özellikli bir yem model koyun.',
   },
   {
     id: 1706401658301,
@@ -319,10 +315,6 @@ const kisisel = [
     text: 'Kıyaslama, yaratıcılığın katilidir. Aynı anda hem uyum sağla (fit in) hem de öne çık (stand out) paradoksu insanı ezer.',
   },
   {
-    id: 1705262924866,
-    text: 'Sarkazm (İğneleme): Kelime anlamı Yunanca "etini koparmak"tan gelir. Netlik ve dürüstlük gerektiren durumları mizahla örtbas etmektir.',
-  },
-  {
     id: 1708409128331,
     text: 'Zamanın neden yaşlandıkça hızlandığını biliyor musun? Çünkü beynin yeni deneyim almayı bıraktığında günleri birbirinden ayırt edemiyor. Pazartesi ile Cuma aynı hissettiriyor. Ocak ile Haziran arasında fark kalmıyor. Bir bakıyorsun 3 yıl geçmiş ama aklında kalan tek bir an bile yok.\n\nBen bunu bu sene fark ettim. Rutin ile geçen ayları yaşıyordum. Ev, okul, spor, ev. Takvime baktığımda aylar uçmuş gitmiş ama hafızamda hiçbir şey yok. Sanki o zaman hiç yaşanmamış gibi. Sonra 10 günlüğüne bir yurtdışı tatili yaptım ve o 10 gün hafızamda 6 aydan daha uzun yer kaplıyor. Neden? Çünkü beynim yeni uyaranlarla karşılaştı. Yeni sokaklar, yeni insanlar, yeni tatlar, yeni kokular. Her yeni deneyim beynin için bir zaman işareti oluşturuyor ve geçmişe baktığında o dönem daha uzun hissettiriyor.\n\nSeyahat etmek lüks değil, zamanı yavaşlatmanın en güçlü aracı. Bunu söylerken illa Baliye git, Maldivlere uç demiyorum. Hiç gitmediğin bir ilçeye git, orada bir lokantada yemek ye, insanlarla konuş. Bu bile yeterli ama evde boş boş oturup aynı rutinde ömrü çürütme. Önemli olan yenilik. Beynin rutin dışı bir şeyle karşılaştığında bütün duyular açılıyor, dikkat seviyesi tavan yapıyor ve o anı hafızana kazıyorsun.\n\nŞimdi düşün. 80 yaşına geldiğinde geriye baktığında ne görmek istersin? Her gün aynı odada aynı ekrana bakarak geçirdiğin binlerce günü mü yoksa farklı yerlerde farklı insanlarla yaşadığın yüzlerce hikayeyi mi? İkisinin toplam süresi aynı olabilir ama birinde yaşamış hissedersin diğerinde sadece var olmuş.\n\nYeni deneyimler sadece zamanı yavaşlatmıyor. Ruh halini düzeltiyor, yaratıcılığı artırıyor, insanlarla bağ kurmayı kolaylaştırıyor. Sürekli aynı ortamda aynı şeyleri yapan biri bir süre sonra robotlaşıyor. Ama her ay en azından bir tane yeni deneyim yaşayan biri canlı kalıyor.\n\nBunun için zengin olmana gerek yok. Yapman gereken tek şey konfor alanından çıkmak. Hiç gitmediğin bir semtte yürü, hiç denemediğin bir yemek ye, hiç konuşmadığın bir insanla sohbet aç. Hepsi bedava ve hepsi beynin için yepyeni bir uyaran.\n\nHayatını dolu yaşamak istiyorsan yeni şeyler denemeyi bırakma. Rutin seni öldürüyor, yenilik seni yaşatıyor. Geriye baktığında pişman olacağın şey yanlış yere gitmiş olmak değil hiçbir yere gitmemiş olmak olacak.',
   },
@@ -363,6 +355,15 @@ const kisisel = [
     id: 1747136700000,
     text: 'When you arise in the morning think of what a privilege it is to be alive, to think, to enjoy, to love.',
     author: 'Marcus Aurelius',
+  },
+  {
+    id: 1747308100000,
+    text: 'Çoğu kişi ilişkilerin "tükenebilir" olduğunu sanır (birinden iyilik istersen kredin biter sanırlar). Ferrazzi ise tam tersini söyler: İlişkiler kas gibidir; ne kadar çok çalıştırırsan o kadar güçlenir ve büyür.\n\nSadece yakın arkadaşların sana yeni bilgi getiremez çünkü onlar da senin bildiklerini biliyor. Sana asıl fırsatları "zayıf bağlar" yani çok sık görüşmediğin ama farklı dünyalardan olan insanlar (fringe) getirir.\n\nSosyal medyayı sadece ne yediğini paylaşmak için kullanma. Alanında bir "uzman" gibi içerik üret. Eğer içerik üretirsen, insanlar seni bulmaya başlar; sen onları kovalamazsın.\n\nİnsanları doğum günlerinde değil, "aklıma geldin" diyerek sebepsizce ara/yaz. Ama en etkili pinging doğum günleridir; çünkü herkes unutulduğunu sandığı o gün hatırlanmak ister.\n\nBirisi bir probleminden mi bahsetti? Hemen rehberini aç ve o problemi çözebilecek diğer arkadaşını ara. Onları tanıştır ve aradan çekil.\n\nBir insanın kalbine girmek istiyorsan bu üçünden birine dokun. Çocuğuna staj ayarlamak veya bir sağlık sorunu için doktor önermek, ömür boyu sürecek bir sadakat yaratır.',
+    author: 'Keith Ferrazzi',
+  },
+  {
+    id: 1747308200000,
+    text: 'Antithesis (Karşıtlık) - Beyin İkilikleri Sever: İnsan beyni zıtlıklarla çalışır. Her şeyi siyah-beyaz görmek isteriz. Eğer bir şeyi tanımlamak istiyorsan, ne olmadığını da söyle. Teknik: "X, Y\'dir" demek yerine; "X, Y\'dir; Z değildir" formatını kullan. Örnek: Neil Armstrong\'un "Benim için küçük, insanlık için büyük bir adım" sözü. Zıtlık (küçük adım vs büyük adım) cümleyi ölümsüzleştirir.\n\nPeriodic Sentences (Periyodik Cümleler) - Tansiyon Yaratmak: Cümlenin ana fiilini veya ana fikrini en sona saklamak. Okuyucu veya dinleyici, cümlenin nereye gideceğini bilmediği için nefesini tutup sonunu bekler. Örnek: "Her ne kadar yorgun olsam da, hava berbat olsa da, cebimde beş kuruş kalmasa da... geliyorum." Eğer ana fikri başta verirsen etkisi sıfırlanır. Heyecan yaratmak istiyorsan ana fiili sona at.\n\nHendiadys - Şiirsel Sis: Bir sıfat tamlamasını ("kızgın köpek") alıp, iki isme dönüştürmek ("köpek ve kızgınlık"). Bu teknik cümleye mantıksız ama çok şiirsel, hafif bulanık bir hava katar. Shakespeare "Furious sound" (Öfkeli ses) demek yerine "Sound and fury" (Ses ve öfke) demiştir. Sıfatlar netleştirir, Hendiadys ise bulanıklaştırır ve derinlik katar.\n\nTricolon - Üçlemenin Gücü: Her şey üçlü olmalıdır. İki eksiktir, dört fazladır. Örnek: "Geldim, gördüm, yendim." (Sezar). Mizah için de kullanılır: İki normal şey söyle, üçüncüde şaşırtmacayı patlat.\n\nLitotes - "Fena Değil" Sanatı: Bir şeyi övmek istediğinde, onu doğrudan övmek yerine, zıttını inkar et. "Çok güzel" deme, "Çirkin sayılmaz" de. Doğrudan övgü bazen samimiyetsiz durabilir. Litotes kullandığında hem kendine güvenen bir hava yaratırsın hem de karşı tarafın zekasına mesaj verirsin.\n\nEpistrophe - Sonun Gücü: Cümlenin sonundaki tekrar. Anaphora\'dan çok daha güçlüdür çünkü insanlar en son duydukları şeyi hatırlar. Örnek (Lincoln): "...government of the people, by the people, for the people." Vurgulamak istediğin anahtar kelimeyi her kısmın sonuna koy.\n\nIsocolon - Ritmik Denge: Cümlenin iki parçasının aynı uzunlukta, aynı yapıda ve aynı ritimde olması. Örnek: "Buy one, get one." Bir sloganın akılda kalmasını istiyorsan hece sayılarını eşitle. Denge, cümleye kesinlik havası katar.\n\nProlepsis - İtirazı Çürütme: Dinleyicinin yapacağı itirazı, o daha ağzını açmadan senin söyleyip çürütmen. Örnek: "Şimdi bana diyeceksiniz ki, \'Bu çok pahalı\'. Evet, pahalı ama..." İtirazı sen dile getirdiğin an, karşı tarafın elindeki kozu almış olursun. Sana dürüst ve açık sözlü bir hava katar.\n\nAporia - Sahte Şüphe: Konuşmacının sanki ne diyeceğini bilmiyormuş gibi numara yapması. Örnek: "Sana ne desem bilemiyorum... Dahi mi, yoksa sadece şanslı mı?" Aslında ne diyeceğini çok iyi biliyorsundur ama bu kararsızlık anı dinleyiciyle samimi bir bağ kurar.\n\nHyperbole - Abartma Sanatı: Bir şeyi öyle bir abartmalısın ki kimse onu gerçek sanmasın ama hissi tam olarak alsın. "Seni 3 saattir bekliyorum" dersen şikayettir. "Seni bin yıldır bekliyorum" dersen edebiyattır. Abartı ne kadar imkansızsa etkisi o kadar güçlüdür.',
   },
 ]
 

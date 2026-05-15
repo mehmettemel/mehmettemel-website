@@ -32,6 +32,10 @@ date: '2026-02-02'
 
 - Kendinizi diğerlerinden ayırmak ve karşınızdakini konuşturmak için çok az kişinin sorduğu benzersiz sorular sorun.
 
+- **Varsayım Öldürücü Sorular**: "Zihnimde yanlış canlandırmamam için soruyorum, şunu mu demek istedin?" Yanlış anlaşılmaları en başta budar.
+
+- İnsanlar genellikle yeterince soru sormaz. Soru sormak, özellikle takip soruları (follow-up questions) sormak, karşı tarafa ilgi duyduğunuzu gösterir ve sevilebilirliği artırır. "Boomer Asking" hatasından (bir soru sorup cevabı dinlemeden konuyu hemen kendine çevirmek) kaçınılmalıdır.
+
 - **Ping Pong Method**: Ping pong method ile karşıdaki kişiye onu dinlediğimizi hissettirmeliyiz. Karşıdakinin çok keyif aldığı bir konuyu bulup onun üzerine gitmeliyiz. Örneğin karşıdaki kişiye ne iş yaptığını sorduk, "mamakta barmenlik yapıyorum" dedi. Bir sonraki sorumuz "güzel ben de garsonum, hayvanları sever misin?" değil, "vay canına mamakta barmenlik yapmak zor olmalı, hiç garip bir olaya karıştın mı?" olmalı.
 
 ## Güven Oluşturma
@@ -68,6 +72,8 @@ date: '2026-02-02'
 
 - Biri size yükselip bağırmaya başladığı zaman içgüdüsel olarak siz de bağırmak istersiniz. Eğer böyle bir durumda sakin kalıp, alçak sesle konuşursanız karşıdaki kişi meydanı boş bulup yükselmeye hunharca devam edecektir. Ancak bağırma desibeli yükseldikçe ve karşıdan karşılık gelmeyince suçluluk duygusu ve kontrolü kaybetmişlik hissi yaşayacaktır bu da onu alçalmaya zorlayacaktır.
 
+- Bir anlaşmazlıkta ilk tepki "Sana katılmıyorum" olmamalıdır. Bu karşı tarafı savunmaya geçirir. Bunun yerine "Duygusal Doğrulama" (Validation) yapılmalıdır: "Böyle hissetmen mantıklı..." diyerek başlamak, sonra farklı görüşü sunmak gerekir. "Ama" kelimesini kullanmaktan kaçınılmalı (bunun yerine "ve" kullanılmalı).
+
 - Birisi size kaçamak cevaplar veriyorsa ona aynı soruyu tekrar tekrar sormanız pek bir işe yaramaz. Bunun yerine kaçamak cevabı aldıktan ve onun tüm gerçeği söylemediğine kani olduktan sonra hemen konuşmak yerine gözlerinin içine bakmaya devam edin. Siz sessiz kalıp baktıkça karşınızdaki kişinin üstündeki psikolojik baskı artacak.
 
 - İnsanlarla tartışırsan kazanamazsın kazansan bile sempatisini kazanamazsın. Bilmiyorsun deme unutuyorsun de mesela. Karşıyı haklı bul.
@@ -90,6 +96,12 @@ date: '2026-02-02'
 
 - Birinden bir şey yapmasını istediğinizde, onlardan önce basit bir ek görev yapmalarını talep etmek, gereksiz veya tembelce istekleri filtreler. Bu yöntem, karşınızdakini kendi sorununu çözmeye yönlendirir.
 
+- Unpopular but 10/10 recommend learning how to shamelessly ask for all that you want. You'll be surprised at how many people are willing to simply give it to you.
+
+- İki seçenek arasına, birine benzeyen ama ondan daha kötü olan üçüncü bir yem seçenek eklendiğinde insanlar o benzer olan iyi seçeneğe yönelirler. Bir ürünü satmak istiyorsanız yanına daha pahalı ve daha az özellikli bir yem model koyun.
+
+- Often with interpersonal relationships, reality doesn't matter. Perception matters. And you can change perception without changing reality. Example: A boss got feedback that she didn't foster collaboration well. Her mentor advised her to use the word "collaborate" every chance she gets — work it into every email and meeting. Don't say "work together", say "collaborate". When there's a problem, talk about it as a chance for collaborative problem solving. Her next review was people glowing about how collaborative she was. She never changed any behavior. Just the words used.
+
 - Şunu şunu söyle yap yerine "söyle yapmayı düşünüyoruz sence nasıl" diyerek yaklaşmak çok daha pozitif bir etki bırakır.
 
 - Karşıdaki insana bir yakıştırma yaparsan onu korumak ister. Mesela yaramaz bir çocuğa "sen lider ruhlusun sınıf başkanı ol" dersen yaramazlık yapmayı kendine yakıştırmaz.
@@ -108,6 +120,8 @@ date: '2026-02-02'
 
 ## Konuşma Teknikleri
 
+- Sarkazm (İğneleme): Kelime anlamı Yunanca "etini koparmak"tan gelir. Netlik ve dürüstlük gerektiren durumları mizahla örtbas etmektir.
+
 - "Sanırım," "bence" gibi ifadelerden kaçının. Bunlar, karşı tarafta kendinizden emin olmadığınızın algısını uyandıracağı için etkinizi azaltacaktır.
 
 - "Göstermeye çalışacağım," "Bahsetmeye çalışacağım" cümlelerini kullanmayın. Bu cümleler de yine size olan güveni azaltacaktır.
@@ -122,11 +136,19 @@ date: '2026-02-02'
 
 - Nothing screams "I'm sizing up your net worth" faster than "What do you do?" question. Instead, try: "What's got you excited these days?" — or — "What's a project you're passionate about?" This lets people reveal their true passions instead of their paycheck.
 
+- **Varsayımsal Sorularla Vizyon Açma**: "Eğer bütçemiz sınırsız olsaydı ne yapardın?" veya "Eğer bu sorunu çözseydik yarın neye benzerdi?" gibi varsayımsal sorularla karşıdaki kişinin vizyonunu açın.
+
+- **Aktif Ol, Pasif Kalma**: Pasif cümleler (edilgen çatı) yazının ve konuşmanın enerjisini emer. "Yapıldı, gidildi" değil; "Yaptı, gitti" diyeceksin. Aktif ses her zaman daha direkt ve canlıdır.
+
+- **Ne Değilse O'nu Söyleme, Ne İse O'nu Söyle**: Negatif formlardan kaçın. Okuyucu/dinleyici neyin olmadığını değil, neyin olduğunu bilmek ister. "Geç kalmadı" deme, "Zamanında geldi" de.
+
 - **Yes but vs Yes and**: "Yes but" karşıdakinin düşüncelerini reddeder, "Yes and" ise onların düşünceleri üzerine inşa eder. Daima "yes and" kullanın.
 
 - **FORD Method**: 1) Family (Aile) - Aile ile ilgili konular aç. Direkt açmak yerine konuyu oraya getir. "Şuradaki adam erkek kardeşime çok benziyor, enerjik biri. Senin böyle bir kardeşin falan var mı?" 2) Occupation (Meslek) - Karşıdaki kişiye işini sorduktan sonra mesela öğretmenim dedi "ben de hep öğretmen olmak isterdim" gibisinden konuyu derinleştirebilirsin. Occupation konuşulacak ilk konulardan olabilir çünkü karşı taraf kendini rahat hisseder. 3) Recreation (Hobi) - Karşıdaki kişiye hobisini sorduktan sonra o hobiyle ilgili yorumunu katıp neden bu hobiyi yaptığını sorabilirsin. 4) Dreams (Hayaller) - Karşıdaki kişiye hayal kurabileceği konularda soru sorabilirsin.
 
 ## Beden Dili
+
+- Bir odaya oraya daha önce gelmişsiniz gibi girin. Nesnelere dokunmak ve alanı sahiplenmek özgüven sinyali verir.
 
 - Göz temasını kesmek feminen bir davranıştır. Ondan gözlerini ayırma ve domine edip baskınlık kurmalısın ara sıra hafif gülümsemeler yapmalısın. Bakışlarını bir kişi üzerinde uzun tutmak günümüzde herkesin gözünü kaçırdığı toplumda seni öne çıkaracaktır. O gözlerini kaçırana kadar gözlerini üzerinde tut.
 
@@ -153,3 +175,5 @@ date: '2026-02-02'
 - Bu sebeple siz siz olun özellikle önemli konularda yorgun ve açken hiçbir şey imzalamayın ve hiçbir şey hakkında kesin karar vermeyin. Önce bir güzel karnınızı doyurun, bir güzel uyuyun ondan sonra karar verin. Ya da birinden bir şey isteyecekseniz eğer karnı açsa daha iyi sonuç alınabilir.
 
 - Birinin yasına tanıklık ederken "Nasıl yardımcı olabilirim?" diye sormak yerine spesifik bir yardım teklif edin (Örn: "Bugün akşam yemeğini ben getiriyorum").
+
+- Depending on if you want to truly help out or just want to sound nice. If you ask someone, "do you need help" people will tend to say no thanks. But if you say something specific like "do you need help sweeping and mopping the floor" then people are more likely to say yes.
