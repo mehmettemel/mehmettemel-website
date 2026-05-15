@@ -23,44 +23,29 @@ export function QuotesContent({ quotes }) {
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
   const paginatedQuotes = filteredQuotes.slice(startIndex, startIndex + ITEMS_PER_PAGE)
 
-  // Set initial random quote on mount
+  // Set initial random quote on mount and when category changes
   useEffect(() => {
     if (filteredQuotes.length > 0) {
-      const random = filteredQuotes[Math.floor(Math.random() * filteredQuotes.length)]
-      setRandomQuote(random)
+      setRandomQuote(filteredQuotes[Math.floor(Math.random() * filteredQuotes.length)])
     }
-    setCurrentPage(1) // Reset to first page when category changes
+    setCurrentPage(1)
   }, [selectedCategory])
 
   const getNewRandomQuote = () => {
     if (filteredQuotes.length === 0) return
-
     setIsAnimating(true)
-
     setTimeout(() => {
-      const random = filteredQuotes[Math.floor(Math.random() * filteredQuotes.length)]
-      setRandomQuote(random)
+      setRandomQuote(filteredQuotes[Math.floor(Math.random() * filteredQuotes.length)])
+      setShowRandom(true)
       setIsAnimating(false)
     }, 300)
   }
 
   const showAllQuotes = () => {
     setIsAnimating(true)
-
     setTimeout(() => {
       setShowRandom(false)
       setCurrentPage(1)
-      setIsAnimating(false)
-    }, 300)
-  }
-
-  const showRandomMode = () => {
-    setIsAnimating(true)
-
-    setTimeout(() => {
-      const random = filteredQuotes[Math.floor(Math.random() * filteredQuotes.length)]
-      setRandomQuote(random)
-      setShowRandom(true)
       setIsAnimating(false)
     }, 300)
   }
@@ -110,15 +95,19 @@ export function QuotesContent({ quotes }) {
 
         <div className="flex items-center gap-3">
           <button
-            onClick={showRandomMode}
-            className="flex items-center gap-1.5 text-xs text-muted-foreground transition-all hover:text-foreground hover:gap-2"
+            onClick={getNewRandomQuote}
+            className={`flex items-center gap-1.5 text-xs transition-all hover:text-foreground hover:gap-2 ${
+              showRandom ? 'font-medium text-foreground underline decoration-2 underline-offset-4' : 'text-muted-foreground'
+            }`}
           >
             <Shuffle className="h-3 w-3" />
             <span>Rastgele</span>
           </button>
           <button
             onClick={showAllQuotes}
-            className="flex items-center gap-1.5 text-xs text-muted-foreground transition-all hover:text-foreground hover:gap-2"
+            className={`flex items-center gap-1.5 text-xs transition-all hover:text-foreground hover:gap-2 ${
+              !showRandom ? 'font-medium text-foreground underline decoration-2 underline-offset-4' : 'text-muted-foreground'
+            }`}
           >
             <Grid3x3 className="h-3 w-3" />
             <span>Tümü</span>
@@ -135,7 +124,10 @@ export function QuotesContent({ quotes }) {
             }`}
           >
             {randomQuote && (
-              <div className="rounded-lg border border-border bg-card p-6">
+              <div
+                onClick={getNewRandomQuote}
+                className="cursor-pointer rounded-lg border border-border bg-card p-6 transition-colors hover:border-foreground/20"
+              >
                 <div className="mb-4">
                   <span className="text-xs font-semibold text-muted-foreground">
                     {randomQuote.category || 'Alıntı'}
