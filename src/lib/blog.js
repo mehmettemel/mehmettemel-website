@@ -9,7 +9,7 @@ import readingTime from 'reading-time'
 const postsDirectory = path.join(process.cwd(), 'content')
 
 // Valid categories (from frontmatter only)
-const CATEGORIES = ['kitaplar', 'kisiler', 'yazilim']
+const CATEGORIES = ['kitaplar', 'kisiler']
 
 /**
  * Get all post files from content folder (flat structure)
@@ -175,7 +175,6 @@ export function getCategoryName(category) {
   const names = {
     kitaplar: 'Kitaplar',
     kisiler: 'Kişiler',
-    yazilim: 'Yazılım',
   }
   return names[category] || category
 }
@@ -187,7 +186,6 @@ export function getCategoryIcon(category) {
   const icons = {
     kitaplar: '📚',
     kisiler: '👤',
-    yazilim: '💻',
   }
   return icons[category] || '📄'
 }

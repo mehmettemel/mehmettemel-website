@@ -17,6 +17,7 @@ import {
 } from './ui/navigation-menu'
 
 const listelerItems = [
+  { href: '/listeler/ai', label: 'AI', emoji: '🤖' },
   { href: '/listeler/tarif', label: 'Tarifler', emoji: '🍳' },
   { href: '/listeler/ingilizce', label: 'İngilizce', emoji: '🇬🇧' },
   { href: '/listeler/rusca', label: 'Rusça', emoji: '🇷🇺' },
