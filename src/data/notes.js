@@ -32,7 +32,7 @@ const saglik = [
   },
   {
     id: 1708775034469,
-    text: "Suyu bir anda, lıkır lıkır, hızlı bir şekilde içmeyin. Suyu tek seferde hızlıca içerseniz, mideden hızla ince bağırsağa ve kana geçer. Kanda aniden sıvı artışı olunca damarlardaki basınç reseptörleri \"kan basıncı artıyor\" uyarısı verir. Vücut suyu hücrelere ulaştırmadan böbrekler yoluyla hızla dışarı atar.\nSuyu yudum yudum, zamana yayarak için.",
+    text: 'Suyu bir anda, lıkır lıkır, hızlı bir şekilde içmeyin. Suyu tek seferde hızlıca içerseniz, mideden hızla ince bağırsağa ve kana geçer. Kanda aniden sıvı artışı olunca damarlardaki basınç reseptörleri "kan basıncı artıyor" uyarısı verir. Vücut suyu hücrelere ulaştırmadan böbrekler yoluyla hızla dışarı atar.\nSuyu yudum yudum, zamana yayarak için.',
   },
   {
     id: 1708098336843,
@@ -64,7 +64,7 @@ const saglik = [
   },
   {
     id: 1706968640797,
-    text: "If you have a daughter, start ballet lessons around age 4/5.\n\nBenefits:\n- Posture\n- Discipline\n- Focus & coordination\n- Teamwork/social skills\n- Strength & muscle tone\n- Feminine movement\n- Classical music",
+    text: 'If you have a daughter, start ballet lessons around age 4/5.\n\nBenefits:\n- Posture\n- Discipline\n- Focus & coordination\n- Teamwork/social skills\n- Strength & muscle tone\n- Feminine movement\n- Classical music',
   },
   {
     id: 1706271975952,
@@ -76,7 +76,7 @@ const saglik = [
   },
   {
     id: 1706005964471,
-    text: "A 20 minute walk after meals is one of the most overlooked health tools.",
+    text: 'A 20 minute walk after meals is one of the most overlooked health tools.',
   },
   {
     id: 1706005963525,
@@ -140,6 +140,15 @@ const saglik = [
     id: 1747308000000,
     text: 'Hastalanmamak için yapılması gerekenler:\n- Telefonunuzu her gün dezenfekte edin. Telefon inanılmaz miktarda mikrop taşır.\n- Küçük çocuklardan uzak durun. Çocuklar (özellikle kreş ve okul çağındakiler) sürekli yeni virüsler getirir.\n- Elleri sık sık yıkayın.\n- Elleri, özellikle yıkanmamışken gözlere, burna veya ağza götürmeyin.\n- Sauna kullanın ama testisleri soğuk tutun. Kalabalık alanlarda N95 maske takın.\n- Bağışıklık güçlendirici karışım: sarımsak, zencefil, bal ve zerdeçal.',
   },
+  {
+    id: 1747310700000,
+    text: 'Society was built to make money. Indifferent to your health and sanity.\n\nFor example, we did not evolve to:\n- Sit 10 hours a day\n- Have our attention fractured 300 times daily\n- Compare ourselves to millions of others\n- Travel 9 time zones in 13 hours\n- Tolerate sounds above 85 dB causing hearing loss\n- Outsmart algorithms hijacking our reward system\n- Breathe fine particulate air pollution\n- Live under 16+ hrs of artificial light a day\n- Have 3 courses of antibiotics before age 2\n- Eat ultra-processed foods for 60% of daily calories\n- Consume 17 teaspoons of added sugar a day\n\nSo if you\'re feeling down in the dumps, maybe fatigued, a little or a lot depressed, anxious, that\'s why.',
+    author: 'Bryan Johnson',
+  },
+  {
+    id: 1747310800000,
+    text: 'Yatak odası kapısını gece açık bırakıp diğer odadan bir pencere açarak uyuduğun odadaki CO2 seviyesini büyük ölçüde düşürebilirsin.',
+  },
 ]
 
 const gida = [
@@ -153,7 +162,7 @@ const gida = [
   },
   {
     id: 1705950454643,
-    text: "I am Italian and not all pastas are the same. The yellowish pasta is the worst quality with high glycemic index because it has been dried out using high temperatures in just few hours.\nGood quality pasta has off white color and is dried slowly. Eat healthy and stay safe!",
+    text: 'I am Italian and not all pastas are the same. The yellowish pasta is the worst quality with high glycemic index because it has been dried out using high temperatures in just few hours.\nGood quality pasta has off white color and is dried slowly. Eat healthy and stay safe!',
   },
   {
     id: 1705764588451,
@@ -181,7 +190,7 @@ const gida = [
   },
   {
     id: 1747136900002,
-    text: 'Mevsiminde olmayan hiçbir sebze ve meyveyi almayın. Yaz güneşinde yetişen domates ile kışın serada yetişen domates arasında, içerdiği likopen ve polifenol (koruyucu maddeler) açısından en az %25-%30\'luk ciddi bir azalma farkı vardır.',
+    text: "Mevsiminde olmayan hiçbir sebze ve meyveyi almayın. Yaz güneşinde yetişen domates ile kışın serada yetişen domates arasında, içerdiği likopen ve polifenol (koruyucu maddeler) açısından en az %25-%30'luk ciddi bir azalma farkı vardır.",
   },
   {
     id: 1747136900003,
@@ -224,7 +233,7 @@ const kisisel = [
   },
   {
     id: 1708338557868,
-    text: 'Be humble, your salary is someone\'s perfume.',
+    text: "Be humble, your salary is someone's perfume.",
   },
   {
     id: 1708248971114,
@@ -232,11 +241,11 @@ const kisisel = [
   },
   {
     id: 1707915174733,
-    text: "Sigmund Freud believed a father must be a \"threat,\" not a friend, or the son never fully becomes a man.\n\nA boy is born into the world of the mother, warmth, forgiveness, safety. But maturity begins only when the father introduces limits, hierarchy, and resistance.\n\nFreud called this the \"Law of the Father\". not violence, but authority that doesn't collapse under emotion.\n\nWhen a father becomes a buddy too early, the boy never exits childhood. Historically, initiation meant separation from the mother, fear, discipline, even pain. The father was the guide into danger, responsibility, and competition.\n\nToday that role is diluted into reassurance and endless empathy. The result is visible everywhere: grown men addicted to comfort, terrified of criticism, avoiding risk, seeking approval.\n\nFriendship with father is possible, but only after strength is proven, not before. Until then, firmness is not cruelty. It is preparation. The world will not negotiate. A father existed to make sure his son could survive that fact.",
+    text: 'Sigmund Freud believed a father must be a "threat," not a friend, or the son never fully becomes a man.\n\nA boy is born into the world of the mother, warmth, forgiveness, safety. But maturity begins only when the father introduces limits, hierarchy, and resistance.\n\nFreud called this the "Law of the Father". not violence, but authority that doesn\'t collapse under emotion.\n\nWhen a father becomes a buddy too early, the boy never exits childhood. Historically, initiation meant separation from the mother, fear, discipline, even pain. The father was the guide into danger, responsibility, and competition.\n\nToday that role is diluted into reassurance and endless empathy. The result is visible everywhere: grown men addicted to comfort, terrified of criticism, avoiding risk, seeking approval.\n\nFriendship with father is possible, but only after strength is proven, not before. Until then, firmness is not cruelty. It is preparation. The world will not negotiate. A father existed to make sure his son could survive that fact.',
   },
   {
     id: 1707728618977,
-    text: "Our biggest downfall as men, is that after you finally win, we sit down to eat with women who never starved with us.",
+    text: 'Our biggest downfall as men, is that after you finally win, we sit down to eat with women who never starved with us.',
   },
   {
     id: 1707557296824,
@@ -244,15 +253,15 @@ const kisisel = [
   },
   {
     id: 1707308015657,
-    text: "you pity the moth confusing a lamp for the moon, yet here you are confusing a screen for the world",
+    text: 'you pity the moth confusing a lamp for the moon, yet here you are confusing a screen for the world',
   },
   {
     id: 1707307252506,
-    text: "the final stage of being smart is acting dumb",
+    text: 'the final stage of being smart is acting dumb',
   },
   {
     id: 1707131456412,
-    text: "Your salary is based on how hard you are to replace, not how hard you work.",
+    text: 'Your salary is based on how hard you are to replace, not how hard you work.',
   },
   {
     id: 1706595828520,
@@ -264,7 +273,7 @@ const kisisel = [
   },
   {
     id: 1706521428377,
-    text: "I own a small bakery. Business has been slow. Rent is up. I was thinking about closing.\n\nLast Friday, a teenager came in. He looked nervous. He counted out change for a cookie. He was short 50 cents.\n\n\"It's okay,\" I said. \"Take it.\"\n\nHe ate it at a table, looking at his math homework. He looked stuck.\n\nI used to be a math tutor.\n\nI walked over. \"Quadratic equations?\"\n\nHe nodded. \"I don't get it.\"\n\nI sat down and helped him for 20 minutes. He got it. He left smiling.\n\nThe next day, he came back with two friends. They bought cookies.\n\nThe day after that, five kids came.\n\nApparently, he told the school, \"The lady at the bakery helps with homework.\"\n\nNow, my bakery is the after-school hang-out spot. It's loud. It's messy. There are backpacks everywhere.\n\nYesterday, I found a note in the tip jar. It was wrapped around a $20 bill.\n\n\"Thanks for helping my son pass math. A Mom.\"\n\nI'm not closing the bakery.\n\nI think I finally found my purpose.\n\nIt's not cookies. It's community.",
+    text: 'I own a small bakery. Business has been slow. Rent is up. I was thinking about closing.\n\nLast Friday, a teenager came in. He looked nervous. He counted out change for a cookie. He was short 50 cents.\n\n"It\'s okay," I said. "Take it."\n\nHe ate it at a table, looking at his math homework. He looked stuck.\n\nI used to be a math tutor.\n\nI walked over. "Quadratic equations?"\n\nHe nodded. "I don\'t get it."\n\nI sat down and helped him for 20 minutes. He got it. He left smiling.\n\nThe next day, he came back with two friends. They bought cookies.\n\nThe day after that, five kids came.\n\nApparently, he told the school, "The lady at the bakery helps with homework."\n\nNow, my bakery is the after-school hang-out spot. It\'s loud. It\'s messy. There are backpacks everywhere.\n\nYesterday, I found a note in the tip jar. It was wrapped around a $20 bill.\n\n"Thanks for helping my son pass math. A Mom."\n\nI\'m not closing the bakery.\n\nI think I finally found my purpose.\n\nIt\'s not cookies. It\'s community.',
   },
   {
     id: 1706833834680,
@@ -272,7 +281,7 @@ const kisisel = [
   },
   {
     id: 1706401658301,
-    text: "the smartest people are the ones who notice patterns",
+    text: 'the smartest people are the ones who notice patterns',
   },
   {
     id: 1706167742417,
@@ -370,6 +379,15 @@ const kisisel = [
     text: 'Often with interpersonal relationships, reality doesn\'t matter. Perception matters. And you can change perception without changing reality. Example: A boss got feedback that she didn\'t foster collaboration well. Her mentor advised her to use the word "collaborate" every chance she gets — work it into every email and meeting. Don\'t say "work together", say "collaborate". When there\'s a problem, talk about it as a chance for collaborative problem solving. Her next review was people glowing about how collaborative she was. She never changed any behavior. Just the words used.',
   },
   {
+    id: 1747310400000,
+    text: 'Eğer bir şey hakkında endişelenme döngüsüne kapıldıysan, hiçbir şey asla değişmeyecek. Bazen önce hareket gelir, sonra duygu arkadan yetişir.\n\nPavel Durov\'un depresyon yorumu bu yüzden patladı. Adam motivasyonu beklemeyin, önce hareket edin diyor.\n\nBu kulağa sert geliyor ama gerçek hayatta çoğu insanın takıldığı yer tam burası. "İyi hissedince başlayacağım" diyorsun, iyi his hiç gelmiyor. "Kafam toparlanınca çalışacağım" diyorsun, kafa daha çok dağılıyor. "Motivasyon gelince spora döneceğim" diyorsun, aylar geçiyor. Durov\'un söylediği şey aslında basit: ruh halini başlangıç noktası yaparsan hayatın kontrolünü havaya bırakırsın.\n\nDuş alırsın, yürürsün, spor yaparsın, masaya oturursun, 20 dakika üretirsin, telefonu kapatırsın, odanı toplarsın. Bunlar küçük görünüyor ama beyne "ben hala oyundayım" sinyali verir. Depresif zihin sürekli erteleme ister. Hareket ise o döngüyü kırar.\n\nBazen akıl sağlığını korumanın ilk adımı, kendi zihninle tartışmayı bırakıp bedeni harekete geçirmektir. Motivasyon bekleyen adam aynı yerde çürür. Küçük de olsa hareket eden adamın sistemi yeniden açılmaya başlar.',
+    author: 'Pavel Durov',
+  },
+  {
+    id: 1747310500000,
+    text: 'I once killed a plant by watering it too much and that is how I learned, even good intentions can be harmful in excess.',
+  },
+  {
     id: 1747308200000,
     text: 'Antithesis (Karşıtlık) - Beyin İkilikleri Sever: İnsan beyni zıtlıklarla çalışır. Her şeyi siyah-beyaz görmek isteriz. Eğer bir şeyi tanımlamak istiyorsan, ne olmadığını da söyle. Teknik: "X, Y\'dir" demek yerine; "X, Y\'dir; Z değildir" formatını kullan. Örnek: Neil Armstrong\'un "Benim için küçük, insanlık için büyük bir adım" sözü. Zıtlık (küçük adım vs büyük adım) cümleyi ölümsüzleştirir.\n\nPeriodic Sentences (Periyodik Cümleler) - Tansiyon Yaratmak: Cümlenin ana fiilini veya ana fikrini en sona saklamak. Okuyucu veya dinleyici, cümlenin nereye gideceğini bilmediği için nefesini tutup sonunu bekler. Örnek: "Her ne kadar yorgun olsam da, hava berbat olsa da, cebimde beş kuruş kalmasa da... geliyorum." Eğer ana fikri başta verirsen etkisi sıfırlanır. Heyecan yaratmak istiyorsan ana fiili sona at.\n\nHendiadys - Şiirsel Sis: Bir sıfat tamlamasını ("kızgın köpek") alıp, iki isme dönüştürmek ("köpek ve kızgınlık"). Bu teknik cümleye mantıksız ama çok şiirsel, hafif bulanık bir hava katar. Shakespeare "Furious sound" (Öfkeli ses) demek yerine "Sound and fury" (Ses ve öfke) demiştir. Sıfatlar netleştirir, Hendiadys ise bulanıklaştırır ve derinlik katar.\n\nTricolon - Üçlemenin Gücü: Her şey üçlü olmalıdır. İki eksiktir, dört fazladır. Örnek: "Geldim, gördüm, yendim." (Sezar). Mizah için de kullanılır: İki normal şey söyle, üçüncüde şaşırtmacayı patlat.\n\nLitotes - "Fena Değil" Sanatı: Bir şeyi övmek istediğinde, onu doğrudan övmek yerine, zıttını inkar et. "Çok güzel" deme, "Çirkin sayılmaz" de. Doğrudan övgü bazen samimiyetsiz durabilir. Litotes kullandığında hem kendine güvenen bir hava yaratırsın hem de karşı tarafın zekasına mesaj verirsin.\n\nEpistrophe - Sonun Gücü: Cümlenin sonundaki tekrar. Anaphora\'dan çok daha güçlüdür çünkü insanlar en son duydukları şeyi hatırlar. Örnek (Lincoln): "...government of the people, by the people, for the people." Vurgulamak istediğin anahtar kelimeyi her kısmın sonuna koy.\n\nIsocolon - Ritmik Denge: Cümlenin iki parçasının aynı uzunlukta, aynı yapıda ve aynı ritimde olması. Örnek: "Buy one, get one." Bir sloganın akılda kalmasını istiyorsan hece sayılarını eşitle. Denge, cümleye kesinlik havası katar.\n\nProlepsis - İtirazı Çürütme: Dinleyicinin yapacağı itirazı, o daha ağzını açmadan senin söyleyip çürütmen. Örnek: "Şimdi bana diyeceksiniz ki, \'Bu çok pahalı\'. Evet, pahalı ama..." İtirazı sen dile getirdiğin an, karşı tarafın elindeki kozu almış olursun. Sana dürüst ve açık sözlü bir hava katar.\n\nAporia - Sahte Şüphe: Konuşmacının sanki ne diyeceğini bilmiyormuş gibi numara yapması. Örnek: "Sana ne desem bilemiyorum... Dahi mi, yoksa sadece şanslı mı?" Aslında ne diyeceğini çok iyi biliyorsundur ama bu kararsızlık anı dinleyiciyle samimi bir bağ kurar.\n\nHyperbole - Abartma Sanatı: Bir şeyi öyle bir abartmalısın ki kimse onu gerçek sanmasın ama hissi tam olarak alsın. "Seni 3 saattir bekliyorum" dersen şikayettir. "Seni bin yıldır bekliyorum" dersen edebiyattır. Abartı ne kadar imkansızsa etkisi o kadar güçlüdür.',
   },
@@ -390,7 +408,7 @@ const genel = [
   },
   {
     id: 1707818617717,
-    text: 'People who don\'t organize into tribes get wiped out by people who do.',
+    text: "People who don't organize into tribes get wiped out by people who do.",
   },
   {
     id: 1706940632163,
@@ -414,7 +432,7 @@ const genel = [
   },
   {
     id: 1705877488509,
-    text: 'Batı, 1991\'de Sovyetler\'in çöküşünden sonra odak noktasını ve amacını kaybetti. Rakipsiz kalmak, tehlike algısını yok etti ve rehavete yol açtı. Avrupa, dünya nüfusunun %12\'sine sahip ancak küresel refah harcamalarının %60\'ını yapıyor. Bu durum, kıtanın tehlikeli bir dünyada yaşadığını unutup fazla konforlu hale geldiğinin göstergesidir.',
+    text: "Batı, 1991'de Sovyetler'in çöküşünden sonra odak noktasını ve amacını kaybetti. Rakipsiz kalmak, tehlike algısını yok etti ve rehavete yol açtı. Avrupa, dünya nüfusunun %12'sine sahip ancak küresel refah harcamalarının %60'ını yapıyor. Bu durum, kıtanın tehlikeli bir dünyada yaşadığını unutup fazla konforlu hale geldiğinin göstergesidir.",
   },
   {
     id: 1705830272459,
@@ -456,6 +474,10 @@ const genel = [
   {
     id: 1706591277060,
     text: 'toplumların başarısının sistemlerinden (demokrasi, komünizm vb.) ziyade, o sistemin "ne kadar açık" olduğuyla ilgili olmasıdır. Bir toplum yükselirken liyakat, eleştiri ve rıza ile beslenir; ancak olgunlaştıkça kaçınılmaz bir bürokratik hantallığa gömülür. Bu aşamada yönetim, sistemi iyileştirmek yerine kendi koltuğunu korumaya odaklandığı için "aldatma" mekanizmasını devreye sokar. Bu, aslında sonun başlangıcıdır; çünkü eleştirinin bastırıldığı bir sistem, hatalarını göremez hale gelir.\n\nAsıl can alıcı nokta ise çöküşün hızıdır. Toplumlar yavaş yavaş geriler ama aniden çökerler. Prof. Jiang\'ın "Mükemmel Fırtına" dediği bu durum; savaş, kıtlık ve salgın gibi dış şokların aynı anda sistemi vurmasıyla gerçekleşir. Otoriterleşen ve eleştiriyi "ihanet" sayan bir yönetim, bu çoklu krizlere esnek bir cevap veremez. Sonuç olarak güç sahipleri, halkın kendilerine isyan etmesini (devrimi) önlemek için dikkat dağıtıcı, anlamsız dış savaşlara yönelirler.\n\nKısacası; önümüzdeki 20 yıl için çizilen tablo, ahlaki bir "doğru-yanlış" meselesi değil, gücün hayatta kalma içgüdüsüdür. Batı dünyasında demokrasinin zayıflaması ve ekonomik krizlerin artması, sistemin rızadan zorlamaya (coercion) geçişinin bir işaretidir. Profesöre göre dünya artık mantık veya ahlakla değil, çıplak güç dinamikleriyle yönetilen bir evreye girmektedir.',
+  },
+  {
+    id: 1747400000000,
+    text: 'Bilgi arttıkça uyum zorlaşır. Nietzsche\'nin perspektifinde bu durum, insanın "sürü ahlakı"ndan uzaklaşmasıyla ilgilidir. Çünkü çoğu toplumsal yapı; sorgulamayan, uyum sağlayan ve düzeni devam ettiren bireyler üzerine kuruludur.\n\nFarkındalık ise bu düzeni bozar. İnsan, yüzeyin altını gördükçe; davranışların ardındaki çıkarları, ilişkilerdeki rol yapmayı ve toplumun yazılı olmayan kurallarını fark etmeye başlar. Bu noktada yaşanan şey sadece "insanları çözmek" değil, aynı zamanda eski anlam dünyasının da yıkılmasıdır.\n\nBu yüzden farkındalık çoğu zaman bir özgürlükten çok bir kırılma yaratır. Kişi artık ne tamamen eskisi gibi olabilir ne de tam anlamıyla yeni bir yere ait hisseder. Anlaşılmamak, geri çekilmek ve daha çok gözlemlemek bu sürecin doğal parçaları haline gelir.\n\nAncak bu durumun tek tarafı karanlık değildir. Nietzsche\'nin de vurguladığı gibi, bu kopuş aynı zamanda bireyin kendi değerlerini yaratabilmesi için bir fırsattır. Yani farkındalığın "laneti", aynı zamanda insanın kendini daha bilinçli ve özgün bir şekilde inşa edebilmesinin de başlangıcıdır.',
   },
 ]
 

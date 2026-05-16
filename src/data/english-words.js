@@ -98,6 +98,7 @@ export const englishWords = [
   { english: 'abundance', turkish: 'bolluk, zenginlik', example: 'There was an abundance of food at the party.', example_turkish: 'Partide bol miktarda yiyecek vardı.' },
   { english: 'inevitably', turkish: 'kaçınılmaz olarak', example: "If you don't save money, you will inevitably run into financial problems.", example_turkish: 'Para biriktirmezsen, kaçınılmaz olarak finansal sorunlarla karşılaşırsın.' },
   { english: 'distinct', turkish: 'belirgin, farklı, ayrı', example: 'The two flavors were very distinct from each other.', example_turkish: 'İki lezzet birbirinden çok farklıydı.' },
+  { english: 'diminishing', turkish: 'azalan, giderek küçülen', example: 'The law of diminishing returns means working more hours doesn\'t always mean more results.', example_turkish: 'Azalan verimler yasası, daha fazla saat çalışmanın her zaman daha fazla sonuç anlamına gelmediğini söyler.' },
 ]
 
 /**
