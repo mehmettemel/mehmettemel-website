@@ -149,6 +149,11 @@ const saglik = [
     id: 1747310800000,
     text: 'Yatak odası kapısını gece açık bırakıp diğer odadan bir pencere açarak uyuduğun odadaki CO2 seviyesini büyük ölçüde düşürebilirsin.',
   },
+  {
+    id: 1747504900000,
+    text: 'Friends, stop drinking alcohol. Not cut back. Eliminate.\n\nAlcohol increases cortisol, disrupts REM sleep, accelerates epigenetic aging, shrinks hippocampal volume, elevates resting heart rate, raises inflammatory markers, impairs glucose metabolism for 16 hrs.\n\nOne drink does that.',
+    author: 'Bryan Johnson',
+  },
 ]
 
 const gida = [
@@ -207,6 +212,11 @@ const gida = [
   {
     id: 1747136900006,
     text: "Marketten alınan sebze meyveler koptuktan 5 gün sonra size ulaşır ve bu 5 gün içinde vitamin/mineral değerlerinin %30'u yok olur. Bu yüzden haftalık pazar alışverişi yerine, azar azar alıp taze tüketmeye çalışın.",
+  },
+  {
+    id: 1747505200000,
+    text: 'Domates ve avokadoyu beraber yemek likopen emilimini 4,4 kat (yaklaşık %400) artırıyor. En iyi emilim için domatesin pişmiş veya sos halinde olması daha avantajlı. Bu ikiliye kırmızı soğan eklemek emilimi zirveye çıkarıyor.\nLikopen, domateste bulunan ve yağda çözünen, kanserle de savaşan bir antioksidan; tek başına yenirse vücut tarafından az emiliyor. Avokadoda ise oleik asit (omega-9) gibi tekli doymamış sağlıklı yağ asitleri var. Bu yağlar, likopen gibi maddelerin bağırsaklardan emilimini ciddi şekilde artırıyor.\nBu birliktelik β-karoten emilimini de 2,6 kat artırıyor.',
+    source: 'https://pubmed.ncbi.nlm.nih.gov/15735074/',
   },
 ]
 
@@ -390,6 +400,32 @@ const kisisel = [
   {
     id: 1747308200000,
     text: 'Antithesis (Karşıtlık) - Beyin İkilikleri Sever: İnsan beyni zıtlıklarla çalışır. Her şeyi siyah-beyaz görmek isteriz. Eğer bir şeyi tanımlamak istiyorsan, ne olmadığını da söyle. Teknik: "X, Y\'dir" demek yerine; "X, Y\'dir; Z değildir" formatını kullan. Örnek: Neil Armstrong\'un "Benim için küçük, insanlık için büyük bir adım" sözü. Zıtlık (küçük adım vs büyük adım) cümleyi ölümsüzleştirir.\n\nPeriodic Sentences (Periyodik Cümleler) - Tansiyon Yaratmak: Cümlenin ana fiilini veya ana fikrini en sona saklamak. Okuyucu veya dinleyici, cümlenin nereye gideceğini bilmediği için nefesini tutup sonunu bekler. Örnek: "Her ne kadar yorgun olsam da, hava berbat olsa da, cebimde beş kuruş kalmasa da... geliyorum." Eğer ana fikri başta verirsen etkisi sıfırlanır. Heyecan yaratmak istiyorsan ana fiili sona at.\n\nHendiadys - Şiirsel Sis: Bir sıfat tamlamasını ("kızgın köpek") alıp, iki isme dönüştürmek ("köpek ve kızgınlık"). Bu teknik cümleye mantıksız ama çok şiirsel, hafif bulanık bir hava katar. Shakespeare "Furious sound" (Öfkeli ses) demek yerine "Sound and fury" (Ses ve öfke) demiştir. Sıfatlar netleştirir, Hendiadys ise bulanıklaştırır ve derinlik katar.\n\nTricolon - Üçlemenin Gücü: Her şey üçlü olmalıdır. İki eksiktir, dört fazladır. Örnek: "Geldim, gördüm, yendim." (Sezar). Mizah için de kullanılır: İki normal şey söyle, üçüncüde şaşırtmacayı patlat.\n\nLitotes - "Fena Değil" Sanatı: Bir şeyi övmek istediğinde, onu doğrudan övmek yerine, zıttını inkar et. "Çok güzel" deme, "Çirkin sayılmaz" de. Doğrudan övgü bazen samimiyetsiz durabilir. Litotes kullandığında hem kendine güvenen bir hava yaratırsın hem de karşı tarafın zekasına mesaj verirsin.\n\nEpistrophe - Sonun Gücü: Cümlenin sonundaki tekrar. Anaphora\'dan çok daha güçlüdür çünkü insanlar en son duydukları şeyi hatırlar. Örnek (Lincoln): "...government of the people, by the people, for the people." Vurgulamak istediğin anahtar kelimeyi her kısmın sonuna koy.\n\nIsocolon - Ritmik Denge: Cümlenin iki parçasının aynı uzunlukta, aynı yapıda ve aynı ritimde olması. Örnek: "Buy one, get one." Bir sloganın akılda kalmasını istiyorsan hece sayılarını eşitle. Denge, cümleye kesinlik havası katar.\n\nProlepsis - İtirazı Çürütme: Dinleyicinin yapacağı itirazı, o daha ağzını açmadan senin söyleyip çürütmen. Örnek: "Şimdi bana diyeceksiniz ki, \'Bu çok pahalı\'. Evet, pahalı ama..." İtirazı sen dile getirdiğin an, karşı tarafın elindeki kozu almış olursun. Sana dürüst ve açık sözlü bir hava katar.\n\nAporia - Sahte Şüphe: Konuşmacının sanki ne diyeceğini bilmiyormuş gibi numara yapması. Örnek: "Sana ne desem bilemiyorum... Dahi mi, yoksa sadece şanslı mı?" Aslında ne diyeceğini çok iyi biliyorsundur ama bu kararsızlık anı dinleyiciyle samimi bir bağ kurar.\n\nHyperbole - Abartma Sanatı: Bir şeyi öyle bir abartmalısın ki kimse onu gerçek sanmasın ama hissi tam olarak alsın. "Seni 3 saattir bekliyorum" dersen şikayettir. "Seni bin yıldır bekliyorum" dersen edebiyattır. Abartı ne kadar imkansızsa etkisi o kadar güçlüdür.',
+  },
+  {
+    id: 1747500000000,
+    text: "For ~3 billion years of evolutionary history, the world was quiet — mostly wind. A snapped twig was information: threat or opportunity, lion or mate or meal. That's why the change-detector evolved to be so reactive.\n\nThe brain didn't evolve to be on 24/7. It needs downtime to restore itself. Silence isn't an absence; it's a nutrient the modern environment has nearly stripped out.",
+  },
+  {
+    id: 1747504800000,
+    text: 'The best thing you can do for yourself is actively increase your surface area for luck to hit you. Go outside, try new cafes, museums, events, take a new route home, speak to people, ask questions, side quest. The more you do, the more serendipity and synchronicity will find you.',
+  },
+  {
+    id: 1747505000000,
+    text: 'True currency is steadfast friendship.',
+    author: 'Elon Musk',
+  },
+  {
+    id: 1747505100000,
+    text: 'Never trust a thought that occurs to you indoors.',
+    author: 'Nietzsche',
+  },
+  {
+    id: 1747505300000,
+    text: 'A very underrated life decision is marrying someone who wants a simple life.',
+  },
+  {
+    id: 1747505400000,
+    text: 'Your future is shaped by the habits you repeat, not the goals you set.',
   },
 ]
 

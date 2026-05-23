@@ -81,6 +81,18 @@ export const recipes = [
     ingredients: '1 can of sardines in olive oil\nHalf red onion, finely chopped\n1 small carrot, grated\nA few olives, chopped\n1 tablespoon dill, finely chopped\nLemon zest\n1 tablespoon lemon juice\n1 teaspoon Dijon mustard\nSalt and pepper to taste',
     instructions: '1. Whisk the sardine oil, lemon zest, lemon juice, mustard, salt and pepper until it emulsifies slightly. Add in the sardines and mash them with a fork (keep some texture, don\'t puree completely).\n2. Mix in the onions, carrots, olives and dill. Spread on sourdough bread. Enjoy!',
   },
+  {
+    id: 13,
+    name: 'Kış Pilavı',
+    ingredients: '1,5 su bardağı basmati pirinç\n500 gr pırasa\n2 orta boy havuç\n1 çay bardağı mercimek\n1 tatlı kaşığı tuz\nKarabiber\n1/2 tatlı kaşığı kimyon\n1 çay kaşığı toz şeker\n1 limon kabuğu rendesi\n1/2 limon suyu\n1/2 demet dereotu\n3-4 yemek kaşığı zeytinyağı\n1,5 bardak sıcak su',
+    instructions: '1. Basmati pirinçleri 7-8 defa, akan suda berraklaşana kadar yıkayın ve süzün.\n2. Mercimeği 2 saat suda ıslatın ve haşlayıp süzün.\n3. Pırasaları incecik doğrayın. Havuçları da ince uzun kesin.\n4. Tencereye zeytinyağını alın, pırasaları hafif yumuşayana kadar soteleyin, havuçları da ekleyip hacimleri kaybolana kadar sotelemeye devam edin.\n5. Üzerine mercimeği ve pirinci ilave edip karıştırın.\n6. Tuz, karabiber, şeker ve kimyonu ekleyin.\n7. Limon kabuğu ve suyunu ilave edip, suyu ekleyin.\n8. Kapağı kapalı kısık ateşte suyu çekene kadar pişirin.\n9. Üzerine kağıt havlu örterek 20 dk demlenmeye bırakın.\n10. Dereotunu ince kıyın ve karıştırın.\n11. Servis ederken üzerine bir miktar daha zeytinyağı gezdirin.',
+  },
+  {
+    id: 14,
+    name: 'Esmer Pirinç-Bulgur Pilavı',
+    ingredients: '0.8 su bardağı esmer pirinç\n0.8 su bardağı kalın bulgur\n0.5 su bardağı yeşil mercimek\n1 soğan, ince doğranmış\n2 yemek kaşığı zeytinyağı\n3 su bardağı sıcak su veya sebze/kemik suyu\n1 tatlı kaşığı tuz\n2 yemek kaşığı kabak çekirdeği veya ay çekirdeği\n1 yemek kaşığı keten tohumu (isteğe bağlı)\n3 yemek kaşığı taze maydanoz veya dereotu, kıyılmış',
+    instructions: '1. Baklagili ön haşla: 0.5 su bardağı yeşil mercimeği bol suda yarı yumuşayana kadar (yaklaşık 12-15 dk) haşla ve süzgece al.\n2. Esmer pirinci ıslat: 0.8 su bardağı esmer pirinci 20-30 dk ılık suda beklet, sonra durulayıp süz.\n3. Soğanı kavur: Tencerede 2 yemek kaşığı zeytinyağını ısıt, 1 ince doğranmış soğanı pembeleşene kadar orta ateşte kavur.\n4. Önce pirinci pişir: Süzülmüş esmer pirinci tencereye ekle, 1-2 dk çevir. Üzerine sıcak suyun yaklaşık 2 bardağını ve 1 tatlı kaşığı tuzu ekle. Kaynayınca ateşi kıs, kapağı kapat ve 15 dk pişir — çünkü esmer pirinç bulgurdan daha uzun sürede pişer.\n5. Bulgur ve baklagili ekle: 15 dakika sonra 0.8 su bardağı bulguru ve ön haşlanmış mercimeği ekle. Kalan 1 bardak sıcak suyu ilave et, karıştır. Kapağı kapatıp kısık ateşte 12-15 dk daha, su çekilene kadar pişir.\n6. Demlendir: Ocağı kapat, kapağın altına temiz bir bez koyup 10 dk demlenmeye bırak.\n7. Servis et: Pilavı havalandırarak karıştır. Üzerine 2 yemek kaşığı çekirdekleri, 1 yemek kaşığı keten tohumunu ve 3 yemek kaşığı taze yeşillikleri serperek servis et.',
+  },
 ]
 
 /**

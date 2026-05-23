@@ -135,7 +135,7 @@ export default function RussianQuiz() {
     return (
       <div className="mx-auto max-w-2xl px-4 py-8">
         <Card className="overflow-hidden">
-          <div className="bg-gradient-to-br from-primary/10 to-primary/5 p-8 text-center">
+          <div className="bg-gradient-to-br from-primary/10 to-primary/5 p-6 text-center sm:p-8">
             <div className="mb-4 text-6xl">🎉</div>
             <h2 className="mb-2 text-2xl font-bold">Test Tamamlandı!</h2>
             <div className="mt-6 text-5xl font-bold text-primary">
@@ -149,7 +149,7 @@ export default function RussianQuiz() {
             </div>
           </div>
 
-          <div className="flex gap-3 p-6">
+          <div className="flex gap-3 p-4 sm:p-6">
             <Button onClick={restartQuiz} className="flex-1" size="lg">
               <RotateCcw className="mr-2 h-4 w-4" />
               Tekrar Dene
@@ -170,7 +170,7 @@ export default function RussianQuiz() {
     <div className="mx-auto max-w-2xl px-4 py-8">
       <Card className="overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between border-b bg-muted/50 px-6 py-4">
+        <div className="flex items-center justify-between border-b bg-muted/50 px-3 py-3 sm:px-6 sm:py-4">
           <div className="flex items-center gap-3">
             <span className="text-2xl">📝</span>
             <div>
@@ -188,36 +188,36 @@ export default function RussianQuiz() {
         </div>
 
         {/* Mode Tabs */}
-        <div className="border-b bg-background px-6 py-3">
+        <div className="border-b bg-background px-3 py-3 sm:px-6">
           <div className="flex gap-2">
             <Button
               variant={mode === 'ru-to-tr' ? 'default' : 'ghost'}
               size="sm"
               onClick={() => handleModeChange('ru-to-tr')}
-              className="flex-1"
+              className="flex-1 text-xs sm:text-sm"
             >
-              🇷🇺 → 🇹🇷 Rusça → Türkçe
+              🇷🇺→🇹🇷 <span className="ml-1 hidden sm:inline">Rusça → Türkçe</span><span className="ml-1 sm:hidden">Ru→Tr</span>
             </Button>
             <Button
               variant={mode === 'tr-to-ru' ? 'default' : 'ghost'}
               size="sm"
               onClick={() => handleModeChange('tr-to-ru')}
-              className="flex-1"
+              className="flex-1 text-xs sm:text-sm"
             >
-              🇹🇷 → 🇷🇺 Türkçe → Rusça
+              🇹🇷→🇷🇺 <span className="ml-1 hidden sm:inline">Türkçe → Rusça</span><span className="ml-1 sm:hidden">Tr→Ru</span>
             </Button>
           </div>
         </div>
 
         {/* Question */}
-        <div className="p-8">
-          <div className="mb-8 text-center">
-            <div className="mb-2 text-sm text-muted-foreground">
+        <div className="p-4 sm:p-8">
+          <div className="mb-6 text-center sm:mb-8">
+            <div className="mb-2 text-xs text-muted-foreground sm:text-sm">
               {mode === 'ru-to-tr'
                 ? 'Aşağıdaki kelimenin Türkçe karşılığı nedir?'
                 : 'Aşağıdaki kelimenin Rusça karşılığı nedir?'}
             </div>
-            <div className="text-4xl font-bold">{current.question}</div>
+            <div className="text-2xl font-bold sm:text-4xl">{current.question}</div>
             {mode === 'ru-to-tr' && (
               <div className="mt-2 text-sm text-muted-foreground">
                 ({current.pronunciation})
@@ -232,7 +232,7 @@ export default function RussianQuiz() {
               const isCorrect = option === current.correctAnswer
               const letter = String.fromCharCode(65 + index) // A, B, C, D
 
-              let className = 'w-full justify-start text-left p-4 h-auto'
+              let className = 'w-full justify-start text-left p-3 sm:p-4 h-auto text-sm sm:text-base'
               if (!showExplanation) {
                 className += ' hover:bg-accent'
               } else if (isCorrect) {
@@ -285,7 +285,7 @@ export default function RussianQuiz() {
           {/* Explanation Panel */}
           {showExplanation && (
             <div className="mt-4 animate-in fade-in slide-in-from-bottom-4 duration-300">
-              <Card className="bg-muted/50 p-6">
+              <Card className="bg-muted/50 p-4 sm:p-6">
                 <div className="mb-4 text-center">
                   {selectedAnswer === current.correctAnswer ? (
                     <div className="text-lg font-semibold text-green-600 dark:text-green-400">
@@ -347,7 +347,7 @@ export default function RussianQuiz() {
         </div>
 
         {/* Progress */}
-        <div className="border-t px-6 py-3">
+        <div className="border-t px-3 py-3 sm:px-6">
           <div className="mb-1 flex justify-between text-xs text-muted-foreground">
             <span>İlerleme</span>
             <span>

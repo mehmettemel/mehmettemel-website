@@ -22,6 +22,7 @@ const listelerItems = [
   { href: '/listeler/ingilizce', label: 'İngilizce', emoji: '🇬🇧' },
   { href: '/listeler/rusca', label: 'Rusça', emoji: '🇷🇺' },
   { href: '/kesifler/rusca-test', label: 'Rusça Test', emoji: '📝' },
+  { href: '/listeler/rastgele', label: 'Rastgele', emoji: '🎲' },
   { href: '/listeler/personal', label: 'Personal', emoji: '🔒' },
 ]
 

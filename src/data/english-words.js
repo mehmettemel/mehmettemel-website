@@ -99,6 +99,9 @@ export const englishWords = [
   { english: 'inevitably', turkish: 'kaçınılmaz olarak', example: "If you don't save money, you will inevitably run into financial problems.", example_turkish: 'Para biriktirmezsen, kaçınılmaz olarak finansal sorunlarla karşılaşırsın.' },
   { english: 'distinct', turkish: 'belirgin, farklı, ayrı', example: 'The two flavors were very distinct from each other.', example_turkish: 'İki lezzet birbirinden çok farklıydı.' },
   { english: 'diminishing', turkish: 'azalan, giderek küçülen', example: 'The law of diminishing returns means working more hours doesn\'t always mean more results.', example_turkish: 'Azalan verimler yasası, daha fazla saat çalışmanın her zaman daha fazla sonuç anlamına gelmediğini söyler.' },
+  { english: 'annihilate', turkish: 'yok etmek, imha etmek', example: 'The team annihilated their opponents 7-0 in the final.', example_turkish: 'Takım finalde rakiplerini 7-0 yok etti.' },
+  { english: 'amended', turkish: 'değiştirilmiş, düzeltilmiş', example: 'The contract was amended to include the new terms.', example_turkish: 'Sözleşme yeni şartları içerecek şekilde değiştirildi.' },
+  { english: 'deliberately', turkish: 'kasıtlı olarak, bilerek', example: 'She deliberately ignored his messages to make him worry.', example_turkish: 'Onu endişelendirmek için mesajlarını kasıtlı olarak görmezden geldi.' },
 ]
 
 /**
