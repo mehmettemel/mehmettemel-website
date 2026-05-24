@@ -4,14 +4,12 @@ import { Container } from '@/components/Container'
 import { useState, useMemo } from 'react'
 import { getAllNotes, noteCategories } from '@/data/notes'
 import { getAllEnglishWords } from '@/data/english-words'
-import { getRussianByCategory } from '@/data/russian'
 import Link from 'next/link'
 
 const TABS = [
   { id: 'alintilar', label: 'Alintiler' },
   { id: 'incelemeler', label: 'Incelemeler' },
   { id: 'ingilizce', label: 'English' },
-  { id: 'rusca', label: 'Rusca' },
 ]
 
 export default function RastgelePage() {
@@ -19,17 +17,10 @@ export default function RastgelePage() {
   const [currentNote, setCurrentNote] = useState(null)
   const [incelemeItem, setIncelemeItem] = useState(null)
   const [englishWord, setEnglishWord] = useState(null)
-  const [russianPhrase, setRussianPhrase] = useState(null)
   const [loading, setLoading] = useState(false)
 
   const allNotes = useMemo(() => getAllNotes(), [])
   const allEnglishWords = useMemo(() => getAllEnglishWords(), [])
-  const allRussianPhrases = useMemo(() => {
-    const cumle = getRussianByCategory('cumle')
-    const fiil = getRussianByCategory('fiil')
-    const isim = getRussianByCategory('isim')
-    return [...cumle, ...fiil, ...isim]
-  }, [])
 
   const getRandomNote = () => {
     const randomIndex = Math.floor(Math.random() * allNotes.length)
@@ -56,16 +47,10 @@ export default function RastgelePage() {
     setEnglishWord(allEnglishWords[randomIndex])
   }
 
-  const getRandomRussian = () => {
-    const randomIndex = Math.floor(Math.random() * allRussianPhrases.length)
-    setRussianPhrase(allRussianPhrases[randomIndex])
-  }
-
   const handleRandom = () => {
     if (activeTab === 'alintilar') getRandomNote()
     else if (activeTab === 'incelemeler') getRandomInceleme()
     else if (activeTab === 'ingilizce') getRandomEnglish()
-    else if (activeTab === 'rusca') getRandomRussian()
   }
 
   const getCategoryName = (id) => {
@@ -77,7 +62,7 @@ export default function RastgelePage() {
     <Container>
       <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-md flex-col px-2 py-6">
         {/* Tabs */}
-        <div className="mb-6 grid grid-cols-4 rounded-lg border border-border bg-card p-1">
+        <div className="mb-6 grid grid-cols-3 rounded-lg border border-border bg-card p-1">
           {TABS.map((tab) => (
             <button
               key={tab.id}
@@ -166,44 +151,6 @@ export default function RastgelePage() {
             </div>
           )}
 
-          {/* Russian */}
-          {activeTab === 'rusca' && russianPhrase && (
-            <div className="rounded-lg border border-border bg-card p-5">
-              <div className="mb-3">
-                <h2 className="text-xl font-bold text-foreground">
-                  {russianPhrase.russian}
-                </h2>
-                {russianPhrase.pronunciation && (
-                  <p className="mt-1 text-sm italic text-muted-foreground">
-                    {russianPhrase.pronunciation}
-                  </p>
-                )}
-              </div>
-              <div className="space-y-1 border-t border-border pt-3">
-                <p className="text-sm text-foreground">
-                  {russianPhrase.turkish}
-                </p>
-                {russianPhrase.english && (
-                  <p className="text-sm text-muted-foreground">
-                    {russianPhrase.english}
-                  </p>
-                )}
-              </div>
-              {russianPhrase.example && (
-                <div className="mt-3 space-y-1 border-t border-border pt-3">
-                  <p className="text-sm text-foreground">
-                    {russianPhrase.example}
-                  </p>
-                  {russianPhrase.exampleTurkish && (
-                    <p className="text-sm text-muted-foreground">
-                      {russianPhrase.exampleTurkish}
-                    </p>
-                  )}
-                </div>
-              )}
-            </div>
-          )}
-
           {/* Empty states */}
           {!currentNote && activeTab === 'alintilar' && (
             <div className="flex h-48 items-center justify-center rounded-lg border border-dashed border-border">
@@ -220,13 +167,6 @@ export default function RastgelePage() {
             </div>
           )}
           {!englishWord && activeTab === 'ingilizce' && (
-            <div className="flex h-48 items-center justify-center rounded-lg border border-dashed border-border">
-              <p className="text-sm text-muted-foreground">
-                Butona bas, rastgele bir kelime gelsin
-              </p>
-            </div>
-          )}
-          {!russianPhrase && activeTab === 'rusca' && (
             <div className="flex h-48 items-center justify-center rounded-lg border border-dashed border-border">
               <p className="text-sm text-muted-foreground">
                 Butona bas, rastgele bir kelime gelsin
