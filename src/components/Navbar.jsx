@@ -4,6 +4,12 @@ import { Menu } from 'lucide-react'
 import { useState } from 'react'
 import Link from 'next/link'
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from './ui/accordion'
 import { AnimatedThemeToggle } from './ui/animated-theme-toggle'
 import { UserIcon } from './auth/UserIcon'
 import { Container } from './Container'
@@ -91,6 +97,9 @@ function DesktopNav() {
   )
 }
 
+const mobileNavLinkClass =
+  'touch-manipulation flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary/50 hover:text-foreground active:bg-secondary'
+
 function MobileNav() {
   const [open, setOpen] = useState(false)
 
@@ -102,78 +111,89 @@ function MobileNav() {
         <Menu className="h-6 w-6" />
         <span className="sr-only">Toggle menu</span>
       </SheetTrigger>
-      <SheetContent side="right" className="w-72 sm:w-80">
-        <nav className="mt-6 flex flex-col gap-0.5">
+      <SheetContent side="right" className="w-72 sm:w-80 flex flex-col">
+        {/* Fixed top shortcuts */}
+        <div className="mt-4 flex items-center gap-2 border-b border-border pb-4 px-1">
           <Link
-            href="/"
+            href="/listeler/tarif"
             onClick={closeSheet}
-            className="touch-manipulation rounded-lg px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset active:bg-secondary"
+            className="flex-1 touch-manipulation rounded-lg bg-secondary/50 px-3 py-2.5 text-center text-sm font-semibold text-foreground transition-colors hover:bg-secondary active:bg-secondary/80"
           >
-            Ana Sayfa
+            🍳 Tarifler
           </Link>
           <Link
-            href="/incelemeler"
+            href="/listeler/ingilizce"
             onClick={closeSheet}
-            className="touch-manipulation rounded-lg px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset active:bg-secondary"
+            className="flex-1 touch-manipulation rounded-lg bg-secondary/50 px-3 py-2.5 text-center text-sm font-semibold text-foreground transition-colors hover:bg-secondary active:bg-secondary/80"
           >
-            İncelemeler
+            🇬🇧 İngilizce
           </Link>
-
-          <Link
-            href="/kesifler/alintilar"
-            onClick={closeSheet}
-            className="touch-manipulation rounded-lg px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset active:bg-secondary"
-          >
-            Alıntılar
-          </Link>
-
-          {/* Listeler Section */}
-          <div className="mt-4 mb-1 border-t border-border pt-4 px-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground/70">
-            Listeler
+          <div className="flex-shrink-0" onClick={closeSheet}>
+            <UserIcon className="h-10 w-10 rounded-lg bg-secondary/50 px-2.5 hover:bg-secondary" />
           </div>
-          <Link
-            href="/listeler"
-            onClick={closeSheet}
-            className="touch-manipulation flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-muted-foreground transition-colors hover:bg-secondary/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset active:bg-secondary"
-          >
-            <span>📋</span>
-            <span>Tümü</span>
-          </Link>
-          {listelerItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={closeSheet}
-              className="touch-manipulation flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset active:bg-secondary"
-            >
-              <span className="text-base">{item.emoji}</span>
-              <span>{item.label}</span>
-            </Link>
-          ))}
+        </div>
 
-          <Link
-            href="/iletisim"
-            onClick={closeSheet}
-            className="touch-manipulation rounded-lg px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset active:bg-secondary"
-          >
-            İletişim
-          </Link>
+        {/* Accordion navigation */}
+        <nav className="flex-1 overflow-y-auto py-2">
+          <Accordion type="multiple" className="w-full">
+            {/* Sayfalar */}
+            <AccordionItem value="sayfalar" className="border-b-0">
+              <AccordionTrigger className="px-4 py-3 text-sm font-semibold text-foreground hover:no-underline hover:bg-secondary/30 rounded-lg">
+                Sayfalar
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="flex flex-col gap-0.5 pl-2">
+                  <Link href="/" onClick={closeSheet} className={mobileNavLinkClass}>
+                    Ana Sayfa
+                  </Link>
+                  <Link href="/incelemeler" onClick={closeSheet} className={mobileNavLinkClass}>
+                    İncelemeler
+                  </Link>
+                  <Link href="/kesifler/alintilar" onClick={closeSheet} className={mobileNavLinkClass}>
+                    Alıntılar
+                  </Link>
+                  <Link href="/iletisim" onClick={closeSheet} className={mobileNavLinkClass}>
+                    İletişim
+                  </Link>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
 
-          <div className="mt-6 space-y-3 border-t border-border pt-6">
-            <div className="flex items-center justify-between rounded-lg px-4 py-3 hover:bg-secondary/30">
-              <span className="text-sm font-medium text-muted-foreground">
-                Admin
-              </span>
-              <UserIcon />
-            </div>
-            <div className="flex items-center justify-between rounded-lg px-4 py-3 hover:bg-secondary/30">
-              <span className="text-sm font-medium text-muted-foreground">
-                Tema
-              </span>
-              <AnimatedThemeToggle />
-            </div>
-          </div>
+            {/* Listeler */}
+            <AccordionItem value="listeler" className="border-b-0">
+              <AccordionTrigger className="px-4 py-3 text-sm font-semibold text-foreground hover:no-underline hover:bg-secondary/30 rounded-lg">
+                Listeler
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="flex flex-col gap-0.5 pl-2">
+                  <Link href="/listeler" onClick={closeSheet} className={mobileNavLinkClass}>
+                    <span>📋</span> Tümü
+                  </Link>
+                  <Link href="/listeler/ai" onClick={closeSheet} className={mobileNavLinkClass}>
+                    <span>🤖</span> AI
+                  </Link>
+                  <Link href="/listeler/rusca" onClick={closeSheet} className={mobileNavLinkClass}>
+                    <span>🇷🇺</span> Rusça
+                  </Link>
+                  <Link href="/kesifler/rusca-test" onClick={closeSheet} className={mobileNavLinkClass}>
+                    <span>📝</span> Rusça Test
+                  </Link>
+                  <Link href="/listeler/rastgele" onClick={closeSheet} className={mobileNavLinkClass}>
+                    <span>🎲</span> Rastgele
+                  </Link>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </nav>
+
+        {/* Footer - Theme toggle */}
+        <div className="border-t border-border px-4 py-4">
+          <div className="flex items-center justify-between">
+            <span className="text-sm font-medium text-muted-foreground">Tema</span>
+            <AnimatedThemeToggle />
+          </div>
+        </div>
       </SheetContent>
     </Sheet>
   )
