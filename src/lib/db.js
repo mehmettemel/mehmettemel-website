@@ -190,6 +190,34 @@ export async function getValidCategories(noteType) {
 }
 
 /**
+ * Get all quotes from DB for given categories (saglik, gida)
+ * Used by public-facing pages to display DB-managed notes
+ * @param {string} [category='all'] - Category filter or 'all' for saglik+gida
+ * @returns {Promise<Array>} Notes array
+ */
+export async function getDbQuotes(category = 'all') {
+  try {
+    if (category && category !== 'all') {
+      return await sql`
+        SELECT id, category, text, author, source
+        FROM notes
+        WHERE note_type = 'quote' AND category = ${category}
+        ORDER BY created_at ASC
+      `
+    }
+    return await sql`
+      SELECT id, category, text, author, source
+      FROM notes
+      WHERE note_type = 'quote' AND category IN ('saglik', 'gida')
+      ORDER BY created_at ASC
+    `
+  } catch (error) {
+    console.error('Database error in getDbQuotes:', error)
+    return []
+  }
+}
+
+/**
  * Get recent notes across all types for homepage display
  * @param {number} limit - Number of notes to fetch (default: 10)
  * @returns {Promise<Array>} Recent notes

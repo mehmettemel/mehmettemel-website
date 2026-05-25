@@ -2,7 +2,6 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { getAllNotes, noteCategories } from '@/data/notes'
 import { getAllEnglishWords } from '@/data/english-words'
 
 const TABS = [
@@ -11,14 +10,14 @@ const TABS = [
   { id: 'ingilizce', color: 'bg-emerald-500' },
 ]
 
-export function MobileHome() {
+export function MobileHome({ allNotes: propNotes, noteCategories: propCategories }) {
   const [activeTab, setActiveTab] = useState('alintilar')
   const [currentNote, setCurrentNote] = useState(null)
   const [incelemeItem, setIncelemeItem] = useState(null)
   const [englishWord, setEnglishWord] = useState(null)
   const [loading, setLoading] = useState(false)
 
-  const allNotes = useMemo(() => getAllNotes(), [])
+  const allNotes = useMemo(() => propNotes || [], [propNotes])
   const allEnglishWords = useMemo(() => getAllEnglishWords(), [])
 
   const getRandomNote = () => {
@@ -53,7 +52,7 @@ export function MobileHome() {
   }
 
   const getCategoryName = (id) => {
-    const cat = noteCategories.find((c) => c.id === id)
+    const cat = (propCategories || []).find((c) => c.id === id)
     return cat ? `${cat.icon} ${cat.name}` : id
   }
 

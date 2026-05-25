@@ -1,6 +1,7 @@
 import { Container } from '../components/Container'
 import { getAllPosts } from '../lib/blog'
-import { getAllNotes } from '../data/notes'
+import { getAllNotes, noteCategories } from '../data/notes'
+import { getDbQuotes } from '../lib/db'
 import { HomeHero } from '../components/home/HomeHero'
 import { HomeResearches } from '../components/home/HomeResearches'
 import { RecentDiscoveries } from '../components/home/RecentDiscoveries'
@@ -42,18 +43,24 @@ export const metadata = {
   },
 }
 
-export default function Home() {
+function formatDbNote(n) {
+  return { id: n.id, text: n.text, author: n.author || undefined, source: n.source || undefined, category: n.category }
+}
+
+export default async function Home() {
   const allPosts = getAllPosts()
   const recentPosts = allPosts.slice(0, 3)
 
-  // Get recent notes from static data
-  const allNotes = getAllNotes()
+  // Combine static (kisisel/genel) + DB (saglik/gida) notes
+  const staticNotes = getAllNotes()
+  const dbNotes = (await getDbQuotes('all')).map(formatDbNote)
+  const allNotes = [...dbNotes, ...staticNotes]
   const recentNotes = allNotes.slice(0, 8)
 
   return (
     <Container>
       {/* Mobile: Rastgele-style random content viewer */}
-      <MobileHome />
+      <MobileHome allNotes={allNotes} noteCategories={noteCategories} />
 
       {/* Desktop: Original layout */}
       <div className="mx-auto hidden max-w-7xl py-8 md:block sm:py-12">

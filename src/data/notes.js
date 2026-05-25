@@ -1,12 +1,7 @@
 /**
- * Notes Data
- * All quotes and notes organized by category
- * Categories: saglik, gida, kisisel, genel
- *
- * To add a new note:
- * 1. Find the correct category array below
- * 2. Add a new object with: { id, text, author (optional), source (optional) }
- * 3. Use Date.now() or a unique timestamp for the id
+ * Notes Data (Static)
+ * kisisel and genel categories are stored here.
+ * saglik and gida categories are managed via admin panel (database).
  */
 
 export const noteCategories = [
@@ -15,209 +10,6 @@ export const noteCategories = [
   { id: 'saglik', name: 'Sağlık', icon: '🏥' },
   { id: 'kisisel', name: 'Kişisel', icon: '💭' },
   { id: 'genel', name: 'Genel', icon: '📝' },
-]
-
-const saglik = [
-  {
-    id: 1712144686508,
-    text: 'Bağışıklık sistemi hastalıklarından (solunum yolu) ve bağırsak sağlığı sorunlarından korunmak için Glutamin alın. Bağırsak hücreleri ve bağışıklık hücreleri enerjileri için glutamine bayılır.',
-  },
-  {
-    id: 1712143998454,
-    text: "Smoothie blender'larının plastik hazneleri, hızlı sürtünme nedeniyle inanılmaz miktarda mikroplastiği içeceğinize karıştırır. Paslanmaz çelik hazneli blender kullanın.",
-  },
-  {
-    id: 1708775062272,
-    text: 'Mükemmel beslenseniz ve spor yapsanız dahi, yönetemediğiniz stres veya sorunlu ilişkiler tüm doğruları silip süpürür.',
-  },
-  {
-    id: 1708775034469,
-    text: 'Suyu bir anda, lıkır lıkır, hızlı bir şekilde içmeyin. Suyu tek seferde hızlıca içerseniz, mideden hızla ince bağırsağa ve kana geçer. Kanda aniden sıvı artışı olunca damarlardaki basınç reseptörleri "kan basıncı artıyor" uyarısı verir. Vücut suyu hücrelere ulaştırmadan böbrekler yoluyla hızla dışarı atar.\nSuyu yudum yudum, zamana yayarak için.',
-  },
-  {
-    id: 1708098336843,
-    text: 'Sinaptik Budama (Synaptic Pruning): Beyin gelişiminin "uzun otlarla dolu bir tarla" gibi olması; kullanılan yollar (kültürel alışkanlıklar) belirginleşirken diğerlerinin kapanması.',
-  },
-  {
-    id: 1707557244481,
-    text: 'Sol tarafınıza yatın. Sağ tarafa yatmak organların mideye baskı yapmasına ve reflüye (GERD) neden olabilir.',
-  },
-  {
-    id: 1707557233945,
-    text: 'Haftanın 7 günü aynı saatte uyanın. Yatış saati değil, uyanış saati melatonini düzenler.',
-  },
-  {
-    id: 1707479292651,
-    text: 'Kansere karşı en etkili gıdalar:\n- Zerdeçalla birlikte karabiber\n- Yeşil Çay',
-  },
-  {
-    id: 1707464675896,
-    text: "Akşamları kırmızı ışık kullanın ve mavi ışığı (ekranları) 20:00'den sonra kesin.",
-  },
-  {
-    id: 1707464591052,
-    text: 'Her saat başı 10 adet "air squat" yapın. Saatlik squatlar, uzun süre oturmanın (sedanter yaşam) neden olduğu lipoprotein lipaz enziminin kapanmasını engeller.',
-  },
-  {
-    id: 1706968694841,
-    text: 'Antibiyotik alırken dikkat edilecekler:\nAntibiyotik öncesi, sırası ve sonrasında yüksek lifli, bitki bazlı beslenin. Bağırsak liften yoksun bırakıldığında, antibiyotik hasarı daha şiddetli olur ve iyileşme gecikir. Eklenmiş şeker, ultra işlenmiş gıdalar ve aşırı doymuş yağlardan uzak durun. Sabahları güneş ışığına çıkın ve hafif egzersiz yapın.',
-  },
-  {
-    id: 1706968640797,
-    text: 'If you have a daughter, start ballet lessons around age 4/5.\n\nBenefits:\n- Posture\n- Discipline\n- Focus & coordination\n- Teamwork/social skills\n- Strength & muscle tone\n- Feminine movement\n- Classical music',
-  },
-  {
-    id: 1706271975952,
-    text: 'Yemek bittikten sonraki ilk 90 dakika içinde hareket etmeye başlayın; çünkü glikoz bu sürede zirve yapar. Yemekten sonra 10 dakikalık kısa bir yürüyüş, kan şekerini düşürmek için yeterlidir.',
-  },
-  {
-    id: 1706082544534,
-    text: 'Dates is the best pre workout. Pure rocket fuel. Eat with empty stomach.',
-  },
-  {
-    id: 1706005964471,
-    text: 'A 20 minute walk after meals is one of the most overlooked health tools.',
-  },
-  {
-    id: 1706005963525,
-    text: "Your leg strength predicts how long you'll live. Not your weight.",
-  },
-  {
-    id: 1705950600399,
-    text: 'Joe Rogan: Sauna 4x per week for 20 minutes at 175 degrees = 40% decrease in all cause mortality. Great for inflammation and red blood cells.',
-  },
-  {
-    id: 1705776972683,
-    text: 'Yatak odanızı bir "mağara" yapın: Tamamen karanlık, sessiz ve soğuk.\n\nIşığı tamamen kesmek için karartma perdeleri veya göz maskesi kullanın.\n\nİdeal uyku sıcaklığı 16-20°C (60-67°F) arasındadır.\n\nYatmadan hemen önce sıcak duş almayın. Vücut ısısının düşmesi uykuyu başlatır; duşu yatmadan 1.5-2 saat önce alın.\n\nYatak sadece uyku ve seks içindir; bilgisayar veya telefonla yatakta vakit geçirmek beynin orayı "uyanıklık" ile eşleştirmesine neden olur.',
-  },
-  {
-    id: 1705679648309,
-    text: 'Dopamin seviyenizi artırmak için yenilik (novelty), risk alma (fiziksel, sosyal veya entelektüel), öngörülemezlik ve karmaşıklığa maruz kalın.',
-  },
-  {
-    id: 1705654496909,
-    text: 'Güç (strength), kas kütlesinden (muscle mass) daha kritiktir. Kas kütlesi genellikle gücün bir göstergesi (proxy) olarak kullanılır ama asıl önemli olan metrik güçtür.\n\nGücü ölçmek için sadece squat/deadlift ağırlıklarına bakmayın; kavrama gücü (grip strength), asılı kalma (dead hang) ve hava squatı gibi temel testleri kullanın.',
-  },
-  {
-    id: 1705654001780,
-    text: 'Odaklanma gerektiren zihinsel işlerinizi, egzersizden sonraki 1-3 saatlik dilime planlayın.\n\nGünde 1-4 porsiyon düşük şekerli fermente gıda tüketin (Kimchi, lahana turşusu, kefir, kaliteli yoğurt).\n\nOda sıcaklığında satılan turşular değil, soğuk zincirde (fermente) olan canlı kültürlü turşuları tercih edin.\n\nKoruyuculu ve pastörize (raf ömrü uzun) turşulardan canlı kültür bekleme.',
-  },
-  {
-    id: 1705604153466,
-    text: 'Stresli anlarda "derin nefes al" demek yerine "yavaş ve uzun nefes ver" (expiration) denmelidir. Nefes vermek Vagus sinirini uyarır ve kalp hızını yavaşlatır.\n\nUzun süre nefes verdiğinizde beyin şaşırır: "Stresli olsaydı hızlı nefes alırdı, yavaş verdiğine göre güvendeyiz" diyerek sempatik sistemi kapatır.',
-  },
-  {
-    id: 1705609152756,
-    text: 'Balık yağınızı mutlaka buzdolabında saklayın. Omega-3 çoklu doymamış bir yağ olduğu için oksidasyona karşı son derece hassastır.',
-  },
-  {
-    id: 1705348234734,
-    text: 'Huberman kreatin protokolü: 1 hafta boyunca günde 30-40g "yükleme", ardından günde 10g devam dozu. Her 16 haftada bir, vücudu dinlendirmek ve gücünüzü test etmek için 1 hafta kreatin kullanımını tamamen durdurun.\n\nMagnezyum Threonate veya Bisglycinate formlarını tercih edin; bunlar kan-beyin bariyerini daha kolay geçer. Magnezyum takviyesini uykudan 30-60 dakika önce alın. Modern tarım nedeniyle topraktaki magnezyum tükendiğinden, günümüzdeki sebzelerden (kale vb.) yeterli magnezyum almak zordur.',
-  },
-  {
-    id: 1705175520931,
-    text: 'Box Breathing (4-4-4-4) ile hızlıca vagus sinirini resetleyip sinir sistemini sakinleştir: burundan 4 sn al, tut, ver, tut.',
-  },
-  {
-    id: 1768243881702,
-    text: 'Bağışıklık takviyesinde 1 numaraya D vitaminini koyun.',
-    author: 'Osman Müftüoğlu',
-  },
-  {
-    id: 1768243962225,
-    text: 'Narı kabuğundaki beyaz liflerle birlikte tüketin veya suyunu öyle sıkın. En değerli polifenoller (elajotaninler) o beyaz liflerde ve çekirdektedir.',
-    author: 'Osman Müftüoğlu',
-  },
-  {
-    id: 1747136800000,
-    text: 'Yemek sonrası oluşan ağır yorgunluk ve uyku halini (postprandiyal somnolans) önlemek için yemekten 30 dakika önce 1 taze limonun suyunu sıkıp, eşit miktarda suyla (1:1 oranında) karıştırarak içmek.',
-  },
-  {
-    id: 1747136800001,
-    text: 'Düzenli kan testi yaptırmayı, özellikle testosteron seviyelerini kontrol etmeyi tavsiye ediyor. Çünkü birçok "zihinsel" sorun (öfke, irritasyon, depresyon gibi) aslında hormonal dengesizlikler, enflamasyon veya besin eksikliklerinden kaynaklanabiliyor. Bunları erken tespit etmek, gereksiz terapi veya ilaç yerine kök nedeni çözmeyi sağlar.',
-  },
-  {
-    id: 1747308000000,
-    text: 'Hastalanmamak için yapılması gerekenler:\n- Telefonunuzu her gün dezenfekte edin. Telefon inanılmaz miktarda mikrop taşır.\n- Küçük çocuklardan uzak durun. Çocuklar (özellikle kreş ve okul çağındakiler) sürekli yeni virüsler getirir.\n- Elleri sık sık yıkayın.\n- Elleri, özellikle yıkanmamışken gözlere, burna veya ağza götürmeyin.\n- Sauna kullanın ama testisleri soğuk tutun. Kalabalık alanlarda N95 maske takın.\n- Bağışıklık güçlendirici karışım: sarımsak, zencefil, bal ve zerdeçal.',
-  },
-  {
-    id: 1747310700000,
-    text: 'Society was built to make money. Indifferent to your health and sanity.\n\nFor example, we did not evolve to:\n- Sit 10 hours a day\n- Have our attention fractured 300 times daily\n- Compare ourselves to millions of others\n- Travel 9 time zones in 13 hours\n- Tolerate sounds above 85 dB causing hearing loss\n- Outsmart algorithms hijacking our reward system\n- Breathe fine particulate air pollution\n- Live under 16+ hrs of artificial light a day\n- Have 3 courses of antibiotics before age 2\n- Eat ultra-processed foods for 60% of daily calories\n- Consume 17 teaspoons of added sugar a day\n\nSo if you\'re feeling down in the dumps, maybe fatigued, a little or a lot depressed, anxious, that\'s why.',
-    author: 'Bryan Johnson',
-  },
-  {
-    id: 1747310800000,
-    text: 'Yatak odası kapısını gece açık bırakıp diğer odadan bir pencere açarak uyuduğun odadaki CO2 seviyesini büyük ölçüde düşürebilirsin.',
-  },
-  {
-    id: 1747504900000,
-    text: 'Friends, stop drinking alcohol. Not cut back. Eliminate.\n\nAlcohol increases cortisol, disrupts REM sleep, accelerates epigenetic aging, shrinks hippocampal volume, elevates resting heart rate, raises inflammatory markers, impairs glucose metabolism for 16 hrs.\n\nOne drink does that.',
-    author: 'Bryan Johnson',
-  },
-]
-
-const gida = [
-  {
-    id: 1712143969086,
-    text: 'Acı, baharatlı veya asidik yiyecekleri (acı sos, ketçap) asla plastikte saklamayın. Asit, kimyasalların gıdaya geçişini (leaching) olağanüstü hızlandırır.',
-  },
-  {
-    id: 1706401416903,
-    text: 'Her gün 3 öğün aynı saatte yemek yemek mekaniktir ve vücudu hantallaştırır. Bazen çok yiyin, bazen aç kalın (oruç/fasting). Vücut besin yoksunluğu stresiyle (Hormesis) antikırılganlaşır.',
-  },
-  {
-    id: 1705950454643,
-    text: 'I am Italian and not all pastas are the same. The yellowish pasta is the worst quality with high glycemic index because it has been dried out using high temperatures in just few hours.\nGood quality pasta has off white color and is dried slowly. Eat healthy and stay safe!',
-  },
-  {
-    id: 1705764588451,
-    text: 'Meyve ve sebzeler %80-95 sudur; lif ihtiyacını tam karşılamak için kuru baklagiller ve tam tahıllar şarttır.',
-  },
-  {
-    id: 1705764760650,
-    text: 'Sarımsağı kullanmadan 10 dakika önce doğrayın; bu yararlı besin maddelerini 3 katına çıkarır.',
-  },
-  {
-    id: 1705764706142,
-    text: 'Etiketinde mutfağınızda bulunmayan isimler (kimyasallar) olan gıdalardan kaçının.',
-  },
-  {
-    id: 1706940187938,
-    text: 'Karaciğerin en büyük dostu sülfür zengini gıdalardır: Lahana, turp, brokoli, karnabahar. Karaciğerdeki yağı yakmak için en az 7500 adım atmalısınız.',
-  },
-  {
-    id: 1747136900000,
-    text: "Balık pişirmeden önce içindeki Omega-3'ü korumak için limon, soğan ve karabiber ile marine edin.",
-  },
-  {
-    id: 1747136900001,
-    text: "Balığı fırında hazırlarken küçük balıklarda 150-160 dereceyi, büyük balıklarda ise en fazla 180 dereceyi geçmeyin. Yüksek sıcaklık omega-3'ü yok eder.",
-  },
-  {
-    id: 1747136900002,
-    text: "Mevsiminde olmayan hiçbir sebze ve meyveyi almayın. Yaz güneşinde yetişen domates ile kışın serada yetişen domates arasında, içerdiği likopen ve polifenol (koruyucu maddeler) açısından en az %25-%30'luk ciddi bir azalma farkı vardır.",
-  },
-  {
-    id: 1747136900003,
-    text: 'Sebzelerdeki tarım ilaçlarını biraz arındırmak için; 10-15 dk tuzlu suda bekletin, ardından 1 litre suya 1 yemek kaşığı karbonat oranlı suda 15-20 dakika daha bekletin.',
-  },
-  {
-    id: 1747136900004,
-    text: 'Sebzeleri pişirmek veya turşulamak (fermente etmek) üzerlerindeki tarım ilaçlarını büyük oranda inaktive eder (yok eder). Bu yüzden asıl özen çiğ yenilen salatalık malzemelere gösterilmelidir.',
-  },
-  {
-    id: 1747136900005,
-    text: 'Evinizdeki boş saksılarda çiçek yerine maydanoz yetiştirin. Her gün güvendiğiniz topraktan çıkan 3 yaprak maydanoz yemek bile hücreleri harika besler.',
-  },
-  {
-    id: 1747136900006,
-    text: "Marketten alınan sebze meyveler koptuktan 5 gün sonra size ulaşır ve bu 5 gün içinde vitamin/mineral değerlerinin %30'u yok olur. Bu yüzden haftalık pazar alışverişi yerine, azar azar alıp taze tüketmeye çalışın.",
-  },
-  {
-    id: 1747505200000,
-    text: 'Domates ve avokadoyu beraber yemek likopen emilimini 4,4 kat (yaklaşık %400) artırıyor. En iyi emilim için domatesin pişmiş veya sos halinde olması daha avantajlı. Bu ikiliye kırmızı soğan eklemek emilimi zirveye çıkarıyor.\nLikopen, domateste bulunan ve yağda çözünen, kanserle de savaşan bir antioksidan; tek başına yenirse vücut tarafından az emiliyor. Avokadoda ise oleik asit (omega-9) gibi tekli doymamış sağlıklı yağ asitleri var. Bu yağlar, likopen gibi maddelerin bağırsaklardan emilimini ciddi şekilde artırıyor.\nBu birliktelik β-karoten emilimini de 2,6 kat artırıyor.',
-    source: 'https://pubmed.ncbi.nlm.nih.gov/15735074/',
-  },
 ]
 
 const kisisel = [
@@ -431,6 +223,11 @@ const kisisel = [
     id: 1748044800000,
     text: "A man's greatest weapon is consistency. It outlasts talent, talk, and luck.",
   },
+  // Moved from saglik → kisisel (parenting advice, not health)
+  {
+    id: 1706968640797,
+    text: 'If you have a daughter, start ballet lessons around age 4/5.\n\nBenefits:\n- Posture\n- Discipline\n- Focus & coordination\n- Teamwork/social skills\n- Strength & muscle tone\n- Feminine movement\n- Classical music',
+  },
 ]
 
 const genel = [
@@ -512,7 +309,7 @@ const genel = [
     text: 'The difference between animals and humans is that animals would never allow the dumbest member of the herd to lead them.',
   },
   {
-    id: 1706591277060,
+    id: 1706591277061,
     text: 'toplumların başarısının sistemlerinden (demokrasi, komünizm vb.) ziyade, o sistemin "ne kadar açık" olduğuyla ilgili olmasıdır. Bir toplum yükselirken liyakat, eleştiri ve rıza ile beslenir; ancak olgunlaştıkça kaçınılmaz bir bürokratik hantallığa gömülür. Bu aşamada yönetim, sistemi iyileştirmek yerine kendi koltuğunu korumaya odaklandığı için "aldatma" mekanizmasını devreye sokar. Bu, aslında sonun başlangıcıdır; çünkü eleştirinin bastırıldığı bir sistem, hatalarını göremez hale gelir.\n\nAsıl can alıcı nokta ise çöküşün hızıdır. Toplumlar yavaş yavaş geriler ama aniden çökerler. Prof. Jiang\'ın "Mükemmel Fırtına" dediği bu durum; savaş, kıtlık ve salgın gibi dış şokların aynı anda sistemi vurmasıyla gerçekleşir. Otoriterleşen ve eleştiriyi "ihanet" sayan bir yönetim, bu çoklu krizlere esnek bir cevap veremez. Sonuç olarak güç sahipleri, halkın kendilerine isyan etmesini (devrimi) önlemek için dikkat dağıtıcı, anlamsız dış savaşlara yönelirler.\n\nKısacası; önümüzdeki 20 yıl için çizilen tablo, ahlaki bir "doğru-yanlış" meselesi değil, gücün hayatta kalma içgüdüsüdür. Batı dünyasında demokrasinin zayıflaması ve ekonomik krizlerin artması, sistemin rızadan zorlamaya (coercion) geçişinin bir işaretidir. Profesöre göre dünya artık mantık veya ahlakla değil, çıplak güç dinamikleriyle yönetilen bir evreye girmektedir.',
   },
   {
@@ -522,36 +319,21 @@ const genel = [
 ]
 
 /**
- * Get all notes as a flat array with category field
+ * Get all static notes (kisisel + genel) as a flat array with category field
  */
 export function getAllNotes() {
   return [
-    ...saglik.map((n) => ({ ...n, category: 'saglik' })),
-    ...gida.map((n) => ({ ...n, category: 'gida' })),
     ...kisisel.map((n) => ({ ...n, category: 'kisisel' })),
     ...genel.map((n) => ({ ...n, category: 'genel' })),
   ]
 }
 
 /**
- * Get notes filtered by category
+ * Get static notes filtered by category (kisisel or genel only)
  */
 export function getNotesByCategory(category) {
   if (!category || category === 'all') return getAllNotes()
-  const categoryMap = { saglik, gida, kisisel, genel }
+  const categoryMap = { kisisel, genel }
   const notes = categoryMap[category] || []
   return notes.map((n) => ({ ...n, category }))
-}
-
-/**
- * Get notes count per category
- */
-export function getNotesStats() {
-  return {
-    total: saglik.length + gida.length + kisisel.length + genel.length,
-    saglik: saglik.length,
-    gida: gida.length,
-    kisisel: kisisel.length,
-    genel: genel.length,
-  }
 }

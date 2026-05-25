@@ -1,6 +1,7 @@
 import { Container } from '@/components/Container'
 import { QuotesContent } from '@/components/kesifler/QuotesContent'
 import { getNotesByCategory } from '@/data/notes'
+import { getDbQuotes } from '@/lib/db'
 import Link from 'next/link'
 
 export const metadata = {
@@ -21,9 +22,23 @@ function ArrowLeftIcon(props) {
   )
 }
 
-export default function QuotesPage({ searchParams }) {
+function formatDbNote(n) {
+  return { id: n.id, text: n.text, author: n.author || undefined, source: n.source || undefined, category: n.category }
+}
+
+export default async function QuotesPage({ searchParams }) {
   const category = searchParams?.category || 'all'
-  const notes = getNotesByCategory(category)
+
+  let notes
+  if (category === 'saglik' || category === 'gida') {
+    notes = (await getDbQuotes(category)).map(formatDbNote)
+  } else if (category === 'all') {
+    const staticNotes = getNotesByCategory('all')
+    const dbNotes = (await getDbQuotes('all')).map(formatDbNote)
+    notes = [...dbNotes, ...staticNotes]
+  } else {
+    notes = getNotesByCategory(category)
+  }
 
   return (
     <Container>
