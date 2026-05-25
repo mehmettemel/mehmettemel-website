@@ -6,9 +6,9 @@ import { getAllNotes, noteCategories } from '@/data/notes'
 import { getAllEnglishWords } from '@/data/english-words'
 
 const TABS = [
-  { id: 'alintilar', label: 'Alıntılar' },
-  { id: 'incelemeler', label: 'İncelemeler' },
-  { id: 'ingilizce', label: 'English' },
+  { id: 'alintilar', color: 'bg-amber-500' },
+  { id: 'incelemeler', color: 'bg-blue-500' },
+  { id: 'ingilizce', color: 'bg-emerald-500' },
 ]
 
 export function MobileHome() {
@@ -58,7 +58,7 @@ export function MobileHome() {
   }
 
   return (
-    <div className="flex min-h-[calc(100vh-4rem)] flex-col px-2 py-4 md:hidden">
+    <div className="flex min-h-[calc(100vh-4rem)] flex-col px-2 pb-20 pt-4 md:hidden">
       {/* Minimal hero */}
       <div className="mb-4 text-center">
         <h1 className="text-lg font-bold tracking-tight text-foreground">
@@ -67,20 +67,19 @@ export function MobileHome() {
         <p className="text-xs text-muted-foreground">dijital koleksiyonum</p>
       </div>
 
-      {/* Tabs */}
-      <div className="mb-4 grid grid-cols-3 rounded-lg border border-border bg-card p-1">
+      {/* Tabs - colored circles */}
+      <div className="mb-4 flex items-center justify-center gap-3">
         {TABS.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`rounded-md px-2 py-2.5 text-xs font-medium transition-all ${
+            className={`h-3 w-3 rounded-full transition-all ${tab.color} ${
               activeTab === tab.id
-                ? 'bg-primary text-primary-foreground shadow-sm'
-                : 'text-muted-foreground hover:text-foreground'
+                ? 'scale-125 ring-2 ring-offset-2 ring-offset-background ring-current'
+                : 'opacity-40'
             }`}
-          >
-            {tab.label}
-          </button>
+            aria-label={tab.id}
+          />
         ))}
       </div>
 
@@ -181,14 +180,16 @@ export function MobileHome() {
         )}
       </div>
 
-      {/* Big Random Button */}
-      <button
-        onClick={handleRandom}
-        disabled={loading}
-        className="w-full rounded-xl bg-primary py-5 text-lg font-bold text-primary-foreground shadow-lg transition-all active:scale-[0.97] disabled:opacity-50"
-      >
-        {loading ? '...' : 'Rastgele'}
-      </button>
+      {/* Sticky minimal random button */}
+      <div className="fixed bottom-6 left-0 right-0 z-40 flex justify-center md:hidden">
+        <button
+          onClick={handleRandom}
+          disabled={loading}
+          className="rounded-full bg-primary px-8 py-3 text-sm font-medium text-primary-foreground shadow-md transition-all active:scale-95 disabled:opacity-50"
+        >
+          {loading ? '...' : 'Rastgele'}
+        </button>
+      </div>
     </div>
   )
 }
