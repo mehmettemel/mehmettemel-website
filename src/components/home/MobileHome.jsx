@@ -68,15 +68,15 @@ export function MobileHome() {
       </div>
 
       {/* Tabs - colored circles */}
-      <div className="mb-4 flex items-center justify-center gap-3">
+      <div className="mb-4 flex items-center justify-center gap-6">
         {TABS.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`h-3 w-3 rounded-full transition-all ${tab.color} ${
+            className={`h-5 w-5 rounded-full transition-all ${tab.color} ${
               activeTab === tab.id
-                ? 'scale-125 ring-2 ring-offset-2 ring-offset-background ring-current'
-                : 'opacity-40'
+                ? 'scale-110 ring-2 ring-offset-3 ring-offset-background ring-current'
+                : 'opacity-35'
             }`}
             aria-label={tab.id}
           />
