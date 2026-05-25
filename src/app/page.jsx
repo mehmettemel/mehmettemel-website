@@ -4,6 +4,7 @@ import { getAllNotes } from '../data/notes'
 import { HomeHero } from '../components/home/HomeHero'
 import { HomeResearches } from '../components/home/HomeResearches'
 import { RecentDiscoveries } from '../components/home/RecentDiscoveries'
+import { MobileHome } from '../components/home/MobileHome'
 
 // SEO metadata for the home page
 export const metadata = {
@@ -51,15 +52,14 @@ export default function Home() {
 
   return (
     <Container>
-      <div className="mx-auto max-w-7xl py-8 sm:py-12">
-        {/* Hero Section - Centered */}
+      {/* Mobile: Rastgele-style random content viewer */}
+      <MobileHome />
+
+      {/* Desktop: Original layout */}
+      <div className="mx-auto hidden max-w-7xl py-8 md:block sm:py-12">
         <HomeHero />
-
         <div className="space-y-12 sm:space-y-16">
-          {/* Researches Section */}
           <HomeResearches posts={recentPosts} />
-
-          {/* Recent Discoveries Section */}
           <RecentDiscoveries notes={recentNotes} />
         </div>
       </div>
