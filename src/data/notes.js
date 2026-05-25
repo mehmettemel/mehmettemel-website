@@ -398,7 +398,7 @@ const kisisel = [
     text: 'I once killed a plant by watering it too much and that is how I learned, even good intentions can be harmful in excess.',
   },
   {
-    id: 1747308200000,
+    id: 1747308200001,
     text: 'Antithesis (Karşıtlık) - Beyin İkilikleri Sever: İnsan beyni zıtlıklarla çalışır. Her şeyi siyah-beyaz görmek isteriz. Eğer bir şeyi tanımlamak istiyorsan, ne olmadığını da söyle. Teknik: "X, Y\'dir" demek yerine; "X, Y\'dir; Z değildir" formatını kullan. Örnek: Neil Armstrong\'un "Benim için küçük, insanlık için büyük bir adım" sözü. Zıtlık (küçük adım vs büyük adım) cümleyi ölümsüzleştirir.\n\nPeriodic Sentences (Periyodik Cümleler) - Tansiyon Yaratmak: Cümlenin ana fiilini veya ana fikrini en sona saklamak. Okuyucu veya dinleyici, cümlenin nereye gideceğini bilmediği için nefesini tutup sonunu bekler. Örnek: "Her ne kadar yorgun olsam da, hava berbat olsa da, cebimde beş kuruş kalmasa da... geliyorum." Eğer ana fikri başta verirsen etkisi sıfırlanır. Heyecan yaratmak istiyorsan ana fiili sona at.\n\nHendiadys - Şiirsel Sis: Bir sıfat tamlamasını ("kızgın köpek") alıp, iki isme dönüştürmek ("köpek ve kızgınlık"). Bu teknik cümleye mantıksız ama çok şiirsel, hafif bulanık bir hava katar. Shakespeare "Furious sound" (Öfkeli ses) demek yerine "Sound and fury" (Ses ve öfke) demiştir. Sıfatlar netleştirir, Hendiadys ise bulanıklaştırır ve derinlik katar.\n\nTricolon - Üçlemenin Gücü: Her şey üçlü olmalıdır. İki eksiktir, dört fazladır. Örnek: "Geldim, gördüm, yendim." (Sezar). Mizah için de kullanılır: İki normal şey söyle, üçüncüde şaşırtmacayı patlat.\n\nLitotes - "Fena Değil" Sanatı: Bir şeyi övmek istediğinde, onu doğrudan övmek yerine, zıttını inkar et. "Çok güzel" deme, "Çirkin sayılmaz" de. Doğrudan övgü bazen samimiyetsiz durabilir. Litotes kullandığında hem kendine güvenen bir hava yaratırsın hem de karşı tarafın zekasına mesaj verirsin.\n\nEpistrophe - Sonun Gücü: Cümlenin sonundaki tekrar. Anaphora\'dan çok daha güçlüdür çünkü insanlar en son duydukları şeyi hatırlar. Örnek (Lincoln): "...government of the people, by the people, for the people." Vurgulamak istediğin anahtar kelimeyi her kısmın sonuna koy.\n\nIsocolon - Ritmik Denge: Cümlenin iki parçasının aynı uzunlukta, aynı yapıda ve aynı ritimde olması. Örnek: "Buy one, get one." Bir sloganın akılda kalmasını istiyorsan hece sayılarını eşitle. Denge, cümleye kesinlik havası katar.\n\nProlepsis - İtirazı Çürütme: Dinleyicinin yapacağı itirazı, o daha ağzını açmadan senin söyleyip çürütmen. Örnek: "Şimdi bana diyeceksiniz ki, \'Bu çok pahalı\'. Evet, pahalı ama..." İtirazı sen dile getirdiğin an, karşı tarafın elindeki kozu almış olursun. Sana dürüst ve açık sözlü bir hava katar.\n\nAporia - Sahte Şüphe: Konuşmacının sanki ne diyeceğini bilmiyormuş gibi numara yapması. Örnek: "Sana ne desem bilemiyorum... Dahi mi, yoksa sadece şanslı mı?" Aslında ne diyeceğini çok iyi biliyorsundur ama bu kararsızlık anı dinleyiciyle samimi bir bağ kurar.\n\nHyperbole - Abartma Sanatı: Bir şeyi öyle bir abartmalısın ki kimse onu gerçek sanmasın ama hissi tam olarak alsın. "Seni 3 saattir bekliyorum" dersen şikayettir. "Seni bin yıldır bekliyorum" dersen edebiyattır. Abartı ne kadar imkansızsa etkisi o kadar güçlüdür.',
   },
   {
@@ -426,6 +426,10 @@ const kisisel = [
   {
     id: 1747505400000,
     text: 'Your future is shaped by the habits you repeat, not the goals you set.',
+  },
+  {
+    id: 1748044800000,
+    text: "A man's greatest weapon is consistency. It outlasts talent, talk, and luck.",
   },
 ]
 
