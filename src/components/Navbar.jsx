@@ -111,7 +111,7 @@ function MobileNav() {
         <Menu className="h-6 w-6" />
         <span className="sr-only">Toggle menu</span>
       </SheetTrigger>
-      <SheetContent side="right" className="w-72 sm:w-80 flex flex-col">
+      <SheetContent side="right" className="w-full sm:w-80 flex flex-col">
         {/* Fixed top shortcuts */}
         <div className="mt-4 flex items-center gap-2 border-b border-border pb-4 px-1">
           <Link
