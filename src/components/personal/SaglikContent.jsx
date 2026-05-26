@@ -3,29 +3,14 @@
 import { useState, useEffect } from 'react'
 import { ChevronRight } from 'lucide-react'
 
-// Group categories into main and sub categories
+// Each category maps directly — no sub-grouping needed
 const categoryGroups = {
-  'Temel Sağlık': ['Temel Sağlık Prensipleri', 'Fiziksel Aktivite ve Egzersiz'],
-  'Beslenme ve Mutfak': [
-    'Beslenme',
-    'Pişirme ve Mutfak Teknikleri',
-    'Gıda Güvenliği ve Restoranlar',
-  ],
-  'Gıdalar': [
-    'Sebzeler',
-    'Meyveler',
-    'Et ve Hayvansal Ürünler',
-    'Yağlar',
-    'Ekmek',
-    'Diğer Faydalı Gıdalar',
-  ],
-  'Cilt ve Saç Bakımı': ['Cilt Bakımı', 'Güneş Kremi', 'Saç Bakımı', 'Egzema'],
-  'İç Sağlık': [
-    'İç Sağlık ve Hastalıklar',
-    'Vitaminler ve Mineraller',
-    'Ağız, Diş ve Boğaz Sağlığı',
-  ],
-  'Sağlık Sistemi': ['Hastane ve Sağlık Sistemi'],
+  'Temel Sağlık': ['Temel Sağlık'],
+  'Beslenme': ['Beslenme'],
+  'Mutfak': ['Mutfak'],
+  'Takviyeler': ['Takviyeler'],
+  'Bakım': ['Bakım'],
+  'Hastalıklar': ['Hastalıklar'],
 }
 
 export function SaglikContent({ categories, title = 'Sağlık' }) {

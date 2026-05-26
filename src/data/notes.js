@@ -1,82 +1,13 @@
 /**
  * Notes Data
  * All quotes and notes organized by category
- * Categories: gida, kisisel, genel
+ * Categories: kisisel, genel
  */
 
 export const noteCategories = [
   { id: 'all', name: 'Tümü', icon: '📚' },
-  { id: 'gida', name: 'Gıda', icon: '🍎' },
-  { id: 'kisisel', name: 'Kişisel', icon: '💭' },
+{ id: 'kisisel', name: 'Kişisel', icon: '💭' },
   { id: 'genel', name: 'Genel', icon: '📝' },
-]
-
-const gida = [
-  {
-    id: 1712143969086,
-    text: 'Acı, baharatlı veya asidik yiyecekleri (acı sos, ketçap) asla plastikte saklamayın. Asit, kimyasalların gıdaya geçişini (leaching) olağanüstü hızlandırır.',
-  },
-  {
-    id: 1706401416903,
-    text: 'Her gün 3 öğün aynı saatte yemek yemek mekaniktir ve vücudu hantallaştırır. Bazen çok yiyin, bazen aç kalın (oruç/fasting). Vücut besin yoksunluğu stresiyle (Hormesis) antikırılganlaşır.',
-  },
-  {
-    id: 1705950454643,
-    text: 'I am Italian and not all pastas are the same. The yellowish pasta is the worst quality with high glycemic index because it has been dried out using high temperatures in just few hours.\nGood quality pasta has off white color and is dried slowly. Eat healthy and stay safe!',
-  },
-  {
-    id: 1705764588451,
-    text: 'Meyve ve sebzeler %80-95 sudur; lif ihtiyacını tam karşılamak için kuru baklagiller ve tam tahıllar şarttır.',
-  },
-  {
-    id: 1705764760650,
-    text: 'Sarımsağı kullanmadan 10 dakika önce doğrayın; bu yararlı besin maddelerini 3 katına çıkarır.',
-  },
-  {
-    id: 1705764706142,
-    text: 'Etiketinde mutfağınızda bulunmayan isimler (kimyasallar) olan gıdalardan kaçının.',
-  },
-  {
-    id: 1706940187938,
-    text: 'Karaciğerin en büyük dostu sülfür zengini gıdalardır: Lahana, turp, brokoli, karnabahar. Karaciğerdeki yağı yakmak için en az 7500 adım atmalısınız.',
-  },
-  {
-    id: 1747136900000,
-    text: "Balık pişirmeden önce içindeki Omega-3'ü korumak için limon, soğan ve karabiber ile marine edin.",
-  },
-  {
-    id: 1747136900001,
-    text: "Balığı fırında hazırlarken küçük balıklarda 150-160 dereceyi, büyük balıklarda ise en fazla 180 dereceyi geçmeyin. Yüksek sıcaklık omega-3'ü yok eder.",
-  },
-  {
-    id: 1747136900002,
-    text: "Mevsiminde olmayan hiçbir sebze ve meyveyi almayın. Yaz güneşinde yetişen domates ile kışın serada yetişen domates arasında, içerdiği likopen ve polifenol (koruyucu maddeler) açısından en az %25-%30'luk ciddi bir azalma farkı vardır.",
-  },
-  {
-    id: 1747136900003,
-    text: 'Sebzelerdeki tarım ilaçlarını biraz arındırmak için; 10-15 dk tuzlu suda bekletin, ardından 1 litre suya 1 yemek kaşığı karbonat oranlı suda 15-20 dakika daha bekletin.',
-  },
-  {
-    id: 1747136900004,
-    text: 'Sebzeleri pişirmek veya turşulamak (fermente etmek) üzerlerindeki tarım ilaçlarını büyük oranda inaktive eder (yok eder). Bu yüzden asıl özen çiğ yenilen salatalık malzemelere gösterilmelidir.',
-  },
-  {
-    id: 1747136900005,
-    text: 'Evinizdeki boş saksılarda çiçek yerine maydanoz yetiştirin. Her gün güvendiğiniz topraktan çıkan 3 yaprak maydanoz yemek bile hücreleri harika besler.',
-  },
-  {
-    id: 1747136900006,
-    text: "Marketten alınan sebze meyveler koptuktan 5 gün sonra size ulaşır ve bu 5 gün içinde vitamin/mineral değerlerinin %30'u yok olur. Bu yüzden haftalık pazar alışverişi yerine, azar azar alıp taze tüketmeye çalışın.",
-  },
-  {
-    id: 1747505200000,
-    text: 'Domates ve avokadoyu beraber yemek likopen emilimini 4,4 kat (yaklaşık %400) artırıyor. En iyi emilim için domatesin pişmiş veya sos halinde olması daha avantajlı. Bu ikiliye kırmızı soğan eklemek emilimi zirveye çıkarıyor.\nLikopen, domateste bulunan ve yağda çözünen, kanserle de savaşan bir antioksidan; tek başına yenirse vücut tarafından az emiliyor. Avokadoda ise oleik asit (omega-9) gibi tekli doymamış sağlıklı yağ asitleri var. Bu yağlar, likopen gibi maddelerin bağırsaklardan emilimini ciddi şekilde artırıyor.\nBu birliktelik β-karoten emilimini de 2,6 kat artırıyor.',
-    source: 'https://pubmed.ncbi.nlm.nih.gov/15735074/',
-  },
-  {
-    id: 1706082544534,
-    text: 'Dates is the best pre workout. Pure rocket fuel. Eat with empty stomach.',
-  },
 ]
 
 const kisisel = [
@@ -386,15 +317,14 @@ const genel = [
 
 export function getAllNotes() {
   return [
-...gida.map((n) => ({ ...n, category: 'gida' })),
-    ...kisisel.map((n) => ({ ...n, category: 'kisisel' })),
+...kisisel.map((n) => ({ ...n, category: 'kisisel' })),
     ...genel.map((n) => ({ ...n, category: 'genel' })),
   ]
 }
 
 export function getNotesByCategory(category) {
   if (!category || category === 'all') return getAllNotes()
-  const categoryMap = { gida, kisisel, genel }
+  const categoryMap = { kisisel, genel }
   const notes = categoryMap[category] || []
   return notes.map((n) => ({ ...n, category }))
 }

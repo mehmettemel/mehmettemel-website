@@ -1,8 +1,8 @@
 export const title = 'Sağlık'
 
 export const categories = {
-  'Temel Sağlık Prensipleri': {
-    label: 'Temel Sağlık Prensipleri',
+  'Temel Sağlık': {
+    label: 'Temel Sağlık',
     items: [
       { text: 'Eller çok önemli. Tırnaklar kirli olmamalı.', subItems: [] },
       { text: 'Uyku en önem vermen gereken şey.', subItems: [] },
@@ -23,11 +23,6 @@ export const categories = {
       { text: 'Society was built to make money. Indifferent to your health and sanity. We did not evolve to: Sit 10 hours a day, have our attention fractured 300 times daily, compare ourselves to millions of others, eat ultra-processed foods for 60% of daily calories, consume 17 teaspoons of added sugar a day. So if you\'re feeling down, maybe fatigued, depressed, anxious, that\'s why. (Bryan Johnson)', subItems: [] },
       { text: 'Yatak odası kapısını gece açık bırakıp diğer odadan bir pencere açarak uyuduğun odadaki CO2 seviyesini büyük ölçüde düşürebilirsin.', subItems: [] },
       { text: 'Friends, stop drinking alcohol. Not cut back. Eliminate. Alcohol increases cortisol, disrupts REM sleep, accelerates epigenetic aging, shrinks hippocampal volume, elevates resting heart rate, raises inflammatory markers, impairs glucose metabolism for 16 hrs. One drink does that. (Bryan Johnson)', subItems: [] },
-    ]
-  },
-  'Fiziksel Aktivite ve Egzersiz': {
-    label: 'Fiziksel Aktivite ve Egzersiz',
-    items: [
       { text: 'Düzenli olarak yokuş çıkılmalı veya merdiven çıkılmalı. Bacak kası çok önemli.', subItems: [] },
       { text: 'Demire tutunup düzenli aşağı doğru asılmak vücut için çok değerli.', subItems: [] },
       { text: 'Futbol beyin için çok zararlı, topa kafa vurmaları sebebiyle. Powerlifting beyne zarar verir. Günde 30 dk yürümek beyin için çok iyi.', subItems: [] },
@@ -72,100 +67,6 @@ export const categories = {
       { text: 'Yemek bittikten sonraki ilk 90 dakika içinde hareket etmeye başlayın; çünkü glikoz bu sürede zirve yapar. Yemekten sonra 10 dakikalık kısa bir yürüyüş, kan şekerini düşürmek için yeterlidir.', subItems: [] },
       { text: 'Odaklanma gerektiren zihinsel işlerinizi, egzersizden sonraki 1-3 saatlik dilime planlayın. Günde 1-4 porsiyon düşük şekerli fermente gıda tüketin (Kimchi, lahana turşusu, kefir, kaliteli yoğurt). Oda sıcaklığında satılan turşular değil, soğuk zincirde (fermente) olan canlı kültürlü turşuları tercih edin.', subItems: [] },
       { text: 'Yemek sonrası oluşan ağır yorgunluk ve uyku halini (postprandiyal somnolans) önlemek için yemekten 30 dakika önce 1 taze limonun suyunu sıkıp, eşit miktarda suyla (1:1 oranında) karıştırarak içmek.', subItems: [] },
-    ]
-  },
-  'Pişirme ve Mutfak Teknikleri': {
-    label: 'Pişirme ve Mutfak Teknikleri',
-    items: [
-      { text: 'Kıyma pişirirken önce kıyma kavrulur. Kıyma tahta kaşıkla eze eze rengini alana kadar kavrulur. Ama öyle pişene kadar değil, sadece o kırmızılıktan kurtulup kahverengini alana kadar kavrulur, sonra soğan içerisine eklenir. Kıymayı kavururken kaşıkla ezmezseniz topaklanma olur, kıymanın gerçek tadını alamazsınız. En büyük hatalardan biri kıyma rengini almadan içine yağ atılması. Kıyma rengini almadan kesinlikle içerine yağ, tuz, su, soğan, domates, biber vs. atılmaz. Kıymayı eze eze rengini alana kavurduktan sonra sırasıyla soğan ve yağı ekleyebilirsiniz. Son bir önerim de baharat ve tuzu ocaktan almadan bir dakika kadar önce eklemeniz.', subItems: [] },
-      { text: 'Eti marine ederken tuz kullanma, sertleştirir.', subItems: [] },
-      { text: 'Tuzun bir fiskesi turtaya, keke ve tüm tatlılara inanılmaz bir hoşluk katar.', subItems: [] },
-      { text: 'Mikrodalgada pişirme ve ısıtma çok sağlıklı bir seçenek.', subItems: [] },
-      { text: 'Basit sebze çorbası yaparken soğanları yağda yumuşatıp, ardından muntazam dilimlenmiş havuç gibi bir sebze ekleyip tuzlamak önemli. Bu ön baharatlama, sebzenin lezzetini yağın içine hapsederek çorbaya yayılmasını sağlar.', subItems: [] },
-    ]
-  },
-  'Gıda Güvenliği ve Restoranlar': {
-    label: 'Gıda Güvenliği ve Restoranlar',
-    items: [
-      { text: 'Gıdaları saklayacaksak mutlaka paslanmaz çelikte saklanmalı.', subItems: [] },
-      { text: 'Şarküteri tezgahında zeytin tenekesi az kalmışsa içi pahalı olanın içine boşaltılır. Aynı şey peynirde de yapılır. Şarküterilerin %90\'ı peynirleri ayırt edemez, çoğu bilgisizdir. "Ben ayırt ederim" diyen salakların önüne Ezine peyniri ve Trakya peyniri koyun, kesinlikle ayırt edemezler. Bu çok uzun yıllar gerektirir. Zaten şarküteri deposuna giremezsiniz, muhtemelen mideniz kalkar.', subItems: [] },
-      { text: 'Gıda sektöründe çalışan samimi bir arkadaşımın dediği üzere, gittiğiniz bir restoranda ne yiyeceğinizden emin değilseniz, garsonun şiddetle tavsiye ettiği her ürünü listenizden çıkarın.', subItems: [] },
-      { text: 'Kapısında kuyruk olmayan restoranlarda yazın beyaz et tüketme. Bakterilerin üremeyi en sevdikleri sıcaklık aralığı 20-45 derece olduğundan illa ki ürün az ya da çok kontamine olmuştur. Sebze, tahıl veya kırmızı et tercih edin. En mantıklı seçimler kızartmalardır çünkü yüksek ısıda pişmişlerdir.', subItems: [] },
-      { text: 'Yemekte eğer kıl çıktıysa geri vermeden önce içine tuz bas. Yoksa içindeki kılı çıkarıp yeni yapmış gibi getiriyorlar.', subItems: [] },
-    ]
-  },
-  'İç Sağlık ve Hastalıklar': {
-    label: 'İç Sağlık ve Hastalıklar',
-    items: [
-      { text: 'Evinde küf olan birisi asla iyileşmez. Küf çok kritik.', subItems: [] },
-      { text: 'Çörek otu sokmalı. Küfe çok iyi geliyor.', subItems: [] },
-      { text: 'Aliminyum içermeyen koltuk altı kullan.', subItems: [] },
-      { text: 'Helicobacter pylori için damla sakızı çiğnemek (Oytun Erbaş).', subItems: [] },
-      { text: 'İnsülin direnci her hastalığın sebebi: İnsülin direnci, vücudunuzun hücrelerinin insüline yeterince tepki vermediği bir durumdur. İnsülin, yiyeceklerden gelen şekerin (glukoz) hücrelere enerji için girmesine yardımcı olan bir hormondur. Bu direnç durumunda, şeker kan dolaşımında kalır, bu da kan şekeri seviyelerinin yüksek olmasına ve zamanla diyabete yol açabilir.Bir hafta hareketsizlik insülin direncini 7 kat artırabiliyor ve daha çarpıcı kısmı, tekrar fiziksel egzersize başladığınızda bile hiç ara vermeyen birine göre insülin direnciniz "haftalarca" 2 katı seviyede kalıyor. Kaslar insüline dirençli hale gelen ilk dokulardan biriymiş. Daha fazla kasımızın olması, daha fazla glukozu kandan çıkarabilmemizi sağlar. Kas kütlesindeki azalış ya da artışlar, kaslar vücudun en büyük dokularından olduğundan insülin duyarlılığımız üstünde fazlasıyla etkili. En çok kas bacaklarda var, o yüzden bacak kasları önemli.', subItems: [] },
-      { text: 'Antibiyotik alırken dikkat edilecekler: Antibiyotik öncesi, sırası ve sonrasında yüksek lifli, bitki bazlı beslenin. Bağırsak liften yoksun bırakıldığında, antibiyotik hasarı daha şiddetli olur ve iyileşme gecikir. Eklenmiş şeker, ultra işlenmiş gıdalar ve aşırı doymuş yağlardan uzak durun. Sabahları güneş ışığına çıkın ve hafif egzersiz yapın.', subItems: [] },
-      { text: 'Düzenli kan testi yaptırmayı, özellikle testosteron seviyelerini kontrol etmeyi tavsiye ediyor. Çünkü birçok "zihinsel" sorun (öfke, irritasyon, depresyon gibi) aslında hormonal dengesizlikler, enflamasyon veya besin eksikliklerinden kaynaklanabiliyor. Bunları erken tespit etmek, gereksiz terapi veya ilaç yerine kök nedeni çözmeyi sağlar.', subItems: [] },
-    ]
-  },
-  'Hastane ve Sağlık Sistemi': {
-    label: 'Hastane ve Sağlık Sistemi',
-    items: [
-      { text: 'Özel hastanelerde ödemelerinizi kredi kartınızla yapın. Ayrıntılı hizmet faturası isteyin, niçin istiyorsunuz diye sorarlarsa SGK\'nın sitesiyle karşılaştıracağım deyin. Tek tek özel hastanelerin isimleriyle birlikte hangi hizmetten kaç TL ilave ücret alabilecekleri SGK tarafından listeleniyor. Hemen pazarlığa oturacaklardır sizinle, nakit ne kadar verebileceğinizi, yardımcı olmak istediklerini sorarlar. Her halükarda kredi kartınızla da indirimi alırsınız. Özellikle yatarak tedavi edilmişse fiyatı en az 1/3 oranında düşürürler. Ya bu fiyat üzerinde anlaşın, ya da ödemenizi iptal ettirmemek istediğinizi söyleyip ayrıntılı faturanızla birlikte ilçe tüketici hakem heyetine başvurun.', subItems: [] },
-      { text: '112 üzerinden özel bir hastanenin acil polikliniğine getirilirseniz, sizden 5 kuruş talep edemezler ama talep ederler ve korkuturlar. Sakın düşmeyin bu oyuna ve hemen Sağlık Bakanlığı\'na ve bağlı bulunduğunuz kolluk kuvvetlere başvurarak durumunuzu anlatın. Anlatmaya gerek kalmadan ücretsiz olarak gerekli işlemleri yapacaklardır. Özellikle kalp krizi ve stent durumlarında "kaliteli stent takacağız, fiyat farkı vs." oyunlarına düşmeyin. Devlet karşılıyor bu durumları.', subItems: [] },
-      { text: 'Devlet hastanelerinde size çekilen MR (emar) filmleri dünyanın en kalitesiz görüntü kalitesine sahiptir. Avrupa\'da bir cihazda günde 20-30 MR çekilirken bizde bu rakam 100-150 civarındadır. 7 kat MR\'ı, 7 kat kaliteyi azaltarak çekiyorlar. Mesela beyninizi gösteren film 10 MB olması gerekirken 1-2 MB oluyor. Kötü kalitede olan MR yüzünden bu ülkede her gün sayısız tümör, sayısız hastalık filmde görülmüyor. Hastalar teşhis almıyor, bu yüzden tanı konulmuyor. Daha da kötüsü çocukların organları küçük olduğundan onlarda teşhis daha çok atlanır. Şikayetinizi anlattığınız ilk 15 saniyede recetenize yazılacak ilaclar belli olur. Devamında kendinizi yormuş oluyorsunuz.', subItems: [] },
-    ]
-  },
-  'Cilt Bakımı': {
-    label: 'Cilt Bakımı',
-    items: [
-      { text: 'Yağlı veya akneli cilt için salisilik asit içeren temizleyici sebum kontrolü sağlar ve sivilceleri önler. Binde 3 oranında retinol ile başlangıç yapılabilir.', subItems: [] },
-      { text: 'Hyaluronik asit içeren nemlendirici özellikle etkilidir, nemi tutar ve cilt bariyerini destekler.', subItems: [] },
-      { text: 'Yağlı cildi olanlar uzun süre duşta kalmamalı ve ılık su ile duş almalı.', subItems: [] },
-      { text: 'Liquid chlorophyll sindirime, metabolizmaya, cilde yardımcı olur ve vücut kokusunu giderir. Bütün gün terlesen bile temiz kokarsın. Ayrıca akne yamaları kullanıyorsan, önce akne üzerine biraz çay ağacı yağı sür, sonra yamayı üzerine koy. Sivilce ya tamamen gider ya da düzleşir ve kırmızılığı kaybolur.', subItems: [] },
-    ]
-  },
-  'Güneş Kremi': {
-    label: 'Güneş Kremi',
-    items: [
-      { text: 'Her gün, bulutlu günlerde bile SPF 30 veya daha yüksek geniş spektrumlu güneş kremi kullan. UV maruziyeti erken yaşlanma ve cilt kanserinin ana nedenidir.', subItems: [] },
-      { text: 'Bu alanda beyaz ten takıntılarının da etkisiyle Güney Koreliler ve Japonlar çok üst seviyede.', subItems: [] },
-      { text: 'UVB, kızarmamıza ve aşırı bronzlaşmamıza sebep olur. UVA ise güneş kaynaklı yaşlanma, lekelenme, sarkmalar, kırışıklıklar ve cilt kanseri gibi birçok ciddi probleme sebep olur. Bu yüzden seçeceğimiz güneş kremlerinin UVB+UVA koruması içermesine dikkat etmeliyiz. Ürünün içinde UVA+UVB korumasının olduğunu PA değerine bakarak anlayabilirsiniz. Güneş kreminin hemen üstünde PA+++/PA++++ yazmalı. En az 3+ olmalı ama tercihen en yüksek koruma olan 4+ tavsiye ederim.', subItems: [] },
-      { text: 'Yani UVB 290-320 nm, UVA ise 320-400 nm arasında iş gören geniş yelpazeli ürünleri seçiyoruz.', subItems: [] },
-      { text: 'Şu maddeleri güneş kremi içeriğinde ilk 7-8 sırada istemeyiz: alcohol denat, Ethylhexyl Methoxycinnamate, ethylhexyl salicylate, homosalate, octocrylene, butyl methoxydibenzoylmethane', subItems: [] },
-      { text: 'Şu maddeler ilk 5-6 içerikte varsa o krem iyidir: bis-ethylhexyloxyphenol methoxyphenyl triazine (bu önemli), diethylamino hydroxybenzoyl hexyl benzoate, methylene bis-benzotriazolyl tetramethylbutylphenol, phenylbenzimidazole sulfonic acid', subItems: [] },
-      { text: 'Markalar: Shiseido, D\'alba (P++++), The Purest Solutions (P++++), Missha (P++++)', subItems: [] },
-    ]
-  },
-  'Saç Bakımı': {
-    label: 'Saç Bakımı',
-    items: [
-      { text: 'Folik asit ve biotin saçları çok güçlendirir, sıfır dökülme ve hacim kazandırır.', subItems: [] },
-      { text: 'Her duş sonrası saçlarınızı mutlaka kurutmak, asla nemli bırakmamak.', subItems: [] },
-      { text: 'Çiğ kabak çekirdeği, çiğ badem, yerli ceviz, kabuklu çiğ yer fıstığından günlük olarak dengeli tüketmek saçlar için çok iyi.', subItems: [] },
-      { text: 'Biberiye çok etkili, şampuana bir damla damlatılabilir.', subItems: [] },
-    ]
-  },
-  'Egzema': {
-    label: 'Egzema',
-    items: [
-      { text: 'Cerave nemlendirici krem ve kil maskesi: Kil maskesini sür, yıka, sonra Cerave krem sür.', subItems: [] },
-      { text: 'Deniz tuzu iyi geliyor.', subItems: [] },
-      { text: 'Uzak durman gereken şeyler: Kahvaltıda ekmeğe, hamur işine, kızartmaya elveda. Domates, peynir, nohut, fıstık, her türlü ekmek, mayalı unlu mamuller, alkol, aşırı şeker tüketimi, paketli kahvaltılıklar, paketli atıştırmalık, abur-cubur, asitli içecekler gibi gereksiz şeyleri yemeyeceksin. (Bunları tek tek bırakıp vücut gözlemlenebilir)', subItems: [] },
-      { text: 'Ekmeği, unu, hamur işi, kek, kraker, makarna ve türevlerini kes. Sadece 5 gün sonra kafanda kürekle atılacak miktarda seboreik dermatit pulları varsa bile geçecek.', subItems: [] },
-      { text: 'Duşu soğuk veya soğuğa yakın ılık almak iyi geliyor.', subItems: [] },
-      { text: 'Paketli yiyeceklerden kaçınmak (özellikle abur-cubur) gerekiyor. Sağlıklı ve düzenli beslenme çok önemli. Yağlı beslenme bu hastalığı tetikliyor.', subItems: [] },
-      { text: 'Güneş kremsiz az güneş görmek lazım.', subItems: [] },
-      { text: 'Denize gir.', subItems: [] },
-      { text: 'Karbonatlı su ile çözüm sağlıyorlar.', subItems: [] },
-      { text: 'Blue Cap krem veya Eucerin Eczema Relief Baby: Bunlar kortizonsuzdur. Yüzünüzdeki kepeği, kızarıklığı bir iki günde yok eder. Fiyatı tuzlu biraz. Uygun bulursanız ikinci elde alsanız işinizi görür. Çok etkili bir krem. Tavsiye ederim.', subItems: [] },
-      { text: 'Yatıştırıcı prebiyotik şampuan - kepeğe karşı / anti pelliculaire.', subItems: [] },
-      { text: 'Yatıştırıcı prebiyotik saç losyonu - kepeğe karşı / anti pelliculaire.', subItems: [] },
-      { text: 'La Roche Kerium DS krem: Pullanan, kızaran cilde iyi geliyor.', subItems: [] },
-      { text: 'Benim bulduğum çözüm: Biberiye yağı, çay ağacı yağı ve çam terebentin yağı. Bu yağları direkt olarak şampuan kutusuna damlatmak yerine, Watsons, Gratis gibi yerlerde satılan 100 ml\'lik boş şampuan kutusunda karıştırıyorum. Sebebi bu yağların uçucu olması. Böylelikle daha küçük bir kutuda daha hızlı tüketmiş oluyorum. Bir diğer önemli nokta: Yağların uçmaması için duştan çıktıktan sonra şampuan kutusunun kapağını açık bırakmamak. Karışım: 8-10 damla çay ağacı yağı, 12-15 damla çam terebentin yağı, 12-15 damla biberiye yağı ve geri kalanına da şampuan olmak üzere hazırlıyorum. Her banyo öncesi kutuyu sallamayı da unutmamak lazım. Bu karışımı yaklaşık 2 aydır kullanıyorum ve saç derimde seboreik dermatite dair hiçbir iz kalmadı.', subItems: [] },
-    ]
-  },
-  'Sebzeler': {
-    label: 'Sebzeler',
-    items: [
       { text: 'Kırmızı Pancar ve Turşusu', subItems: [
         'Arjinin-Sitrulin içerir. Fermente (kvas olarak), smoothie, çiğ, haşlanmış her şekliyle kullanılabilir.',
         'Supplement olarak: Weider markası, Scitech, Onnit, Nordic Naturals.',
@@ -208,21 +109,11 @@ export const categories = {
       { text: 'Pestisit temizleme', subItems: [
         'Birçok çalışma kabartma tozunun (baking soda) taze üründen pestisitleri gidermede etkili olduğunu göstermiştir.',
       ] },
-    ]
-  },
-  'Meyveler': {
-    label: 'Meyveler',
-    items: [
       { text: 'Berryler (Ahududu, Yaban Mersini)', subItems: [] },
       { text: 'Narenciye meyveleri alırken', subItems: [
         'Ağır olanları seçin. Aynı çeşit ve benzer boyutta olduklarında, ağır olanlar daha taze ve sulu olma ihtimali yüksektir.',
       ] },
       { text: 'Narı kabuğundaki beyaz liflerle birlikte tüketin veya suyunu öyle sıkın. En değerli polifenoller (elajotaninler) o beyaz liflerde ve çekirdektedir. (Osman Müftüoğlu)', subItems: [] },
-    ]
-  },
-  'Et ve Hayvansal Ürünler': {
-    label: 'Et ve Hayvansal Ürünler',
-    items: [
       { text: 'Kaliteli Kemik Suyu', subItems: [
         'Glisin içeriyor. Glisin çok faydalı bir aminoasit.',
       ] },
@@ -241,11 +132,6 @@ export const categories = {
       { text: 'İşlenmiş etlerden uzak dur', subItems: [
         'Tütsülenmiş somon, salam, sosis, sucuk zararlı. Pastırma güneşte kurutuluyorsa iyi.',
       ] },
-    ]
-  },
-  'Yağlar': {
-    label: 'Yağlar',
-    items: [
       { text: 'Yağ tüketimi', subItems: [
         'Yetersiz yağ tüketen kişilerde safra kesesi taşı oluşumu başlar çünkü safra sadece yağları sindirmek için salgı bırakır ve düşük yağlı beslenmede safra salgısı kullanılmadığından önce çamurlaşır, sonra taşlaşır.',
       ] },
@@ -268,22 +154,12 @@ export const categories = {
         'Zeytinyağı koyu renkli cam şişede veya teneke içinde satılmalıdır. Zira zeytinyağı güneş ışığıyla tepkimeye girerek kalitesini kaybeder.',
         'Zeytinyağının içindeki en önemli madde "polifenol"dür. Bu maddenin vücut için önemli besin değeri vardır. En yüksek oranla erken hasat zeytinlerden yapılan yağlarda bulunur. Zeytin olgunlaştıkça polifenol oranı da düşer. Polifenol boğazı mutlaka yakar.',
       ] },
-    ]
-  },
-  'Ekmek': {
-    label: 'Ekmek',
-    items: [
       { text: 'Beyaz ekmek vs Tam Buğday', subItems: [
         'Beyaz undan ekmek yapmak için önce unun ruşeym gibi sağlıklı kısımları çıkarıldıktan sonra kalan kısım öğütülür. Ekmek üreticileri biliyor ki eğer kullanıcı beyaz ekmek yerse daha kolay acıkacak, o zaman daha çok ekmek alacak. Oysa tam buğday ekmeği ve türevleri kan şekerini yavaş yükselttiği için ekmek talebini azaltacak. Bu yüzden beyaz ekmek üretme maliyeti daha yüksek olmasına rağmen fiyatı daha ucuz.',
       ] },
       { text: 'Ekşi mayalı ekmek', subItems: [
         'Her zaman daha faydalı çünkü mayalanma sürecinde bakteriler gluteni yer. Aynı zamanda lif ve B vitamini olarak değerli.',
       ] },
-    ]
-  },
-  'Diğer Faydalı Gıdalar': {
-    label: 'Diğer Faydalı Gıdalar',
-    items: [
       { text: 'Çiğ Kabak Çekirdeği (1 Avuç - Çiğ Olmalı)', subItems: [
         'Parazit ilacı.',
         'Arjinin içerir.',
@@ -292,10 +168,41 @@ export const categories = {
       { text: 'Çiğ Badem', subItems: [
         'Çok iyi magnezyum kaynağıdır.',
       ] },
+      { text: 'Acı, baharatlı veya asidik yiyecekleri (acı sos, ketçap) asla plastikte saklamayın. Asit, kimyasalların gıdaya geçişini (leaching) olağanüstü hızlandırır.', subItems: [] },
+      { text: 'Her gün 3 öğün aynı saatte yemek yemek mekaniktir ve vücudu hantallaştırır. Bazen çok yiyin, bazen aç kalın (oruç/fasting). Vücut besin yoksunluğu stresiyle (Hormesis) antikırılganlaşır.', subItems: [] },
+      { text: 'I am Italian and not all pastas are the same. The yellowish pasta is the worst quality with high glycemic index because it has been dried out using high temperatures in just few hours. Good quality pasta has off white color and is dried slowly. Eat healthy and stay safe!', subItems: [] },
+      { text: 'Meyve ve sebzeler %80-95 sudur; lif ihtiyacını tam karşılamak için kuru baklagiller ve tam tahıllar şarttır.', subItems: [] },
+      { text: 'Sarımsağı kullanmadan 10 dakika önce doğrayın; bu yararlı besin maddelerini 3 katına çıkarır.', subItems: [] },
+      { text: 'Etiketinde mutfağınızda bulunmayan isimler (kimyasallar) olan gıdalardan kaçının.', subItems: [] },
+      { text: 'Karaciğerin en büyük dostu sülfür zengini gıdalardır: Lahana, turp, brokoli, karnabahar. Karaciğerdeki yağı yakmak için en az 7500 adım atmalısınız.', subItems: [] },
+      { text: "Balık pişirmeden önce içindeki Omega-3'ü korumak için limon, soğan ve karabiber ile marine edin.", subItems: [] },
+      { text: "Balığı fırında hazırlarken küçük balıklarda 150-160 dereceyi, büyük balıklarda ise en fazla 180 dereceyi geçmeyin. Yüksek sıcaklık omega-3'ü yok eder.", subItems: [] },
+      { text: "Mevsiminde olmayan hiçbir sebze ve meyveyi almayın. Yaz güneşinde yetişen domates ile kışın serada yetişen domates arasında, içerdiği likopen ve polifenol (koruyucu maddeler) açısından en az %25-%30'luk ciddi bir azalma farkı vardır.", subItems: [] },
+      { text: 'Sebzelerdeki tarım ilaçlarını biraz arındırmak için; 10-15 dk tuzlu suda bekletin, ardından 1 litre suya 1 yemek kaşığı karbonat oranlı suda 15-20 dakika daha bekletin.', subItems: [] },
+      { text: 'Sebzeleri pişirmek veya turşulamak (fermente etmek) üzerlerindeki tarım ilaçlarını büyük oranda inaktive eder (yok eder). Bu yüzden asıl özen çiğ yenilen salatalık malzemelere gösterilmelidir.', subItems: [] },
+      { text: 'Evinizdeki boş saksılarda çiçek yerine maydanoz yetiştirin. Her gün güvendiğiniz topraktan çıkan 3 yaprak maydanoz yemek bile hücreleri harika besler.', subItems: [] },
+      { text: "Marketten alınan sebze meyveler koptuktan 5 gün sonra size ulaşır ve bu 5 gün içinde vitamin/mineral değerlerinin %30'u yok olur. Bu yüzden haftalık pazar alışverişi yerine, azar azar alıp taze tüketmeye çalışın.", subItems: [] },
+      { text: 'Domates ve avokadoyu beraber yemek likopen emilimini 4,4 kat (yaklaşık %400) artırıyor. En iyi emilim için domatesin pişmiş veya sos halinde olması daha avantajlı. Bu ikiliye kırmızı soğan eklemek emilimi zirveye çıkarıyor. Likopen, domateste bulunan ve yağda çözünen, kanserle de savaşan bir antioksidan; tek başına yenirse vücut tarafından az emiliyor. Avokadoda ise oleik asit (omega-9) gibi tekli doymamış sağlıklı yağ asitleri var. Bu yağlar, likopen gibi maddelerin bağırsaklardan emilimini ciddi şekilde artırıyor. Bu birliktelik β-karoten emilimini de 2,6 kat artırıyor.', subItems: [] },
+      { text: 'Dates is the best pre workout. Pure rocket fuel. Eat with empty stomach.', subItems: [] },
     ]
   },
-  'Vitaminler ve Mineraller': {
-    label: 'Vitaminler ve Mineraller',
+  'Mutfak': {
+    label: 'Mutfak',
+    items: [
+      { text: 'Kıyma pişirirken önce kıyma kavrulur. Kıyma tahta kaşıkla eze eze rengini alana kadar kavrulur. Ama öyle pişene kadar değil, sadece o kırmızılıktan kurtulup kahverengini alana kadar kavrulur, sonra soğan içerisine eklenir. Kıymayı kavururken kaşıkla ezmezseniz topaklanma olur, kıymanın gerçek tadını alamazsınız. En büyük hatalardan biri kıyma rengini almadan içine yağ atılması. Kıyma rengini almadan kesinlikle içerine yağ, tuz, su, soğan, domates, biber vs. atılmaz. Kıymayı eze eze rengini alana kavurduktan sonra sırasıyla soğan ve yağı ekleyebilirsiniz. Son bir önerim de baharat ve tuzu ocaktan almadan bir dakika kadar önce eklemeniz.', subItems: [] },
+      { text: 'Eti marine ederken tuz kullanma, sertleştirir.', subItems: [] },
+      { text: 'Tuzun bir fiskesi turtaya, keke ve tüm tatlılara inanılmaz bir hoşluk katar.', subItems: [] },
+      { text: 'Mikrodalgada pişirme ve ısıtma çok sağlıklı bir seçenek.', subItems: [] },
+      { text: 'Basit sebze çorbası yaparken soğanları yağda yumuşatıp, ardından muntazam dilimlenmiş havuç gibi bir sebze ekleyip tuzlamak önemli. Bu ön baharatlama, sebzenin lezzetini yağın içine hapsederek çorbaya yayılmasını sağlar.', subItems: [] },
+      { text: 'Gıdaları saklayacaksak mutlaka paslanmaz çelikte saklanmalı.', subItems: [] },
+      { text: 'Şarküteri tezgahında zeytin tenekesi az kalmışsa içi pahalı olanın içine boşaltılır. Aynı şey peynirde de yapılır. Şarküterilerin %90\'ı peynirleri ayırt edemez, çoğu bilgisizdir. "Ben ayırt ederim" diyen salakların önüne Ezine peyniri ve Trakya peyniri koyun, kesinlikle ayırt edemezler. Bu çok uzun yıllar gerektirir. Zaten şarküteri deposuna giremezsiniz, muhtemelen mideniz kalkar.', subItems: [] },
+      { text: 'Gıda sektöründe çalışan samimi bir arkadaşımın dediği üzere, gittiğiniz bir restoranda ne yiyeceğinizden emin değilseniz, garsonun şiddetle tavsiye ettiği her ürünü listenizden çıkarın.', subItems: [] },
+      { text: 'Kapısında kuyruk olmayan restoranlarda yazın beyaz et tüketme. Bakterilerin üremeyi en sevdikleri sıcaklık aralığı 20-45 derece olduğundan illa ki ürün az ya da çok kontamine olmuştur. Sebze, tahıl veya kırmızı et tercih edin. En mantıklı seçimler kızartmalardır çünkü yüksek ısıda pişmişlerdir.', subItems: [] },
+      { text: 'Yemekte eğer kıl çıktıysa geri vermeden önce içine tuz bas. Yoksa içindeki kılı çıkarıp yeni yapmış gibi getiriyorlar.', subItems: [] },
+    ]
+  },
+  'Takviyeler': {
+    label: 'Takviyeler',
     items: [
       { text: 'Vitamin ve minerallerde en çok dikkat edilmesi gereken şey', subItems: [
         'Bu vitamin veya mineral bedenimde var mı? Eğer yoksa alma. (Deniz Şimsek)',
@@ -337,9 +244,38 @@ export const categories = {
       { text: 'Bağışıklık takviyesinde 1 numaraya D vitaminini koyun. (Osman Müftüoğlu)', subItems: [] },
     ]
   },
-  'Ağız, Diş ve Boğaz Sağlığı': {
-    label: 'Ağız, Diş ve Boğaz Sağlığı',
+  'Bakım': {
+    label: 'Bakım',
     items: [
+      { text: 'Yağlı veya akneli cilt için salisilik asit içeren temizleyici sebum kontrolü sağlar ve sivilceleri önler. Binde 3 oranında retinol ile başlangıç yapılabilir.', subItems: [] },
+      { text: 'Hyaluronik asit içeren nemlendirici özellikle etkilidir, nemi tutar ve cilt bariyerini destekler.', subItems: [] },
+      { text: 'Yağlı cildi olanlar uzun süre duşta kalmamalı ve ılık su ile duş almalı.', subItems: [] },
+      { text: 'Liquid chlorophyll sindirime, metabolizmaya, cilde yardımcı olur ve vücut kokusunu giderir. Bütün gün terlesen bile temiz kokarsın. Ayrıca akne yamaları kullanıyorsan, önce akne üzerine biraz çay ağacı yağı sür, sonra yamayı üzerine koy. Sivilce ya tamamen gider ya da düzleşir ve kırmızılığı kaybolur.', subItems: [] },
+      { text: 'Her gün, bulutlu günlerde bile SPF 30 veya daha yüksek geniş spektrumlu güneş kremi kullan. UV maruziyeti erken yaşlanma ve cilt kanserinin ana nedenidir.', subItems: [] },
+      { text: 'Bu alanda beyaz ten takıntılarının da etkisiyle Güney Koreliler ve Japonlar çok üst seviyede.', subItems: [] },
+      { text: 'UVB, kızarmamıza ve aşırı bronzlaşmamıza sebep olur. UVA ise güneş kaynaklı yaşlanma, lekelenme, sarkmalar, kırışıklıklar ve cilt kanseri gibi birçok ciddi probleme sebep olur. Bu yüzden seçeceğimiz güneş kremlerinin UVB+UVA koruması içermesine dikkat etmeliyiz. Ürünün içinde UVA+UVB korumasının olduğunu PA değerine bakarak anlayabilirsiniz. Güneş kreminin hemen üstünde PA+++/PA++++ yazmalı. En az 3+ olmalı ama tercihen en yüksek koruma olan 4+ tavsiye ederim.', subItems: [] },
+      { text: 'Yani UVB 290-320 nm, UVA ise 320-400 nm arasında iş gören geniş yelpazeli ürünleri seçiyoruz.', subItems: [] },
+      { text: 'Şu maddeleri güneş kremi içeriğinde ilk 7-8 sırada istemeyiz: alcohol denat, Ethylhexyl Methoxycinnamate, ethylhexyl salicylate, homosalate, octocrylene, butyl methoxydibenzoylmethane', subItems: [] },
+      { text: 'Şu maddeler ilk 5-6 içerikte varsa o krem iyidir: bis-ethylhexyloxyphenol methoxyphenyl triazine (bu önemli), diethylamino hydroxybenzoyl hexyl benzoate, methylene bis-benzotriazolyl tetramethylbutylphenol, phenylbenzimidazole sulfonic acid', subItems: [] },
+      { text: 'Markalar: Shiseido, D\'alba (P++++), The Purest Solutions (P++++), Missha (P++++)', subItems: [] },
+      { text: 'Folik asit ve biotin saçları çok güçlendirir, sıfır dökülme ve hacim kazandırır.', subItems: [] },
+      { text: 'Her duş sonrası saçlarınızı mutlaka kurutmak, asla nemli bırakmamak.', subItems: [] },
+      { text: 'Çiğ kabak çekirdeği, çiğ badem, yerli ceviz, kabuklu çiğ yer fıstığından günlük olarak dengeli tüketmek saçlar için çok iyi.', subItems: [] },
+      { text: 'Biberiye çok etkili, şampuana bir damla damlatılabilir.', subItems: [] },
+      { text: 'Cerave nemlendirici krem ve kil maskesi: Kil maskesini sür, yıka, sonra Cerave krem sür.', subItems: [] },
+      { text: 'Deniz tuzu iyi geliyor.', subItems: [] },
+      { text: 'Uzak durman gereken şeyler: Kahvaltıda ekmeğe, hamur işine, kızartmaya elveda. Domates, peynir, nohut, fıstık, her türlü ekmek, mayalı unlu mamuller, alkol, aşırı şeker tüketimi, paketli kahvaltılıklar, paketli atıştırmalık, abur-cubur, asitli içecekler gibi gereksiz şeyleri yemeyeceksin. (Bunları tek tek bırakıp vücut gözlemlenebilir)', subItems: [] },
+      { text: 'Ekmeği, unu, hamur işi, kek, kraker, makarna ve türevlerini kes. Sadece 5 gün sonra kafanda kürekle atılacak miktarda seboreik dermatit pulları varsa bile geçecek.', subItems: [] },
+      { text: 'Duşu soğuk veya soğuğa yakın ılık almak iyi geliyor.', subItems: [] },
+      { text: 'Paketli yiyeceklerden kaçınmak (özellikle abur-cubur) gerekiyor. Sağlıklı ve düzenli beslenme çok önemli. Yağlı beslenme bu hastalığı tetikliyor.', subItems: [] },
+      { text: 'Güneş kremsiz az güneş görmek lazım.', subItems: [] },
+      { text: 'Denize gir.', subItems: [] },
+      { text: 'Karbonatlı su ile çözüm sağlıyorlar.', subItems: [] },
+      { text: 'Blue Cap krem veya Eucerin Eczema Relief Baby: Bunlar kortizonsuzdur. Yüzünüzdeki kepeği, kızarıklığı bir iki günde yok eder. Fiyatı tuzlu biraz. Uygun bulursanız ikinci elde alsanız işinizi görür. Çok etkili bir krem. Tavsiye ederim.', subItems: [] },
+      { text: 'Yatıştırıcı prebiyotik şampuan - kepeğe karşı / anti pelliculaire.', subItems: [] },
+      { text: 'Yatıştırıcı prebiyotik saç losyonu - kepeğe karşı / anti pelliculaire.', subItems: [] },
+      { text: 'La Roche Kerium DS krem: Pullanan, kızaran cilde iyi geliyor.', subItems: [] },
+      { text: 'Benim bulduğum çözüm: Biberiye yağı, çay ağacı yağı ve çam terebentin yağı. Bu yağları direkt olarak şampuan kutusuna damlatmak yerine, Watsons, Gratis gibi yerlerde satılan 100 ml\'lik boş şampuan kutusunda karıştırıyorum. Sebebi bu yağların uçucu olması. Böylelikle daha küçük bir kutuda daha hızlı tüketmiş oluyorum. Bir diğer önemli nokta: Yağların uçmaması için duştan çıktıktan sonra şampuan kutusunun kapağını açık bırakmamak. Karışım: 8-10 damla çay ağacı yağı, 12-15 damla çam terebentin yağı, 12-15 damla biberiye yağı ve geri kalanına da şampuan olmak üzere hazırlıyorum. Her banyo öncesi kutuyu sallamayı da unutmamak lazım. Bu karışımı yaklaşık 2 aydır kullanıyorum ve saç derimde seboreik dermatite dair hiçbir iz kalmadı.', subItems: [] },
       { text: 'Hindistan cevizi yağını ağzına al, 5-10 dakika ağızda tut, çalkala ve tükür (Oil Pulling).', subItems: [] },
       { text: 'Sabah rutini yapıyorsan: Önce dil kazıyıcı, sonra oil pulling, sonra diş fırçalama, sonra ilk suyunu iç.', subItems: [] },
       { text: 'Akşam rutininde dil kazıyıcı kullanma.', subItems: [] },
@@ -359,6 +295,21 @@ export const categories = {
       { text: 'Antiseptik gargaralar: Boğazda ilk "yanma" hissedildiği anda iyot bazlı (Betadine gibi) veya doğal (sirke gibi) gargaralara başvurmak.', subItems: [] },
       { text: 'Diş fırçası sterilizasyonu: Fırçayı her kullanım sonrası oksijenli su veya sirke içinde bekleterek üzerinde mikrop barınmasını engellemek.', subItems: [] },
       { text: 'Doğal antibakteriyeller: Kekik yağı (Oil of Oregano) veya Hindistan cevizi yağı ile "oil pulling" (ağızda yağ çevirme) yaparak ağızdaki bakteri yükünü azaltmak.', subItems: [] },
+    ]
+  },
+  'Hastalıklar': {
+    label: 'Hastalıklar',
+    items: [
+      { text: 'Evinde küf olan birisi asla iyileşmez. Küf çok kritik.', subItems: [] },
+      { text: 'Çörek otu sokmalı. Küfe çok iyi geliyor.', subItems: [] },
+      { text: 'Aliminyum içermeyen koltuk altı kullan.', subItems: [] },
+      { text: 'Helicobacter pylori için damla sakızı çiğnemek (Oytun Erbaş).', subItems: [] },
+      { text: 'İnsülin direnci her hastalığın sebebi: İnsülin direnci, vücudunuzun hücrelerinin insüline yeterince tepki vermediği bir durumdur. İnsülin, yiyeceklerden gelen şekerin (glukoz) hücrelere enerji için girmesine yardımcı olan bir hormondur. Bu direnç durumunda, şeker kan dolaşımında kalır, bu da kan şekeri seviyelerinin yüksek olmasına ve zamanla diyabete yol açabilir.Bir hafta hareketsizlik insülin direncini 7 kat artırabiliyor ve daha çarpıcı kısmı, tekrar fiziksel egzersize başladığınızda bile hiç ara vermeyen birine göre insülin direnciniz "haftalarca" 2 katı seviyede kalıyor. Kaslar insüline dirençli hale gelen ilk dokulardan biriymiş. Daha fazla kasımızın olması, daha fazla glukozu kandan çıkarabilmemizi sağlar. Kas kütlesindeki azalış ya da artışlar, kaslar vücudun en büyük dokularından olduğundan insülin duyarlılığımız üstünde fazlasıyla etkili. En çok kas bacaklarda var, o yüzden bacak kasları önemli.', subItems: [] },
+      { text: 'Antibiyotik alırken dikkat edilecekler: Antibiyotik öncesi, sırası ve sonrasında yüksek lifli, bitki bazlı beslenin. Bağırsak liften yoksun bırakıldığında, antibiyotik hasarı daha şiddetli olur ve iyileşme gecikir. Eklenmiş şeker, ultra işlenmiş gıdalar ve aşırı doymuş yağlardan uzak durun. Sabahları güneş ışığına çıkın ve hafif egzersiz yapın.', subItems: [] },
+      { text: 'Düzenli kan testi yaptırmayı, özellikle testosteron seviyelerini kontrol etmeyi tavsiye ediyor. Çünkü birçok "zihinsel" sorun (öfke, irritasyon, depresyon gibi) aslında hormonal dengesizlikler, enflamasyon veya besin eksikliklerinden kaynaklanabiliyor. Bunları erken tespit etmek, gereksiz terapi veya ilaç yerine kök nedeni çözmeyi sağlar.', subItems: [] },
+      { text: 'Özel hastanelerde ödemelerinizi kredi kartınızla yapın. Ayrıntılı hizmet faturası isteyin, niçin istiyorsunuz diye sorarlarsa SGK\'nın sitesiyle karşılaştıracağım deyin. Tek tek özel hastanelerin isimleriyle birlikte hangi hizmetten kaç TL ilave ücret alabilecekleri SGK tarafından listeleniyor. Hemen pazarlığa oturacaklardır sizinle, nakit ne kadar verebileceğinizi, yardımcı olmak istediklerini sorarlar. Her halükarda kredi kartınızla da indirimi alırsınız. Özellikle yatarak tedavi edilmişse fiyatı en az 1/3 oranında düşürürler. Ya bu fiyat üzerinde anlaşın, ya da ödemenizi iptal ettirmemek istediğinizi söyleyip ayrıntılı faturanızla birlikte ilçe tüketici hakem heyetine başvurun.', subItems: [] },
+      { text: '112 üzerinden özel bir hastanenin acil polikliniğine getirilirseniz, sizden 5 kuruş talep edemezler ama talep ederler ve korkuturlar. Sakın düşmeyin bu oyuna ve hemen Sağlık Bakanlığı\'na ve bağlı bulunduğunuz kolluk kuvvetlere başvurarak durumunuzu anlatın. Anlatmaya gerek kalmadan ücretsiz olarak gerekli işlemleri yapacaklardır. Özellikle kalp krizi ve stent durumlarında "kaliteli stent takacağız, fiyat farkı vs." oyunlarına düşmeyin. Devlet karşılıyor bu durumları.', subItems: [] },
+      { text: 'Devlet hastanelerinde size çekilen MR (emar) filmleri dünyanın en kalitesiz görüntü kalitesine sahiptir. Avrupa\'da bir cihazda günde 20-30 MR çekilirken bizde bu rakam 100-150 civarındadır. 7 kat MR\'ı, 7 kat kaliteyi azaltarak çekiyorlar. Mesela beyninizi gösteren film 10 MB olması gerekirken 1-2 MB oluyor. Kötü kalitede olan MR yüzünden bu ülkede her gün sayısız tümör, sayısız hastalık filmde görülmüyor. Hastalar teşhis almıyor, bu yüzden tanı konulmuyor. Daha da kötüsü çocukların organları küçük olduğundan onlarda teşhis daha çok atlanır. Şikayetinizi anlattığınız ilk 15 saniyede recetenize yazılacak ilaclar belli olur. Devamında kendinizi yormuş oluyorsunuz.', subItems: [] },
     ]
   },
 }
