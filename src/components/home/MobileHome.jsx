@@ -58,17 +58,19 @@ export function MobileHome() {
   }
 
   return (
-    <div className="flex min-h-[calc(100vh-4rem)] flex-col px-2 pb-20 pt-4 md:hidden">
-      {/* Minimal hero */}
-      <div className="mb-4 text-center">
-        <h1 className="text-lg font-bold tracking-tight text-foreground">
-          Mehmet Temel
-        </h1>
-        <p className="text-xs text-muted-foreground">dijital koleksiyonum</p>
-      </div>
+    <div className="flex min-h-[calc(100vh-4rem)] flex-col px-2 pt-4 md:hidden">
+      {/* Sticky top: hero + tabs + random button */}
+      <div className="sticky top-0 z-40 bg-background pb-3">
+        {/* Minimal hero */}
+        <div className="mb-3 text-center">
+          <h1 className="text-lg font-bold tracking-tight text-foreground">
+            Mehmet Temel
+          </h1>
+          <p className="text-xs text-muted-foreground">dijital koleksiyonum</p>
+        </div>
 
-      {/* Tabs - colored circles */}
-      <div className="mb-4 flex items-center justify-center gap-6">
+        {/* Tabs - colored circles */}
+        <div className="mb-3 flex items-center justify-center gap-6">
         {TABS.map((tab) => (
           <button
             key={tab.id}
@@ -81,10 +83,20 @@ export function MobileHome() {
             aria-label={tab.id}
           />
         ))}
+        </div>
+
+        {/* Random button */}
+        <button
+          onClick={handleRandom}
+          disabled={loading}
+          className="w-full rounded-full bg-primary py-3 text-sm font-medium text-primary-foreground shadow-md transition-all active:scale-95 disabled:opacity-50"
+        >
+          {loading ? '...' : 'Rastgele'}
+        </button>
       </div>
 
       {/* Content Area */}
-      <div className="mb-4 flex-1">
+      <div className="mt-4 flex-1">
         {/* Alintilar */}
         {activeTab === 'alintilar' && currentNote && (
           <div className="rounded-lg border border-border bg-card p-5">
@@ -180,16 +192,6 @@ export function MobileHome() {
         )}
       </div>
 
-      {/* Sticky minimal random button */}
-      <div className="fixed bottom-6 left-0 right-0 z-40 flex justify-center md:hidden">
-        <button
-          onClick={handleRandom}
-          disabled={loading}
-          className="rounded-full bg-primary px-8 py-3 text-sm font-medium text-primary-foreground shadow-md transition-all active:scale-95 disabled:opacity-50"
-        >
-          {loading ? '...' : 'Rastgele'}
-        </button>
-      </div>
     </div>
   )
 }
