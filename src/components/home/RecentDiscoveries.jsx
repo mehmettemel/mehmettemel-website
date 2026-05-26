@@ -1,4 +1,9 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { KeyRound } from 'lucide-react'
+import { LoginDialog } from '../auth/LoginDialog'
 
 function getDisplayText(note) {
   if (note.text) {
@@ -10,9 +15,38 @@ function getDisplayText(note) {
 }
 
 export function RecentDiscoveries({ notes }) {
-  if (!notes || notes.length === 0) {
-    return null
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [showLogin, setShowLogin] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+    fetch('/api/auth/session')
+      .then((res) => res.json())
+      .then((data) => setIsAuthenticated(data.authenticated))
+      .catch(() => setIsAuthenticated(false))
+  }, [])
+
+  if (!mounted) return null
+
+  if (!isAuthenticated) {
+    return (
+      <>
+        <section>
+          <button
+            onClick={() => setShowLogin(true)}
+            className="group mx-auto flex items-center gap-2 text-xs text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <KeyRound className="h-3.5 w-3.5 transition-transform group-hover:rotate-12 group-hover:scale-110" />
+            <span>Kişisel notlarına erişmek için giriş yap</span>
+          </button>
+        </section>
+        <LoginDialog open={showLogin} onOpenChange={setShowLogin} />
+      </>
+    )
   }
+
+  if (!notes || notes.length === 0) return null
 
   return (
     <section>

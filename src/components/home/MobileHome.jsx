@@ -1,62 +1,102 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
+import { KeyRound } from 'lucide-react'
+import { LoginDialog } from '../auth/LoginDialog'
 import { categories as sozlerData } from '@/data/personal/sozler'
+import { categories as kisiselGelisimData } from '@/data/personal/kisisel-gelisim'
+import { categories as iliskilerData } from '@/data/personal/iliskiler'
+import { categories as toplumData } from '@/data/personal/toplum'
+import { categories as saglikData } from '@/data/personal/saglik'
 import { getAllEnglishWords } from '@/data/english-words'
 
-const TABS = [
-  { id: 'sozler', color: 'bg-amber-500' },
-  { id: 'incelemeler', color: 'bg-blue-500' },
-  { id: 'ingilizce', color: 'bg-emerald-500' },
-]
+function getAllPersonalItems() {
+  const items = []
+  const addFlat = (data, source) => {
+    for (const [cat, val] of Object.entries(data)) {
+      val.items.forEach((item) => {
+        items.push({ text: typeof item === 'string' ? item : item.text, source, category: cat })
+      })
+    }
+  }
+  addFlat(sozlerData, 'Sözler')
+  addFlat(kisiselGelisimData, 'Kişisel Gelişim')
+  addFlat(iliskilerData, 'İlişkiler')
+  addFlat(toplumData, 'Toplum')
+  addFlat(saglikData, 'Sağlık')
+  return items
+}
 
 export function MobileHome() {
-  const [activeTab, setActiveTab] = useState('sozler')
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [showLogin, setShowLogin] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const [currentNote, setCurrentNote] = useState(null)
   const [incelemeItem, setIncelemeItem] = useState(null)
   const [englishWord, setEnglishWord] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [activeTab, setActiveTab] = useState('personal')
 
-  const allQuotes = useMemo(() => sozlerData['Sevdiğim Sözler'].items, [])
+  const allPersonalItems = useMemo(() => getAllPersonalItems(), [])
   const allEnglishWords = useMemo(() => getAllEnglishWords(), [])
 
-  const getRandomNote = () => {
-    const randomIndex = Math.floor(Math.random() * allQuotes.length)
-    setCurrentNote(allQuotes[randomIndex])
+  useEffect(() => {
+    setMounted(true)
+    fetch('/api/auth/session')
+      .then((res) => res.json())
+      .then((data) => setIsAuthenticated(data.authenticated))
+      .catch(() => setIsAuthenticated(false))
+  }, [])
+
+  const getRandomPersonal = () => {
+    const idx = Math.floor(Math.random() * allPersonalItems.length)
+    setCurrentNote(allPersonalItems[idx])
   }
 
   const getRandomInceleme = async () => {
     setLoading(true)
     try {
-      const response = await fetch('/api/rastgele')
-      if (response.ok) {
-        const data = await response.json()
+      const res = await fetch('/api/rastgele')
+      if (res.ok) {
+        const data = await res.json()
         setIncelemeItem(data.item)
       }
     } catch (err) {
-      console.error('Error fetching inceleme:', err)
+      console.error(err)
     } finally {
       setLoading(false)
     }
   }
 
   const getRandomEnglish = () => {
-    const randomIndex = Math.floor(Math.random() * allEnglishWords.length)
-    setEnglishWord(allEnglishWords[randomIndex])
+    const idx = Math.floor(Math.random() * allEnglishWords.length)
+    setEnglishWord(allEnglishWords[idx])
   }
 
   const handleRandom = () => {
-    if (activeTab === 'sozler') getRandomNote()
+    if (activeTab === 'personal') getRandomPersonal()
     else if (activeTab === 'incelemeler') getRandomInceleme()
     else if (activeTab === 'ingilizce') getRandomEnglish()
   }
 
+  if (!mounted) return <div className="min-h-screen md:hidden" />
+
+  const TABS = isAuthenticated
+    ? [
+        { id: 'personal', color: 'bg-amber-500' },
+        { id: 'incelemeler', color: 'bg-blue-500' },
+        { id: 'ingilizce', color: 'bg-emerald-500' },
+      ]
+    : [
+        { id: 'incelemeler', color: 'bg-blue-500' },
+        { id: 'ingilizce', color: 'bg-emerald-500' },
+      ]
+
   return (
     <div className="flex min-h-[calc(100vh-4rem)] flex-col px-2 pt-4 md:hidden">
-      {/* Sticky top: hero + tabs + random button */}
+      {/* Sticky top */}
       <div className="sticky top-0 z-40 bg-background pb-3">
-        {/* Minimal hero */}
         <div className="mb-3 text-center">
           <h1 className="text-lg font-bold tracking-tight text-foreground">
             Mehmet Temel
@@ -64,7 +104,7 @@ export function MobileHome() {
           <p className="text-xs text-muted-foreground">dijital koleksiyonum</p>
         </div>
 
-        {/* Tabs - colored circles */}
+        {/* Tabs */}
         <div className="mb-3 flex items-center justify-center gap-6">
           {TABS.map((tab) => (
             <button
@@ -78,6 +118,15 @@ export function MobileHome() {
               aria-label={tab.id}
             />
           ))}
+          {!isAuthenticated && (
+            <button
+              onClick={() => setShowLogin(true)}
+              className="flex items-center gap-1 text-muted-foreground transition-all hover:text-foreground"
+              aria-label="Giriş yap"
+            >
+              <KeyRound className="h-4 w-4 animate-pulse" />
+            </button>
+          )}
         </div>
 
         {/* Random button */}
@@ -90,13 +139,16 @@ export function MobileHome() {
         </button>
       </div>
 
-      {/* Content Area */}
+      {/* Content */}
       <div className="mt-4 flex-1">
-        {/* Alintilar */}
-        {activeTab === 'sozler' && currentNote && (
+        {/* Personal */}
+        {activeTab === 'personal' && currentNote && (
           <div className="rounded-lg border border-border bg-card p-5">
+            <div className="mb-2 text-xs text-muted-foreground">
+              {currentNote.source} — {currentNote.category}
+            </div>
             <p className="text-sm leading-relaxed text-foreground">
-              {currentNote}
+              {currentNote.text}
             </p>
           </div>
         )}
@@ -156,21 +208,21 @@ export function MobileHome() {
         )}
 
         {/* Empty states */}
-        {!currentNote && activeTab === 'sozler' && (
+        {activeTab === 'personal' && !currentNote && (
           <div className="flex h-48 items-center justify-center rounded-lg border border-dashed border-border">
             <p className="text-sm text-muted-foreground">
-              Butona bas, rastgele bir alıntı gelsin
+              Butona bas, rastgele bir not gelsin
             </p>
           </div>
         )}
-        {!incelemeItem && !loading && activeTab === 'incelemeler' && (
+        {activeTab === 'incelemeler' && !loading && !incelemeItem && (
           <div className="flex h-48 items-center justify-center rounded-lg border border-dashed border-border">
             <p className="text-sm text-muted-foreground">
               Butona bas, rastgele bir inceleme gelsin
             </p>
           </div>
         )}
-        {!englishWord && activeTab === 'ingilizce' && (
+        {activeTab === 'ingilizce' && !englishWord && (
           <div className="flex h-48 items-center justify-center rounded-lg border border-dashed border-border">
             <p className="text-sm text-muted-foreground">
               Butona bas, rastgele bir kelime gelsin
@@ -178,6 +230,8 @@ export function MobileHome() {
           </div>
         )}
       </div>
+
+      <LoginDialog open={showLogin} onOpenChange={setShowLogin} />
     </div>
   )
 }

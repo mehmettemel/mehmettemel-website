@@ -37,7 +37,7 @@ export function LoginDialog({ open, onOpenChange }) {
         // Success - close dialog and navigate to admin
         onOpenChange(false)
         setPassword('')
-        router.push('/admin')
+        router.push('/listeler/personal')
         router.refresh()
       } else {
         // Show error message
@@ -55,9 +55,9 @@ export function LoginDialog({ open, onOpenChange }) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Admin Login</DialogTitle>
+          <DialogTitle>Giriş Yap</DialogTitle>
           <DialogDescription>
-            Enter your password to access the admin dashboard.
+            Kişisel notlarına erişmek için şifreni gir.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
