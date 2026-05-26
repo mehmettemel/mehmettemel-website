@@ -6,13 +6,13 @@ import { categories as sozlerData } from '@/data/personal/sozler'
 import { getAllEnglishWords } from '@/data/english-words'
 
 const TABS = [
-  { id: 'alintilar', color: 'bg-amber-500' },
+  { id: 'sozler', color: 'bg-amber-500' },
   { id: 'incelemeler', color: 'bg-blue-500' },
   { id: 'ingilizce', color: 'bg-emerald-500' },
 ]
 
 export function MobileHome() {
-  const [activeTab, setActiveTab] = useState('alintilar')
+  const [activeTab, setActiveTab] = useState('sozler')
   const [currentNote, setCurrentNote] = useState(null)
   const [incelemeItem, setIncelemeItem] = useState(null)
   const [englishWord, setEnglishWord] = useState(null)
@@ -47,7 +47,7 @@ export function MobileHome() {
   }
 
   const handleRandom = () => {
-    if (activeTab === 'alintilar') getRandomNote()
+    if (activeTab === 'sozler') getRandomNote()
     else if (activeTab === 'incelemeler') getRandomInceleme()
     else if (activeTab === 'ingilizce') getRandomEnglish()
   }
@@ -93,7 +93,7 @@ export function MobileHome() {
       {/* Content Area */}
       <div className="mt-4 flex-1">
         {/* Alintilar */}
-        {activeTab === 'alintilar' && currentNote && (
+        {activeTab === 'sozler' && currentNote && (
           <div className="rounded-lg border border-border bg-card p-5">
             <p className="text-sm leading-relaxed text-foreground">
               {currentNote}
@@ -156,7 +156,7 @@ export function MobileHome() {
         )}
 
         {/* Empty states */}
-        {!currentNote && activeTab === 'alintilar' && (
+        {!currentNote && activeTab === 'sozler' && (
           <div className="flex h-48 items-center justify-center rounded-lg border border-dashed border-border">
             <p className="text-sm text-muted-foreground">
               Butona bas, rastgele bir alıntı gelsin

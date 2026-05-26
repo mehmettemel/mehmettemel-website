@@ -18,7 +18,7 @@ export function RecentDiscoveries({ notes }) {
     <section>
       <div className="mb-6 text-center">
         <h2 className="text-xs font-normal text-muted-foreground">
-          Son Keşifler
+          Sevdiğim Sözler
         </h2>
       </div>
 
@@ -26,7 +26,7 @@ export function RecentDiscoveries({ notes }) {
         {notes.slice(0, 5).map((note) => (
           <div key={note.id} className="w-full text-center">
             <Link
-              href="/kesifler/alintilar"
+              href="/listeler/personal/sozler"
               className="block w-full text-xs font-normal text-foreground transition-opacity hover:opacity-60"
             >
               {getDisplayText(note)}
@@ -37,7 +37,7 @@ export function RecentDiscoveries({ notes }) {
 
       <div className="mt-6 text-center">
         <Link
-          href="/kesifler/alintilar"
+          href="/listeler/personal/sozler"
           className="text-xs text-muted-foreground transition-opacity hover:opacity-60"
         >
           Tümünü Gör →

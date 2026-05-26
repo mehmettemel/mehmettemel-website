@@ -7,13 +7,13 @@ import { getAllEnglishWords } from '@/data/english-words'
 import Link from 'next/link'
 
 const TABS = [
-  { id: 'alintilar', label: 'Alintiler' },
+  { id: 'sozler', label: 'Sözler' },
   { id: 'incelemeler', label: 'Incelemeler' },
   { id: 'ingilizce', label: 'English' },
 ]
 
 export default function RastgelePage() {
-  const [activeTab, setActiveTab] = useState('alintilar')
+  const [activeTab, setActiveTab] = useState('sozler')
   const [currentNote, setCurrentNote] = useState(null)
   const [incelemeItem, setIncelemeItem] = useState(null)
   const [englishWord, setEnglishWord] = useState(null)
@@ -48,7 +48,7 @@ export default function RastgelePage() {
   }
 
   const handleRandom = () => {
-    if (activeTab === 'alintilar') getRandomNote()
+    if (activeTab === 'sozler') getRandomNote()
     else if (activeTab === 'incelemeler') getRandomInceleme()
     else if (activeTab === 'ingilizce') getRandomEnglish()
   }
@@ -75,7 +75,7 @@ export default function RastgelePage() {
 
         {/* Content Area */}
         <div className="mb-6 flex-1">
-          {activeTab === 'alintilar' && currentNote && (
+          {activeTab === 'sozler' && currentNote && (
             <div className="rounded-lg border border-border bg-card p-5">
               <p className="text-sm leading-relaxed text-foreground">
                 {currentNote}
@@ -135,7 +135,7 @@ export default function RastgelePage() {
             </div>
           )}
 
-          {!currentNote && activeTab === 'alintilar' && (
+          {!currentNote && activeTab === 'sozler' && (
             <div className="flex h-48 items-center justify-center rounded-lg border border-dashed border-border">
               <p className="text-sm text-muted-foreground">
                 Butona bas, rastgele bir alinti gelsin
