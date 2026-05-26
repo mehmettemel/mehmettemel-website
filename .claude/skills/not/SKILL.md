@@ -36,6 +36,12 @@ Notun içeriğine göre **önce dosyayı**, sonra **alt kategoriyi** belirle:
 ### `src/data/personal/toplum.js` → Toplum & Dünya
 - **Toplum & Dünya**: Tarih, politika, felsefe, ekonomi, toplum, medeniyet, güç dinamikleri
 
+### `src/data/personal/money.js` → Money
+- **E-Commerce**: E-ticaret, online satış, dropshipping, marketplace, ürün satışı
+- **Marketing**: Pazarlama, reklam, sosyal medya stratejisi, growth hacking, SEO
+- **Finance**: Yatırım, borsa, kripto, bütçe, tasarruf, finansal okuryazarlık
+- **Ideas**: İş fikirleri, girişim fırsatları, yan gelir, niş alanlar
+
 ### `src/data/personal/quotes.js` → Quotes
 - **Quotes**: Kısa, ilham verici sözler ve alıntılar (1-2 cümle, özlü)
 

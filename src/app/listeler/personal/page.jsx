@@ -27,6 +27,10 @@ const personalCategories = [
     href: '/listeler/personal/toplum',
   },
   {
+    title: 'Money',
+    href: '/listeler/personal/money',
+  },
+  {
     title: 'Quotes',
     href: '/listeler/personal/quotes',
   },

@@ -9,6 +9,7 @@ import { categories as kisiselGelisimData } from '@/data/personal/kisisel-gelisi
 import { categories as iliskilerData } from '@/data/personal/iliskiler'
 import { categories as toplumData } from '@/data/personal/toplum'
 import { categories as saglikData } from '@/data/personal/saglik'
+import { categories as moneyData } from '@/data/personal/money'
 import { getAllEnglishWords } from '@/data/english-words'
 
 function getAllPersonalItems() {
@@ -29,6 +30,7 @@ function getAllPersonalItems() {
   addItems(iliskilerData, 'İlişkiler')
   addItems(toplumData, 'Toplum')
   addItems(saglikData, 'Sağlık')
+  addItems(moneyData, 'Money')
   return items
 }
 

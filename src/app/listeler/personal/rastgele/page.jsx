@@ -9,6 +9,7 @@ import { categories as iliskilerData } from '@/data/personal/iliskiler'
 import { categories as toplumData } from '@/data/personal/toplum'
 import { categories as saglikData } from '@/data/personal/saglik'
 import { categories as aiData } from '@/data/personal/ai'
+import { categories as moneyData } from '@/data/personal/money'
 
 function getAllPersonalItems() {
   const items = []
@@ -29,6 +30,7 @@ function getAllPersonalItems() {
   addItems(toplumData, 'Toplum')
   addItems(quotesData, 'Quotes')
   addItems(aiData, 'AI')
+  addItems(moneyData, 'Money')
   return items
 }
 
