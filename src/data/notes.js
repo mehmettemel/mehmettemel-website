@@ -1,146 +1,14 @@
 /**
  * Notes Data
  * All quotes and notes organized by category
- * Categories: saglik, gida, kisisel, genel
+ * Categories: gida, kisisel, genel
  */
 
 export const noteCategories = [
   { id: 'all', name: 'Tümü', icon: '📚' },
   { id: 'gida', name: 'Gıda', icon: '🍎' },
-  { id: 'saglik', name: 'Sağlık', icon: '🏥' },
   { id: 'kisisel', name: 'Kişisel', icon: '💭' },
   { id: 'genel', name: 'Genel', icon: '📝' },
-]
-
-const saglik = [
-  {
-    id: 1712144686508,
-    text: 'Bağışıklık sistemi hastalıklarından (solunum yolu) ve bağırsak sağlığı sorunlarından korunmak için Glutamin alın. Bağırsak hücreleri ve bağışıklık hücreleri enerjileri için glutamine bayılır.',
-  },
-  {
-    id: 1712143998454,
-    text: "Smoothie blender'larının plastik hazneleri, hızlı sürtünme nedeniyle inanılmaz miktarda mikroplastiği içeceğinize karıştırır. Paslanmaz çelik hazneli blender kullanın.",
-  },
-  {
-    id: 1708775062272,
-    text: 'Mükemmel beslenseniz ve spor yapsanız dahi, yönetemediğiniz stres veya sorunlu ilişkiler tüm doğruları silip süpürür.',
-  },
-  {
-    id: 1708775034469,
-    text: 'Suyu bir anda, lıkır lıkır, hızlı bir şekilde içmeyin. Suyu tek seferde hızlıca içerseniz, mideden hızla ince bağırsağa ve kana geçer. Kanda aniden sıvı artışı olunca damarlardaki basınç reseptörleri "kan basıncı artıyor" uyarısı verir. Vücut suyu hücrelere ulaştırmadan böbrekler yoluyla hızla dışarı atar.\nSuyu yudum yudum, zamana yayarak için.',
-  },
-  {
-    id: 1708098336843,
-    text: 'Sinaptik Budama (Synaptic Pruning): Beyin gelişiminin "uzun otlarla dolu bir tarla" gibi olması; kullanılan yollar (kültürel alışkanlıklar) belirginleşirken diğerlerinin kapanması.',
-  },
-  {
-    id: 1707557244481,
-    text: 'Sol tarafınıza yatın. Sağ tarafa yatmak organların mideye baskı yapmasına ve reflüye (GERD) neden olabilir.',
-  },
-  {
-    id: 1707557233945,
-    text: 'Haftanın 7 günü aynı saatte uyanın. Yatış saati değil, uyanış saati melatonini düzenler.',
-  },
-  {
-    id: 1707479292651,
-    text: 'Kansere karşı en etkili gıdalar:\n- Zerdeçalla birlikte karabiber\n- Yeşil Çay',
-  },
-  {
-    id: 1707464675896,
-    text: "Akşamları kırmızı ışık kullanın ve mavi ışığı (ekranları) 20:00'den sonra kesin.",
-  },
-  {
-    id: 1707464591052,
-    text: 'Her saat başı 10 adet "air squat" yapın. Saatlik squatlar, uzun süre oturmanın (sedanter yaşam) neden olduğu lipoprotein lipaz enziminin kapanmasını engeller.',
-  },
-  {
-    id: 1706968694841,
-    text: 'Antibiyotik alırken dikkat edilecekler:\nAntibiyotik öncesi, sırası ve sonrasında yüksek lifli, bitki bazlı beslenin. Bağırsak liften yoksun bırakıldığında, antibiyotik hasarı daha şiddetli olur ve iyileşme gecikir. Eklenmiş şeker, ultra işlenmiş gıdalar ve aşırı doymuş yağlardan uzak durun. Sabahları güneş ışığına çıkın ve hafif egzersiz yapın.',
-  },
-  {
-    id: 1706271975952,
-    text: 'Yemek bittikten sonraki ilk 90 dakika içinde hareket etmeye başlayın; çünkü glikoz bu sürede zirve yapar. Yemekten sonra 10 dakikalık kısa bir yürüyüş, kan şekerini düşürmek için yeterlidir.',
-  },
-  {
-    id: 1706005964471,
-    text: 'A 20 minute walk after meals is one of the most overlooked health tools.',
-  },
-  {
-    id: 1706005963525,
-    text: "Your leg strength predicts how long you'll live. Not your weight.",
-  },
-  {
-    id: 1705950600399,
-    text: 'Joe Rogan: Sauna 4x per week for 20 minutes at 175 degrees = 40% decrease in all cause mortality. Great for inflammation and red blood cells.',
-  },
-  {
-    id: 1705776972683,
-    text: 'Yatak odanızı bir "mağara" yapın: Tamamen karanlık, sessiz ve soğuk.\n\nIşığı tamamen kesmek için karartma perdeleri veya göz maskesi kullanın.\n\nİdeal uyku sıcaklığı 16-20°C (60-67°F) arasındadır.\n\nYatmadan hemen önce sıcak duş almayın. Vücut ısısının düşmesi uykuyu başlatır; duşu yatmadan 1.5-2 saat önce alın.\n\nYatak sadece uyku ve seks içindir; bilgisayar veya telefonla yatakta vakit geçirmek beynin orayı "uyanıklık" ile eşleştirmesine neden olur.',
-  },
-  {
-    id: 1705679648309,
-    text: 'Dopamin seviyenizi artırmak için yenilik (novelty), risk alma (fiziksel, sosyal veya entelektüel), öngörülemezlik ve karmaşıklığa maruz kalın.',
-  },
-  {
-    id: 1705654496909,
-    text: 'Güç (strength), kas kütlesinden (muscle mass) daha kritiktir. Kas kütlesi genellikle gücün bir göstergesi (proxy) olarak kullanılır ama asıl önemli olan metrik güçtür.\n\nGücü ölçmek için sadece squat/deadlift ağırlıklarına bakmayın; kavrama gücü (grip strength), asılı kalma (dead hang) ve hava squatı gibi temel testleri kullanın.',
-  },
-  {
-    id: 1705654001780,
-    text: 'Odaklanma gerektiren zihinsel işlerinizi, egzersizden sonraki 1-3 saatlik dilime planlayın.\n\nGünde 1-4 porsiyon düşük şekerli fermente gıda tüketin (Kimchi, lahana turşusu, kefir, kaliteli yoğurt).\n\nOda sıcaklığında satılan turşular değil, soğuk zincirde (fermente) olan canlı kültürlü turşuları tercih edin.\n\nKoruyuculu ve pastörize (raf ömrü uzun) turşulardan canlı kültür bekleme.',
-  },
-  {
-    id: 1705604153466,
-    text: 'Stresli anlarda "derin nefes al" demek yerine "yavaş ve uzun nefes ver" (expiration) denmelidir. Nefes vermek Vagus sinirini uyarır ve kalp hızını yavaşlatır.\n\nUzun süre nefes verdiğinizde beyin şaşırır: "Stresli olsaydı hızlı nefes alırdı, yavaş verdiğine göre güvendeyiz" diyerek sempatik sistemi kapatır.',
-  },
-  {
-    id: 1705609152756,
-    text: 'Balık yağınızı mutlaka buzdolabında saklayın. Omega-3 çoklu doymamış bir yağ olduğu için oksidasyona karşı son derece hassastır.',
-  },
-  {
-    id: 1705348234734,
-    text: 'Huberman kreatin protokolü: 1 hafta boyunca günde 30-40g "yükleme", ardından günde 10g devam dozu. Her 16 haftada bir, vücudu dinlendirmek ve gücünüzü test etmek için 1 hafta kreatin kullanımını tamamen durdurun.\n\nMagnezyum Threonate veya Bisglycinate formlarını tercih edin; bunlar kan-beyin bariyerini daha kolay geçer. Magnezyum takviyesini uykudan 30-60 dakika önce alın. Modern tarım nedeniyle topraktaki magnezyum tükendiğinden, günümüzdeki sebzelerden (kale vb.) yeterli magnezyum almak zordur.',
-  },
-  {
-    id: 1705175520931,
-    text: 'Box Breathing (4-4-4-4) ile hızlıca vagus sinirini resetleyip sinir sistemini sakinleştir: burundan 4 sn al, tut, ver, tut.',
-  },
-  {
-    id: 1768243881702,
-    text: 'Bağışıklık takviyesinde 1 numaraya D vitaminini koyun.',
-    author: 'Osman Müftüoğlu',
-  },
-  {
-    id: 1768243962225,
-    text: 'Narı kabuğundaki beyaz liflerle birlikte tüketin veya suyunu öyle sıkın. En değerli polifenoller (elajotaninler) o beyaz liflerde ve çekirdektedir.',
-    author: 'Osman Müftüoğlu',
-  },
-  {
-    id: 1747136800000,
-    text: 'Yemek sonrası oluşan ağır yorgunluk ve uyku halini (postprandiyal somnolans) önlemek için yemekten 30 dakika önce 1 taze limonun suyunu sıkıp, eşit miktarda suyla (1:1 oranında) karıştırarak içmek.',
-  },
-  {
-    id: 1747136800001,
-    text: 'Düzenli kan testi yaptırmayı, özellikle testosteron seviyelerini kontrol etmeyi tavsiye ediyor. Çünkü birçok "zihinsel" sorun (öfke, irritasyon, depresyon gibi) aslında hormonal dengesizlikler, enflamasyon veya besin eksikliklerinden kaynaklanabiliyor. Bunları erken tespit etmek, gereksiz terapi veya ilaç yerine kök nedeni çözmeyi sağlar.',
-  },
-  {
-    id: 1747308000000,
-    text: 'Hastalanmamak için yapılması gerekenler:\n- Telefonunuzu her gün dezenfekte edin. Telefon inanılmaz miktarda mikrop taşır.\n- Küçük çocuklardan uzak durun. Çocuklar (özellikle kreş ve okul çağındakiler) sürekli yeni virüsler getirir.\n- Elleri sık sık yıkayın.\n- Elleri, özellikle yıkanmamışken gözlere, burna veya ağza götürmeyin.\n- Sauna kullanın ama testisleri soğuk tutun. Kalabalık alanlarda N95 maske takın.\n- Bağışıklık güçlendirici karışım: sarımsak, zencefil, bal ve zerdeçal.',
-  },
-  {
-    id: 1747310700000,
-    text: "Society was built to make money. Indifferent to your health and sanity.\n\nFor example, we did not evolve to:\n- Sit 10 hours a day\n- Have our attention fractured 300 times daily\n- Compare ourselves to millions of others\n- Travel 9 time zones in 13 hours\n- Tolerate sounds above 85 dB causing hearing loss\n- Outsmart algorithms hijacking our reward system\n- Breathe fine particulate air pollution\n- Live under 16+ hrs of artificial light a day\n- Have 3 courses of antibiotics before age 2\n- Eat ultra-processed foods for 60% of daily calories\n- Consume 17 teaspoons of added sugar a day\n\nSo if you're feeling down in the dumps, maybe fatigued, a little or a lot depressed, anxious, that's why.",
-    author: 'Bryan Johnson',
-  },
-  {
-    id: 1747310800000,
-    text: 'Yatak odası kapısını gece açık bırakıp diğer odadan bir pencere açarak uyuduğun odadaki CO2 seviyesini büyük ölçüde düşürebilirsin.',
-  },
-  {
-    id: 1747504900000,
-    text: "Friends, stop drinking alcohol. Not cut back. Eliminate.\n\nAlcohol increases cortisol, disrupts REM sleep, accelerates epigenetic aging, shrinks hippocampal volume, elevates resting heart rate, raises inflammatory markers, impairs glucose metabolism for 16 hrs.\n\nOne drink does that.",
-    author: 'Bryan Johnson',
-  },
 ]
 
 const gida = [
@@ -518,8 +386,7 @@ const genel = [
 
 export function getAllNotes() {
   return [
-    ...saglik.map((n) => ({ ...n, category: 'saglik' })),
-    ...gida.map((n) => ({ ...n, category: 'gida' })),
+...gida.map((n) => ({ ...n, category: 'gida' })),
     ...kisisel.map((n) => ({ ...n, category: 'kisisel' })),
     ...genel.map((n) => ({ ...n, category: 'genel' })),
   ]
@@ -527,7 +394,7 @@ export function getAllNotes() {
 
 export function getNotesByCategory(category) {
   if (!category || category === 'all') return getAllNotes()
-  const categoryMap = { saglik, gida, kisisel, genel }
+  const categoryMap = { gida, kisisel, genel }
   const notes = categoryMap[category] || []
   return notes.map((n) => ({ ...n, category }))
 }

@@ -8,6 +8,21 @@ export const categories = {
       { text: 'Uyku en önem vermen gereken şey.', subItems: [] },
       { text: 'Şartlar ne olursa olsun uykudan feragat etme. Günlük 8 saat uykunu uyu.', subItems: [] },
       { text: 'Yatakta asla telefonla uyumamak, yastığa yakın telefon olmaması. Lavanta yağı damlatmak uyku için kritik.', subItems: [] },
+      { text: 'Smoothie blender\'larının plastik hazneleri, hızlı sürtünme nedeniyle inanılmaz miktarda mikroplastiği içeceğinize karıştırır. Paslanmaz çelik hazneli blender kullanın.', subItems: [] },
+      { text: 'Mükemmel beslenseniz ve spor yapsanız dahi, yönetemediğiniz stres veya sorunlu ilişkiler tüm doğruları silip süpürür.', subItems: [] },
+      { text: 'Sinaptik Budama (Synaptic Pruning): Beyin gelişiminin "uzun otlarla dolu bir tarla" gibi olması; kullanılan yollar (kültürel alışkanlıklar) belirginleşirken diğerlerinin kapanması.', subItems: [] },
+      { text: 'Sol tarafınıza yatın. Sağ tarafa yatmak organların mideye baskı yapmasına ve reflüye (GERD) neden olabilir.', subItems: [] },
+      { text: 'Haftanın 7 günü aynı saatte uyanın. Yatış saati değil, uyanış saati melatonini düzenler.', subItems: [] },
+      { text: 'Akşamları kırmızı ışık kullanın ve mavi ışığı (ekranları) 20:00\'den sonra kesin.', subItems: [] },
+      { text: 'Joe Rogan: Sauna 4x per week for 20 minutes at 175 degrees = 40% decrease in all cause mortality. Great for inflammation and red blood cells.', subItems: [] },
+      { text: 'Yatak odanızı bir "mağara" yapın: Tamamen karanlık, sessiz ve soğuk. Işığı tamamen kesmek için karartma perdeleri veya göz maskesi kullanın. İdeal uyku sıcaklığı 16-20°C (60-67°F) arasındadır. Yatmadan hemen önce sıcak duş almayın. Vücut ısısının düşmesi uykuyu başlatır; duşu yatmadan 1.5-2 saat önce alın. Yatak sadece uyku ve seks içindir; bilgisayar veya telefonla yatakta vakit geçirmek beynin orayı "uyanıklık" ile eşleştirmesine neden olur.', subItems: [] },
+      { text: 'Dopamin seviyenizi artırmak için yenilik (novelty), risk alma (fiziksel, sosyal veya entelektüel), öngörülemezlik ve karmaşıklığa maruz kalın.', subItems: [] },
+      { text: 'Stresli anlarda "derin nefes al" demek yerine "yavaş ve uzun nefes ver" (expiration) denmelidir. Nefes vermek Vagus sinirini uyarır ve kalp hızını yavaşlatır. Uzun süre nefes verdiğinizde beyin şaşırır: "Stresli olsaydı hızlı nefes alırdı, yavaş verdiğine göre güvendeyiz" diyerek sempatik sistemi kapatır.', subItems: [] },
+      { text: 'Box Breathing (4-4-4-4) ile hızlıca vagus sinirini resetleyip sinir sistemini sakinleştir: burundan 4 sn al, tut, ver, tut.', subItems: [] },
+      { text: 'Hastalanmamak için yapılması gerekenler: Telefonunuzu her gün dezenfekte edin. Küçük çocuklardan uzak durun. Elleri sık sık yıkayın. Elleri gözlere, burna veya ağza götürmeyin. Sauna kullanın ama testisleri soğuk tutun. Kalabalık alanlarda N95 maske takın. Bağışıklık güçlendirici karışım: sarımsak, zencefil, bal ve zerdeçal.', subItems: [] },
+      { text: 'Society was built to make money. Indifferent to your health and sanity. We did not evolve to: Sit 10 hours a day, have our attention fractured 300 times daily, compare ourselves to millions of others, eat ultra-processed foods for 60% of daily calories, consume 17 teaspoons of added sugar a day. So if you\'re feeling down, maybe fatigued, depressed, anxious, that\'s why. (Bryan Johnson)', subItems: [] },
+      { text: 'Yatak odası kapısını gece açık bırakıp diğer odadan bir pencere açarak uyuduğun odadaki CO2 seviyesini büyük ölçüde düşürebilirsin.', subItems: [] },
+      { text: 'Friends, stop drinking alcohol. Not cut back. Eliminate. Alcohol increases cortisol, disrupts REM sleep, accelerates epigenetic aging, shrinks hippocampal volume, elevates resting heart rate, raises inflammatory markers, impairs glucose metabolism for 16 hrs. One drink does that. (Bryan Johnson)', subItems: [] },
     ]
   },
   'Fiziksel Aktivite ve Egzersiz': {
@@ -18,6 +33,10 @@ export const categories = {
       { text: 'Futbol beyin için çok zararlı, topa kafa vurmaları sebebiyle. Powerlifting beyne zarar verir. Günde 30 dk yürümek beyin için çok iyi.', subItems: [] },
       { text: 'Koştuğumuz sürece böbrek üstü bezlerimiz kortizol salgılar, bu da bizi yaşlandırır. Maratoncular bu yüzden 55 yaşına kadar yaşar. Yürümek daha sağlıklı.', subItems: [] },
       { text: 'Ormana yakın, hatta suya yakın yerde yürümek pozitif iyonlar sebebiyle aşırı sağlıklı.', subItems: [] },
+      { text: 'Her saat başı 10 adet "air squat" yapın. Saatlik squatlar, uzun süre oturmanın (sedanter yaşam) neden olduğu lipoprotein lipaz enziminin kapanmasını engeller.', subItems: [] },
+      { text: 'A 20 minute walk after meals is one of the most overlooked health tools.', subItems: [] },
+      { text: 'Your leg strength predicts how long you\'ll live. Not your weight.', subItems: [] },
+      { text: 'Güç (strength), kas kütlesinden (muscle mass) daha kritiktir. Kas kütlesi genellikle gücün bir göstergesi (proxy) olarak kullanılır ama asıl önemli olan metrik güçtür. Gücü ölçmek için sadece squat/deadlift ağırlıklarına bakmayın; kavrama gücü (grip strength), asılı kalma (dead hang) ve hava squatı gibi temel testleri kullanın.', subItems: [] },
     ]
   },
   'Beslenme': {
@@ -48,6 +67,11 @@ export const categories = {
       { text: 'Alkol sınırında içilmeli ve ara vererek içilmelidir. Aralarda yemek ve gıda tüketiminden ziyade sıcak içecek tüketmelisiniz. İçmeye tok karınla başlamalısınız. İçkileri karıştırmamalısınız, bu lafın anlamı rafine içkilerle mayalı içkiler birlikte içilmez anlamına gelir. Bu durum alkolden zehirlenmeyi kolaylaştırır. Yiyeceğiniz ilk gıda tuzlu patates haşlaması, 1 kase yoğurt (yoğurt prebiyotiktir, sindirim sistemi fonksiyonlarına çok iyi gelir) ve güzelce içilen ılık sudan ibarettir.', subItems: [] },
       { text: 'domates-mercimek veya bal kabağı çorbası bunlara karabiber ve zerdeçal ekle.', subItems: [] },
       { text: 'Bitkisel demir (non-heme) alırken yanına mutlaka C vitamini ekle. → Nasıl: Mercimeğin üzerine limon sık veya ıspanak yemeğinin yanında portakal suyu/biber tüket. → Neden işe yarıyor: C vitamini, bitkisel demirin emilimini %300\'e kadar artırabilir.', subItems: [] },
+      { text: 'Suyu bir anda, lıkır lıkır, hızlı bir şekilde içmeyin. Suyu tek seferde hızlıca içerseniz, mideden hızla ince bağırsağa ve kana geçer. Kanda aniden sıvı artışı olunca damarlardaki basınç reseptörleri "kan basıncı artıyor" uyarısı verir. Vücut suyu hücrelere ulaştırmadan böbrekler yoluyla hızla dışarı atar. Suyu yudum yudum, zamana yayarak için.', subItems: [] },
+      { text: 'Kansere karşı en etkili gıdalar: Zerdeçalla birlikte karabiber ve Yeşil Çay.', subItems: [] },
+      { text: 'Yemek bittikten sonraki ilk 90 dakika içinde hareket etmeye başlayın; çünkü glikoz bu sürede zirve yapar. Yemekten sonra 10 dakikalık kısa bir yürüyüş, kan şekerini düşürmek için yeterlidir.', subItems: [] },
+      { text: 'Odaklanma gerektiren zihinsel işlerinizi, egzersizden sonraki 1-3 saatlik dilime planlayın. Günde 1-4 porsiyon düşük şekerli fermente gıda tüketin (Kimchi, lahana turşusu, kefir, kaliteli yoğurt). Oda sıcaklığında satılan turşular değil, soğuk zincirde (fermente) olan canlı kültürlü turşuları tercih edin.', subItems: [] },
+      { text: 'Yemek sonrası oluşan ağır yorgunluk ve uyku halini (postprandiyal somnolans) önlemek için yemekten 30 dakika önce 1 taze limonun suyunu sıkıp, eşit miktarda suyla (1:1 oranında) karıştırarak içmek.', subItems: [] },
     ]
   },
   'Pişirme ve Mutfak Teknikleri': {
@@ -78,6 +102,8 @@ export const categories = {
       { text: 'Aliminyum içermeyen koltuk altı kullan.', subItems: [] },
       { text: 'Helicobacter pylori için damla sakızı çiğnemek (Oytun Erbaş).', subItems: [] },
       { text: 'İnsülin direnci her hastalığın sebebi: İnsülin direnci, vücudunuzun hücrelerinin insüline yeterince tepki vermediği bir durumdur. İnsülin, yiyeceklerden gelen şekerin (glukoz) hücrelere enerji için girmesine yardımcı olan bir hormondur. Bu direnç durumunda, şeker kan dolaşımında kalır, bu da kan şekeri seviyelerinin yüksek olmasına ve zamanla diyabete yol açabilir.Bir hafta hareketsizlik insülin direncini 7 kat artırabiliyor ve daha çarpıcı kısmı, tekrar fiziksel egzersize başladığınızda bile hiç ara vermeyen birine göre insülin direnciniz "haftalarca" 2 katı seviyede kalıyor. Kaslar insüline dirençli hale gelen ilk dokulardan biriymiş. Daha fazla kasımızın olması, daha fazla glukozu kandan çıkarabilmemizi sağlar. Kas kütlesindeki azalış ya da artışlar, kaslar vücudun en büyük dokularından olduğundan insülin duyarlılığımız üstünde fazlasıyla etkili. En çok kas bacaklarda var, o yüzden bacak kasları önemli.', subItems: [] },
+      { text: 'Antibiyotik alırken dikkat edilecekler: Antibiyotik öncesi, sırası ve sonrasında yüksek lifli, bitki bazlı beslenin. Bağırsak liften yoksun bırakıldığında, antibiyotik hasarı daha şiddetli olur ve iyileşme gecikir. Eklenmiş şeker, ultra işlenmiş gıdalar ve aşırı doymuş yağlardan uzak durun. Sabahları güneş ışığına çıkın ve hafif egzersiz yapın.', subItems: [] },
+      { text: 'Düzenli kan testi yaptırmayı, özellikle testosteron seviyelerini kontrol etmeyi tavsiye ediyor. Çünkü birçok "zihinsel" sorun (öfke, irritasyon, depresyon gibi) aslında hormonal dengesizlikler, enflamasyon veya besin eksikliklerinden kaynaklanabiliyor. Bunları erken tespit etmek, gereksiz terapi veya ilaç yerine kök nedeni çözmeyi sağlar.', subItems: [] },
     ]
   },
   'Hastane ve Sağlık Sistemi': {
@@ -191,6 +217,7 @@ export const categories = {
       { text: 'Narenciye meyveleri alırken', subItems: [
         'Ağır olanları seçin. Aynı çeşit ve benzer boyutta olduklarında, ağır olanlar daha taze ve sulu olma ihtimali yüksektir.',
       ] },
+      { text: 'Narı kabuğundaki beyaz liflerle birlikte tüketin veya suyunu öyle sıkın. En değerli polifenoller (elajotaninler) o beyaz liflerde ve çekirdektedir. (Osman Müftüoğlu)', subItems: [] },
     ]
   },
   'Et ve Hayvansal Ürünler': {
@@ -304,6 +331,10 @@ export const categories = {
       { text: 'A vitamini', subItems: [
         'Havuç yiyerek A vitamini ihtiyacımı karşılarım diye düşünmek yanlış. Havuçta bulunan beta-karotendir. Vücudun bunu gerçek A vitaminine (Retinol) dönüştürme oranı çok düşüktür (%3-%28 arası). Gerçek A vitamini sadece hayvansal yağlarda (karaciğer, yumurta sarısı) bulunur.',
       ] },
+      { text: 'Bağışıklık sistemi hastalıklarından (solunum yolu) ve bağırsak sağlığı sorunlarından korunmak için Glutamin alın. Bağırsak hücreleri ve bağışıklık hücreleri enerjileri için glutamine bayılır.', subItems: [] },
+      { text: 'Balık yağınızı mutlaka buzdolabında saklayın. Omega-3 çoklu doymamış bir yağ olduğu için oksidasyona karşı son derece hassastır.', subItems: [] },
+      { text: 'Huberman kreatin protokolü: 1 hafta boyunca günde 30-40g "yükleme", ardından günde 10g devam dozu. Her 16 haftada bir, vücudu dinlendirmek ve gücünüzü test etmek için 1 hafta kreatin kullanımını tamamen durdurun. Magnezyum Threonate veya Bisglycinate formlarını tercih edin; bunlar kan-beyin bariyerini daha kolay geçer. Magnezyum takviyesini uykudan 30-60 dakika önce alın.', subItems: [] },
+      { text: 'Bağışıklık takviyesinde 1 numaraya D vitaminini koyun. (Osman Müftüoğlu)', subItems: [] },
     ]
   },
   'Ağız, Diş ve Boğaz Sağlığı': {
