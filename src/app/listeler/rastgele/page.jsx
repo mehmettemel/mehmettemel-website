@@ -2,24 +2,24 @@
 
 import { Container } from '@/components/Container'
 import { useState, useMemo } from 'react'
-import { categories as sozlerData } from '@/data/personal/sozler'
+import { categories as quotesData } from '@/data/personal/quotes'
 import { getAllEnglishWords } from '@/data/english-words'
 import Link from 'next/link'
 
 const TABS = [
-  { id: 'sozler', label: 'Sözler' },
+  { id: 'quotes', label: 'Quotes' },
   { id: 'incelemeler', label: 'Incelemeler' },
   { id: 'ingilizce', label: 'English' },
 ]
 
 export default function RastgelePage() {
-  const [activeTab, setActiveTab] = useState('sozler')
+  const [activeTab, setActiveTab] = useState('quotes')
   const [currentNote, setCurrentNote] = useState(null)
   const [incelemeItem, setIncelemeItem] = useState(null)
   const [englishWord, setEnglishWord] = useState(null)
   const [loading, setLoading] = useState(false)
 
-  const allQuotes = useMemo(() => sozlerData['Sevdiğim Sözler'].items, [])
+  const allQuotes = useMemo(() => quotesData['Quotes'].items, [])
   const allEnglishWords = useMemo(() => getAllEnglishWords(), [])
 
   const getRandomNote = () => {
@@ -48,7 +48,7 @@ export default function RastgelePage() {
   }
 
   const handleRandom = () => {
-    if (activeTab === 'sozler') getRandomNote()
+    if (activeTab === 'quotes') getRandomNote()
     else if (activeTab === 'incelemeler') getRandomInceleme()
     else if (activeTab === 'ingilizce') getRandomEnglish()
   }
@@ -75,7 +75,7 @@ export default function RastgelePage() {
 
         {/* Content Area */}
         <div className="mb-6 flex-1">
-          {activeTab === 'sozler' && currentNote && (
+          {activeTab === 'quotes' && currentNote && (
             <div className="rounded-lg border border-border bg-card p-5">
               <p className="text-sm leading-relaxed text-foreground">
                 {currentNote}
@@ -135,7 +135,7 @@ export default function RastgelePage() {
             </div>
           )}
 
-          {!currentNote && activeTab === 'sozler' && (
+          {!currentNote && activeTab === 'quotes' && (
             <div className="flex h-48 items-center justify-center rounded-lg border border-dashed border-border">
               <p className="text-sm text-muted-foreground">
                 Butona bas, rastgele bir alinti gelsin

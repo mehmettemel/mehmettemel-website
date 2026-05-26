@@ -4,7 +4,7 @@ import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
 import { KeyRound } from 'lucide-react'
 import { LoginDialog } from '../auth/LoginDialog'
-import { categories as sozlerData } from '@/data/personal/sozler'
+import { categories as quotesData } from '@/data/personal/quotes'
 import { categories as kisiselGelisimData } from '@/data/personal/kisisel-gelisim'
 import { categories as iliskilerData } from '@/data/personal/iliskiler'
 import { categories as toplumData } from '@/data/personal/toplum'
@@ -24,7 +24,7 @@ function getAllPersonalItems() {
       })
     }
   }
-  addItems(sozlerData, 'Sözler')
+  addItems(quotesData, 'Quotes')
   addItems(kisiselGelisimData, 'Kişisel Gelişim')
   addItems(iliskilerData, 'İlişkiler')
   addItems(toplumData, 'Toplum')

@@ -27,8 +27,8 @@ const personalCategories = [
     href: '/listeler/personal/toplum',
   },
   {
-    title: 'Sevdiğim Sözler',
-    href: '/listeler/personal/sozler',
+    title: 'Quotes',
+    href: '/listeler/personal/quotes',
   },
 ]
 

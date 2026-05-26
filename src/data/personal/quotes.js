@@ -1,8 +1,8 @@
-export const title = 'Sevdiğim Sözler'
+export const title = 'Quotes'
 
 export const categories = {
-  'Sevdiğim Sözler': {
-    label: 'Sevdiğim Sözler',
+  'Quotes': {
+    label: 'Quotes',
     items: [
       'Be humble, your salary is someone\'s perfume.',
       'Once a man loses his mother he will never experience that kind of unconditional love on earth ever again.',

@@ -3,9 +3,9 @@ import { cookies } from 'next/headers'
 import { verifyToken } from '@/lib/auth'
 import { redirect } from 'next/navigation'
 import { PersonalContent } from '@/components/personal/PersonalContent'
-import { categories } from '@/data/personal/sozler'
+import { categories } from '@/data/personal/quotes'
 
-export const metadata = { title: 'Sevdiğim Sözler | Mehmet Temel' }
+export const metadata = { title: 'Quotes | Mehmet Temel' }
 
 export default async function SozlerPage() {
   const cookieStore = await cookies()
@@ -17,7 +17,7 @@ export default async function SozlerPage() {
   return (
     <Container>
       <div className="mx-auto max-w-7xl py-8 sm:py-12">
-        <PersonalContent categories={categories} title="Sevdiğim Sözler" />
+        <PersonalContent categories={categories} title="Quotes" />
       </div>
     </Container>
   )

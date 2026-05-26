@@ -1,6 +1,6 @@
 import { Container } from '../components/Container'
 import { getAllPosts } from '../lib/blog'
-import { categories as sozlerData } from '../data/personal/sozler'
+import { categories as quotesData } from '../data/personal/quotes'
 import { HomeHero } from '../components/home/HomeHero'
 import { HomeResearches } from '../components/home/HomeResearches'
 import { RecentDiscoveries } from '../components/home/RecentDiscoveries'
@@ -46,7 +46,7 @@ export default function Home() {
   const allPosts = getAllPosts()
   const recentPosts = allPosts.slice(0, 3)
 
-  const recentNotes = sozlerData['Sevdiğim Sözler'].items.slice(0, 8).map((text, i) => ({
+  const recentNotes = quotesData['Quotes'].items.slice(0, 8).map((text, i) => ({
     id: i,
     text,
   }))

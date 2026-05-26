@@ -36,8 +36,8 @@ Notun içeriğine göre **önce dosyayı**, sonra **alt kategoriyi** belirle:
 ### `src/data/personal/toplum.js` → Toplum & Dünya
 - **Toplum & Dünya**: Tarih, politika, felsefe, ekonomi, toplum, medeniyet, güç dinamikleri
 
-### `src/data/personal/sozler.js` → Sevdiğim Sözler
-- **Sevdiğim Sözler**: Kısa, ilham verici sözler ve alıntılar (1-2 cümle, özlü)
+### `src/data/personal/quotes.js` → Quotes
+- **Quotes**: Kısa, ilham verici sözler ve alıntılar (1-2 cümle, özlü)
 
 ### `src/data/personal/ai.js` → AI
 - **AI Agents & Workflow**, **Prompting & Kullanım**, **Modeller & Teknoloji**, **Araçlar & Ürünler**, **Sektör & Trendler**
@@ -72,12 +72,12 @@ Notun içeriğine göre **önce dosyayı**, sonra **alt kategoriyi** belirle:
 
 ## Yazar/Kaynak Tespiti
 
-- Metnin sonunda "- İsim" veya "(İsim)" varsa → yazarı metnin sonuna " — Yazar" olarak ekle (sozler.js için)
+- Metnin sonunda "- İsim" veya "(İsim)" varsa → yazarı metnin sonuna " — Yazar" olarak ekle (quotes.js için)
 - saglik.js'de author field yok, yazar bilgisini metnin içinde bırak
 
 ## Kısa Söz mü Uzun Not mu?
 
-- 1-2 cümlelik, ilham verici, özlü bir söz → `sozler.js`
+- 1-2 cümlelik, ilham verici, özlü bir söz → `quotes.js`
 - Pratik bilgi, tavsiye, detaylı açıklama → ilgili konu dosyası
 
 ## Birden Fazla Not

@@ -8,7 +8,7 @@ import { verifyToken } from '@/lib/auth'
 import { categories as kisiselGelisimCategories } from '@/data/personal/kisisel-gelisim'
 import { categories as iliskilerCategories } from '@/data/personal/iliskiler'
 import { categories as toplumCategories } from '@/data/personal/toplum'
-import { categories as sozlerCategories } from '@/data/personal/sozler'
+import { categories as quotesCategories } from '@/data/personal/quotes'
 
 function parseIncelemeNotes(content) {
   const sections = content.split(/^## /m).filter(Boolean)
@@ -85,7 +85,7 @@ export async function GET() {
       { source: 'kisisel-gelisim', data: kisiselGelisimCategories },
       { source: 'iliskiler', data: iliskilerCategories },
       { source: 'toplum', data: toplumCategories },
-      { source: 'sozler', data: sozlerCategories },
+      { source: 'quotes', data: quotesCategories },
     ]
 
     for (const { source, data } of personalData) {

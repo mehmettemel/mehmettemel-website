@@ -3,7 +3,7 @@
 import { Container } from '@/components/Container'
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { categories as sozlerData } from '@/data/personal/sozler'
+import { categories as quotesData } from '@/data/personal/quotes'
 import { categories as kisiselGelisimData } from '@/data/personal/kisisel-gelisim'
 import { categories as iliskilerData } from '@/data/personal/iliskiler'
 import { categories as toplumData } from '@/data/personal/toplum'
@@ -27,7 +27,7 @@ function getAllPersonalItems() {
   addItems(kisiselGelisimData, 'Kişisel Gelişim')
   addItems(iliskilerData, 'İlişkiler')
   addItems(toplumData, 'Toplum')
-  addItems(sozlerData, 'Sözler')
+  addItems(quotesData, 'Quotes')
   addItems(aiData, 'AI')
   return items
 }
