@@ -11,7 +11,25 @@ Kullanıcı bir not, alıntı veya bilgi verdiğinde içeriği analiz edip `src/
 
 - Kullanıcı `/not` komutu kullandığında
 
-## Dosya ve Kategori Belirleme
+## Kategori İpucu Tespiti (Öncelikli)
+
+Kullanıcı notla birlikte bir kategori ipucu vermişse (üst veya alt kategori adı), o ipucunu kullanarak hedefi belirle. İpucu örnekleri:
+
+- `/not money: dropshipping'de en önemli şey ürün seçimi` → money.js → E-Commerce
+- `/not marketing sosyal medyada organik büyüme...` → money.js → Marketing
+- `/not sağlık vitamin D eksikliği...` → saglik.js → Takviyeler
+- `/not beslenme aç karnına su içmek...` → saglik.js → Beslenme
+- `/not finance borsa yatırımı...` → money.js → Finance
+- `/not ilişkiler networking etkinlikleri...` → iliskiler.js → Networking
+- `/not mindset cesaret olmadan...` → kisisel-gelisim.js → Mindset
+
+İpucu tespiti kuralları:
+1. Notun başında veya içinde dosya/kategori adı geçiyorsa (money, marketing, finance, sağlık, beslenme vb.) → o hedefi kullan
+2. İpucu üst kategori ise (money, sağlık, ilişkiler) → içeriğe göre alt kategoriyi belirle
+3. İpucu alt kategori ise (marketing, finance, beslenme, takviyeler) → hangi üst kategoriye ait olduğunu bul
+4. İpucu bulunamazsa → içerik analizine geç (aşağıdaki harita)
+
+## Dosya ve Kategori Haritası
 
 Notun içeriğine göre **önce dosyayı**, sonra **alt kategoriyi** belirle:
 
@@ -37,10 +55,10 @@ Notun içeriğine göre **önce dosyayı**, sonra **alt kategoriyi** belirle:
 - **Toplum & Dünya**: Tarih, politika, felsefe, ekonomi, toplum, medeniyet, güç dinamikleri
 
 ### `src/data/personal/money.js` → Money
-- **E-Commerce**: E-ticaret, online satış, dropshipping, marketplace, ürün satışı
-- **Marketing**: Pazarlama, reklam, sosyal medya stratejisi, growth hacking, SEO
-- **Finance**: Yatırım, borsa, kripto, bütçe, tasarruf, finansal okuryazarlık
-- **Ideas**: İş fikirleri, girişim fırsatları, yan gelir, niş alanlar
+- **E-Commerce**: E-ticaret, online satış, dropshipping, marketplace, ürün satışı, Shopify, Amazon
+- **Marketing**: Pazarlama, reklam, sosyal medya stratejisi, growth hacking, SEO, içerik pazarlama, marka
+- **Finance**: Yatırım, borsa, kripto, bütçe, tasarruf, finansal okuryazarlık, gelir-gider
+- **Ideas**: İş fikirleri, girişim fırsatları, yan gelir, niş alanlar, SaaS, ürün fikirleri
 
 ### `src/data/personal/quotes.js` → Quotes
 - **Quotes**: Kısa, ilham verici sözler ve alıntılar (1-2 cümle, özlü)
@@ -64,14 +82,16 @@ Notun içeriğine göre **önce dosyayı**, sonra **alt kategoriyi** belirle:
 
 ## Ekleme Adımları
 
-1. Hedef dosyayı oku
-2. İçerikten dosya ve alt kategori belirle
-3. İlgili kategorinin `items` dizisinin sonuna notu ekle
-4. Kullanıcıya kısa onay ver: "Eklendi: [dosya] → [kategori]"
+1. Kategori ipucu var mı kontrol et (üst/alt kategori adı geçiyor mu)
+2. İpucu varsa → hedefi belirle, ipucu metnini nottan çıkar
+3. İpucu yoksa → içerik analiziyle dosya ve alt kategori belirle
+4. Hedef dosyayı oku
+5. İlgili kategorinin `items` dizisinin sonuna notu ekle
+6. Kullanıcıya kısa onay ver: "Eklendi: [dosya] → [kategori]"
 
 ## Metin Temizleme
 
-- Gereksiz prefix'leri kaldır (`>not`, `/not` vb.)
+- Gereksiz prefix'leri kaldır (`>not`, `/not`, kategori ipuçları vb.)
 - Gereksiz boşlukları temizle
 - Metin olduğu gibi korunsun, yeniden yazma veya özetleme
 - Single quote'ları escape et (`'` → `\'`)
@@ -90,13 +110,28 @@ Notun içeriğine göre **önce dosyayı**, sonra **alt kategoriyi** belirle:
 
 Her notu ayrı ayrı doğru dosya ve kategoriye ekle.
 
-## Örnek
+## Örnekler
 
+**Kategori ipucu ile:**
+Kullanıcı: `/not marketing Organik büyüme için tutarlı içerik üretmek şart`
+→ `src/data/personal/money.js` → **Marketing**
+```js
+'Organik büyüme için tutarlı içerik üretmek şart',
+```
+Yanıt: "Eklendi: money.js → Marketing"
+
+**İçerik analiziyle:**
 Kullanıcı: `/not Sabah güneşine 10 dk çıkmak sirkadyen ritmi düzenler - Huberman`
-
-→ `src/data/personal/saglik.js` → **Temel Sağlık** kategorisine ekle:
+→ `src/data/personal/saglik.js` → **Temel Sağlık**
 ```js
 { text: 'Sabah güneşine 10 dk çıkmak sirkadyen ritmi düzenler. (Huberman)', subItems: [] },
 ```
-
 Yanıt: "Eklendi: saglik.js → Temel Sağlık"
+
+**Üst kategori ipucu ile:**
+Kullanıcı: `/not money Amazon FBA'da private label en kârlı model`
+→ `src/data/personal/money.js` → **E-Commerce**
+```js
+'Amazon FBA\'da private label en kârlı model',
+```
+Yanıt: "Eklendi: money.js → E-Commerce"
