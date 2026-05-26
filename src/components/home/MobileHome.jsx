@@ -31,7 +31,7 @@ function getAllPersonalItems() {
 export function MobileHome() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [showLogin, setShowLogin] = useState(false)
-  const [mounted, setMounted] = useState(false)
+  const [checking, setChecking] = useState(true)
   const [currentNote, setCurrentNote] = useState(null)
   const [incelemeItem, setIncelemeItem] = useState(null)
   const [englishWord, setEnglishWord] = useState(null)
@@ -42,11 +42,11 @@ export function MobileHome() {
   const allEnglishWords = useMemo(() => getAllEnglishWords(), [])
 
   useEffect(() => {
-    setMounted(true)
     fetch('/api/auth/session')
       .then((res) => res.json())
       .then((data) => setIsAuthenticated(data.authenticated))
       .catch(() => setIsAuthenticated(false))
+      .finally(() => setChecking(false))
   }, [])
 
   const getRandomPersonal = () => {
@@ -80,7 +80,17 @@ export function MobileHome() {
     else if (activeTab === 'ingilizce') getRandomEnglish()
   }
 
-  if (!mounted) return <div className="min-h-screen md:hidden" />
+  if (checking) {
+    return (
+      <div className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-2 pt-4 md:hidden">
+        <div className="space-y-3 w-full max-w-xs">
+          <div className="mx-auto h-5 w-32 animate-pulse rounded bg-muted" />
+          <div className="mx-auto h-3 w-24 animate-pulse rounded bg-muted" />
+          <div className="mt-6 h-10 w-full animate-pulse rounded-full bg-muted" />
+        </div>
+      </div>
+    )
+  }
 
   const TABS = isAuthenticated
     ? [

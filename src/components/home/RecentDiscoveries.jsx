@@ -17,17 +17,27 @@ function getDisplayText(note) {
 export function RecentDiscoveries({ notes }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [showLogin, setShowLogin] = useState(false)
-  const [mounted, setMounted] = useState(false)
+  const [checking, setChecking] = useState(true)
 
   useEffect(() => {
-    setMounted(true)
     fetch('/api/auth/session')
       .then((res) => res.json())
       .then((data) => setIsAuthenticated(data.authenticated))
       .catch(() => setIsAuthenticated(false))
+      .finally(() => setChecking(false))
   }, [])
 
-  if (!mounted) return null
+  if (checking) {
+    return (
+      <section>
+        <div className="mx-auto w-full max-w-md space-y-3">
+          {[...Array(3)].map((_, i) => (
+            <div key={i} className="mx-auto h-4 w-3/4 animate-pulse rounded bg-muted" />
+          ))}
+        </div>
+      </section>
+    )
+  }
 
   if (!isAuthenticated) {
     return (
