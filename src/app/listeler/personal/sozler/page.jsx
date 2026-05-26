@@ -2,13 +2,10 @@ import { Container } from '@/components/Container'
 import { cookies } from 'next/headers'
 import { verifyToken } from '@/lib/auth'
 import { redirect } from 'next/navigation'
-import { KendimeNotlarContent } from '@/components/personal/KendimeNotlarContent'
+import { PersonalContent } from '@/components/personal/PersonalContent'
 import { categories } from '@/data/personal/sozler'
 
-export const metadata = {
-  title: 'Sevdiğim Sözler | Mehmet Temel',
-  description: 'İlham veren sözler ve alıntılar',
-}
+export const metadata = { title: 'Sevdiğim Sözler | Mehmet Temel' }
 
 export default async function SozlerPage() {
   const cookieStore = await cookies()
@@ -20,7 +17,7 @@ export default async function SozlerPage() {
   return (
     <Container>
       <div className="mx-auto max-w-7xl py-8 sm:py-12">
-        <KendimeNotlarContent categories={categories} title="Sevdiğim Sözler" />
+        <PersonalContent categories={categories} title="Sevdiğim Sözler" />
       </div>
     </Container>
   )

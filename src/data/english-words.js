@@ -334,6 +334,11 @@ export const englishWords = [
   { english: 'abundance', turkish: 'bolluk, bereket, çokluk', example: 'The region has an abundance of natural resources.', example_turkish: 'Bölge doğal kaynaklar bakımından zengindir.' },
   { english: 'permanently', turkish: 'kalıcı olarak, temelli', example: 'The accident left him permanently disabled.', example_turkish: 'Kaza onu kalıcı olarak engelli bıraktı.' },
   { english: 'impair', turkish: 'bozmak, zayıflatmak, zarar vermek', example: 'Lack of sleep can impair your ability to concentrate.', example_turkish: 'Uyku eksikliği konsantre olma yeteneğinizi zayıflatabilir.' },
+  { english: 'dwell', turkish: 'ikamet etmek, üzerinde durmak, takılmak', example: 'Don\'t dwell on your mistakes — learn from them and move on.', example_turkish: 'Hatalarına takılma — onlardan öğren ve devam et.' },
+  { english: 'inherit', turkish: 'miras almak, devralmak', example: 'She inherited her grandmother\'s love for cooking.', example_turkish: 'Büyükannesinin yemek pişirme sevgisini miras aldı.' },
+  { english: 'seize', turkish: 'ele geçirmek, yakalamak, fırsatı kapmak', example: 'You have to seize every opportunity that comes your way.', example_turkish: 'Önüne çıkan her fırsatı yakalamalısın.' },
+  { english: 'yearn', turkish: 'özlemek, hasret çekmek, şiddetle istemek', example: 'After years abroad, he yearned for the taste of his mother\'s cooking.', example_turkish: 'Yıllarca yurtdışında kaldıktan sonra annesinin yemeklerinin tadını özledi.' },
+  { english: 'salvation', turkish: 'kurtuluş, selamet', example: 'Education was his only salvation from poverty.', example_turkish: 'Eğitim, yoksulluktan tek kurtuluşuydu.' },
 ]
 
 /**
