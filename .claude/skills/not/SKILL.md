@@ -43,8 +43,7 @@ Notun içeriğine göre **önce dosyayı**, sonra **alt kategoriyi** belirle:
 
 ### `src/data/personal/kisisel-gelisim.js` → Kişisel Gelişim
 - **İş & Kariyer**: İş, girişimcilik, startup, kariyer, maaş, verimlilik, liderlik
-- **Mindset**: Kişisel gelişim, motivasyon, cesaret, alışkanlıklar, özgüven, iletişim becerileri, retorik
-- **Hayat Felsefesi**: Hayat dersleri, yaşam prensipleri, aile, ebeveynlik, ilişki tavsiyeleri (genel)
+- **Mindset**: Kişisel gelişim, motivasyon, cesaret, alışkanlıklar, özgüven, hayat dersleri, yaşam prensipleri, aile, ebeveynlik, retorik
 
 ### `src/data/personal/iliskiler.js` → İlişkiler
 - **Kadınlar**: Kadın-erkek ilişkileri, flört, evlilik
