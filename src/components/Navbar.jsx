@@ -28,8 +28,6 @@ const listelerItems = [
   { href: '/listeler/ingilizce', label: 'İngilizce', emoji: '🇬🇧' },
   { href: '/listeler/rusca', label: 'Rusça', emoji: '🇷🇺' },
   { href: '/kesifler/rusca-test', label: 'Rusça Test', emoji: '📝' },
-  { href: '/listeler/rastgele', label: 'Rastgele', emoji: '🎲' },
-  { href: '/listeler/personal', label: 'Personal', emoji: '🔒' },
 ]
 
 function NavLink({ href, children }) {
@@ -52,7 +50,7 @@ function DesktopNav() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavLink href="/kesifler/alintilar">Sözler</NavLink>
+          <NavLink href="/listeler/personal">Personal</NavLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
@@ -149,8 +147,8 @@ function MobileNav() {
                   <Link href="/incelemeler" onClick={closeSheet} className={mobileNavLinkClass}>
                     İncelemeler
                   </Link>
-                  <Link href="/kesifler/alintilar" onClick={closeSheet} className={mobileNavLinkClass}>
-                    Sözler
+                  <Link href="/listeler/personal" onClick={closeSheet} className={mobileNavLinkClass}>
+                    Personal
                   </Link>
                   <Link href="/iletisim" onClick={closeSheet} className={mobileNavLinkClass}>
                     İletişim
@@ -177,9 +175,6 @@ function MobileNav() {
                   </Link>
                   <Link href="/kesifler/rusca-test" onClick={closeSheet} className={mobileNavLinkClass}>
                     <span>📝</span> Rusça Test
-                  </Link>
-                  <Link href="/listeler/rastgele" onClick={closeSheet} className={mobileNavLinkClass}>
-                    <span>🎲</span> Rastgele
                   </Link>
                 </div>
               </AccordionContent>
