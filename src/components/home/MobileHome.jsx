@@ -13,18 +13,22 @@ import { getAllEnglishWords } from '@/data/english-words'
 
 function getAllPersonalItems() {
   const items = []
-  const addFlat = (data, source) => {
+  const addItems = (data, source) => {
     for (const [cat, val] of Object.entries(data)) {
       val.items.forEach((item) => {
-        items.push({ text: typeof item === 'string' ? item : item.text, source, category: cat })
+        if (typeof item === 'string') {
+          items.push({ text: item, subItems: null, source, category: cat })
+        } else {
+          items.push({ text: item.text, subItems: item.subItems, source, category: cat })
+        }
       })
     }
   }
-  addFlat(sozlerData, 'Sözler')
-  addFlat(kisiselGelisimData, 'Kişisel Gelişim')
-  addFlat(iliskilerData, 'İlişkiler')
-  addFlat(toplumData, 'Toplum')
-  addFlat(saglikData, 'Sağlık')
+  addItems(sozlerData, 'Sözler')
+  addItems(kisiselGelisimData, 'Kişisel Gelişim')
+  addItems(iliskilerData, 'İlişkiler')
+  addItems(toplumData, 'Toplum')
+  addItems(saglikData, 'Sağlık')
   return items
 }
 
@@ -160,6 +164,13 @@ export function MobileHome() {
             <p className="text-sm leading-relaxed text-foreground">
               {currentNote.text}
             </p>
+            {currentNote.subItems?.length > 0 && (
+              <ul className="mt-2 ml-4 space-y-1">
+                {currentNote.subItems.map((sub, i) => (
+                  <li key={i} className="text-xs leading-relaxed text-muted-foreground">• {sub}</li>
+                ))}
+              </ul>
+            )}
           </div>
         )}
 

@@ -15,11 +15,11 @@ function getAllPersonalItems() {
   const addItems = (data, source) => {
     for (const [cat, val] of Object.entries(data)) {
       val.items.forEach((item) => {
-        items.push({
-          text: typeof item === 'string' ? item : item.text,
-          source,
-          category: cat,
-        })
+        if (typeof item === 'string') {
+          items.push({ text: item, subItems: null, source, category: cat })
+        } else {
+          items.push({ text: item.text, subItems: item.subItems, source, category: cat })
+        }
       })
     }
   }
@@ -63,6 +63,13 @@ export default function RastgelePage() {
                 <p className="text-sm leading-relaxed text-foreground">
                   {current.text}
                 </p>
+                {current.subItems?.length > 0 && (
+                  <ul className="mt-2 ml-4 space-y-1">
+                    {current.subItems.map((sub, i) => (
+                      <li key={i} className="text-xs leading-relaxed text-muted-foreground">• {sub}</li>
+                    ))}
+                  </ul>
+                )}
               </>
             ) : (
               <div className="flex h-40 items-center justify-center">
