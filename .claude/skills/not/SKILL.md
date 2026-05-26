@@ -59,6 +59,9 @@ Notun içeriğine göre **önce dosyayı**, sonra **alt kategoriyi** belirle:
 - **Finance**: Yatırım, borsa, kripto, bütçe, tasarruf, finansal okuryazarlık, gelir-gider
 - **Ideas**: İş fikirleri, girişim fırsatları, yan gelir, niş alanlar, SaaS, ürün fikirleri
 
+### `src/data/personal/trivia.js` → Trivia
+- **Trivia**: Genel kültür bilgileri, ilginç bilgiler, fun facts, tarihsel detaylar, bilimsel merak uyandıran bilgiler (alt kategorisi yok, tek kategori)
+
 ### `src/data/personal/quotes.js` → Quotes
 - **Quotes**: Kısa, ilham verici sözler ve alıntılar (1-2 cümle, özlü)
 

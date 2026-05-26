@@ -96,6 +96,8 @@ export const categories = {
       'Bu sebeple siz siz olun özellikle önemli konularda yorgun ve açken hiçbir şey imzalamayın ve hiçbir şey hakkında kesin karar vermeyin. Önce bir güzel karnınızı doyurun, bir güzel uyuyun ondan sonra karar verin. Ya da birinden bir şey isteyecekseniz eğer karnı açsa daha iyi sonuç alınabilir.',
       'Birinin yasına tanıklık ederken "Nasıl yardımcı olabilirim?" diye sormak yerine spesifik bir yardım teklif edin (Örn: "Bugün akşam yemeğini ben getiriyorum").',
       'Depending on if you want to truly help out or just want to sound nice. If you ask someone, "do you need help" people will tend to say no thanks. But if you say something specific like "do you need help sweeping and mopping the floor" then people are more likely to say yes.',
+      'When someone is angry-- like irrationally, psychotically angry-- get them to say "yes" to anything. (E.g. Are you mad? Do you want help? Do you want me to give you space?) It engages a different part of the brain, and after that\'s engaged, you can help them with problem solving.',
+      'Mantığı beyinde prefrontal korteks denilen kısım idare eder. Bu kısım beynin en son evrimleşen kısmıdır. En son evrimleştiği için en yavaş ve verimsiz kısımdır aynı zamanda. O yüzden günlük hayatın %95\'inde mantık kullanmaz, ezbere yaşarız. Yine beyni kullanırız ama prefrontal korteks kısmını kullanmayız. Yani insan günlük hayatta çoğunlukla mantık ürünü değil yazılım ürünüdür. O sebeple günlük hayatta tartışmaya girme. Konuyu uzatma. Kısa kes, işine bak. Çünkü insan günlük hayatta sadece yazılım ürünüdür, mantık ürünü değildir.',
     ]
   },
   'Networking': {
