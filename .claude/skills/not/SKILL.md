@@ -1,76 +1,96 @@
 ---
 name: not
-description: Kısa not, alıntı veya bilgi eklemek için kullanılır. /not komutu ile tetiklenir. Notları src/data/notes.js dosyasına kategori bazlı ekler (saglik, gida, kisisel, genel).
+description: Kısa not, alıntı veya bilgi eklemek için kullanılır. /not komutu ile tetiklenir. Notları analiz edip src/data/personal/ altındaki doğru dosya ve kategoriye yerleştirir.
 ---
 
 # Not Ekle
 
-Kullanıcı kısa bir not, alıntı veya bilgi verdiğinde bu notu `src/data/notes.js` dosyasına ekler.
+Kullanıcı bir not, alıntı veya bilgi verdiğinde içeriği analiz edip `src/data/personal/` altındaki doğru JS dosyasına ve kategoriye ekler.
 
 ## Tetikleme
 
-Bu skill şu durumlarda kullanılır:
 - Kullanıcı `/not` komutu kullandığında
-- Kullanıcı kısa bir not, alıntı veya bilgi paylaştığında ve "ekle", "kaydet", "not al" gibi ifadeler kullandığında
 
-## Kategori Belirleme
+## Dosya ve Kategori Belirleme
 
-Notun içeriğine göre şu 4 kategoriden birini seç:
+Notun içeriğine göre **önce dosyayı**, sonra **alt kategoriyi** belirle:
 
-- **saglik**: Sağlık, beslenme bilimi, fitness, egzersiz, uyku, mental sağlık, wellness, vitaminler, takviyeler, bağışıklık, bağırsak sağlığı, nefes teknikleri
-- **gida**: Yemek, tarif ipuçları, mutfak teknikleri, gıda saklama, gıda kalitesi, besin değerleri, yiyecek seçimi
-- **kisisel**: Kişisel gelişim, motivasyon, ilham, hayat dersleri, başarı, ilişkiler, kariyer, verimlilik, alışkanlıklar, yatırım stratejileri, liderlik
-- **genel**: Tarih, politika, felsefe, toplum, ekonomi, teknoloji, bilim, kültür, eğitim — yukarıdaki 3 kategoriye uymayan her şey
+### `src/data/personal/saglik.js` → Sağlık
+- **Temel Sağlık**: Uyku, nefes, stres, genel sağlık prensipleri, fiziksel aktivite, egzersiz, spor
+- **Beslenme**: Yeme-içme alışkanlıkları, besin değerleri, gıda kalitesi, sebze-meyve-et-yağ bilgileri, tarım ilaçları
+- **Mutfak**: Pişirme teknikleri, gıda güvenliği, restoran tavsiyeleri
+- **Takviyeler**: Vitamin, mineral, supplement, kreatin, magnezyum, omega-3
+- **Bakım**: Cilt, saç, diş, güneş kremi, egzema
+- **Hastalıklar**: İç sağlık, hastalıklar, hastane sistemi, insülin direnci
+
+### `src/data/personal/kisisel-gelisim.js` → Kişisel Gelişim
+- **İş & Kariyer**: İş, girişimcilik, startup, kariyer, maaş, verimlilik, liderlik
+- **Mindset**: Kişisel gelişim, motivasyon, cesaret, alışkanlıklar, özgüven, iletişim becerileri, retorik
+- **Hayat Felsefesi**: Hayat dersleri, yaşam prensipleri, aile, ebeveynlik, ilişki tavsiyeleri (genel)
+
+### `src/data/personal/iliskiler.js` → İlişkiler
+- **Kadınlar**: Kadın-erkek ilişkileri, flört, evlilik
+- **İletişim**: İkna, müzakere, beden dili, konuşma teknikleri, güven oluşturma, çatışma yönetimi
+- **Networking**: Sosyal ağ kurma, ilişki yönetimi, networking stratejileri
+
+### `src/data/personal/toplum.js` → Toplum & Dünya
+- **Toplum & Dünya**: Tarih, politika, felsefe, ekonomi, toplum, medeniyet, güç dinamikleri
+
+### `src/data/personal/sozler.js` → Sevdiğim Sözler
+- **Sevdiğim Sözler**: Kısa, ilham verici sözler ve alıntılar (1-2 cümle, özlü)
+
+### `src/data/personal/ai.js` → AI
+- **AI Agents & Workflow**, **Prompting & Kullanım**, **Modeller & Teknoloji**, **Araçlar & Ürünler**, **Sektör & Trendler**
+
+## Ekleme Formatı
+
+### saglik.js için (subItems destekler):
+```js
+{ text: 'Not metni burada', subItems: [] },
+```
+İlgili kategori objesinin `items` dizisinin **sonuna** ekle.
+
+### Diğer tüm dosyalar için (flat string):
+```js
+'Not metni burada',
+```
+İlgili kategori objesinin `items` dizisinin **sonuna** ekle.
 
 ## Ekleme Adımları
 
-1. `src/data/notes.js` dosyasını oku
-2. Kategoriyi belirle
-3. İlgili kategori dizisine (saglik, gida, kisisel, genel) yeni bir obje ekle
-4. Obje formatı:
-   ```js
-   {
-     id: Date.now(),  // benzersiz timestamp
-     text: 'Not metni burada',
-     author: 'Yazar adı',  // opsiyonel, yoksa bu field'ı ekleme
-     source: 'Kaynak',      // opsiyonel, yoksa bu field'ı ekleme
-   }
-   ```
-5. Notu dizinin **sonuna** ekle
-6. Kullanıcıya kısa onay ver
+1. Hedef dosyayı oku
+2. İçerikten dosya ve alt kategori belirle
+3. İlgili kategorinin `items` dizisinin sonuna notu ekle
+4. Kullanıcıya kısa onay ver: "Eklendi: [dosya] → [kategori]"
 
 ## Metin Temizleme
 
-- `>al`, `>not` gibi prefix'leri kaldır
+- Gereksiz prefix'leri kaldır (`>not`, `/not` vb.)
 - Gereksiz boşlukları temizle
-- Tırnak işaretlerini düzelt
-- Metin olduğu gibi korunsun, yeniden yazma veya özetle
-
-## Birden Fazla Not
-
-Kullanıcı birden fazla not verirse:
-- Her notu ayrı bir obje olarak ekle
-- Her birine ayrı id ver
-- Hepsini doğru kategoriye yerleştir
+- Metin olduğu gibi korunsun, yeniden yazma veya özetleme
+- Single quote'ları escape et (`'` → `\'`)
 
 ## Yazar/Kaynak Tespiti
 
-- Metnin sonunda "- İsim" varsa → author alanına yaz
-- Bilinen kişilerden alıntıysa (Huberman, Müftüoğlu vb.) → author alanına yaz
-- Kitap/video referansı varsa → source alanına yaz
-- Belirsizse author/source ekleme
+- Metnin sonunda "- İsim" veya "(İsim)" varsa → yazarı metnin sonuna " — Yazar" olarak ekle (sozler.js için)
+- saglik.js'de author field yok, yazar bilgisini metnin içinde bırak
+
+## Kısa Söz mü Uzun Not mu?
+
+- 1-2 cümlelik, ilham verici, özlü bir söz → `sozler.js`
+- Pratik bilgi, tavsiye, detaylı açıklama → ilgili konu dosyası
+
+## Birden Fazla Not
+
+Her notu ayrı ayrı doğru dosya ve kategoriye ekle.
 
 ## Örnek
 
-Kullanıcı: "Sabah güneşine 10 dk çıkmak sirkadyen ritmi düzenler - Huberman"
+Kullanıcı: `/not Sabah güneşine 10 dk çıkmak sirkadyen ritmi düzenler - Huberman`
 
-→ saglik dizisine ekle:
+→ `src/data/personal/saglik.js` → **Temel Sağlık** kategorisine ekle:
 ```js
-{
-  id: 1715600000000,
-  text: 'Sabah güneşine 10 dk çıkmak sirkadyen ritmi düzenler.',
-  author: 'Huberman',
-}
+{ text: 'Sabah güneşine 10 dk çıkmak sirkadyen ritmi düzenler. (Huberman)', subItems: [] },
 ```
 
-Yanıt: "Eklendi: saglik kategorisine 1 not"
+Yanıt: "Eklendi: saglik.js → Temel Sağlık"
