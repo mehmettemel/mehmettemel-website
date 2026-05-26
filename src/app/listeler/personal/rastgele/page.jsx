@@ -28,9 +28,17 @@ function formatItemDisplay(item) {
     case 'personal_note':
       // Select random item from the items array
       const randomItem = item.items[Math.floor(Math.random() * item.items.length)]
+      const sourceNames = {
+        'kisisel-gelisim': 'Kişisel Gelişim',
+        'iliskiler': 'İlişkiler',
+        'saglik': 'Sağlık',
+        'toplum': 'Toplum & Dünya',
+        'sozler': 'Sevdiğim Sözler',
+        'ai': 'AI',
+      }
       return {
         title: item.category,
-        subtitle: item.source === 'kendime-notlar' ? 'Kendime Notlar' : 'Conversation Skills',
+        subtitle: sourceNames[item.source] || item.source,
         content: randomItem
       }
 

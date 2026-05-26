@@ -7,6 +7,8 @@ import { cookies } from 'next/headers'
 import { verifyToken } from '@/lib/auth'
 import { categories as kisiselGelisimCategories } from '@/data/personal/kisisel-gelisim'
 import { categories as iliskilerCategories } from '@/data/personal/iliskiler'
+import { categories as toplumCategories } from '@/data/personal/toplum'
+import { categories as sozlerCategories } from '@/data/personal/sozler'
 
 function parseIncelemeNotes(content) {
   const sections = content.split(/^## /m).filter(Boolean)
@@ -82,6 +84,8 @@ export async function GET() {
     const personalData = [
       { source: 'kisisel-gelisim', data: kisiselGelisimCategories },
       { source: 'iliskiler', data: iliskilerCategories },
+      { source: 'toplum', data: toplumCategories },
+      { source: 'sozler', data: sozlerCategories },
     ]
 
     for (const { source, data } of personalData) {

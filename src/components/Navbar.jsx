@@ -52,7 +52,7 @@ function DesktopNav() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavLink href="/kesifler/alintilar">Alıntılar</NavLink>
+          <NavLink href="/kesifler/alintilar">Sözler</NavLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
@@ -150,7 +150,7 @@ function MobileNav() {
                     İncelemeler
                   </Link>
                   <Link href="/kesifler/alintilar" onClick={closeSheet} className={mobileNavLinkClass}>
-                    Alıntılar
+                    Sözler
                   </Link>
                   <Link href="/iletisim" onClick={closeSheet} className={mobileNavLinkClass}>
                     İletişim

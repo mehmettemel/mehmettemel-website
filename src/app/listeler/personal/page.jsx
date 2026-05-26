@@ -6,41 +6,38 @@ import Link from 'next/link'
 
 export const metadata = {
   title: 'Personal',
-  description: 'Kişisel sayfalarım',
+  description: 'Kişisel notlarım ve koleksiyonlarım',
 }
 
 const personalCategories = [
-  {
-    title: 'Kendime Notlar',
-    href: '/listeler/personal/kendime-notlar',
-  },
-  {
-    title: 'Conversation Skills',
-    href: '/listeler/personal/conversation-skills',
-  },
   {
     title: 'Sağlık',
     href: '/listeler/personal/saglik',
   },
   {
-    title: 'Kadınlar',
-    href: '/listeler/personal/kadinlar',
+    title: 'Kişisel Gelişim',
+    href: '/listeler/personal/kisisel-gelisim',
+  },
+  {
+    title: 'İlişkiler',
+    href: '/listeler/personal/iliskiler',
+  },
+  {
+    title: 'Toplum & Dünya',
+    href: '/listeler/personal/toplum',
+  },
+  {
+    title: 'Sevdiğim Sözler',
+    href: '/listeler/personal/sozler',
   },
 ]
 
 export default async function PersonalPage() {
-  // Check authentication
   const cookieStore = await cookies()
   const sessionCookie = cookieStore.get('session')
-
-  if (!sessionCookie) {
-    redirect('/?login=required')
-  }
-
+  if (!sessionCookie) redirect('/?login=required')
   const payload = await verifyToken(sessionCookie.value)
-  if (!payload) {
-    redirect('/?login=expired')
-  }
+  if (!payload) redirect('/?login=expired')
 
   return (
     <Container>
