@@ -112,7 +112,7 @@ export function MobileHome() {
       ]
 
   return (
-    <div className="flex min-h-[calc(100vh-4rem)] flex-col px-2 pt-4 md:hidden">
+    <div className="flex min-h-[calc(100vh-4rem)] flex-col px-2 pb-20 pt-4 md:hidden">
       {/* Sticky top */}
       <div className="sticky top-0 z-40 bg-background pb-3">
         <div className="mb-3 text-center">
@@ -147,14 +147,6 @@ export function MobileHome() {
           )}
         </div>
 
-        {/* Random button */}
-        <button
-          onClick={handleRandom}
-          disabled={loading}
-          className="w-full rounded-full bg-primary py-3 text-sm font-medium text-primary-foreground shadow-md transition-all active:scale-95 disabled:opacity-50"
-        >
-          {loading ? '...' : 'Rastgele'}
-        </button>
       </div>
 
       {/* Content */}
@@ -254,6 +246,17 @@ export function MobileHome() {
             </p>
           </div>
         )}
+      </div>
+
+      {/* Fixed bottom random button */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-background/80 px-4 pb-5 pt-3 backdrop-blur-md md:hidden">
+        <button
+          onClick={handleRandom}
+          disabled={loading}
+          className="w-full rounded-full bg-primary py-3 text-sm font-medium text-primary-foreground shadow-md transition-all active:scale-95 disabled:opacity-50"
+        >
+          {loading ? '...' : 'Rastgele'}
+        </button>
       </div>
 
       <LoginDialog open={showLogin} onOpenChange={setShowLogin} />
