@@ -3,7 +3,7 @@ import { cookies } from 'next/headers'
 import { verifyToken } from '@/lib/auth'
 import { redirect } from 'next/navigation'
 import { KendimeNotlarContent } from '@/components/personal/KendimeNotlarContent'
-import { categories } from '@/data/personal/kadinlar'
+import { categories } from '@/data/personal/iliskiler'
 
 export const metadata = {
   title: 'Kadınlar',
@@ -33,7 +33,7 @@ export default async function KadinlarPage() {
             </p>
           </div>
         ) : (
-          <KendimeNotlarContent categories={categories} title="Kadınlar" />
+          <KendimeNotlarContent categories={categories} title="İlişkiler" />
         )}
       </div>
     </Container>

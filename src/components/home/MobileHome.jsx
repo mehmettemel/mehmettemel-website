@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { getAllNotes, noteCategories } from '@/data/notes'
+import { categories as sozlerData } from '@/data/personal/sozler'
 import { getAllEnglishWords } from '@/data/english-words'
 
 const TABS = [
@@ -18,12 +18,12 @@ export function MobileHome() {
   const [englishWord, setEnglishWord] = useState(null)
   const [loading, setLoading] = useState(false)
 
-  const allNotes = useMemo(() => getAllNotes(), [])
+  const allQuotes = useMemo(() => sozlerData['Sevdiğim Sözler'].items, [])
   const allEnglishWords = useMemo(() => getAllEnglishWords(), [])
 
   const getRandomNote = () => {
-    const randomIndex = Math.floor(Math.random() * allNotes.length)
-    setCurrentNote(allNotes[randomIndex])
+    const randomIndex = Math.floor(Math.random() * allQuotes.length)
+    setCurrentNote(allQuotes[randomIndex])
   }
 
   const getRandomInceleme = async () => {
@@ -52,11 +52,6 @@ export function MobileHome() {
     else if (activeTab === 'ingilizce') getRandomEnglish()
   }
 
-  const getCategoryName = (id) => {
-    const cat = noteCategories.find((c) => c.id === id)
-    return cat ? `${cat.icon} ${cat.name}` : id
-  }
-
   return (
     <div className="flex min-h-[calc(100vh-4rem)] flex-col px-2 pt-4 md:hidden">
       {/* Sticky top: hero + tabs + random button */}
@@ -71,18 +66,18 @@ export function MobileHome() {
 
         {/* Tabs - colored circles */}
         <div className="mb-3 flex items-center justify-center gap-6">
-        {TABS.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            className={`h-5 w-5 rounded-full transition-all ${tab.color} ${
-              activeTab === tab.id
-                ? 'scale-110 ring-2 ring-offset-3 ring-offset-background ring-current'
-                : 'opacity-35'
-            }`}
-            aria-label={tab.id}
-          />
-        ))}
+          {TABS.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`h-5 w-5 rounded-full transition-all ${tab.color} ${
+                activeTab === tab.id
+                  ? 'scale-110 ring-2 ring-offset-3 ring-offset-background ring-current'
+                  : 'opacity-35'
+              }`}
+              aria-label={tab.id}
+            />
+          ))}
         </div>
 
         {/* Random button */}
@@ -100,17 +95,9 @@ export function MobileHome() {
         {/* Alintilar */}
         {activeTab === 'alintilar' && currentNote && (
           <div className="rounded-lg border border-border bg-card p-5">
-            <div className="mb-2 text-xs text-muted-foreground">
-              {getCategoryName(currentNote.category)}
-            </div>
             <p className="text-sm leading-relaxed text-foreground">
-              {currentNote.text}
+              {currentNote}
             </p>
-            {currentNote.author && (
-              <p className="mt-3 text-xs text-muted-foreground">
-                — {currentNote.author}
-              </p>
-            )}
           </div>
         )}
 
@@ -191,7 +178,6 @@ export function MobileHome() {
           </div>
         )}
       </div>
-
     </div>
   )
 }

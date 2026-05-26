@@ -3,7 +3,7 @@ import { cookies } from 'next/headers'
 import { verifyToken } from '@/lib/auth'
 import { redirect } from 'next/navigation'
 import { KendimeNotlarContent } from '@/components/personal/KendimeNotlarContent'
-import { categories } from '@/data/personal/conversation-skills'
+import { categories } from '@/data/personal/iliskiler'
 
 export const metadata = {
   title: 'Conversation Skills',

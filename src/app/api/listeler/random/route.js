@@ -5,11 +5,10 @@ import { join } from 'path'
 import matter from 'gray-matter'
 import { cookies } from 'next/headers'
 import { verifyToken } from '@/lib/auth'
-import { categories as kendimeNotlarCategories } from '@/data/personal/kendime-notlar'
-import { categories as conversationCategories } from '@/data/personal/conversation-skills'
+import { categories as kisiselGelisimCategories } from '@/data/personal/kisisel-gelisim'
+import { categories as iliskilerCategories } from '@/data/personal/iliskiler'
 
 function parseIncelemeNotes(content) {
-  // Split by H2 headers (##)
   const sections = content.split(/^## /m).filter(Boolean)
   const notes = []
 
@@ -17,17 +16,14 @@ function parseIncelemeNotes(content) {
     const lines = section.trim().split('\n')
     const noteName = lines[0].trim()
 
-    // Get all content under this header until next header
     let noteContent = []
     for (let i = 1; i < lines.length; i++) {
       const line = lines[i].trim()
-      // Skip H3 headers (###) but include everything else
       if (line && !line.startsWith('###')) {
         noteContent.push(line)
       }
     }
 
-    // Join content and filter out empty ones
     const content = noteContent.join(' ').trim()
     if (content && content !== '---') {
       notes.push({
@@ -42,42 +38,30 @@ function parseIncelemeNotes(content) {
 
 export async function GET() {
   try {
-    // Check authentication
     const cookieStore = await cookies()
     const sessionCookie = cookieStore.get('session')
 
     if (!sessionCookie) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      )
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
     const payload = await verifyToken(sessionCookie.value)
     if (!payload) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      )
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    // Collect all items
     const allItems = []
 
-    // 1. Get all posts from incelemeler (all content/ files) and parse notes
+    // 1. Get all posts from incelemeler
     const allPosts = getAllPosts()
 
     allPosts.forEach(post => {
       try {
-        // Read markdown file for this post
         const contentPath = join(process.cwd(), 'content', `${post.slug}.md`)
         const fileContent = readFileSync(contentPath, 'utf-8')
         const { content } = matter(fileContent)
-
-        // Parse notes from content
         const notes = parseIncelemeNotes(content)
 
-        // Add each note as a separate item
         notes.forEach(note => {
           allItems.push({
             type: 'inceleme_note',
@@ -96,8 +80,8 @@ export async function GET() {
 
     // 2. Get personal notes from JS data
     const personalData = [
-      { source: 'kendime-notlar', data: kendimeNotlarCategories },
-      { source: 'conversation-skills', data: conversationCategories },
+      { source: 'kisisel-gelisim', data: kisiselGelisimCategories },
+      { source: 'iliskiler', data: iliskilerCategories },
     ]
 
     for (const { source, data } of personalData) {
@@ -113,12 +97,8 @@ export async function GET() {
       }
     }
 
-    // Select random item
     if (allItems.length === 0) {
-      return NextResponse.json(
-        { error: 'No items found' },
-        { status: 404 }
-      )
+      return NextResponse.json({ error: 'No items found' }, { status: 404 })
     }
 
     const randomIndex = Math.floor(Math.random() * allItems.length)
@@ -131,9 +111,6 @@ export async function GET() {
 
   } catch (error) {
     console.error('Error in random API:', error)
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

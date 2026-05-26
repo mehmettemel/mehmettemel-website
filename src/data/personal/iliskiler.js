@@ -1,8 +1,22 @@
-export const title = 'Conversation Skills'
+export const title = 'İlişkiler'
 
 export const categories = {
-  'İlk İzlenim & Tanışma': {
-    label: 'İlk İzlenim & Tanışma',
+  'Kadınlar': {
+    label: 'Kadınlar',
+    items: [
+      'Having a girlfriend who doesn\'t post herself on social media is an underrated blessing.',
+      'Kadın, "natural, formed, precise" (doğal, oluşmuş/şekillenmiş, kesin/net) olan her şeyi daha çabuk takdir eder. En çok tiksindiği şey: Erkeğin kararsızlığı (indecision), korkusu, şüphesi, tereddütü, çekingenliği (hesitation, reserve). Kadınlar, erkeğin bir şeyi (zevk, zenginlik ya da ... kendisi/kadını) almasını ya da nasıl alacağını bilmesini ister. En yoksul, en sefil kadında bile ortaçağdaki kadınların (middle ages women) şövalyelere kendilerini "ödül" olarak sunma duygusunun bir izi vardır. Yani: Kadın, en güçlü, en yiğit, en seçkin erkeğe kendini teslim etme içgüdüsü taşır – bu, tarihsel olarak "en iyiye layık olma" hissi.',
+      'Places to find a quality girl: The gym at 9 am on a Saturday or Sunday morning / Airports (conditional, slept on) / Whole foods, Farmers markets, Trader Joe\'s, Erewhon / Nicest coffee shops/Cafes in your city / The park/beach on a sunny day / Book stores (not a big chain)',
+      'Tip for men. Approach with a genuine question not a compliment.',
+      'I\'ve dated many women in my life, and the best women, the women that I\'ve had the longest relationships with, weren\'t the hottest or smartest, but the most inoffensive. They were easy to get along with, didn\'t create problems, laughed easily, and smiled at whatever I said.',
+      'Kadınlar uzun vadeli ilişkide en çok duygusal zekâyı arar (boy, para ya da karizmadan daha önemli). Duygusal zekâ; gerçeği söylerken empati göstermek, karşı tarafı incitmemek ve iletişimde saygılı olmaktır. "Ben sadece dürüst oluyorum" diyen erkek, genellikle kibirli ve empati yoksunu görünür. Bu cümle, kadının duygusal olarak uzaklaşmasına ve ilgisinin tamamen bitmesine neden olur. Gerçek dürüstlük ise uyarı etiketi gerektirmez. Duygusal zekâsı yüksek erkekler şöyle der: "Bakış açımı paylaşabilir miyim?" / "Bana kalırsa böyle, yanlış mı anladım?" / "Dürüst olmak istiyorum ama bunu nasıl hissettireceğimi de önemsiyorum."',
+      'Erkek acizleştikçe kadın zalimleşir.',
+      'Our biggest downfall as men, is that after you finally win, we sit down to eat with women who never starved with us.',
+      'A very underrated life decision is marrying someone who wants a simple life.',
+    ]
+  },
+  'İletişim': {
+    label: 'İletişim',
     items: [
       'Genuine compliments can also serve as effective conversation starters. Whether it\'s about a choice of accessory, a book they\'re reading, or their pet, it shows you\'re observant and appreciative of them.',
       'Daima kıyafetlerine aksesuarlerına karakter özelliklerine iltifat yaparak konuşmaya başla fiziksel özelliklerine iltifat yaparak başlama',
@@ -10,11 +24,6 @@ export const categories = {
       'Nerelisin diye sormak güzel bir başlangıç. Nereli olduğunu öğrendikten sonra o bölge ile ilgili rastgele bir bilgi verip konuya girebilirsin.',
       'Çevrenize bakarak kullanabileceğiniz şeyler bulun. Karşıdaki kişiyle aranızda belirli bir mesafe uzaklık olmasına dikkat et ve karşıdaki kişiyle küçükte olsa bir göz teması kurduysan iletişime geçmeye çalış. Laptopuyla oynayan veya kitap okuyan biriyle iletişime geçmek mantıklı değil.',
       'Birisiyle ilk görüştüğünüzde övgüyle başlayın. Mesela dişçiye gittiğinizde bir şeyini övün önce.',
-    ]
-  },
-  'Dinleme & Anlama': {
-    label: 'Dinleme & Anlama',
-    items: [
       'Küçük Tazminat Davaları Arabulucusu olarak çok sayıda anlaşma gördüm. Rolümün insanların birbirlerini etkili bir şekilde dinlemelerine yardımcı olmak olduğunu fark ettim. İnsanlar anlaşıldıklarını algıladıklarında, anlaşmazlık hızla çözülüyor.',
       '"Bir adamın kalbini kazanmak istiyorsanız, sizi yalanlamasına izin verin." Bunu yapmak için herhangi bir konuda hedef kişiyle biraz sertçe fikir ayrılığı yaşarsınız ve ardından yavaş yavaş onun bakış açısına gelirsiniz. İnsanlardan tavsiye isteyerek de aynı etkiyi yaratmış olursunuz.',
       'İnsanları konuşarak değil, konuşturarak etkilersiniz',
@@ -24,21 +33,11 @@ export const categories = {
       '**Varsayım Öldürücü Sorular**: "Zihnimde yanlış canlandırmamam için soruyorum, şunu mu demek istedin?" Yanlış anlaşılmaları en başta budar.',
       'İnsanlar genellikle yeterince soru sormaz. Soru sormak, özellikle takip soruları (follow-up questions) sormak, karşı tarafa ilgi duyduğunuzu gösterir ve sevilebilirliği artırır. "Boomer Asking" hatasından (bir soru sorup cevabı dinlemeden konuyu hemen kendine çevirmek) kaçınılmalıdır.',
       '**Ping Pong Method**: Ping pong method ile karşıdaki kişiye onu dinlediğimizi hissettirmeliyiz. Karşıdakinin çok keyif aldığı bir konuyu bulup onun üzerine gitmeliyiz. Örneğin karşıdaki kişiye ne iş yaptığını sorduk, "mamakta barmenlik yapıyorum" dedi. Bir sonraki sorumuz "güzel ben de garsonum, hayvanları sever misin?" değil, "vay canına mamakta barmenlik yapmak zor olmalı, hiç garip bir olaya karıştın mı?" olmalı.',
-    ]
-  },
-  'Güven Oluşturma': {
-    label: 'Güven Oluşturma',
-    items: [
       'Karşınızdaki kişide hemen ve ani şekilde güven oluşturmak ve kalkanlarını indirmesini sağlamak istiyorsanız işte size püf noktası: yeni tanıştığınız ve kalkanlarını indirtmek istediğiniz kişiyle ufak bir sırrınızı paylaşın (gerçek olsun çünkü yalanın anlaşılır ve ters teper)',
       'Güven duygusu oluşturmak istediğiniz kişiye hemencik eliyle kavrayabileceği bir bardakta sıcak bir içecek ikram edin. Kulplu bardak olmaz, bardağı tutup sıcaklığı hissetmesi lazım. Bardak elini ısıttıkça size olan güven duygusu artacaktır.',
       'İlk çağlardan beri yemeğimizi en güvende hissettiğimiz yerde yeriz. İşte beynimizin bu antik dönemlerden edindiği binlerce yıllık tecrübe sayesinde ağzımıza bir şeyler attığımız zaman sakinleşmeye başlarız çünkü beyin "güvendeyim" durumuna girer. Bu yüzden iş ile ilgili konular yemekte konuşulabilir veya önemli görüşme öncesi sakız çiğnenebilir.',
       'Siz de biriyle daha yakın olmak istiyorsanız, onunla paylaştığınız ortak değerleriniz üzerine düşünün ve bunlara vurgu yapın.',
       'Ne zaman yeni bir ekip üyesiyle bağlantı kurmam gerekse, ortak hikayeler bulmak için bir toplantı planlarım. Çocukluk hikayesi paylaşabilmek için önden güzel bir çocukluk geçirmişsin gibi duruyorsun diyerek söze girilebilir.',
-    ]
-  },
-  'Övgü & Takdir': {
-    label: 'Övgü & Takdir',
-    items: [
       'İnsan doğasının en derin ilkesi takdir edilme arzusudur.',
       'İnsanları yetenekleri yerine çabaları için övmek daima daha iyi sonuç verir. Onları yetenekleri için övdüğünüzde, sanki doğal bir yetenekle doğdukları için şanslılarmış gibi hafif bir küçümseme ima edilir. İnsanlar iyi talihe çok çalışarak ulaştıklarını hissetmeyi sevdiğinden, övgüleriniz bu noktayı hedef almalıdır.',
       'İnsanların kendilerine aşık olduğunu ve dünyada duymaktan hoşlandıkları en güzel şeyin kendi kutsal isimleri olduğunu bilin. Bu sebeple mümkün olduğunca insanlara isimleriyle hitap edin ve sakın ha sakın unutup karıştırmayın. İsmi unutmanız karşıdaki insanda "bana değer vermiyor" hissi üretir bu da düşmanlığa kolayca dönüşebilir.',
@@ -46,11 +45,6 @@ export const categories = {
       'Karşı tarafı haklı bul. Sizin yerinizde olsam ben de aynı şeyi hissederdim demek karşı tarafı çok etkileyebilecek bir söz.',
       'Bir arkadaşınız yeni öğrendiği bir bilgiyi veya belli bir çalışmadan sonra ulaştığı sonucu size aktardığı zaman bu konuyu önceden bilmenize rağmen "aa evet biliyorum" şeklinde bilmiş bilmiş cevap vermek yerine "aa evet haklısın" şeklinde cevap verin. Her şeyi biliyorum diyenler pek sevilmez.',
       'Biri beni dövdüğü zaman, ona karşı kendimi kolaylıkla savunabilirim; ancak, biri beni övdüğü zaman, ona karşı tamamen savunmasızım.',
-    ]
-  },
-  'Çatışma Yönetimi': {
-    label: 'Çatışma Yönetimi',
-    items: [
       '"If you\'re nice to someone it\'s amazing what they\'ll do for you" -Chris Voss. Applies both ways. If you\'re rude, belittling and hostile, then it will often result in that person turning against the very point you were trying to make.',
       'Biri size yükselip bağırmaya başladığı zaman içgüdüsel olarak siz de bağırmak istersiniz. Eğer böyle bir durumda sakin kalıp, alçak sesle konuşursanız karşıdaki kişi meydanı boş bulup yükselmeye hunharca devam edecektir. Ancak bağırma desibeli yükseldikçe ve karşıdan karşılık gelmeyince suçluluk duygusu ve kontrolü kaybetmişlik hissi yaşayacaktır bu da onu alçalmaya zorlayacaktır.',
       'Bir anlaşmazlıkta ilk tepki "Sana katılmıyorum" olmamalıdır. Bu karşı tarafı savunmaya geçirir. Bunun yerine "Duygusal Doğrulama" (Validation) yapılmalıdır: "Böyle hissetmen mantıklı..." diyerek başlamak, sonra farklı görüşü sunmak gerekir. "Ama" kelimesini kullanmaktan kaçınılmalı (bunun yerine "ve" kullanılmalı).',
@@ -59,11 +53,6 @@ export const categories = {
       'When someone is angry-- like irrationally, psychotically angry-- get them to say "yes" to anything. (E.g. Are you mad? Do you want help? Do you want me to give you space?) It engages a different part of the brain, and after that\'s engaged, you can help them with problem solving.',
       'Herhangi bir (şiddet içermeyen) çatışmada, sorunu düşman olarak gör. Çatışmadaki diğer insanlar, bu düşmanı yok etmek için en büyük müttefiklerin. Bu ifade, bir çatışma durumunda odaklanılması gereken şeyin kişiler değil, sorun olduğunu vurguluyor.',
       'When someone never apologizes even for small things. It seems minor at first but over time it shows they might not take accountability or be open to real communication.',
-    ]
-  },
-  'Etki & İkna': {
-    label: 'Etki & İkna',
-    items: [
       'Bir damla bal bir galon zehirden daha çok sinek toplar. İnsanlarla konuşurken sürekli evet dedirtin, fikir birliğinde olun.',
       'Birisinden bir şeyler isteyeceğiniz zaman mutlaka "yardımına ihtiyacım var" cümlesini kurun. Çünkü birilerinin kendilerinden yardım istemesi insanların hem hoşlarına gider hem de istediğinizi vermezlerse yaşayacakları suçluluk duygusundan kurtulmak isterler. Daha da ilginci insanlar yardım ettikleri diğer insanlara sempati duyarlar.',
       'Kendi tarafınıza çekmek için insanlara armağanlar ya da ödüller verirken, daima küçüklerini seçmek daha iyi olur. Küçük armağanların daha güçlü bir etkisi vardır. Zamana yayılan küçük ödüller, daha gösterişli olanlara oranla insanları size daha fazla bağlayacaktır.',
@@ -81,11 +70,6 @@ export const categories = {
       '**Atıf Yöntemi - Konsensüs Silahı**: Benzer bir durumla karşılaşan çoğu kişi benzer davranışı gösteriyorsa, davranışın sebebi olarak dışsal atıf aranır. Örnek: "Enflasyon yükseldi, ama dünya genelinde birçok ülkede son yirmi yılın en yüksek enflasyon oranları var." (sorun küresel, devlet yönetiminin hatası yok)',
       '**Atıf Yöntemi - Tutarlılık Silahı**: Atıfta bulunulan davranış, benzer konulardaki davranışları ile tutarlı mı? Tutarlı ise içsel atıf yapılır, tutarsızsa dışsal atıf. Örnek: Sabıka kaydı olan biri, hırsızlık yapılan bölgede görülmüşse suçlu olma ihtimali daha yüksek görülür.',
       '**Atıf Yöntemi - Para İsteme Örneği**: YANLIŞ: "Baba bin lira gönderir misin?" (Baba: "Bu çocuk çok savurgan"). DOĞRU: "Baba harcamalarıma çok dikkat ederim, hele son zamanlarda çok daha fazla. Ülke şartları malum. Ama bu ay çok ilginç bir şey oldu, param bitti. (Tutarlılık) Neden olduğunu anlamadım. Ev arkadaşımdan borç istedim, onun da hiç parası kalmamış (Konsensüs). Ülkeyi ne hale getirdiler baba."',
-    ]
-  },
-  'Konuşma Teknikleri': {
-    label: 'Konuşma Teknikleri',
-    items: [
       'Sarkazm (İğneleme): Kelime anlamı Yunanca "etini koparmak"tan gelir. Netlik ve dürüstlük gerektiren durumları mizahla örtbas etmektir.',
       '"Sanırım," "bence" gibi ifadelerden kaçının. Bunlar, karşı tarafta kendinizden emin olmadığınızın algısını uyandıracağı için etkinizi azaltacaktır.',
       '"Göstermeye çalışacağım," "Bahsetmeye çalışacağım" cümlelerini kullanmayın. Bu cümleler de yine size olan güveni azaltacaktır.',
@@ -99,18 +83,8 @@ export const categories = {
       '**Ne Değilse O\'nu Söyleme, Ne İse O\'nu Söyle**: Negatif formlardan kaçın. Okuyucu/dinleyici neyin olmadığını değil, neyin olduğunu bilmek ister. "Geç kalmadı" deme, "Zamanında geldi" de.',
       '**Yes but vs Yes and**: "Yes but" karşıdakinin düşüncelerini reddeder, "Yes and" ise onların düşünceleri üzerine inşa eder. Daima "yes and" kullanın.',
       '**FORD Method**: 1) Family (Aile) - Aile ile ilgili konular aç. Direkt açmak yerine konuyu oraya getir. "Şuradaki adam erkek kardeşime çok benziyor, enerjik biri. Senin böyle bir kardeşin falan var mı?" 2) Occupation (Meslek) - Karşıdaki kişiye işini sorduktan sonra mesela öğretmenim dedi "ben de hep öğretmen olmak isterdim" gibisinden konuyu derinleştirebilirsin. Occupation konuşulacak ilk konulardan olabilir çünkü karşı taraf kendini rahat hisseder. 3) Recreation (Hobi) - Karşıdaki kişiye hobisini sorduktan sonra o hobiyle ilgili yorumunu katıp neden bu hobiyi yaptığını sorabilirsin. 4) Dreams (Hayaller) - Karşıdaki kişiye hayal kurabileceği konularda soru sorabilirsin.',
-    ]
-  },
-  'Beden Dili': {
-    label: 'Beden Dili',
-    items: [
       'Bir odaya oraya daha önce gelmişsiniz gibi girin. Nesnelere dokunmak ve alanı sahiplenmek özgüven sinyali verir.',
       'Göz temasını kesmek feminen bir davranıştır. Ondan gözlerini ayırma ve domine edip baskınlık kurmalısın ara sıra hafif gülümsemeler yapmalısın. Bakışlarını bir kişi üzerinde uzun tutmak günümüzde herkesin gözünü kaçırdığı toplumda seni öne çıkaracaktır. O gözlerini kaçırana kadar gözlerini üzerinde tut.',
-    ]
-  },
-  'Sosyal İlişkiler': {
-    label: 'Sosyal İlişkiler',
-    items: [
       'Genel olarak da her kim olursa olsun insanların arkasından sadece güzel şeyler söylemeyi kendinize hayat düsturu olarak edinin.',
       'Tamamen hatasız ve hiç hatasını göstermeyen insanlar sempatik bulunmaz. Çünkü insan dediğimiz şey hata da yapar, saçmalık da. Eğer son derece hatasız ve mükemmel görünüyorsanız başkaları sizinle duygusal bağ kuramazlar.',
       'Idk if this qualifies, but 100% the easiest way to improve your relationship with anyone (spouse, friend, family) is an unexpected gift at an unexpected time.',
@@ -118,15 +92,19 @@ export const categories = {
       'A great way to understand yourself is to seriously reflect on everything you find irritating in others.',
       'Build up people who are part of the same social circle but aren\'t currently present. If you tell your group, "man, I can\'t believe how good John is getting at guitar" when John isn\'t there, you\'re planting seeds of trust in the others in your circle.',
       'İş konuşması bittikten sonra karşınızdaki kişiye kişisel bir şeyler sormak. Örneğin, "Nasıldı yolculuğun?" sorusunu iş konuşmasının başına değil, sonuna koymak. İş bittikten sonra karşınızdakine kişisel bir şey sormak, artık sosyal bir zorunluluk olmadığı halde çaba gösterdiğinizi gösterir.',
-    ]
-  },
-  'Özel Durumlar & Hatırlatmalar': {
-    label: 'Özel Durumlar & Hatırlatmalar',
-    items: [
       'Sizi başkalarından üstün kılan niteliklerinizi sergileyerek hayranlık uyandırdığınıza inanacak kadar aptal olmayın. Başkalarının aşağı konumlarının farkına varmalarını sağlayarak, yalnızca mutsuz bir hayranlık ya da kıskançlık uyandırmış olursunuz. -Robert Greene',
       'Bu sebeple siz siz olun özellikle önemli konularda yorgun ve açken hiçbir şey imzalamayın ve hiçbir şey hakkında kesin karar vermeyin. Önce bir güzel karnınızı doyurun, bir güzel uyuyun ondan sonra karar verin. Ya da birinden bir şey isteyecekseniz eğer karnı açsa daha iyi sonuç alınabilir.',
       'Birinin yasına tanıklık ederken "Nasıl yardımcı olabilirim?" diye sormak yerine spesifik bir yardım teklif edin (Örn: "Bugün akşam yemeğini ben getiriyorum").',
       'Depending on if you want to truly help out or just want to sound nice. If you ask someone, "do you need help" people will tend to say no thanks. But if you say something specific like "do you need help sweeping and mopping the floor" then people are more likely to say yes.',
+    ]
+  },
+  'Networking': {
+    label: 'Networking',
+    items: [
+      'Çoğu kişi ilişkilerin "tükenebilir" olduğunu sanır (birinden iyilik istersen kredin biter sanırlar). Ferrazzi ise tam tersini söyler: İlişkiler kas gibidir; ne kadar çok çalıştırırsan o kadar güçlenir ve büyür.\n\nSadece yakın arkadaşların sana yeni bilgi getiremez çünkü onlar da senin bildiklerini biliyor. Sana asıl fırsatları "zayıf bağlar" yani çok sık görüşmediğin ama farklı dünyalardan olan insanlar (fringe) getirir.\n\nSosyal medyayı sadece ne yediğini paylaşmak için kullanma. Alanında bir "uzman" gibi içerik üret. Eğer içerik üretirsen, insanlar seni bulmaya başlar; sen onları kovalamazsın.\n\nİnsanları doğum günlerinde değil, "aklıma geldin" diyerek sebepsizce ara/yaz. Ama en etkili pinging doğum günleridir; çünkü herkes unutulduğunu sandığı o gün hatırlanmak ister.\n\nBirisi bir probleminden mi bahsetti? Hemen rehberini aç ve o problemi çözebilecek diğer arkadaşını ara. Onları tanıştır ve aradan çekil.\n\nBir insanın kalbine girmek istiyorsan bu üçünden birine dokun. Çocuğuna staj ayarlamak veya bir sağlık sorunu için doktor önermek, ömür boyu sürecek bir sadakat yaratır.',
+      'Depending on if you want to truly help out or just want to sound nice. If you ask someone, "do you need help" people will tend to say no thanks. But if you say something specific like "do you need help sweeping and mopping the floor" then people are more likely to say yes.',
+      'Often with interpersonal relationships, reality doesn\'t matter. Perception matters. And you can change perception without changing reality. Example: A boss got feedback that she didn\'t foster collaboration well. Her mentor advised her to use the word "collaborate" every chance she gets — work it into every email and meeting. Don\'t say "work together", say "collaborate". When there\'s a problem, talk about it as a chance for collaborative problem solving. Her next review was people glowing about how collaborative she was. She never changed any behavior. Just the words used.',
+      'Güçlü insanların en büyük eksiği "Zaman"dır; onlara zaman kazandıracak tekliflerle gidin.',
     ]
   },
 }

@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { Shuffle, Grid3x3 } from 'lucide-react'
-import { noteCategories as quoteCategories } from '../../data/notes'
 
 const ITEMS_PER_PAGE = 10
 
@@ -10,32 +9,23 @@ export function QuotesContent({ quotes }) {
   const [showRandom, setShowRandom] = useState(true)
   const [randomQuote, setRandomQuote] = useState(null)
   const [isAnimating, setIsAnimating] = useState(false)
-  const [selectedCategory, setSelectedCategory] = useState('all')
   const [currentPage, setCurrentPage] = useState(1)
 
-  // Filter quotes by category
-  const filteredQuotes = selectedCategory === 'all'
-    ? quotes
-    : quotes.filter(q => q.category === selectedCategory)
-
-  // Pagination
-  const totalPages = Math.ceil(filteredQuotes.length / ITEMS_PER_PAGE)
+  const totalPages = Math.ceil(quotes.length / ITEMS_PER_PAGE)
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
-  const paginatedQuotes = filteredQuotes.slice(startIndex, startIndex + ITEMS_PER_PAGE)
+  const paginatedQuotes = quotes.slice(startIndex, startIndex + ITEMS_PER_PAGE)
 
-  // Set initial random quote on mount and when category changes
   useEffect(() => {
-    if (filteredQuotes.length > 0) {
-      setRandomQuote(filteredQuotes[Math.floor(Math.random() * filteredQuotes.length)])
+    if (quotes.length > 0) {
+      setRandomQuote(quotes[Math.floor(Math.random() * quotes.length)])
     }
-    setCurrentPage(1)
-  }, [selectedCategory])
+  }, [])
 
   const getNewRandomQuote = () => {
-    if (filteredQuotes.length === 0) return
+    if (quotes.length === 0) return
     setIsAnimating(true)
     setTimeout(() => {
-      setRandomQuote(filteredQuotes[Math.floor(Math.random() * filteredQuotes.length)])
+      setRandomQuote(quotes[Math.floor(Math.random() * quotes.length)])
       setShowRandom(true)
       setIsAnimating(false)
     }, 300)
@@ -58,7 +48,6 @@ export function QuotesContent({ quotes }) {
     }, 300)
   }
 
-  // Format quote text with quotes if needed
   const formatQuoteText = (text) => {
     if (!text) return ''
     const hasQuotes = text.startsWith('"') || text.includes('\n')
@@ -67,30 +56,12 @@ export function QuotesContent({ quotes }) {
 
   return (
     <>
-      {/* Header with Buttons */}
       <div className="mb-8 flex flex-col items-center gap-3">
         <div className="flex items-center gap-3">
           <span className="text-3xl">💭</span>
           <h1 className="text-xl font-bold tracking-tight text-foreground">
-            Alıntılar
+            Sevdiğim Sözler
           </h1>
-        </div>
-
-        {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-2">
-          {quoteCategories.map(category => (
-            <button
-              key={category.id}
-              onClick={() => setSelectedCategory(category.id)}
-              className={`text-xs transition-all ${
-                selectedCategory === category.id
-                  ? 'font-medium text-foreground underline decoration-2 underline-offset-4'
-                  : 'text-muted-foreground hover:text-foreground'
-              }`}
-            >
-              {category.name}
-            </button>
-          ))}
         </div>
 
         <div className="flex items-center gap-3">
@@ -117,7 +88,6 @@ export function QuotesContent({ quotes }) {
 
       <div className="mx-auto w-full max-w-md">
         {showRandom ? (
-          // Random Quote View
           <div
             className={`transition-opacity duration-300 ${
               isAnimating ? 'opacity-0' : 'opacity-100'
@@ -128,29 +98,13 @@ export function QuotesContent({ quotes }) {
                 onClick={getNewRandomQuote}
                 className="cursor-pointer rounded-lg border border-border bg-card p-6 transition-colors hover:border-foreground/20"
               >
-                <div className="mb-4">
-                  <span className="text-xs font-semibold text-muted-foreground">
-                    {randomQuote.category || 'Alıntı'}
-                  </span>
-                </div>
                 <blockquote className="mb-4 text-sm font-normal text-foreground leading-relaxed whitespace-pre-line">
                   {formatQuoteText(randomQuote.text)}
                 </blockquote>
-                {randomQuote.author && (
-                  <p className="text-xs text-muted-foreground">
-                    — {randomQuote.author}
-                  </p>
-                )}
-                {randomQuote.source && (
-                  <p className="text-xs text-muted-foreground mt-1">
-                    {randomQuote.source}
-                  </p>
-                )}
               </div>
             )}
           </div>
         ) : (
-          // All Quotes View with Pagination
           <>
             <div
               className={`space-y-4 transition-opacity duration-300 ${
@@ -162,29 +116,13 @@ export function QuotesContent({ quotes }) {
                   key={quote.id || index}
                   className="rounded-lg border border-border bg-card p-4"
                 >
-                  <div className="mb-3">
-                    <span className="text-xs font-semibold text-muted-foreground">
-                      {quote.category || 'Alıntı'}
-                    </span>
-                  </div>
-                  <blockquote className="mb-3 text-xs font-normal text-foreground leading-relaxed whitespace-pre-line">
+                  <blockquote className="text-xs font-normal text-foreground leading-relaxed whitespace-pre-line">
                     {formatQuoteText(quote.text)}
                   </blockquote>
-                  {quote.author && (
-                    <p className="text-xs text-muted-foreground">
-                      — {quote.author}
-                    </p>
-                  )}
-                  {quote.source && (
-                    <p className="text-xs text-muted-foreground mt-1">
-                      {quote.source}
-                    </p>
-                  )}
                 </div>
               ))}
             </div>
 
-            {/* Pagination */}
             {totalPages > 1 && (
               <div className="mt-8 flex items-center justify-center gap-2">
                 <button

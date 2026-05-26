@@ -1,6 +1,6 @@
 import { Container } from '@/components/Container'
 import { QuotesContent } from '@/components/kesifler/QuotesContent'
-import { getNotesByCategory } from '@/data/notes'
+import { categories } from '@/data/personal/sozler'
 import Link from 'next/link'
 
 export const metadata = {
@@ -21,9 +21,11 @@ function ArrowLeftIcon(props) {
   )
 }
 
-export default function QuotesPage({ searchParams }) {
-  const category = searchParams?.category || 'all'
-  const notes = getNotesByCategory(category)
+export default function QuotesPage() {
+  const quotes = categories['Sevdiğim Sözler'].items.map((text, i) => ({
+    id: i,
+    text,
+  }))
 
   return (
     <Container>
@@ -38,7 +40,7 @@ export default function QuotesPage({ searchParams }) {
         </Link>
 
         <div className="mx-auto max-w-7xl">
-          {notes.length === 0 ? (
+          {quotes.length === 0 ? (
             <div className="py-12 text-center">
               <div className="mb-4 text-6xl">💭</div>
               <p className="text-base text-muted-foreground">
@@ -46,7 +48,7 @@ export default function QuotesPage({ searchParams }) {
               </p>
             </div>
           ) : (
-            <QuotesContent quotes={notes} />
+            <QuotesContent quotes={quotes} />
           )}
         </div>
       </div>

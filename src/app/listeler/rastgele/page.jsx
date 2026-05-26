@@ -2,7 +2,7 @@
 
 import { Container } from '@/components/Container'
 import { useState, useMemo } from 'react'
-import { getAllNotes, noteCategories } from '@/data/notes'
+import { categories as sozlerData } from '@/data/personal/sozler'
 import { getAllEnglishWords } from '@/data/english-words'
 import Link from 'next/link'
 
@@ -19,12 +19,12 @@ export default function RastgelePage() {
   const [englishWord, setEnglishWord] = useState(null)
   const [loading, setLoading] = useState(false)
 
-  const allNotes = useMemo(() => getAllNotes(), [])
+  const allQuotes = useMemo(() => sozlerData['Sevdiğim Sözler'].items, [])
   const allEnglishWords = useMemo(() => getAllEnglishWords(), [])
 
   const getRandomNote = () => {
-    const randomIndex = Math.floor(Math.random() * allNotes.length)
-    setCurrentNote(allNotes[randomIndex])
+    const randomIndex = Math.floor(Math.random() * allQuotes.length)
+    setCurrentNote(allQuotes[randomIndex])
   }
 
   const getRandomInceleme = async () => {
@@ -53,11 +53,6 @@ export default function RastgelePage() {
     else if (activeTab === 'ingilizce') getRandomEnglish()
   }
 
-  const getCategoryName = (id) => {
-    const cat = noteCategories.find((c) => c.id === id)
-    return cat ? `${cat.icon} ${cat.name}` : id
-  }
-
   return (
     <Container>
       <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-md flex-col px-2 py-6">
@@ -80,24 +75,14 @@ export default function RastgelePage() {
 
         {/* Content Area */}
         <div className="mb-6 flex-1">
-          {/* Alintilar */}
           {activeTab === 'alintilar' && currentNote && (
             <div className="rounded-lg border border-border bg-card p-5">
-              <div className="mb-2 text-xs text-muted-foreground">
-                {getCategoryName(currentNote.category)}
-              </div>
               <p className="text-sm leading-relaxed text-foreground">
-                {currentNote.text}
+                {currentNote}
               </p>
-              {currentNote.author && (
-                <p className="mt-3 text-xs text-muted-foreground">
-                  — {currentNote.author}
-                </p>
-              )}
             </div>
           )}
 
-          {/* Incelemeler */}
           {activeTab === 'incelemeler' && loading && (
             <div className="rounded-lg border border-border bg-card p-5">
               <div className="animate-pulse space-y-3">
@@ -129,7 +114,6 @@ export default function RastgelePage() {
             </div>
           )}
 
-          {/* English */}
           {activeTab === 'ingilizce' && englishWord && (
             <div className="rounded-lg border border-border bg-card p-5">
               <div className="mb-3">
@@ -151,7 +135,6 @@ export default function RastgelePage() {
             </div>
           )}
 
-          {/* Empty states */}
           {!currentNote && activeTab === 'alintilar' && (
             <div className="flex h-48 items-center justify-center rounded-lg border border-dashed border-border">
               <p className="text-sm text-muted-foreground">
@@ -175,7 +158,6 @@ export default function RastgelePage() {
           )}
         </div>
 
-        {/* Big Random Button */}
         <button
           onClick={handleRandom}
           disabled={loading}
