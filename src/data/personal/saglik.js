@@ -52,10 +52,8 @@ export const categories = {
       { text: 'Karanfil tüket.', subItems: [] },
       { text: 'Beef tallow (sığır iç yağı) her şey için kullanılabilir: saç ve vücut sabunu, yemek pişirme, yüze sürme.', subItems: [] },
       { text: 'Ne kadar çeşitli ve lifli gıda tüketirsek bağırsak mikrobiyomu daha çok bakteri içerir ve zenginleşir.', subItems: [] },
-      { text: 'Sarımsak kokusunu en iyi elma geçirir.', subItems: [] },
       { text: 'Yemek yeme sırası şu şekilde olmalıdır: Sebze > Protein/Yağ > Nişasta/Şeker. Bu sıra ile yemek, aynı yiyeceği yemenize rağmen glikoz dalgalanmasını %75 azaltabilir.', subItems: [] },
       { text: 'Karbonhidratları asla "çıplak" yemeyin, onları "giydirin". Bir parça ekmeği tek başına yemek yerine üzerine avokado (yağ) veya peynir (protein) ekleyin.', subItems: [] },
-      { text: 'Kesme şeker kullanmayın. Taşıma esnasında ıslanmış, taşlaşmış ne kadar şeker varsa kesme şeker yaparlar.', subItems: [] },
       { text: 'Gıda üzerinde 5\'ten fazla gıda katkı maddesi varsa onu alma. O ultra işlenmiş bir gıdadır.', subItems: [] },
       { text: 'Kavrulmuş kuruyemişler tehlikelidir. Kuruyemişler sağlıklı yağ içerir fakat bu yağların dumanlanma noktaları çok düşük. Kuruyemişi çiğ tükettiğinizde vücudunuza muhteşem bir sağlıklı yağ ve protein alırken, kavrulmuş kuruyemiş yediğinizde transyağ alıyorsunuz.', subItems: [] },
       { text: 'Ergothioneine, bir amino asit türevi olan güçlü bir antioksidandır ve bazı gıdalarda doğal olarak bulunur. En yüksek ergothioneine içeriğine sahip gıdalar genellikle mantarlar, bazı et ürünleri ve belirli tahıllardır.', subItems: [] },
@@ -194,11 +192,13 @@ export const categories = {
       { text: 'Tuzun bir fiskesi turtaya, keke ve tüm tatlılara inanılmaz bir hoşluk katar.', subItems: [] },
       { text: 'Mikrodalgada pişirme ve ısıtma çok sağlıklı bir seçenek.', subItems: [] },
       { text: 'Basit sebze çorbası yaparken soğanları yağda yumuşatıp, ardından muntazam dilimlenmiş havuç gibi bir sebze ekleyip tuzlamak önemli. Bu ön baharatlama, sebzenin lezzetini yağın içine hapsederek çorbaya yayılmasını sağlar.', subItems: [] },
-      { text: 'Gıdaları saklayacaksak mutlaka paslanmaz çelikte saklanmalı.', subItems: [] },
       { text: 'Şarküteri tezgahında zeytin tenekesi az kalmışsa içi pahalı olanın içine boşaltılır. Aynı şey peynirde de yapılır. Şarküterilerin %90\'ı peynirleri ayırt edemez, çoğu bilgisizdir. "Ben ayırt ederim" diyen salakların önüne Ezine peyniri ve Trakya peyniri koyun, kesinlikle ayırt edemezler. Bu çok uzun yıllar gerektirir. Zaten şarküteri deposuna giremezsiniz, muhtemelen mideniz kalkar.', subItems: [] },
       { text: 'Gıda sektöründe çalışan samimi bir arkadaşımın dediği üzere, gittiğiniz bir restoranda ne yiyeceğinizden emin değilseniz, garsonun şiddetle tavsiye ettiği her ürünü listenizden çıkarın.', subItems: [] },
       { text: 'Kapısında kuyruk olmayan restoranlarda yazın beyaz et tüketme. Bakterilerin üremeyi en sevdikleri sıcaklık aralığı 20-45 derece olduğundan illa ki ürün az ya da çok kontamine olmuştur. Sebze, tahıl veya kırmızı et tercih edin. En mantıklı seçimler kızartmalardır çünkü yüksek ısıda pişmişlerdir.', subItems: [] },
       { text: 'Yemekte eğer kıl çıktıysa geri vermeden önce içine tuz bas. Yoksa içindeki kılı çıkarıp yeni yapmış gibi getiriyorlar.', subItems: [] },
+      { text: 'Sarımsak kokusunu en iyi elma geçirir.', subItems: [] },
+      { text: 'Kesme şeker kullanmayın. Taşıma esnasında ıslanmış, taşlaşmış ne kadar şeker varsa kesme şeker yaparlar.', subItems: [] },
+      { text: 'Gıdaları saklayacaksak mutlaka paslanmaz çelikte saklanmalı.', subItems: [] },
     ]
   },
   'Takviyeler': {
@@ -310,6 +310,7 @@ export const categories = {
       { text: 'Özel hastanelerde ödemelerinizi kredi kartınızla yapın. Ayrıntılı hizmet faturası isteyin, niçin istiyorsunuz diye sorarlarsa SGK\'nın sitesiyle karşılaştıracağım deyin. Tek tek özel hastanelerin isimleriyle birlikte hangi hizmetten kaç TL ilave ücret alabilecekleri SGK tarafından listeleniyor. Hemen pazarlığa oturacaklardır sizinle, nakit ne kadar verebileceğinizi, yardımcı olmak istediklerini sorarlar. Her halükarda kredi kartınızla da indirimi alırsınız. Özellikle yatarak tedavi edilmişse fiyatı en az 1/3 oranında düşürürler. Ya bu fiyat üzerinde anlaşın, ya da ödemenizi iptal ettirmemek istediğinizi söyleyip ayrıntılı faturanızla birlikte ilçe tüketici hakem heyetine başvurun.', subItems: [] },
       { text: '112 üzerinden özel bir hastanenin acil polikliniğine getirilirseniz, sizden 5 kuruş talep edemezler ama talep ederler ve korkuturlar. Sakın düşmeyin bu oyuna ve hemen Sağlık Bakanlığı\'na ve bağlı bulunduğunuz kolluk kuvvetlere başvurarak durumunuzu anlatın. Anlatmaya gerek kalmadan ücretsiz olarak gerekli işlemleri yapacaklardır. Özellikle kalp krizi ve stent durumlarında "kaliteli stent takacağız, fiyat farkı vs." oyunlarına düşmeyin. Devlet karşılıyor bu durumları.', subItems: [] },
       { text: 'Devlet hastanelerinde size çekilen MR (emar) filmleri dünyanın en kalitesiz görüntü kalitesine sahiptir. Avrupa\'da bir cihazda günde 20-30 MR çekilirken bizde bu rakam 100-150 civarındadır. 7 kat MR\'ı, 7 kat kaliteyi azaltarak çekiyorlar. Mesela beyninizi gösteren film 10 MB olması gerekirken 1-2 MB oluyor. Kötü kalitede olan MR yüzünden bu ülkede her gün sayısız tümör, sayısız hastalık filmde görülmüyor. Hastalar teşhis almıyor, bu yüzden tanı konulmuyor. Daha da kötüsü çocukların organları küçük olduğundan onlarda teşhis daha çok atlanır. Şikayetinizi anlattığınız ilk 15 saniyede recetenize yazılacak ilaclar belli olur. Devamında kendinizi yormuş oluyorsunuz.', subItems: [] },
+      { text: 'İnsanlarda tavuğun fırında pişerken glikasyona uğrayıp kahverengileşmesi gibi vücut içinde glikasyona uğrar. Bebeğin kıkırdakları beyaz iken yaşlıların kahverengidir. Yani insanlar aslında içten içe pişer. Glikasyonu artıran ise glikozdur. Vücutta ne kadar glikoz varsa o kadar hızlı pişersin ve glikolize olursun, yani yaşlanırsın; organların yaşlanır, cildin yaşlanır.', subItems: [] },
     ]
   },
 }

@@ -15,7 +15,7 @@ Kullanıcı bir not, alıntı veya bilgi verdiğinde içeriği analiz edip `src/
 
 Kullanıcı notla birlikte bir kategori ipucu vermişse (üst veya alt kategori adı), o ipucunu kullanarak hedefi belirle. İpucu örnekleri:
 
-- `/not money: dropshipping'de en önemli şey ürün seçimi` → money.js → E-Commerce
+- `/not money: dropshipping'de en önemli şey ürün seçimi` → money.js → Business
 - `/not marketing sosyal medyada organik büyüme...` → money.js → Marketing
 - `/not sağlık vitamin D eksikliği...` → saglik.js → Takviyeler
 - `/not beslenme aç karnına su içmek...` → saglik.js → Beslenme
@@ -54,7 +54,7 @@ Notun içeriğine göre **önce dosyayı**, sonra **alt kategoriyi** belirle:
 - **Toplum & Dünya**: Tarih, politika, felsefe, ekonomi, toplum, medeniyet, güç dinamikleri
 
 ### `src/data/personal/money.js` → Money
-- **E-Commerce**: E-ticaret, online satış, dropshipping, marketplace, ürün satışı, Shopify, Amazon
+- **Business**: Ticaret, iş hayatı, e-ticaret, online satış, dropshipping, marketplace, ürün satışı, müşteri yönetimi, tedarikçi, muhasebe, risk yönetimi
 - **Marketing**: Pazarlama, reklam, sosyal medya stratejisi, growth hacking, SEO, içerik pazarlama, marka
 - **Finance**: Yatırım, borsa, kripto, bütçe, tasarruf, finansal okuryazarlık, gelir-gider
 - **Ideas**: İş fikirleri, girişim fırsatları, yan gelir, niş alanlar, SaaS, ürün fikirleri
@@ -132,8 +132,8 @@ Yanıt: "Eklendi: saglik.js → Temel Sağlık"
 
 **Üst kategori ipucu ile:**
 Kullanıcı: `/not money Amazon FBA'da private label en kârlı model`
-→ `src/data/personal/money.js` → **E-Commerce**
+→ `src/data/personal/money.js` → **Business**
 ```js
 'Amazon FBA\'da private label en kârlı model',
 ```
-Yanıt: "Eklendi: money.js → E-Commerce"
+Yanıt: "Eklendi: money.js → Business"
