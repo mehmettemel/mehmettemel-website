@@ -1,0 +1,15 @@
+export const title = 'Kadınlar'
+
+export const categories = {
+  'Genel': {
+    label: 'Genel',
+    items: [
+      'Having a girlfriend who doesn\'t post herself on social media is an underrated blessing.',
+      'Kadın, "natural, formed, precise" (doğal, oluşmuş/şekillenmiş, kesin/net) olan her şeyi daha çabuk takdir eder. En çok tiksindiği şey: Erkeğin kararsızlığı (indecision), korkusu, şüphesi, tereddütü, çekingenliği (hesitation, reserve). Kadınlar, erkeğin bir şeyi (zevk, zenginlik ya da ... kendisi/kadını) almasını ya da nasıl alacağını bilmesini ister. En yoksul, en sefil kadında bile ortaçağdaki kadınların (middle ages women) şövalyelere kendilerini "ödül" olarak sunma duygusunun bir izi vardır. Yani: Kadın, en güçlü, en yiğit, en seçkin erkeğe kendini teslim etme içgüdüsü taşır – bu, tarihsel olarak "en iyiye layık olma" hissi.',
+      'Places to find a quality girl: The gym at 9 am on a Saturday or Sunday morning / Airports (conditional, slept on) / Whole foods, Farmers markets, Trader Joe\'s, Erewhon / Nicest coffee shops/Cafes in your city / The park/beach on a sunny day / Book stores (not a big chain)',
+      'Tip for men. Approach with a genuine question not a compliment.',
+      'I\'ve dated many women in my life, and the best women, the women that I\'ve had the longest relationships with, weren\'t the hottest or smartest, but the most inoffensive. They were easy to get along with, didn\'t create problems, laughed easily, and smiled at whatever I said.',
+      'Kadınlar uzun vadeli ilişkide en çok duygusal zekâyı arar (boy, para ya da karizmadan daha önemli). Duygusal zekâ; gerçeği söylerken empati göstermek, karşı tarafı incitmemek ve iletişimde saygılı olmaktır. "Ben sadece dürüst oluyorum" diyen erkek, genellikle kibirli ve empati yoksunu görünür. Bu cümle, kadının duygusal olarak uzaklaşmasına ve ilgisinin tamamen bitmesine neden olur. Gerçek dürüstlük ise uyarı etiketi gerektirmez. Duygusal zekâsı yüksek erkekler şöyle der: "Bakış açımı paylaşabilir miyim?" / "Bana kalırsa böyle, yanlış mı anladım?" / "Dürüst olmak istiyorum ama bunu nasıl hissettireceğimi de önemsiyorum."',
+    ]
+  },
+}

@@ -5,30 +5,8 @@ import { join } from 'path'
 import matter from 'gray-matter'
 import { cookies } from 'next/headers'
 import { verifyToken } from '@/lib/auth'
-
-function parsePersonalNotes(content) {
-  // Split by H2 headers (##)
-  const sections = content.split(/^## /m).filter(Boolean)
-  const categories = []
-
-  sections.forEach(section => {
-    const lines = section.trim().split('\n')
-    const categoryName = lines[0].trim()
-    const noteItems = lines.slice(1)
-      .map(line => line.trim())
-      .filter(line => line && line.startsWith('-'))
-      .map(line => line.replace(/^-\s*/, ''))
-
-    if (noteItems.length > 0) {
-      categories.push({
-        category: categoryName,
-        items: noteItems
-      })
-    }
-  })
-
-  return categories
-}
+import { categories as kendimeNotlarCategories } from '@/data/personal/kendime-notlar'
+import { categories as conversationCategories } from '@/data/personal/conversation-skills'
 
 function parseIncelemeNotes(content) {
   // Split by H2 headers (##)
@@ -116,26 +94,22 @@ export async function GET() {
       }
     })
 
-    // 2. Get personal notes (kendime-notlar and conversation-skills)
-    const personalFiles = ['kendime-notlar.md', 'conversation-skills.md']
+    // 2. Get personal notes from JS data
+    const personalData = [
+      { source: 'kendime-notlar', data: kendimeNotlarCategories },
+      { source: 'conversation-skills', data: conversationCategories },
+    ]
 
-    for (const filename of personalFiles) {
-      try {
-        const filePath = join(process.cwd(), 'data', 'personal', filename)
-        const fileContent = readFileSync(filePath, 'utf-8')
-        const { content } = matter(fileContent)
-        const categories = parsePersonalNotes(content)
-
-        categories.forEach(category => {
+    for (const { source, data } of personalData) {
+      for (const [categoryName, categoryData] of Object.entries(data)) {
+        if (categoryData.items.length > 0) {
           allItems.push({
             type: 'personal_note',
-            source: filename.replace('.md', ''),
-            category: category.category,
-            items: category.items
+            source,
+            category: categoryName,
+            items: categoryData.items
           })
-        })
-      } catch (error) {
-        console.error(`Error reading ${filename}:`, error)
+        }
       }
     }
 
