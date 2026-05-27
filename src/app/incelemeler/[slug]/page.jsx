@@ -189,6 +189,44 @@ export default async function BlogPost({ params }) {
     }]
   }
 
+  // Kişisel category: render as blog article, not note cards
+  if (post.category === 'kisisel') {
+    return (
+      <Container>
+        <div className="py-8 sm:py-12">
+          <Link
+            href="/incelemeler"
+            aria-label="Go back to incelemeler"
+            className="group mb-6 inline-flex items-center gap-1.5 text-sm text-muted transition-all hover:gap-2 hover:text-foreground"
+          >
+            <ArrowLeftIcon className="h-3.5 w-3.5 stroke-current transition-transform group-hover:-translate-x-0.5" />
+            <span>Geri Dön</span>
+          </Link>
+
+          <article className="mx-auto max-w-2xl">
+            <div className="mb-8 text-center">
+              <h1 className="text-xl font-bold tracking-tight text-foreground">
+                {post.title}
+              </h1>
+              {post.author && (
+                <p className="mt-2 text-xs text-muted-foreground">{post.author}</p>
+              )}
+              {post.date && (
+                <p className="mt-1 text-xs text-muted-foreground">
+                  {new Date(post.date).toLocaleDateString('tr-TR', { year: 'numeric', month: 'long', day: 'numeric' })}
+                </p>
+              )}
+            </div>
+            <div
+              className="prose prose-sm dark:prose-invert max-w-none text-foreground leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: post.content }}
+            />
+          </article>
+        </div>
+      </Container>
+    )
+  }
+
   return (
     <Container>
       <div className="py-8 sm:py-12">
