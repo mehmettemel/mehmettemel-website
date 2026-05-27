@@ -9,7 +9,7 @@ import readingTime from 'reading-time'
 const postsDirectory = path.join(process.cwd(), 'content')
 
 // Valid categories (from frontmatter only)
-const CATEGORIES = ['kitaplar', 'kisiler']
+const CATEGORIES = ['kitaplar', 'kisiler', 'kisisel']
 
 /**
  * Get all post files from content folder (flat structure)
