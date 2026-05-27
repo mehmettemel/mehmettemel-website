@@ -21,6 +21,7 @@ export const categories = {
       'Düşük ışıkta görmeyi kaybettiğimiz ilk renk kırmızıdır. Bu yüzden sinema salonlarındaki koltuklar kırmızı renktedir. Işıklar kapandığında koltuklar da yok olsun ve bize daha iyi bir izleme deneyimi sunulsun.',
       'Kahvenin içindeki parçacıklar kaynama noktasına gelince patlar. Kaynama noktasına hızlıca getirilirse acı bir tat oluşur; bu yüzden yavaş pişirilmelidir. "Bir acı kahveni içmeye geleceğim" sözü de buradan gelir. Çabuk pişirirsin, ziyaretimi kısa tutacağım demektir.',
       'Dunbar Sayısı (Dunbar\'s Number): İngiliz antropolog Robin Dunbar tarafından keşfedilen, bir insanın beyninin biyolojik olarak sağlıklı bir şekilde yönetebileceği, isim-yüz ve sosyal ilişki kombinasyonunu içeren maksimum topluluk sınırı olan "150" sayısıdır. Taş Devri kabileleri, antik Mezopotamya köyleri ve Roma askeri lejyonlarının popülasyon ortalaması hep 150 civarındadır. Günümüz dünyasında da Amish cemaatlerinin büyüklüğü, II. Dünya Savaşı\'ndaki askeri bölükler ve bir insanın Facebook\'taki gerçek etkileşimde olduğu arkadaş sınırı hep bu 150 eşiğine çarpar.',
+      'Tip from a florist: put water, sugar, a little bit of bleach/dish soap and drop a quarter in there. You\'ll get 1-2 months of life easy for your flowers.',
     ],
   },
 }

@@ -182,6 +182,13 @@ export const categories = {
       { text: "Marketten alınan sebze meyveler koptuktan 5 gün sonra size ulaşır ve bu 5 gün içinde vitamin/mineral değerlerinin %30'u yok olur. Bu yüzden haftalık pazar alışverişi yerine, azar azar alıp taze tüketmeye çalışın.", subItems: [] },
       { text: 'Domates ve avokadoyu beraber yemek likopen emilimini 4,4 kat (yaklaşık %400) artırıyor. En iyi emilim için domatesin pişmiş veya sos halinde olması daha avantajlı. Bu ikiliye kırmızı soğan eklemek emilimi zirveye çıkarıyor. Likopen, domateste bulunan ve yağda çözünen, kanserle de savaşan bir antioksidan; tek başına yenirse vücut tarafından az emiliyor. Avokadoda ise oleik asit (omega-9) gibi tekli doymamış sağlıklı yağ asitleri var. Bu yağlar, likopen gibi maddelerin bağırsaklardan emilimini ciddi şekilde artırıyor. Bu birliktelik β-karoten emilimini de 2,6 kat artırıyor.', subItems: [] },
       { text: 'Dates is the best pre workout. Pure rocket fuel. Eat with empty stomach.', subItems: [] },
+      { text: 'Demir değerini doğal yollarla artırma yöntemi (15 günde 2 katına çıkabilir, doktorunuza danışın): Besinlerdeki demiri genelde alamazsınız çünkü fitik asit gibi bağlayıcı kimyasallar emilimi engeller. Fitik asiti uzaklaştırmak için gıdayı işleme tabi tutmak gerekir.', subItems: [
+        'Mercimek ve susamı 16 saat önceden çeyrek limon sıkılmış kireçsiz suda bekletin, sonra suyu dökün tekrar yıkayın.',
+        'Çorba: 100 gr mercimek + 25 gr susam. 1 baş soğan, 2 havuç, 1 domates rendeleyip 1 çay kaşığı kuru naneyi ayçiçek yağında döküm demir tavada kısık ateşte kavurun (döküm tavadan demir emilimi sağlanır). Tuz kullanmayın.',
+        'Salata: Maydanoz, kapya biber, havuç, kuru soğan, sumak, bolca limon. Tuz yok. Kuru soğanı ince doğrayıp zeytinyağı ve sumakla harmanlayın.',
+        'Önce salatayı yiyin (mide asidik hale gelir, demir emilimi için önemli), sonra limonlu çorbayı için, 5-10 dk sonra limonlu su için.',
+        'Öncesinde çay, sigara, peynir, yoğurt yemeyin. 3 saat başka bir şey yemeyin.',
+      ] },
     ]
   },
   'Mutfak': {
@@ -199,6 +206,11 @@ export const categories = {
       { text: 'Sarımsak kokusunu en iyi elma geçirir.', subItems: [] },
       { text: 'Kesme şeker kullanmayın. Taşıma esnasında ıslanmış, taşlaşmış ne kadar şeker varsa kesme şeker yaparlar.', subItems: [] },
       { text: 'Gıdaları saklayacaksak mutlaka paslanmaz çelikte saklanmalı.', subItems: [] },
+      { text: 'Kıymayı normal pişirdiğinizde protein lifleri ısı etkisiyle sıkışır ve sularını dışarı salar; bu da etin grileşmesine ve kurumasına neden olur. Karbonat, etin pH seviyesini yükselterek protein liflerinin birbirini itmesini sağlar. Böylece liflerin arasında boşluk kalır ve et suyunu içine hapseder. Karbonatın etin her yerine eşit dağılması için bir miktar su içinde çözdürülerek kıymaya eklenmesi önerilir.', subItems: [
+        'Genel Ölçü: 450-500 gram kıyma için 1/4 ila 1/2 çay kaşığı karbonat, 1 tatlı kaşığı ile 2 yemek kaşığı arasında suyla karıştırılarak kıymaya dökülür.',
+        'Köfte/Hamburger Köftesi İçin (225-250 gram): 1/8 çay kaşığı karbonat ve 1 çay kaşığı su karıştırılır. Kıymayı çok yoğurmadan, havalandırarak hafifçe harmanlamak etin sertleşmesini önler.',
+        'Karbonat çok hızlı etki eder, saatlerce bekletmeye gerek yok; ekledikten sonra birkaç dakika dinlendirip hemen pişirmeye başlayabilirsiniz.',
+      ] },
     ]
   },
   'Takviyeler': {
@@ -295,6 +307,7 @@ export const categories = {
       { text: 'Antiseptik gargaralar: Boğazda ilk "yanma" hissedildiği anda iyot bazlı (Betadine gibi) veya doğal (sirke gibi) gargaralara başvurmak.', subItems: [] },
       { text: 'Diş fırçası sterilizasyonu: Fırçayı her kullanım sonrası oksijenli su veya sirke içinde bekleterek üzerinde mikrop barınmasını engellemek.', subItems: [] },
       { text: 'Doğal antibakteriyeller: Kekik yağı (Oil of Oregano) veya Hindistan cevizi yağı ile "oil pulling" (ağızda yağ çevirme) yaparak ağızdaki bakteri yükünü azaltmak.', subItems: [] },
+      { text: 'Diş ipi değil, kesinlikle ara yüz fırçası kullanın. Günlük olarak kaya tuzlu su ve Hindistan cevizi yağı ile çalkalayın. Uzun süre kullanımında dişleriniz inci gibi parlayacak.', subItems: [] },
     ]
   },
   'Hastalıklar': {
