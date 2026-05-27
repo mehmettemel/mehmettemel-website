@@ -36,6 +36,7 @@ Kullanıcının verdiği kaynak adını mevcut content/ dosyalarıyla eşleştir
 | müftüoğlu, osman müftüoğlu | `content/osman-muftuoglu-notlari.md` |
 | robert greene, greene | `content/robert-greene-notlari.md` |
 | buyology | `content/buyology-notlari.md` |
+| zaman algısı, zaman algisi | `content/kulturlerde-zaman-algisi.md` |
 
 Eşleşme bulunamazsa → kullanıcıya sor veya yeni dosya oluştur.
 
@@ -88,7 +89,7 @@ featured: false
 3. Kategori seçimi:
    - Kişi ise → `kisiler`
    - Kitap ise → `kitaplar`
-   - Yazılım konusu ise → `yazilim`
+   - Kullanıcının kendi araştırması ise → `kisisel`
 
 ## Metin Kuralları
 
