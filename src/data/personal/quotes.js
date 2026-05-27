@@ -82,6 +82,7 @@ export const categories = {
       'Travel influencers single-handedly destroyed years of propaganda.',
       'Identity is just the sum of the choices we make. We live in a world of infinite paths and endless possibilities. We can be anything, but choosing one thing means grieving the thousands we didn\'t.',
       'Düştüğümüz kuyu sandığımız kadar derin değil ama tutunmaya çalıştığımız ip çok kısa.',
+      'Having a signature piece of jewelry you always wear is very important. I can\'t explain it.',
     ],
   },
 }

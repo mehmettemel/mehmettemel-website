@@ -40,7 +40,7 @@ Notun içeriğine bakarak hedef dosya ve alt kategoriyi belirle:
 | Alt Kategori | Anahtar Konular |
 |---|---|
 | **İş & Kariyer** | İş, girişimcilik, startup, kariyer, maaş, verimlilik, liderlik, feedback |
-| **Mindset** | Motivasyon, cesaret, alışkanlıklar, özgüven, hayat dersleri, yaşam prensipleri, aile, ebeveynlik, retorik, psikoloji |
+| **Mindset** | Kişisel motivasyon, cesaret, alışkanlıklar, özgüven, eyleme geçme, disiplin, aile, ebeveynlik, retorik — şahsi karaktere uygulanacak notlar |
 
 ### iliskiler.js — İlişkiler
 | Alt Kategori | Anahtar Konular |
@@ -60,7 +60,7 @@ Notun içeriğine bakarak hedef dosya ve alt kategoriyi belirle:
 ### toplum.js — Toplum & Dünya
 | Alt Kategori | Anahtar Konular |
 |---|---|
-| **Toplum & Dünya** | Tarih, politika, felsefe, ekonomi, medeniyet, güç dinamikleri |
+| **Toplum & Dünya** | Tarih, politika, felsefe, ekonomi, medeniyet, güç dinamikleri, toplumsal gözlemler, kültürel analizler, varoluşsal konular |
 
 ### trivia.js — Trivia
 | Alt Kategori | Anahtar Konular |
