@@ -76,6 +76,7 @@ export const categories = {
       'Ürün satarken daima artı değerde ver. Mesela sevgililer gününde pasta satarken yanında gül hediye et.',
       'Pricing a product at $9.99 instead of $10 makes it appear much cheaper. Consumers focus only on the first digits when looking at the product price. Use odd numbers in prices if possible.',
       'Ever notice how the fruit and vegetable counters are just inside the entrance? They\'re colorful, fresh & healthy — which makes you feel comfortable and stay longer. Flowers at the entrance give the same feeling of comfort.',
+      'Branding is how people see you. Marketing is how they find you. Sales is how you get paid. Master all three.',
     ],
   },
   'Finance': {

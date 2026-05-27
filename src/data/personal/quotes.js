@@ -98,6 +98,8 @@ export const categories = {
       'Money gives us control over our time, and the more time you have the happier you are. When you have control over your time, you can choose what to do, and when to do it.',
       'Üç istek sizi başkalarının kölesi yapar: sevilme isteği, beğenilme isteği, takdir edilme isteği. — Osho',
       'Hatayı affedin ama yanlışı asla affetmeyin. Hata: bir insanın elinde olmadan, istemeden, iradesini kullanmadan yaparak zarar vermesidir. Hata yapan bundan pişmanlık duyar ve zararı telafi etmek için çabalar, aynı hatayı asla tekrar etmez. Yanlış ise sonuçlarını bilerek, irade kullanarak planlı yapılan kötülüktür. Yanlış yapan size vereceği zararı bilir buna rağmen yapmaktan geri durmaz. Yanlışın pişmanlığı yoktur. Yanlışı bir kez affederseniz bunu yapana ikinciyi de yapabilirsin demiş olursunuz ve günün sonunda itiraz ederseniz ilk yanlışı affettiğiniz halde sonrakilere tepki verdiğiniz için suçlanırsınız.',
+      'Your 20s will teach you that you\'ll be alone on the saddest day of your life but the sun will rise again and you\'ll live.',
+      'One of the darkest moments in my medical education was understanding that "high cholesterol" was a made up disease to sell pills.',
     ],
   },
 }

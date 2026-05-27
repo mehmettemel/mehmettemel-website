@@ -24,6 +24,7 @@ export const categories = {
       'Forget rich versus poor, white-collar versus blue. It\'s now leveraged versus un-leveraged.',
       'If I look at the last 15 years of knowing people in startups, and then seeing who became successful and who didn\'t, I\'m starting to see some general patterns.\n\nThe people I know who became successful (and very rich) regularly asked for help and feedback, and then applied that feedback very quickly (think minutes) and shipped fast while maintaining their own vision.\n\nThe people who didn\'t become successful are the ones who worked on stuff for months/years without asking for help or feedback, or when they did took weeks/months to apply it.\n\nSo I think the feedback -> implement loop and speed of it is possibly very important.',
       'Ekonomik krizlerde doğan şirketler (Airbnb, Uber, Tesla, Palantir) kısıtlamaları avantaja çevirerek büyük başarı yakaladı. Bireysel yatırımcılar için kaynak azlığı dezavantaj değil, özgün stratejiler geliştirme fırsatıdır; büyük fonları taklit etmek yerine farklı düşünmek gerekir.',
+      'Yaptığın şeyin nedenlerini ve neden ve nasıl çalıştığını öğren. Günümüzde herkes Next.js kullanıyor ancak arka planda nasıl çalıştığına dair bir fikirleri yok. Ya da CSS biliyorum diyorlar ama CSS nasıl render ediliyor bilgileri yok. WebAssembly yazan yeni bir geliştirici neredeyse yetişmiyor.',
     ],
   },
   'Mindset': {

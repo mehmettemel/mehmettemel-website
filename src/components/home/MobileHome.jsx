@@ -151,101 +151,101 @@ export function MobileHome() {
 
       {/* Content */}
       <div className="mt-4 flex-1">
-        {/* Personal */}
-        {activeTab === 'personal' && currentNote && (
-          <div className="rounded-lg border border-border bg-card p-5">
-            <div className="mb-2 text-xs text-muted-foreground">
-              {currentNote.source} — {currentNote.category}
-            </div>
-            <p className="text-sm leading-relaxed text-foreground">
-              {currentNote.text}
-            </p>
-            {currentNote.subItems?.length > 0 && (
-              <ul className="mt-2 ml-4 space-y-1">
-                {currentNote.subItems.map((sub, i) => (
-                  <li key={i} className="text-xs leading-relaxed text-muted-foreground">• {sub}</li>
-                ))}
-              </ul>
-            )}
-          </div>
-        )}
+        <div className="rounded-lg border border-border bg-card p-6 min-h-[200px]">
+          {/* Personal */}
+          {activeTab === 'personal' && currentNote && (
+            <>
+              <div className="mb-3 text-xs text-muted-foreground">
+                {currentNote.source} — {currentNote.category}
+              </div>
+              <p className="text-sm leading-relaxed text-foreground">
+                {currentNote.text}
+              </p>
+              {currentNote.subItems?.length > 0 && (
+                <ul className="mt-2 ml-4 space-y-1">
+                  {currentNote.subItems.map((sub, i) => (
+                    <li key={i} className="text-xs leading-relaxed text-muted-foreground">• {sub}</li>
+                  ))}
+                </ul>
+              )}
+            </>
+          )}
 
-        {/* Incelemeler */}
-        {activeTab === 'incelemeler' && loading && (
-          <div className="rounded-lg border border-border bg-card p-5">
+          {/* Incelemeler */}
+          {activeTab === 'incelemeler' && loading && (
             <div className="animate-pulse space-y-3">
               <div className="h-3 w-24 rounded bg-muted"></div>
               <div className="h-5 w-3/4 rounded bg-muted"></div>
               <div className="h-4 w-full rounded bg-muted"></div>
               <div className="h-4 w-5/6 rounded bg-muted"></div>
             </div>
-          </div>
-        )}
+          )}
 
-        {activeTab === 'incelemeler' && !loading && incelemeItem && (
-          <div className="rounded-lg border border-border bg-card p-5">
-            <div className="mb-1 text-xs text-muted-foreground">
-              {incelemeItem.author}
-            </div>
-            <Link
-              href={`/incelemeler/${incelemeItem.slug}`}
-              className="mb-3 block text-base font-semibold text-foreground hover:opacity-70"
-            >
-              {incelemeItem.bookTitle}
-            </Link>
-            <h3 className="mb-2 text-sm font-medium text-foreground">
-              {incelemeItem.noteTitle}
-            </h3>
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              {incelemeItem.noteContent}
-            </p>
-          </div>
-        )}
-
-        {/* English */}
-        {activeTab === 'ingilizce' && englishWord && (
-          <div className="rounded-lg border border-border bg-card p-5">
-            <div className="mb-3">
-              <h2 className="text-xl font-bold text-foreground">
-                {englishWord.english}
-              </h2>
-              <p className="mt-1 text-sm text-muted-foreground">
-                {englishWord.turkish}
-              </p>
-            </div>
-            <div className="space-y-2 border-t border-border pt-3">
-              <p className="text-sm leading-relaxed text-foreground">
-                {englishWord.example}
-              </p>
+          {activeTab === 'incelemeler' && !loading && incelemeItem && (
+            <>
+              <div className="mb-1 text-xs text-muted-foreground">
+                {incelemeItem.author}
+              </div>
+              <Link
+                href={`/incelemeler/${incelemeItem.slug}`}
+                className="mb-3 block text-base font-semibold text-foreground hover:opacity-70"
+              >
+                {incelemeItem.bookTitle}
+              </Link>
+              <h3 className="mb-2 text-sm font-medium text-foreground">
+                {incelemeItem.noteTitle}
+              </h3>
               <p className="text-sm leading-relaxed text-muted-foreground">
-                {englishWord.example_turkish}
+                {incelemeItem.noteContent}
+              </p>
+            </>
+          )}
+
+          {/* English */}
+          {activeTab === 'ingilizce' && englishWord && (
+            <>
+              <div className="mb-3">
+                <h2 className="text-xl font-bold text-foreground">
+                  {englishWord.english}
+                </h2>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {englishWord.turkish}
+                </p>
+              </div>
+              <div className="space-y-2 border-t border-border pt-3">
+                <p className="text-sm leading-relaxed text-foreground">
+                  {englishWord.example}
+                </p>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  {englishWord.example_turkish}
+                </p>
+              </div>
+            </>
+          )}
+
+          {/* Empty states */}
+          {activeTab === 'personal' && !currentNote && (
+            <div className="flex h-40 items-center justify-center">
+              <p className="text-sm text-muted-foreground">
+                Butona bas, rastgele bir not gelsin
               </p>
             </div>
-          </div>
-        )}
-
-        {/* Empty states */}
-        {activeTab === 'personal' && !currentNote && (
-          <div className="flex h-48 items-center justify-center rounded-lg border border-dashed border-border">
-            <p className="text-sm text-muted-foreground">
-              Butona bas, rastgele bir not gelsin
-            </p>
-          </div>
-        )}
-        {activeTab === 'incelemeler' && !loading && !incelemeItem && (
-          <div className="flex h-48 items-center justify-center rounded-lg border border-dashed border-border">
-            <p className="text-sm text-muted-foreground">
-              Butona bas, rastgele bir inceleme gelsin
-            </p>
-          </div>
-        )}
-        {activeTab === 'ingilizce' && !englishWord && (
-          <div className="flex h-48 items-center justify-center rounded-lg border border-dashed border-border">
-            <p className="text-sm text-muted-foreground">
-              Butona bas, rastgele bir kelime gelsin
-            </p>
-          </div>
-        )}
+          )}
+          {activeTab === 'incelemeler' && !loading && !incelemeItem && (
+            <div className="flex h-40 items-center justify-center">
+              <p className="text-sm text-muted-foreground">
+                Butona bas, rastgele bir inceleme gelsin
+              </p>
+            </div>
+          )}
+          {activeTab === 'ingilizce' && !englishWord && (
+            <div className="flex h-40 items-center justify-center">
+              <p className="text-sm text-muted-foreground">
+                Butona bas, rastgele bir kelime gelsin
+              </p>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Fixed bottom random button */}
