@@ -1,8 +1,166 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
-import { PersonalContent } from '@/components/personal/PersonalContent'
+
+function SubCategoryPills({ categories, selected, onSelect }) {
+  const scrollRef = useRef(null)
+  const [showLeft, setShowLeft] = useState(false)
+  const [showRight, setShowRight] = useState(false)
+
+  const updateArrows = () => {
+    const el = scrollRef.current
+    if (!el) return
+    setShowLeft(el.scrollLeft > 0)
+    setShowRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 1)
+  }
+
+  useEffect(() => {
+    updateArrows()
+    window.addEventListener('resize', updateArrows)
+    return () => window.removeEventListener('resize', updateArrows)
+  }, [])
+
+  const scroll = (dir) => {
+    const el = scrollRef.current
+    if (!el) return
+    el.scrollBy({ left: dir * 150, behavior: 'smooth' })
+    setTimeout(updateArrows, 300)
+  }
+
+  const keys = Object.keys(categories)
+  if (keys.length <= 1) return null
+
+  return (
+    <div className="relative mb-5">
+      {showLeft && (
+        <button
+          onClick={() => scroll(-1)}
+          className="absolute left-0 top-0 z-10 flex h-full items-center bg-gradient-to-r from-background to-transparent pr-4"
+        >
+          <ChevronLeft className="h-4 w-4 text-muted-foreground" />
+        </button>
+      )}
+      <div
+        ref={scrollRef}
+        onScroll={updateArrows}
+        className="flex gap-2 overflow-x-auto scrollbar-none px-1 py-1"
+      >
+        <button
+          onClick={() => onSelect('all')}
+          className={`shrink-0 rounded-full px-3 py-1 text-xs transition-all ${
+            selected === 'all'
+              ? 'bg-primary text-primary-foreground'
+              : 'bg-secondary/50 text-muted-foreground hover:text-foreground'
+          }`}
+        >
+          Tümü
+        </button>
+        {keys.map((key) => (
+          <button
+            key={key}
+            onClick={() => onSelect(key)}
+            className={`shrink-0 rounded-full px-3 py-1 text-xs transition-all ${
+              selected === key
+                ? 'bg-primary text-primary-foreground'
+                : 'bg-secondary/50 text-muted-foreground hover:text-foreground'
+            }`}
+          >
+            {categories[key].label}
+          </button>
+        ))}
+      </div>
+      {showRight && (
+        <button
+          onClick={() => scroll(1)}
+          className="absolute right-0 top-0 z-10 flex h-full items-center bg-gradient-to-l from-background to-transparent pl-4"
+        >
+          <ChevronRight className="h-4 w-4 text-muted-foreground" />
+        </button>
+      )}
+    </div>
+  )
+}
+
+function NotesList({ categories, selectedCategory }) {
+  const notes = []
+
+  if (selectedCategory === 'all') {
+    Object.entries(categories).forEach(([, cat]) => {
+      cat.items.forEach((item) => {
+        notes.push({ category: cat.label, content: item })
+      })
+    })
+  } else {
+    const cat = categories[selectedCategory]
+    if (cat) {
+      cat.items.forEach((item) => {
+        notes.push({ category: cat.label, content: item })
+      })
+    }
+  }
+
+  if (notes.length === 0) {
+    return (
+      <div className="py-12 text-center">
+        <p className="text-sm text-muted-foreground">Bu kategoride not yok</p>
+      </div>
+    )
+  }
+
+  return (
+    <div className="mx-auto w-full max-w-2xl">
+      {notes.map((note, index) => (
+        <div
+          key={index}
+          className="border-b border-border/50 py-3.5 last:border-0"
+        >
+          {selectedCategory === 'all' && (
+            <span className="mb-1 inline-block rounded-full bg-secondary/60 px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
+              {note.category}
+            </span>
+          )}
+          {typeof note.content === 'string' ? (
+            <p className="text-sm leading-relaxed text-foreground">
+              {note.content}
+            </p>
+          ) : (
+            <div>
+              <p className="text-sm leading-relaxed text-foreground">
+                {note.content.text}
+              </p>
+              {note.content.subItems?.length > 0 && (
+                <ul className="mt-1.5 ml-4 space-y-0.5">
+                  {note.content.subItems.map((sub, i) => (
+                    <li key={i} className="text-xs leading-relaxed text-muted-foreground">
+                      • {sub}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function TabContent({ categories }) {
+  const [selected, setSelected] = useState('all')
+
+  return (
+    <div>
+      <SubCategoryPills
+        categories={categories}
+        selected={selected}
+        onSelect={setSelected}
+      />
+      <NotesList categories={categories} selectedCategory={selected} />
+    </div>
+  )
+}
 
 export function LifeTipsContent({ tabs, title }) {
   const tabKeys = Object.keys(tabs)
@@ -26,10 +184,7 @@ export function LifeTipsContent({ tabs, title }) {
 
         {tabKeys.map((key) => (
           <TabsContent key={key} value={key}>
-            <PersonalContent
-              categories={tabs[key].categories}
-              title={tabs[key].label}
-            />
+            <TabContent key={activeTab === key ? 'active' : key} categories={tabs[key].categories} />
           </TabsContent>
         ))}
       </Tabs>
