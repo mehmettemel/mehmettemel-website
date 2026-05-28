@@ -1,21 +1,18 @@
 ---
 name: ai
-description: Yapay zeka ile ilgili notları src/data/personal/ai.js dosyasına ekler. /ai komutu ile tetiklenir. Notları uygun kategoriye yerleştirir.
+description: Yapay zeka, finans veya gelecek öngörülerini src/data/personal/future-insights.js dosyasına ekler. /ai komutu ile tetiklenir.
 ---
 
-# AI Not Ekle
+# Future Insights Not Ekle
 
-Kullanıcı `/ai` komutu ile yapay zeka ile ilgili bir not verdiğinde `src/data/personal/ai.js` dosyasına ekler.
+Kullanıcı `/ai` komutu ile yapay zeka, finans veya gelecek öngörüsü verdiğinde `src/data/personal/future-insights.js` dosyasına ekler.
 
 ## Kategoriler
 
 | Alt Kategori | Anahtar Konular |
 |---|---|
-| **AI Agents & Workflow** | AI ajanları, otomasyon, workflow, takım stratejileri, agent mimarisi, AGENTS.md |
-| **Prompting & Kullanım** | Prompt mühendisliği, AI kullanım teknikleri, kod kalitesi, code review |
-| **Modeller & Teknoloji** | Model karşılaştırmaları, benchmark, fine-tuning, RAG, embedding |
-| **Araçlar & Ürünler** | AI araçları, platformlar, MCP, IDE entegrasyonları |
-| **Sektör & Trendler** | AI sektör haberleri, trendler, etik, sentetik veri |
+| **AI & Teknoloji** | AI trendleri, sentetik veri, model gelişimi, otomasyon öngörüleri |
+| **Ekonomi & Finans** | Faiz oranları, yatırım, makroekonomi, AGI'nin ekonomik etkileri |
 
 ## Format
 
@@ -26,9 +23,9 @@ Flat string olarak ilgili kategorinin `items` dizisinin **sonuna** ekle:
 
 ## Adımlar
 
-1. `src/data/personal/ai.js` dosyasını oku
+1. `src/data/personal/future-insights.js` dosyasını oku
 2. Duplike kontrolü yap
 3. Kategoriyi belirle
 4. İlgili kategorinin `items` sonuna ekle
 5. Single quote'ları escape et (`'` → `\'`)
-6. Onay: "Eklendi: ai.js → [kategori]"
+6. Onay: "Eklendi: future-insights.js → [kategori]"

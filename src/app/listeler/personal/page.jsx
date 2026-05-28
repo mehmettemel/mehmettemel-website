@@ -38,6 +38,10 @@ const personalCategories = [
     title: 'Quotes',
     href: '/listeler/personal/quotes',
   },
+  {
+    title: 'Future Insights',
+    href: '/listeler/personal/future-insights',
+  },
 ]
 
 export default async function PersonalPage() {

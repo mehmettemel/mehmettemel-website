@@ -5,14 +5,6 @@
 
 export const listCategories = [
   {
-    id: 'ai',
-    name: 'Artificial Intelligence',
-    emoji: '🤖',
-    icon: '🧠',
-    description: 'Yapay zeka ile ilgili notlar, araçlar ve stratejiler',
-    isStatic: true,
-  },
-  {
     id: 'rusca',
     name: 'Rusça',
     emoji: '🇷🇺',
