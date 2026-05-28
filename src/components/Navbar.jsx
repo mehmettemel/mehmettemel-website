@@ -23,7 +23,7 @@ import {
 } from './ui/navigation-menu'
 
 const listelerItems = [
-  { href: '/listeler/ai', label: 'AI', emoji: '🤖' },
+  { href: '/listeler/life-tips', label: 'Life Tips', emoji: '💡' },
   { href: '/listeler/tarif', label: 'Tarifler', emoji: '🍳' },
   { href: '/listeler/ingilizce', label: 'İngilizce', emoji: '🇬🇧' },
   { href: '/listeler/rusca', label: 'Rusça', emoji: '🇷🇺' },
@@ -59,18 +59,7 @@ function DesktopNav() {
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[220px] gap-1 p-2">
-              <li>
-                <NavigationMenuLink asChild>
-                  <Link
-                    href="/listeler"
-                    className="flex items-center gap-2 rounded-md px-3 py-2.5 text-sm font-semibold transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset active:bg-secondary/80"
-                  >
-                    <span>📋</span>
-                    <span>Tümü</span>
-                  </Link>
-                </NavigationMenuLink>
-              </li>
-              {listelerItems.map((item) => (
+{listelerItems.map((item) => (
                 <li key={item.href}>
                   <NavigationMenuLink asChild>
                     <Link
@@ -164,11 +153,8 @@ function MobileNav() {
               </AccordionTrigger>
               <AccordionContent>
                 <div className="flex flex-col gap-0.5 pl-2">
-                  <Link href="/listeler" onClick={closeSheet} className={mobileNavLinkClass}>
-                    <span>📋</span> Tümü
-                  </Link>
-                  <Link href="/listeler/ai" onClick={closeSheet} className={mobileNavLinkClass}>
-                    <span>🤖</span> AI
+                  <Link href="/listeler/life-tips" onClick={closeSheet} className={mobileNavLinkClass}>
+                    <span>💡</span> Life Tips
                   </Link>
                   <Link href="/listeler/rusca" onClick={closeSheet} className={mobileNavLinkClass}>
                     <span>🇷🇺</span> Rusça

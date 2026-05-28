@@ -13,6 +13,7 @@ export const categories = {
       'Erkek acizleştikçe kadın zalimleşir.',
       'Our biggest downfall as men, is that after you finally win, we sit down to eat with women who never starved with us.',
       'A very underrated life decision is marrying someone who wants a simple life.',
+      'Marriage as a long conversation. When entering a marriage, one should ask the question: do you think you will be able to have good conversations with this woman right into old age? Everything else in marriage is transitory, but most of the time in interaction is spent in conversation. — Friedrich Nietzsche',
     ]
   },
   'İletişim': {

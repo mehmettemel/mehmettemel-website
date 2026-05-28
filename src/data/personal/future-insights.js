@@ -5,6 +5,7 @@ export const categories = {
     label: 'AI & Teknoloji',
     items: [
       'Dünyadaki "orijinal insan üretimi veri" tükenme noktasına geldiği için modeller sentetik (YZ\'nin kendi ürettiği) veriyle besleniyor. Bu durum hataların ve halüsinasyonların çığ gibi büyümesine yol açtığından "doğrulama/kürasyon" becerisi altın değerinde.',
+      'Gelecek için kodlama veya yapay zeka öğrenmeyin; klasik kitaplar okuyun. Yapay zeka çağında en nadir ve değerli beceri, yapay zekayı kullanmak değil, kitaplar aracılığıyla içsel bir diyalog kurabilme ve bağımsız/eleştirel düşünebilme kapasitesi olacaktır.',
     ]
   },
   'Ekonomi & Finans': {
