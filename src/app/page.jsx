@@ -46,10 +46,10 @@ export default function Home() {
   const allPosts = getAllPosts()
   const recentPosts = allPosts.slice(0, 3)
 
-  const recentNotes = quotesData['Quotes'].items.slice(0, 8).map((text, i) => ({
-    id: i,
-    text,
-  }))
+  // Kısa notları filtrele (randomize client-side'da yapılacak)
+  const shortQuotes = quotesData['Quotes'].items
+    .filter((text) => text.length <= 80)
+    .map((text, i) => ({ id: i, text }))
 
   return (
     <Container>
@@ -61,7 +61,7 @@ export default function Home() {
         <HomeHero />
         <div className="space-y-12 sm:space-y-16">
           <HomeResearches posts={recentPosts} />
-          <RecentDiscoveries notes={recentNotes} />
+          <RecentDiscoveries notes={shortQuotes} />
         </div>
       </div>
     </Container>

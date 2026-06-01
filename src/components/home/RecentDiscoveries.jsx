@@ -7,9 +7,7 @@ import { LoginDialog } from '../auth/LoginDialog'
 
 function getDisplayText(note) {
   if (note.text) {
-    const truncated =
-      note.text.length > 60 ? note.text.substring(0, 60) + '...' : note.text
-    return `"${truncated}"`
+    return `"${note.text}"`
   }
   return 'Not'
 }
@@ -18,6 +16,7 @@ export function RecentDiscoveries({ notes }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [showLogin, setShowLogin] = useState(false)
   const [checking, setChecking] = useState(true)
+  const [randomNotes, setRandomNotes] = useState([])
 
   useEffect(() => {
     fetch('/api/auth/session')
@@ -26,6 +25,13 @@ export function RecentDiscoveries({ notes }) {
       .catch(() => setIsAuthenticated(false))
       .finally(() => setChecking(false))
   }, [])
+
+  useEffect(() => {
+    if (notes && notes.length > 0) {
+      const shuffled = [...notes].sort(() => Math.random() - 0.5)
+      setRandomNotes(shuffled.slice(0, 5))
+    }
+  }, [notes])
 
   if (checking) {
     return (
@@ -56,7 +62,7 @@ export function RecentDiscoveries({ notes }) {
     )
   }
 
-  if (!notes || notes.length === 0) return null
+  if (!randomNotes || randomNotes.length === 0) return null
 
   return (
     <section>
@@ -67,7 +73,7 @@ export function RecentDiscoveries({ notes }) {
       </div>
 
       <div className="mx-auto w-full max-w-md space-y-3">
-        {notes.slice(0, 5).map((note) => (
+        {randomNotes.map((note) => (
           <div key={note.id} className="w-full text-center">
             <Link
               href="/listeler/personal/quotes"
