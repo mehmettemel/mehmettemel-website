@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { KeyRound } from 'lucide-react'
+import { KeyRound, ChevronLeft, ChevronRight } from 'lucide-react'
 import { LoginDialog } from '../auth/LoginDialog'
 import { categories as quotesData } from '@/data/personal/quotes'
 import { categories as kisiselGelisimData } from '@/data/personal/kisisel-gelisim'
@@ -13,26 +13,32 @@ import { categories as moneyData } from '@/data/personal/money'
 import { categories as triviaData } from '@/data/personal/trivia'
 import { getAllEnglishWords } from '@/data/english-words'
 
-function getAllPersonalItems() {
+const SOURCES = [
+  { id: 'saglik', label: 'Sağlık', data: saglikData },
+  { id: 'kisisel', label: 'Kişisel Gelişim', data: kisiselGelisimData },
+  { id: 'life', label: 'Life', data: moneyData },
+  { id: 'kadinlar', label: 'Kadınlar', data: iliskilerData },
+  { id: 'toplum', label: 'Toplum', data: toplumData },
+  { id: 'quotes', label: 'Quotes', data: quotesData },
+  { id: 'trivia', label: 'Trivia', data: triviaData },
+  { id: 'incelemeler', label: 'İncelemeler', data: null },
+  { id: 'ingilizce', label: 'İngilizce', data: null },
+]
+
+function buildItems(sources) {
   const items = []
-  const addItems = (data, source) => {
-    for (const [cat, val] of Object.entries(data)) {
+  for (const src of sources) {
+    if (!src.data) continue
+    for (const [cat, val] of Object.entries(src.data)) {
       val.items.forEach((item) => {
         if (typeof item === 'string') {
-          items.push({ text: item, subItems: null, source, category: cat })
+          items.push({ text: item, subItems: null, source: src.label, category: cat })
         } else {
-          items.push({ text: item.text, subItems: item.subItems, source, category: cat })
+          items.push({ text: item.text, subItems: item.subItems, source: src.label, category: cat })
         }
       })
     }
   }
-  addItems(quotesData, 'Quotes')
-  addItems(kisiselGelisimData, 'Kişisel Gelişim')
-  addItems(iliskilerData, 'Kadınlar')
-  addItems(toplumData, 'Toplum')
-  addItems(saglikData, 'Sağlık')
-  addItems(moneyData, 'Life')
-  addItems(triviaData, 'Trivia')
   return items
 }
 
@@ -40,13 +46,16 @@ export function MobileHome() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [showLogin, setShowLogin] = useState(false)
   const [checking, setChecking] = useState(true)
+  const [activeTab, setActiveTab] = useState('all')
   const [currentNote, setCurrentNote] = useState(null)
   const [incelemeItem, setIncelemeItem] = useState(null)
   const [englishWord, setEnglishWord] = useState(null)
   const [loading, setLoading] = useState(false)
-  const [activeTab, setActiveTab] = useState('personal')
+  const [showLeftArrow, setShowLeftArrow] = useState(false)
+  const [showRightArrow, setShowRightArrow] = useState(false)
+  const scrollRef = useRef(null)
 
-  const allPersonalItems = useMemo(() => getAllPersonalItems(), [])
+  const allItems = useMemo(() => buildItems(SOURCES), [])
   const allEnglishWords = useMemo(() => getAllEnglishWords(), [])
 
   useEffect(() => {
@@ -57,13 +66,55 @@ export function MobileHome() {
       .finally(() => setChecking(false))
   }, [])
 
-  const getRandomPersonal = () => {
-    const idx = Math.floor(Math.random() * allPersonalItems.length)
-    setCurrentNote(allPersonalItems[idx])
+  const updateArrows = () => {
+    const el = scrollRef.current
+    if (!el) return
+    setShowLeftArrow(el.scrollLeft > 0)
+    setShowRightArrow(el.scrollLeft < el.scrollWidth - el.clientWidth - 1)
+  }
+
+  useEffect(() => {
+    updateArrows()
+    window.addEventListener('resize', updateArrows)
+    return () => window.removeEventListener('resize', updateArrows)
+  }, [isAuthenticated])
+
+  const scroll = (dir) => {
+    const el = scrollRef.current
+    if (!el) return
+    el.scrollBy({ left: dir * 150, behavior: 'smooth' })
+    setTimeout(updateArrows, 300)
+  }
+
+  const getItemsForTab = (tabId) => {
+    if (tabId === 'all') return allItems
+    const src = SOURCES.find((s) => s.id === tabId)
+    if (!src || !src.data) return []
+    return buildItems([src])
+  }
+
+  const handleRandom = () => {
+    if (activeTab === 'incelemeler') {
+      getRandomInceleme()
+      return
+    }
+    if (activeTab === 'ingilizce') {
+      getRandomEnglish()
+      return
+    }
+    const items = getItemsForTab(activeTab)
+    if (items.length > 0) {
+      const idx = Math.floor(Math.random() * items.length)
+      setCurrentNote(items[idx])
+    }
+    setIncelemeItem(null)
+    setEnglishWord(null)
   }
 
   const getRandomInceleme = async () => {
     setLoading(true)
+    setCurrentNote(null)
+    setEnglishWord(null)
     try {
       const res = await fetch('/api/rastgele')
       if (res.ok) {
@@ -78,14 +129,17 @@ export function MobileHome() {
   }
 
   const getRandomEnglish = () => {
+    setCurrentNote(null)
+    setIncelemeItem(null)
     const idx = Math.floor(Math.random() * allEnglishWords.length)
     setEnglishWord(allEnglishWords[idx])
   }
 
-  const handleRandom = () => {
-    if (activeTab === 'personal') getRandomPersonal()
-    else if (activeTab === 'incelemeler') getRandomInceleme()
-    else if (activeTab === 'ingilizce') getRandomEnglish()
+  const handleTabChange = (tabId) => {
+    setActiveTab(tabId)
+    setCurrentNote(null)
+    setIncelemeItem(null)
+    setEnglishWord(null)
   }
 
   if (checking) {
@@ -100,60 +154,89 @@ export function MobileHome() {
     )
   }
 
-  const TABS = isAuthenticated
-    ? [
-        { id: 'personal', color: 'bg-amber-500' },
-        { id: 'incelemeler', color: 'bg-blue-500' },
-        { id: 'ingilizce', color: 'bg-emerald-500' },
-      ]
-    : [
-        { id: 'incelemeler', color: 'bg-blue-500' },
-        { id: 'ingilizce', color: 'bg-emerald-500' },
-      ]
+  const visibleTabs = isAuthenticated
+    ? SOURCES
+    : SOURCES.filter((s) => s.id === 'incelemeler' || s.id === 'ingilizce')
+
+  const showPersonalNote = activeTab !== 'incelemeler' && activeTab !== 'ingilizce'
+  const hasContent = currentNote || incelemeItem || englishWord || loading
 
   return (
     <div className="flex min-h-[calc(100vh-4rem)] flex-col px-2 pb-20 pt-4 md:hidden">
       {/* Sticky top */}
       <div className="sticky top-0 z-40 bg-background pb-3">
-        <div className="mb-3 text-center">
+        <div className="mb-3 flex items-center justify-center gap-2">
           <h1 className="text-lg font-bold tracking-tight text-foreground">
             Mehmet Temel
           </h1>
-          <p className="text-xs text-muted-foreground">dijital koleksiyonum</p>
-        </div>
-
-        {/* Tabs */}
-        <div className="mb-3 flex items-center justify-center gap-6">
-          {TABS.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`h-5 w-5 rounded-full transition-all ${tab.color} ${
-                activeTab === tab.id
-                  ? 'scale-110 ring-2 ring-offset-3 ring-offset-background ring-current'
-                  : 'opacity-35'
-              }`}
-              aria-label={tab.id}
-            />
-          ))}
           {!isAuthenticated && (
             <button
               onClick={() => setShowLogin(true)}
-              className="flex items-center gap-1 text-muted-foreground transition-all hover:text-foreground"
+              className="flex items-center text-muted-foreground transition-all hover:text-foreground"
               aria-label="Giriş yap"
             >
-              <KeyRound className="h-4 w-4 animate-pulse" />
+              <KeyRound className="h-3.5 w-3.5 animate-pulse" />
             </button>
           )}
         </div>
 
+        {/* Category tabs */}
+        <div className="relative">
+          {showLeftArrow && (
+            <button
+              onClick={() => scroll(-1)}
+              className="absolute left-0 top-0 z-10 flex h-full items-center bg-gradient-to-r from-background to-transparent pr-4"
+            >
+              <ChevronLeft className="h-4 w-4 text-muted-foreground" />
+            </button>
+          )}
+          <div
+            ref={scrollRef}
+            onScroll={updateArrows}
+            className="flex gap-2 overflow-x-auto scrollbar-none px-1 py-1"
+          >
+            {isAuthenticated && (
+              <button
+                onClick={() => handleTabChange('all')}
+                className={`shrink-0 rounded-full px-3 py-1 text-xs transition-all ${
+                  activeTab === 'all'
+                    ? 'bg-primary text-primary-foreground'
+                    : 'bg-secondary/50 text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                Tümü
+              </button>
+            )}
+            {visibleTabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => handleTabChange(tab.id)}
+                className={`shrink-0 rounded-full px-3 py-1 text-xs transition-all ${
+                  activeTab === tab.id
+                    ? 'bg-primary text-primary-foreground'
+                    : 'bg-secondary/50 text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+          {showRightArrow && (
+            <button
+              onClick={() => scroll(1)}
+              className="absolute right-0 top-0 z-10 flex h-full items-center bg-gradient-to-l from-background to-transparent pl-4"
+            >
+              <ChevronRight className="h-4 w-4 text-muted-foreground" />
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Content */}
       <div className="mt-4 flex-1">
         <div className="rounded-lg border border-border bg-card p-6 min-h-[200px]">
-          {/* Personal */}
-          {activeTab === 'personal' && currentNote && (
+          {/* Personal note */}
+          {showPersonalNote && currentNote && (
             <>
               <div className="mb-3 text-xs text-muted-foreground">
                 {currentNote.source} — {currentNote.category}
@@ -223,25 +306,11 @@ export function MobileHome() {
             </>
           )}
 
-          {/* Empty states */}
-          {activeTab === 'personal' && !currentNote && (
+          {/* Empty state */}
+          {!hasContent && (
             <div className="flex h-40 items-center justify-center">
               <p className="text-sm text-muted-foreground">
-                Butona bas, rastgele bir not gelsin
-              </p>
-            </div>
-          )}
-          {activeTab === 'incelemeler' && !loading && !incelemeItem && (
-            <div className="flex h-40 items-center justify-center">
-              <p className="text-sm text-muted-foreground">
-                Butona bas, rastgele bir inceleme gelsin
-              </p>
-            </div>
-          )}
-          {activeTab === 'ingilizce' && !englishWord && (
-            <div className="flex h-40 items-center justify-center">
-              <p className="text-sm text-muted-foreground">
-                Butona bas, rastgele bir kelime gelsin
+                Butona bas, rastgele gelsin
               </p>
             </div>
           )}
