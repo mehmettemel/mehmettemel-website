@@ -13,7 +13,7 @@ import { categories as moneyData } from '@/data/personal/money'
 import { categories as triviaData } from '@/data/personal/trivia'
 import { getAllEnglishWords } from '@/data/english-words'
 
-const SOURCES = [
+const ALL_SOURCES = [
   { id: 'saglik', label: 'Sağlık', data: saglikData },
   { id: 'kisisel', label: 'Kişisel Gelişim', data: kisiselGelisimData },
   { id: 'life', label: 'Life', data: moneyData },
@@ -24,6 +24,15 @@ const SOURCES = [
   { id: 'incelemeler', label: 'İncelemeler', data: null },
   { id: 'ingilizce', label: 'İngilizce', data: null },
 ]
+
+function shuffle(arr) {
+  const a = [...arr]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
 
 function buildItems(sources) {
   const items = []
@@ -55,7 +64,8 @@ export function MobileHome() {
   const [showRightArrow, setShowRightArrow] = useState(false)
   const scrollRef = useRef(null)
 
-  const allItems = useMemo(() => buildItems(SOURCES), [])
+  const SOURCES = useMemo(() => shuffle(ALL_SOURCES), [])
+  const allItems = useMemo(() => buildItems(SOURCES), [SOURCES])
   const allEnglishWords = useMemo(() => getAllEnglishWords(), [])
 
   useEffect(() => {
@@ -318,7 +328,7 @@ export function MobileHome() {
       </div>
 
       {/* Fixed bottom random button */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 bg-background/80 px-4 pb-5 pt-3 backdrop-blur-md md:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-50 bg-background/80 px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur-md md:hidden">
         <button
           onClick={handleRandom}
           disabled={loading}
