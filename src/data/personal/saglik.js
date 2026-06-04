@@ -24,6 +24,8 @@ export const categories = {
       { text: 'Your leg strength predicts how long you\'ll live. Not your weight.', subItems: [] },
       { text: 'Güç (strength), kas kütlesinden (muscle mass) daha kritiktir. Kas kütlesi genellikle gücün bir göstergesi (proxy) olarak kullanılır ama asıl önemli olan metrik güçtür. Gücü ölçmek için sadece squat/deadlift ağırlıklarına bakmayın; kavrama gücü (grip strength), asılı kalma (dead hang) ve hava squatı gibi temel testleri kullanın.', subItems: [] },
       { text: 'Uluslararası uçuşları 3 ayda 1\'den fazla yapma. Vücudun toparlanması çok uzun sürüyor. Kabin basıncı ~7000 feet (hipoksi = oksijen azalması), kabin nemi %5\'e kadar düşüyor (Sahra Çölü\'nden bile kuru). Bunlar kortizolü bozuyor, melatonin üretimini baskılıyor. Doğuya uçmak batıya uçmaktan daha zor etkiliyor. (Bryan Johnson)', subItems: [] },
+      { text: 'Zihin, ne yersek yiyelim veya ne kadar uyursak uyuyalım aynı şekilde çalışan izole bir organ değildir. Dinler (Zen, Katoliklik) bunu bildiği için çay içme, duruş ve bahçecilik gibi rutinler geliştirmiştir.', subItems: [] },
+      { text: 'Grip strength predicts mortality better than almost anything you can measure at home. (Bryan Johnson)', subItems: [] },
     ]
   },
   'Beslenme': {

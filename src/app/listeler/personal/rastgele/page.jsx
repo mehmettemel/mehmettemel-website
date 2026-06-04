@@ -27,11 +27,11 @@ function getAllPersonalItems() {
   }
   addItems(saglikData, 'Sağlık')
   addItems(kisiselGelisimData, 'Kişisel Gelişim')
-  addItems(iliskilerData, 'İlişkiler')
+  addItems(iliskilerData, 'Kadınlar')
   addItems(toplumData, 'Toplum')
   addItems(quotesData, 'Quotes')
   addItems(futureInsightsData, 'Future Insights')
-  addItems(moneyData, 'Money')
+  addItems(moneyData, 'Life')
   addItems(triviaData, 'Trivia')
   return items
 }

@@ -19,7 +19,7 @@ const personalCategories = [
     href: '/listeler/personal/kisisel-gelisim',
   },
   {
-    title: 'İlişkiler',
+    title: 'Kadınlar',
     href: '/listeler/personal/iliskiler',
   },
   {
@@ -27,7 +27,7 @@ const personalCategories = [
     href: '/listeler/personal/toplum',
   },
   {
-    title: 'Money',
+    title: 'Life',
     href: '/listeler/personal/money',
   },
   {

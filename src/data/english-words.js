@@ -339,6 +339,9 @@ export const englishWords = [
   { english: 'seize', turkish: 'ele geçirmek, yakalamak, fırsatı kapmak', example: 'You have to seize every opportunity that comes your way.', example_turkish: 'Önüne çıkan her fırsatı yakalamalısın.' },
   { english: 'yearn', turkish: 'özlemek, hasret çekmek, şiddetle istemek', example: 'After years abroad, he yearned for the taste of his mother\'s cooking.', example_turkish: 'Yıllarca yurtdışında kaldıktan sonra annesinin yemeklerinin tadını özledi.' },
   { english: 'salvation', turkish: 'kurtuluş, selamet', example: 'Education was his only salvation from poverty.', example_turkish: 'Eğitim, yoksulluktan tek kurtuluşuydu.' },
+  { english: 'intended', turkish: 'amaçlanan, kasıtlı, hedeflenen', example: 'The message was intended for you, not for him.', example_turkish: 'Mesaj ona değil, sana yönelikti.' },
+  { english: 'redemption', turkish: 'kurtuluş, kefaret, tövbe', example: 'After years of bad decisions, he finally found redemption by helping others.', example_turkish: 'Yıllarca kötü kararlar verdikten sonra, başkalarına yardım ederek sonunda kurtuluşunu buldu.' },
+  { english: 'controversial', turkish: 'tartışmalı, tartışma yaratan', example: 'His controversial comments about the economy sparked a heated debate online.', example_turkish: 'Ekonomi hakkındaki tartışmalı yorumları internette hararetli bir tartışma başlattı.' },
 ]
 
 /**

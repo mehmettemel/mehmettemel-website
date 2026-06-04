@@ -17,7 +17,8 @@ Kullanıcı notun başında bir kategori ipucu yazabilir. İpucu varsa öncelikl
 **Alt kategori ipuçları** (hem dosyayı hem alt kategoriyi belirler):
 `beslenme` → saglik.js/Beslenme, `mutfak` → saglik.js/Mutfak, `takviye` → saglik.js/Takviyeler, `bakım` → saglik.js/Bakım, `hastalık` → saglik.js/Hastalıklar
 `mindset` → kisisel-gelisim.js/Mindset, `kariyer` → kisisel-gelisim.js/İş & Kariyer
-`kadın` → iliskiler.js/Kadınlar, `iletişim` → iliskiler.js/İletişim, `network` → iliskiler.js/Networking
+`kadın` → iliskiler.js/Kadınlar
+`iletişim` → money.js/İletişim, `network` → money.js/Networking, `insan ilişkileri` → money.js/İnsan İlişkileri
 `business` → money.js/Business, `ecommerce` → money.js/Business, `e-commerce` → money.js/Business, `marketing` → money.js/Marketing, `finance` → money.js/Finance, `ideas` → money.js/Ideas
 
 İpucu bulunduysa metinden çıkar (ipucu notun parçası değil).
@@ -42,20 +43,21 @@ Notun içeriğine bakarak hedef dosya ve alt kategoriyi belirle:
 | **İş & Kariyer** | İş, girişimcilik, startup, kariyer, maaş, verimlilik, liderlik, feedback |
 | **Mindset** | Kişisel motivasyon, cesaret, alışkanlıklar, özgüven, eyleme geçme, disiplin, aile, ebeveynlik, retorik — şahsi karaktere uygulanacak notlar |
 
-### iliskiler.js — İlişkiler
+### iliskiler.js — Kadınlar
 | Alt Kategori | Anahtar Konular |
 |---|---|
 | **Kadınlar** | Kadın-erkek ilişkileri, flört, evlilik |
-| **İletişim** | İkna, müzakere, beden dili, konuşma teknikleri, güven oluşturma, çatışma yönetimi |
-| **Networking** | Sosyal ağ kurma, ilişki yönetimi, networking stratejileri |
 
-### money.js — Money
+### money.js — Life
 | Alt Kategori | Anahtar Konular |
 |---|---|
 | **Business** | Ticaret, iş hayatı, e-ticaret, müşteri yönetimi, tedarikçi, muhasebe, risk yönetimi, çalışan yönetimi |
 | **Marketing** | Pazarlama, reklam, sosyal medya, growth hacking, SEO, içerik pazarlama, marka, dikkat çekme |
 | **Finance** | Yatırım, borsa, kripto, bütçe, tasarruf, finansal okuryazarlık |
 | **Ideas** | İş fikirleri, girişim fırsatları, yan gelir, niş alanlar, SaaS |
+| **İletişim** | İkna, müzakere, beden dili, konuşma teknikleri, güven oluşturma, çatışma yönetimi |
+| **Networking** | Sosyal ağ kurma, ilişki yönetimi, networking stratejileri |
+| **İnsan İlişkileri** | Dostluk, sosyal bağlar, empati, çatışma çözümü, toplumsal ilişkiler |
 
 ### toplum.js — Toplum & Dünya
 | Alt Kategori | Anahtar Konular |

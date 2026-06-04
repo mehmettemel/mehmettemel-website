@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation'
 import { PersonalContent } from '@/components/personal/PersonalContent'
 import { categories } from '@/data/personal/iliskiler'
 
-export const metadata = { title: 'İlişkiler | Mehmet Temel' }
+export const metadata = { title: 'Kadınlar | Mehmet Temel' }
 
 export default async function IliskilerPage() {
   const cookieStore = await cookies()
@@ -17,7 +17,7 @@ export default async function IliskilerPage() {
   return (
     <Container>
       <div className="mx-auto max-w-7xl py-8 sm:py-12">
-        <PersonalContent categories={categories} title="İlişkiler" />
+        <PersonalContent categories={categories} title="Kadınlar" />
       </div>
     </Container>
   )

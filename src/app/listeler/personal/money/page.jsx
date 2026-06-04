@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation'
 import { PersonalContent } from '@/components/personal/PersonalContent'
 import { categories } from '@/data/personal/money'
 
-export const metadata = { title: 'Money | Mehmet Temel' }
+export const metadata = { title: 'Life | Mehmet Temel' }
 
 export default async function MoneyPage() {
   const cookieStore = await cookies()
@@ -17,7 +17,7 @@ export default async function MoneyPage() {
   return (
     <Container>
       <div className="mx-auto max-w-7xl py-8 sm:py-12">
-        <PersonalContent categories={categories} title="Money" />
+        <PersonalContent categories={categories} title="Life" />
       </div>
     </Container>
   )

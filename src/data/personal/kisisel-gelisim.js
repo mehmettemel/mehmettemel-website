@@ -85,6 +85,7 @@ export const categories = {
       'İnsan beyni negatifi anlayamaz, idrak edemez. "Aklınıza bir fil getirmeyin, düşünmeyin." İnsan beynine bir şeyi yapmaması gerektiğini söyleyemezsiniz. Bunu en iyi kayakçılar bilir. Bir kayakçı ormanın içinde "ağaçlara çarpma, ağaçlara çarpma" diye telkinde bulunursa sadece ağaçlara dikkat eder. Demeniz gereken şey "yolu takip et, yolu takip et" diye telkinde bulunarak ilerlemek. Böylece tek odaklandığınız şey yol olacak. Aynı şey yaşamınız için de geçerli. Hayatta engellere odaklanırsanız gördüğünüz tek şey engeller olacaktır. Ağaçların arasından geçebileceğiniz yola odaklanırsanız, tek gördüğünüz yol olacaktır. Kendi kariyerinizi yönlendirmek sizin seçiminiz, tam anlamıyla bakış açınızdır.',
       'Bir insanın kendisine yapacağı en büyük kötülük, kapasitesine denk olmayan insan ve ortamlarla vakit geçirmektir. Buradaki denklik CV, statü veya gelir değil; zihinsel uyum, karşılıklı hoşgörü ve ahlaki derinliktir. Bu konularda seçici olmazsanız, kendinizi heba edersiniz.',
       'Çocuklarınızı kaotik bir geleceğe hazırlamak için onlara sadece 3 temel şey aşılayın: "Seni her zaman seveceğim", "Sana inanıyorum", "Kendine inan". Bu üçlü, çocuğa her türlü engeli aşabileceği kırılmaz bir psikolojik zırh sağlar.',
+      'Hayatın trajediye yatkın olduğunu kabullenmek, üzerinizdeki baskıyı sıfırlar ve mizah yaratır.',
     ],
   },
 }
