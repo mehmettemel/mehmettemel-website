@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo, useEffect, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { KeyRound, ChevronLeft, ChevronRight } from 'lucide-react'
 import { LoginDialog } from '../auth/LoginDialog'
@@ -171,27 +172,54 @@ export function MobileHome() {
   const showPersonalNote = activeTab !== 'incelemeler' && activeTab !== 'ingilizce'
   const hasContent = currentNote || incelemeItem || englishWord || loading
 
+  const randomButton = typeof document !== 'undefined' && createPortal(
+    <div
+      className="md:hidden"
+      style={{
+        position: 'fixed',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        zIndex: 9999,
+        padding: '12px 16px',
+        paddingBottom: 'max(20px, env(safe-area-inset-bottom))',
+        background: 'hsl(var(--background) / 0.8)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
+      }}
+    >
+      <button
+        onClick={handleRandom}
+        disabled={loading}
+        className="w-full rounded-full bg-primary py-3 text-sm font-medium text-primary-foreground shadow-md transition-all active:scale-95 disabled:opacity-50"
+      >
+        {loading ? '...' : 'Rastgele'}
+      </button>
+    </div>,
+    document.body,
+  )
+
   return (
     <>
-      <div className="min-h-[calc(100vh-4rem)] px-2 pb-24 pt-4 md:hidden">
-        {/* Sticky top */}
-        <div className="sticky top-0 z-40 bg-background pb-3">
-          <div className="mb-3 flex items-center justify-center gap-2">
-            <h1 className="text-lg font-bold tracking-tight text-foreground">
-              Mehmet Temel
-            </h1>
-            {!isAuthenticated && (
-              <button
-                onClick={() => setShowLogin(true)}
-                className="flex items-center text-muted-foreground transition-all hover:text-foreground"
-                aria-label="Giriş yap"
-              >
-                <KeyRound className="h-3.5 w-3.5 animate-pulse" />
-              </button>
-            )}
-          </div>
+      <div className="px-2 pb-24 pt-4 md:hidden">
+        {/* Header */}
+        <div className="mb-3 flex items-center justify-center gap-2">
+          <h1 className="text-lg font-bold tracking-tight text-foreground">
+            Mehmet Temel
+          </h1>
+          {!isAuthenticated && (
+            <button
+              onClick={() => setShowLogin(true)}
+              className="flex items-center text-muted-foreground transition-all hover:text-foreground"
+              aria-label="Giriş yap"
+            >
+              <KeyRound className="h-3.5 w-3.5 animate-pulse" />
+            </button>
+          )}
+        </div>
 
-          {/* Category tabs */}
+        {/* Sticky tabs only */}
+        <div className="sticky top-[49px] z-40 bg-background pb-3 -mx-2 px-2">
           <div className="relative">
             {showLeftArrow && (
               <button
@@ -331,30 +359,7 @@ export function MobileHome() {
         <LoginDialog open={showLogin} onOpenChange={setShowLogin} />
       </div>
 
-      {/* Fixed bottom random button - outside main container to avoid any stacking context issues */}
-      <div
-        className="md:hidden"
-        style={{
-          position: 'fixed',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          zIndex: 9999,
-          padding: '12px 16px',
-          paddingBottom: 'max(20px, env(safe-area-inset-bottom))',
-          background: 'hsl(var(--background) / 0.8)',
-          backdropFilter: 'blur(12px)',
-          WebkitBackdropFilter: 'blur(12px)',
-        }}
-      >
-        <button
-          onClick={handleRandom}
-          disabled={loading}
-          className="w-full rounded-full bg-primary py-3 text-sm font-medium text-primary-foreground shadow-md transition-all active:scale-95 disabled:opacity-50"
-        >
-          {loading ? '...' : 'Rastgele'}
-        </button>
-      </div>
+      {randomButton}
     </>
   )
 }
