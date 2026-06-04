@@ -15,6 +15,7 @@ export const categories = {
       'A very underrated life decision is marrying someone who wants a simple life.',
       'Marriage as a long conversation. When entering a marriage, one should ask the question: do you think you will be able to have good conversations with this woman right into old age? Everything else in marriage is transitory, but most of the time in interaction is spent in conversation. — Friedrich Nietzsche',
       'Bize zarar veren veya bizi zorlayan kişilere (ör. kaçıngan partnerler) aşık olmamızın sebebi bir rastlantı değildir. Bilinçdışımız, çocuklukta sorunlu ebeveynimizle yaşadığımız travmayı, ona çok benzeyen bir partnerle yeniden sahneleyip bu kez farklı bir mutlu sonla bitirmeyi (başarmayı) hedefler.',
+      'Muhtaçlık tehlike sinyalidir: Çaresizlik gösteren kişiden uzaklaşmak evrimsel bir savunma refleksidir.',
     ]
   },
 }
