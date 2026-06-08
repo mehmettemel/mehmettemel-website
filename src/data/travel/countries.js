@@ -382,4 +382,19 @@ export const tabs = {
       },
     ],
   },
+  oceaniaCaribbean: {
+    label: 'Okyanusya & Karayipler',
+    emoji: '🏝️',
+    countries: [
+      {
+        name: 'Dominik Cumhuriyeti',
+        flag: '🇩🇴',
+        notes: [
+          'Punta Cana – Denize sıfır mekan, co-working + kafe + akşam partili mekan fikri.',
+          'Santa Domingo ve La Romana çok beğenilmiş.',
+          'Kakao, kahve, tütün – yüksek kalitede ürünler ve yaşam keyfi.',
+        ],
+      },
+    ],
+  },
 }
