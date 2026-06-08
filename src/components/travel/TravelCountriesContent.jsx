@@ -109,7 +109,9 @@ export function TravelCountriesContent({ tabs, title }) {
     emoji: tabs[key].emoji,
   }))
 
-  const countries = tabs[activeTab]?.countries || []
+  const currentTab = tabs[activeTab]
+  const countries = currentTab?.countries || []
+  const generalNotes = currentTab?.generalNotes || []
 
   return (
     <div>
@@ -119,12 +121,33 @@ export function TravelCountriesContent({ tabs, title }) {
 
       <TabBar tabs={allTabs} activeTab={activeTab} onTabChange={setActiveTab} />
 
-      {countries.length === 0 ? (
+      {countries.length === 0 && generalNotes.length === 0 ? (
         <div className="py-12 text-center">
           <p className="text-sm text-muted-foreground">Henüz not eklenmemiş</p>
         </div>
       ) : (
         <div className="mx-auto w-full max-w-2xl space-y-4">
+          {generalNotes.length > 0 && (
+            <div className="rounded-xl border border-border/50 bg-card">
+              <div className="flex items-center gap-2.5 px-4 py-3">
+                <span className="text-lg">📝</span>
+                <h3 className="text-sm font-semibold text-foreground">Genel Notlar</h3>
+                <span className="ml-auto text-[10px] font-medium text-muted-foreground">
+                  {generalNotes.length} not
+                </span>
+              </div>
+              <div className="border-t border-border/30 px-4 py-2.5">
+                <ul className="space-y-2">
+                  {generalNotes.map((note, i) => (
+                    <li key={i} className="flex gap-2.5 text-sm leading-relaxed text-foreground">
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-muted-foreground/40" />
+                      <span>{note}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          )}
           {countries.map((country) => (
             <CountryCard key={country.name} country={country} />
           ))}

@@ -4,6 +4,13 @@ export const tabs = {
   europe: {
     label: 'Avrupa',
     emoji: '🏰',
+    generalNotes: [
+      'The immediate locations for high quality chocolate are of course Belgium and Switzerland. Norwegian chocolate is also very underrated.',
+      'Freia Melkesjokolade is delightful and they also make Kvikklunsj which is like a Kit Kat but far superior. It reminds me of the old Kit Kat recipe in the UK.',
+      'Finland has Fazer, which is probably my favorite major national-brand chocolate. Also easy to find in Sweden too.',
+      'Love me some Meiji or Whitaker\'s.',
+      'Vilnius.',
+    ],
     countries: [
       {
         name: 'İtalya',
@@ -239,6 +246,13 @@ export const tabs = {
           'Vang Vieng – Amazing food, great rapid Wi-Fi and perfect working conditions. Sitting cross-legged at a table with cushions.',
         ],
       },
+      {
+        name: 'Vietnam',
+        flag: '🇻🇳',
+        notes: [
+          'Con Dao.',
+        ],
+      },
     ],
   },
   africa: {
@@ -347,6 +361,12 @@ export const tabs = {
   southAmerica: {
     label: 'Güney Amerika',
     emoji: '🌎',
+    generalNotes: [
+      'r/asklatinamerica – Reddit\'te Latin Amerika hakkında soru sorulabilecek subreddit: https://www.reddit.com/r/asklatinamerica/',
+      'Had amazing chocolate in Quito.',
+      'Dünyanın en hoş iklimi Medellin şehrindedir. –Fatih Koparan',
+      'Türbülans: Bahar ayları (Mart gibi) ve yaz mevsimi (Aralık–Ocak gibi) gündüz saatleri uçuş için uygun. Yaz aylarında hafif sarsıntılı olabiliyor ama kayda değer bir şey yaşanmadı. Yine de o günün hava şartlarına bağlı.',
+    ],
     countries: [
       {
         name: 'Peru',
@@ -365,6 +385,21 @@ export const tabs = {
           "Rio de Janeiro – Ipanema veya Copacabana'da kalınmalı.",
           'Airbnb kalitesiz olabilir.',
           'Santa Catarina harika bir bölge.',
+          'Sao Sebastiao.',
+        ],
+      },
+      {
+        name: 'Kolombiya',
+        flag: '🇨🇴',
+        notes: [
+          'Filandia.',
+        ],
+      },
+      {
+        name: 'Şili',
+        flag: '🇨🇱',
+        notes: [
+          'Cochamó.',
         ],
       },
       {
@@ -386,6 +421,13 @@ export const tabs = {
     label: 'Okyanusya & Karayipler',
     emoji: '🏝️',
     countries: [
+      {
+        name: 'Avustralya',
+        flag: '🇦🇺',
+        notes: [
+          'Tasmania.',
+        ],
+      },
       {
         name: 'Dominik Cumhuriyeti',
         flag: '🇩🇴',
