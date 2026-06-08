@@ -13,6 +13,12 @@ const travelPages = [
     emoji: '📖',
     description: 'Travel tips, tricks and useful information',
   },
+  {
+    href: '/listeler/travel/countries',
+    label: 'Countries',
+    emoji: '🌍',
+    description: 'Country notes, tips and must-see places',
+  },
 ]
 
 export default async function TravelPage() {
