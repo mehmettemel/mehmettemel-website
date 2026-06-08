@@ -126,6 +126,260 @@ export const tabs = {
   asia: {
     label: 'Asya',
     emoji: '🏯',
-    countries: [],
+    countries: [
+      {
+        name: 'Türkiye',
+        flag: '🇹🇷',
+        notes: [
+          'Rota: Batum – Ordu – Samsun – Giresun – Sinop.',
+          'Sinop git sakinlik için.',
+          "Göcek tekne turu (Muğla Ortaca'dan her yere ulaşım mümkün).",
+          'Bodrum, Yalıkavak, Kaş, Patara, Fethiye. –Ahmet Çığşar',
+          'Adana – Kayseri – Sultan Sazlığı – Göreme rotası.',
+          'İstanbul yürüyüş rotaları ve vapur hatları detaylı listelenmiş.',
+          'Bademli koyları için tekne turları önerilmiş.',
+          'Şanlıurfa Göbeklitepe Adıyaman Nemrut Mardin Kasimiye Medresesi – Dayrulzafaran Kilisesi Diyarbakır Hevsel Bahçeleri – Zerzevan Kalesi – Ulu Cami Van Akdamar Kilisesi Kars Ani Harabeleri Malatya Aslantepe Höyüğü.',
+          'Kastamonu.',
+          'Kırklareli.',
+          'Fethiye – Gökova arası en güzel bölge.',
+          'Fethiye Ölüdeniz Belcekız plajı.',
+          'Güzelçamlı Kuşadası – sessiz sakin bir bölge.',
+          'Kaş Kalkan.',
+        ],
+      },
+      {
+        name: 'Türkiye – Kalınabilecek Oteller',
+        flag: '🇹🇷',
+        notes: [
+          'Robinson Çamyuva – Kemer.',
+          'Söğüt Ada Pansiyon – Marmaris.',
+        ],
+      },
+      {
+        name: 'Japonya',
+        flag: '🇯🇵',
+        notes: [
+          'Asakusa – Eski Tokyo atmosferi.',
+          'Matsuyama Shikoku – Nomadlar için güzel bir yer.',
+          'Odaiba – Yapay adalar ve alışveriş.',
+          'Kyoto, Osaka ve Okinawa önerilmiş. –Ahmet Çığşar',
+          'Kanazawa.',
+          'Ucuz ama küçük bedenli kıyafetler.',
+          'Tabelog mekan değerlendirmeleri için daha doğru.',
+          'Kalınacak yerler tren istasyonlarına yakın olmalı.',
+          'Seyahat için uygun aylar: Mart–Mayıs, Kasım, Ocak–Şubat.',
+          'Seyahat için önerilmeyen aylar: Haziran–Ekim.',
+          'Haftasonları çok kalabalık, hafta içi gezmek daha mantıklı.',
+          "Hokkaido'da Shiroi Kibito Park – inanılmaz sevimli çikolata fabrikası, gerçekten iyi çikolata.",
+          'Japan – Royce chocolates.',
+          'Tırnak makası, bıçaklar, makaslar, şemsiyeler Japonya\'dan alınmalı.',
+          'Özellikle Santoku, Damascus Nakiri (kiraz ağacı saplı) ve Gyuto modelleri. Japon çelik işçiliği sayesinde inanılmaz keskin ve uzun ömürlü.',
+        ],
+      },
+      {
+        name: 'Sri Lanka',
+        flag: '🇱🇰',
+        notes: [
+          'Weligama ve Arugam Bay tarafları tavsiye edilen bölgeler. –Ahmet Çığşar',
+          'Favori kasaba: Nuwara Eliya – mükemmel hava, yakındaki Sita tapınağını ziyaret edin.',
+          'Ella kasabası iyi: Ella Rock, Nine Arch Bridge ve Ravana şelalelerini ziyaret edin.',
+          'Ella Rock yürüyüşünde yerel halkın yanlış yol göstererek dolandırmaya çalışmasına dikkat edin, yaygın bir durum.',
+          'Ella–Kandy trenini kaçırmayın, manzaralar çok güzel.',
+          'Güney Sri Lanka\'daki neredeyse tüm plajlar güzel: Jungle Beach, Mirissa Beach ve Unawatuna Beach.',
+          'Matara genel olarak sıkıcı ama Paravi Duwa Temple ve Shrine of Lady of Matara hariç.',
+          'Galle Fort\'u mutlaka ziyaret edin, bütün bir günü orada geçirin ve tepeden gün batımını izleyin.',
+          'Colombo dijital nomadlar için oldukça iyi, One Gall Face Mall yakınındaki coworking space\'leri deneyin.',
+          'Vejetaryenler: kottu rice ve kiribath\'ı mutlaka deneyin!',
+          'Jaffna.',
+        ],
+      },
+      {
+        name: 'Güney Kore',
+        flag: '🇰🇷',
+        notes: [
+          'Busan > Seoul anyday.',
+          'Ladies more beautiful in Daegu.',
+          'Gwangju has the best food.',
+        ],
+      },
+      {
+        name: 'Çin',
+        flag: '🇨🇳',
+        notes: [
+          'Terracotta Soldiers.',
+        ],
+      },
+      {
+        name: 'Tayvan',
+        flag: '🇹🇼',
+        notes: [
+          'Taidong, Taiwan.',
+        ],
+      },
+      {
+        name: 'Ürdün',
+        flag: '🇯🇴',
+        notes: [
+          'Jordan – Listede yer almış, keşfedilmeyi bekliyor.',
+        ],
+      },
+      {
+        name: 'Kamboçya',
+        flag: '🇰🇭',
+        notes: [
+          'Kep – Hardly anything there. No nightlife, no shopping, no tourist attractions. But kilometers of lovely beaches, lovely hostels, friendly locals, a seafood market where you can watch the fishing boats come in and have the freshest possible seafood grilled over charcoal at shockingly low prices, wonderful restaurants with local delicacies including the world\'s best fresh pepper, near-empty highways comfortable for rented motorbikes, and plenty of places to explore including a wildlife sanctuary on the nearby mountain.',
+          'Koh Rong Samloem.',
+        ],
+      },
+      {
+        name: 'Laos',
+        flag: '🇱🇦',
+        notes: [
+          'Mobile internet excellent and super cheap. UNITEL 4G/5G SIM card with 160 GB for <$5/month (99,000 kip). Excellent speeds even in most small towns.',
+          'Vang Vieng – Amazing food, great rapid Wi-Fi and perfect working conditions. Sitting cross-legged at a table with cushions.',
+        ],
+      },
+    ],
+  },
+  africa: {
+    label: 'Afrika',
+    emoji: '🌍',
+    countries: [
+      {
+        name: 'Fas',
+        flag: '🇲🇦',
+        notes: [
+          'Marakeş.',
+          'Sahra Çölü – Işık kirliliği olmayan yıldızlı gökyüzü deneyimi.',
+        ],
+      },
+      {
+        name: 'Sudan',
+        flag: '🇸🇩',
+        notes: [
+          'Sudan Piramitleri.',
+        ],
+      },
+      {
+        name: 'Mauritius',
+        flag: '🇲🇺',
+        notes: [
+          'Trou aux Biches bölgesi.',
+        ],
+      },
+      {
+        name: 'Tanzanya',
+        flag: '🇹🇿',
+        notes: [
+          'Zanzibar Adaları.',
+          'Ucuz bir ülke.',
+        ],
+      },
+      {
+        name: 'Tunus',
+        flag: '🇹🇳',
+        notes: [
+          'South Tunisia.',
+          'Djerba.',
+          'En iyi dönem: Mart–Mayıs ve Eylül–Kasım (çok sıcak olmuyor). Yazın (Haziran–Ağustos) aşırı sıcak (45+ derece) olabilir, çöl zorlayıcı olur.',
+        ],
+      },
+      {
+        name: 'Kenya',
+        flag: '🇰🇪',
+        notes: [
+          'Nairobi.',
+          'Make sure to hit local farmers markets! Great fresh foods grown locally and vendors with great products and even better attitudes.',
+        ],
+      },
+      {
+        name: 'Ruanda',
+        flag: '🇷🇼',
+        notes: [
+          'Kigali – Extremely, ridiculously safe. Gece 2–4 arası rahatça yürüyüşe çıkılabilir. Bin dolar altına rahat yaşanır.',
+        ],
+      },
+      {
+        name: 'Namibya',
+        flag: '🇳🇦',
+        notes: [
+          'Listede yer almış, keşfedilmeyi bekliyor.',
+        ],
+      },
+      {
+        name: 'Réunion',
+        flag: '🇷🇪',
+        notes: [
+          'Listede yer almış, keşfedilmeyi bekliyor.',
+        ],
+      },
+      {
+        name: 'Botsvana',
+        flag: '🇧🇼',
+        notes: [
+          'Listede yer almış, keşfedilmeyi bekliyor.',
+        ],
+      },
+    ],
+  },
+  northAmerica: {
+    label: 'Kuzey Amerika',
+    emoji: '🗽',
+    countries: [
+      {
+        name: 'Meksika',
+        flag: '🇲🇽',
+        notes: [
+          'Puebla – Barok kiliseler, düşük turist yoğunluğu.',
+          'Mexico City, Oaxaca – En iyi yerler.',
+          'Merida – Favorilerden biri.',
+        ],
+      },
+      {
+        name: 'Amerika',
+        flag: '🇺🇸',
+        notes: [
+          'The Grand Teton, Yellowstone, The Redwoods.',
+        ],
+      },
+    ],
+  },
+  southAmerica: {
+    label: 'Güney Amerika',
+    emoji: '🌎',
+    countries: [
+      {
+        name: 'Peru',
+        flag: '🇵🇪',
+        notes: [
+          'Machu Picchu – Büyüleyici.',
+          'Peru genel olarak çok güzel.',
+        ],
+      },
+      {
+        name: 'Brezilya',
+        flag: '🇧🇷',
+        notes: [
+          'Itacaré Bahia – Cennet gibi.',
+          'Buzios, Paraty, Florianopolis, Curitiba, Sao Paulo, Ubatuba, Ilha Bela.',
+          "Rio de Janeiro – Ipanema veya Copacabana'da kalınmalı.",
+          'Airbnb kalitesiz olabilir.',
+          'Santa Catarina harika bir bölge.',
+        ],
+      },
+      {
+        name: 'Arjantin',
+        flag: '🇦🇷',
+        notes: [
+          'En iyi semtler: Recoleta, Palermo, Belgrano ve San Telmo. İyi metro altyapısı var.',
+          'Airbnb kullanılabilir.',
+          'Sırasıyla en beğenilen bölgeler: Palermo Soho – Palermo Hollywood – Palermo Viejo.',
+          'Villa Crespo yine güzel bir bölge.',
+          'Uber kullanılıyor, cash öde.',
+          "Local görüş: Palermo Soho ve Hollywood touristy ve trashy. Recoleta veya Las Cañitas tercih edilmeli.",
+          'Recoleta lokaller tarafından daha çok övülüyor.',
+        ],
+      },
+    ],
   },
 }
