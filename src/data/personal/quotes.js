@@ -101,6 +101,8 @@ export const categories = {
       'Your 20s will teach you that you\'ll be alone on the saddest day of your life but the sun will rise again and you\'ll live.',
       'One of the darkest moments in my medical education was understanding that "high cholesterol" was a made up disease to sell pills.',
       'I believe in re-reading and re-watching your favourite books & movies at different stages of your life. The plot never changes, but your perspective does.',
+      'We need someone to help us to see the things that are really hard for us to see. It\'s like you need a mirror to see the back of your head.',
+      'When you realize that routines are actually rituals of devotion to yourself and your dreams, they become much easier to follow.',
     ],
   },
 }

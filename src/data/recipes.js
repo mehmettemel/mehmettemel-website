@@ -93,6 +93,12 @@ export const recipes = [
     ingredients: '0.8 su bardağı esmer pirinç\n0.8 su bardağı kalın bulgur\n0.5 su bardağı yeşil mercimek\n1 soğan, ince doğranmış\n2 yemek kaşığı zeytinyağı\n3 su bardağı sıcak su veya sebze/kemik suyu\n1 tatlı kaşığı tuz\n2 yemek kaşığı kabak çekirdeği veya ay çekirdeği\n1 yemek kaşığı keten tohumu (isteğe bağlı)\n3 yemek kaşığı taze maydanoz veya dereotu, kıyılmış',
     instructions: '1. Baklagili ön haşla: 0.5 su bardağı yeşil mercimeği bol suda yarı yumuşayana kadar (yaklaşık 12-15 dk) haşla ve süzgece al.\n2. Esmer pirinci ıslat: 0.8 su bardağı esmer pirinci 20-30 dk ılık suda beklet, sonra durulayıp süz.\n3. Soğanı kavur: Tencerede 2 yemek kaşığı zeytinyağını ısıt, 1 ince doğranmış soğanı pembeleşene kadar orta ateşte kavur.\n4. Önce pirinci pişir: Süzülmüş esmer pirinci tencereye ekle, 1-2 dk çevir. Üzerine sıcak suyun yaklaşık 2 bardağını ve 1 tatlı kaşığı tuzu ekle. Kaynayınca ateşi kıs, kapağı kapat ve 15 dk pişir — çünkü esmer pirinç bulgurdan daha uzun sürede pişer.\n5. Bulgur ve baklagili ekle: 15 dakika sonra 0.8 su bardağı bulguru ve ön haşlanmış mercimeği ekle. Kalan 1 bardak sıcak suyu ilave et, karıştır. Kapağı kapatıp kısık ateşte 12-15 dk daha, su çekilene kadar pişir.\n6. Demlendir: Ocağı kapat, kapağın altına temiz bir bez koyup 10 dk demlenmeye bırak.\n7. Servis et: Pilavı havalandırarak karıştır. Üzerine 2 yemek kaşığı çekirdekleri, 1 yemek kaşığı keten tohumunu ve 3 yemek kaşığı taze yeşillikleri serperek servis et.',
   },
+  {
+    id: 15,
+    name: 'Air Fryer Patates',
+    ingredients: '~450g patates, eşit boyutlarda doğranmış\nAvokado yağı spreyi\nTuz\nKarabiber',
+    instructions: '1. Air fryer\'ı 200°C\'ye (400°F) ön ısıtmaya alın.\n2. Patatesleri yıkayın ve eşit boyutlarda parçalara doğrayın (eşit pişmesi için yaklaşık 2.5 cm parçalar).\n3. Patatesleri geniş bir kaseye alın. Hafifçe avokado yağı spreyi sıkın, tuz ve karabiber ekleyin. Tüm parçalar eşit kaplanana kadar iyice karıştırın.\n4. Patatesleri air fryer sepetine tek katman halinde yerleştirin (üst üste koymayın).\n5. 200°C\'de toplam 20 dakika pişirin.\n6. Yarısında (10. dakikada) sepeti sallayın veya patatesleri çevirin, böylece eşit kızarır.\n7. Dışı altın rengi ve çıtır, içi yumuşak olunca çıkarın.',
+  },
 ]
 
 /**

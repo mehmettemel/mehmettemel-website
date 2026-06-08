@@ -342,6 +342,7 @@ export const englishWords = [
   { english: 'intended', turkish: 'amaçlanan, kasıtlı, hedeflenen', example: 'The message was intended for you, not for him.', example_turkish: 'Mesaj ona değil, sana yönelikti.' },
   { english: 'redemption', turkish: 'kurtuluş, kefaret, tövbe', example: 'After years of bad decisions, he finally found redemption by helping others.', example_turkish: 'Yıllarca kötü kararlar verdikten sonra, başkalarına yardım ederek sonunda kurtuluşunu buldu.' },
   { english: 'controversial', turkish: 'tartışmalı, tartışma yaratan', example: 'His controversial comments about the economy sparked a heated debate online.', example_turkish: 'Ekonomi hakkındaki tartışmalı yorumları internette hararetli bir tartışma başlattı.' },
+  { english: 'devotion', turkish: 'bağlılık, adanmışlık, sadakat', example: 'His devotion to his family kept him going through the hardest times.', example_turkish: 'Ailesine olan bağlılığı onu en zor zamanlarda ayakta tuttu.' },
 ]
 
 /**

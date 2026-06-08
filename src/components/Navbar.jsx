@@ -24,6 +24,7 @@ import {
 
 const listelerItems = [
   { href: '/listeler/life-tips', label: 'Life Tips', emoji: '💡' },
+  { href: '/listeler/travel', label: 'Travel', emoji: '✈️' },
   { href: '/listeler/tarif', label: 'Tarifler', emoji: '🍳' },
   { href: '/listeler/ingilizce', label: 'İngilizce', emoji: '🇬🇧' },
   { href: '/listeler/rusca', label: 'Rusça', emoji: '🇷🇺' },

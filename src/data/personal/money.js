@@ -165,11 +165,6 @@ export const categories = {
       'Geri bildirimi geçmiş hataya değil, kişinin hedefine bağlayın. "Bunu yanlış yaptın" demek yerine, "Bana CEO olmak istediğini söylemiştin, CEO olmak isteyen biri bu durumda şöyle davranır" deyin. Kişisel algılanmayı engeller ve egoyu devreden çıkarır.',
       'Often with interpersonal relationships, reality doesn\'t matter. Perception matters. And you can change perception without changing reality. Example: A boss got feedback that she didn\'t foster collaboration well. Her mentor advised her to use the word "collaborate" every chance she gets — work it into every email and meeting. Don\'t say "work together", say "collaborate". When there\'s a problem, talk about it as a chance for collaborative problem solving. Her next review was people glowing about how collaborative she was. She never changed any behavior. Just the words used.',
       '**Atıf Yöntemi - Yakıştırma Örneği**: Karşıdaki insana bir yakıştırma yaparsan onu korumak ister. Mesela yaramaz bir çocuğa "sen lider ruhlusun sınıf başkanı ol" dersen yaramazlık yapmayı kendine yakıştırmaz.',
-    ],
-  },
-  'Networking': {
-    label: 'Networking',
-    items: [
       'Güçlü insanların en büyük eksiği "Zaman"dır; onlara zaman kazandıracak tekliflerle gidin.',
     ],
   },
