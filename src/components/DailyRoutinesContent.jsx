@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
+import { Info, X } from 'lucide-react'
 
 function loadChecked(key) {
   if (typeof window === 'undefined') return {}
@@ -13,6 +14,50 @@ function loadChecked(key) {
 
 function saveChecked(key, checked) {
   localStorage.setItem(key, JSON.stringify(checked))
+}
+
+function InfoTooltip({ info }) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef(null)
+
+  useEffect(() => {
+    if (!open) return
+    function handleClick(e) {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false)
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [open])
+
+  return (
+    <span ref={ref} className="relative ml-auto shrink-0">
+      <button
+        onClick={(e) => {
+          e.stopPropagation()
+          setOpen(!open)
+        }}
+        className="flex h-6 w-6 items-center justify-center rounded-full text-muted-foreground/50 transition-colors hover:bg-secondary hover:text-muted-foreground"
+      >
+        <Info className="h-3.5 w-3.5" />
+      </button>
+      {open && (
+        <div className="absolute right-0 top-8 z-50 w-72 sm:w-80 rounded-xl border border-border bg-card p-4 shadow-lg">
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              setOpen(false)
+            }}
+            className="absolute right-2 top-2 rounded-full p-1 text-muted-foreground hover:bg-secondary hover:text-foreground"
+          >
+            <X className="h-3.5 w-3.5" />
+          </button>
+          <div className="pr-4 text-xs leading-relaxed text-muted-foreground whitespace-pre-line">
+            {info}
+          </div>
+        </div>
+      )}
+    </span>
+  )
 }
 
 function TodoChecklist({ items, storageKey = 'daily-routines-checked' }) {
@@ -103,28 +148,30 @@ function TodoChecklist({ items, storageKey = 'daily-routines-checked' }) {
 
               <div className="border-t border-border/30 px-4 py-1.5">
                 {group.children.map((child) => (
-                  <button
-                    key={child.id}
-                    onClick={() => toggle(child.id)}
-                    className="flex w-full items-center gap-3 rounded-lg px-2 py-2.5 text-left transition-colors hover:bg-secondary/30"
-                  >
-                    <span
-                      className={`flex h-4 w-4 shrink-0 items-center justify-center rounded border-[1.5px] transition-all ${
-                        checked[child.id]
-                          ? 'border-primary bg-primary text-primary-foreground'
-                          : 'border-muted-foreground/30'
-                      }`}
+                  <div key={child.id} className="flex items-center gap-1 rounded-lg px-2 py-2.5 transition-colors hover:bg-secondary/30">
+                    <button
+                      onClick={() => toggle(child.id)}
+                      className="flex flex-1 items-center gap-3 text-left"
                     >
-                      {checked[child.id] && (
-                        <svg className="h-2.5 w-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                        </svg>
-                      )}
-                    </span>
-                    <span className={`text-sm leading-relaxed ${checked[child.id] ? 'text-muted-foreground line-through' : 'text-foreground'}`}>
-                      {child.label}
-                    </span>
-                  </button>
+                      <span
+                        className={`flex h-4 w-4 shrink-0 items-center justify-center rounded border-[1.5px] transition-all ${
+                          checked[child.id]
+                            ? 'border-primary bg-primary text-primary-foreground'
+                            : 'border-muted-foreground/30'
+                        }`}
+                      >
+                        {checked[child.id] && (
+                          <svg className="h-2.5 w-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                          </svg>
+                        )}
+                      </span>
+                      <span className={`text-sm leading-relaxed ${checked[child.id] ? 'text-muted-foreground line-through' : 'text-foreground'}`}>
+                        {child.label}
+                      </span>
+                    </button>
+                    {child.info && <InfoTooltip info={child.info} />}
+                  </div>
                 ))}
               </div>
             </div>
