@@ -25,10 +25,12 @@ import {
 const listelerItems = [
   { href: '/listeler/life-tips', label: 'Life Tips', emoji: '💡' },
   { href: '/listeler/travel', label: 'Travel', emoji: '✈️' },
+  { href: '/listeler/daily-routines', label: 'Daily Routines', emoji: '☀️' },
   { href: '/listeler/tarif', label: 'Tarifler', emoji: '🍳' },
   { href: '/listeler/ingilizce', label: 'İngilizce', emoji: '🇬🇧' },
   { href: '/listeler/rusca', label: 'Rusça', emoji: '🇷🇺' },
   { href: '/kesifler/rusca-test', label: 'Rusça Test', emoji: '📝' },
+  { href: '/incelemeler', label: 'İncelemeler', emoji: '🔬' },
 ]
 
 function NavLink({ href, children }) {
@@ -46,10 +48,6 @@ function DesktopNav() {
   return (
     <NavigationMenu className="hidden md:flex">
       <NavigationMenuList>
-        <NavigationMenuItem>
-          <NavLink href="/incelemeler">İncelemeler</NavLink>
-        </NavigationMenuItem>
-
         <NavigationMenuItem>
           <NavLink href="/listeler/personal">Personal</NavLink>
         </NavigationMenuItem>
@@ -134,9 +132,6 @@ function MobileNav() {
                   <Link href="/" onClick={closeSheet} className={mobileNavLinkClass}>
                     Ana Sayfa
                   </Link>
-                  <Link href="/incelemeler" onClick={closeSheet} className={mobileNavLinkClass}>
-                    İncelemeler
-                  </Link>
                   <Link href="/listeler/personal" onClick={closeSheet} className={mobileNavLinkClass}>
                     Personal
                   </Link>
@@ -157,11 +152,17 @@ function MobileNav() {
                   <Link href="/listeler/life-tips" onClick={closeSheet} className={mobileNavLinkClass}>
                     <span>💡</span> Life Tips
                   </Link>
+                  <Link href="/listeler/daily-routines" onClick={closeSheet} className={mobileNavLinkClass}>
+                    <span>☀️</span> Daily Routines
+                  </Link>
                   <Link href="/listeler/rusca" onClick={closeSheet} className={mobileNavLinkClass}>
                     <span>🇷🇺</span> Rusça
                   </Link>
                   <Link href="/kesifler/rusca-test" onClick={closeSheet} className={mobileNavLinkClass}>
                     <span>📝</span> Rusça Test
+                  </Link>
+                  <Link href="/incelemeler" onClick={closeSheet} className={mobileNavLinkClass}>
+                    <span>🔬</span> İncelemeler
                   </Link>
                 </div>
               </AccordionContent>

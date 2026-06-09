@@ -356,6 +356,7 @@ export const tabs = {
           'Ödemeleri kredi kartı değil telefon ve mobil bankacılık ile yapın, sonra NFC kapatın. Böylece kartınızın fiziki olarak kopyalanmasını da engellemiş olursunuz.',
           'Kredi kartı ile satın alınan ürünün müşteriye teslim edilmemesi halinde, banka müşterinin ödediği bedeli kredi kartına iade etmek zorundadır (Yargıtay 19. Hukuk Dairesi 2016/1953). İşlem 3D Secure ile yapıldıysa hiçbir şey alamazsınız.',
           '5464 sayılı kanun çerçevesinde kaybettiğiniz/çaldırdığınız banka veya kredi kartınızı 24 saat içerisinde bankanıza bildirirseniz, geçen bu süre zarfında doğacak olası kaybınızdan sadece 150 TL ile sınırlı olmak üzere sorumlu oluyorsunuz. 150 TL üstü kaybınız banka tarafından karşılanır.',
+          'Direkt müşteri temsilcisine bağlanma: "Size hangi konuda yardım etmemi istersiniz?" veya "Beni aramışsınız." Bu cevabı verdiğiniz zaman da direkt temsilciye bağlanabilirsiniz.',
         ],
       },
       'Kredi Notu': {

@@ -9,7 +9,6 @@ export const tabs = {
       'Freia Melkesjokolade is delightful and they also make Kvikklunsj which is like a Kit Kat but far superior. It reminds me of the old Kit Kat recipe in the UK.',
       'Finland has Fazer, which is probably my favorite major national-brand chocolate. Also easy to find in Sweden too.',
       'Love me some Meiji or Whitaker\'s.',
-      'Vilnius.',
     ],
     countries: [
       {
@@ -128,15 +127,22 @@ export const tabs = {
           'Riga.',
         ],
       },
+      {
+        name: 'Litvanya',
+        flag: '🇱🇹',
+        notes: [
+          'Vilnius.',
+        ],
+      },
     ],
   },
-  asia: {
-    label: 'Asya',
-    emoji: '🏯',
+  turkey: {
+    label: 'Türkiye',
+    emoji: '🇹🇷',
     countries: [
       {
-        name: 'Türkiye',
-        flag: '🇹🇷',
+        name: 'Gezilecek Yerler',
+        flag: '📍',
         notes: [
           'Rota: Batum – Ordu – Samsun – Giresun – Sinop.',
           'Sinop git sakinlik için.',
@@ -155,13 +161,30 @@ export const tabs = {
         ],
       },
       {
-        name: 'Türkiye – Kalınabilecek Oteller',
-        flag: '🇹🇷',
+        name: 'İstanbul Yürüyüş Rotaları',
+        flag: '🚶',
+        notes: [
+          'Karaköy Tünel → Beyoğlu → İstiklal → Cihangir → Karaköy',
+          'Üsküdar (vapur) → Çengelköy → yürüyerek Kuzguncuk → Üsküdar',
+          'Eminönü (vapur) → Arnavutköy → Bebek',
+          'Çengelköy – İstinye vapuru',
+          'Üsküdar\'dan Haliç hattı ile Balat',
+        ],
+      },
+      {
+        name: 'Kalınabilecek Oteller',
+        flag: '🏨',
         notes: [
           'Robinson Çamyuva – Kemer.',
           'Söğüt Ada Pansiyon – Marmaris.',
         ],
       },
+    ],
+  },
+  asia: {
+    label: 'Asya',
+    emoji: '🏯',
+    countries: [
       {
         name: 'Japonya',
         flag: '🇯🇵',
@@ -435,6 +458,7 @@ export const tabs = {
           'Punta Cana – Denize sıfır mekan, co-working + kafe + akşam partili mekan fikri.',
           'Santa Domingo ve La Romana çok beğenilmiş.',
           'Kakao, kahve, tütün – yüksek kalitede ürünler ve yaşam keyfi.',
+          'Santa Domingo ve La Romana\'yı da çok sevdim ama Punta Cana bambaşka bir yer :) –Ahmet Çığşar',
         ],
       },
     ],
