@@ -25,7 +25,6 @@ import {
 const listelerItems = [
   { href: '/listeler/life-tips', label: 'Life Tips', emoji: '💡' },
   { href: '/listeler/travel', label: 'Travel', emoji: '✈️' },
-  { href: '/listeler/daily-routines', label: 'Daily Routines', emoji: '☀️' },
   { href: '/listeler/tarif', label: 'Tarifler', emoji: '🍳' },
   { href: '/listeler/ingilizce', label: 'İngilizce', emoji: '🇬🇧' },
   { href: '/listeler/rusca', label: 'Rusça', emoji: '🇷🇺' },
@@ -50,6 +49,10 @@ function DesktopNav() {
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavLink href="/listeler/personal">Personal</NavLink>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <NavLink href="/listeler/daily-routines">Daily Routines</NavLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
@@ -135,6 +138,9 @@ function MobileNav() {
                   <Link href="/listeler/personal" onClick={closeSheet} className={mobileNavLinkClass}>
                     Personal
                   </Link>
+                  <Link href="/listeler/daily-routines" onClick={closeSheet} className={mobileNavLinkClass}>
+                    Daily Routines
+                  </Link>
                   <Link href="/iletisim" onClick={closeSheet} className={mobileNavLinkClass}>
                     İletişim
                   </Link>
@@ -151,9 +157,6 @@ function MobileNav() {
                 <div className="flex flex-col gap-0.5 pl-2">
                   <Link href="/listeler/life-tips" onClick={closeSheet} className={mobileNavLinkClass}>
                     <span>💡</span> Life Tips
-                  </Link>
-                  <Link href="/listeler/daily-routines" onClick={closeSheet} className={mobileNavLinkClass}>
-                    <span>☀️</span> Daily Routines
                   </Link>
                   <Link href="/listeler/rusca" onClick={closeSheet} className={mobileNavLinkClass}>
                     <span>🇷🇺</span> Rusça

@@ -6,6 +6,7 @@ export const routineList = [
     label: 'SABAH RUTİNİ',
     children: [
       { id: 'sabah-1', label: 'Uyanır uyanmaz ilk 30 dakikada güneş ışığı almak' },
+      { id: 'sabah-2', label: 'Derin nefes egzersizi yap' },
     ],
   },
 ]
