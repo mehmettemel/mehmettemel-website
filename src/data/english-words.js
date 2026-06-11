@@ -345,6 +345,8 @@ export const englishWords = [
   { english: 'devotion', turkish: 'bağlılık, adanmışlık, sadakat', example: 'His devotion to his family kept him going through the hardest times.', example_turkish: 'Ailesine olan bağlılığı onu en zor zamanlarda ayakta tuttu.' },
   { english: 'deception', turkish: 'aldatma, hile, kandırma', example: 'The whole relationship was built on deception, and she only found out the truth years later.', example_turkish: 'Tüm ilişki aldatma üzerine kurulmuştu ve gerçeği ancak yıllar sonra öğrendi.' },
   { english: 'coercion', turkish: 'zorlama, baskı, cebir', example: 'He signed the contract under coercion and later took legal action to have it voided.', example_turkish: 'Sözleşmeyi baskı altında imzaladı ve daha sonra iptal ettirmek için yasal işlem başlattı.' },
+  { english: 'resemble', turkish: 'benzemek, andırmak', example: 'She resembles her mother so much that people often mistake them for sisters.', example_turkish: 'Annesine o kadar benziyor ki insanlar onları sık sık kız kardeş sanıyor.' },
+  { english: 'affair', turkish: 'ilişki, mesele, olay', example: 'The whole affair was kept secret until a journalist broke the story.', example_turkish: 'Tüm mesele, bir gazeteci haberi ortaya çıkarana kadar gizli tutuldu.' },
 ]
 
 /**

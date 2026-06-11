@@ -105,6 +105,8 @@ export const categories = {
       'When you realize that routines are actually rituals of devotion to yourself and your dreams, they become much easier to follow.',
       'Dünü toprağa gömemezseniz yarınlarınız çiçek açmaz.',
       'Eylemleri sözlerden oluşanlara değil; sözleri eylemlerden oluşan insanlara güvenin. — Platon',
+      'Bizi güçlü yapan yediklerimiz değil, hazmettiklerimizdir; bizi zengin yapan kazandıklarımız değil, muhafaza ettiklerimizdir; bizi bilgili yapan okuduklarımız değil, kafamıza yerleştirdiklerimizdir.',
+      'İnsan, doğası gereği zora düşmedikçe yeteneklerini sonuna kadar kullanmaz. — Sun Tzu',
     ],
   },
 }

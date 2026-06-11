@@ -329,6 +329,7 @@ export const tabs = {
           'Dawn and dusk are statistically the safest times to fly.',
           'Stay awake until it\'s time to sleep in their time, zero jet lag. Never failed me.',
           'Airplane water is dirty. Be careful about drinking coffee or hot tea on planes. Also remember the water you wash your hands with in airplane bathrooms is filthy. Follow up with hand sanitizer — or just try to skip the bathroom on the airplane if possible.',
+          'Uçuşlarda el çantanı ya da sırt çantanı ayak altına koymadan önce bir çöp poşeti içine koyup öyle koy. O bölge çok pis oluyor.',
         ],
       },
       'Long Haul Flights': {
