@@ -28,7 +28,6 @@ const listelerItems = [
   { href: '/listeler/tarif', label: 'Tarifler', emoji: '🍳' },
   { href: '/listeler/ingilizce', label: 'İngilizce', emoji: '🇬🇧' },
   { href: '/listeler/rusca', label: 'Rusça', emoji: '🇷🇺' },
-  { href: '/kesifler/rusca-test', label: 'Rusça Test', emoji: '📝' },
   { href: '/incelemeler', label: 'İncelemeler', emoji: '🔬' },
 ]
 
@@ -160,9 +159,6 @@ function MobileNav() {
                   </Link>
                   <Link href="/listeler/rusca" onClick={closeSheet} className={mobileNavLinkClass}>
                     <span>🇷🇺</span> Rusça
-                  </Link>
-                  <Link href="/kesifler/rusca-test" onClick={closeSheet} className={mobileNavLinkClass}>
-                    <span>📝</span> Rusça Test
                   </Link>
                   <Link href="/incelemeler" onClick={closeSheet} className={mobileNavLinkClass}>
                     <span>🔬</span> İncelemeler

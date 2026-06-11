@@ -1,32 +1,31 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Container } from '@/components/Container'
 import { RussianCard } from '@/components/russian/RussianCard'
 import { RandomCircleButton } from '@/components/ui/random-circle-button'
-import { russianCategories, getRussianByCategory } from '@/data/russian'
+import { russianPhrases } from '@/data/russian'
 
 export default function RussianPage() {
-  const [selectedCategory, setSelectedCategory] = useState('cumle')
   const [currentPhrase, setCurrentPhrase] = useState(null)
 
-  // Get data based on selected category
-  const currentData = useMemo(() => {
-    return getRussianByCategory(selectedCategory)
-  }, [selectedCategory])
-
-  // Get random phrase
-  const getRandomPhrase = () => {
-    if (currentData.length > 0) {
-      const randomIndex = Math.floor(Math.random() * currentData.length)
-      setCurrentPhrase(currentData[randomIndex])
+  const getRandomPhrase = useCallback(() => {
+    if (russianPhrases.length > 0) {
+      const randomIndex = Math.floor(Math.random() * russianPhrases.length)
+      setCurrentPhrase(russianPhrases[randomIndex])
     }
-  }
+  }, [])
 
-  // Set initial phrase when category changes
-  useMemo(() => {
+  // Set initial phrase
+  useEffect(() => {
     getRandomPhrase()
-  }, [currentData])
+  }, [getRandomPhrase])
+
+  // Auto-rotate every 10 seconds
+  useEffect(() => {
+    const interval = setInterval(getRandomPhrase, 10000)
+    return () => clearInterval(interval)
+  }, [getRandomPhrase])
 
   return (
     <Container>
@@ -44,26 +43,9 @@ export default function RussianPage() {
           <p className="text-base text-muted-foreground">
             Günlük hayatta kullanılabilecek Rusça kelime ve cümleler
           </p>
-        </div>
-
-        {/* Category Tabs */}
-        <div className="mb-8 flex flex-wrap justify-center gap-2">
-          {russianCategories.map((cat) => {
-            const count = getRussianByCategory(cat.id).length
-            return (
-              <button
-                key={cat.id}
-                onClick={() => setSelectedCategory(cat.id)}
-                className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
-                  selectedCategory === cat.id
-                    ? 'bg-primary text-primary-foreground shadow-lg'
-                    : 'bg-secondary/50 text-muted-foreground hover:bg-secondary hover:text-foreground'
-                }`}
-              >
-                {cat.emoji} {cat.name} ({count})
-              </button>
-            )
-          })}
+          <p className="mt-2 text-sm text-muted-foreground">
+            Toplam {russianPhrases.length} kelime/cümle
+          </p>
         </div>
 
         {/* Random Button */}

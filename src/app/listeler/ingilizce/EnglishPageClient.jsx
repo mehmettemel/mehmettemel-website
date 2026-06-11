@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect, useCallback } from 'react'
 import { EnglishCard } from '@/components/english/EnglishCard'
 import { RandomCircleButton } from '@/components/ui/random-circle-button'
 import { getRandomEnglishWord } from '@/data/english'
@@ -16,11 +16,18 @@ export function EnglishPageClient({ words }) {
   }, [words])
 
   // Get random word
-  const getRandomWord = () => {
+  const getRandomWord = useCallback(() => {
     if (words.length > 0) {
       setCurrentWord(getRandomEnglishWord(words))
     }
-  }
+  }, [words])
+
+  // Auto-rotate every 10 seconds
+  useEffect(() => {
+    if (words.length === 0) return
+    const interval = setInterval(getRandomWord, 10000)
+    return () => clearInterval(interval)
+  }, [words, getRandomWord])
 
   // If no words yet
   if (words.length === 0) {
