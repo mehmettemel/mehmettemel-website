@@ -28,6 +28,7 @@ const listelerItems = [
   { href: '/listeler/tarif', label: 'Tarifler', emoji: '🍳' },
   { href: '/listeler/ingilizce', label: 'İngilizce', emoji: '🇬🇧' },
   { href: '/listeler/rusca', label: 'Rusça', emoji: '🇷🇺' },
+  { href: '/listeler/questions', label: 'Questions', emoji: '❓' },
   { href: '/incelemeler', label: 'İncelemeler', emoji: '🔬' },
 ]
 

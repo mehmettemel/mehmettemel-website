@@ -28,23 +28,23 @@ export function RecipeModal({ recipe, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-background"
-      onClick={onClose}
+      className="fixed inset-0 z-50 overflow-y-auto bg-background"
+      onClick={(e) => e.stopPropagation()}
     >
       {/* Header Bar */}
       <div className="sticky top-0 z-10 border-b border-border bg-background/95 backdrop-blur-sm">
         <div className="mx-auto flex max-w-4xl items-center justify-between px-4 py-4">
-          <div className="flex items-center gap-3">
+          <div className="flex min-w-0 items-center gap-3">
             <span className="text-2xl" role="img" aria-label="recipe">
               🍳
             </span>
-            <h2 className="text-xl font-bold text-foreground sm:text-2xl">
+            <h2 className="truncate text-xl font-bold text-foreground sm:text-2xl">
               {recipe.name}
             </h2>
           </div>
           <button
             onClick={onClose}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary text-foreground transition-all hover:bg-secondary/80 hover:scale-110"
+            className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-secondary text-foreground transition-all hover:bg-secondary/80 hover:scale-110"
             aria-label="Close"
           >
             ✕
@@ -53,11 +53,7 @@ export function RecipeModal({ recipe, onClose }) {
       </div>
 
       {/* Content */}
-      <div
-        className="mx-auto max-w-4xl overflow-y-auto px-4 py-8"
-        style={{ maxHeight: 'calc(100vh - 73px)' }}
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className="mx-auto max-w-4xl px-4 py-8">
         {/* Ingredients */}
         <div className="mb-8">
           <h3 className="mb-4 flex items-center gap-2 text-xl font-semibold text-foreground">

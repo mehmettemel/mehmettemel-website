@@ -347,6 +347,7 @@ export const englishWords = [
   { english: 'coercion', turkish: 'zorlama, baskı, cebir', example: 'He signed the contract under coercion and later took legal action to have it voided.', example_turkish: 'Sözleşmeyi baskı altında imzaladı ve daha sonra iptal ettirmek için yasal işlem başlattı.' },
   { english: 'resemble', turkish: 'benzemek, andırmak', example: 'She resembles her mother so much that people often mistake them for sisters.', example_turkish: 'Annesine o kadar benziyor ki insanlar onları sık sık kız kardeş sanıyor.' },
   { english: 'affair', turkish: 'ilişki, mesele, olay', example: 'The whole affair was kept secret until a journalist broke the story.', example_turkish: 'Tüm mesele, bir gazeteci haberi ortaya çıkarana kadar gizli tutuldu.' },
+  { english: "if it wasn't/weren't for", turkish: '...olmasaydı, ...olmasa', example: "If it weren't for my wife's support, I would have given up a long time ago.", example_turkish: 'Eşimin desteği olmasaydı, çoktan pes etmiştim.' },
 ]
 
 /**

@@ -20,6 +20,10 @@ export const categories = {
       '"Beni değiştirmeye çalışıyorsun" şikâyeti romantik bir önyargıdır: Antik Yunan\'a göre aşk bir "duygu eğitimi" sürecidir; partnerlerin birbirini geliştirmesi ihanet değil, aşkın asıl işidir.',
       'Alain De Botton\'a göre partner seçerken bizi yöneten şey mutluluk arayışı değil, çocuklukta öğrendiğimiz duygusal iklimi yeniden bulma içgüdüsüdür; sevgisiz veya istikrarsız bir evde büyüyen kişi için "ev" hissi orasıdır ve bu yüzden sağlıklı sevgi tanıdık gelmediği için tehdit gibi hissedilir, hatta ilişki iyi gitmeye başlayınca sabote edilir. Freud\'un iyimser yorumuyla bu tekrar aslında anlamsız bir acı değil, çocukken çözülemeyen sorunu yetişkin olarak çözme girişimidir. Çıkış yolu kalıbı bilince çıkarmaktır: görünür kılınan kalıp ilişki içinde iyileştirilebilir; ama yıkıma sürüklüyorsa kendini kurtarmayı bilmek de aşkın parçasıdır.',
       'People are lonely because most people don\'t understand how to show up in relationships. People tend to feed their egos rather than their heart and soul. They don\'t understand what\'s required to make relationships healthy and fulfilling. People spend more time being concerned about what they\'re receiving rather than what they\'re providing. People need to learn what mature love is because the two prominent issues I see that ruin relationships are ego and immaturity.',
+      'If you argue in front of the kids, you apologize in front of the kids.',
+      'Your family doesn\'t need to know every argument. You\'ll forgive, they won\'t.',
+      'The uncomfortable conversations are the most important conversations to have.',
+      'Don\'t spend money ON the girl, spend money AROUND the girl. Kıza doğrudan hediye (çanta, takı vs.) almak yerine, eğlenceli bir ortam yarat. Kulüpte masa al, şişe al, deneyim yaşat. Ayrıca bu ortamları sosyal medyada paylaşmak sosyal çekimini artırır.',
     ]
   },
 }

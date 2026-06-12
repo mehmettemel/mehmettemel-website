@@ -35,9 +35,14 @@ const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
 async function downloadVideo() {
   console.error('[1/3] Video indiriliyor...');
   return new Promise((resolve, reject) => {
+    const args = ['-f', 'mp4/best', '--recode-video', 'mp4', '-o', tmpPath];
+    if (url.includes('tiktok.com')) {
+      args.push('--extractor-args', 'tiktok:api_hostname=api22-normal-c-useast2a.tiktokv.com');
+    }
+    args.push(url);
     execFile(
       'yt-dlp',
-      ['-f', 'mp4/best', '--recode-video', 'mp4', '-o', tmpPath, url],
+      args,
       { timeout: 300_000 },
       (err, stdout, stderr) => {
         if (err) reject(new Error(`yt-dlp hatasi: ${err.message}\n${stderr}`));

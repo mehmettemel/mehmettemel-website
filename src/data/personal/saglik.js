@@ -185,6 +185,8 @@ export const categories = {
         'Öncesinde çay, sigara, peynir, yoğurt yemeyin. 3 saat başka bir şey yemeyin.',
       ] },
       { text: 'Kurşun ve cıva gibi toksinleri vücuttan atmak için haftada 2-3 kez taze kişniş tüketin.', subItems: [] },
+      { text: 'Fast food restoranları soğuk içecekleri bilerek büyük boy verir. Soğuk içecekler damağı uyuşturarak yağlı ve ağır yiyeceklerin verdiği hissi azaltır, böylece daha fazla yeme isteği uyandırır. Gazlı içecekler geğirmeye neden olup midede yer açar. Ayrıca yağlı yemeklerle birlikte soğuk içecek tüketmek, lavabo borusuna soğuk suyla yağ dökmek gibidir; yağ midede katılaşır ve sindirimi zorlaştırır. Çin restoranlarında yemeklerle birlikte sıcak çay servis edilmesinin sebebi budur: sıcak içecek yağların parçalanmasını kolaylaştırır ve sindirimi iyileştirir. Ağır yemeklerde soğuk soda yerine sıcak çay veya sıcak su tercih edin.', subItems: [] },
+      { text: 'Çiğ sebze filizleri çok riskli gıda grubundadır çünkü bakteriler için uygun olan sera ortamında yetişir. Tüketmekten kaçın.', subItems: [] },
     ]
   },
   'Mutfak': {

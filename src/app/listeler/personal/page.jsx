@@ -3,46 +3,13 @@ import { cookies } from 'next/headers'
 import { verifyToken } from '@/lib/auth'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
+import { PersonalTabs } from '@/components/personal/PersonalTabs'
+import { tabs, title } from '@/data/personal'
 
 export const metadata = {
   title: 'Personal',
   description: 'Kişisel notlarım ve koleksiyonlarım',
 }
-
-const personalCategories = [
-  {
-    title: 'Sağlık',
-    href: '/listeler/personal/saglik',
-  },
-  {
-    title: 'Kişisel Gelişim',
-    href: '/listeler/personal/kisisel-gelisim',
-  },
-  {
-    title: 'Kadınlar',
-    href: '/listeler/personal/iliskiler',
-  },
-  {
-    title: 'Toplum & Dünya',
-    href: '/listeler/personal/toplum',
-  },
-  {
-    title: 'Life',
-    href: '/listeler/personal/money',
-  },
-  {
-    title: 'Trivia',
-    href: '/listeler/personal/trivia',
-  },
-  {
-    title: 'Quotes',
-    href: '/listeler/personal/quotes',
-  },
-  {
-    title: 'Future Insights',
-    href: '/listeler/personal/future-insights',
-  },
-]
 
 export default async function PersonalPage() {
   const cookieStore = await cookies()
@@ -54,31 +21,15 @@ export default async function PersonalPage() {
   return (
     <Container>
       <div className="mx-auto max-w-7xl py-8 sm:py-12">
-        <div className="mb-8 text-center">
-          <h1 className="mb-3 text-xl font-bold tracking-tight text-foreground">
-            Personal
-          </h1>
-        </div>
+        <PersonalTabs tabs={tabs} title={title} />
 
-        <div className="mx-auto w-full max-w-md space-y-3">
-          {personalCategories.map((category) => (
-            <div key={category.href} className="w-full text-center">
-              <Link
-                href={category.href}
-                className="block w-full text-xs font-normal text-foreground transition-opacity hover:opacity-60"
-              >
-                {category.title}
-              </Link>
-            </div>
-          ))}
-          <div className="w-full text-center pt-4">
-            <Link
-              href="/listeler/personal/rastgele"
-              className="block w-full text-xs font-normal text-foreground transition-opacity hover:opacity-60"
-            >
-              Rastgele
-            </Link>
-          </div>
+        <div className="mt-8 text-center">
+          <Link
+            href="/listeler/personal/rastgele"
+            className="text-xs font-normal text-muted-foreground transition-opacity hover:opacity-60"
+          >
+            Rastgele
+          </Link>
         </div>
       </div>
     </Container>

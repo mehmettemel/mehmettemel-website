@@ -7,7 +7,7 @@ function getItemText(item) {
   return typeof item === 'string' ? item : item.text
 }
 
-export function PersonalContent({ categories, title }) {
+export function PersonalContent({ categories, title, hideHeading = false }) {
   const [showRandom, setShowRandom] = useState(true)
   const [randomNote, setRandomNote] = useState(null)
   const [isAnimating, setIsAnimating] = useState(false)
@@ -102,9 +102,11 @@ export function PersonalContent({ categories, title }) {
     <>
       {/* Header */}
       <div className="mb-6 flex flex-col items-center gap-3">
-        <h1 className="text-xl font-bold tracking-tight text-foreground">
-          {title}
-        </h1>
+        {!hideHeading && (
+          <h1 className="text-xl font-bold tracking-tight text-foreground">
+            {title}
+          </h1>
+        )}
         <div className="flex items-center gap-3">
           <button
             onClick={getNewRandom}
