@@ -86,6 +86,7 @@ export const categories = {
       'Bir insanın kendisine yapacağı en büyük kötülük, kapasitesine denk olmayan insan ve ortamlarla vakit geçirmektir. Buradaki denklik CV, statü veya gelir değil; zihinsel uyum, karşılıklı hoşgörü ve ahlaki derinliktir. Bu konularda seçici olmazsanız, kendinizi heba edersiniz.',
       'Çocuklarınızı kaotik bir geleceğe hazırlamak için onlara sadece 3 temel şey aşılayın: "Seni her zaman seveceğim", "Sana inanıyorum", "Kendine inan". Bu üçlü, çocuğa her türlü engeli aşabileceği kırılmaz bir psikolojik zırh sağlar.',
       'Hayatın trajediye yatkın olduğunu kabullenmek, üzerinizdeki baskıyı sıfırlar ve mizah yaratır.',
+      'A satisfied life is better than a successful life. Success is measured by others, but satisfaction is measured by your own soul.',
     ],
   },
 }

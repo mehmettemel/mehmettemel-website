@@ -38,6 +38,8 @@ async function downloadVideo() {
     const args = ['-f', 'mp4/best', '--recode-video', 'mp4', '-o', tmpPath];
     if (url.includes('tiktok.com')) {
       args.push('--extractor-args', 'tiktok:api_hostname=api22-normal-c-useast2a.tiktokv.com');
+      // TikTok anti-bot icin tarayici cerezleri gerekiyor
+      args.push('--cookies-from-browser', 'chrome');
     }
     args.push(url);
     execFile(

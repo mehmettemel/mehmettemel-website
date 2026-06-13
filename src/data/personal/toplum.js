@@ -26,6 +26,7 @@ export const categories = {
       'Gelecekteki meslekler için İsrail gibi çok akıllı yönetilen ülkelerdeki hükümetin gençleri neye yönlendirdiğine bak.',
       'Sınıf yapılarının yıkılması ve herkesin "eşit" doğduğunun söylenmesi, herkesi birbiriyle kıyaslamaya itti. Eşitlerin dünyasındaki sosyal statü ve servet farkları, iyi bir hayatı elimizden kaçırdığımızın yıkıcı bir hatırlatıcısı oldu.',
       'Truly feel like humans weren\'t supposed to have this much access to the world on phones, computers etc. We can never be truly happy if we\'re always imagining what things could be if we were elsewhere.',
+      'İnsan, doğası gereği dünyayı değiştiren bir türdür. Yok eden değil, değiştiren. Merak, keşif, yayılma dürtüsü bizi durdurulamaz bir dönüştürücü yapıyor. Bu yetenek ortadan kalkamaz çünkü bizi insan yapan şeyin ta kendisi. İnsan doğası gereği dünyayı çok hızlı değiştirir, bu da bir kitlesel yok oluşu kaçınılmaz kılar — ama bu yok oluşun esas kurbanı dünya ya da mutlaka insan değil, bizimle aynı çağı paylaşan diğer canlılar.',
     ],
   },
 }

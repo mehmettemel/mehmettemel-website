@@ -107,11 +107,13 @@ export function PersonalContent({ categories, title, hideHeading = false }) {
             {title}
           </h1>
         )}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1.5">
           <button
             onClick={getNewRandom}
-            className={`flex items-center gap-1.5 text-xs transition-all hover:text-foreground hover:gap-2 ${
-              showRandom ? 'font-medium text-foreground underline decoration-2 underline-offset-4' : 'text-muted-foreground'
+            className={`flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] transition-all ${
+              showRandom
+                ? 'border-foreground/20 bg-secondary/60 font-medium text-foreground'
+                : 'border-transparent text-muted-foreground hover:text-foreground'
             }`}
           >
             <Shuffle className="h-3 w-3" />
@@ -119,8 +121,10 @@ export function PersonalContent({ categories, title, hideHeading = false }) {
           </button>
           <button
             onClick={switchToAll}
-            className={`flex items-center gap-1.5 text-xs transition-all hover:text-foreground hover:gap-2 ${
-              !showRandom ? 'font-medium text-foreground underline decoration-2 underline-offset-4' : 'text-muted-foreground'
+            className={`flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] transition-all ${
+              !showRandom
+                ? 'border-foreground/20 bg-secondary/60 font-medium text-foreground'
+                : 'border-transparent text-muted-foreground hover:text-foreground'
             }`}
           >
             <Grid3x3 className="h-3 w-3" />
