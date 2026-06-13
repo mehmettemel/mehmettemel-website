@@ -24,6 +24,7 @@ import {
 
 const listelerItems = [
   { href: '/listeler/life-tips', label: 'Life Tips', emoji: '💡' },
+  { href: '/listeler/w2b', label: 'W2B', emoji: '🛒' },
   { href: '/listeler/travel', label: 'Travel', emoji: '✈️' },
   { href: '/listeler/tarif', label: 'Tarifler', emoji: '🍳' },
   { href: '/listeler/ingilizce', label: 'İngilizce', emoji: '🇬🇧' },
@@ -157,6 +158,9 @@ function MobileNav() {
                 <div className="flex flex-col gap-0.5 pl-2">
                   <Link href="/listeler/life-tips" onClick={closeSheet} className={mobileNavLinkClass}>
                     <span>💡</span> Life Tips
+                  </Link>
+                  <Link href="/listeler/w2b" onClick={closeSheet} className={mobileNavLinkClass}>
+                    <span>🛒</span> W2B
                   </Link>
                   <Link href="/listeler/rusca" onClick={closeSheet} className={mobileNavLinkClass}>
                     <span>🇷🇺</span> Rusça
