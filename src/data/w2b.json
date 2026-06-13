@@ -22,7 +22,8 @@
         { "product": "Dikey süpürge", "brands": ["Dyson", "Kärcher"], "note": "HEPA filtreli olmalı. Fakir eskisi kadar iyi değil." },
         { "product": "Aydınlatma", "brands": ["ACK"] },
         { "product": "Klima", "brands": ["Mitsubishi Heavy SRK45ZSP-WS", "Baymak Elegant Prime 12 Inverter"] },
-        { "product": "Apple TV alternatifi", "brands": ["Xiaomi Mibox"], "note": "Her TV'ye takılır; sık ev değiştirenler için ideal." }
+        { "product": "Apple TV alternatifi", "brands": ["Xiaomi Mibox"], "note": "Her TV'ye takılır; sık ev değiştirenler için ideal." },
+        { "product": "Çalışma koltuğu", "brands": ["Herman Miller Aeron", "Nurus", "Timob Felix"] }
       ]
     },
     {
@@ -52,7 +53,9 @@
         { "product": "Torpido temizleyici", "brands": ["Ataş Plak2"] },
         { "product": "Döşeme temizleyici", "brands": ["Würth"] },
         { "product": "Sinek lekesi çıkarıcı", "brands": ["Würth"], "note": "Cam suyuna konsantre olarak ilave et." },
-        { "product": "Cam temizleyici", "brands": ["Camsil"], "note": "Mavi olan; silikonlu/renkli alma." }
+        { "product": "Cam temizleyici", "brands": ["Camsil"], "note": "Mavi olan; silikonlu/renkli alma." },
+        { "product": "Benzin", "brands": ["Shell"] },
+        { "product": "Dizel (mazot)", "brands": ["Petrol Ofisi", "Total"], "note": "Total'in kurumsal olduğunu anlamak için 'doco mu?' diye sor." }
       ]
     },
     {
@@ -60,6 +63,33 @@
       "emoji": "💄",
       "items": [
         { "product": "Lazer epilasyon cihazı", "brands": ["Candela", "Cynosure"], "note": "Alexandrite klinik cihazları; doktor bulunan yerlerde olur, sonuçları çok iyi." }
+      ]
+    },
+    {
+      "label": "Gıda & Market",
+      "emoji": "🥬",
+      "items": [
+        { "product": "Asma yaprağı (sarmalık)", "brands": ["Tokat"], "note": "Tokat yöresi en makbulü." },
+        { "product": "Domates", "brands": ["Çanakkale"] },
+        { "product": "Pilavlık pirinç", "brands": ["Amber"], "note": "Amber (amberbu) cinsi pilav için makbul." },
+        { "product": "Kuzu eti", "brands": ["Bolu"] },
+        { "product": "Tohum", "brands": ["Genta", "Hobitar"], "note": "Çoğu tohum dandik; ya çıkmaz ya meyve vermez. Genta (ya da alt markası Hobitar) kaliteli ve bilimsel." }
+      ]
+    },
+    {
+      "label": "Teknoloji",
+      "emoji": "💻",
+      "items": [
+        { "product": "Telefon kılıfı", "brands": ["Spigen"] },
+        { "product": "Powerbank", "brands": ["Anker", "Anker 737"] },
+        { "product": "VPN", "brands": ["Proton VPN"] }
+      ]
+    },
+    {
+      "label": "Mekan & Otel",
+      "emoji": "🏨",
+      "items": [
+        { "product": "Otel", "brands": ["Regnum Carya"] }
       ]
     }
   ]

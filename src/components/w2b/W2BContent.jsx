@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { Search, X, Trash2 } from 'lucide-react'
+import { ConfirmModal } from '@/components/ConfirmModal'
 
 function brandName(b) {
   return typeof b === 'string' ? b : b.name
@@ -62,11 +63,13 @@ export function W2BContent({ categories, title, subtitle, editable = false }) {
   const [query, setQuery] = useState('')
   const [activeCat, setActiveCat] = useState('all')
   const [cats, setCats] = useState(categories)
+  const [pending, setPending] = useState(null)
 
   const q = query.trim().toLocaleLowerCase('tr')
 
-  const handleDelete = async (catLabel, product) => {
-    if (!window.confirm(`"${product}" silinsin mi?`)) return
+  const confirmDelete = async () => {
+    const { category: catLabel, product } = pending
+    setPending(null)
     const prev = cats
     setCats((cs) =>
       cs.map((c) =>
@@ -189,7 +192,7 @@ export function W2BContent({ categories, title, subtitle, editable = false }) {
                     key={i}
                     item={item}
                     editable={editable}
-                    onDelete={() => handleDelete(cat.label, item.product)}
+                    onDelete={() => setPending({ category: cat.label, product: item.product })}
                   />
                 ))}
               </div>
@@ -197,6 +200,14 @@ export function W2BContent({ categories, title, subtitle, editable = false }) {
           ))}
         </div>
       )}
+
+      <ConfirmModal
+        open={!!pending}
+        title="Are you sure?"
+        message={pending ? `"${pending.product}" silinecek.` : ''}
+        onConfirm={confirmDelete}
+        onCancel={() => setPending(null)}
+      />
     </div>
   )
 }

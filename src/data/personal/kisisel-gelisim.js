@@ -87,6 +87,7 @@ export const categories = {
       'Çocuklarınızı kaotik bir geleceğe hazırlamak için onlara sadece 3 temel şey aşılayın: "Seni her zaman seveceğim", "Sana inanıyorum", "Kendine inan". Bu üçlü, çocuğa her türlü engeli aşabileceği kırılmaz bir psikolojik zırh sağlar.',
       'Hayatın trajediye yatkın olduğunu kabullenmek, üzerinizdeki baskıyı sıfırlar ve mizah yaratır.',
       'A satisfied life is better than a successful life. Success is measured by others, but satisfaction is measured by your own soul.',
+      'The greatest mind trick humans can do is reframing - the ability to completely transform our emotional experience and behavior by changing how we interpret a situation, without the situation itself changing at all. This is extraordinary when you think about it. The same exact event can make you miserable or energized purely based on the story you tell yourself about it.',
     ],
   },
 }
