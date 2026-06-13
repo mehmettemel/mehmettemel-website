@@ -1,69 +1,10 @@
 // W2B — "Where to Buy"
 // Hangi ürün hangi markadan / nereden alınır listesi.
+// Veri w2b.json'da tutulur (UI'daki silme ikonu o dosyayı düzenler).
 // Her item: { product, brands: [string | { name, href }], note? }
 
-export const title = 'W2B'
-export const subtitle = 'Hangi ürün, hangi markadan?'
+import data from './w2b.json'
 
-export const categories = [
-  {
-    label: 'Ev & Elektronik',
-    emoji: '🏠',
-    items: [
-      { product: 'Cam & sofra ürünleri', brands: ['Paşabahçe'] },
-      { product: 'El aletleri', brands: ['İzeltaş'] },
-      { product: 'Duş başlığı', brands: ['Grohe'], note: 'Termostatik duş bataryası ekstra olarak alınmalı.' },
-      { product: 'Tıraş makinesi', brands: ['Philips'] },
-      { product: 'Lateks yatak', brands: ['Sealy Posturepedic (Lovell Sense)', 'Yatsan'] },
-      { product: 'Düdüklü tencere', brands: ['Fissler'] },
-      { product: 'Bıçak', brands: ['Victorinox'] },
-      { product: 'Döküm tava', brands: ['Staub'] },
-      { product: 'Paket mandalı', brands: ['IKEA Bevara'] },
-      { product: 'Çamaşır makinesi', brands: ['Miele'], note: 'İçi ve dışı çelik kazan olması önemli.' },
-      { product: 'Televizyon', brands: ['LG', 'Samsung', 'Philips'], note: 'LG OLED C / G serisi ve Samsung OLED 90D serisi en iyi modeller. Akıllılık için Apple TV / Android box ekle.' },
-      { product: 'Beyaz eşya', brands: ['Bosch', 'Siemens', 'Miele', 'Electrolux'], note: 'Büyük şehirlerde Bosch/Miele/Electrolux; Anadolu’da servis yaygınlığı için Beko/Arçelik/Vestel. Sık taşınanlar için Arçelik pratik.' },
-      { product: 'Havlu', brands: ['Özdilek'] },
-      { product: 'Dikey süpürge', brands: ['Dyson', 'Kärcher'], note: 'HEPA filtreli olmalı. Fakir eskisi kadar iyi değil.' },
-      { product: 'Aydınlatma', brands: ['ACK'] },
-      { product: 'Klima', brands: ['Mitsubishi Heavy SRK45ZSP-WS', 'Baymak Elegant Prime 12 Inverter'] },
-      { product: 'Apple TV alternatifi', brands: ['Xiaomi Mibox'], note: 'Her TV’ye takılır; sık ev değiştirenler için ideal.' },
-    ],
-  },
-  {
-    label: 'Giyim & Ayakkabı',
-    emoji: '👔',
-    items: [
-      { product: 'Takım elbise', brands: ['Ramsey', 'WCollection', 'Ermenegildo Zegna'] },
-      { product: 'Outdoor / yürüyüş ayakkabısı', brands: ['Merrell', 'Salomon', 'Asolo', 'Lowa'] },
-      { product: 'Günlük ayakkabı', brands: ['Ecco', 'Clarks', 'Hoka'] },
-      { product: 'Sandalet', brands: ['Keen'] },
-      { product: 'Koşu ayakkabısı', brands: ['Brooks Glycerin 22'], note: 'Koşu/yürüyüşte 1 numara büyük al, ayaklar şişer.' },
-      { product: 'Kaz / kuş tüyü mont', brands: ['Lufian'] },
-      { product: 'Outdoor mont', brands: ["Arc'teryx", 'The North Face', 'Marmot', 'HW', 'Patagonia'], note: 'Columbia’dan kaliteli. Gore-tex dış katman tercih et.' },
-      { product: 'Ayakkabı karşılaştırma sitesi', brands: [{ name: 'runrepeat.com', href: 'https://runrepeat.com/' }] },
-    ],
-  },
-  {
-    label: 'Araba',
-    emoji: '🚗',
-    items: [
-      { product: 'Lastik', brands: ['Michelin', 'Continental'], note: 'Çok çukurlu yollarda Michelin alma.' },
-      { product: 'Motor yağı', brands: ['Castrol', 'Liqui Moly'] },
-      { product: 'Yedek parça', brands: ['TRW', 'Brembo', 'Ferodo', 'SKF', 'Febi'], note: '“Orijinal” parçaları bu markalar üretir; yarı fiyatına aynı kalite.' },
-      { product: 'Araç kamerası', brands: ['70MAI A500S Pro Plus'], note: 'Kapasitörlü olmalı; dahili pilli alma, sıcakta patlıyor.' },
-      { product: 'Oto şampuan', brands: ['Gojo'], note: 'Mavi renkli cilalı şampuan.' },
-      { product: 'Cam bezi', brands: ['Mikrotex'], note: 'Mavi olan; başka marka/model deneme.' },
-      { product: 'Torpido temizleyici', brands: ['Ataş Plak2'] },
-      { product: 'Döşeme temizleyici', brands: ['Würth'] },
-      { product: 'Sinek lekesi çıkarıcı', brands: ['Würth'], note: 'Cam suyuna konsantre olarak ilave et.' },
-      { product: 'Cam temizleyici', brands: ['Camsil'], note: 'Mavi olan; silikonlu/renkli alma.' },
-    ],
-  },
-  {
-    label: 'Güzellik & Sağlık',
-    emoji: '💄',
-    items: [
-      { product: 'Lazer epilasyon cihazı', brands: ['Candela', 'Cynosure'], note: 'Alexandrite klinik cihazları; doktor bulunan yerlerde olur, sonuçları çok iyi.' },
-    ],
-  },
-]
+export const title = data.title
+export const subtitle = data.subtitle
+export const categories = data.categories

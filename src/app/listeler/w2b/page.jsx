@@ -17,7 +17,12 @@ export default async function W2BPage() {
   return (
     <Container>
       <div className="mx-auto max-w-7xl py-8 sm:py-12">
-        <W2BContent categories={categories} title={title} subtitle={subtitle} />
+        <W2BContent
+          categories={categories}
+          title={title}
+          subtitle={subtitle}
+          editable={process.env.NODE_ENV !== 'production'}
+        />
       </div>
     </Container>
   )

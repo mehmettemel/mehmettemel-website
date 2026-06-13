@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { Search, X } from 'lucide-react'
+import { Search, X, Trash2 } from 'lucide-react'
 
 function brandName(b) {
   return typeof b === 'string' ? b : b.name
@@ -27,14 +27,25 @@ function BrandChip({ brand }) {
   return <span className={className}>{name}</span>
 }
 
-function Row({ item }) {
+function Row({ item, editable, onDelete }) {
   return (
-    <div className="flex flex-col gap-1.5 border-b border-border/50 py-3.5 last:border-0 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-      <div className="sm:min-w-0 sm:flex-1">
-        <p className="text-sm font-medium text-foreground">{item.product}</p>
-        {item.note && (
-          <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">{item.note}</p>
+    <div className="group flex flex-col gap-1.5 border-b border-border/50 py-3.5 last:border-0 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+      <div className="flex items-start gap-2 sm:min-w-0 sm:flex-1">
+        {editable && (
+          <button
+            onClick={onDelete}
+            aria-label="Sil"
+            className="mt-0.5 shrink-0 rounded p-0.5 text-muted-foreground/50 transition-colors hover:text-red-500 sm:opacity-0 sm:group-hover:opacity-100"
+          >
+            <Trash2 className="h-3.5 w-3.5" />
+          </button>
         )}
+        <div className="min-w-0">
+          <p className="text-sm font-medium text-foreground">{item.product}</p>
+          {item.note && (
+            <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">{item.note}</p>
+          )}
+        </div>
       </div>
       {item.brands.length > 0 && (
         <div className="flex flex-wrap gap-1.5 sm:max-w-[55%] sm:justify-end">
@@ -47,11 +58,35 @@ function Row({ item }) {
   )
 }
 
-export function W2BContent({ categories, title, subtitle }) {
+export function W2BContent({ categories, title, subtitle, editable = false }) {
   const [query, setQuery] = useState('')
   const [activeCat, setActiveCat] = useState('all')
+  const [cats, setCats] = useState(categories)
 
   const q = query.trim().toLocaleLowerCase('tr')
+
+  const handleDelete = async (catLabel, product) => {
+    if (!window.confirm(`"${product}" silinsin mi?`)) return
+    const prev = cats
+    setCats((cs) =>
+      cs.map((c) =>
+        c.label === catLabel
+          ? { ...c, items: c.items.filter((it) => it.product !== product) }
+          : c,
+      ),
+    )
+    try {
+      const res = await fetch('/api/w2b/delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ category: catLabel, product }),
+      })
+      if (!res.ok) throw new Error()
+    } catch {
+      setCats(prev)
+      window.alert('Silme başarısız oldu.')
+    }
+  }
 
   const matches = (item) => {
     if (!q) return true
@@ -66,13 +101,13 @@ export function W2BContent({ categories, title, subtitle }) {
   }
 
   const visible = useMemo(() => {
-    return categories
+    return cats
       .map((cat) => ({ ...cat, items: cat.items.filter(matches) }))
       .filter(
         (cat) =>
           cat.items.length > 0 && (activeCat === 'all' || cat.label === activeCat),
       )
-  }, [categories, activeCat, q])
+  }, [cats, activeCat, q])
 
   const totalShown = visible.reduce((n, c) => n + c.items.length, 0)
 
@@ -150,7 +185,12 @@ export function W2BContent({ categories, title, subtitle }) {
               </div>
               <div>
                 {cat.items.map((item, i) => (
-                  <Row key={i} item={item} />
+                  <Row
+                    key={i}
+                    item={item}
+                    editable={editable}
+                    onDelete={() => handleDelete(cat.label, item.product)}
+                  />
                 ))}
               </div>
             </section>
