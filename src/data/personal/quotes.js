@@ -111,6 +111,7 @@ export const categories = {
       'We suffer more in imagination than in reality',
       'Sunsets are proof that there is beauty in endings',
       'Nostalgia is the most beautiful form of pain',
+      '"Nasıl yaşayacağımız" sorusu, aslında "dikkatimizi nereye yönlendireceğimiz" sorusuyla aynıdır. Dikkatimizi nereye vereceğimizi seçme özgürlüğü, uğruna savaşmaya değer en önemli şeydir.',
     ],
   },
 }
