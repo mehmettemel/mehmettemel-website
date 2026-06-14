@@ -337,6 +337,122 @@ export const tabs = {
           },
         ],
       },
+      {
+        name: 'Tayland',
+        flag: '🇹🇭',
+        sections: [
+          {
+            title: 'Genel & Pratik',
+            notes: [
+              'Aralık-Ocak en yüksek fiyat dönemi.',
+              'Bangkok Airways iyi.',
+            ],
+          },
+          {
+            title: 'Sağlık (Dengue & Sivrisinek)',
+            notes: [
+              'Dengue yaygın ve ciddi olabilir; artık aşısı var, doktora danışılabilir.',
+              "Repellent kullan; 7/11'den şeffaf şişe + pembe kapaklı olan en iyisi.",
+              'Tea Tree Oil tedavi için iyi; ısırıklara yerel Tiger Balm.',
+              'Odanı aydınlık tut (sevmezler), karanlık köşeleri ilaçla, gece siyah/koyu giyme, terletmeyen ince kıyafet giy, ısırığı kaşıma.',
+            ],
+          },
+          {
+            title: 'Para / ATM',
+            notes: [
+              "Her işlemde 220 BHT ücretten kaçınmak için ATM'den büyük miktar çek; ya da bankadan çek (pasaport gerekli).",
+              'Krungsri (yüksek çekim limiti) ve Aeon (düşük işlem ücreti) ATM\'leri ideal.',
+            ],
+          },
+          {
+            title: 'Destinasyonlar',
+            notes: [
+              'Phuket, Samui, Phangan ömür boyu yaşanır, her imkanı sunar (Ahmet Çığşar).',
+              'Nomad/coworking: Samui, Phuket, Chiang Mai (Chiang Mai coworking cenneti).',
+              'En lüks Samui, en bohem Phangan.',
+              'Koh Tao, Koh Chang, Koh Phi Phi.',
+              "Koh Hong (Krabi) > Phi Phi'den uygun ve az kalabalık.",
+              'Koh Lanta (güney) — en iyi plaj tatili.',
+              'Isan / Khon Kaen; Kalasin (kırsal, sakin, 50.000 baht ile rahat); Loei; Nan; Nakhon Phanom.',
+              'Hua Hin; Surat Thani; Chumphon (güzel sahiller); Mae Hong Son (doğa); Kanchanaburi & Sukhothai.',
+              'Rayong — Mirror Mirror Hotel.',
+            ],
+          },
+          {
+            title: 'Koh Phangan',
+            notes: [
+              'Full Moon dışında Haad Rin gündüz sakin (denizi pek güzel değil, olayı deniz değil).',
+              'Kuzeydoğuda gizli koylar (Longtail bot ile); en güzeli özel partili Haad Yuan.',
+              'Sramanera (şelale partisi) ve Paradise şelaleleri; gün batımı: Freeway & Amsterdam Bar.',
+              'Tepelerde 10-15 derece düşüyor — uzun kollu yanına al.',
+              'Merkezi konaklama: Thong Sala civarı (plaj, restoran, pub yakın, gün batımı harika).',
+              "Mu Koh Angthong Deniz Parkı — Phangan'dan günlük tur ~1.800 baht.",
+              'Eylül güzel ve sakin; Ekim-Kasım kötü.',
+              'Plajlar: Zen Beach (turistik, gün batımı muhteşem, deniz orta), Mae Haad (yüzmek için en iyilerden, tepede 360 bar), Malibu (doğu, sakin/güzel), Haad Than Sadet (doğu, az turistik, günübirlik).',
+            ],
+          },
+          {
+            title: 'Koh Samui',
+            notes: [
+              'Wat Plai Laem.',
+              'Lamai Beach.',
+              'Ang Thong takımadaları (42 ada) — Samui veya Surat Thani\'den günlük tekne turu.',
+            ],
+          },
+          {
+            title: 'Phuket',
+            notes: [
+              "Her yeri gezdim, Phuket'i seviyorum — her şey var. Bangla'ya gitme; çoğunlukla Kata ve Old Town arası.",
+              "Daha sakin Koh Lanta (Krabi) tercih; güneyde Trang adaları; Koh Lak'ın yumuşak beyaz kumu Phuket'ten iyi.",
+              'Rawai bölgesinde kal.',
+              'Chillva Market street shopping için güzel.',
+              'Phuket Smart Bus (phuketsmartbus.com).',
+            ],
+          },
+        ],
+      },
+      {
+        name: 'Endonezya',
+        flag: '🇮🇩',
+        sections: [
+          {
+            title: 'Genel & Pratik',
+            notes: [
+              'Online vize alınmalı.',
+              'Guest house öneriliyor.',
+              "Bali'de grip ve nezle için bitki özlü Tolak Angin ilacını al.",
+              'Surabaya ve Jakarta çok sıkıcı. Endonezya\'da büyük şehirler genelde sıkıcı.',
+            ],
+          },
+          {
+            title: 'Bali',
+            notes: [
+              'Ubud ve Canggu aşırı kalabalık.',
+              'Tabanan ve Pererenan – daha sakin bölgeler.',
+              'Sanur baya önerildi — sakin, huzurlu (quiet, peaceful).',
+              'Uluwatu beğeniliyor.',
+              'Amed güzel, çok kalabalık değil, deniz kenarında ve harika yemek mekanlarıyla dolu.',
+              'Bali çok çeşitli: Sanur, Nusa Lembongan, Candidasa, Gili Air, Lombok\'a bak.',
+              'Jimbaran ve Kuta\'yı iyi araştır, emin ol.',
+              "Kuta Lombok temelde Bali ama daha az insanla.",
+            ],
+          },
+          {
+            title: 'Java',
+            notes: [
+              'East Java (Yogyakarta ve Malang).',
+              'Yogyakarta (Java).',
+            ],
+          },
+        ],
+      },
+      {
+        name: 'Özbekistan',
+        flag: '🇺🇿',
+        notes: [
+          'Karayolu ile ülkeye girmek çok sıkıntılı, havayolu seçeneğini tercih et.',
+        ],
+      },
     ],
   },
   africa: {

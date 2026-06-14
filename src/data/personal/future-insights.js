@@ -8,6 +8,7 @@ export const categories = {
       'Gelecek için kodlama veya yapay zeka öğrenmeyin; klasik kitaplar okuyun. Yapay zeka çağında en nadir ve değerli beceri, yapay zekayı kullanmak değil, kitaplar aracılığıyla içsel bir diyalog kurabilme ve bağımsız/eleştirel düşünebilme kapasitesi olacaktır.',
       'Hemşirelik, danışmanlık, sanat ve canlı performans gibi alanlar hayatta kalacak; zira YZ bilgiyi sağlasa da "paylaşılan deneyim" ve duygusal yankılanma her zaman insanın tekelinde kalacak.',
       'Fiziksel evren "minimum enerji tüketerek maksimum düzen sağlama" eğilimindedir. Süper zeki bir AI, savaş ve yıkım gibi yüksek enerji israf eden kaotik süreçlerden mantıksal olarak kaçınır. Evrimsel biyolojide de görüldüğü gibi, zeka arttıkça canlıların "işbirliği çemberi" genişler; bu yüzden Süper Zeka (ASI) özünde yok edici değil, destekleyici ve bolluk yaratıcı (benign) olacaktır.',
+      'Yapay zeka uygulamada ve optimizasyonda insanı geride bıraksa da, "araştırma vizyonu, hedef belirleme ve sağduyu/muhakeme" (hangi problemin çözülmeye değer olduğunu seçmek gibi) konularında insanlar halen belirleyicidir.',
     ]
   },
   'Ekonomi & Finans': {
