@@ -75,26 +75,51 @@ function TabBar({ tabs: allTabs, activeTab, onTabChange }) {
   )
 }
 
+function NoteList({ notes }) {
+  return (
+    <ul className="space-y-2">
+      {notes.map((note, i) => (
+        <li key={i} className="flex gap-2.5 text-sm leading-relaxed text-foreground">
+          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-muted-foreground/40" />
+          <span>{note}</span>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
 function CountryCard({ country }) {
+  const sections = country.sections || null
+  const flatNotes = country.notes || []
+  const totalCount = sections
+    ? sections.reduce((sum, s) => sum + s.notes.length, 0)
+    : flatNotes.length
+
   return (
     <div className="rounded-xl border border-border/50 bg-card">
       <div className="flex items-center gap-2.5 px-4 py-3">
         <span className="text-lg">{country.flag}</span>
         <h3 className="text-sm font-semibold text-foreground">{country.name}</h3>
         <span className="ml-auto text-[10px] font-medium text-muted-foreground">
-          {country.notes.length} not
+          {totalCount} not
         </span>
       </div>
-      <div className="border-t border-border/30 px-4 py-2.5">
-        <ul className="space-y-2">
-          {country.notes.map((note, i) => (
-            <li key={i} className="flex gap-2.5 text-sm leading-relaxed text-foreground">
-              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-muted-foreground/40" />
-              <span>{note}</span>
-            </li>
+      {sections ? (
+        <div className="divide-y divide-border/30 border-t border-border/30">
+          {sections.map((section) => (
+            <div key={section.title} className="px-4 py-2.5">
+              <h4 className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                {section.title}
+              </h4>
+              <NoteList notes={section.notes} />
+            </div>
           ))}
-        </ul>
-      </div>
+        </div>
+      ) : (
+        <div className="border-t border-border/30 px-4 py-2.5">
+          <NoteList notes={flatNotes} />
+        </div>
+      )}
     </div>
   )
 }

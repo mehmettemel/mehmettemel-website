@@ -112,6 +112,13 @@ export const categories = {
       'Sunsets are proof that there is beauty in endings',
       'Nostalgia is the most beautiful form of pain',
       '"Nasıl yaşayacağımız" sorusu, aslında "dikkatimizi nereye yönlendireceğimiz" sorusuyla aynıdır. Dikkatimizi nereye vereceğimizi seçme özgürlüğü, uğruna savaşmaya değer en önemli şeydir.',
+      'How can you judge people for their decision when you knew nothing about their options',
+      'When people fall in love with your flowers and not your roots, they don\'t know what to do when autumn comes.',
+      'You can\'t add days to your life, but you can add life to your days.',
+      'Missed opportunities will haunt you more than rejections.',
+      'If your goal is to experience life, you\'re always winning.',
+      'Worry is a waste of imagination.',
+      'The most healing thing you can do is stop living like everything is an emergency.',
     ],
   },
 }

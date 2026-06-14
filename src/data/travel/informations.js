@@ -258,6 +258,7 @@ export const tabs = {
           'If I were a gringo doing that, I would: 1. Search for the list of Brazilian cities with the best human development index (IDH). 2. Exclude those that are not close to the ocean. 3. Pick up the less populated (almost always will mean fairer prices).',
           'Local Facebook groups > Facebook Events every time. That\'s where the good stuff hides.',
           'Read the terms and conditions of your travel/medical insurance before you travel.',
+          'Food poisoning için iyi gelen herbal tea: "Tràng Vị Khang". Çok iyi geldiğini söylüyorlar.',
         ],
       },
       'People & Countries': {

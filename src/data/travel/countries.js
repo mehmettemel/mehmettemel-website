@@ -272,8 +272,69 @@ export const tabs = {
       {
         name: 'Vietnam',
         flag: '🇻🇳',
-        notes: [
-          'Con Dao.',
+        sections: [
+          {
+            title: 'Pratik Bilgiler',
+            notes: [
+              'Para çekmek için ideal bankalar: TPBank, VPBank, HSBC.',
+              'Viettel en iyi hat.',
+              'Tet (Yeni Yıl) bayramına dikkat et — birçok yer kapalı olur.',
+              'Hanoi ve Ho Chi Minh farklı bir iklime sahip.',
+              'Ülkeden çıkış damgası vurulmadan, ülke içindeyken Vietnam e-vizeye başvuramıyorsun.',
+            ],
+          },
+          {
+            title: 'Ulaşım',
+            notes: [
+              'Hanoi havalimanından otobüs direkt çıkışta solda. Ho Chi Minh ve Da Nang havalimanları merkeze yakın, direkt Grab al.',
+            ],
+          },
+          {
+            title: 'Hanoi – Havalimanı',
+            notes: [
+              'No.86 otobüsüne binebilirsin. Son durak Le Duan caddesinde, Kham Thien caddesiyle kesişiyor. Kişi başı sadece VND30k.',
+              'En ucuzu normal şehir otobüsü (Google Maps yön verir). İkinci en ucuz havalimanı minibüsleri (50k). İkisini de Grab bike ile birleştirip evine ulaşabilirsin.',
+            ],
+          },
+          {
+            title: 'Hanoi – Konumlar',
+            notes: [
+              'Tay Ho – Güzel West Lake kenarında, lüks bir bölge. Yoğun expat nüfusu ve modern olanaklar.',
+              'Ba Dinh – Birçok büyükelçilik ve uluslararası kurum burada. Old Quarter\'a yakın ama o kadar gürültülü/kalabalık değil.',
+              'Dong Da – Mükemmel altyapıya sahip merkezi bölge. Süpermarket, restoran ve gece hayatına kolay erişim.',
+            ],
+          },
+          {
+            title: 'Gezilecek Yerler',
+            notes: [
+              'Da Nang – Mart-Haziran arası gelinir.',
+              'Con Dao.',
+            ],
+          },
+        ],
+      },
+      {
+        name: 'Filipinler',
+        flag: '🇵🇭',
+        sections: [
+          {
+            title: 'Ulaşım & Havalimanı',
+            notes: [
+              'NAIA havalimanı çok kötü, Clark daha iyi. Ya da Manila yerine Cebu\'dan uç.',
+              'Havalimanlarında Grab alanları oluyor; uygulama üzerinden gelmiyorsa o alanlardan Grab çağır.',
+            ],
+          },
+          {
+            title: 'Gezilecek Yerler',
+            notes: [
+              'Coron, Palawan – Sakin, harika insanlar, güzel yemek, masmavi sular, tropikal hava ve henüz turist akınına uğramamış.',
+              'Palawan boat expedition – El Nido\'dan Coron\'a 3 gecelik tekne turu; mercanlar ve ıssız plajlar.',
+              'San Vicente (Palawan): El Nido\'nun kuzeyinde, dünyanın en uzun plajlarından biri olan Long Beach var (çok temiz, az insan). "El Nido vibe\'ı ama çok daha sakin ve ucuz" diye övülüyor. Yeni havaalanı ile erişim kolay. Nomadlar için ideal: internet iyileşiyor, konaklama aylık 400-700 USD.',
+              'Port Barton – El Nido\'dan çok daha az turistik, süper küçük ve büyüleyici.',
+              'Panglao, Bohol – Nomadlar için iyi. Ana cadde turistik ama dışı oldukça sakin; güzel plajlar ve kafeler.',
+              'Bantayan – Emeklilerin tercih ettiği küçük ada. Motor kiralayıp tüm adayı yarım saatte turlanabiliyor. Adada pek bir şey yok ama restoranlardaki yemekler güzel ve ucuz. Birkaç ay kalıp kafa dinlemek için güzel.',
+            ],
+          },
         ],
       },
     ],
@@ -402,13 +463,67 @@ export const tabs = {
       {
         name: 'Brezilya',
         flag: '🇧🇷',
-        notes: [
-          'Itacaré Bahia – Cennet gibi.',
-          'Buzios, Paraty, Florianopolis, Curitiba, Sao Paulo, Ubatuba, Ilha Bela.',
-          "Rio de Janeiro – Ipanema veya Copacabana'da kalınmalı.",
-          'Airbnb kalitesiz olabilir.',
-          'Santa Catarina harika bir bölge.',
-          'Sao Sebastiao.',
+        sections: [
+          {
+            title: 'Genel Görüş',
+            notes: [
+              "Güney Brezilya en iyisi: ucuz yemek, en iyi et, Avrupa kökeni ve kültürü, eğlence... Avrupa'nın en iyisi %50 fiyatına. Rio'dan uzak dur.",
+            ],
+          },
+          {
+            title: 'Güvenlik',
+            notes: [
+              "Brezilya'da en büyük suç sorunu açık ara telefon hırsızlığı. Sokakta asla telefonunu çıkarma. Google Maps'e bakman gerekiyorsa bir markete veya dükkana gir.",
+              'Santa Catarina (güney) çok güvenli hissettiriyor — Florianópolis, Bombas, Bombinhas gibi sahil kasabaları.',
+            ],
+          },
+          {
+            title: 'Bölgeler & Kadınlar',
+            notes: [
+              'Güney (Porto Alegre, Curitiba, Florianópolis): Ağırlıklı Alman, İtalyan ve Polonya kökenli — daha çok Avrupa tipi (sarışın, renkli göz).',
+              'Salvador & Bahia: Ağırlıklı Afrika kökenli.',
+              'Amazon (Manaus, Belém): Büyük oranda Yerli (Indigenous) kökenli.',
+              'São Luís (Maranhão): Yerli ve Afrika kökeni karışımı.',
+              'Fortaleza: Yerli halk ile Portekizli yerleşimci karışımı.',
+              'Minas Gerais (Belo Horizonte): Genellikle Portekizli ve İtalyan kökenli.',
+              'Goiânia: Portekizli ve İtalyan karışımı — kadınlar evlilik için iyi.',
+              'Rio de Janeiro: Gerçek bir melting pot, dünyanın her yerinden insan ve her türlü fiziksel özellik.',
+              'São Paulo: Rio gibi her türlü kökenin bulunduğu bir karışım merkezi.',
+            ],
+          },
+          {
+            title: 'Gezilecek Yerler',
+            notes: [
+              "Pirenópolis ve Chapada dos Veadeiros; Ouro Preto ve çevresi; yemek için Belém (ve birkaç günlük Macapá); São Luís (sadece Lençóis Maranhenses'e geçiş kapısı değil); Alter do Chão.",
+              "Minas'taki herhangi bir roça (kırsal çiftlik). Dağlar, şelaleler, huzur, meyve ağaçları ve cachaça.",
+              'João Pessoa.',
+              'Belo Horizonte.',
+              'Fortaleza ve Brasília.',
+              'Curitiba.',
+              'Itacaré (Bahia) – Cennet gibi.',
+              'Buzios, Paraty, Florianópolis, Ubatuba, Ilha Bela, São Sebastião.',
+            ],
+          },
+          {
+            title: 'São Paulo',
+            notes: [
+              'Pinheiros – Çok sayıda restoran, bar ve oldukça yürünebilir.',
+              'Pinheiros ve Vila Madalena – %100 güvenli değil ama çok daha temiz, güvenli ve harika yeme-içme yerleri var.',
+              'Ipiranga.',
+            ],
+          },
+          {
+            title: 'Rio de Janeiro',
+            notes: [
+              "Copacabana veya Ipanema öneriliyor. Copacabana'da otel, hostel ve Airbnb seçeneği çok daha fazla.",
+            ],
+          },
+          {
+            title: 'Konaklama',
+            notes: [
+              'Airbnb kalitesiz olabilir.',
+            ],
+          },
         ],
       },
       {

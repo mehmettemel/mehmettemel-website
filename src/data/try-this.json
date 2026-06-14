@@ -1,7 +1,5 @@
 {
   "items": [
-    { "id": "tt-1", "text": "Soğuk duş — 30 gün challenge" },
-    { "id": "tt-2", "text": "Sabah 10 dakika meditasyon" },
     { "id": "tt-3", "text": "Uluova jersey süt" },
     { "id": "tt-4", "text": "Lastik tamiri kiti" },
     { "id": "tt-5", "text": "Easybreathe" },
@@ -17,6 +15,7 @@
     { "id": "tt-15", "text": "Casio AQ-240" },
     { "id": "tt-16", "text": "İnanç Fırın süt reçeli (Bursa)" },
     { "id": "tt-17", "text": "Kaliteli akıllı ampul al, geceleri kırmızı veya turuncu tonlar kullan — yaşam kalitesini en az x3 artırır." },
-    { "id": "tt-18", "text": "Kondom 52.5 mm slim fit" }
+    { "id": "tt-18", "text": "Kondom 52.5 mm slim fit" },
+    { "id": "tt-19", "text": "High-quality (2000 Watt+) blender — trust me, properly blended smoothies taste different than the cheap ones" }
   ]
 }
