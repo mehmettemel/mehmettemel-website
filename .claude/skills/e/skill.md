@@ -67,12 +67,27 @@ Hedef path: `tabs.<tabKey>.categories['<Kategori Adı>'].items` dizisinin **sonu
 - `tabs.futureInsights.categories['AI & Teknoloji'].items` sonuna ekle
 - `tabs.tavsiyeler.categories['Marc Lou'].items` sonuna ekle
 
+### Tavsiyeler tabı — not kart formatı:
+`tavsiyeler` tabındaki her item düz string değil, bir **not kartı objesidir**:
+```js
+{
+  title: 'Not başlığı',
+  items: ['madde 1', 'madde 2', ...],
+}
+```
+Hedef: `tabs.tavsiyeler.categories['[Kişi Adı]'].items` dizisine bu objeyi ekle.
+
 ### Tavsiyeler tabına yeni kişi eklenecekse:
-Eğer `tavsiyeler` tabında henüz o kişi için bir kategori yoksa, yeni kategori bloğu oluştur:
+Eğer o kişi için henüz kategori yoksa yeni kategori oluştur:
 ```js
 '[Kişi Adı]': {
   label: '[Kişi Adı]',
-  items: ['...'],
+  items: [
+    {
+      title: 'Not başlığı',
+      items: ['madde 1', 'madde 2'],
+    },
+  ],
 },
 ```
 

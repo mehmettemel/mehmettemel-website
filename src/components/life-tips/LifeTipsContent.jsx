@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 
 function SubCategoryPills({ categories, selected, onSelect }) {
   const scrollRef = useRef(null)
@@ -82,6 +82,88 @@ function SubCategoryPills({ categories, selected, onSelect }) {
   )
 }
 
+function NoteCard({ note, category, showCategory }) {
+  const [open, setOpen] = useState(false)
+  const preview = note.items.slice(0, 3)
+  const remaining = note.items.length - 3
+
+  return (
+    <>
+      <div
+        role="button"
+        tabIndex={0}
+        onClick={() => setOpen(true)}
+        onKeyDown={(e) => e.key === 'Enter' && setOpen(true)}
+        className="group cursor-pointer rounded-lg border border-border/50 p-4 transition-colors hover:border-border hover:bg-secondary/20"
+      >
+        {showCategory && (
+          <span className="mb-2 inline-block rounded-full bg-secondary/60 px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
+            {category}
+          </span>
+        )}
+        <p className="text-sm font-semibold text-foreground transition-colors group-hover:text-primary">
+          {note.title}
+        </p>
+        <ul className="mt-2 space-y-1">
+          {preview.map((item, i) => (
+            <li
+              key={i}
+              className="overflow-hidden text-ellipsis whitespace-nowrap text-xs text-muted-foreground"
+            >
+              · {item}
+            </li>
+          ))}
+        </ul>
+        {remaining > 0 && (
+          <p className="mt-2 text-xs font-medium text-primary/70">
+            +{remaining} more
+          </p>
+        )}
+      </div>
+
+      {open && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm"
+          onClick={() => setOpen(false)}
+        >
+          <div
+            className="relative flex w-full max-w-lg flex-col overflow-hidden rounded-xl border border-border bg-background shadow-xl"
+            style={{ maxHeight: '80vh' }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex shrink-0 items-start justify-between border-b border-border/40 px-5 py-4">
+              <h2 className="pr-4 text-sm font-semibold text-foreground">
+                {note.title}
+              </h2>
+              <button
+                onClick={() => setOpen(false)}
+                className="text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+            <div className="overflow-y-auto px-5 py-4">
+              <ul className="space-y-3">
+                {note.items.map((item, i) => (
+                  <li
+                    key={i}
+                    className="flex gap-2.5 text-sm leading-relaxed text-foreground"
+                  >
+                    <span className="mt-0.5 shrink-0 font-mono text-xs text-muted-foreground">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  )
+}
+
 function NotesList({ categories, selectedCategory }) {
   const notes = []
 
@@ -108,40 +190,58 @@ function NotesList({ categories, selectedCategory }) {
     )
   }
 
+  const isNoteCard = (content) =>
+    typeof content === 'object' && content !== null && 'title' in content && 'items' in content
+
   return (
     <div className="mx-auto w-full max-w-2xl">
-      {notes.map((note, index) => (
-        <div
-          key={index}
-          className="border-b border-border/50 py-3.5 last:border-0"
-        >
-          {selectedCategory === 'all' && (
-            <span className="mb-1 inline-block rounded-full bg-secondary/60 px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
-              {note.category}
-            </span>
-          )}
-          {typeof note.content === 'string' ? (
-            <p className="text-sm leading-relaxed text-foreground">
-              {note.content}
-            </p>
-          ) : (
-            <div>
-              <p className="text-sm leading-relaxed text-foreground">
-                {note.content.text}
-              </p>
-              {note.content.subItems?.length > 0 && (
-                <ul className="mt-1.5 ml-4 space-y-0.5">
-                  {note.content.subItems.map((sub, i) => (
-                    <li key={i} className="text-xs leading-relaxed text-muted-foreground">
-                      • {sub}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
+      {notes.some((n) => isNoteCard(n.content)) ? (
+        <div className="flex flex-col gap-3">
+          {notes.map((note, index) =>
+            isNoteCard(note.content) ? (
+              <NoteCard
+                key={index}
+                note={note.content}
+                category={note.category}
+                showCategory={selectedCategory === 'all'}
+              />
+            ) : null,
           )}
         </div>
-      ))}
+      ) : (
+        notes.map((note, index) => (
+          <div
+            key={index}
+            className="border-b border-border/50 py-3.5 last:border-0"
+          >
+            {selectedCategory === 'all' && (
+              <span className="mb-1 inline-block rounded-full bg-secondary/60 px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
+                {note.category}
+              </span>
+            )}
+            {typeof note.content === 'string' ? (
+              <p className="text-sm leading-relaxed text-foreground">
+                {note.content}
+              </p>
+            ) : (
+              <div>
+                <p className="text-sm leading-relaxed text-foreground">
+                  {note.content.text}
+                </p>
+                {note.content.subItems?.length > 0 && (
+                  <ul className="mt-1.5 ml-4 space-y-0.5">
+                    {note.content.subItems.map((sub, i) => (
+                      <li key={i} className="text-xs leading-relaxed text-muted-foreground">
+                        • {sub}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+          </div>
+        ))
+      )}
     </div>
   )
 }
