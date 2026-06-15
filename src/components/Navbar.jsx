@@ -11,7 +11,8 @@ import {
   AccordionTrigger,
 } from './ui/accordion'
 import { AnimatedThemeToggle } from './ui/animated-theme-toggle'
-import { UserIcon } from './auth/UserIcon'
+import { SkillsIcon } from './auth/SkillsIcon'
+import { LoginTrigger } from './auth/LoginTrigger'
 import { Container } from './Container'
 import {
   NavigationMenu,
@@ -119,9 +120,6 @@ function MobileNav() {
           >
             🇬🇧 İngilizce
           </Link>
-          <div className="flex-shrink-0" onClick={closeSheet}>
-            <UserIcon className="h-10 w-10 rounded-lg bg-secondary/50 px-2.5 hover:bg-secondary" />
-          </div>
         </div>
 
         {/* Accordion navigation */}
@@ -201,7 +199,8 @@ export function Navbar() {
           </div>
 
           <div className="hidden md:absolute md:right-0 md:flex md:items-center md:gap-2">
-            <UserIcon />
+            <LoginTrigger />
+            <SkillsIcon />
             <AnimatedThemeToggle />
           </div>
 

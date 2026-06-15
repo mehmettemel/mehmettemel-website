@@ -1,6 +1,6 @@
 ---
-name: eng
-description: İngilizce kelime eklemek için kullanılır. /eng komutu ile tetiklenir. Kelimeyi Türkçe veya İngilizce verilebilir, tam karşılığı, örnek cümlesi ve çevirisiyle birlikte src/data/english-words.js dosyasına ekler.
+name: en
+description: İngilizce kelime eklemek için kullanılır. /en komutu ile tetiklenir. Kelimeyi Türkçe veya İngilizce verilebilir, tam karşılığı, örnek cümlesi ve çevirisiyle birlikte src/data/english-words.js dosyasına ekler.
 ---
 
 # İngilizce Kelime Ekle
@@ -9,7 +9,7 @@ Kullanıcı bir kelime verdiğinde (Türkçe veya İngilizce), o kelimenin tam k
 
 ## Tetikleme
 
-- Kullanıcı `/eng` komutu kullandığında
+- Kullanıcı `/en` komutu kullandığında
 
 ## Ekleme Adımları
 
@@ -46,16 +46,16 @@ Tek satırda, dizinin sonundaki `]` öncesine ekle.
 
 ## Örnekler
 
-Kullanıcı: `/eng resilience`
+Kullanıcı: `/en resilience`
 → Ekle:
 ```js
 { english: 'resilience', turkish: 'dayanıklılık, esneklik', example: 'Her resilience after losing everything was truly inspiring.', example_turkish: 'Her şeyi kaybettikten sonraki dayanıklılığı gerçekten ilham vericiydi.' },
 ```
 Yanıt: "Eklendi: resilience (dayanıklılık, esneklik)"
 
-Kullanıcı: `/eng göz ardı etmek`
+Kullanıcı: `/en göz ardı etmek`
 → Ekle:
 ```js
-{ english: 'overlook', turkish: 'göz ardı etmek, gözden kaçırmak', example: 'It's easy to overlook small details when you're in a rush.', example_turkish: 'Aceledeyken küçük detayları göz ardı etmek kolaydır.' },
+{ english: 'overlook', turkish: 'göz ardı etmek, gözden kaçırmak', example: 'It\'s easy to overlook small details when you\'re in a rush.', example_turkish: 'Aceledeyken küçük detayları göz ardı etmek kolaydır.' },
 ```
 Yanıt: "Eklendi: overlook (göz ardı etmek, gözden kaçırmak)"

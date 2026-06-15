@@ -1,6 +1,0 @@
-{
-  "version": "0.1.0",
-  "organization": "Mehmet Temel",
-  "date": "May 2026",
-  "abstract": "İngilizce kelime eklemek için kullanılan skill. Türkçe veya İngilizce verilen kelimeyi tam karşılığı, örnek cümlesi ve çevirisiyle birlikte src/data/english-words.js dosyasına ekler."
-}

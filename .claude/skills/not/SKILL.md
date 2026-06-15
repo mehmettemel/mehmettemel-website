@@ -1,25 +1,30 @@
 ---
 name: not
-description: Kısa not, alıntı veya bilgi eklemek için kullanılır. /not komutu ile tetiklenir. Notları analiz edip src/data/personal/ altındaki doğru dosya ve kategoriye yerleştirir.
+description: Kısa not, alıntı veya bilgi eklemek için kullanılır. /not komutu ile tetiklenir. Notları analiz edip src/data/ altındaki doğru dosya ve kategoriye yerleştirir.
 ---
 
 # Not Ekle
 
-Kullanıcı `/not` komutu ile bir not verdiğinde, içeriği analiz edip `src/data/personal/` altındaki doğru JS dosyasına ve alt kategoriye ekler.
+Kullanıcı `/not` komutu ile bir not verdiğinde, içeriği analiz edip doğru JS dosyasına ve alt kategoriye ekler.
 
 ## Adım 1: Kategori İpucu Tespiti
 
 Kullanıcı notun başında bir kategori ipucu yazabilir. İpucu varsa öncelikli olarak kullan:
 
 **Üst kategori ipuçları** (dosyayı belirler, alt kategoriyi içerikten çıkar):
-`sağlık`, `saglik`, `ilişkiler`, `iliskiler`, `kişisel`, `kisisel`, `money`, `para`, `toplum`, `trivia`, `quotes`, `ai`
+`sağlık`, `saglik`, `ilişkiler`, `iliskiler`, `kişisel`, `kisisel`, `toplum`, `trivia`, `quotes`, `entrepreneur`, `girişim`, `girisim`
 
 **Alt kategori ipuçları** (hem dosyayı hem alt kategoriyi belirler):
 `beslenme` → saglik.js/Beslenme, `mutfak` → saglik.js/Mutfak, `takviye` → saglik.js/Takviyeler, `bakım` → saglik.js/Bakım, `hastalık` → saglik.js/Hastalıklar
-`mindset` → kisisel-gelisim.js/Mindset, `kariyer` → kisisel-gelisim.js/İş & Kariyer
+`mindset` → kisisel-gelisim.js/Mindset
 `kadın` → iliskiler.js/Kadınlar
-`iletişim` → money.js/İletişim, `network` → money.js/Networking, `insan ilişkileri` → money.js/İnsan İlişkileri
-`business` → money.js/Business, `ecommerce` → money.js/Business, `e-commerce` → money.js/Business, `marketing` → money.js/Marketing, `finance` → money.js/Finance, `ideas` → money.js/Ideas
+`network` → money.js/Networking, `insan ilişkileri` → money.js/İnsan İlişkileri
+`business` → girisimcilik.js/İş/Temel İlkeler, `ecommerce` → girisimcilik.js/İş/Temel İlkeler, `e-commerce` → girisimcilik.js/İş/Temel İlkeler
+`kariyer` → girisimcilik.js/Kariyer/İş & Kariyer
+`marketing` → girisimcilik.js/Pazarlama/Pazarlama
+`iletişim` → girisimcilik.js/İletişim/İletişim
+`finance` → girisimcilik.js/Future Insights/Ekonomi & Finans
+`ai`, `gelecek`, `future`, `teknoloji` → girisimcilik.js/Future Insights/AI & Teknoloji
 
 İpucu bulunduysa metinden çıkar (ipucu notun parçası değil).
 
@@ -40,7 +45,6 @@ Notun içeriğine bakarak hedef dosya ve alt kategoriyi belirle:
 ### kisisel-gelisim.js — Kişisel Gelişim
 | Alt Kategori | Anahtar Konular |
 |---|---|
-| **İş & Kariyer** | İş, girişimcilik, startup, kariyer, maaş, verimlilik, liderlik, feedback |
 | **Mindset** | Kişisel motivasyon, cesaret, alışkanlıklar, özgüven, eyleme geçme, disiplin, aile, ebeveynlik, retorik — şahsi karaktere uygulanacak notlar |
 
 ### iliskiler.js — Kadınlar
@@ -51,11 +55,6 @@ Notun içeriğine bakarak hedef dosya ve alt kategoriyi belirle:
 ### money.js — Life
 | Alt Kategori | Anahtar Konular |
 |---|---|
-| **Business** | Ticaret, iş hayatı, e-ticaret, müşteri yönetimi, tedarikçi, muhasebe, risk yönetimi, çalışan yönetimi |
-| **Marketing** | Pazarlama, reklam, sosyal medya, growth hacking, SEO, içerik pazarlama, marka, dikkat çekme |
-| **Finance** | Yatırım, borsa, kripto, bütçe, tasarruf, finansal okuryazarlık |
-| **Ideas** | İş fikirleri, girişim fırsatları, yan gelir, niş alanlar, SaaS |
-| **İletişim** | İkna, müzakere, beden dili, konuşma teknikleri, güven oluşturma, çatışma yönetimi |
 | **Networking** | Sosyal ağ kurma, ilişki yönetimi, networking stratejileri |
 | **İnsan İlişkileri** | Dostluk, sosyal bağlar, empati, çatışma çözümü, toplumsal ilişkiler |
 
@@ -74,14 +73,17 @@ Notun içeriğine bakarak hedef dosya ve alt kategoriyi belirle:
 |---|---|
 | **Quotes** | Kısa (1-2 cümle), ilham verici, özlü sözler ve alıntılar |
 
-### ai.js — AI
-| Alt Kategori | Anahtar Konular |
-|---|---|
-| **AI Agents & Workflow** | AI ajanları, otomasyon, workflow, takım stratejileri |
-| **Prompting & Kullanım** | Prompt mühendisliği, AI kullanım teknikleri, kod kalitesi |
-| **Modeller & Teknoloji** | Model karşılaştırmaları, benchmark, fine-tuning, RAG |
-| **Araçlar & Ürünler** | AI araçları, platformlar, MCP, IDE entegrasyonları |
-| **Sektör & Trendler** | AI sektör haberleri, trendler, etik |
+### girisimcilik.js — Entrepreneur (`src/data/girisimcilik.js`)
+| Tab | Alt Kategori | Anahtar Konular |
+|---|---|---|
+| **is** | Temel İlkeler | İş kurma, girişimcilik, startup, ticaret, e-ticaret, risk, yönetim |
+| **is** | Müşteri & Satış | Müşteri yönetimi, satış, tedarikçi, ihracat |
+| **is** | Operasyonlar | Süreç yönetimi, operasyonel verimlilik, çalışan yönetimi |
+| **pazarlama** | Pazarlama | Reklam, sosyal medya, growth hacking, SEO, marka, dikkat çekme |
+| **kariyer** | İş & Kariyer | Kariyer, maaş, verimlilik, liderlik, iş hayatı tavsiyeleri |
+| **iletisim** | İletişim | İkna, müzakere, beden dili, konuşma teknikleri, güven oluşturma |
+| **futureInsights** | AI & Teknoloji | AI, otomasyon, teknoloji trendleri, gelecek öngörüleri |
+| **futureInsights** | Ekonomi & Finans | Yatırım, borsa, kripto, finansal trendler, makroekonomi |
 
 ## Adım 3: Duplike Kontrolü
 
@@ -94,12 +96,19 @@ Hedef dosyayı oku ve notun özü zaten mevcut mu kontrol et. Varsa kullanıcıy
 { text: 'Not metni', subItems: [] },
 ```
 
-### Diğer tüm dosyalar (flat string):
+### personal/ dosyaları (flat string — saglik.js hariç):
 ```js
 'Not metni',
 ```
-
 İlgili kategorinin `items` dizisinin **sonuna** ekle.
+
+### girisimcilik.js formatı (flat string, ama tabs yapısı var):
+```js
+'Not metni',
+```
+Hedef: `tabs.<tabKey>.categories['<Alt Kategori>'].items` dizisinin **sonuna** ekle.
+
+Örnek: `kariyer` ipucu → `tabs.kariyer.categories['İş & Kariyer'].items` sonuna ekle.
 
 ## Metin Temizleme
 
