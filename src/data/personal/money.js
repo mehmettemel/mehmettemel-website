@@ -1,14 +1,6 @@
 export const title = 'Life'
 
 export const categories = {
-  'Finance': {
-    label: 'Finance',
-    items: [],
-  },
-  'Ideas': {
-    label: 'Ideas',
-    items: [],
-  },
   'İnsan İlişkileri': {
     label: 'İnsan İlişkileri',
     items: [

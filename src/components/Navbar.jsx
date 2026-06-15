@@ -23,7 +23,7 @@ import {
 } from './ui/navigation-menu'
 
 const listelerItems = [
-  { href: '/listeler/girisimcilik', label: 'Girişimcilik', emoji: '💼' },
+  { href: '/listeler/girisimcilik', label: 'Entrepreneur', emoji: '💼' },
   { href: '/listeler/life-tips', label: 'Life Tips', emoji: '💡' },
   { href: '/listeler/w2b', label: 'W2B', emoji: '🛒' },
   { href: '/listeler/travel', label: 'Travel', emoji: '✈️' },
@@ -158,7 +158,7 @@ function MobileNav() {
               <AccordionContent>
                 <div className="flex flex-col gap-0.5 pl-2">
                   <Link href="/listeler/girisimcilik" onClick={closeSheet} className={mobileNavLinkClass}>
-                    <span>💼</span> Girişimcilik
+                    <span>💼</span> Entrepreneur
                   </Link>
                   <Link href="/listeler/life-tips" onClick={closeSheet} className={mobileNavLinkClass}>
                     <span>💡</span> Life Tips
