@@ -17,6 +17,7 @@ Kullanıcı notun başında bir ipucu yazabilir. İpucu varsa öncelikli kullan:
 `kariyer` → **kariyer** tab
 `iletişim` → **iletisim** tab
 `ai`, `gelecek`, `future`, `teknoloji`, `finans`, `finance`, `ekonomi` → **futureInsights** tab
+`tavsiye`, `mentor`, `usta` → **tavsiyeler** tab
 
 **Alt kategori ipuçları** (hem tabı hem kategoriyi belirler):
 `müşteri`, `musterı`, `satış` → is/Müşteri & Satış
@@ -25,6 +26,7 @@ Kullanıcı notun başında bir ipucu yazabilir. İpucu varsa öncelikli kullan:
 `ikna`, `müzakere` → iletisim/İletişim
 `ai` → futureInsights/AI & Teknoloji
 `ekonomi`, `finans`, `finance` → futureInsights/Ekonomi & Finans
+`marc lou` → tavsiyeler/Marc Lou
 
 İpucu bulunduysa metinden çıkar (ipucu notun parçası değil).
 
@@ -42,8 +44,9 @@ Notun içeriğine bakarak doğru tab ve kategoriyi belirle:
 | **iletisim** | İletişim | İkna, müzakere, beden dili, konuşma teknikleri, güven oluşturma, çatışma yönetimi |
 | **futureInsights** | AI & Teknoloji | Yapay zeka, otomasyon, teknoloji trendleri, gelecek öngörüleri, dijital dönüşüm |
 | **futureInsights** | Ekonomi & Finans | Yatırım, borsa, kripto, makroekonomi, finansal trendler, para politikası |
+| **tavsiyeler** | [Kişi Adı] | Bilinir girişimci/mentorların tavsiye listeleri — her kategori bir kişiye aittir |
 
-**Karar kuralı:** Pratik iş tavsiyesi → `is` tabı. Tanıtım/büyüme → `pazarlama`. Kişisel gelişim kariyere uygulanmış → `kariyer`. İletişim/ikna → `iletisim`. Teknoloji/gelecek → `futureInsights`.
+**Karar kuralı:** Pratik iş tavsiyesi → `is` tabı. Tanıtım/büyüme → `pazarlama`. Kişisel gelişim kariyere uygulanmış → `kariyer`. İletişim/ikna → `iletisim`. Teknoloji/gelecek → `futureInsights`. Bilinir bir kişinin listesi/manifesto → `tavsiyeler` (kategori adı = kişinin adı).
 
 ## Adım 3: Duplike Kontrolü
 
@@ -62,6 +65,16 @@ Hedef path: `tabs.<tabKey>.categories['<Kategori Adı>'].items` dizisinin **sonu
 - `tabs.is.categories['Temel İlkeler'].items` sonuna ekle
 - `tabs.kariyer.categories['İş & Kariyer'].items` sonuna ekle
 - `tabs.futureInsights.categories['AI & Teknoloji'].items` sonuna ekle
+- `tabs.tavsiyeler.categories['Marc Lou'].items` sonuna ekle
+
+### Tavsiyeler tabına yeni kişi eklenecekse:
+Eğer `tavsiyeler` tabında henüz o kişi için bir kategori yoksa, yeni kategori bloğu oluştur:
+```js
+'[Kişi Adı]': {
+  label: '[Kişi Adı]',
+  items: ['...'],
+},
+```
 
 ## Metin Temizleme
 
