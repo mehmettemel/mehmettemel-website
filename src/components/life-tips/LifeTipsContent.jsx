@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 
 function SubCategoryPills({ categories, selected, onSelect }) {
@@ -121,7 +122,7 @@ function NoteCard({ note, category, showCategory }) {
         )}
       </div>
 
-      {open && (
+      {open && typeof document !== 'undefined' && createPortal(
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm"
           onClick={() => setOpen(false)}
@@ -158,7 +159,8 @@ function NoteCard({ note, category, showCategory }) {
               </ul>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   )
