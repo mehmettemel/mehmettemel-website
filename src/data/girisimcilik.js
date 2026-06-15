@@ -208,6 +208,29 @@ export const tabs = {
     label: 'Tavsiyeler',
     emoji: '📖',
     categories: {
+      'Ahmet Çığşar': {
+        label: 'Ahmet Çığşar',
+        items: [
+          {
+            title: 'Ürün Bulma: Arzı Kolay Ürünler ve Pazar Analizi',
+            items: [
+              'Arzı Kolay Ürünlere Dikkat: Bijuteri tarzı takı toka gibi ucuz ve kolay erişilebilir ürünlere ilk ticari denemelerde yönelme fazla olabiliyor ve arz yığılması oluyor, pazarda o kadar talep yok. Bu ürünler mücevherat değilse, tasarımda veya malzemede bir artı değer eklemiyorsanız, hazırda kitleniz yoksa çok zor kazanç elde edersiniz.',
+              'Hedef Pazar Ülkenin Durumu: Türkiye gibi alım gücü düşen ve hayat pahalılığının insanları korkuttuğu bir pazarda insanlar zorunlu ihtiyaçlara yönelir. Sattığınız ürün bir problemin çözümü, bir ihtiyacın karşılanması, bir insanın veya hayvanın bakımı için gerekli değilse işiniz daha da zor olacaktır. Dekorasyon ürünleri bu tip piyasalarda düşüş yaşarken gıda, temizlik, kişisel bakım gibi ürünler yükseliş gösterir.',
+              'İstisna — Fiyat Esnekliği Düşük Ürünler: Lüks bir saat markasının veya lüks aracın alıcıları alım gücü düşen piyasada bile satın almaya devam eder. Bu kişiler her koşulda o esnekliğe ve alım gücüne sahiptir.',
+              'Ürün bulmak diye de bir şey yok aslında; aranarak bulunacak bir şey değil. Ticarete girmeye karar verirsiniz ve imkanlarınız ölçüsünde bazı ürünler dikkatinizi çeker.',
+            ],
+          },
+          {
+            title: 'Fiyatlandırma: Sosyal Sınıf Tuzağı',
+            items: [
+              'Alt veya orta sınıf ailelerden geliyorsanız, sattığınız bir ürüne veya hizmete fiyat verirken olması gerekenden daha düşük bir fiyat verme eğilimi gösterebilirsiniz.',
+              'Geldiğiniz sosyal sınıftan dolayı, sattığınız şeye insanların o parayı ödeyeceğine pek ihtimal vermeyebilir; kendinizi veya ürünü yetersiz görüp düşük fiyat verebilirsiniz. Bu benim de zamanında düşüp çıktığım bir çukur.',
+              'Piyasada iyi ürünlerle rekabet edebileceğine inandığınız bir şeyse bu ve siz daha alt kalite ürünlerin olduğu sınıfa ait bir fiyatlama yaparsanız, kaliteyi öncelikli tutan ve buna ödeme yapmaya hazır kitleyle yolunuz hiç kesişmeyebilir. Kalite değil fiyatı öncelikli kesimi ise mutlu etmeniz zordur, sadakatleri de zayıf olur genelde.',
+              'Ne ürünün kalite sınıfının altında bir fiyatlama, ne rekabetten koparacak hayalci yüksek fiyatlama. Bu iki sınırın farkında olmak lazım her zaman.',
+            ],
+          },
+        ],
+      },
       'Marc Lou': {
         label: 'Marc Lou',
         items: [

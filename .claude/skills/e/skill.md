@@ -46,7 +46,7 @@ Notun içeriğine bakarak doğru tab ve kategoriyi belirle:
 | **futureInsights** | Ekonomi & Finans | Yatırım, borsa, kripto, makroekonomi, finansal trendler, para politikası |
 | **tavsiyeler** | [Kişi Adı] | Bilinir girişimci/mentorların tavsiye listeleri — her kategori bir kişiye aittir |
 
-**Karar kuralı:** Pratik iş tavsiyesi → `is` tabı. Tanıtım/büyüme → `pazarlama`. Kişisel gelişim kariyere uygulanmış → `kariyer`. İletişim/ikna → `iletisim`. Teknoloji/gelecek → `futureInsights`. Bilinir bir kişinin listesi/manifesto → `tavsiyeler` (kategori adı = kişinin adı).
+**Karar kuralı:** Notta "— Kişi Adı" veya "(Kişi Adı)" gibi bir atıf varsa → **her zaman `tavsiyeler`** tabı (kategori adı = kişinin adı). Atıf yoksa: pratik iş tavsiyesi → `is`, tanıtım/büyüme → `pazarlama`, kariyer → `kariyer`, iletişim/ikna → `iletisim`, teknoloji/gelecek → `futureInsights`.
 
 ## Adım 3: Duplike Kontrolü
 
