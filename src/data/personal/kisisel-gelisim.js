@@ -1,32 +1,6 @@
 export const title = 'Kişisel Gelişim'
 
 export const categories = {
-  'İş & Kariyer': {
-    label: 'İş & Kariyer',
-    items: [
-      'satış ve pazarlamada uzmanlaş',
-      'dont be the best.be the only!',
-      'Be a \'top-level asker.\'',
-      'İşlerinizde uzmanlara ödediğiniz paradan korkmayın.Sahibiden satılık ev olmamalı mesela bu işi uzmanına bırakın.evi siz satmaya çalışırsanız kendi zamanını harcayıp zaman kaybedersiniz.',
-      'kompleks bir yapıyı basitleştirmek rağbet görüyor örneğin biletinial ve airbnb uygulaması. eskiden otel rez yapmak cok kompleks iken artık çok basit.',
-      'Ayrıca çok az tamamen yeni fikir vardır.Çoğu fikir sadece mevcut şirketleri,planları,fikirleri veya çözümleri tekrarlamaktadır.Fikirleri paylaşmak yerine korumaya çok fazla zaman enerji odaklayarak,başkalarından gelen geri bildirimlerle daha iyi olmalarını engelleme riski taşırsınız.İş fikrinizi potansiyel müşterilerle paylaşmanın bile faydaları vardır çünkü onlar, siz çok fazla zaman veya kaynak yatırımı yapmadan erkenden görüşlerini sunabilir ve fikri daha da iyi bir uygulama için şekillendirmenize ve konumlandırmanıza yardımcı olabilirler.',
-      'Ne kadar bilgili oldugundan dolayı degil, kimi tanıdığından dolayı oldugun yerdesindir.',
-      'Naval says, \'If you don\'t own a piece of a business, you don\'t have a path to financial freedom.to stop trading your time for money and start investing your skills in ways that scale.Combine any specific knowledge you have with leverage and value your time like it is the most expensive resource you have.',
-      'önümüzdeki yıllarda zenginlerin ihtiyaclarını çözecek kaliteli hizmet sektörüne büyük ihtiyaç var.yapay zeka gelişmesiyle boş zamanı daha cok olacak zenginlerin böyle şeylere daha cok para harcayacak. - bora özkent',
-      'belirli niş bi alan bulup bu alanda derinlemesine saatler harcayarak o alanda kendini ön plana çıkarabilirsin .çok niş alanlarda hobiler edinerek kendini daha ön plana çıkarabilirsin. örnek alanlar olarak Sand Grain Microphotography,Amateur Cryptozoology,Extreme Ironing,Herb Drying',
-      'daima bir sonraki büyük story ne olacak buna bakmak lazım başarı için.',
-      'Odak noktanızı "Verimlilikten" (bir şeyi olabildiğince ucuza ve çok sayıda üretip kar etmek), "Dayanıklılığa" (krizleri atlatabilmeye ve hayatta kalmaya) kaydırın.',
-      'Liderler sadece kendi takımlarının onlara göstermek istediği dünya versiyonunu yaşarlar. İyi bir CEO bu filtreyi kırmalıdır.\nFiltreleri aşmak için rastgele, direkt kanallar açın. Şirketteki otoriteyi umursamayan, kod ile yaşayan 4 alt kademedeki mühendislerle (veya 24 yaşındaki genç yeteneklerle) düzenli görüşün, size acı gerçekleri onlar söyleyecektir.',
-      'Her zaman insanlara bahis yapın. İyi veya kötü şirketler gelir geçer, ancak harika insanlar her zaman harika işler çıkarır.\n"Harika İnsan" (Great Person) profili: Başarılı, onurlu, sadık, ne yapacağını söyleyen ve sonuç iyi de olsa kötü de olsa verdiği sözün arkasında duran, çok çalışan kişi.',
-      'Gerçekten başarılı olan insanlar hedeflere değil; sürece, öğrenmeye, risk almaya ve kendilerini ilginç şeyler bilen insanlarla çevrelemeye bağlıdırlar. Bu, onları hayat boyu canlı tutar.\n\nBiri bana asıl hedefin canlı kalmak ve öğrenmek olduğunu söyleseydi, parayı çok daha az önemser, gençliğimde aldığımdan çok daha fazla risk alırdım.\n\nKendinizi sürekli sizden daha genç insanlarla çevreleyin. Genç insanların dünyaya bakış açıları, önyargıları ve karar alma çerçeveleri tamamen farklıdır. Onlar, sizin için geleceğe dair bir "erken uyarı sistemi" işlevi görürler.',
-      'Ekonominin amacı üretimi artırmak değil, insanların değer verdikleri bir hayatı seçip yaşayabilmeleri için kapasitelerini (sağlıklı olmak, yaratıcı olmak vb.) genişletmektir.',
-      'Your salary is based on how hard you are to replace, not how hard you work.',
-      'Forget rich versus poor, white-collar versus blue. It\'s now leveraged versus un-leveraged.',
-      'If I look at the last 15 years of knowing people in startups, and then seeing who became successful and who didn\'t, I\'m starting to see some general patterns.\n\nThe people I know who became successful (and very rich) regularly asked for help and feedback, and then applied that feedback very quickly (think minutes) and shipped fast while maintaining their own vision.\n\nThe people who didn\'t become successful are the ones who worked on stuff for months/years without asking for help or feedback, or when they did took weeks/months to apply it.\n\nSo I think the feedback -> implement loop and speed of it is possibly very important.',
-      'Ekonomik krizlerde doğan şirketler (Airbnb, Uber, Tesla, Palantir) kısıtlamaları avantaja çevirerek büyük başarı yakaladı. Bireysel yatırımcılar için kaynak azlığı dezavantaj değil, özgün stratejiler geliştirme fırsatıdır; büyük fonları taklit etmek yerine farklı düşünmek gerekir.',
-      'Yaptığın şeyin nedenlerini ve neden ve nasıl çalıştığını öğren. Günümüzde herkes Next.js kullanıyor ancak arka planda nasıl çalıştığına dair bir fikirleri yok. Ya da CSS biliyorum diyorlar ama CSS nasıl render ediliyor bilgileri yok. WebAssembly yazan yeni bir geliştirici neredeyse yetişmiyor.',
-    ],
-  },
   'Mindset': {
     label: 'Mindset',
     items: [

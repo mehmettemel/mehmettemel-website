@@ -134,6 +134,15 @@ export const tabs = {
           'Vilnius.',
         ],
       },
+      {
+        name: 'Arnavutluk',
+        flag: '🇦🇱',
+        notes: [
+          'Livadi bölgesi.',
+          'Ksamil.',
+          'Durrës.',
+        ],
+      },
     ],
   },
   turkey: {
@@ -150,6 +159,7 @@ export const tabs = {
           'Bodrum, Yalıkavak, Kaş, Patara, Fethiye. –Ahmet Çığşar',
           'Adana – Kayseri – Sultan Sazlığı – Göreme rotası.',
           'İstanbul yürüyüş rotaları ve vapur hatları detaylı listelenmiş.',
+          'İstanbul\'daki en iyi manzara Topkapı Sarayı\'nın manzarası.',
           'Bademli koyları için tekne turları önerilmiş.',
           'Şanlıurfa Göbeklitepe Adıyaman Nemrut Mardin Kasimiye Medresesi – Dayrulzafaran Kilisesi Diyarbakır Hevsel Bahçeleri – Zerzevan Kalesi – Ulu Cami Van Akdamar Kilisesi Kars Ani Harabeleri Malatya Aslantepe Höyüğü.',
           'Kastamonu.',
