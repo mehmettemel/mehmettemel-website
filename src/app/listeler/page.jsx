@@ -46,7 +46,7 @@ export default function ListelerPage() {
             // Recipe stats come from separate table
             const isRecipe = category.id === 'tarif'
             const categoryStats = isStatic
-              ? { total: 41, completed: 0, liked: 0 } // Russian has 41 phrases
+              ? { total: category.staticCount ?? 41, completed: 0, liked: 0 }
               : isRecipe
                 ? { total: recipeStats?.total || 0, completed: 0, liked: 0 }
                 : stats[category.id] || { total: 0, completed: 0, liked: 0 }
@@ -79,7 +79,7 @@ export default function ListelerPage() {
                 {/* Stats */}
                 <div className="mt-auto flex flex-wrap gap-2">
                   <span className="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
-                    {categoryStats.total} {isStatic ? 'kelime' : isRecipe ? 'tarif' : 'item'}
+                    {categoryStats.total} {isStatic ? (category.staticUnit ?? 'kelime') : isRecipe ? 'tarif' : 'item'}
                   </span>
                   {categoryStats.completed > 0 && (
                     <span className="rounded-full bg-secondary px-2.5 py-1 text-xs font-medium text-foreground">

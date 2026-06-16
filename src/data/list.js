@@ -19,6 +19,16 @@ export const listCategories = [
     icon: '👨‍🍳',
     description: 'Yemek tarifleri ve mutfak notları',
   },
+  {
+    id: 'claude',
+    name: 'Claude',
+    emoji: '🤖',
+    icon: '🤖',
+    description: 'Claude ile verimli çalışma notları ve ipuçları',
+    isStatic: true,
+    staticCount: 1,
+    staticUnit: 'not',
+  },
 ]
 
 /**
