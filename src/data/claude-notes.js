@@ -15,6 +15,13 @@ export const tabs = {
         label: 'Promptlama',
         items: [
           {
+            title: '🔄 Handoff Dökümanı (uzun oturumlarda)',
+            items: [
+              'Context dolmaya başladığında veya konuyu değiştireceğinde şunu kullan: "Şimdiye kadar ne yaptık, ne kararlar aldık, bir sonraki adım ne — bunu sıfırdan başlayacak bir Claude okusun diye özetle."',
+              'Bunu kaydet, yeni sohbette ilk mesaj olarak yapıştır. Özellikle Claude Code\'da uzun debug/refactor oturumlarında hayat kurtarıyor.',
+            ],
+          },
+          {
             title: '🧠 Socratic Prompting (karmaşık görevler için)',
             items: [
               'Büyük bir şey yapmadan önce şunu dene: "Şunu yapmak istiyorum: [görev] — Başlamadan önce bana sorman gereken soruları sor."',

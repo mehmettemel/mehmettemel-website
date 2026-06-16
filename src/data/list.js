@@ -26,7 +26,7 @@ export const listCategories = [
     icon: '🤖',
     description: 'Claude ile verimli çalışma notları ve ipuçları',
     isStatic: true,
-    staticCount: 2,
+    staticCount: 3,
     staticUnit: 'not',
   },
 ]
