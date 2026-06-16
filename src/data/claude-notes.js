@@ -11,6 +11,18 @@ export const tabs = {
           'If you notice Claude struggles to fetch the content from a page, you can use the Obsidian Web Clipper to copy the page content as Markdown.',
         ],
       },
+      'Promptlama': {
+        label: 'Promptlama',
+        items: [
+          {
+            title: '🧠 Socratic Prompting (karmaşık görevler için)',
+            items: [
+              'Büyük bir şey yapmadan önce şunu dene: "Şunu yapmak istiyorum: [görev] — Başlamadan önce bana sorman gereken soruları sor."',
+              'Özellikle araştırma ve mimari kararlar için çok işe yarıyor. Claude\'un sormadığı şeyleri sen de düşünmemişsindir genellikle.',
+            ],
+          },
+        ],
+      },
     },
   },
 }
