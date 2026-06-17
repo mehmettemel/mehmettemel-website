@@ -15,6 +15,13 @@ export const tabs = {
         label: 'Promptlama',
         items: [
           {
+            title: '📄 Şişirilmiş CLAUDE.md',
+            items: [
+              'CLAUDE.md çok uzun olunca Claude önemli kuralları gürültüde kaybeder ve görmezden gelir.',
+              'Çözüm: Acımasızca budama yap. Claude onsuz doğru yapıyorsa sil, hook\'a çevir veya skill\'e taşı.',
+            ],
+          },
+          {
             title: '🔄 Handoff Dökümanı (uzun oturumlarda)',
             items: [
               'Context dolmaya başladığında veya konuyu değiştireceğinde şunu kullan: "Şimdiye kadar ne yaptık, ne kararlar aldık, bir sonraki adım ne — bunu sıfırdan başlayacak bir Claude okusun diye özetle."',
