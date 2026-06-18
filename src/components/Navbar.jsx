@@ -32,6 +32,7 @@ const listelerItems = [
   { href: '/listeler/ingilizce', label: 'İngilizce', emoji: '🇬🇧' },
   { href: '/listeler/rusca', label: 'Rusça', emoji: '🇷🇺' },
   { href: '/listeler/questions', label: 'Questions', emoji: '❓' },
+  { href: '/listeler/tansiyon', label: 'Tansiyon Takip', emoji: '🩺' },
   { href: '/listeler/claude', label: 'Claude', emoji: '🤖' },
   { href: '/incelemeler', label: 'İncelemeler', emoji: '🔬' },
 ]
@@ -167,6 +168,9 @@ function MobileNav() {
                   </Link>
                   <Link href="/listeler/rusca" onClick={closeSheet} className={mobileNavLinkClass}>
                     <span>🇷🇺</span> Rusça
+                  </Link>
+                  <Link href="/listeler/tansiyon" onClick={closeSheet} className={mobileNavLinkClass}>
+                    <span>🩺</span> Tansiyon Takip
                   </Link>
                   <Link href="/listeler/claude" onClick={closeSheet} className={mobileNavLinkClass}>
                     <span>🤖</span> Claude

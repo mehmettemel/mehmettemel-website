@@ -20,6 +20,16 @@ export const listCategories = [
     description: 'Yemek tarifleri ve mutfak notları',
   },
   {
+    id: 'tansiyon',
+    name: 'Tansiyon Takip',
+    emoji: '🩺',
+    icon: '🩺',
+    description: 'Günlük tansiyon ölçüm takibi',
+    isStatic: true,
+    staticCount: 0,
+    staticUnit: 'ölçüm',
+  },
+  {
     id: 'claude',
     name: 'Claude',
     emoji: '🤖',
