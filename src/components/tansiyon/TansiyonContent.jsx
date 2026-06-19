@@ -11,40 +11,31 @@ function getBPCategory(sis, dia) {
   return { label: 'Normal', cls: 'bg-green-500 text-white' }
 }
 
-function formatDate(iso) {
-  return new Date(iso).toLocaleDateString('tr-TR', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-  })
+function formatDate(d) {
+  return d.toLocaleDateString('tr-TR', { day: '2-digit', month: '2-digit', year: 'numeric' })
 }
 
-function formatTime(iso) {
-  return new Date(iso).toLocaleTimeString('tr-TR', {
-    hour: '2-digit',
-    minute: '2-digit',
-  })
+function formatTime(d) {
+  return d.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })
 }
+
+const ZAMAN_CLS = {
+  Sabah: 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-400',
+  Akşam: 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-400',
+}
+const ZAMAN_CLS_DEFAULT = 'bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-400'
 
 function FloatingNote() {
-  const [collapsed, setCollapsed] = useState(false)
+  const [isOpen, setIsOpen] = useState(true)
 
   return (
     <div className="fixed bottom-6 right-6 z-40">
-      {collapsed ? (
-        <button
-          onClick={() => setCollapsed(false)}
-          className="flex items-center gap-2 rounded-full border border-border bg-background px-3 py-2 text-xs font-medium text-muted-foreground shadow-lg transition-colors hover:text-foreground"
-        >
-          <AlertCircle className="h-3.5 w-3.5" />
-          Ne zaman ölç?
-        </button>
-      ) : (
+      {isOpen ? (
         <div className="w-72 rounded-xl border border-border/60 bg-card/95 p-4 shadow-xl backdrop-blur-sm">
           <div className="mb-3 flex items-center justify-between">
             <span className="text-xs font-semibold text-foreground">Ne zaman ölç?</span>
             <button
-              onClick={() => setCollapsed(true)}
+              onClick={() => setIsOpen(false)}
               className="text-muted-foreground transition-colors hover:text-foreground"
             >
               <X className="h-3.5 w-3.5" />
@@ -65,6 +56,14 @@ function FloatingNote() {
             </li>
           </ul>
         </div>
+      ) : (
+        <button
+          onClick={() => setIsOpen(true)}
+          className="flex items-center gap-2 rounded-full border border-border bg-background px-3 py-2 text-xs font-medium text-muted-foreground shadow-lg transition-colors hover:text-foreground"
+        >
+          <AlertCircle className="h-3.5 w-3.5" />
+          Ne zaman ölç?
+        </button>
       )}
     </div>
   )
@@ -99,27 +98,22 @@ export function TansiyonContent({ olcumler }) {
               </thead>
               <tbody>
                 {olcumler.map((o, i) => {
+                  const d = new Date(o.tarih)
                   const cat = getBPCategory(o.sistolik, o.diastolik)
                   return (
                     <tr
                       key={o.id}
                       className={`border-b border-border/50 last:border-0 transition-colors hover:bg-secondary/10 ${
-                        i % 2 !== 0 ? 'bg-secondary/5' : ''
+                        i % 2 === 0 ? '' : 'bg-secondary/5'
                       }`}
                     >
-                      <td className="px-4 py-3 pl-5 text-foreground">{formatDate(o.tarih)}</td>
+                      <td className="px-4 py-3 pl-5 text-foreground">{formatDate(d)}</td>
                       <td className="px-4 py-3 tabular-nums text-muted-foreground">
-                        {formatTime(o.tarih)}
+                        {formatTime(d)}
                       </td>
                       <td className="px-4 py-3">
                         <span
-                          className={`rounded-full px-2 py-0.5 text-xs font-medium ${
-                            o.zaman === 'Sabah'
-                              ? 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-400'
-                              : o.zaman === 'Akşam'
-                                ? 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-400'
-                                : 'bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-400'
-                          }`}
+                          className={`rounded-full px-2 py-0.5 text-xs font-medium ${ZAMAN_CLS[o.zaman] ?? ZAMAN_CLS_DEFAULT}`}
                         >
                           {o.zaman}
                         </span>

@@ -1,7 +1,11 @@
-/**
- * List Categories Configuration
- * Defines the categories available in the list system
- */
+import { olcumler } from './tansiyon'
+import { tabs as claudeTabs } from './claude-notes'
+
+function countClaudeNotes() {
+  return Object.values(claudeTabs)
+    .flatMap((tab) => Object.values(tab.categories))
+    .flatMap((cat) => cat.items).length
+}
 
 export const listCategories = [
   {
@@ -26,7 +30,7 @@ export const listCategories = [
     icon: '🩺',
     description: 'Günlük tansiyon ölçüm takibi',
     isStatic: true,
-    staticCount: 0,
+    staticCount: olcumler.length,
     staticUnit: 'ölçüm',
   },
   {
@@ -36,16 +40,11 @@ export const listCategories = [
     icon: '🤖',
     description: 'Claude ile verimli çalışma notları ve ipuçları',
     isStatic: true,
-    staticCount: 4,
+    staticCount: countClaudeNotes(),
     staticUnit: 'not',
   },
 ]
 
-/**
- * Get category config by ID
- * @param {string} id - Category ID
- * @returns {Object|null} Category config or null
- */
 export function getListCategory(id) {
   return listCategories.find((cat) => cat.id === id) || null
 }
