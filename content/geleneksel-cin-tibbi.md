@@ -68,6 +68,42 @@ Vücuttaki aşırı ısıyı (enflamasyon, kızarıklık, ateş, mide yanması) 
 
 ---
 
+## Mevsimsel Beslenme
+
+GÇT'ye göre beslenme yıl boyunca sabit kalmaz; her mevsimin enerjisine ayak uydurulur.
+
+### ☀️ Yaz: Serinlet ve Nemlendirmek
+
+Yazın dışarısı sıcak (Yang) olduğu için vücudun içini hafifçe serinleten ve terle kaybedilen sıvıları yerine koyan Yin karakterli gıdalar öne çıkar. Aşırı sıcak kalbi yorar ve sıvıları tüketir; hafif, ferahlatıcı, ekşi ve serinletici tatlar tercih edilir. Ağır ve yağlı gıdalardan kaçınılır.
+
+- **Çiğ sebzeler ve zeytinyağlılar:** Çiğ domates, salatalık, roka, semizotu ve nane yazın tam bir GÇT şifasıdır — vücudun hararetini alır.
+- **Yaz meyveleri:** Karpuz (GÇT'de aşırı sıcağı temizleyen en güçlü doğal ilaçlardan biri), kavun, şeftali.
+- **Deniz ürünleri:** Izgara veya buharda pişmiş balıklar; özellikle beyaz etli balıklar serinletici/nötr doğaya sahiptir.
+
+### ❄️ Kış: İç Ateşi Yak ve Besle
+
+Kışın dışarısı soğuk ve nemli (Yin) olduğu için vücudun içini ısıtacak, enerjiyi derinlerde (böbreklerde) toplayacak Yang karakterli gıdalar seçilir. Çiğ ve soğuk her şey kışın önerilmez. Gıdaların uzun süre, kısık ateşte pişmesi istenir — pişirme işlemi gıdaya "ısı enerjisi" yükler.
+
+- **Kök sebzeler ve güveçler:** Fırınlanmış kereviz, havuç, balkabağı, tatlı patates. Zeytinyağlı pırasa veya tencerede ağır ağır pişmiş kuru baklagiller (nohut, kuru fasulye, mercimek).
+- **Isıtıcı kombinasyonlar:** Kışın domates yenecekse asla çiğ yenmez; bol sarımsak, zeytinyağı ve karabiberle sos haline getirilip sıcak bir yemeğin tabanı yapılır.
+- **Kemik suları ve sıcak çorbalar:** İçine bol defne yaprağı, biberiye ve kekik eklenmiş sıcak sebze veya et çorbaları kışın temelidir.
+
+---
+
+## Bağışıklık ve Bakteri: Ortamı Temizle
+
+Modern tıp bakteriyel bir hastalığı doğrudan antibiyotikle (bakteriyi öldürerek) çözer. Çin tıbbı ise olaya tersten bakar: *"Eğer içeride bakterinin üreyebileceği nemli, karanlık ve durgun bir ortam yoksa, bakteri gelip oraya yerleşemez."*
+
+Vücudun dış çeperindeki bağışıklık kalkanını Akciğer sistemi yönetir. Akciğerleri güçlü tutmak için keskin/baharatlı tatlar kullanılır — bu tatlar kan dolaşımını yüzeye doğru iter ve mikropları dışarı fırlatır.
+
+**Doğal antibiyotikler:** Sarımsak ve soğan, Çin tıbbında vücuttaki toksik ısıyı temizleyen ve parazit/bakteri önleyen en güçlü "keskin" gıdalardır. Taze zencefil ise özellikle soğuk algınlığının ilk sinyalinde zencefil çorbası veya çayı içilerek vücut terletilir — terleme, bakterinin içeri nüfuz etmesini engeller.
+
+**Hastalık döneminde kesilecekler:** Bakteriler vücutta en çok şekerli, nemli, mukuslu (balgamlı) ortamlarda ürer. Hastalık dönemlerinde veya salgınlarda rafine şeker, unlu mamuller ve süt ürünleri (yoğurt, süt, peynir) tamamen kesilir — bu gıdalar vücutta mukus (balgam) üreterek bakterilere beslenme alanı yaratır.
+
+**Bunun yerine:** Nemi kurutan acı (bitter) yeşillikler (enginar, karahindiba, roka) ve kekik, biberiye, adaçayı gibi aromatik Akdeniz otları tüketilir. Bu otların içindeki uçucu yağlar doğal birer antiseptiktir.
+
+---
+
 ## Pratik Uygulamalar
 
 **Şeker ve tatlı krizleri:** Canın aşırı tatlı çekiyorsa bu Çin tıbbında "dalağım zayıf, acil enerjiye ihtiyacım var" çığlığıdır. Rafine şeker atmak dalağı felç eder. Bunun yerine ılık termal etkili fırınlanmış tatlı patates veya tarçınlı bir lapa, dalağı gerçek anlamda iyileştirir.
