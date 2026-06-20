@@ -119,6 +119,7 @@ export const categories = {
       'If your goal is to experience life, you\'re always winning.',
       'Worry is a waste of imagination.',
       'The most healing thing you can do is stop living like everything is an emergency.',
+      'It is very important to go out alone, to sit under a tree — not with a book, not with a companion, but by yourself — and observe the falling of a leaf, hear the lapping of the water, the fishermen\'s song, watch the flight of a bird, and of your own thoughts as they chase each other across the space of your mind. If you are able to be alone and watch these things, then you will discover extraordinary riches which no government can tax, no human agency can corrupt, and which can never be destroyed. — Jiddu Krishnamurti',
     ],
   },
 }
