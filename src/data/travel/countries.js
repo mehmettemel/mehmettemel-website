@@ -246,6 +246,14 @@ export const tabs = {
         ],
       },
       {
+        name: 'Moğolistan',
+        flag: '🇲🇳',
+        notes: [
+          'Doğa ve yeşil manzaralar için en iyi aylar: Haziran–Eylül.',
+          'Temmuz: Naadam Festivali — geleneksel güreş, at yarışı, okçuluk.',
+        ],
+      },
+      {
         name: 'Çin',
         flag: '🇨🇳',
         notes: [
