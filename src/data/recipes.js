@@ -112,6 +112,12 @@ export const recipes = [
     instructions: '1. Zencefilleri soyup rendenin küçük dişlerinde rendeleyin.\n2. Üzerine 200-250 gr kahverengi şekeri ekleyip karıştırın ve öyle bekletin — şeker zencefilin suyunu çeker, bu maserasyon ne kadar uzun olursa o kadar çok aromatik öz çıkar (15-20 dk idealdir).\n3. 1-2 limonun kabuğunu rendeleyip ekleyin, aynı limonun suyunu da sıkın. (İnce dokunuş: yanına 1 lime suyu sıkarsanız turunç notası belirginleşir.)\n4. Bir miktar naneyi iyice doğrayıp ekleyin.\n5. İsteğe bağlı: 1 tutam tuz ekleyin (tatları dengeler). Daha katmanlı bir aroma için tarçın, kakule veya birkaç karabiberi de bu aşamada ekleyebilirsiniz.\n6. Karışıma 1-2 şişe soğuk soda ekleyin. Avucunuzla eze eze iyice karıştırın — ezmek zencefilin ve nanenin yağlarını açığa çıkarır.\n7. 20-30 dakika bu şekilde dinlensin.\n8. Bulamacı bir tülbentle parça parça, elinizle sıka sıka süzün. Süzülen konsantreyi şişeye doldurun.\n9. Servis: Bu bir konsantredir. 1\'e 5 oranında soğuk soda ile karıştırarak için. En iyi oran 1\'e 5\'tir ama azar azar artırıp azaltarak kendi mükemmel oranınızı bulabilirsiniz.\n10. Hem zencefil konsantresi hem de soda servis öncesi soğuk olsun.\n11. Şişeden dökmeden önce iyice çalkalayın — dibinde tortu birikir.\n\nNot: Bazı yerlerde hazırlarken içine yeşil ice tea karıştırıyorlar; istenirse denenebilir ama sade hâli de gayet iyidir.',
   },
   {
+    id: 19,
+    name: 'Akdeniz Yaz Dip Sosu',
+    ingredients: 'Zeytinyağı (bol)\nBalsamik sirke\nTuz\nKarabiber\nSarımsak (bol — 2-3 diş)\n1 limon (suyu)\nGüneşte kurutulmuş domates (kavanozdan, doğranmış)\nTaze fesleğen (kıyılmış)\nParmesan (rendelenmiş — bol)\nÇam fıstığı (üzeri için)\nEkmek (servis için)',
+    instructions: '1. Kaseye bol zeytinyağı dök.\n2. Üzerine balsamik sirke gezdır.\n3. Tuz ve karabiber ekle.\n4. Sarımsağı ince rende ile rendele, kaseye ekle.\n5. Limonun suyunu sık.\n6. Güneşte kurutulmuş domatesleri doğrayıp ekle.\n7. Kıyılmış taze fesleğeni ekle.\n8. Bol parmesan rendele, çatalla tüm malzemeleri karıştır.\n9. Üzerine çam fıstığı ve biraz daha parmesan rendele.\n10. Ekmekle servis et.\n\nNot: İsteğe göre zeytin veya farklı taze otlar da eklenebilir.',
+  },
+  {
     id: 15,
     name: 'Air Fryer Patates',
     ingredients: '~450g patates, eşit boyutlarda doğranmış\nAvokado yağı spreyi\nTuz\nKarabiber',
