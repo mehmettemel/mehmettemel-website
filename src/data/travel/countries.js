@@ -240,6 +240,9 @@ export const tabs = {
           'Busan > Seoul anyday.',
           'Ladies more beautiful in Daegu.',
           'Gwangju has the best food.',
+          'Gyeongju.',
+          'Jeonju.',
+          'Suwon.',
         ],
       },
       {
