@@ -118,6 +118,12 @@ export const recipes = [
     instructions: '1. Kaseye bol zeytinyağı dök.\n2. Üzerine balsamik sirke gezdır.\n3. Tuz ve karabiber ekle.\n4. Sarımsağı ince rende ile rendele, kaseye ekle.\n5. Limonun suyunu sık.\n6. Güneşte kurutulmuş domatesleri doğrayıp ekle.\n7. Kıyılmış taze fesleğeni ekle.\n8. Bol parmesan rendele, çatalla tüm malzemeleri karıştır.\n9. Üzerine çam fıstığı ve biraz daha parmesan rendele.\n10. Ekmekle servis et.\n\nNot: İsteğe göre zeytin veya farklı taze otlar da eklenebilir.',
   },
   {
+    id: 20,
+    name: 'Antrenman Öncesi Enerji Küpleri',
+    ingredients: 'Taze zencefil (bol)\n2 adet pancar\nBol bal\n2 limon (suyu)',
+    instructions: '1. Taze zencefil, pancar, bol bal ve limon suyunu blendere koy.\n2. Pürüzsüz kıvama gelene kadar blend et.\n3. Karışımı 2 inçlik (5 cm) buz kalıplarına dök.\n4. Dondurucuya koy ve tamamen donmasını bekle.\n5. Kullanmak istediğinde bir veya iki küpü bir bardak sıcak suya at, eriyene kadar karıştır ve antremandan önce iç.',
+  },
+  {
     id: 15,
     name: 'Air Fryer Patates',
     ingredients: '~450g patates, eşit boyutlarda doğranmış\nAvokado yağı spreyi\nTuz\nKarabiber',
