@@ -13,7 +13,8 @@ export const routineList = [
       { id: 'sabah-2', label: 'Derin nefes egzersizi yap' },
       { id: 'sabah-3', label: 'Çiğ badem, ceviz ve kabak çekirdeği tüket' },
       { id: 'sabah-4', label: 'Çiğ havuç ye' },
-      { id: 'sabah-5', label: 'Daima modunu yüksek ve olumlu tut. Negatif şeyleri zihninde NLP ile soldur.' },
+      { id: 'sabah-5', label: 'Kahvaltı ortasında soğuk sıkım zeytinyağı + 1 damla kekik yağı karıştırıp tüket', info: 'Aç karnına değil, kahvaltının ortasında tüket.' },
+      { id: 'sabah-6', label: 'Daima modunu yüksek ve olumlu tut. Negatif şeyleri zihninde NLP ile soldur.' },
     ],
   },
 ]
