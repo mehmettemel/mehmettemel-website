@@ -179,6 +179,9 @@ export const tabs = {
           'Eminönü (vapur) → Arnavutköy → Bebek',
           'Çengelköy – İstinye vapuru',
           'Üsküdar\'dan Haliç hattı ile Balat',
+          'Kennedy Caddesi\'nden Sirkeci\'ye kadar yürüyün — başka bir İstanbul.',
+          'Marmaray Sirkeci Garı çıkışından Akbank Sokağı\'na girin, başka bir evren gibi hissettiriyor. Hayyam Pasajı için gidin ama sokağa olan meraktan pasajı geçtikten sonra 700 m daha yürüyün.',
+          'Sirkeci\'den Yedikule\'ye kadar yürüyüş rotası — dünyanın en harika şehir yürüyüşlerinden biri.',
         ],
       },
       {
