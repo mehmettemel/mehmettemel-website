@@ -204,6 +204,7 @@ export const categories = {
       { text: 'Kapısında kuyruk olmayan restoranlarda yazın beyaz et tüketme. Bakterilerin üremeyi en sevdikleri sıcaklık aralığı 20-45 derece olduğundan illa ki ürün az ya da çok kontamine olmuştur. Sebze, tahıl veya kırmızı et tercih edin. En mantıklı seçimler kızartmalardır çünkü yüksek ısıda pişmişlerdir.', subItems: [] },
       { text: 'Yemekte eğer kıl çıktıysa geri vermeden önce içine tuz bas. Yoksa içindeki kılı çıkarıp yeni yapmış gibi getiriyorlar.', subItems: [] },
       { text: 'Sarımsak kokusunu en iyi elma geçirir.', subItems: [] },
+      { text: 'Fermente gıdaları her gün tüketin: 1-4 yemek kaşığı lahana turşusu, kimchi veya fermente pancar sebzelerin üzerine karıştırılabilir. Randomize kontrollü deneyde yüksek fermente gıda diyeti bağırsak mikrobiyal çeşitliliğini artırdı ve kanda 19 inflamasyon proteinini düşürdü. Sadece yüksek lif diyeti ise mikrobiyal çeşitliliği değiştirmedi. - Bryan Johnson', subItems: [] },
       { text: 'Allisin ısıya dayanıksızdır. Bu yüzden sarımsağı pişirmek antibakteriyel gücünü neredeyse yok eder. En etkili yol, çiğ sarımsağı ezip 5-10 dakika oda sıcaklığında bekletmek (böylece allisin maddesi maksimum seviyeye ulaşır) ve ardından tüketmektir.', subItems: [] },
       { text: 'Kesme şeker kullanmayın. Taşıma esnasında ıslanmış, taşlaşmış ne kadar şeker varsa kesme şeker yaparlar.', subItems: [] },
       { text: 'Gıdaları saklayacaksak mutlaka paslanmaz çelikte saklanmalı.', subItems: [] },
