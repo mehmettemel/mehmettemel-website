@@ -62,6 +62,7 @@ export const categories = {
       'Hayatın trajediye yatkın olduğunu kabullenmek, üzerinizdeki baskıyı sıfırlar ve mizah yaratır.',
       'A satisfied life is better than a successful life. Success is measured by others, but satisfaction is measured by your own soul.',
       'The greatest mind trick humans can do is reframing - the ability to completely transform our emotional experience and behavior by changing how we interpret a situation, without the situation itself changing at all. This is extraordinary when you think about it. The same exact event can make you miserable or energized purely based on the story you tell yourself about it.',
+      'Our house rule is you don\'t have to go to sleep if you\'re reading. So my 8 year old is now reading 6th grade reading level because he likes thinking that he\'s getting away with staying up after bedtime. Win/win.',
     ],
   },
 }
