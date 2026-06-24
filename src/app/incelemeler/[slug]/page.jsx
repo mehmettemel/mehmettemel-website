@@ -45,106 +45,65 @@ function ArrowLeftIcon(props) {
   )
 }
 
-// Parse HTML content into sections with paragraphs
-function parseContentToSections(htmlContent, headings) {
-  if (!htmlContent || !headings || headings.length === 0) {
-    // If no headings, treat entire content as one section
-    const paragraphs = extractParagraphsFromHTML(htmlContent)
-    return [{
-      id: 'content',
-      heading: 'İçerik',
-      paragraphs: paragraphs
-    }]
+// Extract paragraphs and list items from an HTML fragment
+function extractParagraphsFromSection(html) {
+  if (!html) return []
+  const paragraphs = []
+
+  const pRegex = /<p[^>]*>([\s\S]*?)<\/p>/gi
+  let match
+  while ((match = pRegex.exec(html)) !== null) {
+    const text = match[1].replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim()
+    if (text && text.length > 10) paragraphs.push(text)
+  }
+
+  const liRegex = /<li[^>]*>([\s\S]*?)<\/li>/gi
+  while ((match = liRegex.exec(html)) !== null) {
+    const text = match[1].replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim()
+    if (text && text.length > 10) paragraphs.push(text)
+  }
+
+  return paragraphs
+}
+
+// Server-safe section parser: associates content with its h2 heading via regex
+function extractSectionsFromHTML(htmlContent, headings) {
+  if (!htmlContent) return []
+
+  if (!headings || headings.length === 0) {
+    return [{ id: 'content', heading: 'İçerik', paragraphs: extractParagraphsFromSection(htmlContent) }]
   }
 
   const sections = []
-  const parser = new DOMParser()
-  const doc = parser.parseFromString(htmlContent, 'text/html')
 
-  headings.forEach((heading, index) => {
-    const headingElement = doc.getElementById(heading.id)
-    if (!headingElement) return
+  for (let i = 0; i < headings.length; i++) {
+    const heading = headings[i]
+    const nextHeading = headings[i + 1]
 
-    const paragraphs = []
-    let currentElement = headingElement.nextElementSibling
+    const escapedText = heading.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    const headingPattern = new RegExp(`<h2[^>]*>${escapedText}</h2>`, 'i')
+    const headingMatch = headingPattern.exec(htmlContent)
+    if (!headingMatch) continue
 
-    // Get the next heading to know where to stop
-    const nextHeading = headings[index + 1]
-    const nextHeadingElement = nextHeading ? doc.getElementById(nextHeading.id) : null
+    const sectionStart = headingMatch.index + headingMatch[0].length
+    let sectionEnd = htmlContent.length
 
-    // Collect all content until next heading
-    while (currentElement && currentElement !== nextHeadingElement) {
-      if (currentElement.tagName === 'P') {
-        const text = currentElement.textContent.trim()
-        if (text && text.length > 20) {
-          paragraphs.push(text)
-        }
-      } else if (currentElement.tagName === 'UL' || currentElement.tagName === 'OL') {
-        const listItems = currentElement.querySelectorAll('li')
-        listItems.forEach(li => {
-          const text = li.textContent.trim()
-          if (text && text.length > 20) {
-            paragraphs.push(text)
-          }
-        })
-      }
-      currentElement = currentElement.nextElementSibling
+    if (nextHeading) {
+      const escapedNext = nextHeading.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+      const nextPattern = new RegExp(`<h2[^>]*>${escapedNext}</h2>`, 'i')
+      const nextMatch = nextPattern.exec(htmlContent.substring(sectionStart))
+      if (nextMatch) sectionEnd = sectionStart + nextMatch.index
     }
+
+    const sectionContent = htmlContent.substring(sectionStart, sectionEnd)
+    const paragraphs = extractParagraphsFromSection(sectionContent)
 
     if (paragraphs.length > 0) {
-      sections.push({
-        id: heading.id,
-        heading: heading.text,
-        paragraphs: paragraphs
-      })
+      sections.push({ id: heading.id, heading: heading.text, paragraphs })
     }
-  })
+  }
 
   return sections
-}
-
-// Fallback: Extract paragraphs from HTML if DOMParser fails
-function extractParagraphsFromHTML(htmlContent) {
-  if (!htmlContent) return []
-
-  const paragraphs = []
-
-  // Extract list items (ul/ol > li) as separate paragraphs, preserving inner HTML like <strong>
-  const listItemRegex = /<li[^>]*>(.*?)<\/li>/gi
-  let match
-  while ((match = listItemRegex.exec(htmlContent)) !== null) {
-    const text = match[1]
-      .replace(/\s+/g, ' ') // Normalize whitespace only
-      .trim()
-
-    if (text && text.length > 10) {
-      paragraphs.push(text) // Keep HTML tags for bold, italic, etc.
-    }
-  }
-
-  // If we found list items, return them
-  if (paragraphs.length > 0) {
-    return paragraphs
-  }
-
-  // Otherwise, fallback to paragraph extraction
-  const withoutTags = htmlContent
-    .replace(/<h[1-6][^>]*>.*?<\/h[1-6]>/gi, '') // Remove headings
-    .replace(/<[^>]*>/g, ' ') // Remove all HTML tags
-    .replace(/\s+/g, ' ') // Normalize whitespace
-    .trim()
-
-  // Split by periods followed by space and capital letter or newline
-  const sentences = withoutTags.split(/\.\s+/)
-
-  sentences.forEach(sentence => {
-    const cleaned = sentence.trim()
-    if (cleaned.length > 50) {
-      paragraphs.push(cleaned.endsWith('.') ? cleaned : cleaned + '.')
-    }
-  })
-
-  return paragraphs
 }
 
 export default async function BlogPost({ params }) {
@@ -155,39 +114,7 @@ export default async function BlogPost({ params }) {
     notFound()
   }
 
-  // Server-side parsing is not possible with DOMParser (browser API)
-  // So we'll extract paragraphs differently
-  const sections = post.headings && post.headings.length > 0
-    ? post.headings.map(heading => ({
-        id: heading.id,
-        heading: heading.text,
-        paragraphs: [] // Will be populated client-side
-      }))
-    : []
-
-  // Extract all paragraphs from content
-  const allParagraphs = extractParagraphsFromHTML(post.content)
-
-  // If we have headings, distribute paragraphs across sections
-  // Otherwise create a single section
-  let finalSections
-  if (sections.length > 0) {
-    // Distribute paragraphs evenly across sections
-    const paragraphsPerSection = Math.ceil(allParagraphs.length / sections.length)
-    finalSections = sections.map((section, index) => ({
-      ...section,
-      paragraphs: allParagraphs.slice(
-        index * paragraphsPerSection,
-        (index + 1) * paragraphsPerSection
-      )
-    })).filter(section => section.paragraphs.length > 0)
-  } else {
-    finalSections = [{
-      id: 'content',
-      heading: 'İçerik',
-      paragraphs: allParagraphs
-    }]
-  }
+  const finalSections = extractSectionsFromHTML(post.content, post.headings)
 
   // Kişisel category: render as blog article, not note cards
   if (post.category === 'kisisel') {
