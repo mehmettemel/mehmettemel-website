@@ -12,7 +12,7 @@ export function RussianCard({ phrase }) {
     <Tooltip.Provider delayDuration={200}>
       <div className="group relative rounded-xl border border-border bg-card p-6 transition-all duration-200 hover:border-primary/40 hover:bg-secondary/20 hover:shadow-lg">
         {/* Color swatch for colors */}
-        {phrase.type === 'renk' && phrase.color && (
+        {phrase.color && (
           <div
             className="mx-auto mb-4 h-12 w-12 rounded-full border-2 border-border shadow-md"
             style={{ backgroundColor: phrase.color }}
@@ -21,9 +21,11 @@ export function RussianCard({ phrase }) {
 
         {/* Russian Text - Main display */}
         <div className="flex items-start justify-between gap-2">
-          <p className="flex-1 text-center text-2xl font-bold text-foreground sm:text-3xl">
-            {phrase.russian}
-          </p>
+          <div className="flex-1 text-center">
+            <p className="text-2xl font-bold text-foreground sm:text-3xl">{phrase.russian}</p>
+            <p className="mt-1 font-mono text-xs text-muted-foreground">[{phrase.pronunciation}]</p>
+            <p className="mt-1 text-sm text-foreground/80">{phrase.turkish}</p>
+          </div>
 
           {/* Info Icon with Tooltip */}
           <Tooltip.Root>

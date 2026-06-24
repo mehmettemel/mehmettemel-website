@@ -1,31 +1,14 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState } from 'react'
 import { Container } from '@/components/Container'
 import { RussianCard } from '@/components/russian/RussianCard'
-import { RandomCircleButton } from '@/components/ui/random-circle-button'
-import { russianPhrases } from '@/data/russian'
+import { russianTabs, getRussianByTab } from '@/data/russian'
 
 export default function RussianPage() {
-  const [currentPhrase, setCurrentPhrase] = useState(null)
+  const [activeTab, setActiveTab] = useState(russianTabs[0].id)
 
-  const getRandomPhrase = useCallback(() => {
-    if (russianPhrases.length > 0) {
-      const randomIndex = Math.floor(Math.random() * russianPhrases.length)
-      setCurrentPhrase(russianPhrases[randomIndex])
-    }
-  }, [])
-
-  // Set initial phrase
-  useEffect(() => {
-    getRandomPhrase()
-  }, [getRandomPhrase])
-
-  // Auto-rotate every 10 seconds
-  useEffect(() => {
-    const interval = setInterval(getRandomPhrase, 10000)
-    return () => clearInterval(interval)
-  }, [getRandomPhrase])
+  const phrases = getRussianByTab(activeTab)
 
   return (
     <Container>
@@ -33,9 +16,7 @@ export default function RussianPage() {
         {/* Header */}
         <div className="mb-8 text-center">
           <div className="mb-2 flex items-center justify-center gap-3">
-            <span className="text-4xl" role="img" aria-label="Russian">
-              🇷🇺
-            </span>
+            <span className="text-4xl" role="img" aria-label="Russian">🇷🇺</span>
             <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
               Rusça
             </h1>
@@ -43,21 +24,34 @@ export default function RussianPage() {
           <p className="text-base text-muted-foreground">
             Günlük hayatta kullanılabilecek Rusça kelime ve cümleler
           </p>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Toplam {russianPhrases.length} kelime/cümle
-          </p>
         </div>
 
-        {/* Random Button */}
-        <div className="mb-8 flex justify-center">
-          <RandomCircleButton onClick={getRandomPhrase} />
+        {/* Tabs */}
+        <div className="mb-8 flex flex-wrap justify-center gap-2">
+          {russianTabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition-all ${
+                activeTab === tab.id
+                  ? 'bg-primary text-primary-foreground shadow-sm'
+                  : 'bg-secondary text-muted-foreground hover:bg-secondary/80 hover:text-foreground'
+              }`}
+            >
+              <span>{tab.emoji}</span>
+              <span>{tab.label}</span>
+              <span className="ml-0.5 text-xs opacity-60">
+                ({getRussianByTab(tab.id).length})
+              </span>
+            </button>
+          ))}
         </div>
 
-        {/* Single Card Display */}
-        <div className="flex justify-center">
-          <div className="w-full max-w-2xl">
-            {currentPhrase && <RussianCard phrase={currentPhrase} />}
-          </div>
+        {/* Cards Grid */}
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {phrases.map((phrase) => (
+            <RussianCard key={phrase.id} phrase={phrase} />
+          ))}
         </div>
       </div>
     </Container>
