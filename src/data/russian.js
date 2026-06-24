@@ -4,6 +4,7 @@
  */
 
 export const russianTabs = [
+  { id: 'konusma',  label: 'Konuşmalar',       emoji: '🗣️' },
   { id: 'tanisma',  label: 'Tanışma',         emoji: '👋' },
   { id: 'kafe',     label: 'Kafe & Restoran',  emoji: '☕' },
   { id: 'seyahat',  label: 'Seyahat',          emoji: '✈️' },
@@ -11,6 +12,82 @@ export const russianTabs = [
   { id: 'sayilar',  label: 'Sayılar',          emoji: '🔢' },
   { id: 'renkler',  label: 'Renkler',          emoji: '🎨' },
   { id: 'fiiller',  label: 'Fiiller',          emoji: '🏃' },
+]
+
+export const russianConversations = [
+  {
+    id: 1,
+    title: 'Tanışma',
+    subtitle: 'Встреча — İki yabancının tanışması',
+    lines: [
+      { speaker: 'A', russian: 'Привет! Как дела?',                      pronunciation: 'Privet! Kak dela?',                        turkish: 'Merhaba! Nasılsın?' },
+      { speaker: 'B', russian: 'Хорошо, спасибо. А у тебя?',            pronunciation: 'Harasho, spasiba. A u tebya?',             turkish: 'İyiyim, teşekkürler. Ya sen?' },
+      { speaker: 'A', russian: 'У меня тоже хорошо. Как тебя зовут?',   pronunciation: 'U menya tozhe harasho. Kak tebya zavut?',  turkish: 'Ben de iyiyim. Adın ne?' },
+      { speaker: 'B', russian: 'Меня зовут Полина. А тебя?',            pronunciation: 'Menya zavut Polina. A tebya?',             turkish: 'Benim adım Polina. Ya senin?' },
+      { speaker: 'A', russian: 'Меня зовут Мемет. Откуда ты?',          pronunciation: 'Menya zavut Memet. Otkuda tı?',            turkish: 'Benim adım Mehmet. Nerelisin?' },
+      { speaker: 'B', russian: 'Я из России. А ты?',                    pronunciation: 'Ya iz Rossii. A tı?',                     turkish: 'Rusyalıyım. Ya sen?' },
+      { speaker: 'A', russian: 'Я из Турции. Приятно познакомиться!',   pronunciation: 'Ya iz Turtsii. Priyatna paznakomitsya!',   turkish: 'Türküm. Tanıştığıma memnun oldum!' },
+      { speaker: 'B', russian: 'Мне тоже!',                             pronunciation: 'Mnye tozhe!',                             turkish: 'Ben de!' },
+    ],
+  },
+  {
+    id: 2,
+    title: 'Kafede',
+    subtitle: 'В кафе — Sipariş verme',
+    lines: [
+      { speaker: 'A', russian: 'Добрый день! Что будете?',              pronunciation: 'Dobrıy den! Shto budete?',                turkish: 'İyi günler! Ne alırsınız?' },
+      { speaker: 'B', russian: 'Мне кофе, пожалуйста.',                 pronunciation: 'Mnye kofe, pajalusta.',                   turkish: 'Bana kahve lütfen.' },
+      { speaker: 'A', russian: 'Большой или маленький?',                pronunciation: 'Bolshoy ili malenky?',                    turkish: 'Büyük mü küçük mü?' },
+      { speaker: 'B', russian: 'Большой, спасибо. Сколько стоит?',     pronunciation: 'Bolshoy, spasiba. Skolka stoit?',         turkish: 'Büyük, teşekkürler. Ne kadar?' },
+      { speaker: 'A', russian: 'Двести рублей.',                        pronunciation: 'Dvesti rubley.',                         turkish: 'İki yüz ruble.' },
+      { speaker: 'B', russian: 'Можно заплатить картой?',              pronunciation: 'Mojna zaplatit kartoy?',                  turkish: 'Kartla ödeyebilir miyim?' },
+      { speaker: 'A', russian: 'Да, конечно. Вот терминал.',           pronunciation: 'Da, kanyeshna. Vot terminal.',            turkish: 'Evet, tabii. İşte terminal.' },
+      { speaker: 'B', russian: 'Спасибо!',                             pronunciation: 'Spasiba!',                               turkish: 'Teşekkürler!' },
+      { speaker: 'A', russian: 'Пожалуйста. Приятного аппетита!',      pronunciation: 'Pajalusta. Priyatnava appetita!',         turkish: 'Rica ederim. Afiyet olsun!' },
+    ],
+  },
+  {
+    id: 3,
+    title: 'Yol Sorma',
+    subtitle: 'Как пройти — Yol tarifi',
+    lines: [
+      { speaker: 'A', russian: 'Извините, где находится метро?',        pronunciation: 'Izvinite, gde nahoditsya metro?',         turkish: 'Özür dilerim, metro nerede?' },
+      { speaker: 'B', russian: 'Прямо, потом налево.',                  pronunciation: 'Pryama, potom naleva.',                  turkish: 'Düz gidin, sonra sola.' },
+      { speaker: 'A', russian: 'Это далеко?',                           pronunciation: 'Eta daleko?',                            turkish: 'Uzak mı?' },
+      { speaker: 'B', russian: 'Нет, пять минут пешком.',              pronunciation: 'Net, pyat minut peshkom.',               turkish: 'Hayır, yürüyerek beş dakika.' },
+      { speaker: 'A', russian: 'Большое спасибо!',                     pronunciation: 'Bolshoye spasiba!',                      turkish: 'Çok teşekkürler!' },
+      { speaker: 'B', russian: 'Пожалуйста!',                          pronunciation: 'Pajalusta!',                             turkish: 'Rica ederim!' },
+    ],
+  },
+  {
+    id: 4,
+    title: 'Rusça Konuşuyor musun?',
+    subtitle: 'Ты говоришь по-русски? — Dil hakkında konuşma',
+    lines: [
+      { speaker: 'A', russian: 'Ты говоришь по-русски?',               pronunciation: 'Tı govorish pa-ruski?',                  turkish: 'Rusça konuşuyor musun?' },
+      { speaker: 'B', russian: 'Да, немного. А ты?',                   pronunciation: 'Da, nyemnoga. A tı?',                   turkish: 'Evet, biraz. Ya sen?' },
+      { speaker: 'A', russian: 'Я учу русский язык.',                   pronunciation: 'Ya uchu ruskiy yazık.',                  turkish: 'Rusça öğreniyorum.' },
+      { speaker: 'B', russian: 'Как долго ты учишь?',                  pronunciation: 'Kak dolga tı uchish?',                   turkish: 'Ne zamandır öğreniyorsun?' },
+      { speaker: 'A', russian: 'Три месяца. Это сложно!',              pronunciation: 'Tri mesyatsa. Eta slojno!',              turkish: 'Üç aydır. Zor!' },
+      { speaker: 'B', russian: 'Не волнуйся, у тебя получается!',      pronunciation: 'Ne valnoysya, u tebya paluchayetsya!',   turkish: 'Merak etme, başarıyorsun!' },
+    ],
+  },
+  {
+    id: 5,
+    title: 'Restoranda',
+    subtitle: 'В ресторане — Masa ayırtma ve sipariş',
+    lines: [
+      { speaker: 'A', russian: 'Добрый вечер! У вас есть свободный столик?', pronunciation: 'Dobrıy vecher! U vas yest svobodnıy stolik?', turkish: 'İyi akşamlar! Boş masanız var mı?' },
+      { speaker: 'B', russian: 'Да, есть. На сколько человек?',         pronunciation: 'Da, yest. Na skolka chelovek?',           turkish: 'Evet, var. Kaç kişilik?' },
+      { speaker: 'A', russian: 'На двоих.',                             pronunciation: 'Na dvoih.',                              turkish: 'İki kişilik.' },
+      { speaker: 'B', russian: 'Пожалуйста, сюда. Меню, пожалуйста.',  pronunciation: 'Pajalusta, syuda. Menyu, pajalusta.',    turkish: 'Buyurun, buraya. İşte menü.' },
+      { speaker: 'A', russian: 'Что вы рекомендуете?',                 pronunciation: 'Shto vı rekamenduyete?',                 turkish: 'Ne tavsiye edersiniz?' },
+      { speaker: 'B', russian: 'Борщ очень вкусный сегодня.',          pronunciation: 'Borsh ochen vkusnıy sevodnya.',          turkish: 'Bugün borsch çok lezzetli.' },
+      { speaker: 'A', russian: 'Хорошо, два борща и хлеб.',            pronunciation: 'Harasho, dva borsha i hleb.',            turkish: 'Tamam, iki borsch ve ekmek.' },
+      { speaker: 'B', russian: 'Отлично! Что будете пить?',            pronunciation: 'Otlichna! Shto budete pit?',             turkish: 'Harika! Ne içersiniz?' },
+      { speaker: 'A', russian: 'Воду, пожалуйста.',                    pronunciation: 'Vodu, pajalusta.',                       turkish: 'Su lütfen.' },
+    ],
+  },
 ]
 
 export const russianPhrases = [

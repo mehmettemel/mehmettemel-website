@@ -3,12 +3,14 @@
 import { useState } from 'react'
 import { Container } from '@/components/Container'
 import { RussianCard } from '@/components/russian/RussianCard'
-import { russianTabs, getRussianByTab } from '@/data/russian'
+import { ConversationCard } from '@/components/russian/ConversationCard'
+import { russianTabs, getRussianByTab, russianConversations } from '@/data/russian'
 
 export default function RussianPage() {
   const [activeTab, setActiveTab] = useState(russianTabs[0].id)
 
-  const phrases = getRussianByTab(activeTab)
+  const isConversations = activeTab === 'konusma'
+  const phrases = isConversations ? [] : getRussianByTab(activeTab)
 
   return (
     <Container>
@@ -41,18 +43,29 @@ export default function RussianPage() {
               <span>{tab.emoji}</span>
               <span>{tab.label}</span>
               <span className="ml-0.5 text-xs opacity-60">
-                ({getRussianByTab(tab.id).length})
+                ({tab.id === 'konusma' ? russianConversations.length : getRussianByTab(tab.id).length})
               </span>
             </button>
           ))}
         </div>
 
-        {/* Cards Grid */}
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {phrases.map((phrase) => (
-            <RussianCard key={phrase.id} phrase={phrase} />
-          ))}
-        </div>
+        {/* Conversations */}
+        {isConversations && (
+          <div className="grid gap-4 sm:grid-cols-2">
+            {russianConversations.map((conv) => (
+              <ConversationCard key={conv.id} conversation={conv} />
+            ))}
+          </div>
+        )}
+
+        {/* Phrase Cards Grid */}
+        {!isConversations && (
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {phrases.map((phrase) => (
+              <RussianCard key={phrase.id} phrase={phrase} />
+            ))}
+          </div>
+        )}
       </div>
     </Container>
   )
