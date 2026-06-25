@@ -6,19 +6,13 @@ import { ResearchContent } from '../../../components/research/ResearchContent'
 
 export async function generateStaticParams() {
   const posts = getAllPostSlugs()
-  return posts.map((post) => ({
-    slug: post.slug,
-  }))
+  return posts.map((post) => ({ slug: post.slug }))
 }
 
 export async function generateMetadata({ params }) {
   const { slug } = await params
   const post = await getPostBySlug(slug)
-
-  if (!post) {
-    return {}
-  }
-
+  if (!post) return {}
   return {
     title: post.title,
     description: post.description,
@@ -45,114 +39,11 @@ function ArrowLeftIcon(props) {
   )
 }
 
-// Extract paragraphs and list items from an HTML fragment
-function extractParagraphsFromSection(html) {
-  if (!html) return []
-  const paragraphs = []
-
-  const pRegex = /<p[^>]*>([\s\S]*?)<\/p>/gi
-  let match
-  while ((match = pRegex.exec(html)) !== null) {
-    const text = match[1].replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim()
-    if (text && text.length > 10) paragraphs.push(text)
-  }
-
-  const liRegex = /<li[^>]*>([\s\S]*?)<\/li>/gi
-  while ((match = liRegex.exec(html)) !== null) {
-    const text = match[1].replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim()
-    if (text && text.length > 10) paragraphs.push(text)
-  }
-
-  return paragraphs
-}
-
-// Server-safe section parser: associates content with its h2 heading via regex
-function extractSectionsFromHTML(htmlContent, headings) {
-  if (!htmlContent) return []
-
-  if (!headings || headings.length === 0) {
-    return [{ id: 'content', heading: 'İçerik', paragraphs: extractParagraphsFromSection(htmlContent) }]
-  }
-
-  const sections = []
-
-  for (let i = 0; i < headings.length; i++) {
-    const heading = headings[i]
-    const nextHeading = headings[i + 1]
-
-    const escapedText = heading.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-    const headingPattern = new RegExp(`<h2[^>]*>${escapedText}</h2>`, 'i')
-    const headingMatch = headingPattern.exec(htmlContent)
-    if (!headingMatch) continue
-
-    const sectionStart = headingMatch.index + headingMatch[0].length
-    let sectionEnd = htmlContent.length
-
-    if (nextHeading) {
-      const escapedNext = nextHeading.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-      const nextPattern = new RegExp(`<h2[^>]*>${escapedNext}</h2>`, 'i')
-      const nextMatch = nextPattern.exec(htmlContent.substring(sectionStart))
-      if (nextMatch) sectionEnd = sectionStart + nextMatch.index
-    }
-
-    const sectionContent = htmlContent.substring(sectionStart, sectionEnd)
-    const paragraphs = extractParagraphsFromSection(sectionContent)
-
-    if (paragraphs.length > 0) {
-      sections.push({ id: heading.id, heading: heading.text, paragraphs })
-    }
-  }
-
-  return sections
-}
-
 export default async function BlogPost({ params }) {
   const { slug } = await params
   const post = await getPostBySlug(slug)
 
-  if (!post) {
-    notFound()
-  }
-
-  const finalSections = extractSectionsFromHTML(post.content, post.headings)
-
-  // Kişisel category: render as blog article, not note cards
-  if (post.category === 'kisisel') {
-    return (
-      <Container>
-        <div className="py-8 sm:py-12">
-          <Link
-            href="/incelemeler"
-            aria-label="Go back to incelemeler"
-            className="group mb-6 inline-flex items-center gap-1.5 text-sm text-muted transition-all hover:gap-2 hover:text-foreground"
-          >
-            <ArrowLeftIcon className="h-3.5 w-3.5 stroke-current transition-transform group-hover:-translate-x-0.5" />
-            <span>Geri Dön</span>
-          </Link>
-
-          <article className="mx-auto max-w-2xl">
-            <div className="mb-8 text-center">
-              <h1 className="text-xl font-bold tracking-tight text-foreground">
-                {post.title}
-              </h1>
-              {post.author && (
-                <p className="mt-2 text-xs text-muted-foreground">{post.author}</p>
-              )}
-              {post.date && (
-                <p className="mt-1 text-xs text-muted-foreground">
-                  {new Date(post.date).toLocaleDateString('tr-TR', { year: 'numeric', month: 'long', day: 'numeric' })}
-                </p>
-              )}
-            </div>
-            <div
-              className="prose prose-sm dark:prose-invert max-w-none text-foreground leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            />
-          </article>
-        </div>
-      </Container>
-    )
-  }
+  if (!post) notFound()
 
   return (
     <Container>
@@ -160,18 +51,64 @@ export default async function BlogPost({ params }) {
         <Link
           href="/incelemeler"
           aria-label="Go back to incelemeler"
-          className="group mb-6 inline-flex items-center gap-1.5 text-sm text-muted transition-all hover:gap-2 hover:text-foreground"
+          className="group mb-8 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-all hover:gap-2 hover:text-foreground"
         >
           <ArrowLeftIcon className="h-3.5 w-3.5 stroke-current transition-transform group-hover:-translate-x-0.5" />
           <span>Geri Dön</span>
         </Link>
 
-        <div className="mx-auto max-w-7xl">
-          <ResearchContent
-            sections={finalSections}
-            title={post.title}
-            author={post.author}
-          />
+        <div className="mx-auto max-w-5xl">
+          <div className="flex gap-16">
+            {/* Main Article */}
+            <article className="min-w-0 flex-1">
+              {/* Header */}
+              <header className="mb-10 border-b border-border pb-8">
+                <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                  {post.title}
+                </h1>
+                <div className="mt-4 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
+                  {post.author && post.author !== 'Mehmet Temel' && (
+                    <span>{post.author}</span>
+                  )}
+                  {post.source && (
+                    <span className="text-muted-foreground/60">· {post.source}</span>
+                  )}
+                  {post.date && (
+                    <span className="text-muted-foreground/60">
+                      ·{' '}
+                      {new Date(post.date).toLocaleDateString('tr-TR', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })}
+                    </span>
+                  )}
+                  {post.readingTime && (
+                    <span className="text-muted-foreground/60">· {post.readingTime}</span>
+                  )}
+                </div>
+              </header>
+
+              {/* Content */}
+              <div
+                className="prose prose-sm dark:prose-invert max-w-none
+                  prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-foreground
+                  prose-h2:text-lg prose-h2:mt-10 prose-h2:mb-4
+                  prose-p:text-foreground/90 prose-p:leading-relaxed prose-p:mb-4
+                  prose-strong:text-foreground prose-strong:font-semibold
+                  prose-em:text-foreground/80
+                  prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+                  prose-blockquote:border-l-2 prose-blockquote:border-primary/40 prose-blockquote:pl-4 prose-blockquote:text-muted-foreground prose-blockquote:not-italic
+                  prose-ul:my-4 prose-li:my-1 prose-li:text-foreground/90
+                  prose-code:text-primary prose-code:bg-secondary/60 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:text-xs
+                  prose-hr:border-border"
+                dangerouslySetInnerHTML={{ __html: post.content }}
+              />
+            </article>
+
+            {/* Sticky ToC */}
+            <ResearchContent headings={post.headings} />
+          </div>
         </div>
       </div>
     </Container>
