@@ -13,6 +13,7 @@ import {
 import { AnimatedThemeToggle } from './ui/animated-theme-toggle'
 import { SkillsIcon } from './auth/SkillsIcon'
 import { LoginTrigger } from './auth/LoginTrigger'
+import { QuickNotes } from './QuickNotes'
 import { Container } from './Container'
 import {
   NavigationMenu,
@@ -209,6 +210,7 @@ export function Navbar() {
           <div className="hidden md:absolute md:right-0 md:flex md:items-center md:gap-2">
             <LoginTrigger />
             <SkillsIcon />
+            <QuickNotes />
             <AnimatedThemeToggle />
           </div>
 
