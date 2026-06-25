@@ -1,7 +1,7 @@
 ---
 title: "Richard Hamming — Sen ve Araştırman"
 date: "2026-06-25"
-description: "Bell Labs'in efsanevi bilim insanı Richard Hamming'in 1986'daki tarihi konuşmasından: büyük işler başarmanın anatomisi, hazırlıklı beyin, önemli problemler ve iz bırakmanın psikolojisi."
+description: "Bell Labs'in efsanevi bilim insanı Richard Hamming'in 1986'daki tarihi konuşmasından notlar: büyük işler başarmanın anatomisi."
 category: "kisiler"
 tags: ["richard hamming", "araştırma", "bilim", "verimlilik", "büyük işler", "kariyer", "bell labs"]
 author: "Richard W. Hamming"
@@ -13,52 +13,72 @@ featured: false
 
 ---
 
-## Şans Mitini Yıkmak: Hazırlıklı Beyin
+## Bileşik Faiz Etkisi
 
-İnsanların en büyük savunma mekanizmalarından biri, büyük başarıları tamamen "şansa" veya "doğru zamanda doğru yerde olmaya" bağlamaktır. Hamming bu sahte mütevazılığı ve bahaneyi tamamen reddeder.
+Bilgi ve üretkenlik tıpkı bileşik faiz gibi çalışır. Aynı yeteneğe sahip iki kişiden her gün %10 daha fazla odaklanarak düşünen biri, bir ömür sonunda diğerini katlar. Ne kadar çok bilirsen o kadar çok öğrenirsin, ne kadar çok öğrenirsen o kadar çok yapabilirsin.
 
-Bilgi ve üretkenlik tıpkı bileşik faiz (compound interest) gibidir. Aynı yeteneğe sahip iki kişiden her gün sadece %10 daha fazla odaklanarak düşünen biri, bir ömür sonunda diğerini ikiye katlamakla kalmaz, muazzam bir fark yaratır.
+---
 
-Pasteur'ün ilkesi: "Şans sadece hazırlıklı beyinleri seçer." Hangi spesifik gün, hangi elmanın başınıza düşeceği şanstır; ama o elma düştüğünde arkasındaki kütleçekimini görebilmek, yıllarca o konuyu düşünen bir beynin ürünüdür.
+## Şans Hazırlıklı Beyni Seçer
 
-Yıldırımların güvenli vadilere değil, dağ zirvelerine düştüğünü hatırlatır Hamming. Büyük işler yapmak istiyorsanız fırtınanın ortasında, riskli ve büyük fikirlerin tartışıldığı zirvelerde durmalısınız.
+Pasteur: "Şans sadece hazırlıklı beyinleri seçer." Hangi gün, hangi elmanın başına düşeceği şanstır. Ama o elma düştüğünde arkasındaki kütleçekimini görebilmek, yıllarca o konuyu düşünen bir beynin ürünüdür.
 
-## Büyük Düşünceler Zamanı ve Önemli Problemler
+---
 
-Ortalama bir araştırmacı, zamanının neredeyse tamamını "güvenli" ama hiçbir şeyi değiştirmeyecek mikro işlere harcar. Hamming'in buna karşı geliştirdiği strateji nettir: Her cuma öğleden sonrasını "Büyük Düşünceler Zamanı" (Great Thoughts Time) olarak ilan etmiştir. Bu saatlerde tüm teknik detayları ve rutin işleri bir kenara bırakıp makro sorular sormuştur: "Benim alanım önümüzdeki 10-20 yılda nereye gidiyor?", "Şu an gerçekten önemli olan neyin peşindeyim?"
+## Yıldırım Zirveye Düşer
 
-Bir problemin önemli olması için sadece büyük olması yetmez — aynı zamanda mantıklı bir atak planınızın (reasonable attack) olması gerekir. Alanınızda her an cebinizde taşıdığınız 10 ila 20 arası "önemli problem" listesi olmalıdır. Yeni bir fikir duyduğunuzda, hemen bu listedeki sorunlarla bağdaştırıp harekete geçmelisiniz.
+Büyük işler yapmak istiyorsan fırtınanın ortasında, riskli fikirlerin tartışıldığı zirvelerde durmalısın. Yıldırımlar güvenli vadilere değil, dağ zirvelerine düşer.
 
-## Kusurları Varlığa Dönüştürmek
+---
 
-En büyük kırılımlar, şartlar kötü olduğunda ve kısıtlar bizi zorladığında gerçekleşir. Bell Labs, Hamming'e kod yazması için bir programcı ordusu vermemişti. Herkes manuel yollarla çalışırken Hamming şu soruyu sordu: "Eğer bu makineler bu kadar akıllıysa, neden kodu da kendileri yazmıyor?" Bu kısıt, onu otomatik programlama alanının öncülerinden biri yaptı.
+## Cuma Öğleden Sonraları
 
-Karşılaştığınız bir duvarı veya eksikliği tersine çevirmeyi öğrenmelisiniz. Bir sorunu çözemiyorsanız, "Neden çözemiyorum?" sorusunun kendisini inceleyerek yepyeni bir teori doğurabilirsiniz.
+Hamming kariyeri boyunca her cuma öğleden sonrasını "Büyük Düşünceler Zamanı" ilan etti. Teknik detayları bir kenara bırakıp makro sorular sordu: "Alanım 10 yıl sonra nerede olacak? Şu an gerçekten önemli olan neyin peşindeyim?"
 
-## Egonuzu Doğru Kullanın
+---
 
-Çok zeki insanların büyük işler yapamamasının en büyük nedenlerinden biri kişilik defektleridir. Sistemle, patronla veya toplumun kurallarıyla sürekli savaş halinde olanlar enerjilerini buraya harcar ve yaratıcılıklarını tüketirler.
+## Önemli Problem Listesi
 
-Hamming, görünüşte uyum sağlamayı (appearance of conforming) seçtiği an işlerinin inanılmaz hızlandığını söyler. Sistemi dönüştürmek mi istiyorsunuz, yoksa büyük bir bilim insanı mı? Seçiminizi yapın.
+Her zaman cebinde 10-20 arası "önemli problem" listesi taşımalısın. Önemli olmak için ikisi de gerekli: büyük bir problem olması ve üzerinde mantıklı bir atak planının bulunması. Yeni bir fikir duyduğunda hemen bu listeyle eşleştir.
 
-Egonuzu kendinize karşı bir tuzak olarak da kullanabilirsiniz: Hamming, kitabını bitirmek için tüm arkadaşlarına "Geri döndüğümde bu kitap bitmiş olacak!" diye ilan etmiştir. Sırf mahcup olmamak için egosunu kendisini çalıştırmak için bir motora dönüştürmüştür.
+---
 
-## Kapıyı Açık Tutmak
+## Kısıtlar Seni Zorlasın
 
-Ofisinizin kapısı açık mı, kapalı mı? Kapısını kapatıp çalışanlar bugün daha üretken görünürler. Ancak 10 yıl sonra dünyanın hangi yöne gittiğini kaçırırlar ve işleri marjinalleşir. Kapısını açık tutanlar sürekli bölünürler ama dünyada neyin değiştiğine dair her zaman canlı ipuçları yakalarlar. Uzun vadede büyük işleri yapanlar, kapısını açık tutanlardır.
+Bell Labs Hamming'e programcı vermemişti. Herkes manuel yollarla çalışırken o şunu sordu: "Bu makineler bu kadar akıllıysa, neden kodu da kendileri yazmıyor?" Bu kısıt, onu otomatik programlama alanının öncülerinden biri yaptı. En büyük kırılımlar çoğu zaman ideal koşullarda değil, kısıtlar altında doğar.
 
-## Fikirleri Satabilmek
+---
 
-Bilim insanları "satış" kelimesinden nefret ederler. Dünyanın, onların harika dehasını keşfetmesini beklerler. Fakat gerçek dünya böyle çalışmaz. Eğer yaptığınız işin üzerine başkalarının da bir şeyler inşa etmesini istiyorsanız, onu çok iyi satmalısınız: net ve anlaşılır yazmalı, sunumlarınızda önce büyük resmi anlatmalı, dinleyiciyi içeri davet etmelisiniz.
+## Sistemle Küçük Savaşlar Açma
 
-## Yedi Yıl Kuralı ve Körelmeyi Önlemek
+Egonu tatmin etmek için her şeyde sisteme direnmek sadece enerji emer. Hamming görünüşte uyum sağlamayı seçtiği an işlerinin hızlandığını söylüyor. Sistemi dönüştürmek mi istiyorsun, yoksa büyük bir iş mi yapmak? İkisini aynı anda yapmak çok zor.
 
-Büyük bir başarı elde ettikten sonra gelen en büyük tehlike şöhret ve konfördür. Claude Shannon'ın bile bilgi teorisinden sonra kendi şöhretinin altında ezildiğini savunur Hamming.
+---
 
-Çözüm: Yaklaşık her 7 yılda bir alanınızı veya odaklandığınız konuyu radikal olarak değiştirmelisiniz. Yeni bir alana geçtiğinizde tekrar bir "bebek" gibi sıfırdan başlarsınız. Şöhretinizi ve konforunuzu geride bırakmak cesaret ister ama zihni taze tutmanın tek yolu budur.
+## Egonu Kendi Aleyhine Kullan
 
-## Son Söz
+Hamming kitabını bitirmek için tüm arkadaşlarına "Döndüğümde bu kitap bitmiş olacak!" diye ilan etti. Mahcup olmamak için egosunu kendisini çalıştıracak bir motora dönüştürdü. Köşeye sıkışmış fare en hızlı koşan faredir.
 
-Bu düzeyde bir adanmışlık ve odaklanma beraberinde stres getirir. Konforlu bir hayat sürmek de bir seçimdir. Ancak tarihe geçecek, gerçekten birinci sınıf bir iş yapmanın hazzı, Hamming'in deyimiyle "şarap, kadın ve şarkının toplamından daha güzeldir."
+---
 
-Asıl değer varılan sonuçta değil, mücadelenin kendisindedir. Kendinizden büyük bir şey yaratma mücadelesi, kendi başına yaşanmaya değer tek şeydir.
+## Açık Kapı
+
+Kapısını kapatan bugün daha üretken görünür. Ama 10 yıl sonra dünyanın nereye gittiğini kaçırmış olur ve işi marjinalleşir. Kapısını açık tutan sürekli bölünür ama neyin önemli olduğuna dair her zaman canlı sinyaller alır. Uzun vadede büyük işleri yapanlar açık kapılılardır.
+
+---
+
+## Fikirlerini Sat
+
+Bilim insanları "satış" kelimesinden nefret eder, dünyanın kendilerini keşfetmesini bekler. Ama gerçek dünya böyle çalışmıyor. Başkalarının senin üzerine bir şeyler inşa etmesini istiyorsan, önce büyük resmi anlat, teknik detaylara boğma. İnsanları dışlamak yerine içeri davet et.
+
+---
+
+## Her 7 Yılda Bir Sıfırla
+
+Nobel alan bilim insanları artık sadece "büyük problemler" üzerinde çalışmak ister ve bu onları sterilize eder. Shannon bile bilgi teorisinden sonra şöhretinin altında ezildi. Yaklaşık her 7 yılda bir alanını radikal olarak değiştir. Yeniden bebek gibi başlamak cesaret ister ama zihni taze tutmanın tek yolu budur.
+
+---
+
+## Mücadelenin Kendisi
+
+Bu düzeyde adanmışlık stres getirir, konforlu bir hayat sürmek de bir seçimdir. Ama birinci sınıf bir iş yapmanın hazzı Hamming'e göre "şarap, kadın ve şarkının toplamından daha güzeldir." Asıl değer varılan sonuçta değil, kendinizden büyük bir şey yaratma mücadelesinin kendisindedir.
