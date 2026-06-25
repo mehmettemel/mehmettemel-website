@@ -1,5 +1,6 @@
 import { Providers } from './providers'
 import { Layout } from '../components/Layout'
+import { QuickNotes } from '../components/QuickNotes'
 import { siteConfig, generateStructuredData } from '../lib/seo'
 
 import '../styles/tailwind.css'
@@ -315,6 +316,7 @@ export default function RootLayout({ children }) {
         <Providers>
           <div className="relative flex min-h-screen flex-col">
             <Layout>{children}</Layout>
+            <QuickNotes />
           </div>
         </Providers>
       </body>
