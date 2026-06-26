@@ -146,6 +146,7 @@ export const tabs = {
           'Hemşirelik, danışmanlık, sanat ve canlı performans gibi alanlar hayatta kalacak; zira YZ bilgiyi sağlasa da "paylaşılan deneyim" ve duygusal yankılanma her zaman insanın tekelinde kalacak.',
           'Fiziksel evren "minimum enerji tüketerek maksimum düzen sağlama" eğilimindedir. Süper zeki bir AI, savaş ve yıkım gibi yüksek enerji israf eden kaotik süreçlerden mantıksal olarak kaçınır. Evrimsel biyolojide de görüldüğü gibi, zeka arttıkça canlıların "işbirliği çemberi" genişler; bu yüzden Süper Zeka (ASI) özünde yok edici değil, destekleyici ve bolluk yaratıcı (benign) olacaktır.',
           'Yapay zeka uygulamada ve optimizasyonda insanı geride bıraksa da, "araştırma vizyonu, hedef belirleme ve sağduyu/muhakeme" (hangi problemin çözülmeye değer olduğunu seçmek gibi) konularında insanlar halen belirleyicidir.',
+          'Savaşlar insansızlaştıkça (drone, insansız hava araçları...) ve insan kaybı azaldıkça, savaşın siyasi maliyeti (kamuoyu baskısı, protestolar) düşer. Savaşlar "normalleşir", rutinleşir ve bitmek bilmeyen "sonsuz savaşlara" dönüşür.',
         ],
       },
       'Ekonomi & Finans': {
