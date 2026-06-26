@@ -274,7 +274,7 @@ export const tabs = {
         name: 'Ürdün',
         flag: '🇯🇴',
         notes: [
-          'Jordan – Listede yer almış, keşfedilmeyi bekliyor.',
+          'Aqaba sahil kenti, Wadi Rum\'a yakın. Amman daha büyük ve imkânlı. İkisi de Petra\'ya makul mesafede — gerçek anlamda bir dünya harikası. Yemek hem lezzetli hem ucuz, araç kiralama hesaplı, iki şehri birbirine bağlayan çöl otoyolu başlı başına bir deneyim.',
         ],
       },
       {
