@@ -76,7 +76,7 @@ export function RecentDiscoveries({ notes }) {
         {randomNotes.map((note) => (
           <div key={note.id} className="w-full text-center">
             <Link
-              href="/listeler/personal/quotes"
+              href="/lists/personal/quotes"
               className="block w-full text-xs font-normal text-foreground transition-opacity hover:opacity-60"
             >
               {getDisplayText(note)}
@@ -87,7 +87,7 @@ export function RecentDiscoveries({ notes }) {
 
       <div className="mt-6 text-center">
         <Link
-          href="/listeler/personal/quotes"
+          href="/lists/personal/quotes"
           className="text-xs text-muted-foreground transition-opacity hover:opacity-60"
         >
           Tümünü Gör →

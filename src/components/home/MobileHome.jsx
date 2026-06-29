@@ -309,7 +309,7 @@ export function MobileHome() {
                   {incelemeItem.author}
                 </div>
                 <Link
-                  href={`/incelemeler/${incelemeItem.slug}`}
+                  href={`/reviews/${incelemeItem.slug}`}
                   className="mb-3 block text-base font-semibold text-foreground hover:opacity-70"
                 >
                   {incelemeItem.bookTitle}

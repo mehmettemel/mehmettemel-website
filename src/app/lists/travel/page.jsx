@@ -8,13 +8,13 @@ export const metadata = { title: 'Travel | Mehmet Temel' }
 
 const travelPages = [
   {
-    href: '/listeler/travel/informations',
+    href: '/lists/travel/informations',
     label: 'Informations',
     emoji: '📖',
     description: 'Travel tips, tricks and useful information',
   },
   {
-    href: '/listeler/travel/countries',
+    href: '/lists/travel/countries',
     label: 'Countries',
     emoji: '🌍',
     description: 'Country notes, tips and must-see places',

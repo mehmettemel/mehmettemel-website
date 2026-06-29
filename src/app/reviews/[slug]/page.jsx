@@ -49,12 +49,12 @@ export default async function BlogPost({ params }) {
     <Container>
       <div className="py-8 sm:py-12">
         <Link
-          href="/incelemeler"
-          aria-label="Go back to incelemeler"
+          href="/reviews"
+          aria-label="Go back to reviews"
           className="group mb-8 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-all hover:gap-2 hover:text-foreground"
         >
           <ArrowLeftIcon className="h-3.5 w-3.5 stroke-current transition-transform group-hover:-translate-x-0.5" />
-          <span>Geri Dön</span>
+          <span>Back</span>
         </Link>
 
         <div className="mx-auto max-w-5xl">

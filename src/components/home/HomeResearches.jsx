@@ -17,7 +17,7 @@ export function HomeResearches({ posts }) {
         {posts.map((post) => (
           <div key={post.slug} className="w-full text-center">
             <Link
-              href={`/incelemeler/${post.slug}`}
+              href={`/reviews/${post.slug}`}
               className="block w-full text-xs font-normal transition-opacity hover:opacity-60"
             >
               <span className="text-foreground">{post.title}</span>
@@ -36,7 +36,7 @@ export function HomeResearches({ posts }) {
 
       <div className="mt-6 text-center">
         <Link
-          href="/incelemeler"
+          href="/reviews"
           className="text-xs text-muted-foreground transition-opacity hover:opacity-60"
         >
           Tümünü Gör →

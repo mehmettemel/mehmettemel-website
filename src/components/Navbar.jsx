@@ -25,17 +25,17 @@ import {
 } from './ui/navigation-menu'
 
 const listelerItems = [
-  { href: '/listeler/girisimcilik', label: 'Entrepreneur', emoji: '💼' },
-  { href: '/listeler/life-tips', label: 'Life Tips', emoji: '💡' },
-  { href: '/listeler/w2b', label: 'W2B', emoji: '🛒' },
-  { href: '/listeler/travel', label: 'Travel', emoji: '✈️' },
-  { href: '/listeler/tarif', label: 'Tarifler', emoji: '🍳' },
-  { href: '/listeler/ingilizce', label: 'İngilizce', emoji: '🇬🇧' },
-  { href: '/listeler/rusca', label: 'Rusça', emoji: '🇷🇺' },
-  { href: '/listeler/questions', label: 'Questions', emoji: '❓' },
-  { href: '/listeler/tansiyon', label: 'Tansiyon Takip', emoji: '🩺' },
-  { href: '/listeler/claude', label: 'Claude', emoji: '🤖' },
-  { href: '/incelemeler', label: 'İncelemeler', emoji: '🔬' },
+  { href: '/lists/entrepreneurship', label: 'Entrepreneur', emoji: '💼' },
+  { href: '/lists/life-tips', label: 'Life Tips', emoji: '💡' },
+  { href: '/lists/w2b', label: 'W2B', emoji: '🛒' },
+  { href: '/lists/travel', label: 'Travel', emoji: '✈️' },
+  { href: '/lists/recipes', label: 'Recipes', emoji: '🍳' },
+  { href: '/lists/english', label: 'English', emoji: '🇬🇧' },
+  { href: '/lists/russian', label: 'Russian', emoji: '🇷🇺' },
+  { href: '/lists/questions', label: 'Questions', emoji: '❓' },
+  { href: '/lists/blood-pressure', label: 'Blood Pressure', emoji: '🩺' },
+  { href: '/lists/claude', label: 'Claude', emoji: '🤖' },
+  { href: '/reviews', label: 'Reviews', emoji: '🔬' },
 ]
 
 function NavLink({ href, children }) {
@@ -54,16 +54,16 @@ function DesktopNav() {
     <NavigationMenu className="hidden md:flex">
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavLink href="/listeler/personal">Personal</NavLink>
+          <NavLink href="/lists/personal">Personal</NavLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavLink href="/listeler/daily-routines">Daily Routines</NavLink>
+          <NavLink href="/lists/daily-routines">Daily Routines</NavLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
           <NavigationMenuTrigger className="bg-transparent px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-transparent hover:text-foreground focus:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-foreground">
-            Listeler
+            Lists
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[220px] gap-1 p-2">
@@ -85,7 +85,7 @@ function DesktopNav() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavLink href="/iletisim">İletişim</NavLink>
+          <NavLink href="/contact">Contact</NavLink>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
@@ -110,18 +110,18 @@ function MobileNav() {
         {/* Fixed top shortcuts */}
         <div className="mt-4 flex items-center gap-2 border-b border-border pb-4 px-1">
           <Link
-            href="/listeler/tarif"
+            href="/lists/recipes"
             onClick={closeSheet}
             className="flex-1 touch-manipulation rounded-lg bg-secondary/50 px-3 py-2.5 text-center text-sm font-semibold text-foreground transition-colors hover:bg-secondary active:bg-secondary/80"
           >
-            🍳 Tarifler
+            🍳 Recipes
           </Link>
           <Link
-            href="/listeler/ingilizce"
+            href="/lists/english"
             onClick={closeSheet}
             className="flex-1 touch-manipulation rounded-lg bg-secondary/50 px-3 py-2.5 text-center text-sm font-semibold text-foreground transition-colors hover:bg-secondary active:bg-secondary/80"
           >
-            🇬🇧 İngilizce
+            🇬🇧 English
           </Link>
         </div>
 
@@ -131,53 +131,53 @@ function MobileNav() {
             {/* Sayfalar */}
             <AccordionItem value="sayfalar" className="border-b-0">
               <AccordionTrigger className="px-4 py-3 text-sm font-semibold text-foreground hover:no-underline hover:bg-secondary/30 rounded-lg">
-                Sayfalar
+                Pages
               </AccordionTrigger>
               <AccordionContent>
                 <div className="flex flex-col gap-0.5 pl-2">
                   <Link href="/" onClick={closeSheet} className={mobileNavLinkClass}>
-                    Ana Sayfa
+                    Home
                   </Link>
-                  <Link href="/listeler/personal" onClick={closeSheet} className={mobileNavLinkClass}>
+                  <Link href="/lists/personal" onClick={closeSheet} className={mobileNavLinkClass}>
                     Personal
                   </Link>
-                  <Link href="/listeler/daily-routines" onClick={closeSheet} className={mobileNavLinkClass}>
+                  <Link href="/lists/daily-routines" onClick={closeSheet} className={mobileNavLinkClass}>
                     Daily Routines
                   </Link>
-                  <Link href="/iletisim" onClick={closeSheet} className={mobileNavLinkClass}>
-                    İletişim
+                  <Link href="/contact" onClick={closeSheet} className={mobileNavLinkClass}>
+                    Contact
                   </Link>
                 </div>
               </AccordionContent>
             </AccordionItem>
 
-            {/* Listeler */}
+            {/* Lists */}
             <AccordionItem value="listeler" className="border-b-0">
               <AccordionTrigger className="px-4 py-3 text-sm font-semibold text-foreground hover:no-underline hover:bg-secondary/30 rounded-lg">
-                Listeler
+                Lists
               </AccordionTrigger>
               <AccordionContent>
                 <div className="flex flex-col gap-0.5 pl-2">
-                  <Link href="/listeler/girisimcilik" onClick={closeSheet} className={mobileNavLinkClass}>
+                  <Link href="/lists/entrepreneurship" onClick={closeSheet} className={mobileNavLinkClass}>
                     <span>💼</span> Entrepreneur
                   </Link>
-                  <Link href="/listeler/life-tips" onClick={closeSheet} className={mobileNavLinkClass}>
+                  <Link href="/lists/life-tips" onClick={closeSheet} className={mobileNavLinkClass}>
                     <span>💡</span> Life Tips
                   </Link>
-                  <Link href="/listeler/w2b" onClick={closeSheet} className={mobileNavLinkClass}>
+                  <Link href="/lists/w2b" onClick={closeSheet} className={mobileNavLinkClass}>
                     <span>🛒</span> W2B
                   </Link>
-                  <Link href="/listeler/rusca" onClick={closeSheet} className={mobileNavLinkClass}>
-                    <span>🇷🇺</span> Rusça
+                  <Link href="/lists/russian" onClick={closeSheet} className={mobileNavLinkClass}>
+                    <span>🇷🇺</span> Russian
                   </Link>
-                  <Link href="/listeler/tansiyon" onClick={closeSheet} className={mobileNavLinkClass}>
-                    <span>🩺</span> Tansiyon Takip
+                  <Link href="/lists/blood-pressure" onClick={closeSheet} className={mobileNavLinkClass}>
+                    <span>🩺</span> Blood Pressure
                   </Link>
-                  <Link href="/listeler/claude" onClick={closeSheet} className={mobileNavLinkClass}>
+                  <Link href="/lists/claude" onClick={closeSheet} className={mobileNavLinkClass}>
                     <span>🤖</span> Claude
                   </Link>
-                  <Link href="/incelemeler" onClick={closeSheet} className={mobileNavLinkClass}>
-                    <span>🔬</span> İncelemeler
+                  <Link href="/reviews" onClick={closeSheet} className={mobileNavLinkClass}>
+                    <span>🔬</span> Reviews
                   </Link>
                 </div>
               </AccordionContent>
@@ -188,7 +188,7 @@ function MobileNav() {
         {/* Footer - Theme toggle */}
         <div className="border-t border-border px-4 py-4">
           <div className="flex items-center justify-between">
-            <span className="text-sm font-medium text-muted-foreground">Tema</span>
+            <span className="text-sm font-medium text-muted-foreground">Theme</span>
             <AnimatedThemeToggle />
           </div>
         </div>
@@ -203,7 +203,7 @@ export function Navbar() {
       <Container>
         <div className="relative mx-auto flex max-w-7xl items-center justify-between py-3 md:justify-center">
           <div className="flex items-center">
-            <NavLink href="/">Ana Sayfa</NavLink>
+            <NavLink href="/">Home</NavLink>
             <DesktopNav />
           </div>
 

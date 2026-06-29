@@ -59,7 +59,7 @@ export function UserIcon({ className }) {
 
   const handleClick = () => {
     if (isAuthenticated) {
-      router.push('/listeler/personal')
+      router.push('/lists/personal')
     } else {
       setShowLogin(true)
     }

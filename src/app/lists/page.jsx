@@ -6,17 +6,15 @@ import { listCategories } from '@/data/list'
 export const revalidate = 60
 
 export const metadata = {
-  title: 'Listeler - Takip Listelerim | Mehmet Temel',
-  description:
-    'Tarifler, dil öğrenimi ve kişisel takip listelerim.',
+  title: 'Lists | Mehmet Temel',
+  description: 'Recipes, language learning and personal tracking lists.',
   alternates: {
-    canonical: 'https://mehmettemel.com/listeler',
+    canonical: 'https://mehmettemel.com/lists',
   },
   openGraph: {
-    title: 'Listeler - Takip Listelerim | Mehmet Temel',
-    description:
-      'Tarifler, dil öğrenimi ve kişisel takip listelerim.',
-    url: 'https://mehmettemel.com/listeler',
+    title: 'Lists | Mehmet Temel',
+    description: 'Recipes, language learning and personal tracking lists.',
+    url: 'https://mehmettemel.com/lists',
     type: 'website',
   },
 }
@@ -44,7 +42,7 @@ export default function ListelerPage() {
             // Russian uses static data
             const isStatic = category.isStatic
             // Recipe stats come from separate table
-            const isRecipe = category.id === 'tarif'
+            const isRecipe = category.slug === 'recipes' || category.id === 'tarif'
             const categoryStats = isStatic
               ? { total: category.staticCount ?? 41, completed: 0, liked: 0 }
               : isRecipe
@@ -54,7 +52,7 @@ export default function ListelerPage() {
             return (
               <Link
                 key={category.id}
-                href={`/listeler/${category.id}`}
+                href={`/lists/${category.slug ?? category.id}`}
                 className="group flex flex-col rounded-xl border border-border bg-card p-6 transition-all duration-200 hover:border-primary/40 hover:bg-secondary/20 hover:shadow-lg"
               >
                 {/* Icon & Name */}

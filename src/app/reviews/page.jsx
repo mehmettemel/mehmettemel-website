@@ -4,9 +4,9 @@ import { getAllPosts } from '../../lib/blog'
 import { PageHeader } from '../../components/PageHeader'
 
 export const metadata = {
-  title: 'Araştırmalar | Mehmet Temel',
+  title: 'Reviews | Mehmet Temel',
   description:
-    'Beslenme, gıda ve insan biyolojisi üzerine derinlemesine araştırmalarım. Her konuda detaylı analiz ve kişisel yorumlar.',
+    'In-depth research and reviews on nutrition, food and human biology. Detailed analysis and personal commentary.',
 }
 
 export default function ResearchesIndex() {

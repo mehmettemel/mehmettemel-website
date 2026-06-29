@@ -37,7 +37,7 @@ export function LoginDialog({ open, onOpenChange }) {
         // Success - close dialog and navigate to admin
         onOpenChange(false)
         setPassword('')
-        router.push('/listeler/personal')
+        router.push('/lists/personal')
         router.refresh()
       } else {
         // Show error message

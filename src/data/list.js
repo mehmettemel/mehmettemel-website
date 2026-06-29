@@ -10,6 +10,7 @@ function countClaudeNotes() {
 export const listCategories = [
   {
     id: 'rusca',
+    slug: 'russian',
     name: 'Rusça',
     emoji: '🇷🇺',
     icon: '🗣️',
@@ -18,6 +19,7 @@ export const listCategories = [
   },
   {
     id: 'tarif',
+    slug: 'recipes',
     name: 'Tarifler',
     emoji: '🍳',
     icon: '👨‍🍳',
@@ -25,6 +27,7 @@ export const listCategories = [
   },
   {
     id: 'tansiyon',
+    slug: 'blood-pressure',
     name: 'Tansiyon Takip',
     emoji: '🩺',
     icon: '🩺',

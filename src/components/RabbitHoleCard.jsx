@@ -24,7 +24,7 @@ export function RabbitHoleCard({ post, index }) {
       style={{ zIndex: index }}
     >
       <Link
-        href={`/incelemeler/${post.slug}`}
+        href={`/reviews/${post.slug}`}
         className="block w-full text-center transition-opacity hover:opacity-60"
       >
         <h3 className="text-xs font-normal">

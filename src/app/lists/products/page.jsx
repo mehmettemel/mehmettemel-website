@@ -6,16 +6,15 @@ import { getListCategory } from '@/data/list'
 export const revalidate = 60
 
 export const metadata = {
-  title: 'Ürünler - Listeler | Mehmet Temel',
-  description:
-    'Almak istediğim ve aldığım teknolojik ürünler, ekipmanlar ve diğer eşyalar.',
+  title: 'Products | Mehmet Temel',
+  description: 'Tech products, gear and other items I want to buy or have bought.',
   alternates: {
-    canonical: 'https://mehmettemel.com/listeler/urun',
+    canonical: 'https://mehmettemel.com/lists/products',
   },
   openGraph: {
-    title: 'Ürünler - Listeler | Mehmet Temel',
-    description: 'Almak istediğim ve aldığım ürünler.',
-    url: 'https://mehmettemel.com/listeler/urun',
+    title: 'Products | Mehmet Temel',
+    description: 'Tech products, gear and other items.',
+    url: 'https://mehmettemel.com/lists/products',
     type: 'website',
   },
 }

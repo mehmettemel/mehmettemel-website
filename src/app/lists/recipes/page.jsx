@@ -4,15 +4,15 @@ import { RecipeList } from '@/components/recipes/RecipeList'
 import { getListCategory } from '@/data/list'
 
 export const metadata = {
-  title: 'Tarifler - Listeler | Mehmet Temel',
-  description: 'Yemek tarifleri ve mutfak notları.',
+  title: 'Recipes | Mehmet Temel',
+  description: 'Food recipes and kitchen notes.',
   alternates: {
-    canonical: 'https://mehmettemel.com/listeler/tarif',
+    canonical: 'https://mehmettemel.com/lists/recipes',
   },
   openGraph: {
-    title: 'Tarifler - Listeler | Mehmet Temel',
-    description: 'Yemek tarifleri ve mutfak notları',
-    url: 'https://mehmettemel.com/listeler/tarif',
+    title: 'Recipes | Mehmet Temel',
+    description: 'Food recipes and kitchen notes.',
+    url: 'https://mehmettemel.com/lists/recipes',
     type: 'website',
   },
 }

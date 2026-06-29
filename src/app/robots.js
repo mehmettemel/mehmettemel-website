@@ -3,11 +3,11 @@ export default function robots() {
     rules: [
       {
         userAgent: '*',
-        allow: ['/', '/incelemeler', '/incelemeler/'],
+        allow: ['/', '/reviews', '/reviews/'],
         disallow: [
-          '/listeler/',
+          '/lists/',
           '/bu-hafta/',
-          '/iletisim/',
+          '/contact/',
           '/private/',
           '/admin/',
         ],
