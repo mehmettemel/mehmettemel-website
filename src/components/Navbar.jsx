@@ -34,7 +34,6 @@ const listsItems = [
   { href: '/lists/english', label: 'English', emoji: '🇬🇧' },
   { href: '/lists/russian', label: 'Russian', emoji: '🇷🇺' },
   { href: '/lists/questions', label: 'Questions', emoji: '❓' },
-  { href: '/lists/blood-pressure', label: 'Blood Pressure', emoji: '🩺' },
   { href: '/lists/claude', label: 'Claude', emoji: '🤖' },
 ]
 
@@ -245,9 +244,6 @@ function MobileNav() {
                     </Link>
                     <Link href="/lists/russian" onClick={closeSheet} className={mobileNavLinkClass}>
                       <span>🇷🇺</span> Russian
-                    </Link>
-                    <Link href="/lists/blood-pressure" onClick={closeSheet} className={mobileNavLinkClass}>
-                      <span>🩺</span> Blood Pressure
                     </Link>
                     <Link href="/lists/claude" onClick={closeSheet} className={mobileNavLinkClass}>
                       <span>🤖</span> Claude

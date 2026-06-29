@@ -1,4 +1,3 @@
-import { olcumler } from './tansiyon'
 import { tabs as claudeTabs } from './claude-notes'
 
 function countClaudeNotes() {
@@ -24,17 +23,6 @@ export const listCategories = [
     emoji: '🍳',
     icon: '👨‍🍳',
     description: 'Yemek tarifleri ve mutfak notları',
-  },
-  {
-    id: 'tansiyon',
-    slug: 'blood-pressure',
-    name: 'Tansiyon Takip',
-    emoji: '🩺',
-    icon: '🩺',
-    description: 'Günlük tansiyon ölçüm takibi',
-    isStatic: true,
-    staticCount: olcumler.length,
-    staticUnit: 'ölçüm',
   },
   {
     id: 'claude',
