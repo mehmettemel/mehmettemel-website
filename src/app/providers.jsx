@@ -2,6 +2,7 @@
 
 import { ThemeProvider, useTheme } from 'next-themes'
 import { useEffect } from 'react'
+import { AuthProvider } from '../components/auth/AuthProvider'
 
 function ThemeWatcher() {
   let { resolvedTheme, setTheme } = useTheme()
@@ -29,9 +30,11 @@ function ThemeWatcher() {
 
 export function Providers({ children }) {
   return (
-    <ThemeProvider attribute="class" disableTransitionOnChange>
-      <ThemeWatcher />
-      {children}
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider attribute="class" disableTransitionOnChange>
+        <ThemeWatcher />
+        {children}
+      </ThemeProvider>
+    </AuthProvider>
   )
 }

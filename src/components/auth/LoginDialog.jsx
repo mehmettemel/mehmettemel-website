@@ -11,13 +11,13 @@ import {
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { useRouter } from 'next/navigation'
+import { useAuth } from './AuthProvider'
 
 export function LoginDialog({ open, onOpenChange }) {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
-  const router = useRouter()
+  const { refresh } = useAuth()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -34,13 +34,10 @@ export function LoginDialog({ open, onOpenChange }) {
       const data = await res.json()
 
       if (res.ok) {
-        // Success - close dialog and navigate to admin
         onOpenChange(false)
         setPassword('')
-        router.push('/lists/personal')
-        router.refresh()
+        await refresh()
       } else {
-        // Show error message
         setError(data.error || 'Invalid password')
       }
     } catch (err) {
@@ -55,9 +52,9 @@ export function LoginDialog({ open, onOpenChange }) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Giriş Yap</DialogTitle>
+          <DialogTitle>Login</DialogTitle>
           <DialogDescription>
-            Kişisel notlarına erişmek için şifreni gir.
+            Enter your password to access personal notes.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
