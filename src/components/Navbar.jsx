@@ -35,6 +35,7 @@ const listsItems = [
   { href: '/lists/russian', label: 'Russian', emoji: '🇷🇺' },
   { href: '/lists/questions', label: 'Questions', emoji: '❓' },
   { href: '/lists/claude', label: 'Claude', emoji: '🤖' },
+  { href: '/lists/resources', label: 'Resources', emoji: '🔗' },
 ]
 
 function NavLink({ href, children }) {
@@ -247,6 +248,9 @@ function MobileNav() {
                     </Link>
                     <Link href="/lists/claude" onClick={closeSheet} className={mobileNavLinkClass}>
                       <span>🤖</span> Claude
+                    </Link>
+                    <Link href="/lists/resources" onClick={closeSheet} className={mobileNavLinkClass}>
+                      <span>🔗</span> Resources
                     </Link>
                   </div>
                 </AccordionContent>
