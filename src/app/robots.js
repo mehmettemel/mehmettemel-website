@@ -3,8 +3,14 @@ export default function robots() {
     rules: [
       {
         userAgent: '*',
-        allow: '/',
-        disallow: ['/private/', '/admin/'],
+        allow: ['/', '/incelemeler', '/incelemeler/'],
+        disallow: [
+          '/listeler/',
+          '/bu-hafta/',
+          '/iletisim/',
+          '/private/',
+          '/admin/',
+        ],
       },
     ],
     sitemap: 'https://mehmettemel.com/sitemap.xml',
