@@ -12,7 +12,6 @@ const ITEMS_PER_PAGE = 12
 const researchCategories = [
   { id: 'all', name: 'Tümü', icon: '📚' },
   { id: 'kisiler', name: 'Kişiler', icon: '👤' },
-  { id: 'kitaplar', name: 'Kitaplar', icon: '📚' },
   { id: 'kisisel', name: 'Kişisel', icon: '✍️' },
 ]
 
