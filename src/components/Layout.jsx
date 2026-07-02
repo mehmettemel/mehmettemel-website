@@ -10,6 +10,9 @@ export function Layout({ children }) {
   const pathname = usePathname()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
+  // Gazete sayfası kendi başına bir dünya — site kromu gizlenir
+  const isStandalone = pathname === '/gazete'
+
   useEffect(() => {
     fetch('/api/auth/session')
       .then((res) => res.json())
@@ -19,7 +22,7 @@ export function Layout({ children }) {
 
   return (
     <div className="relative flex min-h-screen w-full flex-col">
-      <Navbar />
+      {!isStandalone && <Navbar />}
       <main className="flex-auto">
         <div key={pathname} className="min-h-full">
           {children}
@@ -27,8 +30,8 @@ export function Layout({ children }) {
       </main>
 
       {/* Language Learning Floating Widgets */}
-      {isAuthenticated && <EnglishFloatingWidget />}
-      {isAuthenticated && <RussianFloatingWidget />}
+      {!isStandalone && isAuthenticated && <EnglishFloatingWidget />}
+      {!isStandalone && isAuthenticated && <RussianFloatingWidget />}
     </div>
   )
 }
