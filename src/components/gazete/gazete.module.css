@@ -54,11 +54,13 @@
   justify-content: center;
 }
 
+/* Masada duran tek gazete sayfası — yüksekliğe sığacak şekilde
+   ölçeklenir (kontroller için pay bırakır) */
 .book {
   --p: 0;
   position: relative;
-  width: min(94vw, 1100px);
-  aspect-ratio: 1100 / 733;
+  width: min(92vw, calc((100dvh - 185px) * 0.75), 660px);
+  aspect-ratio: 550 / 733;
   perspective: 2600px;
   perspective-origin: 50% 50%;
   user-select: none;
@@ -66,30 +68,27 @@
   touch-action: pan-y;
 }
 
-.bookPortrait {
-  width: min(94vw, 540px);
-  aspect-ratio: 550 / 733;
-}
-
-/* --------------- Duran sayfa yuvaları --------------- */
-
-.slotLeft,
-.slotRight,
 .slotFull {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 50%;
+  inset: 0;
 }
-.slotLeft {
-  left: 0;
+
+/* --------------- Gazete destesi (alt tabakalar) --------------- */
+
+.stackSheet {
+  position: absolute;
+  inset: 0;
+  background: #ece2c8;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.35),
+    0 14px 36px rgba(0, 0, 0, 0.4);
 }
-.slotRight {
-  left: 50%;
+.stack1 {
+  transform: translate(5px, 6px) rotate(0.55deg);
 }
-.slotFull {
-  left: 0;
-  width: 100%;
+.stack2 {
+  transform: translate(-6px, 11px) rotate(-0.8deg);
+  background: #e4d9bd;
 }
 
 /* --------------- KAĞIT ---------------
@@ -126,21 +125,6 @@
   opacity: 0.05;
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* Cilt kıvrımı (spread ortası) */
-.spineShadeL,
-.spineShadeR {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 2;
-}
-.spineShadeL {
-  background: linear-gradient(to left, rgba(26, 22, 18, 0.22), transparent 9%);
-}
-.spineShadeR {
-  background: linear-gradient(to right, rgba(26, 22, 18, 0.22), transparent 9%);
 }
 
 /* --------------- WebGL kıvrım tuvali ---------------

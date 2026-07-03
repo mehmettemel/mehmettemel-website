@@ -31,13 +31,10 @@ const mastheadFont = UnifrakturCook({
 })
 const fontVars = `${displayFont.variable} ${bodyFont.variable} ${mastheadFont.variable}`
 
+// Gazete metaforu: cilt/spread yok — masada duran tek büyük sayfa
+// destesi. Çevrilen yaprak sola savrulup desteden çıkar, altından
+// sonraki sayfa görünür.
 const PAGE_COUNT = 4
-// Masaüstü: kapak sağda tek başına, sonra 2-3 spread, sonra arka kapak solda
-const SPREADS = [
-  [null, 0],
-  [1, 2],
-  [3, null],
-]
 // İlk yerleşim boyutu — gerçek boyut ölçülünce düğümler yeniden
 // boyutlanıp dokular GERÇEK sayfa ölçüsünde üretilir (DOM ile
 // satır kırılımları birebir aynı olsun diye)
@@ -193,12 +190,10 @@ export function GazeteBook() {
 
   const [pos, setPos] = useState(0)
   const [turn, setTurn] = useState(null)
-  const [portrait, setPortrait] = useState(false)
   const [texturesReady, setTexturesReady] = useState(false)
 
   const posRef = useRef(0)
   const turnRef = useRef(null)
-  const portraitRef = useRef(false)
   const pRef = useRef(0)
   const velRef = useRef(0)
   const rafRef = useRef(0)
@@ -209,9 +204,8 @@ export function GazeteBook() {
 
   posRef.current = pos
   turnRef.current = turn
-  portraitRef.current = portrait
 
-  const maxPos = portrait ? PAGE_COUNT - 1 : SPREADS.length - 1
+  const maxPos = PAGE_COUNT - 1
 
   const setP = useCallback((v) => {
     pRef.current = v
@@ -294,10 +288,8 @@ export function GazeteBook() {
       if (turnRef.current?.t === t) return
       cancelAnimationFrame(rafRef.current)
       velRef.current = 0
-      const isP = portraitRef.current
-      const front = isP ? t : SPREADS[t][1]
-      const back = isP ? null : SPREADS[t + 1][0]
-      visualRef.current = engineRef.current?.beginTurn(front, back, side) ?? false
+      // yaprak = t. sayfa; arkası kağıt sırtı (hayalet mürekkep izi)
+      visualRef.current = engineRef.current?.beginTurn(t, null, side) ?? false
       turnRef.current = { t }
       setTurn({ t })
       setP(side)
@@ -306,8 +298,7 @@ export function GazeteBook() {
   )
 
   const flipNext = useCallback(() => {
-    if (busyRef.current || posRef.current >= (portraitRef.current ? PAGE_COUNT - 1 : SPREADS.length - 1))
-      return
+    if (busyRef.current || posRef.current >= PAGE_COUNT - 1) return
     if (!turnRef.current) {
       tiltRef.current = -0.55
       startTurn(posRef.current, 0)
@@ -329,7 +320,7 @@ export function GazeteBook() {
     (enter) => {
       if (dragRef.current || busyRef.current || !engineRef.current?.texturesReady) return
       if (enter) {
-        if (posRef.current >= (portraitRef.current ? PAGE_COUNT - 1 : SPREADS.length - 1)) return
+        if (posRef.current >= PAGE_COUNT - 1) return
         if (!turnRef.current) {
           tiltRef.current = -0.7
           startTurn(posRef.current, 0)
@@ -363,22 +354,15 @@ export function GazeteBook() {
       if (!engineRef.current?.texturesReady) return
       const rect = bookRef.current.getBoundingClientRect()
       if (!rect.width) return
-      const isPortrait = portraitRef.current
-      const spineX = isPortrait ? rect.left : rect.left + rect.width / 2
-      const pageW = isPortrait ? rect.width : rect.width / 2
-      const span = isPortrait ? pageW : 2 * pageW
+      const spineX = rect.left
+      const pageW = rect.width
+      const span = pageW
       const dx = e.clientX - spineX
       const p = posRef.current
-      const max = isPortrait ? PAGE_COUNT - 1 : SPREADS.length - 1
 
       let t = null
-      if (isPortrait) {
-        if (dx > pageW * 0.6 && p < max) t = p
-        else if (dx < pageW * 0.25 && p > 0) t = p - 1
-      } else {
-        if (dx > 0 && p < max) t = p
-        else if (dx < 0 && p > 0) t = p - 1
-      }
+      if (dx > pageW * 0.55 && p < PAGE_COUNT - 1) t = p // sağ kenar → ileri
+      else if (dx < pageW * 0.22 && p > 0) t = p - 1 // sol kenar → geri
       if (t == null) return
 
       cancelAnimationFrame(rafRef.current)
@@ -495,14 +479,12 @@ export function GazeteBook() {
     const apply = () => {
       const rect = book.getBoundingClientRect()
       if (!rect.width) return
-      const isP = portraitRef.current
-      const W = isP ? rect.width : rect.width / 2
+      const W = rect.width
       const H = rect.height
       const mL = W * 1.15
-      const mR = W * 0.18
+      const mR = W * 0.16
       const mY = H * 0.09
-      const spineX = isP ? 0 : rect.width / 2
-      host.style.left = `${spineX - mL}px`
+      host.style.left = `${-mL}px`
       host.style.top = `${-mY}px`
       host.style.width = `${mL + W + mR}px`
       host.style.height = `${H + 2 * mY}px`
@@ -522,7 +504,7 @@ export function GazeteBook() {
       ro.disconnect()
       clearTimeout(rebuildTimerRef.current)
     }
-  }, [portrait, rebuildTextures])
+  }, [rebuildTextures])
 
   /* ---------- Klavye + responsive ---------- */
 
@@ -535,100 +517,32 @@ export function GazeteBook() {
     return () => window.removeEventListener('keydown', onKey)
   }, [flipNext, flipPrev])
 
-  useEffect(() => {
-    const apply = () => {
-      const isP = window.innerWidth < 640
-      setPortrait((prev) => {
-        if (prev === isP) return prev
-        // spread ↔ sayfa indeksi eşlemesi; süren dönüş iptal edilir
-        turnRef.current = null
-        busyRef.current = false
-        engineRef.current?.endTurn()
-        setTurn(null)
-        setP(0)
-        setPos((cur) => {
-          const next = isP
-            ? cur === 0
-              ? 0
-              : cur === 1
-                ? 1
-                : 3
-            : cur === 0
-              ? 0
-              : cur < 3
-                ? 1
-                : 2
-          posRef.current = next
-          return next
-        })
-        return isP
-      })
-    }
-    let timer
-    const onResize = () => {
-      clearTimeout(timer)
-      timer = setTimeout(apply, 200)
-    }
-    apply()
-    window.addEventListener('resize', onResize)
-    return () => {
-      clearTimeout(timer)
-      window.removeEventListener('resize', onResize)
-    }
-  }, [setP])
-
   /* ---------- Görünüm ---------- */
 
-  let leftPage, rightPage
-  if (portrait) {
-    leftPage = null
-    rightPage = turn ? Math.min(turn.t + 1, PAGE_COUNT - 1) : pos
-  } else if (turn) {
-    leftPage = SPREADS[turn.t][0]
-    rightPage = SPREADS[turn.t + 1][1]
-  } else {
-    leftPage = SPREADS[pos][0]
-    rightPage = SPREADS[pos][1]
-  }
-
-  const indicator = portrait
-    ? `${pos + 1}`
-    : pos === 0
-      ? '1'
-      : pos === maxPos
-        ? `${PAGE_COUNT}`
-        : `${pos * 2}–${pos * 2 + 1}`
+  // Görünen sayfa: dönüş sırasında yaprağın altındaki (sonraki) sayfa
+  const showPage = turn ? Math.min(turn.t + 1, PAGE_COUNT - 1) : pos
+  // Destede kalan sayfa sayısı kadar alt tabaka görünür
+  const remaining = PAGE_COUNT - 1 - pos
 
   return (
     <div className={`${styles.bookArea} ${fontVars}`}>
       <div
         ref={bookRef}
-        className={`${styles.book} ${portrait ? styles.bookPortrait : ''}`}
+        className={styles.book}
         onPointerDown={pointerDown}
         onPointerMove={pointerMove}
         onPointerUp={pointerUp}
         onPointerCancel={pointerUp}
       >
-        {/* Duran sol sayfa */}
-        {!portrait && (
-          <div className={styles.slotLeft}>
-            {leftPage != null && (
-              <div className={styles.page} lang="tr">
-                <PageContent index={leftPage} />
-                <div className={styles.spineShadeL} />
-              </div>
-            )}
-          </div>
-        )}
+        {/* Gazete destesi: üstteki sayfanın altındaki tabakalar */}
+        {remaining >= 2 && <div className={`${styles.stackSheet} ${styles.stack2}`} />}
+        {remaining >= 1 && <div className={`${styles.stackSheet} ${styles.stack1}`} />}
 
-        {/* Duran sağ sayfa */}
-        <div className={portrait ? styles.slotFull : styles.slotRight}>
-          {rightPage != null && (
-            <div className={styles.page} lang="tr">
-              <PageContent index={rightPage} />
-              {!portrait && <div className={styles.spineShadeR} />}
-            </div>
-          )}
+        {/* Üstteki sayfa */}
+        <div className={styles.slotFull}>
+          <div className={styles.page} lang="tr">
+            <PageContent index={showPage} />
+          </div>
         </div>
 
         {/* WebGL kıvrım tuvali (yalnız dönüş sırasında görünür) */}
@@ -669,7 +583,7 @@ export function GazeteBook() {
           ‹ Evvelki
         </button>
         <span className={styles.pageIndicator}>
-          Sahife {indicator} / {PAGE_COUNT}
+          Sahife {pos + 1} / {PAGE_COUNT}
         </span>
         <button
           type="button"
