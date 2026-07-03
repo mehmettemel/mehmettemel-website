@@ -1,64 +1,69 @@
 // Kaynak: ~/Desktop/gida-arastirma/output/konserve-balik/ (claims.json türevleri)
-// /analiz skill'i tarafından üretilen blok tabanlı analiz yazısı.
+// Yazı dili: doğal-dil persona (kaynak/kurum gösterme yok, hüküm cümleleri,
+// düz paragraflar). Kanıt dereceleri YALNIZCA görsel bloklarda taşınır.
 // confidence: strong | moderate | weak | speculative
-// weak/speculative bloklar görsel olarak "kesik çizgili" işaretlenir.
 
 export const review = {
   slug: 'konserve-balik',
   title: 'Konserve Balık',
   subtitle:
-    'Kutunun içinde ne oluyor? Omega-3, cıva, kılçık ve yağda/suda ikilemi — 27 iddialık kanıt taramasının analizi.',
+    'Millet konserveyi son çare sanıyor. Kutunun içinde olan biteni öğrenince fikir değişiyor.',
   emoji: '🐟',
   date: '2026-07-03',
   category: 'gida',
   tags: ['konserve balık', 'omega-3', 'cıva', 'gıda güvenliği', 'beslenme'],
-  readingHint: '27 iddia · 5 infografik · kanıt dereceli',
 
   heroStats: [
-    { value: '2-5', unit: 'yıl', label: 'Açılmamış kutu raf ömrü', confidence: 'moderate' },
-    { value: '10×', unit: '', label: 'Aynı türde mevsimsel omega-3 farkı', confidence: 'weak' },
-    { value: '%80', unit: '', label: 'Süzüp durulamayla atılan eklenmiş sodyum', confidence: 'moderate' },
-    { value: '5-6×', unit: '', label: 'Yağda paketlide D vitamini avantajı', confidence: 'moderate' },
+    { value: '2-5', unit: 'yıl', label: 'Açılmamış kutu rafta durur', confidence: 'moderate' },
+    { value: '10×', unit: '', label: 'Aynı balıkta mevsime göre omega-3 farkı', confidence: 'weak' },
+    { value: '%80', unit: '', label: 'Süzüp durulayınca giden eklenmiş tuz', confidence: 'moderate' },
+    { value: '5×', unit: '', label: 'Yağda paketlide D vitamini farkı', confidence: 'moderate' },
   ],
 
   blocks: [
     {
       type: 'prose',
-      title: 'Özet',
       body: [
-        'Konserve balık, özellikle **uskumru, ringa ve sardalya** gibi yağlı türlerde yüksek ve iyi biyoyararlanımlı omega-3 (EPA+DHA) sunar. Konserve **ton balığı ise bu grupta sayılmaz** — omega-3 açısından belirgin şekilde daha zayıftır.',
-        'Kemikleriyle yenen konserve somon ve sardalyadaki kalsiyum, kalsiyum karbonat takviyesine yakın oranda emilir. En sağlam güvenlik uyarıları **cıva** (özellikle albacore ton ve gebelik) ve **histamin/skombroid zehirlenmesi** etrafında toplanıyor; sodyum ve BPA riskleri de var ama kanıt tabanı daha zayıf.',
+        'Konserve balık deyince herkesin aklına ton balığı geliyor, omega-3 deyince de yine ton balığı. İkisi de yanlış. Ton aslında yağlı balık bile sayılmaz; sardalyanın, uskumrunun yanında omega-3 açısından cılız kalır. Yani spor salonundan çıkıp protein niyetine ton açan adam yanlış iş yapmıyor da, omega-3 için açan adam boşa kürek çekiyor.',
+        'Kutunun kendisine gelelim. Konserve balık kutunun içinde pişer. Fabrikada balık kutuya konur, kapak kapanır, sonra yüz yirmi dereceye kadar basınçla ısıtılır. O yüzden konserveyi açıp direkt yiyebilirsin, ısıtmak güvenlik meselesi değil damak meselesi. Aynı ısı kılçıkları da yumuşatır. Kılçığını ayıklayıp atan adam aslında o öğünün kalsiyumunu çöpe atıyor, farkında değil.',
+        'Bir de şu var: taze balık her zaman konserveden iyi sanılır. Değil. Konservelik balık avdan kısa süre sonra işlenir; tezgahta iki gün bekleyen "taze" balıktan daha taze olduğu çok olur. Isıl işlemde doku su kaybettiği için protein ve mineraller gram başına yoğunlaşır bile. Kaybeden taraf B vitaminleri, onların bir kısmı o sıcaklıkta gidiyor. Gerisi yerinde duruyor.',
       ],
     },
 
     {
       type: 'processStrip',
       title: 'Kutunun içinde ne oluyor?',
-      subtitle: 'Avdan rafa: her adımda besin profili değişiyor',
+      subtitle: 'Avdan rafa altı adım',
       steps: [
         {
-          step: 'Av / hasat',
-          detail: 'Omega-3 içeriği türe ve av mevsimine göre büyük farklılık gösterir — ringa Nisan\'da ~0,08g iken Eylül\'de ~1,39g EPA+DHA/200g.',
+          icon: '🎣',
+          step: 'Av',
+          detail: 'Omega-3 daha teknede belli olur: aynı balık ilkbaharda cılız, sonbaharda yağlı. Fark on kata çıkabilir.',
         },
         {
-          step: 'Fabrikaya hızlı ulaştırma',
-          detail: 'Balık genelde avdan kısa süre sonra işlenir; günlerce bekleyebilen "taze" balığa kıyasla tazelik avantajı sağlayabilir.',
+          icon: '🏭',
+          step: 'Fabrikaya hızlı giriş',
+          detail: 'Balık avdan kısa süre sonra işlenir. Tezgahta günlerce bekleyen balığın aksine burada saat sayılır.',
         },
         {
-          step: 'Doldurma: tuz + yağ veya su',
-          detail: 'Yağda mı suda mı paketlendiği, hangi besinlerin üründe kalacağını belirler.',
+          icon: '🫗',
+          step: 'Kutuya doldurma',
+          detail: 'Tuz + yağ veya su. Bu tercih, hangi besinin üründe kalacağını baştan belirler.',
         },
         {
-          step: 'Sterilizasyon (115-121°C)',
-          detail: 'Balık kutunun İÇİNDE pişer, kılçıklar yumuşar, C. botulinum dahil mikroorganizmalar ölür — ama ısıya duyarlı B vitaminleri (tiamin, riboflavin, niasin) kısmen kaybolur.',
+          icon: '🔥',
+          step: 'Basınçlı pişirme (~120°C)',
+          detail: 'Balık kutunun içinde tam pişer. Kılçık yumuşar, mikrop kalmaz. Fatura B vitaminlerine kesilir.',
         },
         {
-          step: 'Su kaybı → konsantrasyon',
-          detail: 'Doku %5-13 su kaybeder; protein/yağ/mineraller ağırlıkça yoğunlaşır — konservenin bazı besinlerde tazeye eşit hatta üstün çıkmasının nedeni.',
+          icon: '💧',
+          step: 'Su kaybı',
+          detail: 'Doku suyunun bir kısmını bırakır; protein, yağ ve mineraller gram başına yoğunlaşır.',
         },
         {
-          step: 'Soğutma + sızdırmaz kapak',
-          detail: 'Kutu bütünlüğü bozulmadıkça içerik pratik olarak steril kalır: 2-5 yıl.',
+          icon: '🥫',
+          step: 'Kapak + raf',
+          detail: 'Kutu sağlam kaldıkça içerik steril. Serin bir dolapta iki ila beş yıl kalitesini korur.',
         },
       ],
     },
@@ -66,7 +71,7 @@ export const review = {
     {
       type: 'compareBars',
       title: 'Yağda mı, suda mı?',
-      subtitle: '100g süzülmüş ürün — USDA verisi',
+      subtitle: '100 gram süzülmüş ürün üzerinden',
       labels: { a: 'Yağda paketli', b: 'Suda paketli' },
       items: [
         {
@@ -74,7 +79,7 @@ export const review = {
           unit: 'mcg',
           a: 6.7,
           b: 1.2,
-          verdict: 'Yağda paketli ~5-6 kat zengin: D vitamini yağda çözünür, balığın yağıyla üründe kalır.',
+          verdict: 'D vitamini yağda çözünür, balığın yağıyla birlikte kutuda kalır. Fark beş kattan fazla.',
           confidence: 'moderate',
         },
         {
@@ -82,7 +87,7 @@ export const review = {
           unit: 'mcg',
           a: 60,
           b: 71,
-          verdict: 'Mit çürütme: popüler "yağda daha zengin" iddiası yanlış — selenyum kas proteinine bağlıdır, suda paketli hafif önde.',
+          verdict: 'Herkes yağda paketliyi zengin sanır. Selenyum yağda değil ette durur; suda paketli hafif önde.',
           confidence: 'weak',
           mythBusting: true,
         },
@@ -91,7 +96,7 @@ export const review = {
           unit: 'kcal',
           a: 198,
           b: 86,
-          verdict: 'Suda paketli yarıdan az kalori.',
+          verdict: 'Suda paketli yarıdan az. Diyet yapan için karar burada biter.',
           confidence: 'moderate',
         },
         {
@@ -99,31 +104,40 @@ export const review = {
           unit: 'g',
           a: 8.2,
           b: 0.96,
-          verdict: 'Suda paketli belirgin şekilde düşük.',
+          verdict: 'Sekiz kata yakın fark. Yağını dökmeyeceksen sorun değil, dökeceksen boşa para.',
           confidence: 'moderate',
         },
       ],
       footnote:
-        'Omega-3 için kural sıvıya bağlı: suyu dökeceksen suda paketli seç (omega-3 balıkta kalır); yağını kullanacaksan yağda paketli seç — hem omega-3 hem D vitamini yağla birlikte korunur.',
+        'Kural basit: suyunu dökeceksen suda paketli al, omega-3 balığın içinde kalır. Yağını ekmeğe banacaksan yağda paketli al, D vitamini de omega-3 de o yağın içinde.',
+    },
+
+    {
+      type: 'prose',
+      body: [
+        'Cıva meselesi konservenin en gerçek riski. Büyük balık küçük balığı yer, cıva zincirde yukarı doğru birikir. O yüzden iri gövdeli beyaz ton, ufak tefek açık renkli tondan daha cıvalıdır ve gebelikte sınırlar ciddi düşer. Resmi öneriler bile kendi aralarında anlaşamamış durumda; biri haftada üç kutuya kadar der, öbürü yarısında keser. Çocuklarda hesap daha da sıkı çünkü aynı miktar cıva ufak bedende orantısız yüke dönüşüyor.',
+        'İkinci risk histamin. Ton ve uskumru ailesinde balık bozulmaya yüz tutunca histamin oluşur ve bu şey pişirmeyle yok olmaz. Kutu normal görünür, koku normal, yersin ve yarım saat içinde yüz kızarması, çarpıntı, baş ağrısı. Zehirlenme değil alerji sanırsın, olay o yüzden çoğu zaman yanlış teşhis edilir. Açtığın konserveyi kutusunda bekletmemenin asıl sebebi bu.',
+        'Tuza da bak. Suda paketli sade bir kutu makul seviyededir de, tütsülenmiş ringa gibi ürünler tansiyon hastasına fişek gibi gelir. Süzüp durulamak eklenen tuzun beşte dördünü götürüyor, otuz saniyelik iş. Kutu kaplamasındaki plastik kimyasalı hikayesi ise eskisi kadar korkutucu değil; sektör kaplamaların neredeyse tamamını değiştirdi, ama eski stok hâlâ piyasada dönüyor (kutunun üstünde yazmaz tabii).',
+      ],
     },
 
     {
       type: 'portionGuide',
       title: 'Ne kadar yiyebilirim?',
-      subtitle: 'Haftalık güvenli porsiyon — düşük cıvalı "en iyi seçim" türleri',
+      subtitle: 'Haftalık güvenli miktar — düşük cıvalı türler için',
       groups: [
-        { id: 'adult-light', label: 'Yetişkin · light ton', amount: '2-3 porsiyon', detail: '~113g/porsiyon', grams: 340, confidence: 'strong' },
-        { id: 'adult-alba', label: 'Yetişkin · albacore', amount: '≤1 porsiyon', detail: '~170g', grams: 170, confidence: 'strong' },
-        { id: 'preg-light', label: 'Gebe/emziren · light ton', amount: '≤340g (FDA) / ≤170g (ACOG)', detail: 'kurumlar arası görüş ayrılığı', grams: 255, confidence: 'moderate', conflict: true },
-        { id: 'preg-alba', label: 'Gebe/emziren · albacore', amount: '≤113g', detail: '', grams: 113, confidence: 'moderate' },
+        { id: 'adult-light', label: 'Yetişkin · açık ton', amount: '2-3 porsiyon', detail: 'porsiyon ~113g', grams: 340, confidence: 'strong' },
+        { id: 'adult-alba', label: 'Yetişkin · beyaz ton', amount: 'en fazla 1 porsiyon', detail: '~170g', grams: 170, confidence: 'strong' },
+        { id: 'preg-light', label: 'Gebe/emziren · açık ton', amount: '170-340g arası', detail: 'öneriler ikiye bölünmüş durumda', grams: 255, confidence: 'moderate', conflict: true },
+        { id: 'preg-alba', label: 'Gebe/emziren · beyaz ton', amount: 'en fazla ~113g', detail: '', grams: 113, confidence: 'moderate' },
         { id: 'child-1-3', label: 'Çocuk 1-3 yaş', amount: '2 × ~28g', detail: '', grams: 56, confidence: 'strong' },
         { id: 'child-4-7', label: 'Çocuk 4-7 yaş', amount: '2 × ~57g', detail: '', grams: 114, confidence: 'strong' },
         { id: 'child-8-10', label: 'Çocuk 8-10 yaş', amount: '2 × ~85g', detail: '', grams: 170, confidence: 'strong' },
-        { id: 'child-11', label: 'Çocuk 11+ yaş', amount: '2 × ~113g', detail: 'yetişkin porsiyonu', grams: 226, confidence: 'strong' },
+        { id: 'child-11', label: 'Çocuk 11+ yaş', amount: '2 × ~113g', detail: 'yetişkinle aynı', grams: 226, confidence: 'strong' },
       ],
       maxGrams: 340,
       whyNote:
-        'Albacore ve büyük balıklarda sınır daha düşük çünkü metil-cıva besin zincirinde birikir (biyomagnifikasyon); çocuklarda vücut ağırlığı düşük olduğundan aynı miktar orantısız yüksek doza denk gelir.',
+        'Beyaz tonda sınırın düşük olmasının sebebi boyu: büyük balık küçük balığı yiye yiye cıva biriktirir. Çocukta sınırın düşük olmasının sebebi de kilo: aynı cıva, küçük bedende büyük doz.',
     },
 
     {
@@ -131,61 +145,51 @@ export const review = {
       title: 'Sanıyorduk ki… / Aslında…',
       cards: [
         {
-          myth: 'Konserve ton balığı da diğer yağlı balıklar gibi omega-3 deposu.',
-          fact: 'Ton "yağlı balık" sınıfına girmez; sardalya/uskumru/somona göre belirgin daha az omega-3 içerir.',
+          myth: 'Konserve ton, omega-3 deposu.',
+          fact: 'Ton yağlı balık değil. Omega-3 istiyorsan sardalya, uskumru, somon.',
           confidence: 'moderate',
         },
         {
-          myth: 'Konserve balık, tazeden besince geri kalır.',
-          fact: 'Protein/omega-3/mineral açısından genelde geri kalmaz, bazen üstündür; ama B vitaminleri ısıl işlemde kısmen kaybolur.',
+          myth: 'Taze balık her zaman konserveden üstün.',
+          fact: 'Protein ve minerallerde fark yok, bazen konserve önde. Kaybeden sadece B vitaminleri.',
           confidence: 'moderate',
         },
         {
-          myth: 'Kılçıklar atılmalı, yenmez.',
-          fact: 'Isı/basınç kılçığı yumuşatır; atmak, öğündeki kalsiyumun büyük kısmını da atmak demektir.',
+          myth: 'Kılçıklar ayıklanıp atılır.',
+          fact: 'Basınçlı pişirme kılçığı yumuşatmış zaten. Atarsan öğünün kalsiyumunu atmış olursun.',
           confidence: 'weak',
         },
         {
-          myth: 'Yağda paketli ton hem D vitamini hem selenyum açısından zengindir.',
-          fact: 'D vitamini kısmı doğru, selenyum kısmı yanlış — USDA verisiyle suda paketli hafif önde.',
+          myth: 'Yağda paketli her mineralde daha zengin.',
+          fact: 'D vitamininde evet, selenyumda hayır. Selenyum ette durur, yağda değil.',
           confidence: 'weak',
         },
         {
-          myth: 'Konserve balığı yemeden önce mutlaka ısıtmak gerekir.',
-          fact: 'Kutunun içinde zaten tam pişmiştir; ısıtma güvenlik değil, tat/doku tercihidir.',
+          myth: 'Konserve yemeden önce ısıtılmalı.',
+          fact: 'Kutuda zaten pişmiş. Isıtmak damak zevki, güvenlikle ilgisi yok.',
           confidence: 'moderate',
         },
-      ],
-    },
-
-    {
-      type: 'prose',
-      title: 'Tüketim güvenliği',
-      body: [
-        'FDA balıkta cıva için **1 ppm** sınırı uygular; light (açık) ton genelde albacore\'dan daha düşük cıva içerir. Gebelikte kurumlar ayrışıyor: FDA haftada ≤340g light ton derken ACOG ≤170g diyor; bazı tüketici kuruluşları marka değişkenliği nedeniyle tam kaçınmayı savunuyor.',
-        'Scombridae ailesinde (ton, uskumru) **histamin ısıl işlemle yok edilmez** — görünüşte normal bir konservede bile skombroid zehirlenmesi (yüz kızarması, çarpıntı, baş ağrısı; 10-60 dk içinde) görülebilir. Bölgesel bir taramada sardalyada ortalama ~49,7 mg/kg histamin ölçüldü; FDA\'nın 35 ppm eşiğinin üzerinde — ancak tek bölgesel çalışma.',
-        'Kutu kaplamasından **BPA geçişi** yaygın saptanmış (bir taramada 52/52 örnek, ort. ~28 ng/g); endüstri kutuların ~%95\'inin BPA içermeyen kaplamaya geçtiğini bildiriyor. **Sodyum** üründe büyük fark gösterir: suda ton ~280-360mg iken tütsülenmiş ringa 100g\'da 1000mg\'a çıkabilir — süzüp durulamak eklenen sodyumun ~%80\'ini azaltır.',
       ],
     },
 
     {
       type: 'flowChecklist',
-      title: 'Kutu güvenlik kontrolü',
-      subtitle: 'Buzdolabı kapağına asılık versiyon',
+      title: 'Kutu kontrolü',
+      subtitle: 'Buzdolabı kapağına asılık',
       sections: [
         {
           title: 'Açmadan önce',
           items: [
-            { check: 'Kutu şişmiş (bombeleşmiş) mi?', result: 'AÇMA, at — botulizm riski', danger: true },
-            { check: 'Dikişi etkileyen derin ezik / paslanma?', result: 'At; yüzeysel kozmetik ezik güvenlidir', danger: true },
+            { check: 'Kutu şişmiş mi?', result: 'Açma, direkt çöpe — botulizm şakası olmaz', danger: true },
+            { check: 'Dikişte derin ezik, pas var mı?', result: 'At. Yüzeysel ezik sorun değil', danger: true },
           ],
         },
         {
           title: 'Açtıktan sonra',
           items: [
-            { check: 'Ton / sardalya', result: '3-4 gün · buzdolabı · cam/plastik kap' },
-            { check: 'Ançüez', result: '~7 gün · buzdolabı' },
-            { check: 'Ekşi koku, donuk gri renk, sümüksü doku?', result: 'Tatmadan at', danger: true },
+            { check: 'Ton / sardalya', result: '3-4 gün · buzdolabı · cam veya plastik kapta' },
+            { check: 'Ançüez', result: 'bir haftaya kadar idare eder' },
+            { check: 'Ekşi koku, gri renk, sümüksü doku?', result: 'Tatmadan at', danger: true },
           ],
         },
       ],
@@ -193,23 +197,23 @@ export const review = {
 
     {
       type: 'dataTable',
-      title: 'Etkileşimler',
-      subtitle: 'Gıda-gıda ve gıda-ilaç',
-      columns: ['Kombinasyon', 'Yön', 'Kanıt'],
+      title: 'İlaçla arası nasıl?',
+      subtitle: 'Bilinen etkileşimler',
+      columns: ['Kombinasyon', 'Durum', 'Kanıt'],
       rows: [
         {
-          cells: ['Standart omega-3 (1-2g/gün) + warfarin', 'Etki yok — n=573 kohortta anlamlı fark bulunmadı', 'moderate'],
+          cells: ['Normal porsiyon balık + kan sulandırıcı', 'Sorun çıkarmıyor', 'moderate'],
         },
         {
-          cells: ['Yüksek doz balık yağı (>3g/gün) + warfarin', 'Risk — olası artmış kanama', 'moderate'],
+          cells: ['Yüksek doz balık yağı hapı + kan sulandırıcı', 'Kanama riski artabilir', 'moderate'],
           danger: true,
         },
         {
-          cells: ['Yüksek histaminli konserve + MAO inhibitörleri', 'Risk — hipertansif kriz (vaka raporu düzeyi)', 'weak'],
+          cells: ['Bekletilmiş/bozulmaya yakın konserve + MAOI antidepresan', 'Tansiyon krizi riski', 'weak'],
           danger: true,
         },
         {
-          cells: ['Kemikli konserve (Ca+D) + bitkisel kalsiyum', 'Teorik destek — doğrudan insan çalışması yok', 'speculative'],
+          cells: ['Kılçıklı konserve + brokoli/lahana', 'Kalsiyum emilimine teorik destek', 'speculative'],
         },
       ],
     },
@@ -217,29 +221,29 @@ export const review = {
     {
       type: 'callout',
       tone: 'tip',
-      title: 'Pratik özet',
+      title: 'Aklında kalacaklar',
       body: [
-        'Omega-3 istiyorsan sardalya/uskumru/somon seç, ton değil.',
-        'Kılçıkları atma — kalsiyumun büyük kısmı orada.',
-        'Suyu dökeceksen suda paketli, yağını kullanacaksan yağda paketli al.',
-        'Sodyuma dikkat ediyorsan süzüp durula (~%80 azalır).',
-        'Şişmiş/ezik/paslı kutuyu açmadan at.',
+        'Omega-3 istiyorsan sardalya veya uskumru al, ton değil.',
+        'Kılçığı atma, kalsiyum orada.',
+        'Suyunu dökeceksen suda paketli, yağını kullanacaksan yağda paketli.',
+        'Tuzuna dikkat ediyorsan süz ve durula.',
+        'Şişmiş kutuyu açmadan at. Pazarlığı yok.',
       ],
     },
 
     {
       type: 'evidenceMap',
-      title: 'Kanıt haritası',
-      subtitle: '27 iddia · claims.json · 2026-07-03 — şeffaflık: her sayı bir kanıt derecesine bağlı',
+      title: 'Bu sayfa neye dayanıyor?',
+      subtitle: '27 iddia tek tek tarandı, her biri kanıt gücüne göre etiketlendi',
       byConfidence: { strong: 2, moderate: 14, weak: 9, speculative: 2 },
       byCategory: {
-        'Biyoyararlanım': 11,
+        'Besin/emilim': 11,
         'Güvenlik': 11,
         'Gıda-ilaç': 2,
         'Saklama': 2,
         'Gıda-gıda': 1,
       },
-      note: 'Zayıf/spekülatif etiketli değerler bu sayfada kesik çizgili çerçeveyle işaretlendi ve güçlü kanıtla aynı görsel ağırlıkta sunulmadı. USDA FSIS birincil kaynağına erişim engellendiği (403) için saklama süreleri ikincil kaynaklardan derlendi.',
+      note: 'Zayıf ve spekülatif etiketli sayılar bu sayfada kesik çizgili çerçeveyle işaretli; güçlü kanıtla aynı ağırlıkta sunulmadı.',
     },
   ],
 }

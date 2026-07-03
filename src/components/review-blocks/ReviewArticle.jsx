@@ -2,14 +2,17 @@
 
 /* ============================================================
    Blok tabanlı zengin analiz yazısı renderer'ı.
-   - Grafikler: Recharts
-   - Animasyon: framer-motion (scroll-reveal, kart flip, gauge)
-   - Kanıt kuralı: weak/speculative bloklar kesik çizgili
-     çerçeveyle işaretlenir, güçlü kanıtla aynı ağırlıkta sunulmaz.
+   - Grafikler: Recharts (görünür olunca mount edilir → animasyon
+     ekranda oynar, sayfa yüklenirken değil)
+   - Animasyon: framer-motion (scroll-reveal, yaylı sayaçlar,
+     çizilen süreç hattı, kart flip)
+   - Kanıt kuralı: weak/speculative görseller kesik çizgili
+     çerçeveyle işaretlenir. Kanıt dili YALNIZCA görsel katmanda
+     yaşar; yazı katmanı doğal dildedir.
    ============================================================ */
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import { motion, useInView, useSpring, useTransform } from 'framer-motion'
 import {
   ResponsiveContainer,
   BarChart,
@@ -45,6 +48,28 @@ const reveal = {
   transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
 }
 
+/* Grafik ekrana girince mount edilir → recharts animasyonu
+   izleyicinin gözü önünde oynar */
+function ChartOnView({ height, children }) {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-40px' })
+  return (
+    <div ref={ref} style={{ height }}>
+      {inView ? children : null}
+    </div>
+  )
+}
+
+/* Yaylı sayaç: değer değişince eski değerden yenisine akar */
+function SpringNumber({ value, className }) {
+  const spring = useSpring(value, { stiffness: 110, damping: 20 })
+  const display = useTransform(spring, (v) => String(Math.round(v)))
+  useEffect(() => {
+    spring.set(value)
+  }, [value, spring])
+  return <motion.span className={className}>{display}</motion.span>
+}
+
 function ConfidenceBadge({ level }) {
   const c = CONF[level]
   if (!c) return null
@@ -68,34 +93,17 @@ function SectionTitle({ title, subtitle }) {
   )
 }
 
-/* **kalın** işaretli düz metin */
-function RichText({ text }) {
-  const parts = text.split(/\*\*(.+?)\*\*/g)
-  return (
-    <>
-      {parts.map((p, i) =>
-        i % 2 === 1 ? (
-          <strong key={i} className="font-semibold text-foreground">
-            {p}
-          </strong>
-        ) : (
-          p
-        ),
-      )}
-    </>
-  )
-}
-
 /* ---------- bloklar ---------- */
 
+/* Yazı katmanı: başlıksız, düz akan paragraflar (doğal dil) */
 function Prose({ block }) {
   return (
     <motion.section {...reveal}>
       {block.title && <SectionTitle title={block.title} />}
-      <div className="space-y-4">
+      <div className="space-y-5">
         {block.body.map((p, i) => (
-          <p key={i} className="text-[15px] leading-relaxed text-muted-foreground">
-            <RichText text={p} />
+          <p key={i} className="text-[15.5px] leading-[1.75] text-foreground/85">
+            {p}
           </p>
         ))}
       </div>
@@ -107,33 +115,39 @@ function ProcessStrip({ block }) {
   return (
     <motion.section {...reveal}>
       <SectionTitle title={block.title} subtitle={block.subtitle} />
-      <div className="relative">
-        <div className="absolute bottom-0 left-[15px] top-0 w-px bg-border sm:left-1/2" />
-        <div className="space-y-6">
+      <div className="relative pl-12">
+        {/* çizilen hat */}
+        <motion.div
+          className="absolute bottom-4 left-[19px] top-1 w-px origin-top bg-gradient-to-b from-primary/60 via-border to-border"
+          initial={{ scaleY: 0 }}
+          whileInView={{ scaleY: 1 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 1.4, ease: 'easeOut' }}
+        />
+        <div className="space-y-7">
           {block.steps.map((s, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, x: -14 }}
+              initial={{ opacity: 0, x: -16 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.45, delay: i * 0.05 }}
-              className={`relative flex gap-4 sm:w-1/2 ${i % 2 ? 'sm:ml-auto sm:pl-8' : 'sm:flex-row-reverse sm:pr-8 sm:text-right'} pl-10 sm:pl-0`}
+              transition={{ duration: 0.45, delay: i * 0.08 }}
+              className="relative"
             >
-              <div
-                className="absolute left-0 top-1 flex h-8 w-8 items-center justify-center rounded-full border border-border bg-card text-xs font-bold text-primary sm:left-auto"
-                style={{ [typeof window !== 'undefined' ? 'inset' : 'left']: undefined }}
-              />
-              <div className="absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full border border-border bg-card text-xs font-bold text-primary sm:left-1/2 sm:-translate-x-1/2 sm:[position:absolute] sm:[left:calc(50%)]" />
-              <span className="absolute left-0 top-0 z-10 flex h-8 w-8 items-center justify-center rounded-full border border-border bg-card text-xs font-bold text-primary sm:hidden">
-                {i + 1}
-              </span>
-              <div className="min-w-0 flex-1">
-                <h3 className="text-sm font-semibold text-foreground">
-                  <span className="mr-2 hidden text-primary sm:inline">{i + 1}.</span>
-                  {s.step}
-                </h3>
-                <p className="mt-1 text-[13px] leading-relaxed text-muted-foreground">{s.detail}</p>
-              </div>
+              <motion.span
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ type: 'spring', stiffness: 260, damping: 16, delay: i * 0.08 + 0.1 }}
+                className="absolute -left-12 top-0 flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-lg shadow-sm"
+              >
+                {s.icon || i + 1}
+              </motion.span>
+              <h3 className="flex items-baseline gap-2 text-sm font-semibold text-foreground">
+                <span className="text-[11px] font-bold text-primary">{String(i + 1).padStart(2, '0')}</span>
+                {s.step}
+              </h3>
+              <p className="mt-1 max-w-xl text-[13.5px] leading-relaxed text-muted-foreground">{s.detail}</p>
             </motion.div>
           ))}
         </div>
@@ -157,6 +171,10 @@ function CompareBars({ block }) {
       <div className="grid gap-4 sm:grid-cols-2">
         {block.items.map((item, i) => {
           const conf = CONF[item.confidence]
+          const hi = Math.max(item.a, item.b)
+          const lo = Math.min(item.a, item.b)
+          const ratio = lo > 0 ? hi / lo : null
+          const winner = item.a >= item.b ? COLOR_A : COLOR_B
           const data = [
             { name: block.labels.a, value: item.a, fill: COLOR_A },
             { name: block.labels.b, value: item.b, fill: COLOR_B },
@@ -164,10 +182,10 @@ function CompareBars({ block }) {
           return (
             <motion.div
               key={i}
-              initial={{ opacity: 0, scale: 0.97 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
+              initial={{ opacity: 0, scale: 0.96, y: 12 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.45, delay: i * 0.07 }}
               className="rounded-xl bg-card p-4"
               style={{ border: `1px ${conf?.dashed ? 'dashed' : 'solid'} var(--border, rgba(128,128,128,0.3))` }}
             >
@@ -175,18 +193,28 @@ function CompareBars({ block }) {
                 <h3 className="text-sm font-semibold text-foreground">
                   {item.metric} <span className="font-normal text-muted-foreground">({item.unit})</span>
                 </h3>
-                {item.mythBusting && (
+                {item.mythBusting ? (
                   <span className="shrink-0 rounded-full bg-rose-500/10 px-2 py-0.5 text-[10px] font-semibold text-rose-500">
                     ❌ popüler ama yanlış
                   </span>
+                ) : (
+                  ratio &&
+                  ratio >= 1.5 && (
+                    <span
+                      className="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold"
+                      style={{ color: winner, background: `${winner}14` }}
+                    >
+                      ≈{ratio >= 3 ? Math.round(ratio) : ratio.toFixed(1).replace('.', ',')}× fark
+                    </span>
+                  )
                 )}
               </div>
-              <div className="h-[76px]">
+              <ChartOnView height={76}>
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={data} layout="vertical" margin={{ top: 4, right: 44, bottom: 0, left: 0 }}>
                     <XAxis type="number" hide domain={[0, 'dataMax']} />
                     <YAxis type="category" dataKey="name" width={1} tick={false} axisLine={false} tickLine={false} />
-                    <Bar dataKey="value" radius={[3, 3, 3, 3]} barSize={18} isAnimationActive animationDuration={900}>
+                    <Bar dataKey="value" radius={[3, 3, 3, 3]} barSize={18} isAnimationActive animationDuration={1000} animationEasing="ease-out">
                       {data.map((d, j) => (
                         <Cell key={j} fill={d.fill} />
                       ))}
@@ -199,7 +227,7 @@ function CompareBars({ block }) {
                     </Bar>
                   </BarChart>
                 </ResponsiveContainer>
-              </div>
+              </ChartOnView>
               <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{item.verdict}</p>
               <div className="mt-2">
                 <ConfidenceBadge level={item.confidence} />
@@ -209,9 +237,15 @@ function CompareBars({ block }) {
         })}
       </div>
       {block.footnote && (
-        <p className="mt-4 rounded-lg bg-secondary/50 p-3 text-xs leading-relaxed text-muted-foreground">
-          💡 <RichText text={block.footnote} />
-        </p>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="mt-4 rounded-lg bg-secondary/50 p-3 text-xs leading-relaxed text-muted-foreground"
+        >
+          💡 {block.footnote}
+        </motion.p>
       )}
     </motion.section>
   )
@@ -221,20 +255,22 @@ function PortionGuide({ block }) {
   const [active, setActive] = useState(block.groups[0])
   const pct = Math.round((active.grams / block.maxGrams) * 100)
   const conf = CONF[active.confidence]
+  // 1 kutu ≈ 113g süzülmüş balık
+  const cans = Math.max(Math.round((active.grams / 113) * 2) / 2, 0.5)
 
   return (
     <motion.section {...reveal}>
       <SectionTitle title={block.title} subtitle={block.subtitle} />
-      <div className="grid gap-6 rounded-xl border border-border bg-card p-5 sm:grid-cols-[1fr_220px]">
+      <div className="grid gap-6 rounded-xl border border-border bg-card p-5 sm:grid-cols-[1fr_230px]">
         <div className="flex flex-wrap content-start gap-2">
           {block.groups.map((g) => (
             <button
               key={g.id}
               type="button"
               onClick={() => setActive(g)}
-              className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+              className={`rounded-full px-3 py-1.5 text-xs font-medium transition-all ${
                 active.id === g.id
-                  ? 'bg-primary text-primary-foreground'
+                  ? 'scale-105 bg-primary text-primary-foreground shadow-sm'
                   : 'bg-secondary text-muted-foreground hover:text-foreground'
               }`}
             >
@@ -243,28 +279,63 @@ function PortionGuide({ block }) {
           ))}
           <p className="mt-3 w-full text-xs leading-relaxed text-muted-foreground">{block.whyNote}</p>
         </div>
+
         <div className="mx-auto flex flex-col items-center">
-          <div className="relative h-[170px] w-[200px]">
+          <div className="relative h-[150px] w-[210px]">
             <ResponsiveContainer width="100%" height="100%">
               <RadialBarChart
                 cx="50%"
-                cy="70%"
-                innerRadius={70}
-                outerRadius={92}
+                cy="78%"
+                innerRadius={74}
+                outerRadius={96}
                 startAngle={180}
                 endAngle={0}
                 data={[{ value: pct, fill: conf?.color || COLOR_A }]}
               >
                 <PolarAngleAxis type="number" domain={[0, 100]} tick={false} />
-                <RadialBar dataKey="value" cornerRadius={8} background={{ fill: 'rgba(128,128,128,0.12)' }} isAnimationActive animationDuration={700} />
+                <RadialBar
+                  dataKey="value"
+                  cornerRadius={8}
+                  background={{ fill: 'rgba(128,128,128,0.12)' }}
+                  isAnimationActive
+                  animationDuration={600}
+                  animationEasing="ease-out"
+                />
               </RadialBarChart>
             </ResponsiveContainer>
-            <div className="absolute inset-x-0 bottom-6 text-center">
-              <div className="text-xl font-bold text-foreground">{active.grams}g</div>
-              <div className="text-[10px] uppercase tracking-wider text-muted-foreground">haftalık</div>
+            <div className="absolute inset-x-0 bottom-2 text-center">
+              <div className="text-2xl font-bold text-foreground">
+                <SpringNumber value={active.grams} />
+                <span className="text-sm font-medium text-muted-foreground">g</span>
+              </div>
+              <div className="text-[10px] uppercase tracking-widest text-muted-foreground">haftalık</div>
             </div>
           </div>
-          <div className="text-center">
+
+          {/* kutu karşılığı */}
+          <motion.div
+            key={active.id}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-2 flex items-center gap-1"
+            title={`≈ ${cans} kutu (113g süzülmüş)`}
+          >
+            {Array.from({ length: Math.ceil(cans) }, (_, i) => (
+              <motion.span
+                key={i}
+                initial={{ scale: 0, rotate: -12 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 15, delay: i * 0.07 }}
+                className="text-lg"
+                style={{ opacity: i + 1 <= cans ? 1 : 0.35 }}
+              >
+                🥫
+              </motion.span>
+            ))}
+            <span className="ml-1 text-xs text-muted-foreground">≈ {String(cans).replace('.', ',')} kutu</span>
+          </motion.div>
+
+          <div className="mt-2 text-center">
             <div className="text-sm font-semibold text-foreground">{active.amount}</div>
             {active.detail && <div className="text-xs text-muted-foreground">{active.detail}</div>}
             <div className="mt-2 flex justify-center gap-2">
@@ -290,6 +361,7 @@ function MythCard({ card, index }) {
       type="button"
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -4 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4, delay: index * 0.07 }}
       onClick={() => setFlipped((f) => !f)}
@@ -354,9 +426,15 @@ function FlowChecklist({ block }) {
                   transition={{ delay: j * 0.06 }}
                   className="flex items-start gap-2.5 text-sm"
                 >
-                  <span className={`mt-0.5 ${it.danger ? 'text-rose-500' : 'text-emerald-500'}`}>
+                  <motion.span
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 14, delay: j * 0.06 + 0.15 }}
+                    className={`mt-0.5 ${it.danger ? 'text-rose-500' : 'text-emerald-500'}`}
+                  >
                     {it.danger ? '✕' : '✓'}
-                  </span>
+                  </motion.span>
                   <span className="min-w-0">
                     <span className="text-foreground">{it.check}</span>
                     <span className={`block text-xs ${it.danger ? 'font-medium text-rose-500' : 'text-muted-foreground'}`}>
@@ -390,7 +468,14 @@ function DataTable({ block }) {
           </thead>
           <tbody>
             {block.rows.map((r, i) => (
-              <tr key={i} className="border-b border-border/60 last:border-0">
+              <motion.tr
+                key={i}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.07 }}
+                className="border-b border-border/60 last:border-0"
+              >
                 {r.cells.map((cell, j) =>
                   j === r.cells.length - 1 && CONF[cell] ? (
                     <td key={j} className="px-4 py-3">
@@ -402,7 +487,7 @@ function DataTable({ block }) {
                     </td>
                   ),
                 )}
-              </tr>
+              </motion.tr>
             ))}
           </tbody>
         </table>
@@ -419,10 +504,17 @@ function Callout({ block }) {
         <h3 className="mb-3 text-sm font-bold uppercase tracking-widest text-primary">{block.title}</h3>
         <ul className="space-y-2">
           {block.body.map((b, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm leading-relaxed text-foreground">
+            <motion.li
+              key={i}
+              initial={{ opacity: 0, x: -8 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.06 }}
+              className="flex items-start gap-2 text-sm leading-relaxed text-foreground"
+            >
               <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-              <RichText text={b} />
-            </li>
+              {b}
+            </motion.li>
           ))}
         </ul>
       </div>
@@ -443,29 +535,33 @@ function EvidenceMap({ block }) {
     <motion.section {...reveal}>
       <SectionTitle title={block.title} subtitle={block.subtitle} />
       <div className="grid gap-4 rounded-xl border border-border bg-card p-5 sm:grid-cols-2">
-        <div className="relative h-[210px]">
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie
-                data={confData}
-                dataKey="value"
-                nameKey="name"
-                innerRadius={58}
-                outerRadius={84}
-                paddingAngle={3}
-                strokeWidth={0}
-                isAnimationActive
-                animationDuration={900}
-              >
-                {confData.map((d, i) => (
-                  <Cell key={i} fill={d.fill} />
-                ))}
-              </Pie>
-            </PieChart>
-          </ResponsiveContainer>
-          <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
-            <span className="text-2xl font-bold text-foreground">{total}</span>
-            <span className="text-[10px] uppercase tracking-widest text-muted-foreground">iddia</span>
+        <div>
+          <div className="relative">
+            <ChartOnView height={200}>
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={confData}
+                    dataKey="value"
+                    nameKey="name"
+                    innerRadius={56}
+                    outerRadius={82}
+                    paddingAngle={3}
+                    strokeWidth={0}
+                    isAnimationActive
+                    animationDuration={900}
+                  >
+                    {confData.map((d, i) => (
+                      <Cell key={i} fill={d.fill} />
+                    ))}
+                  </Pie>
+                </PieChart>
+              </ResponsiveContainer>
+            </ChartOnView>
+            <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
+              <span className="text-2xl font-bold text-foreground">{total}</span>
+              <span className="text-[10px] uppercase tracking-widest text-muted-foreground">iddia</span>
+            </div>
           </div>
           <div className="mt-1 flex flex-wrap justify-center gap-x-4 gap-y-1">
             {confData.map((d, i) => (
@@ -476,7 +572,7 @@ function EvidenceMap({ block }) {
             ))}
           </div>
         </div>
-        <div className="h-[230px]">
+        <ChartOnView height={230}>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={catData} layout="vertical" margin={{ top: 8, right: 34, bottom: 0, left: 8 }}>
               <XAxis type="number" hide />
@@ -493,7 +589,7 @@ function EvidenceMap({ block }) {
               </Bar>
             </BarChart>
           </ResponsiveContainer>
-        </div>
+        </ChartOnView>
       </div>
       {block.note && <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{block.note}</p>}
     </motion.section>
@@ -524,12 +620,18 @@ export function ReviewArticle({ review }) {
         transition={{ duration: 0.5 }}
         className="mb-10 text-center"
       >
-        <div className="mb-3 text-4xl">{review.emoji}</div>
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ type: 'spring', stiffness: 200, damping: 14, delay: 0.15 }}
+          className="mb-3 text-4xl"
+        >
+          {review.emoji}
+        </motion.div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">{review.title}</h1>
         <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-muted-foreground">{review.subtitle}</p>
         <div className="mt-3 text-xs uppercase tracking-widest text-muted-foreground">
           {new Date(review.date).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })}
-          {review.readingHint && <> · {review.readingHint}</>}
         </div>
       </motion.header>
 
@@ -541,9 +643,9 @@ export function ReviewArticle({ review }) {
             return (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45, delay: 0.1 + i * 0.08 }}
+                initial={{ opacity: 0, y: 16, scale: 0.94 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ type: 'spring', stiffness: 180, damping: 18, delay: 0.2 + i * 0.09 }}
                 className="rounded-xl bg-card p-4 text-center"
                 style={{ border: `1px ${conf?.dashed ? 'dashed' : 'solid'} var(--border, rgba(128,128,128,0.3))` }}
               >

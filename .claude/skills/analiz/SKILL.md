@@ -24,7 +24,36 @@ Klasörde genellikle şunlar bulunur (hepsi olmayabilir):
 | `saklama-tablosu.json` | Saklama koşulları | dataTable veya flowChecklist |
 | `rapor.html` | Ham rapor | gerekirse ek bağlam |
 
-## Adım 2: Bilgi Seçimi (en güçlü bilgiler)
+## Adım 2: Yazı Dili (prose blokları — EN KRİTİK KURAL)
+
+Prose blokları, konuyu yıllardır bilen ve kendi kafasından yazan birinin
+doğal diliyle yazılır. Kanıt/akademik dil YALNIZCA görsel bloklarda yaşar
+(rozetler, kesik çizgiler); yazıya asla sızmaz.
+
+- **Kaynak gösterme YASAK:** "araştırmalara göre", "çalışmalar gösteriyor",
+  kurum/rapor/tarih adı (USDA, FDA, ACOG...) prose'da geçmez. Kurumsal
+  ayrılık anlatılacaksa isimsiz: "resmi öneriler kendi arasında ikiye
+  bölünmüş durumda; biri üç kutu der, öbürü yarısında keser."
+- **Kesinlik:** "bence", "sanırım", "olabilir", "gibi görünüyor" yok.
+  Hüküm cümlesi: "bu böyle", "olay şu". Geri adım ekleri yok.
+- **Sayılar yuvarlak ve laf arasında:** "yüzde 47,3" değil "neredeyse
+  yarısı"; "5-6 kat" değil "beş kat". Sayı cümlenin yıldızı olmaz.
+- **Düz paragraf:** prose bloklarında başlık, madde işareti, `**bold**`
+  YOK. `title` alanı boş bırakılır (bölüm başlıklarını görsel bloklar taşır).
+- **Ritim:** cümle uzunlukları karışık; üç kelimelik cümle, arkasından
+  uzun dağınık bir cümle. Bağlaçla başlayan cümle serbest ("Ama işte...",
+  "Bir de şu var:"). Parantez içi kuru laf çakma serbest.
+- **AI kalıpları YASAK:** "-maktadır", "günümüzde", "son derece", "sadece
+  X değil aynı zamanda Y", üçlü sıralama, "sonuç olarak/özetle", uzun
+  tire (—). Giriş-gelişme-sonuç kurma; konuya ortasından dal, net hükümle
+  bitir.
+- **Somutluk:** soyut riski gündelik şeyle anlat ("tansiyon hastasına
+  fişek gibi gelir"). Benzetme beklenmedik ama herkesin anlayacağı olsun;
+  kur ve bırak, açıklama.
+- Toplam prose hacmi 500-800 kelime; 2-4 prose bloğuna bölünüp görsellerin
+  arasına serpiştirilir. `subtitle` da aynı seste tek cümledir.
+
+## Adım 3: Bilgi Seçimi (en güçlü bilgiler)
 
 - **confidence sıralaması:** strong > moderate > weak > speculative.
 - Hero istatistikleri ve ana iddialar strong/moderate'ten seçilir.
@@ -35,14 +64,14 @@ Klasörde genellikle şunlar bulunur (hepsi olmayabilir):
 - `myth_busting: true` verileri compareBars item'ında `mythBusting: true` yap.
 - Sayı uydurma; yalnızca kaynaktaki değerleri kullan.
 
-## Adım 3: Blok Kataloğu
+## Adım 4: Blok Kataloğu
 
 `blocks` dizisine şu tiplerden uygun olanları koy (sıra: özet → süreç/mekanizma
 → karşılaştırma → interaktif → mitler → güvenlik → tablo → pratik özet →
 kanıt haritası):
 
 ```js
-{ type: 'prose', title, body: ['**kalın** destekli paragraflar'] }
+{ type: 'prose', body: ['düz paragraflar — title yok, bold yok (bkz. Adım 2)'] }
 { type: 'processStrip', title, subtitle, steps: [{ step, detail }] }        // süreç/zaman şeridi
 { type: 'compareBars', title, subtitle, labels: { a, b },
   items: [{ metric, unit, a: sayı, b: sayı, verdict, confidence, mythBusting? }],
@@ -67,7 +96,7 @@ kanıt haritası):
 ```js
 export const review = {
   slug, title, subtitle, emoji, date: 'YYYY-MM-DD', category: 'gida',
-  tags: [...], readingHint: 'N iddia · M infografik · kanıt dereceli',
+  tags: [...],
   heroStats: [{ value: '2-5', unit: 'yıl', label, confidence }], // 4 adet
   blocks: [...],
 }
@@ -75,7 +104,7 @@ export const review = {
 
 Örnek dosya: `src/data/reviews/konserve-balik.js` — formatın kanonik örneği.
 
-## Adım 4: Kayıt
+## Adım 5: Kayıt
 
 `src/data/reviews/index.js` içine import ekle ve `richReviews` dizisine koy:
 
@@ -87,7 +116,7 @@ export const richReviews = [konserveBalik, yeniSlug]
 Liste sayfası ve `/reviews/[slug]` route'u otomatik alır; başka dosyaya
 dokunma.
 
-## Adım 5: Doğrulama
+## Adım 6: Doğrulama
 
 1. `npx next build` — hata yok.
 2. Preview'da `/reviews/<slug>` aç: hero istatistikleri, grafikler ve
