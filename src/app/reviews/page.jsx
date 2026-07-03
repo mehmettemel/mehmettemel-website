@@ -1,6 +1,7 @@
 import { Container } from '../../components/Container'
 import { ResearchesList } from '../../components/ResearchesList'
 import { getAllPosts } from '../../lib/blog'
+import { richReviewsAsPosts } from '@/data/reviews'
 import { PageHeader } from '../../components/PageHeader'
 
 export const metadata = {
@@ -10,7 +11,10 @@ export const metadata = {
 }
 
 export default function ResearchesIndex() {
-  const posts = getAllPosts()
+  // Zengin (blok tabanlı) analizler + markdown yazıları, tarihe göre
+  const posts = [...richReviewsAsPosts(), ...getAllPosts()].sort(
+    (a, b) => new Date(b.date) - new Date(a.date),
+  )
 
   return (
     <Container>

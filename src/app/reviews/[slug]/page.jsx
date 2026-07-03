@@ -3,14 +3,32 @@ import Link from 'next/link'
 import { Container } from '../../../components/Container'
 import { getPostBySlug, getAllPostSlugs } from '../../../lib/blog'
 import { ResearchContent } from '../../../components/research/ResearchContent'
+import { getRichReview, richReviews } from '@/data/reviews'
+import { ReviewArticle } from '@/components/review-blocks/ReviewArticle'
 
 export async function generateStaticParams() {
   const posts = getAllPostSlugs()
-  return posts.map((post) => ({ slug: post.slug }))
+  return [
+    ...richReviews.map((r) => ({ slug: r.slug })),
+    ...posts.map((post) => ({ slug: post.slug })),
+  ]
 }
 
 export async function generateMetadata({ params }) {
   const { slug } = await params
+  const rich = getRichReview(slug)
+  if (rich) {
+    return {
+      title: rich.title,
+      description: rich.subtitle,
+      openGraph: {
+        title: rich.title,
+        description: rich.subtitle,
+        type: 'article',
+        publishedTime: rich.date,
+      },
+    }
+  }
   const post = await getPostBySlug(slug)
   if (!post) return {}
   return {
@@ -41,6 +59,27 @@ function ArrowLeftIcon(props) {
 
 export default async function BlogPost({ params }) {
   const { slug } = await params
+
+  // Zengin (blok tabanlı) analiz yazısı mı?
+  const rich = getRichReview(slug)
+  if (rich) {
+    return (
+      <Container>
+        <div className="py-8 sm:py-12">
+          <Link
+            href="/reviews"
+            aria-label="Go back to reviews"
+            className="group mb-8 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-all hover:gap-2 hover:text-foreground"
+          >
+            <ArrowLeftIcon className="h-3.5 w-3.5 stroke-current transition-transform group-hover:-translate-x-0.5" />
+            <span>Back</span>
+          </Link>
+          <ReviewArticle review={rich} />
+        </div>
+      </Container>
+    )
+  }
+
   const post = await getPostBySlug(slug)
 
   if (!post) notFound()
