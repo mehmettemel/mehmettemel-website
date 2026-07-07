@@ -1,14 +1,14 @@
 import { Container } from '@/components/Container'
 import { NoteGraph } from '@/components/graph/NoteGraph'
-import { graphTitle, graphSubtitle } from '@/data/graph-notes'
+import { graphTitle, graphSubtitle } from '@/data/food-notes'
 
 export const metadata = {
-  title: 'Graph | Mehmet Temel',
-  description: 'Bağlantılı notlar grafiği.',
+  title: 'Food | Mehmet Temel',
+  description: 'Kendi gıda notlarım, bağlantılı grafik.',
   robots: { index: false, follow: false },
 }
 
-export default function GraphPage() {
+export default function FoodPage() {
   return (
     <Container>
       <div className="mx-auto max-w-5xl py-8 sm:py-12">

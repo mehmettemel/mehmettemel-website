@@ -40,7 +40,7 @@ const listsItems = [
 
 const reviewsItems = [
   { href: '/reviews', label: 'Analizler', emoji: '🔬' },
-  { href: '/reviews/graph', label: 'Graph', emoji: '🕸️' },
+  { href: '/reviews/food', label: 'Food', emoji: '🍎' },
 ]
 
 function NavLink({ href, children }) {
@@ -243,8 +243,8 @@ function MobileNav() {
                   <Link href="/reviews" onClick={closeSheet} className={mobileNavLinkClass}>
                     <span>🔬</span> Reviews
                   </Link>
-                  <Link href="/reviews/graph" onClick={closeSheet} className={mobileNavLinkClass}>
-                    <span>🕸️</span> Graph
+                  <Link href="/reviews/food" onClick={closeSheet} className={mobileNavLinkClass}>
+                    <span>🍎</span> Food
                   </Link>
                   <Link href="/contact" onClick={closeSheet} className={mobileNavLinkClass}>
                     Contact

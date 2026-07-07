@@ -8,7 +8,7 @@ import {
   forceCenter,
   forceCollide,
 } from 'd3-force'
-import { nodes as rawNodes, links as rawLinks } from '@/data/graph-notes'
+import { nodes as rawNodes, links as rawLinks } from '@/data/food-notes'
 
 /* Obsidian-tarzı kuvvet-yönlü not grafiği.
    - d3-force yalnızca koordinat hesaplar; render React/SVG.
