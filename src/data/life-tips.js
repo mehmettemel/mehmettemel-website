@@ -124,6 +124,7 @@ export const tabs = {
           'Sarımsak Ezici.',
           'Buzdolabı, klima vs. gibi soğutma cihazlarının borulamasında bakır değil de alüminyum boru kullanılmışsa o cihazı almayın.',
           'Teflon tava zararlı, demir tava ve çelik tava kullanılmalı. Çelik tava en iyisi. Teflon kullanılıyorsa 2 yıl içinde atılmalı.',
+          'Kaliteli, 26cm, çok katmanlı, bakır çekirdekli, 18-10 bir paslanmaz çelik tava alın ve keyfinize bakın. Pahalıdır, "tavaya bu para verilir mi" demeyin. Evladiyelik yatırımdır.',
           'Yurt dışında da üretimi olan bir firmadan beyaz eşya alacaksanız bayiden yurt dışı üretimi olanı ısrarla isteyin. Beyaz eşya üretimi için tedarik edilen ürünlerin kalitelisi yurt dışındaki komplekse gider, yurt içinde düşük kalite kalır.',
           'Yeni evlenecek veya ev kuran arkadaşlara: evinizi düz beyaza boyayın. Ne koyarsanız yakışır.',
           'Beyaz ışık ne evde ne ofiste asla olmaz. Evde sarı, ofiste günışığı.',

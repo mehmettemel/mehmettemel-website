@@ -260,6 +260,12 @@ export const categories = {
       { text: 'Deniz ürünlerindeki PUFA (çoklu doymamış yağ asitleri)\'lar ağırlıklı olarak uzun zincirli Omega-3 (EPA ve DHA) yağ asitleridir ve hücre zarı sağlığı ile inflamasyonu azaltmak için elzemdir. Tohum yağlarındaki (ayçiçek, mısır) PUFA\'lar ise Omega-6 (Linoleik asit) ağırlıklıdır ve kronik inflamasyonu tetikleyebilir. Omega-3 yağları ısıya ve ışığa çok duyarlıdır; şişelenmiş balık yağlarının rafta okside (acılaşmış/bozulmuş) olma riski çok yüksektir. Konserve veya taze sardalya gibi küçük yağlı balıkları doğrudan yemek, oksidasyon riski olmadan en saf Omega-3\'ü ve güçlü bir antioksidan olan astaksantini almanızı sağlar.', subItems: [] },
     ]
   },
+  'Bakım': {
+    label: 'Bakım',
+    items: [
+      { text: 'Tuzlu denize girmeden önce saçı tatlı su ile nemlendirip hindistan cevizi/ayçiçek/argan yağı ile uçlarına yağ sürmek saçı kırılmalardan korur.', subItems: [] },
+    ]
+  },
   'Hastalıklar': {
     label: 'Hastalıklar',
     items: [

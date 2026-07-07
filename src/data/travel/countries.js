@@ -52,6 +52,7 @@ export const tabs = {
         notes: [
           'Portugal / The Azores.',
           'Funchal.',
+          'Pedemia çorapları al.',
         ],
       },
       {
@@ -61,6 +62,7 @@ export const tabs = {
           'Şehirler: Split, Zadar, Rovinj, Zagreb, Opatija, Makarska.',
           'Adalar: Rab, Brac, Hvar, Lopud, Korcula.',
           'Tercih edilen dönem: Nisan-Mayıs (az turist).',
+          'Plitvice Gölleri – Basamaklı türkuaz göller ve şelaleler; ülkenin en bilinen milli parkı.',
         ],
       },
       {
@@ -86,6 +88,7 @@ export const tabs = {
           'Samos – Karlovasi Köyü – sakin sessiz bir yer.',
           'Semadirekt Adası – Sessiz sakin.',
           'Halkidiki.',
+          'Meteora – Dev kayalıkların tepesine kurulmuş manastırlar; gün doğumu/batımında büyüleyici.',
         ],
       },
       {
@@ -141,6 +144,21 @@ export const tabs = {
           'Livadi bölgesi.',
           'Ksamil.',
           'Durrës.',
+          'Gjirokastër – UNESCO korumalı, taş evleri ve Osmanlı dönemi mimarisiyle "taş şehir".',
+        ],
+      },
+      {
+        name: 'Gürcistan',
+        flag: '🇬🇪',
+        notes: [
+          'Svaneti – Kafkasların eteğinde, ortaçağdan kalma taş kulesi köyleriyle (Uşguli, Mestia) ünlü izole bölge.',
+        ],
+      },
+      {
+        name: 'Norveç',
+        flag: '🇳🇴',
+        notes: [
+          'Lofoten Adaları – Sivri dağlar, balıkçı köyleri ve kutup ışıkları; yazın gece güneşi, kışın aurora için ideal.',
         ],
       },
     ],
@@ -168,6 +186,7 @@ export const tabs = {
           'Fethiye Ölüdeniz Belcekız plajı.',
           'Güzelçamlı Kuşadası – sessiz sakin bir bölge.',
           'Kaş Kalkan.',
+          'Hatay Samandağ Karamağra Hümeyra Plajı – Meydan köyündeki Mantra\'nın hemen arkası.',
         ],
       },
       {
@@ -254,6 +273,7 @@ export const tabs = {
         notes: [
           'Doğa ve yeşil manzaralar için en iyi aylar: Haziran–Eylül.',
           'Temmuz: Naadam Festivali — geleneksel güreş, at yarışı, okçuluk.',
+          'Khövsgöl Gölü – "Moğolistan\'ın mavi incisi"; kuzeyde Rusya sınırına yakın, dünyanın en berrak göllerinden biri.',
         ],
       },
       {
@@ -333,6 +353,8 @@ export const tabs = {
             notes: [
               'Da Nang – Mart-Haziran arası gelinir.',
               'Con Dao.',
+              'Phong Nha – Dünyanın en büyük mağaralarından Son Doong\'un da bulunduğu Phong Nha-Kẻ Bàng Ulusal Parkı.',
+              'Mù Cang Chải – Kuzeybatıda, sonbaharda hasat mevsiminde altın rengine bürünen basamaklı pirinç tarlalarıyla ünlü.',
             ],
           },
         ],
@@ -357,6 +379,8 @@ export const tabs = {
               'Port Barton – El Nido\'dan çok daha az turistik, süper küçük ve büyüleyici.',
               'Panglao, Bohol – Nomadlar için iyi. Ana cadde turistik ama dışı oldukça sakin; güzel plajlar ve kafeler.',
               'Bantayan – Emeklilerin tercih ettiği küçük ada. Motor kiralayıp tüm adayı yarım saatte turlanabiliyor. Adada pek bir şey yok ama restoranlardaki yemekler güzel ve ucuz. Birkaç ay kalıp kafa dinlemek için güzel.',
+              'Batad – Banaue yakınlarında, UNESCO listesindeki 2000 yıllık amfitiyatro şeklindeki pirinç teraslarıyla ünlü, sadece yürüyerek ulaşılan köy.',
+              'Siargao – Sörf başkenti; Cloud 9 dalgası, palmiye ormanları ve rahat ada hayatı.',
             ],
           },
         ],
@@ -468,6 +492,18 @@ export const tabs = {
               'Yogyakarta (Java).',
             ],
           },
+          {
+            title: 'Raja Ampat',
+            notes: [
+              'Batı Papua açıklarında; dünyanın en zengin deniz biyoçeşitliliğine sahip bölgelerden biri, dalış ve şnorkel için birebir.',
+            ],
+          },
+          {
+            title: 'Flores Adası',
+            notes: [
+              'Komodo Ulusal Parkı\'na geçiş kapısı (Labuan Bajo); pembe kumlu plajlar ve yanardağ gölleriyle (Kelimutu) bilinir.',
+            ],
+          },
         ],
       },
       {
@@ -475,6 +511,27 @@ export const tabs = {
         flag: '🇺🇿',
         notes: [
           'Karayolu ile ülkeye girmek çok sıkıntılı, havayolu seçeneğini tercih et.',
+        ],
+      },
+      {
+        name: 'Yemen',
+        flag: '🇾🇪',
+        notes: [
+          'Sokotra – Dünya üzerinde başka hiçbir yerde olmayan ejder kanı ağaçları ve uzaylı manzarasıyla bilinen ada; "Hint Okyanusu\'nun Galapagos\'u".',
+        ],
+      },
+      {
+        name: 'Nepal',
+        flag: '🇳🇵',
+        notes: [
+          'Tsum Vadisi – Manaslu bölgesinde, Tibet Budizmi kültürünü koruyan, henüz kalabalıklaşmamış "gizli vadi".',
+        ],
+      },
+      {
+        name: 'Pakistan',
+        flag: '🇵🇰',
+        notes: [
+          'Slow Valley.',
         ],
       },
     ],
@@ -541,7 +598,7 @@ export const tabs = {
         name: 'Namibya',
         flag: '🇳🇦',
         notes: [
-          'Listede yer almış, keşfedilmeyi bekliyor.',
+          'Damaraland – Kızıl kayalık dağlar, kaya resimleri (Twyfelfontein) ve çölde yaşayan filler; ülkenin en izole bölgelerinden.',
         ],
       },
       {
@@ -556,6 +613,13 @@ export const tabs = {
         flag: '🇧🇼',
         notes: [
           'Listede yer almış, keşfedilmeyi bekliyor.',
+        ],
+      },
+      {
+        name: 'São Tomé & Príncipe',
+        flag: '🇸🇹',
+        notes: [
+          'Batı Afrika kıyısında, ekvator hattı üzerinde ıssız ada ülkesi; yağmur ormanı, kakao çiftlikleri ve el değmemiş plajlarıyla bilinir.',
         ],
       },
     ],
@@ -580,6 +644,13 @@ export const tabs = {
           'The Grand Teton, Yellowstone, The Redwoods.',
         ],
       },
+      {
+        name: 'Grönland',
+        flag: '🇬🇱',
+        notes: [
+          'Kangerlussuaq – Buzul, tundra ve kutup ışıkları için giriş noktası; ülkenin ana havalimanı burada.',
+        ],
+      },
     ],
   },
   southAmerica: {
@@ -598,6 +669,7 @@ export const tabs = {
         notes: [
           'Machu Picchu – Büyüleyici.',
           'Peru genel olarak çok güzel.',
+          'Choquequirao – Machu Picchu\'nun "kayıp kız kardeşi"; kalabalıktan uzak, çok günlük zorlu bir trekking gerektiriyor.',
         ],
       },
       {
@@ -642,6 +714,7 @@ export const tabs = {
               'Curitiba.',
               'Itacaré (Bahia) – Cennet gibi.',
               'Buzios, Paraty, Florianópolis, Ubatuba, Ilha Bela, São Sebastião.',
+              'Lençóis Maranhenses – Beyaz kum tepeleri arasında yağmur suyuyla oluşan turkuaz göletler; en iyi Haziran-Eylül arası (göletler dolu).',
             ],
           },
           {
@@ -678,6 +751,7 @@ export const tabs = {
         flag: '🇨🇱',
         notes: [
           'Cochamó.',
+          'Aysén Bölgesi – Patagonya\'nın ıssız kuzeyi; buzullar, fiyortlar ve Carretera Austral yol gezisi için birebir.',
         ],
       },
       {
@@ -714,6 +788,13 @@ export const tabs = {
           'Santa Domingo ve La Romana çok beğenilmiş.',
           'Kakao, kahve, tütün – yüksek kalitede ürünler ve yaşam keyfi.',
           'Santa Domingo ve La Romana\'yı da çok sevdim ama Punta Cana bambaşka bir yer :) –Ahmet Çığşar',
+        ],
+      },
+      {
+        name: 'Fiji',
+        flag: '🇫🇯',
+        notes: [
+          'Taveuni – "Bahçeler Adası"; yağmur ormanı, mercan resifleri ve şelaleleriyle Fiji\'nin en yeşil adalarından.',
         ],
       },
     ],
