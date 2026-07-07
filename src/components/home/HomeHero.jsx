@@ -7,8 +7,7 @@ export function HomeHero() {
 
       <div className="mx-auto max-w-md text-xs text-muted-foreground">
         <p className="text-center leading-relaxed">
-          dijital koleksiyonum. Site üzerinde her şeyin otomasyonla organize
-          edilmesi üzerine denemeler yapıyorum.
+          Overthinking Omnivore
         </p>
       </div>
     </div>
