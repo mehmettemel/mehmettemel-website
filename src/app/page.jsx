@@ -1,9 +1,8 @@
 import { Container } from '../components/Container'
 import { getAllPosts } from '../lib/blog'
-import { categories as quotesData } from '../data/personal/quotes'
 import { HomeHero } from '../components/home/HomeHero'
 import { HomeResearches } from '../components/home/HomeResearches'
-import { RecentDiscoveries } from '../components/home/RecentDiscoveries'
+import { NoteGraph } from '../components/graph/NoteGraph'
 import { MobileHome } from '../components/home/MobileHome'
 
 // SEO metadata for the home page
@@ -46,11 +45,6 @@ export default function Home() {
   const allPosts = getAllPosts()
   const recentPosts = allPosts.slice(0, 3)
 
-  // Kısa notları filtrele (randomize client-side'da yapılacak)
-  const shortQuotes = quotesData['Quotes'].items
-    .filter((text) => text.length <= 80)
-    .map((text, i) => ({ id: i, text }))
-
   return (
     <Container>
       {/* Mobile: Rastgele-style random content viewer */}
@@ -61,7 +55,7 @@ export default function Home() {
         <HomeHero />
         <div className="space-y-12 sm:space-y-16">
           <HomeResearches posts={recentPosts} />
-          <RecentDiscoveries notes={shortQuotes} />
+          <NoteGraph heightClass="h-[60vh]" />
         </div>
       </div>
     </Container>

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useRef, useState, useCallback } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import {
   forceSimulation,
   forceLink,
@@ -15,7 +16,7 @@ import { nodes as rawNodes, links as rawLinks } from '@/data/food-notes'
    - Tek renk, minimal. Bağlantı derecesi noktanın boyutunu belirler.
    - Hover: komşuları vurgula. Tık: yan panelde notu aç. */
 
-export function NoteGraph() {
+export function NoteGraph({ heightClass = 'h-[70vh]' }) {
   const wrapRef = useRef(null)
   const simRef = useRef(null)
   const [size, setSize] = useState({ w: 0, h: 0 })
@@ -123,7 +124,7 @@ export function NoteGraph() {
     <div className="relative">
       <div
         ref={wrapRef}
-        className="relative h-[70vh] min-h-[440px] w-full overflow-hidden rounded-xl border border-border/60 bg-card/40"
+        className={`relative ${heightClass} min-h-[440px] w-full overflow-hidden`}
       >
         <svg width={size.w} height={size.h} className="block select-none">
           {/* bağlantılar */}
@@ -214,43 +215,51 @@ export function NoteGraph() {
         )}
       </div>
 
-      {/* açılan not paneli */}
-      {active && (
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 flex w-full max-w-sm items-start p-3 sm:p-4">
-          <div className="pointer-events-auto max-h-full w-full overflow-y-auto rounded-xl border border-border bg-card p-5 shadow-lg">
-            <div className="mb-3 flex items-start justify-between gap-3">
-              <h3 className="text-lg font-semibold text-foreground">
-                {active.title}
-              </h3>
-              <button
-                onClick={() => setActive(null)}
-                className="rounded-md px-2 py-0.5 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-                aria-label="Kapat"
-              >
-                ✕
-              </button>
-            </div>
-            {active.tags?.length > 0 && (
-              <div className="mb-3 flex flex-wrap gap-1.5">
-                {active.tags.map((t) => (
-                  <span
-                    key={t}
-                    className="rounded-full bg-secondary px-2 py-0.5 text-[10px] uppercase tracking-wide text-muted-foreground"
-                  >
-                    {t}
-                  </span>
-                ))}
+      {/* açılan not paneli — sonner toast gibi alt-ortadan yay ile çıkar */}
+      <AnimatePresence>
+        {active && (
+          <div className="pointer-events-none fixed inset-x-0 bottom-4 z-50 flex justify-center px-4 sm:bottom-6">
+            <motion.div
+              initial={{ opacity: 0, y: 28, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 28, scale: 0.97 }}
+              transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+              className="pointer-events-auto max-h-[55vh] w-full max-w-md overflow-y-auto rounded-2xl border border-border bg-card p-5 shadow-2xl"
+            >
+              <div className="mb-3 flex items-start justify-between gap-3">
+                <h3 className="text-lg font-semibold text-foreground">
+                  {active.title}
+                </h3>
+                <button
+                  onClick={() => setActive(null)}
+                  className="-mr-1 rounded-md px-2 py-0.5 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                  aria-label="Kapat"
+                >
+                  ✕
+                </button>
               </div>
-            )}
-            <p className="text-sm leading-relaxed text-foreground/85">
-              {active.body}
-            </p>
+              {active.tags?.length > 0 && (
+                <div className="mb-3 flex flex-wrap gap-1.5">
+                  {active.tags.map((t) => (
+                    <span
+                      key={t}
+                      className="rounded-full bg-secondary px-2 py-0.5 text-[10px] uppercase tracking-wide text-muted-foreground"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              )}
+              <p className="text-sm leading-relaxed text-foreground/85">
+                {active.body}
+              </p>
 
-            {/* bağlantılı notlar */}
-            <GraphLinks node={active} graph={graph} onOpen={setActive} />
+              {/* bağlantılı notlar */}
+              <GraphLinks node={active} graph={graph} onOpen={setActive} />
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </div>
   )
 }
