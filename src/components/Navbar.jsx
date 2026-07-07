@@ -38,6 +38,11 @@ const listsItems = [
   { href: '/lists/resources', label: 'Resources', emoji: '🔗' },
 ]
 
+const reviewsItems = [
+  { href: '/reviews', label: 'Analizler', emoji: '🔬' },
+  { href: '/reviews/graph', label: 'Graph', emoji: '🕸️' },
+]
+
 function NavLink({ href, children }) {
   return (
     <Link
@@ -146,7 +151,26 @@ function DesktopNav() {
         )}
 
         <NavigationMenuItem>
-          <NavLink href="/reviews">Reviews</NavLink>
+          <NavigationMenuTrigger className="bg-transparent px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-transparent hover:text-foreground focus:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-foreground">
+            Reviews
+          </NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <ul className="grid w-[200px] gap-1 p-2">
+              {reviewsItems.map((item) => (
+                <li key={item.href}>
+                  <NavigationMenuLink asChild>
+                    <Link
+                      href={item.href}
+                      className="flex items-center gap-2 rounded-md px-3 py-2.5 text-sm transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset active:bg-secondary/80"
+                    >
+                      <span>{item.emoji}</span>
+                      <span>{item.label}</span>
+                    </Link>
+                  </NavigationMenuLink>
+                </li>
+              ))}
+            </ul>
+          </NavigationMenuContent>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
@@ -217,7 +241,10 @@ function MobileNav() {
                     </Link>
                   )}
                   <Link href="/reviews" onClick={closeSheet} className={mobileNavLinkClass}>
-                    Reviews
+                    <span>🔬</span> Reviews
+                  </Link>
+                  <Link href="/reviews/graph" onClick={closeSheet} className={mobileNavLinkClass}>
+                    <span>🕸️</span> Graph
                   </Link>
                   <Link href="/contact" onClick={closeSheet} className={mobileNavLinkClass}>
                     Contact
