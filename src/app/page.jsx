@@ -1,7 +1,5 @@
 import { Container } from '../components/Container'
-import { getAllPosts } from '../lib/blog'
 import { HomeHero } from '../components/home/HomeHero'
-import { HomeResearches } from '../components/home/HomeResearches'
 import { NoteGraph } from '../components/graph/NoteGraph'
 import { MobileHome } from '../components/home/MobileHome'
 
@@ -42,9 +40,6 @@ export const metadata = {
 }
 
 export default function Home() {
-  const allPosts = getAllPosts()
-  const recentPosts = allPosts.slice(0, 3)
-
   return (
     <Container>
       {/* Mobile: Rastgele-style random content viewer */}
@@ -54,7 +49,6 @@ export default function Home() {
       <div className="mx-auto hidden max-w-7xl py-8 md:block sm:py-12">
         <HomeHero />
         <div className="space-y-12 sm:space-y-16">
-          <HomeResearches posts={recentPosts} />
           <NoteGraph heightClass="h-[60vh]" />
         </div>
       </div>

@@ -2,7 +2,6 @@
 
 import { useState, useMemo, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
-import Link from 'next/link'
 import { KeyRound, ChevronLeft, ChevronRight } from 'lucide-react'
 import { LoginDialog } from '../auth/LoginDialog'
 import { categories as quotesData } from '@/data/personal/quotes'
@@ -22,7 +21,6 @@ const ALL_SOURCES = [
   { id: 'toplum', label: 'Toplum', data: toplumData },
   { id: 'quotes', label: 'Quotes', data: quotesData },
   { id: 'trivia', label: 'Trivia', data: triviaData },
-  { id: 'incelemeler', label: 'İncelemeler', data: null },
   { id: 'ingilizce', label: 'İngilizce', data: null },
 ]
 
@@ -58,9 +56,7 @@ export function MobileHome() {
   const [checking, setChecking] = useState(true)
   const [activeTab, setActiveTab] = useState('all')
   const [currentNote, setCurrentNote] = useState(null)
-  const [incelemeItem, setIncelemeItem] = useState(null)
   const [englishWord, setEnglishWord] = useState(null)
-  const [loading, setLoading] = useState(false)
   const [showLeftArrow, setShowLeftArrow] = useState(false)
   const [showRightArrow, setShowRightArrow] = useState(false)
   const scrollRef = useRef(null)
@@ -105,10 +101,6 @@ export function MobileHome() {
   }
 
   const handleRandom = () => {
-    if (activeTab === 'incelemeler') {
-      getRandomInceleme()
-      return
-    }
     if (activeTab === 'ingilizce') {
       getRandomEnglish()
       return
@@ -118,30 +110,11 @@ export function MobileHome() {
       const idx = Math.floor(Math.random() * items.length)
       setCurrentNote(items[idx])
     }
-    setIncelemeItem(null)
     setEnglishWord(null)
-  }
-
-  const getRandomInceleme = async () => {
-    setLoading(true)
-    setCurrentNote(null)
-    setEnglishWord(null)
-    try {
-      const res = await fetch('/api/rastgele')
-      if (res.ok) {
-        const data = await res.json()
-        setIncelemeItem(data.item)
-      }
-    } catch (err) {
-      console.error(err)
-    } finally {
-      setLoading(false)
-    }
   }
 
   const getRandomEnglish = () => {
     setCurrentNote(null)
-    setIncelemeItem(null)
     const idx = Math.floor(Math.random() * allEnglishWords.length)
     setEnglishWord(allEnglishWords[idx])
   }
@@ -149,7 +122,6 @@ export function MobileHome() {
   const handleTabChange = (tabId) => {
     setActiveTab(tabId)
     setCurrentNote(null)
-    setIncelemeItem(null)
     setEnglishWord(null)
   }
 
@@ -167,10 +139,10 @@ export function MobileHome() {
 
   const visibleTabs = isAuthenticated
     ? SOURCES
-    : SOURCES.filter((s) => s.id === 'incelemeler' || s.id === 'ingilizce')
+    : SOURCES.filter((s) => s.id === 'ingilizce')
 
-  const showPersonalNote = activeTab !== 'incelemeler' && activeTab !== 'ingilizce'
-  const hasContent = currentNote || incelemeItem || englishWord || loading
+  const showPersonalNote = activeTab !== 'ingilizce'
+  const hasContent = currentNote || englishWord
 
   const randomButton = typeof document !== 'undefined' && createPortal(
     <div
@@ -190,10 +162,9 @@ export function MobileHome() {
     >
       <button
         onClick={handleRandom}
-        disabled={loading}
-        className="w-full rounded-full bg-primary py-3 text-sm font-medium text-primary-foreground shadow-md transition-all active:scale-95 disabled:opacity-50"
+        className="w-full rounded-full bg-primary py-3 text-sm font-medium text-primary-foreground shadow-md transition-all active:scale-95"
       >
-        {loading ? '...' : 'Rastgele'}
+        Rastgele
       </button>
     </div>,
     document.body,
@@ -290,36 +261,6 @@ export function MobileHome() {
                     ))}
                   </ul>
                 )}
-              </>
-            )}
-
-            {/* Incelemeler */}
-            {activeTab === 'incelemeler' && loading && (
-              <div className="animate-pulse space-y-3">
-                <div className="h-3 w-24 rounded bg-muted"></div>
-                <div className="h-5 w-3/4 rounded bg-muted"></div>
-                <div className="h-4 w-full rounded bg-muted"></div>
-                <div className="h-4 w-5/6 rounded bg-muted"></div>
-              </div>
-            )}
-
-            {activeTab === 'incelemeler' && !loading && incelemeItem && (
-              <>
-                <div className="mb-1 text-xs text-muted-foreground">
-                  {incelemeItem.author}
-                </div>
-                <Link
-                  href={`/reviews/${incelemeItem.slug}`}
-                  className="mb-3 block text-base font-semibold text-foreground hover:opacity-70"
-                >
-                  {incelemeItem.bookTitle}
-                </Link>
-                <h3 className="mb-2 text-sm font-medium text-foreground">
-                  {incelemeItem.noteTitle}
-                </h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  {incelemeItem.noteContent}
-                </p>
               </>
             )}
 

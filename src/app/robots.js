@@ -3,9 +3,10 @@ export default function robots() {
     rules: [
       {
         userAgent: '*',
-        allow: ['/', '/reviews', '/reviews/'],
+        allow: ['/'],
         disallow: [
           '/lists/',
+          '/food/',
           '/bu-hafta/',
           '/contact/',
           '/private/',

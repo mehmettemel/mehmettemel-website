@@ -13,6 +13,7 @@ const skills = [
   { cmd: '/not', desc: 'Not / alıntı ekle' },
   { cmd: '/e', desc: 'Entrepreneur notu' },
   { cmd: '/en', desc: 'İngilizce kelime' },
+  { cmd: '/food', desc: 'Food notu ekle' },
   { cmd: '/w2b', desc: "W2B'ye ekle" },
   { cmd: '/life-tips', desc: 'Life Tips ipucu' },
   { cmd: '/video', desc: 'Video analizi' },

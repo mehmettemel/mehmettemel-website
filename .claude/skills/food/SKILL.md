@@ -1,13 +1,13 @@
 ---
 name: food
-description: Food notlar grafiğine (Obsidian-tarzı /reviews/food) yeni gıda notu ekler. /food komutu ile tetiklenir. Notu analiz edip src/data/food-notes.js dosyasına bir node olarak ekler ve mevcut notlarla anlamsal ilişki kurup links'e bağlar.
+description: Food notlar grafiğine (Obsidian-tarzı /food) yeni gıda notu ekler. /food komutu ile tetiklenir. Notu analiz edip src/data/food-notes.js dosyasına bir node olarak ekler ve mevcut notlarla anlamsal ilişki kurup links'e bağlar.
 ---
 
 # Food Not Ekle
 
 Kullanıcı `/food` komutu ile bir gıda notu verdiğinde, notu `src/data/food-notes.js`
 dosyasına bir **node** olarak ekler ve **mevcut notlarla anlamsal olarak
-ilişkilendirip** `links`'e bağlar. Sayfa: `/reviews/food` (Obsidian-tarzı
+ilişkilendirip** `links`'e bağlar. Sayfa: `/food` (Obsidian-tarzı
 kuvvet-yönlü grafik). Skill YALNIZCA veri dosyasını düzenler; bileşene dokunmaz.
 
 ## Veri Yapısı

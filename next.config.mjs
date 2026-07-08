@@ -12,8 +12,6 @@ const nextConfig = {
   async redirects() {
     return [
       { source: '/iletisim', destination: '/contact', permanent: true },
-      { source: '/incelemeler', destination: '/reviews', permanent: true },
-      { source: '/incelemeler/:path*', destination: '/reviews/:path*', permanent: true },
       // Turkish list slugs → English
       { source: '/listeler/tarif', destination: '/lists/recipes', permanent: true },
       { source: '/listeler/ingilizce', destination: '/lists/english', permanent: true },
