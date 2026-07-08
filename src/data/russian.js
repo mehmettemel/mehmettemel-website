@@ -150,6 +150,9 @@ export const russianPhrases = [
   { id: 50,  tab: 'kafe', russian: 'завтрак',    pronunciation: 'zavtrak',   turkish: 'kahvaltı',       english: 'breakfast' },
   { id: 51,  tab: 'kafe', russian: 'обед',       pronunciation: 'abyed',     turkish: 'öğle yemeği',    english: 'lunch' },
   { id: 52,  tab: 'kafe', russian: 'ужин',       pronunciation: 'ujin',      turkish: 'akşam yemeği',   english: 'dinner' },
+  { id: 400, tab: 'kafe', russian: 'Наличные',                     pronunciation: 'Nalichnıye',                       turkish: 'Nakit',                               english: 'Cash' },
+  { id: 401, tab: 'kafe', russian: 'Какое самое популярное блюдо?', pronunciation: 'Kakoye samaye papulyarnaye blyuda?', turkish: 'En popüler yemek hangisi?',           english: 'What is the most popular dish?' },
+  { id: 402, tab: 'kafe', russian: 'Я не голодный',                pronunciation: 'Ya ne galodnıy',                  turkish: 'Aç değilim',                          english: "I'm not hungry" },
 
   // ===== SEYAHAT =====
   { id: 6,   tab: 'seyahat', russian: 'Где находится...?',         pronunciation: 'Gde nahoditsya...?',              turkish: '... nerede?',                         english: 'Where is...?' },
@@ -171,6 +174,7 @@ export const russianPhrases = [
   { id: 3,   tab: 'temel', russian: 'Повторите, пожалуйста',     pronunciation: 'Paftarite, pajalusta',            turkish: 'Lütfen tekrar edin',                  english: 'Please repeat' },
   { id: 9,   tab: 'temel', russian: 'Сколько стоит?',            pronunciation: 'Skolka stoit?',                   turkish: 'Bu ne kadar?',                        english: 'How much does it cost?' },
   { id: 10,  tab: 'temel', russian: 'Помогите!',                 pronunciation: 'Pamagite!',                       turkish: 'İmdat!',                              english: 'Help!' },
+  { id: 403, tab: 'temel', russian: 'Извините',                  pronunciation: 'Izvinite',                        turkish: 'Affedersiniz / Pardon',               english: 'Excuse me / Sorry' },
   { id: 100, tab: 'temel', russian: 'Вы можете мне помочь?',     pronunciation: 'Vı mojete mnye pamoch?',          turkish: 'Bana yardım edebilir misiniz?',       english: 'Can you help me?' },
   { id: 101, tab: 'temel', russian: 'Что это за место?',         pronunciation: 'Shto eta za myesta?',             turkish: 'Burası neresi?',                      english: 'What is this place?' },
   { id: 103, tab: 'temel', russian: 'Что это?',                  pronunciation: 'Shto eta?',                       turkish: 'Bu ne?',                              english: 'What is this?' },
