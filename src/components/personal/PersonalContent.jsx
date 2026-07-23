@@ -234,16 +234,17 @@ export function PersonalContent({ categories, title, hideHeading = false }) {
             )}
           </div>
         ) : (
-          /* All notes view - fluid grid */
-          <div className="grid w-full grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-4 xl:grid-cols-5">
+          /* All notes view - fluid grid; hovering a card dims/blurs siblings */
+          <div className="grid w-full grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-4 xl:grid-cols-5 [&:has(.note-card:hover)_.note-card:not(:hover)]:opacity-30 [&:has(.note-card:hover)_.note-card:not(:hover)]:blur-[1.5px]">
             {filteredNotes.map((note, index) => {
               const text = getItemText(note.content)
               const subItems = typeof note.content === 'string' ? [] : note.content.subItems || []
+              const isLong = text.length > 400 || subItems.length > 3
               return (
                 <button
                   key={index}
                   onClick={() => setModalNote(note)}
-                  className="group relative rounded-lg border border-border bg-card p-3 text-left transition-colors hover:border-foreground/20"
+                  className="note-card group relative rounded-lg border border-border bg-card p-3 text-left transition-all duration-200 hover:z-30 hover:border-foreground/20"
                 >
                   {selectedCategory === 'all' && (
                     <div className="mb-1 truncate text-[10px] font-semibold text-muted-foreground">
@@ -258,22 +259,31 @@ export function PersonalContent({ categories, title, hideHeading = false }) {
                       +{subItems.length} alt not
                     </div>
                   )}
-                  {/* Hover preview - full text */}
-                  <div className="pointer-events-none invisible absolute inset-x-0 top-0 z-20 max-h-80 overflow-hidden rounded-lg border border-border bg-card p-3 opacity-0 shadow-xl transition-opacity duration-150 group-hover:visible group-hover:opacity-100">
-                    {selectedCategory === 'all' && (
-                      <div className="mb-1 text-[10px] font-semibold text-muted-foreground">
-                        {note.category}
+                  {/* Hover preview - full text, animated pop-over */}
+                  <div className="pointer-events-none invisible absolute inset-x-0 top-0 z-20 max-h-80 origin-top scale-95 overflow-hidden rounded-lg border border-foreground/15 bg-card opacity-0 shadow-2xl ring-1 ring-black/20 transition-all duration-200 ease-out group-hover:visible group-hover:scale-100 group-hover:opacity-100">
+                    <div className="max-h-80 overflow-hidden p-3">
+                      {selectedCategory === 'all' && (
+                        <div className="mb-1 text-[10px] font-semibold text-muted-foreground">
+                          {note.category}
+                        </div>
+                      )}
+                      <p className="text-xs font-normal leading-relaxed text-foreground">
+                        {text}
+                      </p>
+                      {subItems.length > 0 && (
+                        <ul className="mt-1 ml-3 space-y-0.5">
+                          {subItems.map((sub, i) => (
+                            <li key={i} className="text-xs text-muted-foreground">• {sub}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                    {isLong && (
+                      <div className="absolute inset-x-0 bottom-0 flex h-14 items-end justify-center bg-gradient-to-t from-card via-card/80 to-transparent pb-2">
+                        <span className="text-[10px] font-medium text-muted-foreground">
+                          Tamamı için tıkla
+                        </span>
                       </div>
-                    )}
-                    <p className="text-xs font-normal leading-relaxed text-foreground">
-                      {text}
-                    </p>
-                    {subItems.length > 0 && (
-                      <ul className="mt-1 ml-3 space-y-0.5">
-                        {subItems.map((sub, i) => (
-                          <li key={i} className="text-xs text-muted-foreground">• {sub}</li>
-                        ))}
-                      </ul>
                     )}
                   </div>
                 </button>

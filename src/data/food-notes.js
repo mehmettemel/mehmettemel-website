@@ -32,6 +32,12 @@ export const nodes = [
     tags: ['bamya', 'limon', 'sebze'],
     body: 'Bamya pişirirken salgı istemiyorsan başlangıçta limon suyu eklemelisin. Bamya ısındıkça, hücre duvarlarındaki pektinler parçalanır ve suyla birleşerek kolayca çözünür. Bu da yemeğin suyuna o koyu, lifli ve uzayan kıvamı verir. Limon suyundaki sitrik asit, ortamın pH seviyesini düşürür. Asidik ortamda pektin molekülleri birbirine daha sıkı bağlanır ve suda çözünme kabiliyetlerini kaybederler. Hücre yapısı bütünlüğünü koruduğu için pektin suya salınmaz ve o jelimsi salgı oluşmaz.',
   },
+  {
+    id: 'japon-restoran-uzmanlasma',
+    title: 'Japon Restoran Uzmanlaşması',
+    tags: ['japon', 'restoran', 'kültür'],
+    body: 'Japon yemek kültüründe restoranlar tek bir alanda uzmanlaşma eğilimindedir. En iyi suşiyi yemek için sadece suşi yapan yere, en iyi rameni yemek için sadece ramen yapan yere gitmeniz lazım.',
+  },
 ]
 
 export const links = [
