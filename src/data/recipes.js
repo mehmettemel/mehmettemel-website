@@ -129,6 +129,12 @@ export const recipes = [
     ingredients: '~450g patates, eşit boyutlarda doğranmış\nAvokado yağı spreyi\nTuz\nKarabiber',
     instructions: '1. Air fryer\'ı 200°C\'ye (400°F) ön ısıtmaya alın.\n2. Patatesleri yıkayın ve eşit boyutlarda parçalara doğrayın (eşit pişmesi için yaklaşık 2.5 cm parçalar).\n3. Patatesleri geniş bir kaseye alın. Hafifçe avokado yağı spreyi sıkın, tuz ve karabiber ekleyin. Tüm parçalar eşit kaplanana kadar iyice karıştırın.\n4. Patatesleri air fryer sepetine tek katman halinde yerleştirin (üst üste koymayın).\n5. 200°C\'de toplam 20 dakika pişirin.\n6. Yarısında (10. dakikada) sepeti sallayın veya patatesleri çevirin, böylece eşit kızarır.\n7. Dışı altın rengi ve çıtır, içi yumuşak olunca çıkarın.',
   },
+  {
+    id: 21,
+    name: 'Zeytinyağlı Bal Limonatası (1 Litre)',
+    ingredients: '1 tane tam limon (mumsuz olsun)\n1 litre soğuk su\n1 çay kaşığı zeytinyağı\n4 çorba kaşığı bal (damak zevkine göre 4-6 kaşık arası ayarlanabilir)\nBuz (servis için)',
+    instructions: '1. Limonu çok iyi yıkayın. Mumsuz olup olmadığını kontrol etmek için tırnağınızı kabuğuna sürtün. Beyaz mum çıkıyorsa kullanmayın.\n2. Mutfak robotunun / blenderın haznesine hepsini birden koyun: bütün limon (dilimlemeden, olduğu gibi), 1 litre soğuk su, 1 çay kaşığı zeytinyağı, 4 çorba kaşığı bal.\n3. 1-2 dakika blenderdan geçirin. Limon tamamen parçalanacak, kabuk aroması + suyu + her şey bir arada karışacak.\n4. Hazır olan limonatayı süzgeçten süzerek buz dolu bir sürahiye boşaltın.\n5. Buz gibi için.\n\nNot: Renk boğuk sarı / mat sarımsı olur (normal, blenderdan geçtiği için). Asla acı tadı gelmiyor. Zeytinyağı acı vermiyor, tam tersine yumuşaklık ve lezzet katıyor. Peynir suyu, yoğurt suyu vs. eklemeye gerek yok, orijinal tarif bu şekilde. Çok ferah, sağlıklı ve 1 dakikada hazır oluyor.',
+  },
 ]
 
 /**

@@ -108,6 +108,7 @@ export const categories = {
       'Bizi güçlü yapan yediklerimiz değil, hazmettiklerimizdir; bizi zengin yapan kazandıklarımız değil, muhafaza ettiklerimizdir; bizi bilgili yapan okuduklarımız değil, kafamıza yerleştirdiklerimizdir.',
       'İnsan, doğası gereği zora düşmedikçe yeteneklerini sonuna kadar kullanmaz. — Sun Tzu',
       'If you pray for flowers, don\'t wonder why it rains',
+      'Airport have seen more sincere kisses than any wedding halls, and the walls of hospitals have heard prayers than any sacred place. Because love felt most when it\'s leaving',
       'We suffer more in imagination than in reality',
       'Sunsets are proof that there is beauty in endings',
       'Nostalgia is the most beautiful form of pain',

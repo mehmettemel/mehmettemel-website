@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { Shuffle, Grid3x3, ChevronLeft, ChevronRight } from 'lucide-react'
+import { createPortal } from 'react-dom'
+import { Shuffle, Grid3x3, ChevronLeft, ChevronRight, X } from 'lucide-react'
 
 function getItemText(item) {
   return typeof item === 'string' ? item : item.text
@@ -14,6 +15,7 @@ export function PersonalContent({ categories, title, hideHeading = false }) {
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [showLeftArrow, setShowLeftArrow] = useState(false)
   const [showRightArrow, setShowRightArrow] = useState(false)
+  const [modalNote, setModalNote] = useState(null)
   const scrollRef = useRef(null)
 
   const categoryKeys = Object.keys(categories)
@@ -54,6 +56,17 @@ export function PersonalContent({ categories, title, hideHeading = false }) {
     window.addEventListener('resize', updateArrows)
     return () => window.removeEventListener('resize', updateArrows)
   }, [showRandom])
+
+  useEffect(() => {
+    if (!modalNote) return
+    const onKey = (e) => e.key === 'Escape' && setModalNote(null)
+    document.addEventListener('keydown', onKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
+    }
+  }, [modalNote])
 
   const scroll = (dir) => {
     const el = scrollRef.current
@@ -221,46 +234,95 @@ export function PersonalContent({ categories, title, hideHeading = false }) {
             )}
           </div>
         ) : (
-          /* All notes view */
-          <div className="mx-auto w-full max-w-md space-y-0">
-            {filteredNotes.map((note, index) => (
-              <div
-                key={index}
-                className="border-b border-border py-4 last:border-0"
-              >
-                {selectedCategory === 'all' && (
-                  <div className="mb-1 text-xs font-semibold text-muted-foreground">
-                    {note.category}
-                  </div>
-                )}
-                {typeof note.content === 'string' ? (
-                  <p className="text-xs font-normal text-foreground leading-relaxed">
-                    {note.content}
+          /* All notes view - fluid grid */
+          <div className="grid w-full grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-4 xl:grid-cols-5">
+            {filteredNotes.map((note, index) => {
+              const text = getItemText(note.content)
+              const subItems = typeof note.content === 'string' ? [] : note.content.subItems || []
+              return (
+                <button
+                  key={index}
+                  onClick={() => setModalNote(note)}
+                  className="group relative rounded-lg border border-border bg-card p-3 text-left transition-colors hover:border-foreground/20"
+                >
+                  {selectedCategory === 'all' && (
+                    <div className="mb-1 truncate text-[10px] font-semibold text-muted-foreground">
+                      {note.category}
+                    </div>
+                  )}
+                  <p className="line-clamp-4 text-xs font-normal leading-relaxed text-foreground">
+                    {text}
                   </p>
-                ) : (
-                  <div>
-                    <p className="text-xs font-normal text-foreground leading-relaxed">
-                      {note.content.text}
+                  {subItems.length > 0 && (
+                    <div className="mt-1 text-[10px] text-muted-foreground">
+                      +{subItems.length} alt not
+                    </div>
+                  )}
+                  {/* Hover preview - full text */}
+                  <div className="pointer-events-none invisible absolute inset-x-0 top-0 z-20 max-h-80 overflow-hidden rounded-lg border border-border bg-card p-3 opacity-0 shadow-xl transition-opacity duration-150 group-hover:visible group-hover:opacity-100">
+                    {selectedCategory === 'all' && (
+                      <div className="mb-1 text-[10px] font-semibold text-muted-foreground">
+                        {note.category}
+                      </div>
+                    )}
+                    <p className="text-xs font-normal leading-relaxed text-foreground">
+                      {text}
                     </p>
-                    {note.content.subItems?.length > 0 && (
-                      <ul className="mt-1 ml-4 space-y-0.5">
-                        {note.content.subItems.map((sub, i) => (
+                    {subItems.length > 0 && (
+                      <ul className="mt-1 ml-3 space-y-0.5">
+                        {subItems.map((sub, i) => (
                           <li key={i} className="text-xs text-muted-foreground">• {sub}</li>
                         ))}
                       </ul>
                     )}
                   </div>
-                )}
-              </div>
-            ))}
+                </button>
+              )
+            })}
             {filteredNotes.length === 0 && (
-              <div className="py-12 text-center">
+              <div className="col-span-full py-12 text-center">
                 <p className="text-xs text-muted-foreground">Bu kategoride not yok</p>
               </div>
             )}
           </div>
         )}
       </div>
+
+      {/* Full text modal - portal to body to escape transformed ancestors */}
+      {modalNote && createPortal(
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          onClick={() => setModalNote(null)}
+        >
+          <div className="absolute inset-0 bg-black/60" />
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative z-10 max-h-[80vh] w-full max-w-lg overflow-y-auto rounded-xl border border-border bg-card p-6 shadow-2xl"
+          >
+            <button
+              onClick={() => setModalNote(null)}
+              className="absolute right-3 top-3 rounded-full p-1 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+              aria-label="Kapat"
+            >
+              <X className="h-4 w-4" />
+            </button>
+            <div className="mb-3 pr-6 text-xs font-semibold text-muted-foreground">
+              {modalNote.category}
+            </div>
+            <p className="whitespace-pre-line text-sm font-normal leading-relaxed text-foreground">
+              {getItemText(modalNote.content)}
+            </p>
+            {typeof modalNote.content !== 'string' && modalNote.content.subItems?.length > 0 && (
+              <ul className="mt-3 ml-4 space-y-1">
+                {modalNote.content.subItems.map((sub, i) => (
+                  <li key={i} className="text-xs text-muted-foreground">• {sub}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>,
+        document.body
+      )}
     </>
   )
 }
