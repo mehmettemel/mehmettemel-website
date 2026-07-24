@@ -1,6 +1,5 @@
 import { Container } from '../components/Container'
 import { HomeHero } from '../components/home/HomeHero'
-import { NoteGraph } from '../components/graph/NoteGraph'
 import { MobileHome } from '../components/home/MobileHome'
 
 // SEO metadata for the home page
@@ -48,9 +47,6 @@ export default function Home() {
       {/* Desktop: Original layout */}
       <div className="mx-auto hidden max-w-7xl py-8 md:block sm:py-12">
         <HomeHero />
-        <div className="space-y-12 sm:space-y-16">
-          <NoteGraph heightClass="h-[60vh]" />
-        </div>
       </div>
     </Container>
   )
