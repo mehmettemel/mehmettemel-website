@@ -38,8 +38,15 @@ export const nodes = [
     tags: ['japon', 'restoran', 'kültür'],
     body: 'Japon yemek kültüründe restoranlar tek bir alanda uzmanlaşma eğilimindedir. En iyi suşiyi yemek için sadece suşi yapan yere, en iyi rameni yemek için sadece ramen yapan yere gitmeniz lazım.',
   },
+  {
+    id: 'tavuk-butu-derisiyle',
+    title: 'Tavuk Butu Derisiyle',
+    tags: ['tavuk', 'glisin', 'et'],
+    body: 'Tavuk butunu derisiyle ye. Deri iyi bir glisin kaynağı; but zaten göğse göre daha lezzetli ve besleyici.',
+  },
 ]
 
 export const links = [
   { source: 'yag-karisimlari', target: 'ultra-islenmis-ekmek' },
+  { source: 'tavuk-butu-derisiyle', target: 'tavugu-kendin-parcala' },
 ]
