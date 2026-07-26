@@ -260,7 +260,7 @@ export function PersonalContent({ categories, title, hideHeading = false }) {
                     </div>
                   )}
                   {/* Hover preview - full text, animated pop-over */}
-                  <div className="pointer-events-none invisible absolute inset-x-0 top-0 z-20 max-h-80 origin-top scale-95 overflow-hidden rounded-lg border border-foreground/15 bg-card opacity-0 shadow-2xl ring-1 ring-black/20 transition-all duration-200 ease-out group-hover:visible group-hover:scale-100 group-hover:opacity-100">
+                  <div className="pointer-events-none invisible absolute inset-x-0 top-0 z-20 max-h-80 min-h-full origin-top scale-95 overflow-hidden rounded-lg border border-foreground/15 bg-card opacity-0 shadow-2xl ring-1 ring-black/20 transition-all duration-200 ease-out group-hover:visible group-hover:scale-100 group-hover:opacity-100">
                     <div className="max-h-80 overflow-hidden p-3">
                       {selectedCategory === 'all' && (
                         <div className="mb-1 text-[10px] font-semibold text-muted-foreground">

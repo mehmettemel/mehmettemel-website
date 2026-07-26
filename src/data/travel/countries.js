@@ -100,6 +100,10 @@ export const tabs = {
           "Don't smile at people you don't talk to in big cities, in small cities preferably don't smile at people you don't know at all.",
           'Refusing from drinking a tea while being guest in a Russian house is a rude gesture.',
           "When you enter to shop say hello (it would be great, if you do it in Russian). When you pay for product, don't forget to say thanks and goodbye.",
+          '5000 Ruble gibi büyük banknotları küçük dükkanlar/taksiler bozmak istemez, ATM ve gişelerin de garip banknot limitleri var. Bu yüzden döviz bozdururken küçük banknotlar (100, 500, 1000 Ruble) istemeye özen göster.',
+          'Şehre inmeden önce Yandex Maps üzerinden Moskova haritasını tamamen offline (çevrimdışı) indir. GPS kaybolsa bile haritayı sokak sokak görebilmek hayat kurtarır.',
+          'Kafelerdeki ücretsiz Wi-Fi ağları doğrulama için Rus telefon numarası istediğinden "nasıl olsa bir kafeye oturur bağlanırım" rahatlığına güvenme.',
+          'Havaalanına inmeden önce e-SIM sağlayıcılarını (Airalo, Maya vb. Rusya kapsamasını) kontrol et veya havalimanından direkt turistik fiziksel SIM kart hattı çözümlerini araştır.',
         ],
       },
       {
