@@ -46,6 +46,7 @@ export const tabs = {
           'Bir pencerenin ısıcamlı olup olmadığını anlamak için iki lamine camın arasındaki alüminyum çıtaya bakılabilir. Çıtanın üzerinde lazerle işlenmiş bilgiler bulunur ve ısıcam yazısı yazar.',
           'Pimapen yaptırırken asla ucuzuna kaçmayın. Sonra kış ortasında pencereden rüzgar sesi dinleyip buz gibi odada oturursunuz. İşçilik kalitesiz olunca sonradan iyi usta getirseniz de düzeltemiyor.',
           'You need two coats of paint. The advertisements are lies.',
+          'Uyumadığın zamanlarda bol ışık için floor-to-ceiling camlar.',
         ],
       },
       'Klima': {

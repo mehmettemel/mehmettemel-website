@@ -191,6 +191,10 @@ export const tabs = {
           'Güzelçamlı Kuşadası – sessiz sakin bir bölge.',
           'Kaş Kalkan.',
           'Hatay Samandağ Karamağra Hümeyra Plajı – Meydan köyündeki Mantra\'nın hemen arkası.',
+          'Datça koyları: Sabah erkenden boşken Kargı (4\'ten sonra da tepe gölgesi yapar, şemsiyesiz gidilir ama kalabalıktır), öğlen 2\'den sonra dalgalı olan ama öncesinde harika bir denize sahip Perili Köşk, yine sabah boş yakalayabileceğiniz ve turkuaz suyuyla nam salmış Gerence (Akvaryum Koyu), Palamutbükü, Haytıbükü, Ovabükü. Bu koyların hepsi akvaryum gibidir.',
+          'Datça – Gıynap (Gırnap): Özel bir yer arıyorsanız ve yürüyebilirseniz; Knidos\'a giderken yol üstünde, dağdan aşağı 10 dk yürümeniz gerekiyor.',
+          'Güzelcehisar Lav Sütunları (denizden).',
+          'Kuzeydoğu Gürcü kiliseleri (İşhan, Dört Kilise vb. ve elbette turizm sezonu dışı).',
         ],
       },
       {

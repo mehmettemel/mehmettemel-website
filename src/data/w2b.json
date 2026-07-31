@@ -112,7 +112,14 @@
           "product": "Klima",
           "brands": [
             "Mitsubishi Heavy SRK45ZSP-WS",
-            "Baymak Elegant Prime 12 Inverter"
+            "Baymak Elegant Prime 12 Inverter",
+            "LG"
+          ]
+        },
+        {
+          "product": "Hava temizleyici (air purifier)",
+          "brands": [
+            "Xiaomi"
           ]
         },
         {

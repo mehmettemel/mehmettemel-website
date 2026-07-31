@@ -65,6 +65,7 @@ export const categories = {
       'Our house rule is you don\'t have to go to sleep if you\'re reading. So my 8 year old is now reading 6th grade reading level because he likes thinking that he\'s getting away with staying up after bedtime. Win/win.',
       'In life, you must choose your regrets. You\'ll regret it if you get married. You\'ll regret it if you don\'t get married. You\'ll regret it if you have kids, and you\'ll regret it if you don\'t. Kierkegaard said this 200 years ago: "Whatever you choose, you\'ll regret it. Because the problem isn\'t in your choices; it\'s in romanticizing a life you haven\'t lived. A person always finds an untraveled path alluring and mysterious." That\'s why the issue isn\'t making the right choice. It\'s choosing and deciding which regret you\'ll live with.',
       'If you don\'t wake up excited and go to bed tired, drop everything and think of what your future will look like if you keep repeating the same day for the rest of your life. Sit with that discomfort until a new direction appears.',
+      'Geri döndürülemez kararlar almaktan korkmayın. Açık kapı bırakmayan, iptal şansı olmayan kararlar alın. (İnsan zihni karar kesinleştiğinde o durumu kabullenmeye programlıdır; iptal ve iade seçenekleri o eşyaya veya karara duyulan memnuniyeti mahveder.)',
     ],
   },
 }
