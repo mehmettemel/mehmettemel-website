@@ -49,6 +49,850 @@ export const TAGS = [
 ]
 
 export const notes = [
+  // ─── Machine coding: implement X ───
+  {
+    id: 'debounce-implementasyonu',
+    type: 'qa',
+    title: "Debounce'ı sıfırdan nasıl yazarsın?",
+    summary:
+      "Çağrılar arka arkaya gelirken timer'ı sürekli sıfırla — ancak sessizlik olunca son çağrı çalışsın.",
+    body: 'En sık atlanan detay: closure içinde timer id\'sini saklamak. Her yeni çağrı bir öncekini clearTimeout ile iptal eder.',
+    tags: ['javascript'],
+    code: [
+      {
+        label: 'From scratch — no lodash',
+        lang: 'js',
+        snippet: `function debounce(fn, delay) {
+  let timer = null // lives in the closure, survives between calls
+
+  return function (...args) {
+    clearTimeout(timer) // cancel the PREVIOUS pending call
+    timer = setTimeout(() => fn.apply(this, args), delay)
+  }
+}
+
+const onResize = debounce(() => console.log('resized'), 300)
+window.addEventListener('resize', onResize)
+// fires once, 300ms after the LAST resize event — not on every event`,
+      },
+      {
+        label: 'Common interview follow-up: leading edge',
+        lang: 'js',
+        snippet: `function debounce(fn, delay, immediate = false) {
+  let timer = null
+  return function (...args) {
+    const callNow = immediate && !timer
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      timer = null
+      if (!immediate) fn.apply(this, args)
+    }, delay)
+    if (callNow) fn.apply(this, args) // fire on the FIRST call, then wait
+  }
+}`,
+      },
+    ],
+  },
+
+  {
+    id: 'throttle-implementasyonu',
+    type: 'qa',
+    title: "Throttle'ı sıfırdan nasıl yazarsın, debounce'tan farkı ne?",
+    summary:
+      "Throttle: belirli aralıkla en fazla 1 çağrı GEÇİRİR. Debounce: sessizlik olana kadar HİÇBİRİNİ geçirmez.",
+    body: 'Scroll/mousemove gibi sürekli tetiklenen olaylarda throttle tercih edilir — kullanıcı geri bildirim almaya devam eder, sadece sıklık sınırlanır.',
+    tags: ['javascript'],
+    code: [
+      {
+        label: 'From scratch — timestamp-based',
+        lang: 'js',
+        snippet: `function throttle(fn, interval) {
+  let lastCall = 0
+
+  return function (...args) {
+    const now = Date.now()
+    if (now - lastCall < interval) return // too soon, drop this call
+    lastCall = now
+    fn.apply(this, args)
+  }
+}
+
+const onScroll = throttle(() => console.log('scroll'), 200)
+window.addEventListener('scroll', onScroll)
+// fires at most once every 200ms, no matter how fast scroll fires`,
+      },
+    ],
+  },
+
+  {
+    id: 'array-polyfill-map-reduce',
+    type: 'qa',
+    title: 'Array.prototype.map ve reduce\'u sıfırdan nasıl yazarsın?',
+    summary:
+      "map: her elemanı dönüştürüp aynı uzunlukta yeni dizi döner. reduce: dizi + başlangıç değeriyle TEK bir sonuca indirger — map/filter da aslında reduce ile yazılabilir.",
+    body: "Polyfill yazarken orijinal diziyi MUTATE ETMEMEK ve callback'e (eleman, index, dizi) üçlüsünü geçmek kritik detaylardır.",
+    tags: ['javascript'],
+    code: [
+      {
+        label: 'Array.prototype.map from scratch',
+        lang: 'js',
+        snippet: `Array.prototype.myMap = function (callback, thisArg) {
+  const result = []
+  for (let i = 0; i < this.length; i++) {
+    if (i in this) { // skip holes in sparse arrays
+      result.push(callback.call(thisArg, this[i], i, this))
+    }
+  }
+  return result
+}
+
+;[1, 2, 3].myMap((n) => n * 2) // [2, 4, 6]`,
+      },
+      {
+        label: 'Array.prototype.reduce from scratch — map/filter are just reduce',
+        lang: 'js',
+        snippet: `Array.prototype.myReduce = function (callback, initialValue) {
+  let acc = initialValue
+  let startIndex = 0
+
+  if (acc === undefined) {
+    acc = this[0] // no initial value -> first element seeds the accumulator
+    startIndex = 1
+  }
+
+  for (let i = startIndex; i < this.length; i++) {
+    acc = callback(acc, this[i], i, this)
+  }
+  return acc
+}
+
+// map, expressed as reduce — proves reduce is the general primitive
+;[1, 2, 3].myReduce((acc, n) => [...acc, n * 2], []) // [2, 4, 6]`,
+      },
+    ],
+  },
+
+  {
+    id: 'promise-all-polyfill',
+    type: 'qa',
+    title: "Promise.all'ı sıfırdan nasıl yazarsın?",
+    summary:
+      'Tüm promise\'leri PARALEL başlat, sonuçları orijinal SIRAYLA topla, biri reddederse anında reddet.',
+    body: 'En sık atlanan detay: sonuçların sırası, hangi promise\'in önce bittiğine göre değil, dizideki ORİJİNAL indekse göre olmalı.',
+    tags: ['javascript'],
+    code: [
+      {
+        label: 'From scratch',
+        lang: 'js',
+        snippet: `function promiseAll(promises) {
+  return new Promise((resolve, reject) => {
+    const results = new Array(promises.length)
+    let completed = 0
+
+    if (promises.length === 0) return resolve(results)
+
+    promises.forEach((p, i) => {
+      Promise.resolve(p).then((value) => {
+        results[i] = value // write at the ORIGINAL index, not arrival order
+        completed++
+        if (completed === promises.length) resolve(results)
+      }, reject) // any single rejection rejects the whole thing immediately
+    })
+  })
+}`,
+      },
+    ],
+  },
+
+  {
+    id: 'curry-implementasyonu',
+    type: 'qa',
+    title: 'Curry fonksiyonu nasıl yazılır, ne işe yarar?',
+    summary:
+      "f(a, b, c) çağrısını f(a)(b)(c) olarak da çağırılabilir hale getirir — kaç argüman biriktiğini fn.length ile takip eder.",
+    body: 'Kullanım alanı: kısmi uygulama (partial application) — bir fonksiyonun bazı argümanlarını önceden sabitleyip yeniden kullanılabilir bir versiyonunu üretmek.',
+    tags: ['javascript'],
+    code: [
+      {
+        label: 'Generic curry — works for any arity',
+        lang: 'js',
+        snippet: `function curry(fn) {
+  return function curried(...args) {
+    if (args.length >= fn.length) {
+      return fn.apply(this, args) // enough args collected -> call it
+    }
+    // not enough yet -> return a function that collects more
+    return (...more) => curried.apply(this, [...args, ...more])
+  }
+}
+
+const add3 = (a, b, c) => a + b + c
+const curried = curry(add3)
+
+curried(1)(2)(3) // 6
+curried(1, 2)(3) // 6 — also works, partial groups are fine
+curried(1, 2, 3) // 6 — also works, all at once`,
+      },
+    ],
+  },
+
+  {
+    id: 'deep-clone-implementasyonu',
+    type: 'qa',
+    title: 'Deep clone nasıl yazılır, structuredClone ne zaman yeterli?',
+    summary:
+      "structuredClone çoğu vakada yeterli ama fonksiyon KOPYALAYAMAZ ve circular reference'ı otomatik çözer — özel senaryolarda elle yazman gerekir.",
+    body: "JSON.parse(JSON.stringify(x)) en yaygın (yanlış) kısayoldur — Date, undefined, fonksiyon, Map/Set'i sessizce bozar.",
+    tags: ['javascript'],
+    code: [
+      {
+        label: 'The broken shortcut everyone reaches for first',
+        lang: 'js',
+        snippet: `const obj = { date: new Date(), fn: () => 1, undef: undefined }
+JSON.parse(JSON.stringify(obj))
+// { date: "2026-...string, not Date!", fn is GONE, undef is GONE }`,
+      },
+      {
+        label: 'Manual deep clone with circular reference handling',
+        lang: 'js',
+        snippet: `function deepClone(value, seen = new WeakMap()) {
+  if (value === null || typeof value !== 'object') return value
+  if (seen.has(value)) return seen.get(value) // circular ref -> reuse the clone
+
+  const clone = Array.isArray(value) ? [] : {}
+  seen.set(value, clone) // register BEFORE recursing, so cycles resolve
+
+  for (const key in value) {
+    clone[key] = deepClone(value[key], seen)
+  }
+  return clone
+}
+
+const a = { name: 'a' }
+a.self = a // circular reference
+const cloned = deepClone(a) // does NOT infinite-loop, cloned.self === cloned`,
+      },
+    ],
+  },
+
+  {
+    id: 'event-emitter-implementasyonu',
+    type: 'qa',
+    title: 'Event emitter (pub/sub) sıfırdan nasıl yazılır?',
+    summary:
+      "Event adı -> listener dizisi eşleşen bir Map/obje tutar. on() ekler, emit() sırayla çağırır, off() çıkarır.",
+    body: 'React dışı state paylaşımı, bileşenler arası gevşek bağlı haberleşme, custom hook içi olay sistemleri hep bu deseni kullanır.',
+    tags: ['javascript', 'mimari'],
+    code: [
+      {
+        label: 'Minimal EventEmitter',
+        lang: 'js',
+        snippet: `class EventEmitter {
+  #listeners = new Map() // event name -> Set of callbacks
+
+  on(event, callback) {
+    if (!this.#listeners.has(event)) this.#listeners.set(event, new Set())
+    this.#listeners.get(event).add(callback)
+    return () => this.off(event, callback) // return an unsubscribe fn
+  }
+
+  off(event, callback) {
+    this.#listeners.get(event)?.delete(callback)
+  }
+
+  emit(event, ...args) {
+    this.#listeners.get(event)?.forEach((cb) => cb(...args))
+  }
+}
+
+const bus = new EventEmitter()
+const unsubscribe = bus.on('login', (user) => console.log(user, 'logged in'))
+bus.emit('login', { name: 'Ada' }) // "Ada logged in"
+unsubscribe() // stops listening`,
+      },
+    ],
+  },
+
+  {
+    id: 'call-apply-bind-polyfill',
+    type: 'qa',
+    title: 'call, apply, bind arasındaki fark nedir, bind\'ı nasıl yazarsın?',
+    summary:
+      "call: this + argümanları TEK TEK alır, hemen çağırır. apply: argümanları DİZİ olarak alır, hemen çağırır. bind: hemen çağırmaz, this'i SABİTLENMİŞ yeni bir fonksiyon döner.",
+    body: 'bind\'ın polyfill\'i call\'ı kullanır — bu üçü de aynı temel mekanizmanın (this\'i açıkça ayarlama) farklı arayüzleridir.',
+    tags: ['javascript'],
+    code: [
+      {
+        label: 'The three, side by side',
+        lang: 'js',
+        snippet: `function greet(greeting) { return \`\${greeting}, \${this.name}\` }
+const user = { name: 'Ada' }
+
+greet.call(user, 'Hi')    // 'Hi, Ada' — args listed individually, runs NOW
+greet.apply(user, ['Hi']) // 'Hi, Ada' — args as an array, runs NOW
+const bound = greet.bind(user)
+bound('Hi')                // 'Hi, Ada' — this locked in, runs LATER, on call`,
+      },
+      {
+        label: 'bind — polyfill built on call',
+        lang: 'js',
+        snippet: `Function.prototype.myBind = function (context, ...boundArgs) {
+  const fn = this // the original function being bound
+  return function (...callArgs) {
+    return fn.call(context, ...boundArgs, ...callArgs)
+  }
+}
+
+function greet(greeting) { return \`\${greeting}, \${this.name}\` }
+const bound = greet.myBind({ name: 'Ada' })
+bound('Hi') // 'Hi, Ada'`,
+      },
+    ],
+  },
+
+  // ─── CSS temelleri ───
+  {
+    id: 'css-box-model',
+    type: 'qa',
+    title: 'CSS box model nedir, content-box ile border-box farkı ne?',
+    summary:
+      "Her eleman content + padding + border + margin katmanlarından oluşur. box-sizing, width'in NEYİ ölçtüğünü belirler.",
+    body: "content-box (varsayılan): width sadece içeriktir, padding/border dışına eklenir — toplam genişlik büyür. border-box: width padding+border'ı İÇİNE alır, tahmin edilebilir kalır.",
+    tags: ['css'],
+    code: [
+      {
+        label: 'Why border-box is the safer default',
+        lang: 'css',
+        snippet: `.content-box {
+  box-sizing: content-box; /* default */
+  width: 200px;
+  padding: 20px;
+  border: 5px solid;
+  /* RENDERED width = 200 + 20*2 + 5*2 = 250px — surprising */
+}
+
+.border-box {
+  box-sizing: border-box;
+  width: 200px;
+  padding: 20px;
+  border: 5px solid;
+  /* RENDERED width = 200px exactly — padding/border eat into it */
+}
+
+/* Most resets do this globally: */
+* { box-sizing: border-box; }`,
+      },
+    ],
+  },
+
+  {
+    id: 'flexbox-vs-grid',
+    type: 'qa',
+    title: 'Flexbox ile Grid arasında ne zaman hangisi seçilir?',
+    summary:
+      "Flexbox TEK BOYUTLUDUR (satır ya da sütun) — içerik boyutuna göre esner. Grid İKİ BOYUTLUDUR — satır ve sütunu aynı anda kontrol eder.",
+    body: 'Kural: içeriğin BOYUTU önceliği belirliyorsa (bir navbar, buton grubu) flexbox; sayfa/kart DÜZENİ önceliği belirliyorsa (dashboard, galeri) grid.',
+    tags: ['css'],
+    code: [
+      {
+        label: 'Same layout, two mental models',
+        lang: 'css',
+        snippet: `/* Flexbox: one dimension, items flow and wrap */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Grid: two dimensions, explicit rows AND columns at once */
+.dashboard {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  grid-template-rows: 60px 1fr;
+  grid-template-areas:
+    "sidebar header"
+    "sidebar main";
+}
+.sidebar { grid-area: sidebar; }
+.header  { grid-area: header; }
+.main    { grid-area: main; }`,
+      },
+    ],
+  },
+
+  {
+    id: 'css-specificity-hesaplama',
+    type: 'qa',
+    title: 'CSS specificity nasıl hesaplanır?',
+    summary:
+      "Dört basamaklı bir puan: inline style > id > class/attribute/pseudo-class > element/pseudo-element. Yüksek puan kazanır, eşitlikte SONRA gelen kural kazanır.",
+    body: '!important bu hiyerarşinin TAMAMINI atlar — bu yüzden debug etmesi zordur, son çare olarak kullanılmalı.',
+    tags: ['css'],
+    code: [
+      {
+        label: 'Specificity in practice',
+        lang: 'css',
+        snippet: `/* specificity: (0,0,1,0) — 1 element */
+p { color: black; }
+
+/* specificity: (0,0,1,1) — 1 class + 1 element -> wins over the rule above */
+p.intro { color: blue; }
+
+/* specificity: (0,1,0,0) — 1 id -> wins over both rules above */
+#hero p { color: red; }
+
+/* wins over EVERYTHING except inline style + !important on an equal selector */
+style="color: green" /* inline: (1,0,0,0) */
+
+/* nukes the whole hierarchy — hard to override later, use as last resort */
+p { color: purple !important; }`,
+      },
+    ],
+  },
+
+  {
+    id: 'css-units-em-rem-vh',
+    type: 'qa',
+    title: 'em, rem, vh/vw arasındaki fark nedir, ne zaman hangisi kullanılır?',
+    summary:
+      "em: EBEVEYNİN font-size'ına göredir, iç içe geçince katlanarak büyür. rem: sadece KÖK (html) elemana göredir, öngörülebilir. vh/vw: viewport yüzdesidir.",
+    body: 'em\'in "katlanma" tuzağı: bir bileşen başka bir bileşenin içine konunca font boyutu beklenmedik şekilde büyüyebilir — rem bu riski taşımaz.',
+    tags: ['css'],
+    code: [
+      {
+        label: 'The em compounding trap',
+        lang: 'css',
+        snippet: `html { font-size: 16px; }
+
+.card { font-size: 1.2em; }        /* 16 * 1.2 = 19.2px */
+.card .badge { font-size: 1.2em; } /* 19.2 * 1.2 = 23px — compounds! */
+
+/* rem always resolves against the ROOT, never compounds */
+.card { font-size: 1.2rem; }        /* 16 * 1.2 = 19.2px */
+.card .badge { font-size: 1.2rem; } /* still 16 * 1.2 = 19.2px */
+
+/* vh/vw: percentage of the viewport, independent of any parent */
+.hero { height: 100vh; } /* always full viewport height */`,
+      },
+    ],
+  },
+
+  {
+    id: 'css-custom-properties',
+    type: 'qa',
+    title: "CSS custom properties (variables) neden Sass değişkeninden farklıdır?",
+    summary:
+      "Sass değişkeni DERLEME anında metne dönüşür, sabittir. CSS custom property TARAYICIDA yaşar — JS ile canlı değiştirilebilir, cascade/inheritance'a tabidir.",
+    body: 'Bu fark tema değişimini (dark mode) mümkün kılar: tek bir custom property\'yi güncellemek, onu kullanan HER yeri anında günceller — sayfa yeniden derlenmez.',
+    tags: ['css'],
+    code: [
+      {
+        label: "Live updates JS can't do with Sass variables",
+        lang: 'css',
+        snippet: `:root {
+  --brand-color: #6366f1;
+}
+
+.button {
+  background: var(--brand-color);
+}
+
+/* changing this ONE line updates every element using it,
+   at runtime, no rebuild — Sass variables can't do this */`,
+      },
+      {
+        label: 'Toggled from JavaScript',
+        lang: 'js',
+        snippet: `document.documentElement.style.setProperty('--brand-color', '#ef4444')
+// every .button on the page turns red immediately`,
+      },
+    ],
+  },
+
+  // ─── Event delegation ───
+  {
+    id: 'event-delegation-nedir',
+    type: 'qa',
+    title: 'Event delegation nedir, neden 1000 listener yerine 1 tanesi yeterli?',
+    summary:
+      "Olaylar DOM'da yukarı doğru kabarır (bubble). Listener'ı her çocuğa değil, ORTAK ataya koyup event.target ile hangi çocuğa tıklandığını anlarsın.",
+    body: 'Dinamik olarak eklenen elemanlar için de otomatik çalışır — sonradan DOM\'a eklenen bir <li>, her çocuğa listener bağlamana gerek kalmadan çalışır.',
+    tags: ['javascript'],
+    code: [
+      {
+        label: '1000 listeners — works, but wasteful',
+        lang: 'js',
+        snippet: `document.querySelectorAll('li').forEach((li) => {
+  li.addEventListener('click', () => console.log(li.textContent))
+})
+// a new <li> added later needs its OWN new listener attached manually`,
+      },
+      {
+        label: 'One listener on the parent — scales automatically',
+        lang: 'js',
+        snippet: `document.querySelector('ul').addEventListener('click', (e) => {
+  const li = e.target.closest('li') // find which child was actually clicked
+  if (!li) return
+  console.log(li.textContent)
+})
+// a new <li> added later works IMMEDIATELY — no extra listener needed,
+// because the click still bubbles up to the same <ul>`,
+      },
+    ],
+  },
+
+  // ─── Service Worker / PWA ───
+  {
+    id: 'service-worker-nedir',
+    type: 'qa',
+    title: 'Service Worker nedir, offline çalışmayı nasıl mümkün kılar?',
+    summary:
+      "Sayfadan bağımsız, arka planda çalışan bir proxy script — tüm ağ isteklerini yakalayıp cache'den ya da ağdan cevap verebilir.",
+    body: 'Sayfa kapansa bile çalışmaya devam edebilir (push notification, background sync). fetch olayını dinleyerek "önce cache, olmazsa ağ" gibi stratejiler kurar.',
+    tags: ['tarayıcı', 'performans'],
+    code: [
+      {
+        label: 'Register and intercept requests',
+        lang: 'js',
+        snippet: `// main.js — register the worker
+navigator.serviceWorker.register('/sw.js')
+
+// sw.js — cache-first strategy
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request).then((cached) => {
+      // serve from cache if we have it, otherwise hit the network
+      return cached || fetch(event.request)
+    }),
+  )
+})
+
+// This is what makes an app work with NO network connection —
+// the service worker answers requests itself, the browser never
+// even tries to reach the server for cached assets.`,
+      },
+    ],
+  },
+
+  // ─── Erişilebilirlik ───
+  {
+    id: 'semantic-html-neden-onemli',
+    type: 'qa',
+    title: 'Semantic HTML neden önemli, sadece <div> ile yapılamaz mı?',
+    summary:
+      "Ekran okuyucular ve arama motorları anlamı ETİKETTEN çıkarır. <div onclick> bir butondur ama klavyeyle odaklanamaz, screen reader 'buton' demez.",
+    body: 'Doğru etiket (button, nav, main, article) ücretsiz klavye desteği, ARIA rolü ve SEO yapısı getirir — hepsini elle yeniden inşa etmene gerek kalmaz.',
+    tags: ['erişilebilirlik'],
+    code: [
+      {
+        label: 'A div is not a button',
+        lang: 'html',
+        snippet: `<!-- looks clickable, but: no keyboard focus, no Enter/Space activation,
+     no screen reader announcement, no default styling -->
+<div onclick="submit()">Submit</div>
+
+<!-- gets ALL of the above for free, from the browser -->
+<button onclick="submit()">Submit</button>
+
+<!-- same logic for landmarks — screen reader users jump between
+     these by role, they don't read the whole page top to bottom -->
+<nav>...</nav>
+<main>...</main>
+<footer>...</footer>`,
+      },
+    ],
+  },
+
+  {
+    id: 'aria-ne-zaman-gerekli',
+    type: 'qa',
+    title: 'ARIA ne zaman gerekli, ne zaman zararlı?',
+    summary:
+      "1. kural: ARIA gerekmiyorsa kullanma — semantic HTML zaten hallediyorsa üstüne ARIA eklemek çelişkili davranışa yol açabilir.",
+    body: "ARIA sadece görünümü değiştirmez, DAVRANIŞI da değiştirmelisin — role='button' yazıp klavye desteğini eklemezsen ekran okuyucuyu YALANCI çıkarırsın.",
+    tags: ['erişilebilirlik'],
+    code: [
+      {
+        label: 'ARIA without behavior is worse than no ARIA',
+        lang: 'jsx',
+        snippet: `// BAD — announces "button" but Tab/Enter don't work, it LIES to screen readers
+<div role="button" onClick={submit}>Submit</div>
+
+// GOOD — use the real element, ARIA becomes unnecessary
+<button onClick={submit}>Submit</button>
+
+// When you truly need a custom widget (e.g. a combobox), ARIA AND behavior
+// both have to be implemented together:
+<div
+  role="button"
+  tabIndex={0}
+  onClick={submit}
+  onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && submit()}
+>
+  Submit
+</div>`,
+      },
+    ],
+  },
+
+  {
+    id: 'klavye-navigasyonu-focus-yonetimi',
+    type: 'qa',
+    title: 'Klavye navigasyonu ve focus yönetimi neyi kapsar?',
+    summary:
+      "Tab sırası mantıklı olmalı, focus GÖRÜNÜR olmalı, bir modal açılınca focus içine hapsedilmeli (focus trap) ve kapanınca tetikleyen elemana dönmeli.",
+    body: 'outline: none yazıp geri koymamak en yaygın erişilebilirlik hatasıdır — mouse kullanmayan biri artık nerede olduğunu göremez.',
+    tags: ['erişilebilirlik'],
+    code: [
+      {
+        label: 'Focus trap and restore on modal close',
+        lang: 'jsx',
+        snippet: `function Modal({ onClose, children }) {
+  const dialogRef = useRef(null)
+  const triggerRef = useRef(document.activeElement) // remember who opened this
+
+  useEffect(() => {
+    dialogRef.current?.focus() // move focus INTO the modal on open
+    return () => triggerRef.current?.focus() // restore focus on close
+  }, [])
+
+  return (
+    <div role="dialog" aria-modal="true" ref={dialogRef} tabIndex={-1}>
+      {children}
+      <button onClick={onClose}>Close</button>
+    </div>
+  )
+}
+// Without this, closing a modal silently drops focus back to <body> —
+// a keyboard user loses their place in the page entirely.`,
+      },
+    ],
+  },
+
+  // ─── Test ───
+  {
+    id: 'unit-integration-e2e-farki',
+    type: 'qa',
+    title: 'Unit, integration ve e2e test arasındaki fark nedir?',
+    summary:
+      "Unit: tek bir fonksiyon/bileşen, izole. Integration: birkaç parça birlikte, gerçek etkileşim. E2E: gerçek tarayıcıda, uçtan uca kullanıcı akışı.",
+    body: 'Piramit kuralı: çok unit test (hızlı, ucuz), orta miktarda integration, az e2e (yavaş, pahalı ama en gerçekçi güveni verir).',
+    tags: ['test'],
+    code: [
+      {
+        label: 'Same feature, three test levels',
+        lang: 'js',
+        snippet: `// Unit — isolated, mocks everything external
+test('formatPrice formats cents to currency', () => {
+  expect(formatPrice(1099)).toBe('$10.99')
+})
+
+// Integration — real component tree, mocked network
+test('AddToCart button updates the cart count', async () => {
+  render(<ProductPage product={mockProduct} />)
+  await userEvent.click(screen.getByRole('button', { name: /add to cart/i }))
+  expect(screen.getByText('Cart (1)')).toBeInTheDocument()
+})
+
+// E2E — real browser, real (test) backend, full user flow
+test('user can complete checkout', async ({ page }) => {
+  await page.goto('/product/42')
+  await page.click('text=Add to Cart')
+  await page.click('text=Checkout')
+  await expect(page.locator('h1')).toHaveText('Order Confirmed')
+})`,
+      },
+    ],
+  },
+
+  {
+    id: 'testing-library-implementation-detail',
+    type: 'qa',
+    title: 'Testing Library "implementation detail test etme" ilkesi ne demek?',
+    summary:
+      "Bileşenin İÇ YAPISINI değil, kullanıcının GÖRDÜĞÜNÜ test et — state adı, class adı değil, ekrandaki metin/rol üzerinden sorgula.",
+    body: "getByRole/getByText kullanmak, refactor sırasında (state adını değiştirmek gibi) testin KIRILMAMASINI sağlar — test davranışı doğrular, kodun iç mimarisini değil.",
+    tags: ['test', 'react'],
+    code: [
+      {
+        label: 'Fragile — breaks on any refactor',
+        lang: 'jsx',
+        snippet: `const wrapper = shallow(<Counter />)
+expect(wrapper.state('count')).toBe(0) // tied to internal state name
+wrapper.find('.increment-btn').simulate('click') // tied to a CSS class`,
+      },
+      {
+        label: 'Resilient — tied to user-visible behavior',
+        lang: 'jsx',
+        snippet: `render(<Counter />)
+expect(screen.getByText('0')).toBeInTheDocument() // what the USER sees
+
+await userEvent.click(screen.getByRole('button', { name: /increment/i }))
+expect(screen.getByText('1')).toBeInTheDocument()
+// rename the internal state variable, change the CSS class —
+// this test still passes, because it never looked at either`,
+      },
+    ],
+  },
+
+  // ─── Git ───
+  {
+    id: 'git-rebase-vs-merge',
+    type: 'qa',
+    title: 'git rebase ile git merge arasındaki fark nedir?',
+    summary:
+      "merge: iki dalı birleştiren yeni bir commit oluşturur, geçmiş DALLANMIŞ kalır. rebase: commit'lerini başka bir dalın ucuna TAŞIYIP yeniden yazar, geçmiş DÜZ görünür.",
+    body: "rebase, PAYLAŞILAN/push edilmiş bir dalda yapılırsa başkalarının geçmişini bozar — kural: sadece kendi lokal, henüz paylaşılmamış commit'lerinde kullan.",
+    tags: ['git'],
+    code: [
+      {
+        label: 'History shape after each',
+        lang: 'bash',
+        snippet: `# merge: preserves both histories, adds a merge commit
+git checkout main
+git merge feature
+#   A---B---C main
+#        \\   \\
+#         D---E---M   <- merge commit M, history branches visibly
+
+# rebase: replays feature's commits ON TOP of main, linear result
+git checkout feature
+git rebase main
+#   A---B---C main
+#            \\
+#             D'---E'  <- D and E rewritten with new hashes
+
+# NEVER rebase a branch others have already pulled — you'd rewrite
+# commits they already have, creating conflicting histories.`,
+      },
+    ],
+  },
+
+  {
+    id: 'git-object-model-nedir',
+    type: 'qa',
+    title: "Git'in iç yapısı nasıl çalışır: commit, tree, blob nedir?",
+    summary:
+      "Blob: bir dosyanın içeriği. Tree: bir klasörün anlık görüntüsü (blob'lara ve alt tree'lere işaretçiler). Commit: bir tree'ye + üst commit'e + metadata'ya işaretçi.",
+    body: "Bir commit her dosyayı yeniden kopyalamaz — değişmeyen dosyalar aynı blob'u PAYLAŞIR. Bu yüzden branch oluşturmak ve commit almak neredeyse anlıktır.",
+    tags: ['git'],
+    code: [
+      {
+        label: 'What a commit actually points to',
+        lang: 'bash',
+        snippet: `# a commit is just a pointer chain, content-addressed by SHA-1/SHA-256
+commit a1b2c3
+├── tree 9f8e7d          (snapshot of the root directory)
+│   ├── blob 4d5e6f  src/index.js
+│   └── tree 1a2b3c  src/utils/
+│       └── blob 7c8d9e  helpers.js
+└── parent: commit 0f1e2d (the previous commit)
+
+# unchanged files between two commits point to the SAME blob —
+# git never re-stores identical content twice
+git cat-file -p a1b2c3   # inspect the commit object directly
+git cat-file -p 9f8e7d   # inspect the tree it points to`,
+      },
+    ],
+  },
+
+  // ─── TypeScript utility types ───
+  {
+    id: 'typescript-utility-types',
+    type: 'qa',
+    title: "Partial, Pick, Omit, Record ne işe yarar?",
+    summary:
+      "Var olan bir tipten YENİ bir tip türetirler — sıfırdan yazmak yerine mevcut tipi dönüştürürsün. En sık sorulan TS pratik sorusu.",
+    body: 'Partial: tüm alanları opsiyonel yapar (update fonksiyonlarında). Pick/Omit: alan seç/çıkar. Record: key-value map tipini kısaca tanımlar.',
+    tags: ['typescript'],
+    code: [
+      {
+        label: 'The four you\'ll use constantly',
+        lang: 'ts',
+        snippet: `interface User { id: number; name: string; email: string; role: string }
+
+// Partial — every field becomes optional, perfect for update payloads
+function updateUser(id: number, changes: Partial<User>) { /* ... */ }
+updateUser(1, { name: 'Ada' }) // no need to pass email/role too
+
+// Pick — take only the listed fields
+type UserPreview = Pick<User, 'id' | 'name'> // { id: number; name: string }
+
+// Omit — take everything EXCEPT the listed fields
+type UserWithoutEmail = Omit<User, 'email'>
+
+// Record — shorthand for "an object with these keys, all this value type"
+type RolePermissions = Record<'admin' | 'editor' | 'viewer', string[]>
+// same as: { admin: string[]; editor: string[]; viewer: string[] }`,
+      },
+    ],
+  },
+
+  {
+    id: 'discriminated-union-nedir',
+    type: 'qa',
+    title: 'Discriminated union (tagged union) nedir, neden kullanılır?',
+    summary:
+      "Ortak bir 'tag' alanına (genelde type/status) sahip union — TS o alana bakarak hangi variant olduğunu KESİN olarak daraltabilir.",
+    body: 'API cevaplarında loading/success/error durumlarını modellemenin standart yolu budur — her state\'in kendi alanları vardır, birbirine karışamaz.',
+    tags: ['typescript'],
+    code: [
+      {
+        label: 'Modeling async state without impossible combinations',
+        lang: 'ts',
+        snippet: `type FetchState<T> =
+  | { status: 'loading' }
+  | { status: 'success'; data: T }
+  | { status: 'error'; error: string }
+
+function render(state: FetchState<User>) {
+  switch (state.status) {
+    case 'loading':
+      return 'Loading...'
+    case 'success':
+      return state.data.name // TS knows .data exists HERE, only here
+    case 'error':
+      return state.error // TS knows .error exists HERE, only here
+  }
+}
+// Without the tag, you could accidentally have { data: X, error: Y }
+// at the same time — this type makes that combination IMPOSSIBLE.`,
+      },
+    ],
+  },
+
+  // ─── Storage karşılaştırması ───
+  {
+    id: 'cookie-localstorage-sessionstorage-farki',
+    type: 'qa',
+    title: 'Cookie, localStorage, sessionStorage arasındaki fark nedir?',
+    summary:
+      "Cookie: her HTTP isteğiyle sunucuya OTOMATİK gider, küçük (~4KB). localStorage/sessionStorage: sadece tarayıcıda kalır, sunucu görmez, çok daha büyük (~5-10MB).",
+    body: 'sessionStorage sekme kapanınca silinir, localStorage kalıcıdır. Auth token\'ı localStorage\'a koymak XSS\'e karşı cookie+httpOnly\'den daha savunmasızdır — JS ile okunabilir.',
+    tags: ['tarayıcı', 'güvenlik'],
+    code: [
+      {
+        label: 'Who sees it, how long it lives',
+        lang: 'js',
+        snippet: `// Cookie — sent automatically with EVERY request to the domain
+document.cookie = 'theme=dark; max-age=3600'
+// server sees this on every fetch — good for auth session ids
+
+// localStorage — persists until explicitly cleared, JS-only
+localStorage.setItem('theme', 'dark')
+// survives browser restart, NEVER sent to the server automatically
+
+// sessionStorage — cleared when the TAB closes, JS-only
+sessionStorage.setItem('formDraft', JSON.stringify(draft))
+// good for "don't lose this if they refresh, but don't persist forever"
+
+// Security note: httpOnly cookies can't be read by JS at all —
+// that's exactly why they're the safer place for auth tokens.
+// localStorage is fully readable by any script running on the page,
+// including an injected XSS payload.`,
+      },
+    ],
+  },
   // ─── Katman 3: JS Motoru ve Çalışma Zamanı ───
   {
     id: 'prototype-this-nedir',

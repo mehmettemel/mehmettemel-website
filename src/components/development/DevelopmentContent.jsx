@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import { Search, X, HelpCircle, StickyNote, BookOpen, Code2, Copy, Check, Pin, FileText } from 'lucide-react'
+import { Search, X, HelpCircle, StickyNote, BookOpen, Code2, Check, Pin, FileText, Trash2 } from 'lucide-react'
 
 const TYPE_META = {
   qa: { label: 'Soru', icon: HelpCircle },
@@ -400,9 +400,9 @@ function CopyRemoveButton({ id }) {
       onClick={copy}
       title={`Silme komutunu kopyala: /remove dev:${id}`}
       aria-label="Silme komutunu kopyala"
-      className="rounded-md p-1 text-muted-foreground/50 transition-colors hover:bg-secondary hover:text-foreground"
+      className="rounded-md p-1 text-muted-foreground/50 transition-colors hover:bg-secondary hover:text-destructive"
     >
-      {copied ? <Check className="h-3.5 w-3.5 text-primary" /> : <Copy className="h-3.5 w-3.5" />}
+      {copied ? <Check className="h-3.5 w-3.5 text-primary" /> : <Trash2 className="h-3.5 w-3.5" />}
     </button>
   )
 }
