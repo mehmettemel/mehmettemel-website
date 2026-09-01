@@ -259,6 +259,7 @@ export const tabs = {
           'Local Facebook groups > Facebook Events every time. That\'s where the good stuff hides.',
           'Read the terms and conditions of your travel/medical insurance before you travel.',
           'Food poisoning için iyi gelen herbal tea: "Tràng Vị Khang". Çok iyi geldiğini söylüyorlar.',
+          'Gittiğim yerde hangi kıyı, hangi koy daha güzeldir, Marine Traffic\'teki yat yığılmalarından anlarım. Bir yerde ne kadar çok tekne varsa orada kayda değer bir şey vardır, yat sahipleri yanılmaz.',
         ],
       },
       'People & Countries': {

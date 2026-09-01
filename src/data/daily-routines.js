@@ -11,10 +11,21 @@ export const routineList = [
         info: 'Kortizol doğal olarak sabah yükselir. Sabah ışığı olmadan bu yükseliş düzgün düşmez, öğleden sonra hâlâ yüksek kalır.\n\nSabah güneş ışığı (tercihen dışarıda, gözlük takmadan) suprakiazmatik çekirdeği (SCN - ana biyolojik saat) sıfırlar. Bu:\n\n• Kortizol ritmini düzeltir (sabah spike + sağlıklı düşüş).\n• Melatonin ritmini iyileştirir → daha iyi uyku.\n• Ruh hali, dikkat ve enerjiyi artırır.',
       },
       { id: 'sabah-2', label: 'Derin nefes egzersizi yap' },
+      { id: 'sabah-6', label: 'Daima modunu yüksek ve olumlu tut. Negatif şeyleri zihninde NLP ile soldur.' },
+    ],
+  },
+  {
+    id: 'beslenme',
+    label: 'BESLENME RUTİNİ',
+    children: [
       { id: 'sabah-3', label: 'Çiğ badem, ceviz ve kabak çekirdeği tüket' },
       { id: 'sabah-4', label: 'Çiğ havuç ye' },
       { id: 'sabah-5', label: 'Kahvaltı ortasında soğuk sıkım zeytinyağı + 1 damla kekik yağı karıştırıp tüket', info: 'Aç karnına değil, kahvaltının ortasında tüket.' },
-      { id: 'sabah-6', label: 'Daima modunu yüksek ve olumlu tut. Negatif şeyleri zihninde NLP ile soldur.' },
+      {
+        id: 'beslenme-baharat',
+        label: 'Baharat kullan',
+        subItems: ['Zerdeçal, sumak, zencefil, karanfil ve tarçın'],
+      },
     ],
   },
 ]

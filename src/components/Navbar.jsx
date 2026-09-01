@@ -25,6 +25,11 @@ import {
   NavigationMenuTrigger,
 } from './ui/navigation-menu'
 
+const moatItems = [
+  { href: '/moat/roadmap', label: 'Roadmap', emoji: '🗺️' },
+  { href: '/moat/development', label: 'Development', emoji: '🧱' },
+]
+
 const listsItems = [
   { href: '/lists/entrepreneurship', label: 'Entrepreneur', emoji: '💼' },
   { href: '/lists/life-tips', label: 'Life Tips', emoji: '💡' },
@@ -34,7 +39,7 @@ const listsItems = [
   { href: '/lists/english', label: 'English', emoji: '🇬🇧' },
   { href: '/lists/russian', label: 'Russian', emoji: '🇷🇺' },
   { href: '/lists/questions', label: 'Questions', emoji: '❓' },
-  { href: '/lists/claude', label: 'Claude', emoji: '🤖' },
+  { href: '/lists/watchlist', label: 'Watchlist', emoji: '🎬' },
 ]
 
 function NavLink({ href, children }) {
@@ -116,6 +121,31 @@ function DesktopNav() {
         {isAuthenticated && (
           <NavigationMenuItem>
             <NavLink href="/lists/daily-routines">Daily Routines</NavLink>
+          </NavigationMenuItem>
+        )}
+
+        {isAuthenticated && (
+          <NavigationMenuItem>
+            <NavigationMenuTrigger className="bg-transparent px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-transparent hover:text-foreground focus:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-foreground">
+              Moat
+            </NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className="grid w-[220px] gap-1 p-2">
+                {moatItems.map((item) => (
+                  <li key={item.href}>
+                    <NavigationMenuLink asChild>
+                      <Link
+                        href={item.href}
+                        className="flex items-center gap-2 rounded-md px-3 py-2.5 text-sm transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset active:bg-secondary/80"
+                      >
+                        <span>{item.emoji}</span>
+                        <span>{item.label}</span>
+                      </Link>
+                    </NavigationMenuLink>
+                  </li>
+                ))}
+              </ul>
+            </NavigationMenuContent>
           </NavigationMenuItem>
         )}
 
@@ -219,6 +249,16 @@ function MobileNav() {
                       Daily Routines
                     </Link>
                   )}
+                  {isAuthenticated && (
+                    <Link href="/moat/roadmap" onClick={closeSheet} className={mobileNavLinkClass}>
+                      <span>🗺️</span> Roadmap
+                    </Link>
+                  )}
+                  {isAuthenticated && (
+                    <Link href="/moat/development" onClick={closeSheet} className={mobileNavLinkClass}>
+                      <span>🧱</span> Development
+                    </Link>
+                  )}
                   <Link href="/food" onClick={closeSheet} className={mobileNavLinkClass}>
                     <span>🍎</span> Food
                   </Link>
@@ -252,8 +292,8 @@ function MobileNav() {
                     <Link href="/lists/russian" onClick={closeSheet} className={mobileNavLinkClass}>
                       <span>🇷🇺</span> Russian
                     </Link>
-                    <Link href="/lists/claude" onClick={closeSheet} className={mobileNavLinkClass}>
-                      <span>🤖</span> Claude
+                    <Link href="/lists/watchlist" onClick={closeSheet} className={mobileNavLinkClass}>
+                      <span>🎬</span> Watchlist
                     </Link>
                   </div>
                 </AccordionContent>

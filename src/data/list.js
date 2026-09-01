@@ -1,10 +1,4 @@
-import { tabs as claudeTabs } from './claude-notes'
-
-function countClaudeNotes() {
-  return Object.values(claudeTabs)
-    .flatMap((tab) => Object.values(tab.categories))
-    .flatMap((cat) => cat.items).length
-}
+import { entries as watchlistEntries } from './watchlist'
 
 export const listCategories = [
   {
@@ -25,14 +19,15 @@ export const listCategories = [
     description: 'Yemek tarifleri ve mutfak notları',
   },
   {
-    id: 'claude',
-    name: 'Claude',
-    emoji: '🤖',
-    icon: '🤖',
-    description: 'Claude ile verimli çalışma notları ve ipuçları',
+    id: 'watchlist',
+    slug: 'watchlist',
+    name: 'Watchlist',
+    emoji: '🎬',
+    icon: '🍿',
+    description: 'Beğendiğim filmler ve diziler',
     isStatic: true,
-    staticCount: countClaudeNotes(),
-    staticUnit: 'not',
+    staticCount: watchlistEntries.length,
+    staticUnit: 'yapım',
   },
 ]
 

@@ -77,6 +77,7 @@ export const categories = {
     label: 'Bakım',
     items: [
       { text: 'Tuzlu denize girmeden önce saçı tatlı su ile nemlendirip hindistan cevizi/ayçiçek/argan yağı ile uçlarına yağ sürmek saçı kırılmalardan korur.', subItems: [] },
+      { text: 'Güneş maruziyeti cildi ciddi şekilde yaşlandırıyor. Görünür cilt yaşlanmasının yaklaşık %90\'ı güneşten geliyor (derin kırışıklıklar, sarkma, leke). Cilt hasarı hem UVA hem UVB\'den geliyor. UVB öğlen saatlerinde (özellikle 10:00-16:00) zirve yapıyor. UVA ise gün boyunca (güneş varken) yüksek seviyede kalıyor. Özellikle peak UVB penceresinde (öğlen civarı) cildi korumak önemli. UVA gün boyu hasar biriktirdiği için dikkat edilmesi gereken şey.', subItems: [] },
     ]
   },
   'Hastalıklar': {

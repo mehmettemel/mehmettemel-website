@@ -79,7 +79,7 @@ export const tabs = {
       'Ev Alma': {
         label: 'Ev Alma',
         items: [
-          'https://parselsorgu.tkgm.gov.tr/ > analiz sekmesinden alım satım yoğunluğu incele.',
+          'Ev alırken çoğu kişinin bakmadığı ama sizin mutlaka bakmanız gereken bir veri var: Bir mahallede, sokakta hatta bölgede geçen yıl kaç tane daire alınıp satıldığını görebiliyorsunuz. Parsel Sorgu uygulamasına (https://parselsorgu.tkgm.gov.tr/) giriyorsunuz: Analiz → Alım Satım Yoğunluğu → 2025 → İl → İlçe → Küme Haritası seçimlerini yapıyorsunuz. Harita üzerinde bölgelerdeki alım-satım yoğunluklarını gösteren rakamlar çıkıyor. Yani bir ev almadan önce: O bölgede ne kadar satış olmuş? Hangi bölgelerde hareketlilik daha fazla? Yatırım yaptığınız bölge gerçekten talep görüyor mu? gibi sorulara veriyle cevap bulabilirsiniz. Gayrimenkul alırken sadece fiyatı değil, bölgenin hareketini de inceleyin.',
           'Fiyatlar durgun, kredi faizlerinin gerçek enflasyonla yan yana geldiği mesela yüzde 9 enflasyon yüzde 9 faiz var. Bu zamanlarda ev alınır. Başını sokacak bir ev ise direkt al.',
           'Tapunun üzerinize devrini almadan önce ilgili belediyeye başvurun ve söz konusu yerin imar işlem dosyasını arşivden çektirin. Özellikle yapı tatil tutanağı (zabıt) olup olmadığı ve imar yasasının 42. ve 32. maddelerine göre alınmış para ve yıkım cezası kararlarının bulunup bulunmadığı kontrol edilmelidir.',
           'Kat mülkiyeti kanununu bilin. Bu kanunu küçümsemeyin. Paranızı iade edip sizi kendi evinizden kovmaları mümkündür.',

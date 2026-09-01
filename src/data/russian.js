@@ -10,6 +10,7 @@ export const russianTabs = [
   { id: 'seyahat',  label: 'Seyahat',          emoji: '✈️' },
   { id: 'temel',    label: 'Temel İfadeler',   emoji: '💬' },
   { id: 'sayilar',  label: 'Sayılar',          emoji: '🔢' },
+  { id: 'gunler',   label: 'Günler',           emoji: '📅' },
   { id: 'renkler',  label: 'Renkler',          emoji: '🎨' },
   { id: 'fiiller',  label: 'Fiiller',          emoji: '🏃' },
 ]
@@ -105,6 +106,8 @@ export const russianPhrases = [
   { id: 201, tab: 'tanisma', russian: 'Я турист из Турции',        pronunciation: 'Ya turist iz Turtsii',             turkish: "Türkiye'den gelen bir turistim",       english: 'I am a tourist from Turkey' },
   { id: 12,  tab: 'tanisma', russian: 'Я учу русский язык',        pronunciation: 'Ya uchu ruskiy yazık',             turkish: 'Rusça öğreniyorum',                   english: 'I am learning Russian' },
   { id: 13,  tab: 'tanisma', russian: 'Я немного говорю по-русски', pronunciation: 'Ya nyemnoga gavaryu pa-ruski',    turkish: 'Biraz Rusça konuşuyorum',             english: 'I speak a little Russian' },
+  { id: 404, tab: 'tanisma', russian: 'Какие планы на выходные?',  pronunciation: 'Kakiye planı na vıhadnıye?',       turkish: 'Hafta sonu planların ne?',            english: 'What are your plans for the weekend?' },
+  { id: 405, tab: 'tanisma', russian: 'Какой твой любимый день?',  pronunciation: 'Kakoy tvoy lyubimıy den?',         turkish: 'En sevdiğin gün hangisi?',            english: 'What is your favorite day?' },
 
   // ===== KAFE & RESTORAN =====
   { id: 7,   tab: 'kafe', russian: 'Меню, пожалуйста',            pronunciation: 'Menyu, pajalusta',                 turkish: 'Menü lütfen',                         english: 'Menu, please' },
@@ -208,7 +211,7 @@ export const russianPhrases = [
   { id: 313, tab: 'sayilar', russian: 'одиннадцать',   pronunciation: 'adinnadtsat',   turkish: 'on bir',    english: '11' },
   { id: 314, tab: 'sayilar', russian: 'двенадцать',    pronunciation: 'dvenadtsat',    turkish: 'on iki',    english: '12' },
   { id: 315, tab: 'sayilar', russian: 'тринадцать',    pronunciation: 'trinadtsat',    turkish: 'on üç',     english: '13' },
-  { id: 316, tab: 'sayilar', russian: 'четырнадцать',  pronunciation: 'chetirnادtsat', turkish: 'on dört',   english: '14' },
+  { id: 316, tab: 'sayilar', russian: 'четырнадцать',  pronunciation: 'chetirnadtsat', turkish: 'on dört',   english: '14' },
   { id: 317, tab: 'sayilar', russian: 'пятнадцать',    pronunciation: 'pyatnadtsat',   turkish: 'on beş',    english: '15' },
   { id: 318, tab: 'sayilar', russian: 'шестнадцать',   pronunciation: 'shestnadtsat',  turkish: 'on altı',   english: '16' },
   { id: 319, tab: 'sayilar', russian: 'семнадцать',    pronunciation: 'semnadtsat',    turkish: 'on yedi',   english: '17' },
@@ -257,6 +260,20 @@ export const russianPhrases = [
   { id: 310, tab: 'fiiller', russian: 'давать',    pronunciation: 'davat',     turkish: 'vermek',                english: 'to give',           example: '*Дайте* мне воду',             exampleTranslation: 'Give me water' },
   { id: 311, tab: 'fiiller', russian: 'находить',  pronunciation: 'nahadit',   turkish: 'bulmak',                english: 'to find',           example: 'Я не могу *найти* ключи',       exampleTranslation: 'I cannot find my keys' },
   { id: 312, tab: 'fiiller', russian: 'мочь',      pronunciation: 'moch',      turkish: 'yapabilmek',            english: 'to be able/can',    example: 'Я *могу* помочь',              exampleTranslation: 'I can help' },
+
+  // ─── GÜNLER ───
+  { id: 410, tab: 'gunler', russian: 'понедельник',  pronunciation: 'panidelnik',  turkish: 'Pazartesi',  english: 'Monday' },
+  { id: 411, tab: 'gunler', russian: 'вторник',      pronunciation: 'ftornik',     turkish: 'Salı',       english: 'Tuesday' },
+  { id: 412, tab: 'gunler', russian: 'среда',        pronunciation: 'srida',       turkish: 'Çarşamba',   english: 'Wednesday' },
+  { id: 413, tab: 'gunler', russian: 'четверг',      pronunciation: 'chetverk',    turkish: 'Perşembe',   english: 'Thursday' },
+  { id: 414, tab: 'gunler', russian: 'пятница',      pronunciation: 'pyatnitsa',   turkish: 'Cuma',       english: 'Friday' },
+  { id: 415, tab: 'gunler', russian: 'суббота',      pronunciation: 'subota',      turkish: 'Cumartesi',  english: 'Saturday' },
+  { id: 416, tab: 'gunler', russian: 'воскресенье',  pronunciation: 'vaskrisenye', turkish: 'Pazar',      english: 'Sunday' },
+  { id: 417, tab: 'gunler', russian: 'выходные',     pronunciation: 'vıhadnıye',   turkish: 'hafta sonu', english: 'weekend' },
+  { id: 418, tab: 'gunler', russian: 'неделя',       pronunciation: 'nidelya',     turkish: 'hafta',      english: 'week' },
+  { id: 419, tab: 'gunler', russian: 'сегодня',      pronunciation: 'sivodnya',    turkish: 'bugün',      english: 'today' },
+  { id: 420, tab: 'gunler', russian: 'завтра',       pronunciation: 'zaftra',      turkish: 'yarın',      english: 'tomorrow' },
+  { id: 421, tab: 'gunler', russian: 'вчера',        pronunciation: 'fchira',      turkish: 'dün',        english: 'yesterday' },
 ]
 
 export function getRussianByTab(tabId) {

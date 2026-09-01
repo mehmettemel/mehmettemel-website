@@ -10,13 +10,15 @@ import {
 } from '@/components/ui/tooltip'
 
 const skills = [
+  { cmd: '/dev', desc: 'Development kartı ekle' },
+  { cmd: '/pin', desc: 'Kartı sabitle / kaldır' },
+  { cmd: '/remove', desc: 'Siteden içerik sil' },
   { cmd: '/not', desc: 'Not / alıntı ekle' },
+  { cmd: '/food', desc: 'Food notu ekle' },
   { cmd: '/e', desc: 'Entrepreneur notu' },
   { cmd: '/en', desc: 'İngilizce kelime' },
-  { cmd: '/food', desc: 'Food notu ekle' },
   { cmd: '/w2b', desc: "W2B'ye ekle" },
   { cmd: '/life-tips', desc: 'Life Tips ipucu' },
-  { cmd: '/video', desc: 'Video analizi' },
 ]
 
 export function SkillsIcon({ className }) {

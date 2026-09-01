@@ -148,7 +148,8 @@ function TodoChecklist({ items, storageKey = 'daily-routines-checked' }) {
 
               <div className="border-t border-border/30 px-4 py-1.5">
                 {group.children.map((child) => (
-                  <div key={child.id} className="flex items-center gap-1 rounded-lg px-2 py-2.5 transition-colors hover:bg-secondary/30">
+                  <div key={child.id}>
+                  <div className="flex items-center gap-1 rounded-lg px-2 py-2.5 transition-colors hover:bg-secondary/30">
                     <button
                       onClick={() => toggle(child.id)}
                       className="flex flex-1 items-center gap-3 text-left"
@@ -171,6 +172,19 @@ function TodoChecklist({ items, storageKey = 'daily-routines-checked' }) {
                       </span>
                     </button>
                     {child.info && <InfoTooltip info={child.info} />}
+                  </div>
+                  {child.subItems?.length > 0 && (
+                    <ul className="mb-1.5 ml-9 space-y-1">
+                      {child.subItems.map((sub, i) => (
+                        <li
+                          key={i}
+                          className={`text-xs leading-relaxed ${checked[child.id] ? 'text-muted-foreground/60' : 'text-muted-foreground'}`}
+                        >
+                          • {sub}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                   </div>
                 ))}
               </div>
