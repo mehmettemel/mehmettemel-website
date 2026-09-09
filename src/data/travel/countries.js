@@ -630,6 +630,14 @@ export const tabs = {
           'Batı Afrika kıyısında, ekvator hattı üzerinde ıssız ada ülkesi; yağmur ormanı, kakao çiftlikleri ve el değmemiş plajlarıyla bilinir.',
         ],
       },
+      {
+        name: 'Güney Afrika',
+        flag: '🇿🇦',
+        notes: [
+          'Cape Town – Bantry Bay: Deniz manzaralı, sakin, nomadlar için iyi bir bölge.',
+          'Cape Town – Clifton: Ünlü plajlarıyla, nomadlar için iyi bir bölge.',
+        ],
+      },
     ],
   },
   northAmerica: {

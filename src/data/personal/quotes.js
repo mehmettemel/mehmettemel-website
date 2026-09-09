@@ -123,6 +123,7 @@ export const categories = {
       'It is very important to go out alone, to sit under a tree — not with a book, not with a companion, but by yourself — and observe the falling of a leaf, hear the lapping of the water, the fishermen\'s song, watch the flight of a bird, and of your own thoughts as they chase each other across the space of your mind. If you are able to be alone and watch these things, then you will discover extraordinary riches which no government can tax, no human agency can corrupt, and which can never be destroyed. — Jiddu Krishnamurti',
       'All roads eventually lead back to the interests you had as a child. The paradox of maturing is that you arrive back at the child.',
       'If you want to have amazing experiences, you have to put yourself in amazing places.',
+      'Every single con and scam start with rushing you.',
     ],
   },
 }

@@ -49,6 +49,434 @@ export const TAGS = [
 ]
 
 export const notes = [
+  // ─── til reposundan ───
+  {
+    id: 'event-propagation-fazlari',
+    type: 'qa',
+    title: 'Event propagation üç fazdan oluşur: capturing, target, bubbling nedir?',
+    summary:
+      'Olay önce yukarıdan aşağı iner (capturing), hedefte tetiklenir (target), sonra aşağıdan yukarı çıkar (bubbling).',
+    body: "addEventListener varsayılan olarak bubbling fazını dinler. Üçüncü argüman {capture:true} verirsen listener capturing fazında çalışır. stopPropagation bu zinciri kırar.",
+    tags: ['javascript'],
+    code: [
+      {
+        label: 'Capturing runs top-down, bubbling runs bottom-up',
+        lang: 'js',
+        snippet: `document.querySelector('html').addEventListener(
+  'click',
+  () => console.log('1. html - capturing'),
+  { capture: true }, // runs on the way DOWN, before the target
+)
+
+document.querySelector('button').addEventListener('click', () =>
+  console.log('2. button - target'),
+)
+
+document.querySelector('html').addEventListener('click', () =>
+  console.log('3. html - bubbling'), // default: runs on the way UP, after
+)
+
+// Click the button -> logs: 1, 2, 3`,
+      },
+      {
+        label: 'stopPropagation cuts the chain',
+        lang: 'js',
+        snippet: `button.addEventListener('click', (e) => {
+  e.stopPropagation() // bubbling phase never reaches ancestors
+  console.log('button clicked')
+})
+
+document.querySelector('html').addEventListener('click', () =>
+  console.log('never runs — propagation was stopped'),
+)`,
+      },
+    ],
+  },
+
+  {
+    id: 'statement-vs-expression-jsx',
+    type: 'qa',
+    title: 'Statement ile expression farkı nedir, JSX {} içine neden if yazılamaz?',
+    summary:
+      "Expression bir DEĞER üretir (5*10, a?b:c). Statement bir EYLEM tanımlar (if, for, let x=5). JSX {} sadece expression kabul eder.",
+    body: "if bir statement olduğu için JSX içine doğrudan yazılamaz — yerine ternary ya da && kullanılır, çünkü ikisi de bir değer üretir.",
+    tags: ['javascript', 'react'],
+    code: [
+      {
+        label: 'if is a statement — this breaks',
+        lang: 'jsx',
+        snippet: `// Error: JSX {} can only hold an expression, not a statement
+return (
+  <div>
+    {if (secondsRemaining > 0) {
+      \`\${secondsRemaining} seconds left\`
+    } else {
+      'Time expired!'
+    }}
+  </div>
+)`,
+      },
+      {
+        label: 'Fix — ternary is an expression, produces a value',
+        lang: 'jsx',
+        snippet: `return (
+  <div>
+    {secondsRemaining > 0 ? \`\${secondsRemaining} seconds left\` : 'Time expired!'}
+  </div>
+)
+// Same reason data.forEach(item => console.log(item)) works here
+// but a raw for-loop wouldn't — the forEach call IS an expression.`,
+      },
+    ],
+  },
+
+  {
+    id: 'proxy-pattern-js',
+    type: 'qa',
+    title: 'JavaScript Proxy nedir, hangi problemleri çözer?',
+    summary:
+      "Bir objeye erişimi/değişimini YAKALAYIP araya giren bir sarmalayıcı — get/set trap'leriyle validation, loglama, reaktivite kurulabilir.",
+    body: "Vue 3'ün reaktivite sistemi ve MobX gibi kütüphaneler state değişimini algılamak için tam olarak Proxy kullanır. Reflect, orijinal davranışı bozmadan hedef objeye erişmenin güvenli yoludur.",
+    tags: ['javascript'],
+    code: [
+      {
+        label: 'Intercept get/set with a validation layer',
+        lang: 'js',
+        snippet: `const person = { name: 'Ada', age: 42 }
+
+const personProxy = new Proxy(person, {
+  get(target, prop) {
+    console.log(\`reading \${prop}\`)
+    return Reflect.get(target, prop) // safe passthrough to the real object
+  },
+  set(target, prop, value) {
+    if (prop === 'age' && typeof value !== 'number') {
+      throw new TypeError('age must be a number') // validation on write
+    }
+    return Reflect.set(target, prop, value)
+  },
+})
+
+personProxy.name     // logs "reading name", returns 'Ada'
+personProxy.age = 43  // passes validation
+personProxy.age = 'x' // throws TypeError`,
+      },
+      {
+        label: 'This is how reactive libraries detect changes',
+        lang: 'js',
+        snippet: `// Simplified idea behind Vue 3 / MobX-style reactivity:
+function reactive(obj) {
+  return new Proxy(obj, {
+    set(target, key, value) {
+      Reflect.set(target, key, value)
+      rerenderComponentsThatReadThisKey(key) // the "magic" is just a set trap
+      return true
+    },
+  })
+}
+// No polling, no manual subscriptions — the Proxy intercepts every write.`,
+      },
+    ],
+  },
+
+  {
+    id: 'provider-context-pattern',
+    type: 'qa',
+    title: 'Provider (Context) pattern nasıl çalışır, hangi performans tuzağını taşır?',
+    summary:
+      "Context, veriyi prop drilling olmadan ağacın her yerine ulaştırır. Ama value her render'da yeni obje ise, onu okuyan HERKES gereksiz render olur.",
+    body: "value objesini useMemo ile sabitlemek, ya da sık/seyrek değişen veriyi ayrı context'lere bölmek bu tuzağın standart çözümüdür.",
+    tags: ['react', 'mimari'],
+    code: [
+      {
+        label: 'The pitfall — every consumer re-renders on every Provider render',
+        lang: 'jsx',
+        snippet: `function App() {
+  const [theme, setTheme] = useState('dark')
+
+  return (
+    // NEW object literal every render -> every consumer re-renders,
+    // even if theme itself didn't change
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <Toggle />
+      <List />
+    </ThemeContext.Provider>
+  )
+}`,
+      },
+      {
+        label: 'Fix — memoize the value',
+        lang: 'jsx',
+        snippet: `function App() {
+  const [theme, setTheme] = useState('dark')
+
+  const value = useMemo(() => ({ theme, setTheme }), [theme])
+  // reference only changes when theme actually changes
+
+  return (
+    <ThemeContext.Provider value={value}>
+      <Toggle />
+      <List />
+    </ThemeContext.Provider>
+  )
+}`,
+      },
+    ],
+  },
+
+  {
+    id: 'factory-pattern-js',
+    type: 'qa',
+    title: "Factory function pattern nedir, class'tan farkı ne?",
+    summary:
+      "new anahtar kelimesi olmadan obje döndüren bir fonksiyon. Tip'e göre farklı obje şekilleri üretmek için switch/if ile dallanabilir.",
+    body: "class'a göre avantajı: this bağlama sorunları yoktur, obje literal'i döndürdüğü için daha esnektir ve inheritance zincirine bağımlı değildir.",
+    tags: ['javascript'],
+    code: [
+      {
+        label: 'A factory branching by type',
+        lang: 'js',
+        snippet: `function createManager(name) {
+  return { name, role: 'Manager', manageTeam: () => \`\${name} manages\` }
+}
+function createDeveloper(name) {
+  return { name, role: 'Developer', writeCode: () => \`\${name} codes\` }
+}
+
+function employeeFactory(name, type) {
+  switch (type) {
+    case 'Manager': return createManager(name)
+    case 'Developer': return createDeveloper(name)
+    default: throw new Error(\`Unknown type: \${type}\`)
+  }
+}
+
+const ada = employeeFactory('Ada', 'Developer')
+ada.writeCode() // 'Ada codes' — no \`new\`, no \`this\` binding to worry about`,
+      },
+    ],
+  },
+
+  {
+    id: 'usestate-vs-usereducer',
+    type: 'qa',
+    title: 'useState ile useReducer arasında ne zaman hangisi seçilir?',
+    summary:
+      "useReducer aslında React'in İÇİNDE useState ile yazılmıştır — useState'in yapabildiği her şeyi useReducer de yapabilir, tersi tam doğru değildir.",
+    body: "Kural: state güncellemeleri birbirinden BAĞIMSIZSA useState yeterli. Bir güncelleme diğer state alanlarına BAĞLIYSA useReducer okunabilirliği artırır.",
+    tags: ['react'],
+    code: [
+      {
+        label: 'Same logic, two hooks',
+        lang: 'jsx',
+        snippet: `// useState — fine for independent, simple updates
+const [page, setPage] = useState(1)
+setPage((p) => p + 1)
+
+// useReducer — clearer when transitions depend on the action type,
+// and multiple fields update together in response to one event
+function reducer(state, action) {
+  switch (action.type) {
+    case 'GO_TO_NEXT_PAGE':
+      return { ...state, page: state.page + 1, hasVisited: true }
+    case 'RESET':
+      return { page: 1, hasVisited: false }
+  }
+}
+const [state, dispatch] = useReducer(reducer, { page: 1, hasVisited: false })
+dispatch({ type: 'GO_TO_NEXT_PAGE' })`,
+      },
+    ],
+  },
+
+  {
+    id: 'memory-leak-desenleri',
+    type: 'qa',
+    title: 'En yaygın 4 bellek sızıntısı deseni nedir?',
+    summary:
+      "Kaldırılmayan event listener, temizlenmeyen timer, gereksiz referans tutan closure, kapatılmayan bağlantı (socket/XHR) — dördü de aynı kökten: unutulan referans.",
+    body: "Bir şey hâlâ erişilebilir olduğu sürece garbage collector onu toplayamaz. useEffect'in cleanup fonksiyonu React'te bu dördünü de tek noktadan yönetir.",
+    tags: ['javascript', 'performans'],
+    code: [
+      {
+        label: 'Four leaks, side by side',
+        lang: 'js',
+        snippet: `// 1. Listener never removed — keeps the element referenced indefinitely
+window.addEventListener('resize', handleResize) // never cleaned up
+
+// 2. Timer never cleared — keeps its closure (and everything it captures) alive
+setInterval(() => console.log(bigData.length), 1000) // never cleared
+
+// 3. Closure captures more than it needs
+function attach() {
+  const bigData = new Array(1_000_000).fill('x')
+  el.onclick = () => {
+    console.log('clicked') // doesn't use bigData, but the closure
+  }                        // still pins it in memory if referenced nearby
+}
+
+// 4. Open connection never closed
+const socket = new WebSocket(url) // never socket.close()`,
+      },
+      {
+        label: 'React: cleanup functions close all four',
+        lang: 'jsx',
+        snippet: `useEffect(() => {
+  const onResize = () => console.log('resized')
+  window.addEventListener('resize', onResize)
+
+  const id = setInterval(poll, 1000)
+  const socket = new WebSocket(url)
+
+  return () => { // runs on unmount — this is where leaks are prevented
+    window.removeEventListener('resize', onResize)
+    clearInterval(id)
+    socket.close()
+  }
+}, [])`,
+      },
+    ],
+  },
+
+  {
+    id: 'flexbox-min-width-tuzagi',
+    type: 'qa',
+    title: "Flexbox eleman neden min-width'in altına küçülmüyor?",
+    summary:
+      "Flexbox algoritması bir çocuğu içeriğinin MİNİMUM boyutundan (default: auto) daha fazla küçültmez — flex-shrink değeri ne olursa olsun.",
+    body: "En sık karşılaşılan yer: bir input/metin flex satırında taşar, container'ı genişletir. Çözüm min-width: 0 ile bu varsayılan alt sınırı geçersiz kılmaktır.",
+    tags: ['css'],
+    code: [
+      {
+        label: 'Default min-width: auto blocks shrinking',
+        lang: 'css',
+        snippet: `.flex-container {
+  display: flex;
+  width: 300px;
+}
+
+.flex-child {
+  flex-shrink: 1; /* looks like it should shrink freely, but... */
+  /* min-width defaults to "auto" -> won't shrink below CONTENT size,
+     so a long unbroken string of text overflows the container instead */
+}`,
+      },
+      {
+        label: 'Fix — override the implicit minimum',
+        lang: 'css',
+        snippet: `.flex-child {
+  min-width: 0; /* now it CAN shrink below its content size */
+  overflow: hidden;
+  text-overflow: ellipsis; /* pairs well once shrinking is allowed */
+}
+/* Same fix applies to flex-direction: column with min-height: 0 */`,
+      },
+    ],
+  },
+
+  {
+    id: 'realtime-veri-batching-performans',
+    type: 'qa',
+    title: "Yüksek frekanslı realtime veri (socket) React'i nasıl kilitler, nasıl batchlenir?",
+    summary:
+      "Saniyede yüzlerce socket event'i doğrudan state'e yazarsan her biri ayrı render tetikler. Veriyi ara belleğe topla, aralıklı TOPLU state güncelle.",
+    body: "Gerçek bir vakada anlık konum güncellemesi dakikada 10.000 render'a yol açıyordu. Veriyi 100ms'lik pencerelerde biriktirip tek seferde işlemek render sayısını 50'ye indirdi — aynı veri, 200 kat daha az render.",
+    tags: ['react', 'performans', 'mimari'],
+    code: [
+      {
+        label: 'Naive — one render per socket message',
+        lang: 'js',
+        snippet: `socket.onmessage = (event) => {
+  const location = JSON.parse(event.data)
+  setCourierLocation(location) // fires on EVERY message — hundreds per second
+}`,
+      },
+      {
+        label: 'Batched — collect, flush on an interval',
+        lang: 'js',
+        snippet: `let buffer = []
+
+socket.onmessage = (event) => {
+  buffer.push(JSON.parse(event.data)) // just accumulate, no render yet
+}
+
+setInterval(() => {
+  if (buffer.length === 0) return
+  setCourierLocations((prev) => applyUpdates(prev, buffer)) // ONE render
+  buffer = []
+}, 100) // 100ms window: imperceptible to a human, huge for React
+
+// Bonus: widen the interval when the map is zoomed out — the user
+// can't perceive sub-second position changes at that scale anyway.`,
+      },
+    ],
+  },
+
+  {
+    id: 'function-declaration-vs-expression',
+    type: 'qa',
+    title: 'Function declaration ile function expression farkı nedir, hoisting nasıl etkiler?',
+    summary:
+      'Declaration tamamen hoistlenir — tanımdan ÖNCE çağrılabilir. Expression hoistlenmez, sadece o satıra gelince var olur.',
+    body: "const ile tanımlanan bir function expression, tanımlanana kadar Temporal Dead Zone'dadır — çağırmaya çalışmak ReferenceError fırlatır, declaration'da bu risk yoktur.",
+    tags: ['javascript'],
+    code: [
+      {
+        label: 'Declaration — callable before its definition',
+        lang: 'js',
+        snippet: `sayHi() // works — declarations are hoisted with their full body
+
+function sayHi() {
+  console.log('hi')
+}`,
+      },
+      {
+        label: 'Expression — not callable before its line',
+        lang: 'js',
+        snippet: `sayHi() // ReferenceError: Cannot access 'sayHi' before initialization
+
+const sayHi = function () {
+  console.log('hi')
+}
+// Same applies to arrow functions: const sayHi = () => {...}`,
+      },
+    ],
+  },
+
+  {
+    id: 'refresh-token-flow',
+    type: 'qa',
+    title: 'Access token ile refresh token neden ikisi birden kullanılır?',
+    summary:
+      'Access token KISA ömürlüdür — çalınsa bile hızla geçersiz olur. Refresh token UZUN ömürlüdür, sadece yeni access token almak için kullanılır.',
+    body: "Refresh token genelde httpOnly cookie'de saklanır (JS okuyamaz, XSS'e kapalı); access token bellekte kısa ömürlü tutulur. Süresi dolunca istemci sessizce refresh token ile yenisini alır.",
+    tags: ['güvenlik', 'backend'],
+    code: [
+      {
+        label: 'Why two tokens instead of one long-lived one',
+        lang: 'js',
+        snippet: `// Access token: short-lived (e.g. 15 min), sent with every API request
+fetch('/api/orders', {
+  headers: { Authorization: \`Bearer \${accessToken}\` },
+})
+
+// When it expires, the client uses the refresh token to get a NEW one —
+// silently, without asking the user to log in again
+async function refreshAccessToken() {
+  const res = await fetch('/api/refresh', {
+    method: 'POST',
+    credentials: 'include', // sends the httpOnly refresh token cookie
+  })
+  const { accessToken } = await res.json()
+  return accessToken
+}
+
+// If the access token leaks (XSS, logs, browser history), the damage
+// window is minutes, not the full session lifetime — that's the
+// entire reason this split exists.`,
+      },
+    ],
+  },
   // ─── Machine coding: implement X ───
   {
     id: 'debounce-implementasyonu',

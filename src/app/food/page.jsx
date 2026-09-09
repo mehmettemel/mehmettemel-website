@@ -10,16 +10,21 @@ export const metadata = {
 
 export default function FoodPage() {
   return (
-    <Container>
-      <div className="mx-auto max-w-5xl py-8 sm:py-12">
-        <div className="mb-6 text-center">
-          <h1 className="text-2xl font-bold tracking-tight text-foreground">
-            {graphTitle}
-          </h1>
-          <p className="mt-1 text-sm text-muted-foreground">{graphSubtitle}</p>
+    <>
+      <Container>
+        <div className="mx-auto max-w-5xl pt-8 sm:pt-12">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold tracking-tight text-foreground">
+              {graphTitle}
+            </h1>
+            <p className="mt-1 text-sm text-muted-foreground">{graphSubtitle}</p>
+          </div>
         </div>
-        <NoteGraph />
+      </Container>
+      {/* grafik kenardan kenara: küme nefes alsın */}
+      <div className="w-full pb-8">
+        <NoteGraph heightClass="h-[78vh]" />
       </div>
-    </Container>
+    </>
   )
 }

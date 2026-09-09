@@ -710,6 +710,12 @@ export const nodes = [
     tags: ['mutfak', 'et'],
     body: 'Kıymayı normal pişirdiğinizde protein lifleri ısı etkisiyle sıkışır ve sularını dışarı salar; bu da etin grileşmesine ve kurumasına neden olur. Karbonat, etin pH seviyesini yükselterek protein liflerinin birbirini itmesini sağlar. Böylece liflerin arasında boşluk kalır ve et suyunu içine hapseder. Karbonatın etin her yerine eşit dağılması için bir miktar su içinde çözdürülerek kıymaya eklenmesi önerilir. Genel Ölçü: 450-500 gram kıyma için 1/4 ila 1/2 çay kaşığı karbonat, 1 tatlı kaşığı ile 2 yemek kaşığı arasında suyla karıştırılarak kıymaya dökülür. Köfte/Hamburger Köftesi İçin (225-250 gram): 1/8 çay kaşığı karbonat ve 1 çay kaşığı su karıştırılır. Kıymayı çok yoğurmadan, havalandırarak hafifçe harmanlamak etin sertleşmesini önler. Karbonat çok hızlı etki eder, saatlerce bekletmeye gerek yok; ekledikten sonra birkaç dakika dinlendirip hemen pişirmeye başlayabilirsiniz.',
   },
+  {
+    id: 'kislik-domates-botulizm-riski',
+    title: 'Kışlık Domates ve Botulizm',
+    tags: ['konserve', 'gıda-güvenliği', 'domates'],
+    body: 'Güzide memleketimizde gene kışlık domates hazırlıkları başlamış. Arkadaşlar hata yaparsanız küf falan görülür yemezsiniz ama botulizm zehirlenmesi sizi canınızdan edebilir.\n\nBotulizm "Clostridium Botulinum" bakterisinin ürettiği ölümcül toksindir. Şu meşhur botoks da ismini buradan alır. Bunu kokudan tattan falan anlayamazsınız.\n\nBu kışlık domatesleri yaparken kavanozun dibine yarım çay kaşığı limon tuzu atın ve bu riski önleyin. Hele o domatesin içine soğan, sarımsak, kabak, patlıcan gibi şeyler atıyorsanız hiç ihmal etmeyin limon tuzunu asitliği garanti altına alın. Her sene ülkemizde onlarca insan bu sebepten ölüyor.\n\nYarım çay kaşığı limon tuzu canınızı kurtarabilir. Eşe dosta paylaşın, bilmeyenler bilsin, bilenler övünsün. Sosyal medya cehaleti ve tarifleri can almasın.',
+  },
 ]
 
 export const links = [
@@ -753,4 +759,5 @@ export const links = [
   { source: 'microplane-rende', target: 'sarimsak-kesim-lezzet' },
   { source: 'yesil-sebze-buz-soku', target: 'sebze-haslama-kurali' },
   { source: 'karabiber-sona-dogru', target: 'ot-ekleme-zamani' },
+  { source: 'kislik-domates-botulizm-riski', target: 'lahana-tursusu' },
 ]
