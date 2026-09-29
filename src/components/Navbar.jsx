@@ -289,8 +289,14 @@ function MobileNav() {
                     <Link href="/lists/w2b" onClick={closeSheet} className={mobileNavLinkClass}>
                       <span>🛒</span> W2B
                     </Link>
+                    <Link href="/lists/travel" onClick={closeSheet} className={mobileNavLinkClass}>
+                      <span>✈️</span> Travel
+                    </Link>
                     <Link href="/lists/russian" onClick={closeSheet} className={mobileNavLinkClass}>
                       <span>🇷🇺</span> Russian
+                    </Link>
+                    <Link href="/lists/questions" onClick={closeSheet} className={mobileNavLinkClass}>
+                      <span>❓</span> Questions
                     </Link>
                     <Link href="/lists/watchlist" onClick={closeSheet} className={mobileNavLinkClass}>
                       <span>🎬</span> Watchlist

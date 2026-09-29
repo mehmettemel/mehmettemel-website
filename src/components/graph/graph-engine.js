@@ -4,9 +4,13 @@
    Fizik (her karede, 3B):
    - kısa menzilli itme: noktalar birbirine yaklaşınca ayrılır
    - bağlantı yayı: bağlı notlar belli mesafede durur
-   - zayıf merkez çekimi + yumuşak küresel sınır: sert duvar yok,
-     dışarı taşan nokta nazikçe geri çekilir (kenara yapışma olmaz)
+   - zayıf merkez çekimi + yumuşak elipsoid sınır: sert duvar yok,
+     dışarı taşan nokta nazikçe geri çekilir (kenara yapışma olmaz);
+     elipsoid ekran oranını izler → geniş ekranda küme yatayda dolar
    - salınım (drift): her noktanın kendine özgü fazı, sürekli süzülür
+
+   Dış API: setActive(id), flyTo(id) — kamerayı noktaya döndürür,
+   setFilter(ids) — etiket/arama süzgeci, shuffle(), dispose()
 
    Render:
    - InstancedMesh → tüm küreler tek draw call
@@ -25,8 +29,9 @@ const CFG = {
   repulse: 0.9,
   repulseRange: 6.4, // bu mesafenin dışında itme yok → dolu, havadar küme
   center: 0.003,
-  bound: 18, // yumuşak sınır yarıçapı
+  bound: 18, // yumuşak sınır yarıçapı (elipsoidin kısa ekseni)
   boundK: 0.03,
+  maxStretch: 2.1, // geniş ekranda küme yatayda en fazla bu kadar uzar
   damp: 0.9,
   drift: 0.0045, // düşük: sakin, ağır süzülme
   warmup: 260, // ilk karede yerleşmiş görünsün
@@ -66,13 +71,18 @@ export class GraphEngine {
 
     this.hover = -1
     this.active = -1
+    this.fly = -1 // kameranın önüne getirilecek nokta
+    this.filter = null // etiket/arama süzgeci: görünür indeks kümesi
     this.userMoved = false
     this.snapColors = true
     this.disposed = false
     this.t = 0
+    this.sx = 1 // elipsoid ölçekleri: ekran oranına göre küme uzar
+    this.sy = 1
 
     this.initPhysics()
-    this.initScene()
+    this.initScene() // fitCamera → sx/sy belirlenir
+    this.randomize() // elipsoid ölçekleriyle yeniden dağıt
     this.initLabels()
     this.applyTheme()
     this.bind()
@@ -106,13 +116,13 @@ export class GraphEngine {
   randomize() {
     const r0 = CFG.bound * 0.8
     for (let i = 0; i < this.n; i++) {
-      // küre içinde düzgün dağılım
+      // elipsoid içinde düzgün dağılım
       const u = Math.random() * 2 - 1
       const th = Math.random() * Math.PI * 2
       const s = Math.sqrt(1 - u * u)
       const r = r0 * Math.cbrt(Math.random())
-      this.pos[i * 3] = r * s * Math.cos(th)
-      this.pos[i * 3 + 1] = r * s * Math.sin(th)
+      this.pos[i * 3] = r * s * Math.cos(th) * this.sx
+      this.pos[i * 3 + 1] = r * s * Math.sin(th) * this.sy
       this.pos[i * 3 + 2] = r * u
       this.vel[i * 3] = this.vel[i * 3 + 1] = this.vel[i * 3 + 2] = 0
     }
@@ -162,19 +172,23 @@ export class GraphEngine {
       vel[bx + 2] -= dz * f
     }
 
-    // merkez çekimi + yumuşak sınır + salınım + sönüm + entegrasyon
+    // merkez çekimi + yumuşak elipsoid sınır + salınım + sönüm + entegrasyon
+    // Konum elipsoid uzayına ölçeklenir (x/sx, y/sy, z): kuvvetler orada
+    // küresel hesaplanır, geri ölçeklenir → küme ekran oranında uzar.
     this.t += 1
     const drift = withDrift && !this.reduceMotion ? CFG.drift : 0
+    const isx = 1 / this.sx
+    const isy = 1 / this.sy
     for (let i = 0; i < n; i++) {
       const ix = i * 3
-      const px = pos[ix]
-      const py = pos[ix + 1]
+      const px = pos[ix] * isx
+      const py = pos[ix + 1] * isy
       const pz = pos[ix + 2]
       const r = Math.sqrt(px * px + py * py + pz * pz) || 1e-3
       let pull = CFG.center
       if (r > CFG.bound) pull += (CFG.boundK * (r - CFG.bound)) / r
-      vel[ix] -= px * pull
-      vel[ix + 1] -= py * pull
+      vel[ix] -= px * pull * isx
+      vel[ix + 1] -= py * pull * isy
       vel[ix + 2] -= pz * pull
 
       if (drift) {
@@ -232,7 +246,7 @@ export class GraphEngine {
     controls.dampingFactor = 0.06
     controls.enablePan = false
     controls.minDistance = 16
-    controls.maxDistance = 100
+    controls.maxDistance = 140
     controls.rotateSpeed = 0.6
     controls.autoRotate = !this.reduceMotion
     controls.autoRotateSpeed = 0.28
@@ -297,20 +311,29 @@ export class GraphEngine {
 
   fitCamera() {
     const aspect = this.camera.aspect
+    // küme ekran oranını izler: yatay ekranda genişler, dikeyde uzar
+    if (aspect >= 1) {
+      this.sx = THREE.MathUtils.clamp(aspect * 0.9, 1, CFG.maxStretch)
+      this.sy = 1
+    } else {
+      this.sx = 1
+      this.sy = THREE.MathUtils.clamp((1 / aspect) * 0.8, 1, 1.8)
+    }
+
     const vfov = THREE.MathUtils.degToRad(CFG.fov)
-    const hfov = 2 * Math.atan(Math.tan(vfov / 2) * aspect)
-    const half = Math.min(vfov, hfov) / 2
-    // geniş ekranda küme çevresinde nefes payı; dar (dikey) ekranda yakın dur,
-    // kenardan taşan birkaç nokta sorun değil
-    const fit = aspect < 0.8 ? 0.78 : 1.05
-    const dist = THREE.MathUtils.clamp(
-      (CFG.bound * fit) / Math.sin(half) + 2,
-      22,
-      90,
+    const tanV = Math.tan(vfov / 2)
+    const tanH = tanV * aspect
+    // her iki eksende de küme sığsın; öne yakın noktalar için derinlik payı.
+    // Küme sınıra kadar dolmaz (itme menzili kısa), o yüzden fit < 1.
+    const fit = aspect < 0.8 ? 0.72 : 0.86
+    const need = Math.max(
+      (CFG.bound * this.sy * fit) / tanV,
+      (CFG.bound * this.sx * fit) / tanH,
     )
+    const dist = THREE.MathUtils.clamp(need + CFG.bound * 0.3, 22, 120)
     if (!this.userMoved) this.camera.position.setLength(dist)
-    this.scene.fog.near = dist - 8
-    this.scene.fog.far = dist + 26
+    this.scene.fog.near = dist - 6
+    this.scene.fog.far = dist + CFG.bound * 1.6
   }
 
   /* ---------- etiketler ---------- */
@@ -342,6 +365,7 @@ export class GraphEngine {
     this.colFg = fg
     this.colPrimary = primary
     this.colDim = fg.clone().lerp(bg, 0.72)
+    this.colGhost = fg.clone().lerp(bg, 0.86) // süzgeç dışı kalanlar
     this.colLink = bg.clone().lerp(fg, 0.4)
     this.colLinkDim = bg.clone().lerp(fg, 0.14)
     this.scene.fog.color.copy(bg)
@@ -425,7 +449,6 @@ export class GraphEngine {
       this.host.style.cursor = best >= 0 ? 'pointer' : 'grab'
       this.handlers.onHover?.(best >= 0 ? this.graph.nodes[best].id : null)
     }
-    this.controls.autoRotate = !this.reduceMotion && this.hover < 0
   }
 
   /* ---------- dış API ---------- */
@@ -434,10 +457,26 @@ export class GraphEngine {
     this.active = id != null ? (this.index.get(id) ?? -1) : -1
   }
 
+  // Kamerayı yumuşakça döndürüp noktayı önüne getirir (mesafe korunur)
+  flyTo(id) {
+    const i = this.index.get(id)
+    this.fly = i == null ? -1 : i
+  }
+
+  // ids: null → süzgeç yok; dizi → yalnız bu notlar belirgin
+  setFilter(ids) {
+    if (!ids) {
+      this.filter = null
+      return
+    }
+    this.filter = new Set(ids.map((id) => this.index.get(id)).filter((i) => i != null))
+  }
+
   shuffle() {
     this.randomize()
     this.hover = -1
     this.active = -1
+    this.fly = -1
     for (let i = 0; i < 12; i++) this.step(false)
   }
 
@@ -478,28 +517,51 @@ export class GraphEngine {
     this.updateLabels(focus, near)
     this.snapColors = false
 
+    this.updateFly()
+    this.controls.autoRotate =
+      !this.reduceMotion && this.hover < 0 && this.active < 0 && this.fly < 0
     this.controls.update()
     this.renderer.render(this.scene, this.camera)
     this.raf = requestAnimationFrame(this.loop)
   }
 
+  // kamera konumunu, mesafeyi koruyarak hedef noktanın doğrultusuna çeker
+  updateFly() {
+    if (this.fly < 0) return
+    const ix = this.fly * 3
+    const cam = this.camera.position
+    const dist = cam.length()
+    this.v3.set(this.pos[ix], this.pos[ix + 1], this.pos[ix + 2])
+    if (this.v3.lengthSq() < 1e-4) {
+      this.fly = -1
+      return
+    }
+    this.v3.setLength(dist)
+    cam.lerp(this.v3, 0.07)
+    cam.setLength(dist)
+    if (cam.distanceToSquared(this.v3) < 0.05) this.fly = -1
+  }
+
   updateSpheres(focus, near, lerp) {
-    const { pos, boost, mesh, dummy } = this
+    const { pos, boost, mesh, dummy, filter } = this
     const colors = mesh.instanceColor.array
     for (let i = 0; i < this.n; i++) {
       const ix = i * 3
       const isFocus = i === focus
       const isNear = near ? near.has(i) : false
-      const target = isFocus ? 1.45 : isNear ? 1.15 : 1
+      const ghost = filter ? !filter.has(i) && !isFocus && !isNear : false
+      const target = isFocus ? 1.45 : isNear ? 1.15 : ghost ? 0.72 : 1
       boost[i] += (target - boost[i]) * 0.18
 
       const col = isFocus
         ? this.colPrimary
-        : near
-          ? isNear
-            ? this.colFg
-            : this.colDim
-          : this.colFg
+        : ghost
+          ? this.colGhost
+          : near
+            ? isNear
+              ? this.colFg
+              : this.colDim
+            : this.colFg
       colors[ix] += (col.r - colors[ix]) * lerp
       colors[ix + 1] += (col.g - colors[ix + 1]) * lerp
       colors[ix + 2] += (col.b - colors[ix + 2]) * lerp
@@ -526,9 +588,10 @@ export class GraphEngine {
       linkPos[o + 5] = pos[b * 3 + 2]
 
       const touches = focus >= 0 && (a === focus || b === focus)
+      const ghost = this.filter && !(this.filter.has(a) && this.filter.has(b))
       const col = touches
         ? this.colPrimary
-        : near
+        : near || ghost
           ? this.colLinkDim
           : this.colLink
       for (let v = 0; v < 6; v += 3) {
@@ -577,13 +640,15 @@ export class GraphEngine {
       }
     } else {
       // kameraya en yakınlar; ekranda çakışanlar atlanır (üst üste yazı yok)
-      const count = THREE.MathUtils.clamp(Math.round((w * h) / 60000), 4, 12)
+      // büyük ekranda daha çok etiket, süzgeç varsa yalnız süzülenler
+      const count = THREE.MathUtils.clamp(Math.round((w * h) / 42000), 4, 28)
       this.order.sort((a, b) => rank[a] - rank[b])
       const placed = []
       let shown = 0
       for (const i of this.order) {
         if (shown >= count) break
         if (proj[i * 3 + 2] === Infinity) break
+        if (this.filter && !this.filter.has(i)) continue
         const sx = proj[i * 3]
         const sy = proj[i * 3 + 1]
         const clash = placed.some(

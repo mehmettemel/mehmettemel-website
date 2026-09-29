@@ -301,6 +301,7 @@ export const tabs = {
           'Kredi kartı concierge\'i kullan: American Express, Visa Infinite vs. gibi kartların concierge servisi üzerinden rezervasyon yaptırdığında bazen OTA\'dan daha iyi fiyat + otel perkleri (erken check-in, upgrade, ücretsiz kahvaltı vs.) alabiliyorsun.',
           'Check-in\'de şikayet et veya nazikçe sor: Oda beğenmezsen resepsiyona "Bu oda sitede gördüğüm fotoğraflarla hiç uyuşmuyor" dersen sıklıkla daha iyi bir odaya geçiriyorlar.',
           'Küçük otellerde durum tersine dönebiliyor: Bazı bağımsız oteller OTA rezervasyonlarını daha çok önemsiyor çünkü Booking.com\'da yüksek puan almak onlar için çok kritik.',
+          'If you ever arrive to a hotel too early and the room isn\'t ready, sprawl out in the lobby, put on a sleeping mask and start loudly snoring. Your room will be ready in 5 minutes.',
         ],
       },
       'Hostels': {

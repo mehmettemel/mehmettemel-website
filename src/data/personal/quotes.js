@@ -124,6 +124,9 @@ export const categories = {
       'All roads eventually lead back to the interests you had as a child. The paradox of maturing is that you arrive back at the child.',
       'If you want to have amazing experiences, you have to put yourself in amazing places.',
       'Every single con and scam start with rushing you.',
+      'İnsan, istediği her şeyi elde edebilir; ancak elde ettikten sonra, artık onu istemediğini anlar. Hayat, daima yeni bir arzu ile yer değiştiren, tatmin edilmemiş bir iradenin trajedisidir. — Arthur Schopenhauer',
+      'Don\'t forget that the compass was invented before the clock, because direction is more important than time.',
+      'To be happy you must eliminate two things: the fear of a bad future and the memory of a bad past. Anxiety and Depression, in other words.',
     ],
   },
 }

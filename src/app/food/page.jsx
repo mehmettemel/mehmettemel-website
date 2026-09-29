@@ -1,4 +1,3 @@
-import { Container } from '@/components/Container'
 import { NoteGraph } from '@/components/graph/NoteGraph'
 import { graphTitle, graphSubtitle } from '@/data/food-notes'
 
@@ -8,23 +7,12 @@ export const metadata = {
   robots: { index: false, follow: false },
 }
 
+// Navbar: py-3 + h-9 + 1px kenarlık = 61px. Sahne kalan tüm ekranı alır;
+// başlık, süzgeçler ve panel tuvalin üstünde yüzer (NoteGraph içinde).
 export default function FoodPage() {
   return (
-    <>
-      <Container>
-        <div className="mx-auto max-w-5xl pt-8 sm:pt-12">
-          <div className="text-center">
-            <h1 className="text-2xl font-bold tracking-tight text-foreground">
-              {graphTitle}
-            </h1>
-            <p className="mt-1 text-sm text-muted-foreground">{graphSubtitle}</p>
-          </div>
-        </div>
-      </Container>
-      {/* grafik kenardan kenara: küme nefes alsın */}
-      <div className="w-full pb-8">
-        <NoteGraph heightClass="h-[78vh]" />
-      </div>
-    </>
+    <div className="relative h-[calc(100dvh-61px)] min-h-[560px] w-full overflow-hidden">
+      <NoteGraph title={graphTitle} subtitle={graphSubtitle} />
+    </div>
   )
 }

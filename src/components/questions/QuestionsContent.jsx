@@ -1,7 +1,52 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useState, useRef, useEffect, useMemo } from 'react'
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronDown,
+  Search,
+  Check,
+  X,
+} from 'lucide-react'
+
+/* ============================================================
+   Questions sayfası: masaüstünde sekme + alt-kategori pill'leri
+   (DesktopQuestions), mobilde ayrı bir gezinme: kategori kartları
+   → arama → tek kategori listesi (MobileQuestions). İki uç noktada
+   ihtiyaç farklı: masaüstünde yatay sekmeler sorun değil, mobilde
+   soru bulmak ve okumak öncelik — o yüzden ayrı bileşen.
+   ============================================================ */
+
+const lower = (s) => s.toLocaleLowerCase('tr')
+
+function itemText(content) {
+  return typeof content === 'string' ? content : content.text
+}
+
+function itemSubItems(content) {
+  return typeof content === 'string' ? null : content.subItems
+}
+
+function flattenTab(tab) {
+  const items = []
+  Object.entries(tab.categories).forEach(([categoryKey, cat]) => {
+    cat.items.forEach((content) => {
+      items.push({ categoryKey, categoryLabel: cat.label, content })
+    })
+  })
+  return items
+}
+
+function matches(content, query) {
+  const subs = itemSubItems(content)
+  const hay = lower(itemText(content) + ' ' + (subs ? subs.join(' ') : ''))
+  return hay.includes(query)
+}
+
+/* ============================================================
+   Masaüstü: sekme + alt-kategori pill'leri + düz liste (önceki UI)
+   ============================================================ */
 
 function SubCategoryPills({ categories, selected, onSelect }) {
   const scrollRef = useRef(null)
@@ -269,7 +314,7 @@ function TabBar({ tabs: allTabs, activeTab, onTabChange }) {
   )
 }
 
-export function QuestionsContent({ tabs, title }) {
+function DesktopQuestions({ tabs, title }) {
   const tabKeys = Object.keys(tabs)
   const [activeTab, setActiveTab] = useState(tabKeys[0])
 
@@ -293,5 +338,290 @@ export function QuestionsContent({ tabs, title }) {
         ) : null,
       )}
     </div>
+  )
+}
+
+/* ============================================================
+   Mobil: kategori kartları → arama → tek kategori listesi.
+   Amaç: soru bulmak (arama, kısa kart listesi) ve okumak
+   (geniş satır aralığı, tek soru = tek kart) masaüstündeki yatay
+   sekme + yoğun liste düzeninden daha kolay olsun.
+   ============================================================ */
+
+function MobileSearchBar({ value, onChange, placeholder }) {
+  return (
+    <div className="flex items-center gap-2 rounded-full border border-border bg-secondary/30 px-3.5 py-2.5">
+      <Search className="h-4 w-4 shrink-0 text-muted-foreground" />
+      <input
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className="w-full min-w-0 bg-transparent text-sm text-foreground placeholder:text-muted-foreground/70 focus:outline-none"
+      />
+      {value && (
+        <button
+          onClick={() => onChange('')}
+          aria-label="Aramayı temizle"
+          className="shrink-0 text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <X className="h-3.5 w-3.5" />
+        </button>
+      )}
+    </div>
+  )
+}
+
+function MobileQuestionCard({ text, subItems, categoryLabel, showCategory, checked, onToggle }) {
+  const [showExample, setShowExample] = useState(false)
+
+  return (
+    <div
+      className={`rounded-xl border p-4 transition-colors ${
+        checked ? 'border-border/40 bg-secondary/10' : 'border-border/60 bg-card'
+      }`}
+    >
+      <div className="flex items-start gap-3">
+        <button
+          onClick={onToggle}
+          aria-label={checked ? 'Soruldu işaretini kaldır' : 'Soruldu olarak işaretle'}
+          aria-pressed={checked}
+          className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 transition-colors ${
+            checked
+              ? 'border-primary bg-primary text-primary-foreground'
+              : 'border-border text-transparent'
+          }`}
+        >
+          <Check className="h-3.5 w-3.5" />
+        </button>
+        <div className="min-w-0 flex-1">
+          {showCategory && (
+            <span className="mb-1.5 inline-block rounded-full bg-secondary/60 px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
+              {categoryLabel}
+            </span>
+          )}
+          <p
+            className={`text-[15px] leading-relaxed transition-colors ${
+              checked ? 'text-muted-foreground line-through' : 'text-foreground'
+            }`}
+          >
+            {text}
+          </p>
+          {subItems?.length > 0 && (
+            <div className="mt-2">
+              <button
+                onClick={() => setShowExample((v) => !v)}
+                className="inline-flex items-center gap-1 text-xs font-medium text-primary/80"
+              >
+                {showExample ? 'Örneği gizle' : 'Örnek diyaloğu göster'}
+                <ChevronDown
+                  className={`h-3.5 w-3.5 transition-transform ${showExample ? 'rotate-180' : ''}`}
+                />
+              </button>
+              {showExample && (
+                <div className="mt-2 space-y-1.5 rounded-lg border border-border/40 bg-muted/30 px-3 py-2.5">
+                  {subItems.map((sub, i) => (
+                    <p key={i} className="text-xs leading-relaxed text-muted-foreground">
+                      {sub}
+                    </p>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function MobileTabView({ tab, onBack }) {
+  const [query, setQuery] = useState('')
+  const [checked, setChecked] = useState({})
+
+  const items = useMemo(
+    () => flattenTab(tab).map((it, id) => ({ ...it, id })),
+    [tab],
+  )
+  const categoryCount = Object.keys(tab.categories).length
+
+  const filtered = useMemo(() => {
+    const q = lower(query.trim())
+    if (!q) return items
+    return items.filter((it) => matches(it.content, q))
+  }, [items, query])
+
+  const answeredCount = Object.values(checked).filter(Boolean).length
+
+  return (
+    <div>
+      {/* top-[61px]: navbar yüksekliği (py-3 + h-9 + 1px kenarlık) — food/page.jsx'teki değerle aynı */}
+      <div className="sticky top-[61px] z-30 -mt-1 bg-background/95 pb-3 pt-3 backdrop-blur">
+        <div className="mb-3 flex items-center gap-2">
+          <button
+            onClick={onBack}
+            aria-label="Kategorilere dön"
+            className="-ml-1.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground active:bg-secondary/80"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <h2 className="min-w-0 flex-1 truncate text-base font-semibold text-foreground">
+            <span className="mr-1.5">{tab.emoji}</span>
+            {tab.label}
+          </h2>
+          <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
+            {answeredCount} / {items.length}
+          </span>
+        </div>
+        <MobileSearchBar value={query} onChange={setQuery} placeholder="Bu kategoride ara…" />
+      </div>
+
+      <div className="flex flex-col gap-2.5 pt-4">
+        {filtered.length === 0 ? (
+          <div className="py-16 text-center">
+            <p className="text-sm text-muted-foreground">
+              {items.length === 0 ? 'Bu kategoride soru yok' : 'Sonuç bulunamadı'}
+            </p>
+          </div>
+        ) : (
+          filtered.map((item) => (
+            <MobileQuestionCard
+              key={item.id}
+              text={itemText(item.content)}
+              subItems={itemSubItems(item.content)}
+              categoryLabel={item.categoryLabel}
+              showCategory={categoryCount > 1}
+              checked={!!checked[item.id]}
+              onToggle={() => setChecked((p) => ({ ...p, [item.id]: !p[item.id] }))}
+            />
+          ))
+        )}
+      </div>
+    </div>
+  )
+}
+
+function MobileHome({ tabs, tabKeys, title, onOpenTab }) {
+  const [query, setQuery] = useState('')
+
+  const allItems = useMemo(() => {
+    const out = []
+    tabKeys.forEach((tabKey) => {
+      flattenTab(tabs[tabKey]).forEach((it) => {
+        out.push({
+          ...it,
+          tabKey,
+          tabLabel: tabs[tabKey].label,
+          tabEmoji: tabs[tabKey].emoji,
+        })
+      })
+    })
+    return out
+  }, [tabs, tabKeys])
+
+  const results = useMemo(() => {
+    const q = lower(query.trim())
+    if (q.length < 2) return null
+    return allItems.filter((it) => matches(it.content, q))
+  }, [allItems, query])
+
+  return (
+    <div>
+      <h1 className="mb-1 text-center text-xl font-bold tracking-tight text-foreground">
+        {title}
+      </h1>
+      <p className="mb-4 text-center text-xs text-muted-foreground">
+        {allItems.length} soru · {tabKeys.length} kategori
+      </p>
+
+      <div className="mb-5">
+        <MobileSearchBar value={query} onChange={setQuery} placeholder="Tüm sorularda ara…" />
+      </div>
+
+      {results ? (
+        <div>
+          <p className="mb-3 text-xs text-muted-foreground">{results.length} sonuç</p>
+          {results.length === 0 ? (
+            <div className="py-16 text-center">
+              <p className="text-sm text-muted-foreground">Sonuç bulunamadı</p>
+            </div>
+          ) : (
+            <div className="flex flex-col gap-2.5">
+              {results.map((item, i) => (
+                <div key={i}>
+                  <button
+                    onClick={() => onOpenTab(item.tabKey)}
+                    className="mb-1.5 inline-flex items-center gap-1 rounded-full bg-secondary/60 px-2 py-0.5 text-[10px] font-medium text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    <span>{item.tabEmoji}</span> {item.tabLabel}
+                  </button>
+                  <div className="rounded-xl border border-border/60 bg-card p-4">
+                    <p className="text-[15px] leading-relaxed text-foreground">
+                      {itemText(item.content)}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="flex flex-col gap-2.5">
+          {tabKeys.map((tabKey) => {
+            const tab = tabs[tabKey]
+            const count = flattenTab(tab).length
+            return (
+              <button
+                key={tabKey}
+                onClick={() => onOpenTab(tabKey)}
+                className="flex items-center gap-3 rounded-xl border border-border/60 bg-card p-4 text-left transition-colors active:bg-secondary/30"
+              >
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-secondary/50 text-xl">
+                  {tab.emoji}
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block truncate text-sm font-semibold text-foreground">
+                    {tab.label}
+                  </span>
+                  <span className="block text-xs text-muted-foreground">
+                    {count} soru
+                  </span>
+                </span>
+                <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />
+              </button>
+            )
+          })}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function MobileQuestions({ tabs, title }) {
+  const tabKeys = Object.keys(tabs)
+  const [activeTabKey, setActiveTabKey] = useState(null)
+
+  if (activeTabKey) {
+    return (
+      <MobileTabView tab={tabs[activeTabKey]} onBack={() => setActiveTabKey(null)} />
+    )
+  }
+
+  return (
+    <MobileHome tabs={tabs} tabKeys={tabKeys} title={title} onOpenTab={setActiveTabKey} />
+  )
+}
+
+/* ============================================================ */
+
+export function QuestionsContent({ tabs, title }) {
+  return (
+    <>
+      <div className="hidden md:block">
+        <DesktopQuestions tabs={tabs} title={title} />
+      </div>
+      <div className="md:hidden">
+        <MobileQuestions tabs={tabs} title={title} />
+      </div>
+    </>
   )
 }

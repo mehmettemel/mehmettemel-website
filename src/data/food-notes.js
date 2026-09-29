@@ -716,6 +716,12 @@ export const nodes = [
     tags: ['konserve', 'gıda-güvenliği', 'domates'],
     body: 'Güzide memleketimizde gene kışlık domates hazırlıkları başlamış. Arkadaşlar hata yaparsanız küf falan görülür yemezsiniz ama botulizm zehirlenmesi sizi canınızdan edebilir.\n\nBotulizm "Clostridium Botulinum" bakterisinin ürettiği ölümcül toksindir. Şu meşhur botoks da ismini buradan alır. Bunu kokudan tattan falan anlayamazsınız.\n\nBu kışlık domatesleri yaparken kavanozun dibine yarım çay kaşığı limon tuzu atın ve bu riski önleyin. Hele o domatesin içine soğan, sarımsak, kabak, patlıcan gibi şeyler atıyorsanız hiç ihmal etmeyin limon tuzunu asitliği garanti altına alın. Her sene ülkemizde onlarca insan bu sebepten ölüyor.\n\nYarım çay kaşığı limon tuzu canınızı kurtarabilir. Eşe dosta paylaşın, bilmeyenler bilsin, bilenler övünsün. Sosyal medya cehaleti ve tarifleri can almasın.',
   },
+  {
+    id: 'tavuk-velveting-karbonat',
+    title: 'Tavuk Velveting',
+    tags: ['tavuk', 'mutfak', 'karbonat'],
+    body: 'Çin restoranlarındaki tavukların pamuk gibi olmasının sırrı "velveting" adı verilen basit bir marinasyon tekniğidir. Bu yöntem tavuğun pH dengesini değiştirerek et liflerinin suyu hapsetmesini sağlar ve her türlü ete evde kolayca uygulanabilir.\n\n* Karbonatla Dinlendirme: Tavuk göğsünü ince ince dilimleyin. Yaklaşık 500 gram ete çeyrek çay kaşığı karbonat serpip iyice masaj yapın ve 15 dakika bekletin.\n* Yıkama ve Süzme: Süre bitince tavukları soğuk suda mutlaka iyice durulayın (karbonat kalırsa ette acı bir tat bırakır). Ardından fazla suyunu elinizle iyice sıkıp süzün.\n* Mühürleme: Tavukları biraz mısır nişastası ve lezzet için bir miktar soya sosu ile harmanlayın. Nişasta, etin pişerken suyunu dışarı salmasını engelleyen koruyucu bir tabaka oluşturur.\n\nBu hazırlıktan sonra tavuğu kızarttığınızda dağılacak kadar yumuşak ve sulu kaldığını göreceksiniz.',
+  },
 ]
 
 export const links = [
@@ -760,4 +766,5 @@ export const links = [
   { source: 'yesil-sebze-buz-soku', target: 'sebze-haslama-kurali' },
   { source: 'karabiber-sona-dogru', target: 'ot-ekleme-zamani' },
   { source: 'kislik-domates-botulizm-riski', target: 'lahana-tursusu' },
+  { source: 'tavuk-velveting-karbonat', target: 'karbonatla-kiyma-yumusatma' },
 ]
