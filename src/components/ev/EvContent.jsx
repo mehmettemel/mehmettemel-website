@@ -16,12 +16,15 @@ import {
   Home,
   KeyRound,
   ListChecks,
+  MessageCircleQuestion,
   RotateCcw,
   Scale,
   Search,
   StickyNote,
+  Sun,
   TrendingUp,
   Truck,
+  VolumeX,
   X,
 } from 'lucide-react'
 
@@ -44,6 +47,8 @@ const ICONS = {
   search: Search,
   file: FileText,
   truck: Truck,
+  volume: VolumeX,
+  sun: Sun,
 }
 
 const lower = (s) => s.toLocaleLowerCase('tr')
@@ -373,7 +378,9 @@ function BuyTab({ groups }) {
   )
 }
 
-function ViewTab({ groups, list }) {
+// Gezme listesi ve emlakçı soruları aynı kalıbı kullanır: gruplu, işaretlenebilir,
+// "Sıfırla" ile yeni ev için baştan başlanır.
+function ChecklistTab({ groups, list, title, hint, checkLabel, uncheckLabel }) {
   const ids = groups.flatMap((g) => g.items.map((i) => i.id))
   const done = ids.filter((id) => list.checked[id]).length
 
@@ -382,12 +389,8 @@ function ViewTab({ groups, list }) {
       <div className="rounded-2xl border border-border/60 bg-card p-4 sm:p-5">
         <div className="mb-3 flex items-center justify-between gap-3">
           <div className="min-w-0">
-            <h2 className="truncate text-sm font-semibold text-foreground">
-              Bu evde kontrol edilenler
-            </h2>
-            <p className="text-xs text-muted-foreground">
-              Her ev gezisinde işaretle, yeni evde sıfırla.
-            </p>
+            <h2 className="truncate text-sm font-semibold text-foreground">{title}</h2>
+            <p className="text-xs text-muted-foreground">{hint}</p>
           </div>
           <div className="flex shrink-0 items-center gap-3">
             <span className="text-xs tabular-nums text-muted-foreground">
@@ -428,7 +431,7 @@ function ViewTab({ groups, list }) {
                     <CheckButton
                       checked={isDone}
                       onClick={() => list.toggle(item.id)}
-                      label={isDone ? 'Kontrol edildi işaretini kaldır' : 'Kontrol edildi olarak işaretle'}
+                      label={isDone ? uncheckLabel : checkLabel}
                     />
                     <ClampText
                       text={item.text}
@@ -569,10 +572,11 @@ function SearchResults({ query, index, onJump }) {
 /* ---------- ana bileşen ---------- */
 
 export function EvContent({ data }) {
-  const { title, subtitle, targetDate, phases, buyGroups, viewGroups, rentGroups, resources, notes } = data
+  const { title, subtitle, targetDate, phases, buyGroups, viewGroups, askGroups, rentGroups, resources, notes } = data
 
   const plan = useChecklist('ev-plan:todos')
   const view = useChecklist('ev-plan:viewing')
+  const ask = useChecklist('ev-plan:askq')
 
   const [tab, setTab] = useState('plan')
   const [query, setQuery] = useState('')
@@ -600,8 +604,13 @@ export function EvContent({ data }) {
     () => viewGroups.flatMap((g) => g.items.map((i) => i.id)),
     [viewGroups],
   )
+  const askIds = useMemo(
+    () => askGroups.flatMap((g) => g.items.map((i) => i.id)),
+    [askGroups],
+  )
   const planDone = planAll.filter((t) => plan.checked[t.id]).length
   const viewDone = viewIds.filter((id) => view.checked[id]).length
+  const askDone = askIds.filter((id) => ask.checked[id]).length
   const buyCount = buyGroups.reduce((n, g) => n + g.tips.length, 0)
   const rentCount = rentGroups.reduce((n, g) => n + g.tips.length, 0)
 
@@ -609,6 +618,7 @@ export function EvContent({ data }) {
     { id: 'plan', label: 'Plan', icon: ListChecks, meta: plan.ready ? `${planDone}/${planAll.length}` : '' },
     { id: 'buy', label: 'Ev Alma', icon: Home, meta: String(buyCount) },
     { id: 'view', label: 'Gezme Listesi', icon: ClipboardList, meta: view.ready ? `${viewDone}/${viewIds.length}` : '' },
+    { id: 'ask', label: 'Emlakçıya Sorular', icon: MessageCircleQuestion, meta: ask.ready ? `${askDone}/${askIds.length}` : '' },
     { id: 'rent', label: 'Kiralama', icon: KeyRound, meta: String(rentCount) },
     { id: 'notes', label: 'Notlar', icon: StickyNote, meta: String(notes.length + resources.length) },
   ]
@@ -625,6 +635,9 @@ export function EvContent({ data }) {
     viewGroups.forEach((g) =>
       g.items.forEach((t) => out.push({ section: 'view', sectionLabel: 'Gezme Listesi', group: g.title, text: t.text })),
     )
+    askGroups.forEach((g) =>
+      g.items.forEach((t) => out.push({ section: 'ask', sectionLabel: 'Emlakçıya Sorular', group: g.title, text: t.text })),
+    )
     rentGroups.forEach((g) =>
       g.tips.forEach((t) => out.push({ section: 'rent', sectionLabel: 'Kiralama', group: g.title, text: t })),
     )
@@ -635,7 +648,7 @@ export function EvContent({ data }) {
       out.push({ section: 'notes', sectionLabel: 'Notlar', group: 'Link', text: `${r.label}. ${r.desc ?? ''} ${r.href}` }),
     )
     return out
-  }, [phases, buyGroups, viewGroups, rentGroups, notes, resources])
+  }, [phases, buyGroups, viewGroups, askGroups, rentGroups, notes, resources])
 
   const searching = query.trim().length >= 2
 
@@ -754,7 +767,23 @@ export function EvContent({ data }) {
               ) : tab === 'buy' ? (
                 <BuyTab groups={buyGroups} />
               ) : tab === 'view' ? (
-                <ViewTab groups={viewGroups} list={view} />
+                <ChecklistTab
+                  groups={viewGroups}
+                  list={view}
+                  title="Bu evde kontrol edilenler"
+                  hint="Her ev gezisinde işaretle, yeni evde sıfırla."
+                  checkLabel="Kontrol edildi olarak işaretle"
+                  uncheckLabel="Kontrol edildi işaretini kaldır"
+                />
+              ) : tab === 'ask' ? (
+                <ChecklistTab
+                  groups={askGroups}
+                  list={ask}
+                  title="Emlakçıya sorulanlar"
+                  hint="En kritik sorular en üstte. Cevap aldıkça işaretle, yeni evde sıfırla."
+                  checkLabel="Soruldu olarak işaretle"
+                  uncheckLabel="Soruldu işaretini kaldır"
+                />
               ) : tab === 'rent' ? (
                 <RentTab groups={rentGroups} />
               ) : (
