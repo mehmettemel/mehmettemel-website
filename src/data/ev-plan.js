@@ -25,6 +25,8 @@ export const phases = [
       { id: 'p3', text: 'Parsel Sorgu\'da hedef mahalle ve ilçelerin alım satım yoğunluğuna (küme haritası) bak.' },
       { id: 'p4', text: 'Ulaşım kriterini yaz: metro veya durağa en fazla 15 dakika yürüme.' },
       { id: 'p5', text: 'Daire kriterlerini yaz: giriş ve 1. kat hariç, 5-10 yaş arası bina.' },
+      { id: 'p6', text: 'Findeks notunu kontrol et ve çekebileceğin kredi üst limitini netleştir (dosya masrafı, ekspertiz, DASK ve sigorta kesintilerini de hesaba kat).' },
+      { id: 'p7', text: 'Ses yalıtımını öncelikli kriter olarak yaz: yatak odası yan dairelerle bitişik olmasın, mümkünse son kat, komşu profili sessiz olsun.' },
     ],
   },
   {
@@ -33,6 +35,9 @@ export const phases = [
     hint: 'Ay 1-2',
     todos: [
       { id: 'g0', text: 'Emlakçıyla görüşmeden önce "Emlakçıya Sorular" sekmesini aç, kritik soruları sor.' },
+      { id: 'g8', text: 'İlandaki konumu TKGM Parsel Sorgu üzerinden ada/parsel numarasıyla doğrula.' },
+      { id: 'g9', text: 'Her adayı hem gündüz hem akşam saatinde gez: güneşin odalara vuruşunu, hava akımını, komşu ve sokak seslerini böyle anlarsın.' },
+      { id: 'g10', text: 'Ses testi yap: pencereler kapalıyken sessiz dur, yan daire, üst kat, asansör ve sokak seslerini dinle, yatak odasının hangi odayla bitişik olduğuna bak.' },
       { id: 'g1', text: 'Aday evleri gez, her gezide "Gezme Listesi" sekmesini kullan.' },
       { id: 'g2', text: 'Her aday için kira x 180 ay değer kontrolünü yap (Ev Alma sekmesindeki hesaplayıcı).' },
       { id: 'g3', text: 'Balkon demirleri, zemin birleşimi (çift temel), banyo tavanı ve duvar diplerini kontrol et.' },
@@ -53,6 +58,7 @@ export const phases = [
       { id: 'h4', text: 'Kat irtifakı projesinde kapı numarasına göre bağımsız bölüm kontrolünü yap.' },
       { id: 'h5', text: 'Yönetim planını oku (evcil hayvan, kullanım kuralları dahil).' },
       { id: 'h6', text: 'Zorunlu deprem sigortasını (DASK) yaptır, tapu işlemlerinden önce hazır olsun.' },
+      { id: 'h7', text: 'İnşaat ruhsat tarihini öğren: bina yaşı değil ruhsat tarihi deprem yönetmeliği için esastır.' },
     ],
   },
   {
@@ -63,13 +69,37 @@ export const phases = [
       { id: 'a1', text: 'Tapu devri öncesi son kez imar işlem dosyasını ve borç durumunu kontrol et.' },
       { id: 'a2', text: 'Su hattı değişecekse eve girmeden önce yaptır.' },
       { id: 'a3', text: 'Beyaz eşya, yatak ve gardrobu yerini ölçerek erkenden sipariş ver (teslimat 15 günü bulabiliyor).' },
-      { id: 'a4', text: 'Elektrik, su ve doğalgaz aboneliklerini aç.' },
+      { id: 'a4', text: 'Eski su, elektrik ve doğalgaz borçlarının ilişiğini kes, abonelikleri kendi adına aç.' },
       { id: 'a5', text: 'Taşınmayı hafta içi ve sabah saatine anlaşarak planla.' },
+      { id: 'a6', text: 'Kaporadan önce metne kredi/ekspertiz iade şartını ekle, evi görmeden kapora gönderme.' },
+      { id: 'a7', text: 'Emlakçı komisyonu, tapu harcı (%4) ve değer artış kazancı vergisini kimin ödeyeceğini pazarlıkta netleştir.' },
+      { id: 'a8', text: 'Ödemeyi tapu günü Tapu Takas veya banka blokesiyle yap, tapudan bir gün önce para gönderme.' },
+      { id: 'a9', text: 'Tapudan sonra aynı yıl içinde emlak vergisi beyanını ver.' },
     ],
   },
 ]
 
 export const buyGroups = [
+  {
+    id: 'arastirma',
+    title: 'Ön Araştırma ve Konum Kontrolü',
+    icon: 'search',
+    tips: [
+      'Parsel ve Adres Teyidi: İlandaki konumu TKGM Parsel Sorgu üzerinden ada/parsel numarasıyla doğrulayın. (Bazen ilan Mezitli/Yenişehir sınırında daha değerli bir mahalle olarak girilip tapuda farklı çıkabiliyor).',
+      'Fiyat & Amortisman Hesabı: Evin fiyatını bölgedeki rayiç kira getirisine bölün. Mersin’de yazlık/kiralık talebi yüksek bölgelerde amortisman süresi 13-15 yıl bandında ise kelepir, 16-18 yıl bandı normal kabul edilir.',
+      'Gündüz Gözüyle İnceleme: Daireye mutlaka gün ışığında gidin. Mersin’in sert güneşinin hangi saatte hangi odaya vurduğunu ve doğal hava akımını (rüzgar koridorunu) sadece gündüz net anlarsınız.',
+      'Deprem Yönetmeliği Tuzağı: Bina yaşı tek başına yeterli değildir; ruhsatın alındığı tarih esastır. Örneğin bina 2008 teslimi olsa bile inşaat ruhsatı 2006’da alındıysa 1998 yönetmeliğine göre yapılmış olabilir.',
+    ],
+  },
+  {
+    id: 'piyasa',
+    title: 'Piyasa ve Zamanlama',
+    icon: 'trend',
+    tips: [
+      'Ev alırken çoğu kişinin bakmadığı ama sizin mutlaka bakmanız gereken bir veri var: Bir mahallede, sokakta hatta bölgede geçen yıl kaç tane daire alınıp satıldığını görebiliyorsunuz. Parsel Sorgu uygulamasına (https://parselsorgu.tkgm.gov.tr/) giriyorsunuz: Analiz → Alım Satım Yoğunluğu → 2025 → İl → İlçe → Küme Haritası seçimlerini yapıyorsunuz. Harita üzerinde bölgelerdeki alım-satım yoğunluklarını gösteren rakamlar çıkıyor. Yani bir ev almadan önce: O bölgede ne kadar satış olmuş? Hangi bölgelerde hareketlilik daha fazla? Yatırım yaptığınız bölge gerçekten talep görüyor mu? gibi sorulara veriyle cevap bulabilirsiniz. Gayrimenkul alırken sadece fiyatı değil, bölgenin hareketini de inceleyin.',
+      'Fiyatlar durgun, kredi faizlerinin gerçek enflasyonla yan yana geldiği mesela yüzde 9 enflasyon yüzde 9 faiz var. Bu zamanlarda ev alınır. Başını sokacak bir ev ise direkt al.',
+    ],
+  },
   {
     id: 'hukuki',
     title: 'Tapu, İmar ve Hukuki Kontrol',
@@ -85,15 +115,6 @@ export const buyGroups = [
     ],
   },
   {
-    id: 'piyasa',
-    title: 'Piyasa ve Zamanlama',
-    icon: 'trend',
-    tips: [
-      'Ev alırken çoğu kişinin bakmadığı ama sizin mutlaka bakmanız gereken bir veri var: Bir mahallede, sokakta hatta bölgede geçen yıl kaç tane daire alınıp satıldığını görebiliyorsunuz. Parsel Sorgu uygulamasına (https://parselsorgu.tkgm.gov.tr/) giriyorsunuz: Analiz → Alım Satım Yoğunluğu → 2025 → İl → İlçe → Küme Haritası seçimlerini yapıyorsunuz. Harita üzerinde bölgelerdeki alım-satım yoğunluklarını gösteren rakamlar çıkıyor. Yani bir ev almadan önce: O bölgede ne kadar satış olmuş? Hangi bölgelerde hareketlilik daha fazla? Yatırım yaptığınız bölge gerçekten talep görüyor mu? gibi sorulara veriyle cevap bulabilirsiniz. Gayrimenkul alırken sadece fiyatı değil, bölgenin hareketini de inceleyin.',
-      'Fiyatlar durgun, kredi faizlerinin gerçek enflasyonla yan yana geldiği mesela yüzde 9 enflasyon yüzde 9 faiz var. Bu zamanlarda ev alınır. Başını sokacak bir ev ise direkt al.',
-    ],
-  },
-  {
     id: 'bina',
     title: 'Bina, Konum ve Komşular',
     icon: 'building',
@@ -102,6 +123,47 @@ export const buyGroups = [
       'Evin geçmişini ve apartman sakinlerinin yaşantısından küçük çıkarımlar yapmak için zemin kata, kömürlüğe, oto park gibi yerlere inin. Bu kısımlar daha az ilgi gördüğü için apartmanın geneli hakkında bilgi sahibi olabilirsiniz.',
       'Komşularınızı iyi tanımaya çalışın. Bugün iyi bir alt-üst komşusu olmadığı için evini değiştiren binlerce kişi var.',
       '1+0 daire epey dar. Metroya, otobüs durağına 15 dakika yürümek cehennem. Giriş ve 1. katı bırakın. Çöpü kapıcının alması en iyisi.',
+    ],
+  },
+  {
+    id: 'kapora',
+    title: 'Kapora ve Ön Sözleşme',
+    icon: 'file',
+    tips: [
+      'Evi Görmeden Asla Para Göndermeyin: "Ev kaçacak", "başka talipli var" baskısıyla sözleşmesiz kapora atmayın.',
+      'Kaporaya Kredi/Cayma Şartı: Noter veya emlakçı aracılığıyla imzalanacak kapora metnine şu maddeyi mutlaka ekletin: "Alıcının bankadan talep ettiği kredi miktarı (örneğin X TL) çıkmazsa veya ekspertiz değerinden ötürü kredi onaylanmazsa kapora kesintisiz iade edilir."',
+      'Emlakçı Komisyonu: Yasal sınır alıcıdan %2 + KDV’dir. Pazarlıkta satıcının kendi payını (%2) size yükleyip yüklemediğini baştan netleştirin.',
+    ],
+  },
+  {
+    id: 'kredi',
+    title: 'Kredi, Banka ve Ekspertiz',
+    icon: 'coins',
+    tips: [
+      'Kredi Notu ve Ön Onay: Ev bakarken Findeks notunuzu kontrol edin ve çekebileceğiniz üst limiti önceden netleştirin.',
+      'Maliyet Kesintileri: Onaylanan kredi tutarının tamamı elinize geçmez; dosya masrafı, ekspertiz, DASK, hayat sigortası ve konut sigortası gibi kalemler için kredi tutarından kesinti yapılacağını hesaba katın.',
+      'Satıcının Kredi/İpotek Borcu: Satıcının üzerinde halen kapatılmamış konut kredisi varsa süreç uzayabilir; iki banka arasında resmi ipotek yazışmaları yapılması gerekir.',
+      'Bloke Hesap Güvencesi: Banka kredili satışta para doğrudan elden verilmez; banka bloke koyar, tapu devri gerçekleştikten ve resmi bildirim sisteme düştükten (genelde birkaç saat içinde) sonra para satıcının hesabına aktarılır.',
+    ],
+  },
+  {
+    id: 'tapu',
+    title: 'Tapu ve Satış Günü Riskleri',
+    icon: 'scale',
+    tips: [
+      'Bedeli Düşük Gösterme Riski: Tapu harcı az çıksın diye satış bedelini belediye rayicinden gösterme tekliflerine dikkat edin. Vergi denetimleri banka transferleri ve ekspertiz değerleri üzerinden tespit edip gecikme faizi ve ceza çıkarabiliyor.',
+      'Değer Artış Kazancı: Satıcı 5 yıllık süreyi doldurmadıysa çıkacak Değer Artış Kazancı vergisini alıcıya yıkmaya çalışabilir; bunu baştan konuşun.',
+      'Tapu Masrafı Paylaşımı: Yasal olarak %4 harç yarı yarıya (%2 alıcı - %2 satıcı) paylaşılır. Ancak bölgedeki yerel piyasada tamamını alıcıya ödetme eğilimi olabilir, pazarlık aşamasında bunu net karara bağlayın.',
+      'Ödeme Zamanlaması: Kredisiz peşin alıyorsanız, paranızı asla tapudan bir gün önce göndermeyin. Ya tapu memurunun huzurundayken anlık EFT yapın ya da en güvenlisi Tapu Takas sistemini kullanın.',
+    ],
+  },
+  {
+    id: 'sonrasi',
+    title: 'Satış Sonrası Resmi İşlemler',
+    icon: 'file',
+    tips: [
+      'Emlak Beyanı: Tapuyu aldıktan sonra aynı takvim yılı içinde evin bulunduğu ilçe belediyesine gidip (veya e-Devlet üzerinden) emlak vergisi bildiriminde bulunun.',
+      'Abonelikler: Dairenin önceki su, elektrik ve doğalgaz borçlarının ilişiğinin kesildiğinden emin olun; ardından kendi adınıza sıfırdan abonelik açtırın.',
     ],
   },
   {
@@ -126,6 +188,20 @@ export const viewGroups = [
       { id: 'v-hukuki-1', text: 'Kat Mülkiyeti (İskan): Tapuda doğrudan "Kat Mülkiyeti" yazması en temiz durumdur (iskan alınmış, yasal süreç bitmiştir). Tapu "Kat İrtifakı" ise binanın iskanının (yapı kullanma izin belgesi) alınıp alınmadığını belediyeden sorgula. İskansız binalarda şantiye elektriği/suyu kullanılır (yüksek fatura) ve yasal riskler sürer.' },
       { id: 'v-hukuki-2', text: 'Sığınak ve Ortak Alan Kontrolü: İskan alamayan veya sonradan sorun yaşayan binalarda en sık sebep sığınaktır. Bodruma inip sığınağın projeye uygun olup olmadığını, daireye veya dükkana çevrilip çevrilmediğini mutlaka gözünle gör.' },
       { id: 'v-hukuki-3', text: 'Borç/İpotek Durumu: Tapu üzerinde haciz/ipotek ve geçmiş dönem aidat veya emlak vergisi borcu olup olmadığını kontrol et.' },
+    ],
+  },
+  {
+    id: 'ses',
+    title: 'Ses Yalıtımı ve Komşular',
+    icon: 'volume',
+    items: [
+      { id: 'v-ses-1', text: 'yan daire ile senin daire hangi odalarda yanyana? örnek; yatak odanızın duvarı yan dairenin yatak odası-salonu-mutfağı ile bitişik olmamalı. 13,5 cm tuğla duvar + sıva ses yalıtımı sağlamaz. sen uyumak istedin gece 11:00 de ama yan dairenin salonu senin yatak odanla bitişik ve onlar hala uyumadıysa tv son ses açık eziyetle geçer günün. yine aynı şekilde yan dairenin yatak odası ile senin yatak odan bitişik olmamalı. onlar sevişir sen dinlersin ya da tam tersi. mümkünse yatak odası bağımsız olmalı. en kötü kendi odalarınla-banyonla bitişik olmalı.' },
+      { id: 'v-ses-2', text: 'ses takıntısı varsa kesinlikle son kat tercih edilmeli. (yalıtım var kabul diyorum). en kötü yazın +2 derece sıcak olur onu da hürriyetin için kabullen. üst komşu= kaderin olmamalı.' },
+      { id: 'v-ses-3', text: 'kesinlikle alt ve yan komşularını analiz et. mümkünse 60 lı yaşlarda emekli olsunlar. sıfır ses ve senin göstereceğin saygı-ikili ilişki ile nazın geçer. haftada en kötü torunlar gelse bile sen bunu zaten dert etmezsin. bu sorun da halloldu.' },
+      { id: 'v-ses-4', text: 'Ses testi: Pencereler kapalıyken sessizce durup dinle. Yan daire, üst kat, kapı ve koridor, asansör ve sokak sesleri geliyor mu? Daireyi bir de akşam saatinde gör, komşular ve sokak en çok o saatte duyulur.' },
+      { id: 'v-ses-5', text: 'Yan dairelerle ortak duvarlara bak ve vurup dinle, kalınlığına dikkat et (13,5 cm tuğla + sıva ses yalıtımı sağlamaz). Yatak odası duvarı yan dairenin hangi odasıyla bitişik, asansör kuyusu veya tesisat şaftı yatak odasına komşu mu?' },
+      { id: 'v-ses-6', text: 'Pencere ve kapıları kapatıp aç, dış gürültünün ne kadar kesildiğini karşılaştır. Çift cam dış seslerin yalıtımında artıdır.' },
+      { id: 'v-ses-7', text: 'Üst kattan adım ve eşya sürükleme sesi geliyor mu, alt dairenin sesi yükseliyor mu? Mümkünse üst ve alt komşuyla kısaca konuş.' },
     ],
   },
   {
@@ -186,16 +262,6 @@ export const viewGroups = [
     ],
   },
   {
-    id: 'ses',
-    title: 'Ses ve Komşular',
-    icon: 'volume',
-    items: [
-      { id: 'v-ses-1', text: 'yan daire ile senin daire hangi odalarda yanyana? örnek; yatak odanızın duvarı yan dairenin yatak odası-salonu-mutfağı ile bitişik olmamalı. 13,5 cm tuğla duvar + sıva ses yalıtımı sağlamaz. sen uyumak istedin gece 11:00 de ama yan dairenin salonu senin yatak odanla bitişik ve onlar hala uyumadıysa tv son ses açık eziyetle geçer günün. yine aynı şekilde yan dairenin yatak odası ile senin yatak odan bitişik olmamalı. onlar sevişir sen dinlersin ya da tam tersi. mümkünse yatak odası bağımsız olmalı. en kötü kendi odalarınla-banyonla bitişik olmalı.' },
-      { id: 'v-ses-2', text: 'ses takıntısı varsa kesinlikle son kat tercih edilmeli. (yalıtım var kabul diyorum). en kötü yazın +2 derece sıcak olur onu da hürriyetin için kabullen. üst komşu= kaderin olmamalı.' },
-      { id: 'v-ses-3', text: 'kesinlikle alt ve yan komşularını analiz et. mümkünse 60 lı yaşlarda emekli olsunlar. sıfır ses ve senin göstereceğin saygı-ikili ilişki ile nazın geçer. haftada en kötü torunlar gelse bile sen bunu zaten dert etmezsin. bu sorun da halloldu.' },
-    ],
-  },
-  {
     id: 'yapi',
     title: 'Yapı Kalitesi',
     icon: 'hammer',
@@ -229,6 +295,21 @@ export const askGroups = [
       { id: 'q-kritik-4', text: 'Daireye veya binaya ait geçmiş aidat, emlak vergisi ya da fatura borcu var mı?' },
       { id: 'q-kritik-5', text: 'Bodrumdaki sığınak projesine uygun mu, dükkana veya daireye çevrilmiş mi?' },
       { id: 'q-kritik-6', text: 'Satıcı neden satıyor, daire ne kadar zamandır satışta?' },
+      { id: 'q-kritik-7', text: 'Ada ve parsel numarası nedir? İlandaki konumu TKGM Parsel Sorgu üzerinden doğrulayacağım.' },
+    ],
+  },
+  {
+    id: 'ses',
+    title: 'Ses Yalıtımı',
+    icon: 'volume',
+    items: [
+      { id: 'q-ses-1', text: 'Yan daireyle ortak duvar kaç cm kalınlığında, hangi malzemeden (tuğla, gazbeton, briket)? Ses yalıtımı yapılmış mı?' },
+      { id: 'q-ses-2', text: 'Yatak odamın duvarı yan dairenin hangi odasıyla (salon, yatak odası, mutfak, banyo) bitişik?' },
+      { id: 'q-ses-3', text: 'Yan, alt ve üst dairelerde kimler oturuyor (ev sahibi mi kiracı mı, yaşları, çocuk var mı)? Üst kattan adım veya eşya sürükleme sesi geliyor mu?' },
+      { id: 'q-ses-4', text: 'Katlar arası döşemede (şap altı) ses yalıtımı yapılmış mı?' },
+      { id: 'q-ses-5', text: 'Pencereler çift cam mı? Cadde veya sokak gürültüsü yatak odasına geliyor mu?' },
+      { id: 'q-ses-6', text: 'Asansör, hidrofor ve tesisat şaftı yatak odasına yakın mı, geceleri ses yapıyor mu?' },
+      { id: 'q-ses-7', text: 'Çevrede gürültü kaynağı var mı (ana cadde, cami, okul, eğlence mekanı, inşaat)?' },
     ],
   },
   {
@@ -244,6 +325,7 @@ export const askGroups = [
       { id: 'q-bina-6', text: 'Yönetim planını görebilir miyim?' },
       { id: 'q-bina-7', text: 'DASK (zorunlu deprem sigortası) poliçesi var mı?' },
       { id: 'q-bina-8', text: 'Su hattı hangi malzemeden, plastik mi demir mi?' },
+      { id: 'q-bina-9', text: 'İnşaat ruhsatı hangi yıl alınmış? (Bina yaşı değil ruhsat tarihi deprem yönetmeliği için esas.)' },
     ],
   },
   {
@@ -255,7 +337,6 @@ export const askGroups = [
       { id: 'q-daire-2', text: 'Hangi cephelere bakıyor, çapraz hava akımı var mı, batıya bakan oda hangisi?' },
       { id: 'q-daire-3', text: 'Hiç su sızıntısı, rutubet veya üst komşudan akıntı yaşandı mı? Ne zaman, nasıl giderildi?' },
       { id: 'q-daire-4', text: 'Tadilat veya yenileme yapıldı mı? Elektrik ve su tesisatı yenilendi mi, ne zaman?' },
-      { id: 'q-daire-5', text: 'Yan, alt ve üst dairelerde kimler oturuyor (ev sahibi mi kiracı mı, yaşları)? Yatak odamla bitişik oda hangisi?' },
       { id: 'q-daire-6', text: 'Evde kiracı var mı? Varsa ne zaman tahliye edilir?' },
       { id: 'q-daire-7', text: 'Elektrik, su ve doğalgaz abonelikleri açık mı, kimin üzerinde?' },
     ],
@@ -279,6 +360,10 @@ export const askGroups = [
       { id: 'q-surec-2', text: 'Aynı binada veya sokakta son bir yılda satılan daire var mı, kaça gitti?' },
       { id: 'q-surec-3', text: 'Banka kredisi çekilebilir durumda mı, ekspertizde sorun çıkar mı?' },
       { id: 'q-surec-4', text: 'Tapu harcı ve diğer masraflar nasıl paylaşılacak, emlakçı komisyonu kimden ve ne kadar?' },
+      { id: 'q-surec-5', text: 'Kapora metnine kredi çıkmazsa veya ekspertiz düşük kalırsa kesintisiz iade şartını yazabilir miyiz?' },
+      { id: 'q-surec-6', text: 'Satıcı 5 yıllık süreyi doldurdu mu? Değer artış kazancı vergisi çıkacaksa kim ödeyecek?' },
+      { id: 'q-surec-7', text: 'Tapuda satış bedeli gerçek bedel olarak mı gösterilecek?' },
+      { id: 'q-surec-8', text: 'Ödemeyi bloke hesap veya Tapu Takas ile yapabilir miyiz?' },
     ],
   },
 ]
