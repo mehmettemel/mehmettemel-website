@@ -188,12 +188,20 @@ function CheckButton({ checked, onClick, label }) {
   )
 }
 
-function GroupCard({ icon, title, count, children, aside }) {
+function GroupCard({ icon, title, count, children, aside, accent = false }) {
   const Icon = ICONS[icon] ?? Home
   return (
-    <section className="overflow-hidden rounded-2xl border border-border/60 bg-card">
+    <section
+      className={`overflow-hidden rounded-2xl border bg-card ${
+        accent ? 'border-primary/40 ring-1 ring-primary/20' : 'border-border/60'
+      }`}
+    >
       <header className="flex items-center gap-3 border-b border-border/50 px-4 py-3.5 sm:px-5">
-        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-secondary/60 text-muted-foreground">
+        <span
+          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${
+            accent ? 'bg-primary/25 text-foreground' : 'bg-secondary/60 text-muted-foreground'
+          }`}
+        >
           <Icon className="h-[18px] w-[18px]" />
         </span>
         <h3 className="min-w-0 flex-1 truncate text-sm font-semibold text-foreground">
@@ -305,11 +313,25 @@ function PlanTab({ phases, list }) {
   )
 }
 
-// Kira x 180 ay: Ev İçi Bilgiler notundaki değerleme kuralı.
-function RentCalculator() {
-  const [digits, setDigits] = useState('')
-  const rent = digits ? Number(digits) : 0
+// TL girişi: yalnızca rakam alır, binlik ayırıcıyla gösterir.
+function MoneyInput({ label, digits, onChange, ariaLabel }) {
+  return (
+    <label className="flex flex-1 items-center gap-2 rounded-xl border border-border bg-secondary/30 px-3.5 py-2.5 focus-within:border-foreground/30">
+      <span className="text-xs text-muted-foreground">{label}</span>
+      <input
+        inputMode="numeric"
+        value={digits ? fmt.format(Number(digits)) : ''}
+        onChange={(e) => onChange(e.target.value.replace(/\D/g, '').slice(0, 10))}
+        placeholder="0"
+        aria-label={ariaLabel}
+        className="min-w-0 flex-1 bg-transparent text-right text-sm tabular-nums text-foreground placeholder:text-muted-foreground/60 focus:outline-none"
+      />
+      <span className="text-xs text-muted-foreground">TL</span>
+    </label>
+  )
+}
 
+function CalcCard({ title, hint, children }) {
   return (
     <section className="rounded-2xl border border-border/60 bg-card p-4 sm:p-5">
       <div className="mb-3 flex items-center gap-3">
@@ -317,27 +339,27 @@ function RentCalculator() {
           <Coins className="h-[18px] w-[18px]" />
         </span>
         <div className="min-w-0">
-          <h3 className="truncate text-sm font-semibold text-foreground">
-            Değer kontrolü: kira x 180 ay
-          </h3>
-          <p className="text-xs text-muted-foreground">
-            Binadaki veya sitedeki benzer dairenin aylık kirasını yaz.
-          </p>
+          <h3 className="truncate text-sm font-semibold text-foreground">{title}</h3>
+          <p className="text-xs text-muted-foreground">{hint}</p>
         </div>
       </div>
+      {children}
+    </section>
+  )
+}
+
+// Kira x 180 ay: Ev İçi Bilgiler notundaki değerleme kuralı.
+function RentCalculator() {
+  const [digits, setDigits] = useState('')
+  const rent = digits ? Number(digits) : 0
+
+  return (
+    <CalcCard
+      title="Değer kontrolü: kira x 180 ay"
+      hint="Binadaki veya sitedeki benzer dairenin aylık kirasını yaz."
+    >
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-        <label className="flex flex-1 items-center gap-2 rounded-xl border border-border bg-secondary/30 px-3.5 py-2.5 focus-within:border-foreground/30">
-          <span className="text-xs text-muted-foreground">Aylık kira</span>
-          <input
-            inputMode="numeric"
-            value={digits ? fmt.format(rent) : ''}
-            onChange={(e) => setDigits(e.target.value.replace(/\D/g, '').slice(0, 9))}
-            placeholder="0"
-            aria-label="Aylık kira (TL)"
-            className="min-w-0 flex-1 bg-transparent text-right text-sm tabular-nums text-foreground placeholder:text-muted-foreground/60 focus:outline-none"
-          />
-          <span className="text-xs text-muted-foreground">TL</span>
-        </label>
+        <MoneyInput label="Aylık kira" digits={digits} onChange={setDigits} ariaLabel="Aylık kira (TL)" />
         <div className="flex items-baseline justify-between gap-2 rounded-xl bg-secondary/40 px-4 py-2.5 sm:min-w-[15rem] sm:justify-end">
           <span className="text-xs text-muted-foreground">Makul fiyat</span>
           <span className="text-base font-semibold tabular-nums text-foreground">
@@ -345,7 +367,65 @@ function RentCalculator() {
           </span>
         </div>
       </div>
-    </section>
+    </CalcCard>
+  )
+}
+
+// Gizli maliyet: toplam harç %4 (alıcı ve satıcı genelde yarı yarıya), emlakçı her taraftan
+// %2 + KDV (%2,4). Oranlar Ev Alma notlarındaki 5 milyon TL'lik örnekten alındı
+// (200 bin + 240 bin TL). DASK ve döner sermaye ayrıca eklenir.
+const HARC_TOPLAM = 0.04
+const KOMISYON_TARAF = 0.024
+
+function CostCalculator() {
+  const [digits, setDigits] = useState('')
+  const price = digits ? Number(digits) : 0
+  const rows = [
+    {
+      key: 'shared',
+      label: 'Yarı yarıya paylaşılırsa',
+      sub: 'harcın yarısı + komisyon alıcı payı',
+      extra: price * (HARC_TOPLAM / 2 + KOMISYON_TARAF),
+    },
+    {
+      key: 'worst',
+      label: 'En kötü durum',
+      sub: 'harç ve komisyonun hepsi alıcıda',
+      extra: price * (HARC_TOPLAM + KOMISYON_TARAF * 2),
+    },
+  ]
+
+  return (
+    <CalcCard
+      title="Gizli maliyet: toplam bütçe"
+      hint="Bütçeyi satış fiyatı değil, ek masraflar dahil toplam üzerinden kur."
+    >
+      <MoneyInput label="Satış fiyatı" digits={digits} onChange={setDigits} ariaLabel="Satış fiyatı (TL)" />
+      <ul className="mt-3 space-y-2">
+        {rows.map((r) => (
+          <li
+            key={r.key}
+            className="flex items-center justify-between gap-3 rounded-xl bg-secondary/40 px-4 py-2.5"
+          >
+            <div className="min-w-0">
+              <p className="truncate text-sm font-medium text-foreground">{r.label}</p>
+              <p className="truncate text-xs text-muted-foreground">{r.sub}</p>
+            </div>
+            <div className="shrink-0 text-right tabular-nums">
+              <p className="text-base font-semibold text-foreground">
+                {price ? `${fmt.format(Math.round(price + r.extra))} TL` : 'n/a'}
+              </p>
+              <p className="text-xs text-muted-foreground">
+                {price ? `+${fmt.format(Math.round(r.extra))} TL` : ''}
+              </p>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-3 text-xs text-muted-foreground">
+        DASK ve döner sermaye ayrıca eklenir (5 milyon TL örnekte yaklaşık 10 bin TL).
+      </p>
+    </CalcCard>
   )
 }
 
@@ -364,25 +444,114 @@ function TipList({ tips }) {
   )
 }
 
+// Kademeler: kritiklik sırasına göre. Grupların `tier` alanı buradaki key ile eşleşir.
+const BUY_TIERS = [
+  {
+    key: 'kazik',
+    heading: 'Kazıklanmamak için vazgeçilmezler',
+    note: 'Bunlardan biri tutmuyorsa fiyat cazip olsa da ilerleme.',
+    accent: true,
+  },
+  {
+    key: 'apartman',
+    heading: 'İyi bir apartman dairesi için kritikler',
+    note: 'Belge temizse sıra binanın seni her ay yormamasına gelir.',
+    accent: true,
+  },
+  {
+    key: 'diger',
+    heading: 'Diğer notlar',
+    note: 'Süreç sırasına göre ayrıntılar.',
+    collapsible: true,
+  },
+]
+
 function BuyTab({ groups }) {
+  const [closed, setClosed] = useState({})
+  const sections = BUY_TIERS.map((t) => ({
+    ...t,
+    groups: groups.filter((g) => (g.tier ?? 'diger') === t.key),
+  })).filter((t) => t.groups.length > 0)
+
   return (
     <div className="space-y-4">
       <RentCalculator />
+      <CostCalculator />
       {groups.length === 0 && <EmptyState title="Henüz not yok" />}
-      {groups.map((g) => (
-        <GroupCard key={g.id} icon={g.icon} title={g.title} count={g.tips.length}>
-          <TipList tips={g.tips} />
-        </GroupCard>
-      ))}
+      {sections.map((sec) => {
+        const count = sec.groups.reduce((n, g) => n + g.tips.length, 0)
+        const open = !sec.collapsible || !closed[sec.key]
+        return (
+          <div key={sec.key} className="space-y-4">
+            <TierHeading
+              heading={sec.heading}
+              note={sec.note}
+              meta={String(count)}
+              accent={sec.accent}
+              collapsible={sec.collapsible}
+              open={open}
+              onToggle={() => setClosed((c) => ({ ...c, [sec.key]: !c[sec.key] }))}
+            />
+            {open &&
+              sec.groups.map((g) => (
+                <GroupCard
+                  key={g.id}
+                  icon={g.icon}
+                  title={g.title}
+                  count={g.tips.length}
+                  accent={sec.accent}
+                >
+                  <TipList tips={g.tips} />
+                </GroupCard>
+              ))}
+          </div>
+        )
+      })}
     </div>
   )
 }
 
+// Bölüm başlığı (kademe): isteğe bağlı vurgu ve katlanma.
+function TierHeading({ heading, note, done, total, ready, meta, accent, collapsible, open, onToggle }) {
+  const Tag = collapsible ? 'button' : 'div'
+  return (
+    <Tag
+      {...(collapsible ? { onClick: onToggle, 'aria-expanded': open } : {})}
+      className={`flex w-full items-start gap-3 px-1 pt-2 text-left ${collapsible ? 'cursor-pointer' : ''}`}
+    >
+      <div className="min-w-0 flex-1">
+        <h2 className="flex items-center gap-2 text-sm font-semibold text-foreground">
+          {accent && (
+            <span className="shrink-0 rounded-full bg-primary/30 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide">
+              Öncelik
+            </span>
+          )}
+          <span className="min-w-0">{heading}</span>
+        </h2>
+        {note && <p className="mt-0.5 text-xs text-muted-foreground">{note}</p>}
+      </div>
+      <span className="mt-0.5 shrink-0 text-xs tabular-nums text-muted-foreground">
+        {meta ?? (ready ? `${done} / ${total}` : '')}
+      </span>
+      {collapsible && (
+        <ChevronDown
+          className={`mt-0.5 h-4 w-4 shrink-0 text-muted-foreground transition-transform ${
+            open ? 'rotate-180' : ''
+          }`}
+        />
+      )}
+    </Tag>
+  )
+}
+
 // Gezme listesi ve emlakçı soruları aynı kalıbı kullanır: gruplu, işaretlenebilir,
-// "Sıfırla" ile yeni ev için baştan başlanır.
-function ChecklistTab({ groups, list, title, hint, checkLabel, uncheckLabel }) {
-  const ids = groups.flatMap((g) => g.items.map((i) => i.id))
+// "Sıfırla" ile yeni ev için baştan başlanır. sections: [{ key, heading?, note?,
+// accent?, collapsible?, groups }]
+function ChecklistTab({ sections, list, title, hint, checkLabel, uncheckLabel }) {
+  const allGroups = sections.flatMap((sec) => sec.groups)
+  const ids = allGroups.flatMap((g) => g.items.map((i) => i.id))
   const done = ids.filter((id) => list.checked[id]).length
+  const [closed, setClosed] = useState({})
 
   return (
     <div className="space-y-4">
@@ -409,39 +578,64 @@ function ChecklistTab({ groups, list, title, hint, checkLabel, uncheckLabel }) {
         <ProgressBar done={done} total={ids.length} ready={list.ready} />
       </div>
 
-      {groups.length === 0 && <EmptyState title="Henüz madde yok" />}
-      {groups.map((g) => {
-        const gDone = g.items.filter((i) => list.checked[i.id]).length
+      {allGroups.length === 0 && <EmptyState title="Henüz madde yok" />}
+
+      {sections.map((sec) => {
+        const secIds = sec.groups.flatMap((g) => g.items.map((i) => i.id))
+        const secDone = secIds.filter((id) => list.checked[id]).length
+        const open = !sec.collapsible || !closed[sec.key]
         return (
-          <GroupCard
-            key={g.id}
-            icon={g.icon}
-            title={g.title}
-            aside={
-              <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
-                {list.ready ? `${gDone} / ${g.items.length}` : ''}
-              </span>
-            }
-          >
-            <ul className="divide-y divide-border/40">
-              {g.items.map((item) => {
-                const isDone = !!list.checked[item.id]
+          <div key={sec.key} className="space-y-4">
+            {sec.heading && (
+              <TierHeading
+                heading={sec.heading}
+                note={sec.note}
+                done={secDone}
+                total={secIds.length}
+                ready={list.ready}
+                accent={sec.accent}
+                collapsible={sec.collapsible}
+                open={open}
+                onToggle={() => setClosed((c) => ({ ...c, [sec.key]: !c[sec.key] }))}
+              />
+            )}
+            {open &&
+              sec.groups.map((g) => {
+                const gDone = g.items.filter((i) => list.checked[i.id]).length
                 return (
-                  <li key={item.id} className="flex items-start gap-3 px-4 py-3.5 sm:px-5">
-                    <CheckButton
-                      checked={isDone}
-                      onClick={() => list.toggle(item.id)}
-                      label={isDone ? uncheckLabel : checkLabel}
-                    />
-                    <ClampText
-                      text={item.text}
-                      className={isDone ? 'text-muted-foreground' : 'text-foreground'}
-                    />
-                  </li>
+                  <GroupCard
+                    key={g.id}
+                    icon={g.icon}
+                    title={g.title}
+                    accent={sec.accent}
+                    aside={
+                      <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
+                        {list.ready ? `${gDone} / ${g.items.length}` : ''}
+                      </span>
+                    }
+                  >
+                    <ul className="divide-y divide-border/40">
+                      {g.items.map((item) => {
+                        const isDone = !!list.checked[item.id]
+                        return (
+                          <li key={item.id} className="flex items-start gap-3 px-4 py-3.5 sm:px-5">
+                            <CheckButton
+                              checked={isDone}
+                              onClick={() => list.toggle(item.id)}
+                              label={isDone ? uncheckLabel : checkLabel}
+                            />
+                            <ClampText
+                              text={item.text}
+                              className={isDone ? 'text-muted-foreground' : 'text-foreground'}
+                            />
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </GroupCard>
                 )
               })}
-            </ul>
-          </GroupCard>
+          </div>
         )
       })}
     </div>
@@ -599,6 +793,50 @@ export function EvContent({ data }) {
     })
   }, [targetDate])
 
+  const viewSections = useMemo(
+    () =>
+      [
+        {
+          key: 'eleme',
+          heading: 'Kısa eleme',
+          note: 'Bu altı maddeden biri tutmuyorsa ucuzluk genelde sonradan çıkar.',
+          accent: true,
+          groups: viewGroups.filter((g) => g.tier === 'eleme'),
+        },
+        {
+          key: 'detay',
+          heading: 'Detaylı kontrol',
+          groups: viewGroups.filter((g) => g.tier !== 'eleme'),
+        },
+      ].filter((sec) => sec.groups.length > 0),
+    [viewGroups],
+  )
+  const askSections = useMemo(
+    () =>
+      [
+        {
+          key: 'kazik',
+          heading: 'Kazıklanmamak için vazgeçilmezler',
+          note: 'Biri tutmuyorsa fiyat cazip olsa da ilerleme. Kapora vermeden önce net cevap al.',
+          accent: true,
+        },
+        {
+          key: 'apartman',
+          heading: 'İyi bir apartman dairesi için kritikler',
+          note: 'Belge temizse sıra binanın seni her ay yormamasına gelir.',
+          accent: true,
+        },
+        {
+          key: 'ekstra',
+          heading: 'Ekstra sorular',
+          note: 'Zaman olursa veya görüşme ilerledikçe sor.',
+          collapsible: true,
+        },
+      ]
+        .map((t) => ({ ...t, groups: askGroups.filter((g) => g.tier === t.key) }))
+        .filter((sec) => sec.groups.length > 0),
+    [askGroups],
+  )
   const planAll = useMemo(() => phases.flatMap((p) => p.todos), [phases])
   const viewIds = useMemo(
     () => viewGroups.flatMap((g) => g.items.map((i) => i.id)),
@@ -768,7 +1006,7 @@ export function EvContent({ data }) {
                 <BuyTab groups={buyGroups} />
               ) : tab === 'view' ? (
                 <ChecklistTab
-                  groups={viewGroups}
+                  sections={viewSections}
                   list={view}
                   title="Bu evde kontrol edilenler"
                   hint="Her ev gezisinde işaretle, yeni evde sıfırla."
@@ -777,10 +1015,10 @@ export function EvContent({ data }) {
                 />
               ) : tab === 'ask' ? (
                 <ChecklistTab
-                  groups={askGroups}
+                  sections={askSections}
                   list={ask}
                   title="Emlakçıya sorulanlar"
-                  hint="En kritik sorular en üstte. Cevap aldıkça işaretle, yeni evde sıfırla."
+                  hint="Önce kritik sorular. Cevap aldıkça işaretle, yeni evde sıfırla."
                   checkLabel="Soruldu olarak işaretle"
                   uncheckLabel="Soruldu işaretini kaldır"
                 />
