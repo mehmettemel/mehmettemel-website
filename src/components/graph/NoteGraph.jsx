@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useRef, useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Search, Shuffle, X, ArrowUpRight } from 'lucide-react'
-import { nodes as rawNodes, links as rawLinks } from '@/data/food-notes'
 import { GraphEngine } from './graph-engine'
 
 /* 3B not bulutu — three.js motoru koordinat ve çizimi üstlenir,
@@ -16,7 +15,7 @@ const MAX_RESULTS = 8
 
 const lower = (s) => s.toLocaleLowerCase('tr')
 
-export function NoteGraph({ title, subtitle }) {
+export function NoteGraph({ title, subtitle, nodes: rawNodes, links: rawLinks }) {
   const hostRef = useRef(null)
   const engineRef = useRef(null)
   const searchRef = useRef(null)
@@ -54,7 +53,7 @@ export function NoteGraph({ title, subtitle }) {
       .filter(([, c]) => c >= MIN_TAG_COUNT)
       .sort((a, b) => b[1] - a[1])
     return { nodes, links, neighbors, byId, tags }
-  }, [])
+  }, [rawNodes, rawLinks])
 
   useEffect(() => {
     const host = hostRef.current

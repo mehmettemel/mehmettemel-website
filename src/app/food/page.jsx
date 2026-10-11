@@ -1,5 +1,5 @@
 import { NoteGraph } from '@/components/graph/NoteGraph'
-import { graphTitle, graphSubtitle } from '@/data/food-notes'
+import { graphTitle, graphSubtitle, nodes, links } from '@/data/food-notes'
 
 export const metadata = {
   title: 'Food | Mehmet Temel',
@@ -12,7 +12,12 @@ export const metadata = {
 export default function FoodPage() {
   return (
     <div className="relative h-[calc(100dvh-61px)] min-h-[560px] w-full overflow-hidden">
-      <NoteGraph title={graphTitle} subtitle={graphSubtitle} />
+      <NoteGraph
+        title={graphTitle}
+        subtitle={graphSubtitle}
+        nodes={nodes}
+        links={links}
+      />
     </div>
   )
 }
