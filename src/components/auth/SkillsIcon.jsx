@@ -10,8 +10,6 @@ import {
 } from '@/components/ui/tooltip'
 
 const skills = [
-  { cmd: '/dev', desc: 'Development kartı ekle' },
-  { cmd: '/pin', desc: 'Kartı sabitle / kaldır' },
   { cmd: '/remove', desc: 'Siteden içerik sil' },
   { cmd: '/not', desc: 'Not / alıntı ekle' },
   { cmd: '/food', desc: 'Food notu ekle' },
