@@ -39,7 +39,7 @@ export function NoteGraph({ title, subtitle, nodes: rawNodes, links: rawLinks })
       degree.set(l.target, degree.get(l.target) + 1)
     })
     nodes.forEach((n) => {
-      n.r = 0.34 + Math.min(degree.get(n.id), 5) * 0.11
+      n.r = 0.28 + Math.min(degree.get(n.id), 5) * 0.08
     })
     const neighbors = new Map(nodes.map((n) => [n.id, new Set([n.id])]))
     links.forEach((l) => {
