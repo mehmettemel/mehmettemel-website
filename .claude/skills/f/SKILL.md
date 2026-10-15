@@ -40,7 +40,7 @@ ve `links`'i incele. Yeni notu bunlarla ilişkilendireceksin.
   etiketi olarak görüneceği için kısa tut (örn. "Prompt Caching",
   "Ajan Döngüsü", "Context Penceresi").
 - **tags**: 1-3 adet küçük harf etiket. Konu veya kategori
-  (örn. `llm`, `prompt`, `ajan`, `araç`, `eval`, `maliyet`).
+  (mevcut etiketlerden seç: üst kategori `iş` / `pazarlama` / `kariyer` / `ai`, ayrıca `risk`, `satış`, `müşteri`, `fiyatlama`, `network`, `muhasebe`, `strateji` vb.).
 - **body**: kullanıcının verdiği metin. Olduğu gibi koru, yeniden yazma veya
   özetleme. Sadece `/f` prefix'ini ve varsa baştaki ipucunu temizle.
   Single quote'ları escape et (`'` → `\'`).

@@ -12,7 +12,7 @@ Kullanıcı `/not` komutu ile bir not verdiğinde, içeriği analiz edip doğru 
 Kullanıcı notun başında bir kategori ipucu yazabilir. İpucu varsa öncelikli olarak kullan:
 
 **Üst kategori ipuçları** (dosyayı belirler, alt kategoriyi içerikten çıkar):
-`sağlık`, `saglik`, `ilişkiler`, `iliskiler`, `kişisel`, `kisisel`, `toplum`, `trivia`, `quotes`, `entrepreneur`, `girişim`, `girisim`
+`sağlık`, `saglik`, `ilişkiler`, `iliskiler`, `kişisel`, `kisisel`, `toplum`, `trivia`, `quotes`, `iletişim`, `ikna`, `entrepreneur`, `girişim`, `girisim`
 
 **Alt kategori ipuçları** (hem dosyayı hem alt kategoriyi belirler):
 `beslenme` → saglik.js/Beslenme, `mutfak` → saglik.js/Mutfak, `takviye` → saglik.js/Takviyeler, `bakım` → saglik.js/Bakım, `hastalık` → saglik.js/Hastalıklar
@@ -22,7 +22,7 @@ Kullanıcı notun başında bir kategori ipucu yazabilir. İpucu varsa öncelikl
 `business` → girisimcilik.js/İş/Temel İlkeler, `ecommerce` → girisimcilik.js/İş/Temel İlkeler, `e-commerce` → girisimcilik.js/İş/Temel İlkeler
 `kariyer` → girisimcilik.js/Kariyer/İş & Kariyer
 `marketing` → girisimcilik.js/Pazarlama/Pazarlama
-`iletişim` → girisimcilik.js/İletişim/İletişim
+`iletişim`, `ikna` → iletisim.js/İletişim
 `finance`, `ai`, `gelecek`, `future`, `teknoloji` → future-notes.js (graf; `/f` skill'inin formatı: node + links)
 
 İpucu bulunduysa metinden çıkar (ipucu notun parçası değil).
@@ -72,6 +72,11 @@ Notun içeriğine bakarak hedef dosya ve alt kategoriyi belirle:
 |---|---|
 | **Quotes** | Kısa (1-2 cümle), ilham verici, özlü sözler ve alıntılar |
 
+### iletisim.js — İletişim & İkna
+| Alt Kategori | Anahtar Konular |
+|---|---|
+| **İletişim** | İkna, müzakere, beden dili, konuşma teknikleri, güven oluşturma |
+
 ### girisimcilik.js — Entrepreneur (`src/data/girisimcilik.js`)
 | Tab | Alt Kategori | Anahtar Konular |
 |---|---|---|
@@ -80,7 +85,6 @@ Notun içeriğine bakarak hedef dosya ve alt kategoriyi belirle:
 | **is** | Operasyonlar | Süreç yönetimi, operasyonel verimlilik, çalışan yönetimi |
 | **pazarlama** | Pazarlama | Reklam, sosyal medya, growth hacking, SEO, marka, dikkat çekme |
 | **kariyer** | İş & Kariyer | Kariyer, maaş, verimlilik, liderlik, iş hayatı tavsiyeleri |
-| **iletisim** | İletişim | İkna, müzakere, beden dili, konuşma teknikleri, güven oluşturma |
 
 ## Adım 3: Duplike Kontrolü
 

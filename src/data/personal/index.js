@@ -5,6 +5,7 @@ import { categories as toplum } from './toplum'
 import { categories as money } from './money'
 import { categories as trivia } from './trivia'
 import { categories as quotes } from './quotes'
+import { categories as iletisim } from './iletisim'
 
 export const title = 'Personal'
 
@@ -16,4 +17,5 @@ export const tabs = {
   money: { label: 'Life', emoji: '💰', categories: money },
   trivia: { label: 'Trivia', emoji: '🧠', categories: trivia },
   quotes: { label: 'Quotes', emoji: '💬', categories: quotes },
+  iletisim: { label: 'İletişim & İkna', emoji: '🤝', categories: iletisim },
 }
