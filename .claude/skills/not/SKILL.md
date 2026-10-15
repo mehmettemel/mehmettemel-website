@@ -12,16 +12,14 @@ Kullanıcı `/not` komutu ile bir not verdiğinde, içeriği analiz edip doğru 
 Kullanıcı notun başında bir kategori ipucu yazabilir. İpucu varsa öncelikli olarak kullan:
 
 **Üst kategori ipuçları** (dosyayı belirler, alt kategoriyi içerikten çıkar):
-`sağlık`, `saglik`, `ilişkiler`, `iliskiler`, `kişisel`, `kisisel`, `toplum`, `trivia`, `quotes`, `iletişim`, `ikna`, `entrepreneur`, `girişim`, `girisim`
+`sağlık`, `saglik`, `ilişkiler`, `iliskiler`, `kişisel`, `kisisel`, `toplum`, `trivia`, `quotes`, `iletişim`, `ikna`
 
 **Alt kategori ipuçları** (hem dosyayı hem alt kategoriyi belirler):
 `beslenme` → saglik.js/Beslenme, `mutfak` → saglik.js/Mutfak, `takviye` → saglik.js/Takviyeler, `bakım` → saglik.js/Bakım, `hastalık` → saglik.js/Hastalıklar
 `mindset` → kisisel-gelisim.js/Mindset
 `kadın` → iliskiler.js/Kadınlar
 `network` → money.js/Networking, `insan ilişkileri` → money.js/İnsan İlişkileri
-`business` → girisimcilik.js/İş/Temel İlkeler, `ecommerce` → girisimcilik.js/İş/Temel İlkeler, `e-commerce` → girisimcilik.js/İş/Temel İlkeler
-`kariyer` → girisimcilik.js/Kariyer/İş & Kariyer
-`marketing` → girisimcilik.js/Pazarlama/Pazarlama
+`business`, `ecommerce`, `e-commerce`, `kariyer`, `marketing` → future-notes.js (graf; `/f` skill'inin formatı: node + links)
 `iletişim`, `ikna` → iletisim.js/İletişim
 `finance`, `ai`, `gelecek`, `future`, `teknoloji` → future-notes.js (graf; `/f` skill'inin formatı: node + links)
 
@@ -77,15 +75,6 @@ Notun içeriğine bakarak hedef dosya ve alt kategoriyi belirle:
 |---|---|
 | **İletişim** | İkna, müzakere, beden dili, konuşma teknikleri, güven oluşturma |
 
-### girisimcilik.js — Entrepreneur (`src/data/girisimcilik.js`)
-| Tab | Alt Kategori | Anahtar Konular |
-|---|---|---|
-| **is** | Temel İlkeler | İş kurma, girişimcilik, startup, ticaret, e-ticaret, risk, yönetim |
-| **is** | Müşteri & Satış | Müşteri yönetimi, satış, tedarikçi, ihracat |
-| **is** | Operasyonlar | Süreç yönetimi, operasyonel verimlilik, çalışan yönetimi |
-| **pazarlama** | Pazarlama | Reklam, sosyal medya, growth hacking, SEO, marka, dikkat çekme |
-| **kariyer** | İş & Kariyer | Kariyer, maaş, verimlilik, liderlik, iş hayatı tavsiyeleri |
-
 ## Adım 3: Duplike Kontrolü
 
 Hedef dosyayı oku ve notun özü zaten mevcut mu kontrol et. Varsa kullanıcıya bildir, ekleme.
@@ -102,14 +91,6 @@ Hedef dosyayı oku ve notun özü zaten mevcut mu kontrol et. Varsa kullanıcıy
 'Not metni',
 ```
 İlgili kategorinin `items` dizisinin **sonuna** ekle.
-
-### girisimcilik.js formatı (flat string, ama tabs yapısı var):
-```js
-'Not metni',
-```
-Hedef: `tabs.<tabKey>.categories['<Alt Kategori>'].items` dizisinin **sonuna** ekle.
-
-Örnek: `kariyer` ipucu → `tabs.kariyer.categories['İş & Kariyer'].items` sonuna ekle.
 
 ## Metin Temizleme
 

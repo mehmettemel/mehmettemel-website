@@ -26,7 +26,6 @@ import {
 } from './ui/navigation-menu'
 
 const listsItems = [
-  { href: '/lists/entrepreneurship', label: 'Entrepreneur', emoji: '💼' },
   { href: '/lists/life-tips', label: 'Life Tips', emoji: '💡' },
   { href: '/lists/w2b', label: 'W2B', emoji: '🛒' },
   { href: '/lists/travel', label: 'Travel', emoji: '✈️' },
@@ -251,9 +250,6 @@ function MobileNav() {
                 </AccordionTrigger>
                 <AccordionContent>
                   <div className="flex flex-col gap-0.5 pl-2">
-                    <Link href="/lists/entrepreneurship" onClick={closeSheet} className={mobileNavLinkClass}>
-                      <span>💼</span> Entrepreneur
-                    </Link>
                     <Link href="/lists/life-tips" onClick={closeSheet} className={mobileNavLinkClass}>
                       <span>💡</span> Life Tips
                     </Link>

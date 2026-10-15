@@ -25,7 +25,7 @@ düzenler.
 
 - `food-notes.js`, `watchlist.js`, `books.js`
 - `recipes.js`, `russian.js`, `english-words.js`, `life-tips.js`
-- `girisimcilik.js`, `w2b.json`, `daily-routines.js`
+- `future-notes.js`, `w2b.json`, `daily-routines.js`
 - `personal/` altındakiler: `saglik.js`, `quotes.js`, `trivia.js`, `toplum.js`,
   `kisisel-gelisim.js`, `iliskiler.js`, `money.js`
 - `travel/` altındakiler: `countries.js`, `informations.js`
