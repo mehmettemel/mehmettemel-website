@@ -10,7 +10,7 @@
    - salınım (drift): her noktanın kendine özgü fazı, sürekli süzülür
 
    Dış API: setActive(id), flyTo(id) — kamerayı noktaya döndürür,
-   setFilter(ids) — etiket/arama süzgeci, shuffle(), dispose()
+   setFilter(ids) — etiket/arama süzgeci, dispose()
 
    Render:
    - InstancedMesh → tüm küreler tek draw call
@@ -39,7 +39,7 @@ const CFG = {
 }
 
 const LABEL_BASE =
-  'absolute left-0 top-0 whitespace-nowrap text-[11px] leading-none tracking-tight will-change-transform'
+  'absolute left-0 top-0 whitespace-nowrap text-xs leading-none tracking-tight will-change-transform'
 
 function readHsl(name, fallback) {
   const raw = getComputedStyle(document.documentElement)
@@ -470,14 +470,6 @@ export class GraphEngine {
       return
     }
     this.filter = new Set(ids.map((id) => this.index.get(id)).filter((i) => i != null))
-  }
-
-  shuffle() {
-    this.randomize()
-    this.hover = -1
-    this.active = -1
-    this.fly = -1
-    for (let i = 0; i < 12; i++) this.step(false)
   }
 
   dispose() {

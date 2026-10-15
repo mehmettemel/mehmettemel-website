@@ -722,6 +722,12 @@ export const nodes = [
     tags: ['tavuk', 'mutfak', 'karbonat'],
     body: 'Çin restoranlarındaki tavukların pamuk gibi olmasının sırrı "velveting" adı verilen basit bir marinasyon tekniğidir. Bu yöntem tavuğun pH dengesini değiştirerek et liflerinin suyu hapsetmesini sağlar ve her türlü ete evde kolayca uygulanabilir.\n\n* Karbonatla Dinlendirme: Tavuk göğsünü ince ince dilimleyin. Yaklaşık 500 gram ete çeyrek çay kaşığı karbonat serpip iyice masaj yapın ve 15 dakika bekletin.\n* Yıkama ve Süzme: Süre bitince tavukları soğuk suda mutlaka iyice durulayın (karbonat kalırsa ette acı bir tat bırakır). Ardından fazla suyunu elinizle iyice sıkıp süzün.\n* Mühürleme: Tavukları biraz mısır nişastası ve lezzet için bir miktar soya sosu ile harmanlayın. Nişasta, etin pişerken suyunu dışarı salmasını engelleyen koruyucu bir tabaka oluşturur.\n\nBu hazırlıktan sonra tavuğu kızarttığınızda dağılacak kadar yumuşak ve sulu kaldığını göreceksiniz.',
   },
+  {
+    id: 'kagit-filtre-kahve',
+    title: 'Kağıt Filtre Kahve',
+    tags: ['kahve', 'içecek'],
+    body: 'Kağıt filtre ile demlenen kahve en sağlıklısı.',
+  },
 ]
 
 export const links = [
@@ -767,4 +773,5 @@ export const links = [
   { source: 'karabiber-sona-dogru', target: 'ot-ekleme-zamani' },
   { source: 'kislik-domates-botulizm-riski', target: 'lahana-tursusu' },
   { source: 'tavuk-velveting-karbonat', target: 'karbonatla-kiyma-yumusatma' },
+  { source: 'kagit-filtre-kahve', target: 'kansere-karsi-gidalar' },
 ]

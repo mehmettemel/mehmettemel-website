@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Search, Shuffle, X, ArrowUpRight } from 'lucide-react'
+import { Search, X, ArrowUpRight } from 'lucide-react'
 import { GraphEngine } from './graph-engine'
 
 /* 3B not bulutu — three.js motoru koordinat ve çizimi üstlenir,
@@ -23,6 +23,7 @@ export function NoteGraph({ title, subtitle, nodes: rawNodes, links: rawLinks })
   const [tag, setTag] = useState(null)
   const [query, setQuery] = useState('')
   const [searchFocus, setSearchFocus] = useState(false)
+  const [cursor, setCursor] = useState(0) // klavyeyle seçili arama sonucu
 
   const graph = useMemo(() => {
     const nodes = rawNodes.map((n) => ({ ...n }))
@@ -80,6 +81,21 @@ export function NoteGraph({ title, subtitle, nodes: rawNodes, links: rawLinks })
     engineRef.current?.setFilter(ids)
   }, [tag, graph])
 
+  // "/" veya ⌘K: aramaya odaklan (bir alana yazarken devreye girmez)
+  useEffect(() => {
+    const onKey = (e) => {
+      const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)
+      const cmdK = (e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k'
+      if (cmdK || (e.key === '/' && !typing)) {
+        e.preventDefault()
+        searchRef.current?.focus()
+        searchRef.current?.select()
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
+
   // Esc: önce arama, sonra panel, sonra süzgeç kapanır
   useEffect(() => {
     const onKey = (e) => {
@@ -97,11 +113,6 @@ export function NoteGraph({ title, subtitle, nodes: rawNodes, links: rawLinks })
     engineRef.current?.flyTo(node.id)
   }, [])
 
-  const shuffle = useCallback(() => {
-    engineRef.current?.shuffle()
-    setActive(null)
-  }, [])
-
   const results = useMemo(() => {
     const q = lower(query.trim())
     if (q.length < 2) return []
@@ -117,6 +128,28 @@ export function NoteGraph({ title, subtitle, nodes: rawNodes, links: rawLinks })
       .slice(0, MAX_RESULTS)
       .map((h) => h.node)
   }, [query, graph])
+
+  useEffect(() => setCursor(0), [query])
+
+  const pickResult = (n) => {
+    openNode(n)
+    setQuery('')
+    searchRef.current?.blur()
+  }
+
+  const onSearchKey = (e) => {
+    if (!results.length) return
+    if (e.key === 'ArrowDown') {
+      e.preventDefault()
+      setCursor((c) => (c + 1) % results.length)
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault()
+      setCursor((c) => (c - 1 + results.length) % results.length)
+    } else if (e.key === 'Enter') {
+      e.preventDefault()
+      pickResult(results[cursor] ?? results[0])
+    }
+  }
 
   const showResults = searchFocus && query.trim().length >= 2
   const filteredCount = tag
@@ -140,7 +173,7 @@ export function NoteGraph({ title, subtitle, nodes: rawNodes, links: rawLinks })
         <p className="mt-1 hidden text-sm text-muted-foreground sm:block">
           {subtitle}
         </p>
-        <div className="mt-2 text-[10px] uppercase tracking-[0.2em] text-muted-foreground/70">
+        <div className="mt-2 text-xs uppercase tabular-nums tracking-[0.16em] text-muted-foreground/70">
           {tag ? `${filteredCount} / ${graph.nodes.length}` : graph.nodes.length}{' '}
           not · {graph.links.length} bağ
         </div>
@@ -156,17 +189,17 @@ export function NoteGraph({ title, subtitle, nodes: rawNodes, links: rawLinks })
               onClick={() => setTag(tag === t ? null : t)}
             >
               {t}
-              <span className="ml-1 opacity-60">{c}</span>
+              <span className="ml-1.5 tabular-nums opacity-60">{c}</span>
             </Chip>
           ))}
         </div>
       </div>
 
-      {/* sağ üst: arama + karıştır */}
+      {/* sağ üst: arama */}
       {/* z-50: arama sonuçları panelin (z-40) üstüne açılır */}
-      <div className="absolute right-4 top-4 z-50 flex items-start gap-2 sm:right-6 sm:top-6">
+      <div className="absolute right-4 top-4 z-50 sm:right-6 sm:top-6">
         <div className="relative">
-          <div className="flex h-9 items-center gap-2 rounded-full border border-border bg-card/80 pl-3 pr-2 backdrop-blur transition-colors focus-within:border-foreground/30">
+          <div className="flex h-9 items-center gap-2 rounded-full border border-border bg-card/80 pl-3 pr-2 shadow-sm backdrop-blur transition-colors focus-within:border-foreground/30 focus-within:bg-card">
             <Search className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
             <input
               ref={searchRef}
@@ -174,10 +207,19 @@ export function NoteGraph({ title, subtitle, nodes: rawNodes, links: rawLinks })
               onChange={(e) => setQuery(e.target.value)}
               onFocus={() => setSearchFocus(true)}
               onBlur={() => setTimeout(() => setSearchFocus(false), 120)}
+              onKeyDown={onSearchKey}
               placeholder="Not ara…"
               aria-label="Notlarda ara"
-              className="w-28 bg-transparent text-xs text-foreground placeholder:text-muted-foreground/70 focus:outline-none sm:w-44 md:w-56"
+              role="combobox"
+              aria-expanded={showResults}
+              aria-controls="note-search-results"
+              className="w-28 bg-transparent text-sm text-foreground placeholder:text-muted-foreground/70 focus:outline-none sm:w-44 md:w-56"
             />
+            {!query && !searchFocus && (
+              <kbd className="hidden h-5 items-center rounded border border-border bg-secondary px-1.5 font-mono text-xs text-muted-foreground sm:inline-flex">
+                /
+              </kbd>
+            )}
             {query && (
               <button
                 onClick={() => {
@@ -199,28 +241,41 @@ export function NoteGraph({ title, subtitle, nodes: rawNodes, links: rawLinks })
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -4 }}
                 transition={{ duration: 0.15 }}
-                className="absolute right-0 top-11 w-72 overflow-hidden rounded-xl border border-border bg-card shadow-xl"
+                id="note-search-results"
+                role="listbox"
+                className="absolute right-0 top-11 w-[min(20rem,calc(100vw-2rem))] overflow-hidden rounded-xl border border-border bg-card p-1 shadow-xl"
               >
                 {results.length === 0 && (
-                  <li className="px-3 py-2.5 text-xs text-muted-foreground">
+                  <li className="px-3 py-2.5 text-sm text-muted-foreground">
                     Sonuç yok
                   </li>
                 )}
-                {results.map((n) => (
-                  <li key={n.id}>
+                {results.map((n, i) => (
+                  <li key={n.id} role="option" aria-selected={i === cursor}>
                     <button
                       onMouseDown={(e) => e.preventDefault()}
-                      onClick={() => {
-                        openNode(n)
-                        setQuery('')
-                        searchRef.current?.blur()
-                      }}
-                      className="flex w-full items-center justify-between gap-2 px-3 py-2 text-left text-xs text-foreground transition-colors hover:bg-secondary"
+                      onMouseEnter={() => setCursor(i)}
+                      onClick={() => pickResult(n)}
+                      title={n.title}
+                      className={`flex w-full flex-col gap-0.5 rounded-lg px-3 py-2 text-left transition-colors ${
+                        i === cursor ? 'bg-secondary' : ''
+                      }`}
                     >
-                      <span className="truncate">{n.title}</span>
-                      <span className="shrink-0 text-[10px] uppercase tracking-wide text-muted-foreground">
-                        {n.tags?.[0]}
+                      <span className="flex w-full min-w-0 items-center justify-between gap-2">
+                        <span className="truncate text-sm text-foreground">
+                          <Highlight text={n.title} query={query} />
+                        </span>
+                        {n.tags?.[0] && (
+                          <span className="shrink-0 text-xs text-muted-foreground">
+                            {n.tags[0]}
+                          </span>
+                        )}
                       </span>
+                      {!lower(n.title).includes(lower(query.trim())) && (
+                        <span className="line-clamp-1 text-xs text-muted-foreground">
+                          <Highlight text={snippet(n.body, query)} query={query} />
+                        </span>
+                      )}
                     </button>
                   </li>
                 ))}
@@ -228,21 +283,15 @@ export function NoteGraph({ title, subtitle, nodes: rawNodes, links: rawLinks })
             )}
           </AnimatePresence>
         </div>
-
-        <button
-          onClick={shuffle}
-          title="Noktaları karıştır"
-          aria-label="Noktaları karıştır"
-          className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card/80 text-muted-foreground backdrop-blur transition-colors hover:border-foreground/25 hover:text-foreground"
-        >
-          <Shuffle className="h-3.5 w-3.5" />
-        </button>
       </div>
 
-      {/* sağ alt: kullanım ipucu (sol alt köşede site widget'ı var) */}
-      <div className="pointer-events-none absolute bottom-4 right-4 z-20 hidden text-[10px] uppercase tracking-[0.2em] text-muted-foreground/60 sm:right-6 sm:block">
-        sürükle döndür · kaydır yakınlaştır · noktaya tıkla
-      </div>
+      {/* sağ alt: kullanım ipucu (sol alt köşede site widget'ı var);
+          panel açıkken panelin altına taşmasın diye gizlenir */}
+      {!active && (
+        <div className="pointer-events-none absolute bottom-4 right-4 z-20 hidden text-xs text-muted-foreground/60 sm:right-6 sm:block">
+          sürükle döndür · kaydır yakınlaştır · noktaya tıkla · / ara
+        </div>
+      )}
 
       {/* not paneli: masaüstünde sağdan yan panel, mobilde alttan kart */}
       <AnimatePresence>
@@ -266,7 +315,7 @@ export function NoteGraph({ title, subtitle, nodes: rawNodes, links: rawLinks })
                       <button
                         key={t}
                         onClick={() => setTag(tag === t ? null : t)}
-                        className={`rounded-full px-2 py-0.5 text-[10px] uppercase tracking-wide transition-colors ${
+                        className={`rounded-full px-2.5 py-0.5 text-xs transition-colors ${
                           tag === t
                             ? 'bg-foreground text-background'
                             : 'bg-secondary text-muted-foreground hover:text-foreground'
@@ -288,8 +337,8 @@ export function NoteGraph({ title, subtitle, nodes: rawNodes, links: rawLinks })
             </div>
 
             <div className="min-h-0 flex-1 overflow-y-auto px-5 py-4">
-              <p className="whitespace-pre-line text-sm leading-relaxed text-foreground/85">
-                {active.body}
+              <p className="whitespace-pre-line text-[15px] leading-relaxed text-foreground/85">
+                <RichText text={active.body} />
               </p>
               <GraphLinks node={active} graph={graph} onOpen={openNode} />
             </div>
@@ -304,7 +353,7 @@ function Chip({ active, onClick, children }) {
   return (
     <button
       onClick={onClick}
-      className={`shrink-0 rounded-full border px-2.5 py-1 text-[11px] leading-none transition-colors ${
+      className={`shrink-0 rounded-full border px-3 py-1.5 text-xs leading-none transition-colors ${
         active
           ? 'border-foreground bg-foreground text-background'
           : 'border-border bg-card/70 text-muted-foreground backdrop-blur hover:border-foreground/30 hover:text-foreground'
@@ -323,7 +372,7 @@ function GraphLinks({ node, graph, onOpen }) {
   if (related.length === 0) return null
   return (
     <div className="mt-5 border-t border-border/60 pt-4">
-      <div className="mb-2 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+      <div className="mb-2 text-xs uppercase tracking-[0.16em] text-muted-foreground">
         Bağlantılı · {related.length}
       </div>
       <ul className="space-y-1">
@@ -331,9 +380,10 @@ function GraphLinks({ node, graph, onOpen }) {
           <li key={r.id}>
             <button
               onClick={() => onOpen(r)}
-              className="group flex w-full items-center justify-between gap-2 rounded-lg border border-border px-3 py-2 text-left text-xs text-foreground transition-colors hover:border-primary/50 hover:bg-secondary"
+              title={r.title}
+              className="group flex w-full items-center justify-between gap-2 rounded-lg border border-border px-3 py-2 text-left text-sm text-foreground transition-colors hover:border-foreground/25 hover:bg-secondary"
             >
-              <span className="truncate">{r.title}</span>
+              <span className="min-w-0 truncate">{r.title}</span>
               <ArrowUpRight className="h-3.5 w-3.5 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" />
             </button>
           </li>
@@ -341,4 +391,43 @@ function GraphLinks({ node, graph, onOpen }) {
       </ul>
     </div>
   )
+}
+
+// **kalın** işaretli kısımları <strong> yapar; geri kalan metin olduğu gibi
+function RichText({ text }) {
+  return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
+    part.startsWith('**') && part.endsWith('**') ? (
+      <strong key={i} className="font-semibold text-foreground">
+        {part.slice(2, -2)}
+      </strong>
+    ) : (
+      part
+    ),
+  )
+}
+
+// aranan ifadeyi metin içinde vurgular (büyük/küçük harf duyarsız, tr)
+function Highlight({ text, query }) {
+  const q = query.trim()
+  if (q.length < 2) return text
+  const at = lower(text).indexOf(lower(q))
+  if (at < 0) return text
+  return (
+    <>
+      {text.slice(0, at)}
+      <mark className="rounded-sm bg-primary/20 text-foreground">
+        {text.slice(at, at + q.length)}
+      </mark>
+      {text.slice(at + q.length)}
+    </>
+  )
+}
+
+// gövdede eşleşmenin çevresinden kısa bir kesit
+function snippet(body, query) {
+  const plain = body.replace(/\*\*/g, '').replace(/\s+/g, ' ')
+  const at = lower(plain).indexOf(lower(query.trim()))
+  if (at < 0) return plain.slice(0, 90)
+  const start = Math.max(0, at - 30)
+  return (start > 0 ? '…' : '') + plain.slice(start, start + 110)
 }
