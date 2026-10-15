@@ -17,7 +17,7 @@ export const nodes = [
   {
     id: 'kebab-case-benzersiz-id',
     title: 'Kısa Başlık',        // 1-4 kelime, grafikte etiket olarak görünür
-    tags: ['etiket1', 'etiket2'], // 1-3 küçük harf etiket
+    tags: ['kategori'],           // tek etiket, 10 genel kategoriden biri
     body: 'Notun tam metni.',     // kullanıcının verdiği metin, olduğu gibi
   },
 ]
@@ -39,8 +39,8 @@ ve `links`'i incele. Yeni notu bunlarla ilişkilendireceksin.
 - **title**: notun özünü veren 1-4 kelimelik kısa başlık. Grafikte nokta
   etiketi olarak görüneceği için kısa tut (örn. "Prompt Caching",
   "Ajan Döngüsü", "Context Penceresi").
-- **tags**: 1-3 adet küçük harf etiket. Konu veya kategori
-  (mevcut etiketlerden seç: üst kategori `iş` / `pazarlama` / `kariyer` / `ai`, ayrıca `risk`, `satış`, `müşteri`, `fiyatlama`, `network`, `muhasebe`, `strateji` vb.).
+- **tags**: 1 adet küçük harf etiket (kategori).
+  (TEK etiket, şu 10 genel kategoriden biri: `ai`, `toplum`, `finans`, `strateji`, `satış`, `pazarlama`, `network`, `ekip`, `operasyon`, `kariyer`. Yeni etiket icat etme; hiçbiri uymuyorsa en yakınını seç).
 - **body**: kullanıcının verdiği metin. Olduğu gibi koru, yeniden yazma veya
   özetleme. Sadece `/f` prefix'ini ve varsa baştaki ipucunu temizle.
   Single quote'ları escape et (`'` → `\'`).
