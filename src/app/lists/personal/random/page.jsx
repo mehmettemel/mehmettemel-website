@@ -8,7 +8,6 @@ import { categories as kisiselGelisimData } from '@/data/personal/kisisel-gelisi
 import { categories as iliskilerData } from '@/data/personal/iliskiler'
 import { categories as toplumData } from '@/data/personal/toplum'
 import { categories as saglikData } from '@/data/personal/saglik'
-import { categories as futureInsightsData } from '@/data/personal/future-insights'
 import { categories as triviaData } from '@/data/personal/trivia'
 import { categories as moneyData } from '@/data/personal/money'
 
@@ -30,7 +29,6 @@ function getAllPersonalItems() {
   addItems(iliskilerData, 'Kadınlar')
   addItems(toplumData, 'Toplum')
   addItems(quotesData, 'Quotes')
-  addItems(futureInsightsData, 'Future Insights')
   addItems(moneyData, 'Life')
   addItems(triviaData, 'Trivia')
   return items

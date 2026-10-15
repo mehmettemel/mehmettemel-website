@@ -23,8 +23,7 @@ Kullanıcı notun başında bir kategori ipucu yazabilir. İpucu varsa öncelikl
 `kariyer` → girisimcilik.js/Kariyer/İş & Kariyer
 `marketing` → girisimcilik.js/Pazarlama/Pazarlama
 `iletişim` → girisimcilik.js/İletişim/İletişim
-`finance` → girisimcilik.js/Future Insights/Ekonomi & Finans
-`ai`, `gelecek`, `future`, `teknoloji` → girisimcilik.js/Future Insights/AI & Teknoloji
+`finance`, `ai`, `gelecek`, `future`, `teknoloji` → future-notes.js (graf; `/f` skill'inin formatı: node + links)
 
 İpucu bulunduysa metinden çıkar (ipucu notun parçası değil).
 
@@ -82,8 +81,6 @@ Notun içeriğine bakarak hedef dosya ve alt kategoriyi belirle:
 | **pazarlama** | Pazarlama | Reklam, sosyal medya, growth hacking, SEO, marka, dikkat çekme |
 | **kariyer** | İş & Kariyer | Kariyer, maaş, verimlilik, liderlik, iş hayatı tavsiyeleri |
 | **iletisim** | İletişim | İkna, müzakere, beden dili, konuşma teknikleri, güven oluşturma |
-| **futureInsights** | AI & Teknoloji | AI, otomasyon, teknoloji trendleri, gelecek öngörüleri |
-| **futureInsights** | Ekonomi & Finans | Yatırım, borsa, kripto, finansal trendler, makroekonomi |
 
 ## Adım 3: Duplike Kontrolü
 
@@ -120,7 +117,7 @@ Hedef: `tabs.<tabKey>.categories['<Alt Kategori>'].items` dizisinin **sonuna** e
 ## Yazar/Kaynak
 
 - Metnin sonunda "- İsim" veya "(İsim)" varsa:
-  - quotes.js için → " — Yazar" olarak metnin sonuna ekle
+  - quotes.js için → " (Yazar)" olarak metnin sonuna ekle (em dash kullanma, kullanıcının genel kuralı)
   - Diğer dosyalar için → metnin içinde bırak
 
 ## Kısa Söz mü Uzun Not mu?
