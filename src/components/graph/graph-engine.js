@@ -7,16 +7,22 @@
    - zayıf merkez çekimi + yumuşak elipsoid sınır: sert duvar yok,
      dışarı taşan nokta nazikçe geri çekilir (kenara yapışma olmaz);
      elipsoid ekran oranını izler → geniş ekranda küme yatayda dolar
+   - küme çekimi: her etiket kümesinin küre üzerinde sabit bir çapası
+     var (Fibonacci dağılımı, en kalabalık küme önde); üyeler hafifçe
+     oraya çekilir → aynı konudaki notlar ekranda bir bölgede toplanır
    - salınım (drift): her noktanın kendine özgü fazı, sürekli süzülür
 
    Dış API: setActive(id), flyTo(id) — kamerayı noktaya döndürür,
-   setFilter(ids) — etiket/arama süzgeci, dispose()
+   flyToCluster(k), resetView(), setFilter(ids, cluster) — etiket/arama
+   süzgeci, setInset(right, bottom) — panel açıkken sahne merkezini
+   boş alana kaydırır, dispose()
 
    Render:
    - InstancedMesh → tüm küreler tek draw call
    - LineSegments → bağlantılar, tepe renkleriyle vurgu
    - Etiketler HTML katmanı; kameraya en yakın noktalar ve odaktakiler
      görünür, geri kalanı gizli (üst üste binen yazı yok)
+   - Küme başlıkları: odak yokken her kümenin ağırlık merkezinde etiket adı
    - Renkler CSS değişkenlerinden okunur, tema değişince güncellenir
    ============================================================ */
 
@@ -32,6 +38,8 @@ const CFG = {
   bound: 18, // yumuşak sınır yarıçapı (elipsoidin kısa ekseni)
   boundK: 0.03,
   maxStretch: 2.1, // geniş ekranda küme yatayda en fazla bu kadar uzar
+  cluster: 0.006, // küme çapasına çekim; merkez çekiminden güçlü, yaydan zayıf
+  clusterR: 8, // çapaların merkeze uzaklığı (elipsoid uzayında); bulut sınıra taşmasın
   damp: 0.9,
   drift: 0.0045, // düşük: sakin, ağır süzülme
   warmup: 260, // ilk karede yerleşmiş görünsün
@@ -40,6 +48,11 @@ const CFG = {
 
 const LABEL_BASE =
   'absolute left-0 top-0 whitespace-nowrap text-xs leading-none tracking-tight will-change-transform'
+const CAPTION_BASE =
+  'absolute left-0 top-0 whitespace-nowrap text-xs font-medium uppercase leading-none tracking-[0.2em] text-muted-foreground/60 will-change-transform'
+// yazı arkasına zemin renginde hale: çizgilerin üstünde de okunur
+const LABEL_HALO =
+  '0 0 6px hsl(var(--background)), 0 0 2px hsl(var(--background))'
 
 function readHsl(name, fallback) {
   const raw = getComputedStyle(document.documentElement)
@@ -69,10 +82,19 @@ export class GraphEngine {
     this.reduceMotion =
       window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false
 
+    // kümeler: graph.clusterOf[i] → küme indeksi (-1: kümesiz)
+    this.clusters = graph.clusters ?? []
+    this.clusterOf = graph.clusterOf ?? null
+    this.initAnchors()
+
     this.hover = -1
     this.active = -1
     this.fly = -1 // kameranın önüne getirilecek nokta
+    this.flyPoint = null // ya da sabit bir hedef yön (küme merkezi, sıfırlama)
     this.filter = null // etiket/arama süzgeci: görünür indeks kümesi
+    this.filterCluster = -1 // süzgeçteki etiketin kümesi (başlık için)
+    this.inset = { x: 0, y: 0 } // sahne merkezinin kayması (px, yarı değer)
+    this.insetTarget = { x: 0, y: 0 }
     this.userMoved = false
     this.snapColors = true
     this.disposed = false
@@ -89,11 +111,35 @@ export class GraphEngine {
 
     for (let i = 0; i < CFG.warmup; i++) this.step(false)
 
+    // ilk kare: sahne yumuşakça belirir
+    this.host.style.transition = 'opacity 700ms ease'
+    this.host.style.opacity = '0'
+    requestAnimationFrame(() => {
+      if (!this.disposed) this.host.style.opacity = '1'
+    })
+
     this.loop = this.loop.bind(this)
     this.raf = requestAnimationFrame(this.loop)
   }
 
   /* ---------- fizik ---------- */
+
+  // Küme çapaları: birim küre üzerinde Fibonacci dağılımı. k=0 (en
+  // kalabalık küme) kameranın baktığı +z yönünde, sonrakiler arkaya doğru.
+  initAnchors() {
+    const K = this.clusters.length
+    this.anchor = new Float32Array(K * 3)
+    if (K < 2) return // tek küme = tüm bulut; çapa anlamsız
+    const golden = Math.PI * (3 - Math.sqrt(5))
+    for (let k = 0; k < K; k++) {
+      const z = 1 - ((k + 0.5) / K) * 2
+      const r = Math.sqrt(1 - z * z)
+      const th = golden * k
+      this.anchor[k * 3] = Math.cos(th) * r
+      this.anchor[k * 3 + 1] = Math.sin(th) * r
+      this.anchor[k * 3 + 2] = z
+    }
+  }
 
   initPhysics() {
     const n = this.n
@@ -179,6 +225,8 @@ export class GraphEngine {
     const drift = withDrift && !this.reduceMotion ? CFG.drift : 0
     const isx = 1 / this.sx
     const isy = 1 / this.sy
+    const clustered = this.clusterOf && this.clusters.length >= 2
+    const { anchor, clusterOf } = this
     for (let i = 0; i < n; i++) {
       const ix = i * 3
       const px = pos[ix] * isx
@@ -190,6 +238,15 @@ export class GraphEngine {
       vel[ix] -= px * pull * isx
       vel[ix + 1] -= py * pull * isy
       vel[ix + 2] -= pz * pull
+
+      // küme çapasına çekim (çapa elipsoid uzayında, dünyaya ölçeklenir)
+      if (clustered && clusterOf[i] >= 0) {
+        const kx = clusterOf[i] * 3
+        const R = CFG.clusterR
+        vel[ix] += (anchor[kx] * R * this.sx - pos[ix]) * CFG.cluster
+        vel[ix + 1] += (anchor[kx + 1] * R * this.sy - pos[ix + 1]) * CFG.cluster
+        vel[ix + 2] += (anchor[kx + 2] * R - pos[ix + 2]) * CFG.cluster
+      }
 
       if (drift) {
         const sp = this.speed[i]
@@ -291,7 +348,7 @@ export class GraphEngine {
     const lmat = new THREE.LineBasicMaterial({
       vertexColors: true,
       transparent: true,
-      opacity: 0.95,
+      opacity: 0.9,
     })
     const lines = new THREE.LineSegments(lgeo, lmat)
     lines.frustumCulled = false
@@ -341,11 +398,24 @@ export class GraphEngine {
   initLabels() {
     const layer = document.createElement('div')
     layer.className = 'pointer-events-none absolute inset-0 overflow-hidden'
+    // küme başlıkları önce eklenir → not etiketleri üstte kalır
+    this.capEls = this.clusters.map((c) => {
+      const el = document.createElement('span')
+      el.className = CAPTION_BASE
+      el.textContent = c.tag
+      el.style.opacity = '0'
+      el.style.textShadow = LABEL_HALO
+      layer.appendChild(el)
+      return el
+    })
+    this.capOp = new Float32Array(this.clusters.length)
+    this.capCentroid = new Float32Array(this.clusters.length * 3)
     this.labelEls = this.graph.nodes.map((n) => {
       const el = document.createElement('span')
       el.className = `${LABEL_BASE} text-muted-foreground`
       el.textContent = n.title
       el.style.opacity = '0'
+      el.style.textShadow = LABEL_HALO
       layer.appendChild(el)
       return el
     })
@@ -354,6 +424,9 @@ export class GraphEngine {
     this.labelFocus = new Uint8Array(this.n)
     this.host.appendChild(layer)
     this.labelLayer = layer
+    // gerçek yazı genişlikleri → çakışma testi uzun başlıkları da yakalar
+    this.labelW = new Float32Array(this.labelEls.map((el) => el.offsetWidth || 80))
+    this.capW = new Float32Array(this.capEls.map((el) => el.offsetWidth || 80))
   }
 
   /* ---------- tema ---------- */
@@ -366,8 +439,9 @@ export class GraphEngine {
     this.colPrimary = primary
     this.colDim = fg.clone().lerp(bg, 0.72)
     this.colGhost = fg.clone().lerp(bg, 0.86) // süzgeç dışı kalanlar
-    this.colLink = bg.clone().lerp(fg, 0.4)
-    this.colLinkDim = bg.clone().lerp(fg, 0.14)
+    // dinlenme halinde çizgiler sessiz; odakta ana renge çıkarlar
+    this.colLink = bg.clone().lerp(fg, 0.26)
+    this.colLinkDim = bg.clone().lerp(fg, 0.1)
     this.scene.fog.color.copy(bg)
     this.snapColors = true
   }
@@ -401,10 +475,15 @@ export class GraphEngine {
       this.pointer.set(10, 10)
       this.needPick = true
     }
+    // boşluğa çift tık: kamera başlangıç yönüne döner
+    this.onDbl = () => {
+      if (this.hover < 0) this.resetView()
+    }
     el.addEventListener('pointermove', this.onMove)
     el.addEventListener('pointerdown', this.onDown)
     el.addEventListener('pointerup', this.onUp)
     el.addEventListener('pointerleave', this.onLeave)
+    el.addEventListener('dblclick', this.onDbl)
 
     this.ro = new ResizeObserver(() => this.resize())
     this.ro.observe(this.host)
@@ -423,6 +502,7 @@ export class GraphEngine {
     this.renderer.setSize(w, h)
     this.camera.aspect = w / h
     this.camera.updateProjectionMatrix()
+    this.applyInset()
     this.fitCamera()
   }
 
@@ -461,15 +541,76 @@ export class GraphEngine {
   flyTo(id) {
     const i = this.index.get(id)
     this.fly = i == null ? -1 : i
+    this.flyPoint = null
   }
 
-  // ids: null → süzgeç yok; dizi → yalnız bu notlar belirgin
-  setFilter(ids) {
+  // Kümenin ağırlık merkezini kameranın önüne getirir
+  flyToCluster(k) {
+    if (k < 0 || k >= this.clusters.length) return
+    this.centroid(k, this.v3)
+    if (this.v3.lengthSq() < 1e-4) return
+    this.fly = -1
+    this.flyPoint = this.v3.clone()
+  }
+
+  // Başlangıç bakışı: tam karşıdan
+  resetView() {
+    this.fly = -1
+    this.flyPoint = new THREE.Vector3(0, 0, 1)
+  }
+
+  // ids: null → süzgeç yok; dizi → yalnız bu notlar belirgin.
+  // cluster: süzülen etiketin kümesi (başlığı açık kalır), yoksa -1
+  setFilter(ids, cluster = -1) {
+    this.filterCluster = ids ? cluster : -1
     if (!ids) {
       this.filter = null
       return
     }
     this.filter = new Set(ids.map((id) => this.index.get(id)).filter((i) => i != null))
+  }
+
+  // Panel açıkken sahne merkezi boş alanın ortasına kayar (px cinsinden
+  // sağdan/alttan kaplanan alan). Her karede yumuşakça hedefe gider.
+  setInset(right = 0, bottom = 0) {
+    this.insetTarget.x = right / 2
+    this.insetTarget.y = bottom / 2
+  }
+
+  updateInset() {
+    const c = this.inset
+    const t = this.insetTarget
+    if (Math.abs(t.x - c.x) < 0.3 && Math.abs(t.y - c.y) < 0.3) {
+      if (c.x === t.x && c.y === t.y) return
+      c.x = t.x
+      c.y = t.y
+    } else {
+      c.x += (t.x - c.x) * 0.1
+      c.y += (t.y - c.y) * 0.1
+    }
+    this.applyInset()
+  }
+
+  applyInset() {
+    const w = this.host.clientWidth
+    const h = this.host.clientHeight
+    if (!w || !h) return
+    const { x, y } = this.inset
+    if (!x && !y) this.camera.clearViewOffset()
+    else this.camera.setViewOffset(w, h, x, y, w, h)
+  }
+
+  // kümenin dünya uzayındaki ağırlık merkezi → out
+  centroid(k, out) {
+    const members = this.clusters[k]?.members ?? []
+    out.set(0, 0, 0)
+    if (!members.length) return out
+    for (const i of members) {
+      out.x += this.pos[i * 3]
+      out.y += this.pos[i * 3 + 1]
+      out.z += this.pos[i * 3 + 2]
+    }
+    return out.divideScalar(members.length)
   }
 
   dispose() {
@@ -480,6 +621,7 @@ export class GraphEngine {
     el.removeEventListener('pointerdown', this.onDown)
     el.removeEventListener('pointerup', this.onUp)
     el.removeEventListener('pointerleave', this.onLeave)
+    el.removeEventListener('dblclick', this.onDbl)
     this.ro.disconnect()
     this.mo.disconnect()
     this.controls.dispose()
@@ -491,6 +633,8 @@ export class GraphEngine {
     el.remove()
     this.labelLayer.remove()
     this.host.style.cursor = ''
+    this.host.style.opacity = ''
+    this.host.style.transition = ''
   }
 
   /* ---------- kare döngüsü ---------- */
@@ -510,28 +654,42 @@ export class GraphEngine {
     this.snapColors = false
 
     this.updateFly()
+    this.updateInset()
     this.controls.autoRotate =
-      !this.reduceMotion && this.hover < 0 && this.active < 0 && this.fly < 0
+      !this.reduceMotion &&
+      this.hover < 0 &&
+      this.active < 0 &&
+      this.fly < 0 &&
+      !this.flyPoint
     this.controls.update()
     this.renderer.render(this.scene, this.camera)
     this.raf = requestAnimationFrame(this.loop)
   }
 
-  // kamera konumunu, mesafeyi koruyarak hedef noktanın doğrultusuna çeker
+  // kamera konumunu, mesafeyi koruyarak hedef doğrultusuna çeker.
+  // Hedef: canlı bir nokta (fly) ya da sabit bir yön (flyPoint).
   updateFly() {
-    if (this.fly < 0) return
-    const ix = this.fly * 3
+    if (this.fly < 0 && !this.flyPoint) return
     const cam = this.camera.position
     const dist = cam.length()
-    this.v3.set(this.pos[ix], this.pos[ix + 1], this.pos[ix + 2])
+    if (this.fly >= 0) {
+      const ix = this.fly * 3
+      this.v3.set(this.pos[ix], this.pos[ix + 1], this.pos[ix + 2])
+    } else {
+      this.v3.copy(this.flyPoint)
+    }
     if (this.v3.lengthSq() < 1e-4) {
       this.fly = -1
+      this.flyPoint = null
       return
     }
     this.v3.setLength(dist)
     cam.lerp(this.v3, 0.07)
     cam.setLength(dist)
-    if (cam.distanceToSquared(this.v3) < 0.05) this.fly = -1
+    if (cam.distanceToSquared(this.v3) < 0.05) {
+      this.fly = -1
+      this.flyPoint = null
+    }
   }
 
   updateSpheres(focus, near, lerp) {
@@ -624,6 +782,11 @@ export class GraphEngine {
       rank[i] = proj[ix + 2] - (labelOp[i] > 0.3 ? 5 : 0)
     }
 
+    // küme başlıkları: odak yokken ağırlık merkezinde; süzgeç varsa yalnız
+    // süzülen küme. Önce yerleşirler, not etiketleri onlardan kaçınır.
+    const placed = []
+    this.updateCaptions(focus, placed)
+
     // hedef görünürlük
     target.fill(0)
     if (focus >= 0) {
@@ -635,7 +798,6 @@ export class GraphEngine {
       // büyük ekranda daha çok etiket, süzgeç varsa yalnız süzülenler
       const count = THREE.MathUtils.clamp(Math.round((w * h) / 42000), 4, 28)
       this.order.sort((a, b) => rank[a] - rank[b])
-      const placed = []
       let shown = 0
       for (const i of this.order) {
         if (shown >= count) break
@@ -643,11 +805,12 @@ export class GraphEngine {
         if (this.filter && !this.filter.has(i)) continue
         const sx = proj[i * 3]
         const sy = proj[i * 3 + 1]
+        const hw = this.labelW[i] / 2
         const clash = placed.some(
-          ([px, py]) => Math.abs(px - sx) < 130 && Math.abs(py - sy) < 28,
+          ([px, py, pw]) => Math.abs(px - sx) < hw + pw + 10 && Math.abs(py - sy) < 30,
         )
         if (clash) continue
-        placed.push([sx, sy])
+        placed.push([sx, sy, hw])
         target[i] = 0.9 - (shown / count) * 0.4 // en yakın en belirgin
         shown += 1
       }
@@ -684,6 +847,37 @@ export class GraphEngine {
       el.style.transform = `translate3d(${proj[ix].toFixed(1)}px, ${(
         proj[ix + 1] + pr + 5
       ).toFixed(1)}px, 0) translateX(-50%)`
+      el.style.opacity = op.toFixed(3)
+    }
+  }
+
+  updateCaptions(focus, placed) {
+    const K = this.clusters.length
+    if (K < 2) return
+    const { camera, v3, capEls, capOp } = this
+    const w = this.host.clientWidth
+    const h = this.host.clientHeight
+    for (let k = 0; k < K; k++) {
+      const members = this.clusters[k].members
+      let tgt = 0
+      if (focus < 0 && members.length >= 3) {
+        tgt = this.filterCluster < 0 ? (this.filter ? 0 : 1) : k === this.filterCluster ? 1 : 0
+      }
+      this.centroid(k, v3)
+      v3.project(camera)
+      const behind = v3.z > 1
+      if (behind) tgt = 0
+      capOp[k] += (tgt - capOp[k]) * (tgt > capOp[k] ? 0.08 : 0.16)
+      const op = capOp[k]
+      const el = capEls[k]
+      if (op < 0.02 && tgt === 0) {
+        if (el.style.opacity !== '0') el.style.opacity = '0'
+        continue
+      }
+      const sx = ((v3.x + 1) / 2) * w
+      const sy = ((1 - v3.y) / 2) * h
+      placed.push([sx, sy, this.capW[k] / 2])
+      el.style.transform = `translate3d(${sx.toFixed(1)}px, ${sy.toFixed(1)}px, 0) translate(-50%, -50%)`
       el.style.opacity = op.toFixed(3)
     }
   }
