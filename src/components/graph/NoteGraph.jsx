@@ -19,7 +19,6 @@ export function NoteGraph({ title, subtitle, nodes: rawNodes, links: rawLinks })
   const hostRef = useRef(null)
   const engineRef = useRef(null)
   const searchRef = useRef(null)
-  const panelRef = useRef(null)
   const [active, setActive] = useState(null)
   const [tag, setTag] = useState(null)
   const [query, setQuery] = useState('')
@@ -39,7 +38,7 @@ export function NoteGraph({ title, subtitle, nodes: rawNodes, links: rawLinks })
       degree.set(l.target, degree.get(l.target) + 1)
     })
     nodes.forEach((n) => {
-      n.r = 0.28 + Math.min(degree.get(n.id), 5) * 0.08
+      n.r = 0.34 + Math.min(degree.get(n.id), 5) * 0.11
     })
     const neighbors = new Map(nodes.map((n) => [n.id, new Set([n.id])]))
     links.forEach((l) => {
@@ -54,37 +53,14 @@ export function NoteGraph({ title, subtitle, nodes: rawNodes, links: rawLinks })
     const tags = [...tagCount.entries()]
       .filter(([, c]) => c >= MIN_TAG_COUNT)
       .sort((a, b) => b[1] - a[1])
-    // kümeler: çip olan etiketler; bir not birden çok etikete sahipse en
-    // nadir olanına gider (beslenme + karaciğer → karaciğer kümesi),
-    // böylece dev bir "genel" blob yerine okunur bölgeler oluşur
-    const clusterIndex = new Map(tags.map(([t], k) => [t, k]))
-    const clusters = tags.map(([t]) => ({ tag: t, members: [] }))
-    const clusterOf = new Int32Array(nodes.length).fill(-1)
-    nodes.forEach((n, i) => {
-      let best = -1
-      let bestCount = Infinity
-      n.tags?.forEach((t) => {
-        const k = clusterIndex.get(t)
-        if (k != null && tagCount.get(t) < bestCount) {
-          best = k
-          bestCount = tagCount.get(t)
-        }
-      })
-      clusterOf[i] = best
-      if (best >= 0) clusters[best].members.push(i)
-    })
-    return { nodes, links, neighbors, byId, tags, clusters, clusterOf, clusterIndex }
+    return { nodes, links, neighbors, byId, tags }
   }, [rawNodes, rawLinks])
 
   useEffect(() => {
     const host = hostRef.current
     if (!host) return
     const engine = new GraphEngine(host, graph, {
-      onClick: (id) => {
-        const node = id ? graph.byId.get(id) : null
-        setActive(node)
-        if (node) engine.flyTo(id) // tıklanan not kameranın önüne gelir
-      },
+      onClick: (id) => setActive(id ? graph.byId.get(id) : null),
     })
     engineRef.current = engine
     return () => {
@@ -97,35 +73,12 @@ export function NoteGraph({ title, subtitle, nodes: rawNodes, links: rawLinks })
     engineRef.current?.setActive(active?.id ?? null)
   }, [active])
 
-  // panel açıkken sahne merkezi boş alana kayar: masaüstünde panel sağda
-  // (400px + kenar boşluğu), mobilde alttan kart (gerçek yüksekliği ölçülür)
+  // etiket süzgeci → motorda silikleştirme
   useEffect(() => {
-    const engine = engineRef.current
-    const host = hostRef.current
-    if (!engine || !host) return
-    if (!active) {
-      engine.setInset(0, 0)
-      return
-    }
-    const desktop = window.matchMedia('(min-width: 768px)').matches
-    if (desktop) {
-      engine.setInset(424, 0)
-      return
-    }
-    const panelH = (panelRef.current?.offsetHeight ?? 0) + 12
-    engine.setInset(0, Math.min(panelH, Math.round(host.clientHeight * 0.6)))
-  }, [active])
-
-  // etiket süzgeci → motorda silikleştirme + kamera o kümeye döner
-  useEffect(() => {
-    const engine = engineRef.current
-    if (!engine) return
     const ids = tag
       ? graph.nodes.filter((n) => n.tags?.includes(tag)).map((n) => n.id)
       : null
-    const k = tag ? (graph.clusterIndex.get(tag) ?? -1) : -1
-    engine.setFilter(ids, k)
-    if (k >= 0) engine.flyToCluster(k)
+    engineRef.current?.setFilter(ids)
   }, [tag, graph])
 
   // "/" veya ⌘K: aramaya odaklan (bir alana yazarken devreye girmez)
@@ -345,7 +298,6 @@ export function NoteGraph({ title, subtitle, nodes: rawNodes, links: rawLinks })
         {active && (
           <motion.aside
             key={active.id}
-            ref={panelRef}
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 24 }}
