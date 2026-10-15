@@ -13,7 +13,7 @@ const skills = [
   { cmd: '/remove', desc: 'Siteden içerik sil' },
   { cmd: '/not', desc: 'Not / alıntı ekle' },
   { cmd: '/food', desc: 'Food notu ekle' },
-  { cmd: '/ai', desc: 'AI notu ekle' },
+  { cmd: '/f', desc: 'Future notu ekle' },
 ]
 
 export function SkillsIcon({ className }) {

@@ -148,9 +148,11 @@ function DesktopNav() {
           <NavLink href="/food">Food</NavLink>
         </NavigationMenuItem>
 
-        <NavigationMenuItem>
-          <NavLink href="/ai">AI</NavLink>
-        </NavigationMenuItem>
+        {isAuthenticated && (
+          <NavigationMenuItem>
+            <NavLink href="/future">Future</NavLink>
+          </NavigationMenuItem>
+        )}
 
         <NavigationMenuItem>
           <NavLink href="/books">Books</NavLink>
@@ -226,9 +228,11 @@ function MobileNav() {
                   <Link href="/food" onClick={closeSheet} className={mobileNavLinkClass}>
                     <span>🍎</span> Food
                   </Link>
-                  <Link href="/ai" onClick={closeSheet} className={mobileNavLinkClass}>
-                    <span>🤖</span> AI
-                  </Link>
+                  {isAuthenticated && (
+                    <Link href="/future" onClick={closeSheet} className={mobileNavLinkClass}>
+                      <span>🔮</span> Future
+                    </Link>
+                  )}
                   <Link href="/books" onClick={closeSheet} className={mobileNavLinkClass}>
                     <span>📚</span> Books
                   </Link>

@@ -1,13 +1,13 @@
 ---
-name: ai
-description: AI notlar grafiğine (Obsidian-tarzı /ai) yeni yapay zeka notu ekler. /ai komutu ile tetiklenir. Notu analiz edip src/data/ai-notes.js dosyasına bir node olarak ekler ve mevcut notlarla anlamsal ilişki kurup links'e bağlar.
+name: f
+description: Future notlar grafiğine (Obsidian-tarzı /f) yeni gelecek notu ekler. /f komutu ile tetiklenir. Notu analiz edip src/data/future-notes.js dosyasına bir node olarak ekler ve mevcut notlarla anlamsal ilişki kurup links'e bağlar.
 ---
 
-# AI Not Ekle
+# Future Not Ekle
 
-Kullanıcı `/ai` komutu ile bir yapay zeka notu verdiğinde, notu `src/data/ai-notes.js`
+Kullanıcı `/f` komutu ile bir gelecek notu verdiğinde, notu `src/data/future-notes.js`
 dosyasına bir **node** olarak ekler ve **mevcut notlarla anlamsal olarak
-ilişkilendirip** `links`'e bağlar. Sayfa: `/ai` (Obsidian-tarzı
+ilişkilendirip** `links`'e bağlar. Sayfa: `/future` (giriş gerekli) (Obsidian-tarzı
 kuvvet-yönlü grafik). Skill YALNIZCA veri dosyasını düzenler; bileşene dokunmaz.
 
 ## Veri Yapısı
@@ -29,7 +29,7 @@ export const links = [
 
 ## Adım 1: Mevcut Notları Oku
 
-`src/data/ai-notes.js`'i oku. Var olan tüm `nodes`'u (id, title, tags, body)
+`src/data/future-notes.js`'i oku. Var olan tüm `nodes`'u (id, title, tags, body)
 ve `links`'i incele. Yeni notu bunlarla ilişkilendireceksin.
 
 ## Adım 2: Node Oluştur
@@ -42,7 +42,7 @@ ve `links`'i incele. Yeni notu bunlarla ilişkilendireceksin.
 - **tags**: 1-3 adet küçük harf etiket. Konu veya kategori
   (örn. `llm`, `prompt`, `ajan`, `araç`, `eval`, `maliyet`).
 - **body**: kullanıcının verdiği metin. Olduğu gibi koru, yeniden yazma veya
-  özetleme. Sadece `/ai` prefix'ini ve varsa baştaki ipucunu temizle.
+  özetleme. Sadece `/f` prefix'ini ve varsa baştaki ipucunu temizle.
   Single quote'ları escape et (`'` → `\'`).
 
 ## Adım 3: İlişkilendirme (en önemli kısım)
@@ -88,12 +88,12 @@ Onay sorma; notu ekle, ilişkileri kur, sonucu bildir.
 ## Onay Formatı
 
 ```
-Eklendi: ai-notes.js → [başlık]
+Eklendi: future-notes.js → [başlık]
 Bağlandı: [başlık] ↔ [ilişkili not] (gerekçe)
 ```
 
 İlişki yoksa:
 
 ```
-Eklendi: ai-notes.js → [başlık] (henüz bağ yok, tek başına)
+Eklendi: future-notes.js → [başlık] (henüz bağ yok, tek başına)
 ```
