@@ -1,17 +1,53 @@
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { verifyToken } from '@/lib/auth'
-import { NoteGraph } from '@/components/graph/NoteGraph'
-import { graphTitle, graphSubtitle, nodes, links } from '@/data/future-notes'
+import { Container } from '@/components/Container'
+import { PersonalContent } from '@/components/personal/PersonalContent'
+import { graphTitle, nodes, links } from '@/data/future-notes'
 
 export const metadata = {
   title: 'Future | Mehmet Temel',
-  description: 'Gelecek üzerine notlarım, bağlantılı grafik.',
+  description: 'Gelecek, iş, pazarlama ve kariyer notlarım.',
   robots: { index: false, follow: false },
 }
 
-// Giriş gerektirir. Food sayfasıyla aynı sahne: Navbar yüksekliği (61px)
-// çıkarılır, grafik kalan ekranı doldurur. Not yokken grafik motoru açılmaz.
+// Kategori sırası: fırsat önde, sonra not sayısına göre. Etiket yazımı
+// (ai gibi kısaltmalar) için özel adlar; geri kalanı baş harfi büyütülür.
+const LABELS = { ai: 'AI' }
+const FIRST = 'fırsat'
+const labelOf = (tag) =>
+  LABELS[tag] ?? tag.charAt(0).toLocaleUpperCase('tr') + tag.slice(1)
+
+// Veri grafik biçiminde (nodes + links) tutulur; sayfa notları etikete göre
+// kartlara böler, bağları modalda "Bağlantılı" olarak gösterir.
+function buildCategories() {
+  const byId = new Map(nodes.map((n) => [n.id, n]))
+  const related = new Map(nodes.map((n) => [n.id, []]))
+  for (const l of links) {
+    if (!byId.has(l.source) || !byId.has(l.target)) continue
+    related.get(l.source).push(l.target)
+    related.get(l.target).push(l.source)
+  }
+  const groups = new Map()
+  for (const n of nodes) {
+    const tag = n.tags?.[0] ?? 'diğer'
+    if (!groups.has(tag)) groups.set(tag, [])
+    groups.get(tag).push({
+      id: n.id,
+      title: n.title,
+      text: n.body,
+      subItems: [],
+      related: related.get(n.id).map((id) => ({ id, title: byId.get(id).title })),
+    })
+  }
+  const order = [...groups.keys()].sort((a, b) =>
+    a === FIRST ? -1 : b === FIRST ? 1 : groups.get(b).length - groups.get(a).length,
+  )
+  return Object.fromEntries(
+    order.map((tag) => [tag, { label: labelOf(tag), items: groups.get(tag) }]),
+  )
+}
+
 export default async function FuturePage() {
   const cookieStore = await cookies()
   const sessionCookie = cookieStore.get('session')
@@ -20,22 +56,15 @@ export default async function FuturePage() {
   if (!payload) redirect('/?login=expired')
 
   return (
-    <div className="relative h-[calc(100dvh-61px)] min-h-[560px] w-full overflow-hidden">
-      {nodes.length === 0 ? (
-        <div className="flex h-full flex-col items-center justify-center gap-2 px-4 text-center">
-          <h1 className="text-2xl font-semibold">{graphTitle}</h1>
-          <p className="max-w-md text-sm text-muted-foreground">
-            Henüz not yok. /f ile ilk notu ekle.
-          </p>
-        </div>
-      ) : (
-        <NoteGraph
+    <Container>
+      <div className="mx-auto max-w-7xl py-8 sm:py-12">
+        <PersonalContent
+          categories={buildCategories()}
           title={graphTitle}
-          subtitle={graphSubtitle}
-          nodes={nodes}
-          links={links}
+          defaultView="all"
+          searchable
         />
-      )}
-    </div>
+      </div>
+    </Container>
   )
 }

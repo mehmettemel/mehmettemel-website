@@ -1,11 +1,12 @@
-// Future: gelecek, yapay zeka, iş, pazarlama ve kariyer notlarım, Obsidian-tarzı bağlantılı grafik.
-// Her not bir "dot"; links ile birbirine bağlanır.
+// Future: gelecek, yapay zeka, iş, pazarlama ve kariyer notlarım.
+// /future sayfası notları etikete (ilk etiket = kategori) göre kartlara böler;
+// links, notun modalında "Bağlantılı" olarak görünür.
 // Not eklemek /f skill'i ile yapılır: skill notu analiz eder,
 // nodes'a { id, title, tags, body } ekler ve mevcut notlarla
 // anlamsal ilişki kurup links'e { source, target } koyar.
 
 export const graphTitle = 'Future'
-export const graphSubtitle = 'Gelecek, iş, pazarlama ve kariyer notlarım. Bir noktaya dokun, açılsın.'
+export const graphSubtitle = 'Gelecek, iş, pazarlama ve kariyer notlarım.'
 
 export const nodes = [
   {

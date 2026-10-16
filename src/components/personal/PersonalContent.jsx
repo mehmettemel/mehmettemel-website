@@ -2,14 +2,31 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
-import { Shuffle, Grid3x3, ChevronLeft, ChevronRight, X } from 'lucide-react'
+import { Shuffle, Grid3x3, ChevronLeft, ChevronRight, X, Search, Link2, Check } from 'lucide-react'
 
 function getItemText(item) {
   return typeof item === 'string' ? item : item.text
 }
 
-export function PersonalContent({ categories, title, hideHeading = false }) {
-  const [showRandom, setShowRandom] = useState(true)
+const trLower = (s) => s.toLocaleLowerCase('tr')
+
+/* Kategorili not listesi: rastgele kart ya da "Tümü" kart ızgarası.
+   Öğe biçimi: 'metin' ya da { text, subItems, title?, id?, related? }.
+   Opsiyonel:
+   - defaultView="all": ızgara görünümüyle açılır
+   - searchable: arama kutusu + not sayısı
+   - id olan notlar: modalda "Bağlantı" düğmesi (<sayfa>?n=<id>), bağlantıyla
+     gelinirse not doğrudan açılır; related varsa modalda bağlantılı notlar */
+export function PersonalContent({
+  categories,
+  title,
+  hideHeading = false,
+  defaultView = 'random',
+  searchable = false,
+}) {
+  const [showRandom, setShowRandom] = useState(defaultView !== 'all')
+  const [query, setQuery] = useState('')
+  const [copied, setCopied] = useState(false)
   const [randomNote, setRandomNote] = useState(null)
   const [isAnimating, setIsAnimating] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState('all')
@@ -109,7 +126,51 @@ export function PersonalContent({ categories, title, hideHeading = false }) {
     }
   }
 
-  const filteredNotes = getFilteredNotes()
+  const q = trLower(query.trim())
+  const filteredNotes = getFilteredNotes().filter((n) => {
+    if (!q) return true
+    const c = n.content
+    const hay = typeof c === 'string' ? c : `${c.title ?? ''} ${c.text} ${(c.subItems ?? []).join(' ')}`
+    return trLower(`${hay} ${n.category}`).includes(q)
+  })
+
+  // derin bağlantı: ?n=<id> ile gelinen not modalda açılır
+  useEffect(() => {
+    const wanted = new URLSearchParams(window.location.search).get('n')
+    if (!wanted) return
+    const found = getAllNotes().find((n) => n.content?.id === wanted)
+    if (found) {
+      setShowRandom(false)
+      setModalNote(found)
+    }
+    // yalnız ilk yüklemede
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const copyLink = async (id) => {
+    const url = `${window.location.origin}${window.location.pathname}?n=${encodeURIComponent(id)}`
+    try {
+      await navigator.clipboard.writeText(url)
+    } catch {
+      const ta = document.createElement('textarea')
+      ta.value = url
+      ta.style.position = 'fixed'
+      ta.style.opacity = '0'
+      document.body.appendChild(ta)
+      ta.select()
+      document.execCommand('copy')
+      ta.remove()
+    }
+    setCopied(true)
+  }
+
+  useEffect(() => {
+    if (!copied) return
+    const t = setTimeout(() => setCopied(false), 1600)
+    return () => clearTimeout(t)
+  }, [copied])
+
+  useEffect(() => setCopied(false), [modalNote])
 
   return (
     <>
@@ -123,7 +184,7 @@ export function PersonalContent({ categories, title, hideHeading = false }) {
         <div className="flex items-center gap-1.5">
           <button
             onClick={getNewRandom}
-            className={`flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] transition-all ${
+            className={`flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs transition-all ${
               showRandom
                 ? 'border-foreground/20 bg-secondary/60 font-medium text-foreground'
                 : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -134,7 +195,7 @@ export function PersonalContent({ categories, title, hideHeading = false }) {
           </button>
           <button
             onClick={switchToAll}
-            className={`flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] transition-all ${
+            className={`flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs transition-all ${
               !showRandom
                 ? 'border-foreground/20 bg-secondary/60 font-medium text-foreground'
                 : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -144,6 +205,32 @@ export function PersonalContent({ categories, title, hideHeading = false }) {
             <span>Tümü</span>
           </button>
         </div>
+        {searchable && !showRandom && (
+          <div className="flex items-center gap-3">
+            <div className="flex h-9 w-64 max-w-full items-center gap-2 rounded-full border border-border bg-card/80 pl-3 pr-2 transition-colors focus-within:border-foreground/30">
+              <Search className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Notlarda ara…"
+                aria-label="Notlarda ara"
+                className="min-w-0 flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground/70 focus:outline-none"
+              />
+              {query && (
+                <button
+                  onClick={() => setQuery('')}
+                  aria-label="Aramayı temizle"
+                  className="rounded-full p-0.5 text-muted-foreground hover:text-foreground"
+                >
+                  <X className="h-3 w-3" />
+                </button>
+              )}
+            </div>
+            <span className="text-xs tabular-nums text-muted-foreground">
+              {filteredNotes.length} not
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Category tabs - horizontal scrollable */}
@@ -210,6 +297,11 @@ export function PersonalContent({ categories, title, hideHeading = false }) {
                 <div className="mb-3 text-xs font-semibold text-muted-foreground">
                   {randomNote.category}
                 </div>
+                {randomNote.content.title && (
+                  <h3 className="mb-2 text-base font-semibold leading-snug text-foreground">
+                    {randomNote.content.title}
+                  </h3>
+                )}
                 <div className="text-sm font-normal text-foreground leading-relaxed">
                   {typeof randomNote.content === 'string' ? (
                     <p>{randomNote.content}</p>
@@ -247,15 +339,20 @@ export function PersonalContent({ categories, title, hideHeading = false }) {
                   className="note-card group relative rounded-lg border border-border bg-card p-3 text-left transition-all duration-200 hover:z-30 hover:border-foreground/20"
                 >
                   {selectedCategory === 'all' && (
-                    <div className="mb-1 truncate text-[10px] font-semibold text-muted-foreground">
+                    <div className="mb-1 truncate text-xs font-semibold text-muted-foreground">
                       {note.category}
                     </div>
+                  )}
+                  {note.content.title && (
+                    <h3 className="mb-1 line-clamp-2 text-sm font-semibold leading-snug text-foreground">
+                      {note.content.title}
+                    </h3>
                   )}
                   <p className="line-clamp-4 text-xs font-normal leading-relaxed text-foreground">
                     {text}
                   </p>
                   {subItems.length > 0 && (
-                    <div className="mt-1 text-[10px] text-muted-foreground">
+                    <div className="mt-1 text-xs text-muted-foreground">
                       +{subItems.length} alt not
                     </div>
                   )}
@@ -263,9 +360,14 @@ export function PersonalContent({ categories, title, hideHeading = false }) {
                   <div className="pointer-events-none invisible absolute inset-x-0 top-0 z-20 max-h-80 min-h-full origin-top scale-95 overflow-hidden rounded-lg border border-foreground/15 bg-card opacity-0 shadow-2xl ring-1 ring-black/20 transition-all duration-200 ease-out group-hover:visible group-hover:scale-100 group-hover:opacity-100">
                     <div className="max-h-80 overflow-hidden p-3">
                       {selectedCategory === 'all' && (
-                        <div className="mb-1 text-[10px] font-semibold text-muted-foreground">
+                        <div className="mb-1 text-xs font-semibold text-muted-foreground">
                           {note.category}
                         </div>
+                      )}
+                      {note.content.title && (
+                        <h3 className="mb-1 text-sm font-semibold leading-snug text-foreground">
+                          {note.content.title}
+                        </h3>
                       )}
                       <p className="text-xs font-normal leading-relaxed text-foreground">
                         {text}
@@ -280,7 +382,7 @@ export function PersonalContent({ categories, title, hideHeading = false }) {
                     </div>
                     {isLong && (
                       <div className="absolute inset-x-0 bottom-0 flex h-14 items-end justify-center bg-gradient-to-t from-card via-card/80 to-transparent pb-2">
-                        <span className="text-[10px] font-medium text-muted-foreground">
+                        <span className="text-xs font-medium text-muted-foreground">
                           Tamamı için tıkla
                         </span>
                       </div>
@@ -291,7 +393,9 @@ export function PersonalContent({ categories, title, hideHeading = false }) {
             })}
             {filteredNotes.length === 0 && (
               <div className="col-span-full py-12 text-center">
-                <p className="text-xs text-muted-foreground">Bu kategoride not yok</p>
+                <p className="text-xs text-muted-foreground">
+                  {q ? 'Aramayla eşleşen not yok' : 'Bu kategoride not yok'}
+                </p>
               </div>
             )}
           </div>
@@ -316,9 +420,26 @@ export function PersonalContent({ categories, title, hideHeading = false }) {
             >
               <X className="h-4 w-4" />
             </button>
-            <div className="mb-3 pr-6 text-xs font-semibold text-muted-foreground">
-              {modalNote.category}
+            <div className="mb-3 flex items-center justify-between gap-3 pr-6">
+              <span className="text-xs font-semibold text-muted-foreground">
+                {modalNote.category}
+              </span>
+              {modalNote.content.id && (
+                <button
+                  onClick={() => copyLink(modalNote.content.id)}
+                  className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-md px-2 text-xs text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                  title="Bağlantıyı kopyala"
+                >
+                  {copied ? <Check className="h-3.5 w-3.5" /> : <Link2 className="h-3.5 w-3.5" />}
+                  <span aria-live="polite">{copied ? 'Kopyalandı' : 'Bağlantı'}</span>
+                </button>
+              )}
             </div>
+            {modalNote.content.title && (
+              <h2 className="mb-2 text-lg font-semibold leading-snug text-foreground">
+                {modalNote.content.title}
+              </h2>
+            )}
             <p className="whitespace-pre-line text-sm font-normal leading-relaxed text-foreground">
               {getItemText(modalNote.content)}
             </p>
@@ -328,6 +449,29 @@ export function PersonalContent({ categories, title, hideHeading = false }) {
                   <li key={i} className="text-xs text-muted-foreground">• {sub}</li>
                 ))}
               </ul>
+            )}
+            {modalNote.content.related?.length > 0 && (
+              <div className="mt-5 border-t border-border/60 pt-4">
+                <div className="mb-2 text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                  Bağlantılı · {modalNote.content.related.length}
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {modalNote.content.related.map((r) => {
+                    const target = getAllNotes().find((n) => n.content?.id === r.id)
+                    return (
+                      <button
+                        key={r.id}
+                        disabled={!target}
+                        onClick={() => target && setModalNote(target)}
+                        title={r.title}
+                        className="max-w-full truncate rounded-full border border-border px-3 py-1 text-xs text-foreground transition-colors hover:border-foreground/25 hover:bg-secondary"
+                      >
+                        {r.title}
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
             )}
           </div>
         </div>,

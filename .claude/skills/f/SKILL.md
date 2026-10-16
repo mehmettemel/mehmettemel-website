@@ -1,14 +1,15 @@
 ---
 name: f
-description: Future notlar grafiğine (Obsidian-tarzı /f) yeni gelecek notu ekler. /f komutu ile tetiklenir. Notu analiz edip src/data/future-notes.js dosyasına bir node olarak ekler ve mevcut notlarla anlamsal ilişki kurup links'e bağlar.
+description: Future notlar grafiğine (/f) yeni gelecek notu ekler. /f komutu ile tetiklenir. Notu analiz edip src/data/future-notes.js dosyasına bir node olarak ekler ve mevcut notlarla anlamsal ilişki kurup links'e bağlar.
 ---
 
 # Future Not Ekle
 
 Kullanıcı `/f` komutu ile bir gelecek notu verdiğinde, notu `src/data/future-notes.js`
 dosyasına bir **node** olarak ekler ve **mevcut notlarla anlamsal olarak
-ilişkilendirip** `links`'e bağlar. Sayfa: `/future` (giriş gerekli) (Obsidian-tarzı
-kuvvet-yönlü grafik). Skill YALNIZCA veri dosyasını düzenler; bileşene dokunmaz.
+ilişkilendirip** `links`'e bağlar. Sayfa: `/future` (giriş gerekli): notlar kategoriye (etiket) göre
+kart ızgarası olarak listelenir, arama ve kategori filtresi vardır; `links`
+notun modalında "Bağlantılı" olarak görünür. Skill YALNIZCA veri dosyasını düzenler; bileşene dokunmaz.
 
 ## Veri Yapısı
 
