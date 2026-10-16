@@ -638,6 +638,48 @@ export const nodes = [
     tags: ['pazarlama'],
     body: 'No free plan: Less than 3% of free users ever convert. Free users increase support costs and make you build features paying customers don\'t want.\n\nThree colors: Black text, white background, one color for the Buy button. Every extra color fights for attention.\n\nNumbers over adjectives: "Save 4 hours every week" not "Fast". Numbers are specific and memorable.\n\nFooter people want to share: 97% of visitors won\'t buy, but they might share. People remember what they see last. Finish strong.\n\nOG image as YouTube thumbnail: If they don\'t click, they don\'t watch. Your OG image is often seen more than your actual website.\n\nOne idea per screen: Don\'t try to say everything at once. One screen. One message.\n\nHeadline a fifth grader understands: Complexity kills curiosity. Use simple words. Your mum should get it.\n\nHard paywall: Signups don\'t pay the bills. Ask for payment before asking for data.\n\nCopy only you could write: If a competitor could copy-paste your landing page, your copy is too generic. Write from experience.\n\nShow the product before explaining it: A demo communicates more than paragraphs of text. Show. Don\'t tell.\n\nDo one thing: The more things you do, the less people remember. Be known for one thing.\n\nPopcorn Pricing: Three choices: Good, Better, Best. Every extra tier creates another reason to leave.\n\nRide a wave: Build around trends and problems people are already discussing. The wave does half the marketing.\n\nSteal copy from customers: Customers already describe your product better than you do. Write like your customers talk.\n\nFounder people can see and hear: People buy from people. A screen recording from the founder beats a corporate promo video.\n\nPricing impossible to miss: Put "Pricing" in the header. Visitors use it to understand the product, not just the price.\n\nHeadline people remember next day: Write five headlines. Show them to friends. Wait 24 hours. Keep the one that sticks.\n\nEmotional headline: People remember feelings. Your headline should make people laugh, say wow, or think "what is this."\n\nDo something never seen before: Nobody shares another clone. Surprise people.\n\nHero section must sell alone: 80% of visitors won\'t scroll past the hero. If they don\'t understand and want it in seconds, you\'ve lost.\n\nShow empathy before selling: Before people trust your solution, they need to believe you understand their problem.\n\nOne call to action: Every extra button creates hesitation. When people have multiple paths, many choose none. One next step.\n\nName people remember: Use words people already know. Avoid wordplay, made-up words, and names that require explanation.\n\nSell human desires, not features: People buy more money, time, health, status, or less pain. Features are just vehicles.\n\nLet people try before buying: Don\'t hide your best features behind a paywall. Let people play before they pay.\n\nNo weak words: "Most", "many", "rarely" weaken your message. Make statements, not estimates.\n\nNo subscription: One-time payments are 10x easier to sell. Don\'t add another monthly charge unless you can\'t ship without it.\n\nCTA that says what happens next: "Analyze My Website" tells people exactly what they\'re about to do. "Get Started" means nothing.\n\nLaunch with testimonials: A landing page without testimonials asks strangers to trust you blindly. Collect proof before traffic.\n\nDescribable in under 10 words: If you can\'t explain your product in one sentence, your users won\'t either.\n\nCompare yourself to competitors: People care why they should switch. Show a simple comparison table. Make the decision obvious.\n\nMore expensive than competitors: Nobody talks about the second cheapest option. Charge more.\n\n(Marc Lou)',
   },
+  {
+    id: 'insani-baglu-sirketler-one-cikacak',
+    title: 'İnsani Bağlı Şirketler',
+    tags: ['fırsat'],
+    body: 'Modern dünya her şeyi "insansızlaştırdı"; müşteriyle gerçek, insani bağ kuran şirketler öne çıkacak.',
+  },
+  {
+    id: 'hayat-becerileri-meslek-belirsizligi',
+    title: 'Meslek Belirsizliği',
+    tags: ['fırsat'],
+    body: 'Çocuklarınıza "belirli bir kariyer" yerine temel hayat becerilerini (yaratıcılık, iletişim, kaynak bulma) öğretin. Çünkü 20 yıl sonra hangi mesleğin kalacağı belli değil.',
+  },
+  {
+    id: 'gelecek-meslekler-israil',
+    title: 'Gelecek Meslekler: İsrail',
+    tags: ['fırsat'],
+    body: 'Gelecekteki meslekler için İsrail gibi çok akıllı yönetilen ülkelerdeki hükümetin gençleri neye yönlendirdiğine bak.',
+  },
+  {
+    id: 'gelecek-kucuk-girisimlerin',
+    title: 'Küçük Girişimlerin Geleceği',
+    tags: ['fırsat'],
+    body: 'Gelecek, büyük hükümetlerin değil, birbirine bağlı bireylerin ve küçük girişimlerin eseri olacak.',
+  },
+  {
+    id: 'harika-firsatlar-ucuz-degil',
+    title: 'Harika Fırsat Ucuz Değil',
+    tags: ['fırsat'],
+    body: 'Harika fırsatları asla "ucuza" alamazsınız. Pazarın o anki fiyatlamasına göre fazla para ödersiniz ancak şirket eksponansiyel büyüdüğünde o fiyat çok ucuz kalır.',
+  },
+  {
+    id: 'olumsuz-kosullar-kazanc-zamani',
+    title: 'Kriz Kazanç Zamanı',
+    tags: ['fırsat'],
+    body: 'Olumsuz görünen koşullar para kazanmak için en iyi zamanlardır.',
+  },
+  {
+    id: 'uzmanlik-kor-nokta',
+    title: 'Uzmanlığın Kör Noktası',
+    tags: ['fırsat'],
+    body: 'Yatırımcı Dean Williams: "Uzmanlık harikadır, ancak kötü bir yan etkisi vardır. Yeni fikirleri kabul etme konusunda bir yetersizlik yaratma eğilimindedir." 70-80\'lerde yatırım yapanlar düşük enflasyonun uzun süreceğine inanamadı. 90\'ların sonunda başlayanlar her yüksek değerlemede balon görüyor. 25 yaş altı blok zincirini 55 yaş üstüne göre daha kolay anlıyor. Gelişen her şeye (piyasalar, teknoloji, kariyer) bir zamanlar harika olan fikirlerin ömrünü doldurabileceği ve onları onarmaya çalışmak yerine çekip gitmenin daha iyi olacağı zihniyetiyle yaklaşılmalıdır.',
+  },
 ]
 
 export const links = [
@@ -719,4 +761,15 @@ export const links = [
   { source: 'viral-urunun-32-ilkesi', target: 'ilkel-beyne-mesaj' },
   { source: 'viral-urunun-32-ilkesi', target: 'abonelik-modeli' },
   { source: 'viral-urunun-32-ilkesi', target: 'duygusal-tetikleyiciler' },
+  { source: 'insani-baglu-sirketler-one-cikacak', target: 'sifir-surtunmeli-iliski' },
+  { source: 'insani-baglu-sirketler-one-cikacak', target: 'insana-ozgu-meslekler' },
+  { source: 'hayat-becerileri-meslek-belirsizligi', target: 'insana-ozgu-meslekler' },
+  { source: 'hayat-becerileri-meslek-belirsizligi', target: 'yz-cagi-klasik-kitaplar' },
+  { source: 'gelecek-meslekler-israil', target: 'hayat-becerileri-meslek-belirsizligi' },
+  { source: 'gelecek-kucuk-girisimlerin', target: 'maasa-kiralanma' },
+  { source: 'gelecek-kucuk-girisimlerin', target: 'kendi-isini-kur' },
+  { source: 'harika-firsatlar-ucuz-degil', target: 'sonraki-buyuk-hikaye' },
+  { source: 'olumsuz-kosullar-kazanc-zamani', target: 'kriz-ve-kisit-avantaji' },
+  { source: 'uzmanlik-kor-nokta', target: 'sentetik-veri-dogrulama' },
+  { source: 'uzmanlik-kor-nokta', target: 'kriz-ve-kisit-avantaji' },
 ]
