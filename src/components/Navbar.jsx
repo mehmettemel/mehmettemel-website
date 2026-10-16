@@ -108,6 +108,12 @@ function DesktopNav() {
       <NavigationMenuList>
         {isAuthenticated && (
           <NavigationMenuItem>
+            <NavLink href="/me">Me</NavLink>
+          </NavigationMenuItem>
+        )}
+
+        {isAuthenticated && (
+          <NavigationMenuItem>
             <NavLink href="/lists/personal">Personal</NavLink>
           </NavigationMenuItem>
         )}
@@ -214,6 +220,11 @@ function MobileNav() {
                   <Link href="/" onClick={closeSheet} className={mobileNavLinkClass}>
                     Home
                   </Link>
+                  {isAuthenticated && (
+                    <Link href="/me" onClick={closeSheet} className={mobileNavLinkClass}>
+                      Me
+                    </Link>
+                  )}
                   {isAuthenticated && (
                     <Link href="/lists/personal" onClick={closeSheet} className={mobileNavLinkClass}>
                       Personal
