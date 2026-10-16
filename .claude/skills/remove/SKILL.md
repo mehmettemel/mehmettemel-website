@@ -1,6 +1,6 @@
 ---
 name: remove
-description: Sitedeki herhangi bir içeriği (not, kart, kayıt, madde) veri dosyasından kaldırmak için kullanılır. /remove komutu ile tetiklenir. "food:<id>" gibi bir referans ya da serbest metin alır, doğru veri dosyasını bulur, kaydı siler ve doğrular.
+description: Sitedeki herhangi bir içeriği (not, kart, kayıt, madde) veri dosyasından kaldırmak için kullanılır. /remove komutu ile tetiklenir. "food:<id>" gibi bir referans, panelden kopyalanan bir not bağlantısı ya da serbest metin alır, doğru veri dosyasını bulur, kaydı siler ve doğrular.
 ---
 
 # İçerik Kaldır
@@ -11,13 +11,27 @@ düzenler.
 
 ## Adım 1: Referans Çözümleme
 
-İki giriş biçimi var:
+Üç giriş biçimi var:
+
+**0) Not bağlantısı** — Food ve Future panelindeki "Bağlantı" düğmesiyle
+kopyalanır: `https://.../food?n=<id>` veya `https://.../future?n=<id>`.
+Yol dosyayı, `n` parametresi not id'sini verir; prefix'li referansla aynı
+işlem yapılır:
+
+| Yol | Eşdeğeri |
+|---|---|
+| `/food` | `food:<id>` |
+| `/future` | `future:<id>` |
+
+Bağlantı gelince arama yapma, onay sorma: id'yi dosyada bul, sil, doğrula.
+Birden çok bağlantı alt alta gelebilir, hepsini sil.
 
 **a) Prefix'li referans** — kesin hedef, arama gerekmez:
 
 | Prefix | Dosya | Kayıt |
 |---|---|---|
 | `food:<id>` | `src/data/food-notes.js` | `nodes` içinde `id` eşleşen obje + o id'ye dokunan TÜM `links` |
+| `future:<id>` | `src/data/future-notes.js` | `nodes` içinde `id` eşleşen obje + o id'ye dokunan TÜM `links` |
 | `watchlist:<başlık>` | `src/data/watchlist.js` | `entries` içinde `title` eşleşen obje |
 
 **b) Serbest metin** — kullanıcı bir başlık, cümle parçası ya da konu verir.
@@ -46,7 +60,7 @@ Dosya formatına göre kaydı KOMPLE kaldır:
 - **Obje dizisi** (recipes, watchlist, food nodes): objeyi
   virgülüyle birlikte sil. Kalan dizi geçerli JS olmalı.
 - **String dizisi** (quotes, trivia, life-tips items): satırı sil.
-- **food-notes**: node silinince `links` içinde `source` YA DA `target` olarak
+- **food-notes ve future-notes**: node silinince `links` içinde `source` YA DA `target` olarak
   o id'yi taşıyan tüm satırları da sil — sarkan referans bırakma.
 - **w2b.json**: JSON geçerliliğini koru; kategori boş kalırsa kategoriyi de
   silmeyi ÖNER ama sorma, sadece bildir ve bırak.
@@ -60,7 +74,7 @@ node --check <dosya>          # .js dosyaları
 python3 -m json.tool <dosya>  # .json dosyaları
 ```
 
-food-notes silmesinde ek olarak: kalan `links` içinde silinen id geçmediğini
+food-notes ve future-notes silmesinde ek olarak: kalan `links` içinde silinen id geçmediğini
 grep ile doğrula.
 
 ## Sınırlar
@@ -81,4 +95,4 @@ Silindi: [dosya] → [başlık/id]
 ```
 
 Birden çoksa her biri ayrı satır. Bağlantı temizliği olduysa
-(`food-notes`): "n bağlantı da kaldırıldı" ekle.
+(`food-notes`, `future-notes`): "n bağlantı da kaldırıldı" ekle.

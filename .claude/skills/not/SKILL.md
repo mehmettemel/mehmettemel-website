@@ -21,7 +21,7 @@ Kullanıcı notun başında bir kategori ipucu yazabilir. İpucu varsa öncelikl
 `network` → money.js/Networking, `insan ilişkileri` → money.js/İnsan İlişkileri
 `business`, `ecommerce`, `e-commerce`, `kariyer`, `marketing` → future-notes.js (graf; `/f` skill'inin formatı: node + links)
 `iletişim`, `ikna` → iletisim.js/İletişim
-`finance`, `ai`, `gelecek`, `future`, `teknoloji` → future-notes.js (graf; `/f` skill'inin formatı: node + links)
+`fırsat`, `gelecek iş`, `sektör` → future-notes.js (etiket `fırsat`: gelecek vadeden işler), `finance`, `ai`, `gelecek`, `future`, `teknoloji` → future-notes.js (graf; `/f` skill'inin formatı: node + links)
 
 İpucu bulunduysa metinden çıkar (ipucu notun parçası değil).
 

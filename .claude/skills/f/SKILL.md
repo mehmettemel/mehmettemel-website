@@ -17,7 +17,7 @@ export const nodes = [
   {
     id: 'kebab-case-benzersiz-id',
     title: 'Kısa Başlık',        // 1-4 kelime, grafikte etiket olarak görünür
-    tags: ['kategori'],           // tek etiket, 10 genel kategoriden biri
+    tags: ['kategori'],           // tek etiket, 11 genel kategoriden biri
     body: 'Notun tam metni.',     // kullanıcının verdiği metin, olduğu gibi
   },
 ]
@@ -40,7 +40,9 @@ ve `links`'i incele. Yeni notu bunlarla ilişkilendireceksin.
   etiketi olarak görüneceği için kısa tut (örn. "Prompt Caching",
   "Ajan Döngüsü", "Context Penceresi").
 - **tags**: 1 adet küçük harf etiket (kategori).
-  (TEK etiket, şu 10 genel kategoriden biri: `ai`, `toplum`, `finans`, `strateji`, `satış`, `pazarlama`, `network`, `ekip`, `operasyon`, `kariyer`. Yeni etiket icat etme; hiçbiri uymuyorsa en yakınını seç).
+  (TEK etiket, şu 11 genel kategoriden biri: `fırsat`, `ai`, `toplum`, `finans`, `strateji`, `satış`, `pazarlama`, `network`, `ekip`, `operasyon`, `kariyer`. Yeni etiket icat etme; hiçbiri uymuyorsa en yakınını seç.
+
+  **`fırsat` = gelecek vadeden işler.** Gelecekte büyüyecek, para kazandıracak ya da değer kazanacak iş / sektör / meslek / niş öngörüleri bu etikete gider (örn. "renovasyon patlayacak", "geri dönüşüm sektörü", "zenginlere hizmet", "insana özgü meslekler"). Not hem `fırsat` hem başka bir kategoriye uyuyorsa (örn. bir AI öngörüsü ama aynı zamanda iş fırsatı) ve ana fikri "şu iş / sektör kazanacak" ise `fırsat` seç; ana fikri teknolojinin ya da toplumun nasıl değişeceğiyse `ai` / `toplum` seç).
 - **body**: kullanıcının verdiği metin. Olduğu gibi koru, yeniden yazma veya
   özetleme. Sadece `/f` prefix'ini ve varsa baştaki ipucunu temizle.
   Single quote'ları escape et (`'` → `\'`).

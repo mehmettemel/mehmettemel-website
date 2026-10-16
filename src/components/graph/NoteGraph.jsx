@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Search, X, ArrowUpRight } from 'lucide-react'
+import { Search, X, ArrowUpRight, Link2, Check } from 'lucide-react'
 import { GraphEngine } from './graph-engine'
 
 /* 3B not bulutu — three.js motoru koordinat ve çizimi üstlenir,
@@ -24,6 +24,7 @@ export function NoteGraph({ title, subtitle, nodes: rawNodes, links: rawLinks })
   const [query, setQuery] = useState('')
   const [searchFocus, setSearchFocus] = useState(false)
   const [cursor, setCursor] = useState(0) // klavyeyle seçili arama sonucu
+  const [copied, setCopied] = useState(false)
 
   const graph = useMemo(() => {
     const nodes = rawNodes.map((n) => ({ ...n }))
@@ -63,6 +64,13 @@ export function NoteGraph({ title, subtitle, nodes: rawNodes, links: rawLinks })
       onClick: (id) => setActive(id ? graph.byId.get(id) : null),
     })
     engineRef.current = engine
+    // derin bağlantı: ?n=<id> ile gelinen not açılır ve kameranın önüne gelir
+    const wanted = new URLSearchParams(window.location.search).get('n')
+    const wantedNode = wanted ? graph.byId.get(wanted) : null
+    if (wantedNode) {
+      setActive(wantedNode)
+      engine.flyTo(wantedNode.id)
+    }
     return () => {
       engine.dispose()
       engineRef.current = null
@@ -107,6 +115,35 @@ export function NoteGraph({ title, subtitle, nodes: rawNodes, links: rawLinks })
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [query, active, tag])
+
+  // notun bağlantısını panoya alır: <sayfa>?n=<id>. /remove bu bağlantıyı
+  // doğrudan çözer (yol → veri dosyası, n → not id'si).
+  const copyLink = useCallback(async (node) => {
+    const url = `${window.location.origin}${window.location.pathname}?n=${encodeURIComponent(node.id)}`
+    try {
+      await navigator.clipboard.writeText(url)
+    } catch {
+      // pano izni yoksa geçici bir alan üzerinden kopyala
+      const ta = document.createElement('textarea')
+      ta.value = url
+      ta.style.position = 'fixed'
+      ta.style.opacity = '0'
+      document.body.appendChild(ta)
+      ta.select()
+      document.execCommand('copy')
+      ta.remove()
+    }
+    setCopied(true)
+  }, [])
+
+  useEffect(() => {
+    if (!copied) return
+    const t = setTimeout(() => setCopied(false), 1600)
+    return () => clearTimeout(t)
+  }, [copied])
+
+  // başka nota geçince "kopyalandı" durumu sıfırlanır
+  useEffect(() => setCopied(false), [active])
 
   const openNode = useCallback((node) => {
     setActive(node)
@@ -327,13 +364,28 @@ export function NoteGraph({ title, subtitle, nodes: rawNodes, links: rawLinks })
                   </div>
                 )}
               </div>
-              <button
-                onClick={() => setActive(null)}
-                className="-mr-1.5 -mt-1 rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-                aria-label="Kapat"
-              >
-                <X className="h-4 w-4" />
-              </button>
+              <div className="-mr-1.5 -mt-1 flex shrink-0 items-center gap-0.5">
+                <button
+                  onClick={() => copyLink(active)}
+                  className="inline-flex h-8 items-center gap-1.5 rounded-md px-2 text-xs text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                  aria-label="Not bağlantısını kopyala"
+                  title="Bağlantıyı kopyala"
+                >
+                  {copied ? (
+                    <Check className="h-3.5 w-3.5" />
+                  ) : (
+                    <Link2 className="h-3.5 w-3.5" />
+                  )}
+                  <span aria-live="polite">{copied ? 'Kopyalandı' : 'Bağlantı'}</span>
+                </button>
+                <button
+                  onClick={() => setActive(null)}
+                  className="rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                  aria-label="Kapat"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
             </div>
 
             <div className="min-h-0 flex-1 overflow-y-auto px-5 py-4">

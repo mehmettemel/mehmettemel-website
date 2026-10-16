@@ -11,13 +11,13 @@ export const nodes = [
   {
     id: 'nufus-azalmasi-emlak',
     title: 'Nüfus Azalması ve Emlak',
-    tags: ['toplum'],
+    tags: ['fırsat'],
     body: 'Nüfus azalıyor Türkiye\'de evlilikler azalıyor vb. emlak sekterü giderek küçülecek ha sen para kazanırsın ömrünce ömrün kaç yıl ki zaten ama hep gerileme hissedersin.',
   },
   {
     id: 'renovasyon-patlayacak',
     title: 'Renovasyon Patlayacak',
-    tags: ['toplum'],
+    tags: ['fırsat'],
     body: 'Türkiye\'de patlayacak sektör renevasyon anadan-dededen kalan evleri düzgün renevasyon yapan firmalar ya da yıkıp yeniden yapanlar bunlar kazanır.',
   },
   {
@@ -35,7 +35,7 @@ export const nodes = [
   {
     id: 'insana-ozgu-meslekler',
     title: 'İnsana Özgü Meslekler',
-    tags: ['ai'],
+    tags: ['fırsat'],
     body: 'Hemşirelik, danışmanlık, sanat ve canlı performans gibi alanlar hayatta kalacak; zira YZ bilgiyi sağlasa da "paylaşılan deneyim" ve duygusal yankılanma her zaman insanın tekelinde kalacak.',
   },
   {
@@ -227,13 +227,13 @@ export const nodes = [
   {
     id: 'wrapper-urun-fiyati',
     title: 'Wrapper Ürün Fiyatı',
-    tags: ['satış'],
+    tags: ['fırsat'],
     body: 'Amazon\'un SES diye bir servisi var. Uygulamanızdan email göndermenizi sağlıyor. 10.000 email göndermenin maliyeti yaklaşık 1 dolar. Sonra biri geliyor, bunun üzerine güzel bir API, arayüz, dashboard ve developer experience inşa ediyor. Adını da Resend koyup 10 katı fiyata satıyor. Ve bu daha pahalı "wrapper" ürün binlerce müşteri buluyor. Demek ki insanlar her zaman en ucuz ürünü satın almıyor. Aynı teknolojiyi daha kolay, daha keyifli ve daha az zaman harcatarak sunabiliyorsanız, insanlar bunun için kat kat fazla ödemeye razı oluyor, ana satıcı sektörün lideri Amazon olsa bile. Bunun yakın zamandaki en güzel bir diğer örneği: Vercel Domains. Bin yıllık domain satın alma piyasasını altüst etti adamlar. Tek yaptıkları oldukça kolay, sade, tek tıkla domain alınabilecek bir arayüz sunmak oldu. Sonuçta her şey her şeyin wrapper\'ı. Kim daha güzel sarıp sarmalar ve sunarsa pazar payı bulabilir. Son olarak "wrapper" yapmak sanıldığı kadar kolay bir iş değildir. "İnsan psikolojisinden" anlamayan wrapper yapamaz.',
   },
   {
     id: '65-80-yas-musteri',
     title: '65-80 Yaş Müşteri',
-    tags: ['satış'],
+    tags: ['fırsat'],
     body: 'Ekonomik olarak en güçlü grup 65-80 yaş aralığı doğumlulardır. Borçları yoktur, emekli maaşları yüksektir, çocuklar büyümüştür, harcamaları düşüktür. Parayı mezara götürmeyi düşünmezler. Güneş deniz tatiline değil deneyimlemeye önem verirler.',
   },
   {
@@ -311,7 +311,7 @@ export const nodes = [
   {
     id: 'zenginler-harcar',
     title: 'Zenginler Harcar',
-    tags: ['satış'],
+    tags: ['fırsat'],
     body: 'Ozark dizisinden sahne: Sahte sineklerin gösterişlisini el işçiliğiyle yapan adam, herkes 30 cente satarken kim 6 dolara alır ki diyor. Kankasının cevabı: "Zenginler her zaman para harcamanın yeni bir yolunu arar!" Bu kadar basit. Zenginler para harcamanın yolunu ararken, zengin özentileri de sosyal medya sayesinde onlarla yarış halindeyken, "bu devirde iş yapılmaz, millet karnını zor doyuruyor" gibi önyargılar yüzünden birçok insan girişimci dünyasına dahil olmuyor. Kendi dünyalarının dışında da bir dünya olduğunu göremiyorlar.',
   },
   {
@@ -407,7 +407,7 @@ export const nodes = [
   {
     id: 'geri-donusum-sektoru',
     title: 'Geri Dönüşüm Sektörü',
-    tags: ['strateji'],
+    tags: ['fırsat'],
     body: 'Türkiye\'deki en bakir, en kazançlı sektör geri dönüşüm sektörüdür. Eğer geri dönüştürebileceğin bir ürün bulursan kaçırma. Hesaplama yaparken hurda, ıskarta oranlarını mutlaka hesaba kat.',
   },
   {
@@ -551,19 +551,19 @@ export const nodes = [
   {
     id: 'zenginlere-kaliteli-hizmet',
     title: 'Zenginlere Kaliteli Hizmet',
-    tags: ['strateji'],
+    tags: ['fırsat'],
     body: 'önümüzdeki yıllarda zenginlerin ihtiyaclarını çözecek kaliteli hizmet sektörüne büyük ihtiyaç var. Yapay zeka gelişmesiyle boş zamanı daha cok olacak zenginlerin böyle şeylere daha cok para harcayacak. - bora özkent',
   },
   {
     id: 'nis-alan-ve-hobi',
     title: 'Niş Alan ve Hobi',
-    tags: ['strateji'],
+    tags: ['fırsat'],
     body: 'belirli niş bir alan bulup bu alanda derinlemesine saatler harcayarak o alanda kendini ön plana çıkarabilirsin. çok niş alanlarda hobiler edinerek kendini daha ön plana çıkarabilirsin. örnek alanlar olarak Sand Grain Microphotography, Amateur Cryptozoology, Extreme Ironing, Herb Drying',
   },
   {
     id: 'sonraki-buyuk-hikaye',
     title: 'Sonraki Büyük Hikaye',
-    tags: ['strateji'],
+    tags: ['fırsat'],
     body: 'daima bir sonraki büyük story ne olacak buna bakmak lazım başarı için.',
   },
   {
@@ -611,7 +611,7 @@ export const nodes = [
   {
     id: 'kriz-ve-kisit-avantaji',
     title: 'Kriz ve Kısıt Avantajı',
-    tags: ['strateji'],
+    tags: ['fırsat'],
     body: 'Ekonomik krizlerde doğan şirketler (Airbnb, Uber, Tesla, Palantir) kısıtlamaları avantaja çevirerek büyük başarı yakaladı. Bireysel yatırımcılar için kaynak azlığı dezavantaj değil, özgün stratejiler geliştirme fırsatıdır; büyük fonları taklit etmek yerine farklı düşünmek gerekir.',
   },
   {
