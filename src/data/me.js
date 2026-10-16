@@ -2,7 +2,6 @@
 // paragraphs sırayla basılır; closing en altta vurgulu tek cümle.
 
 export const meTitle = 'Me'
-export const meSubtitle = 'Nasıl düşünürüm, nasıl yaşarım, neye bakarım.'
 
 export const paragraphs = [
   'Omurgam pragmatist. Bir fikrin doğruluğunu işe yaramasıyla ölçerim. Söze değil örüntüye güvenirim, çünkü örüntü yalan söylemez. Yüzeyin altına bakarım: bir sistemi anlamak için söylenen amaca değil oyuncuların çıkarına bakarım. Bu konuda Nietzsche ve Freud’un öğrencisiyim. Sürü ahlakına şüpheyle bakarım, bilinçdışının bizi yönettiğini kabul ederim. Nerede yaşayacağın, ne yiyeceğin, kiminle oturacağın birer karar değil, birer dünya görüşüdür.',
