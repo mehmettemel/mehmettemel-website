@@ -161,6 +161,8 @@ export const tabs = {
           'Sentetik kumaşlar (Polyester-Naylon-Akrilik) kontraseptif (doğum kontrol) etkiye sahip. Doğal kumaşlar ise pamuk, ipek ve yündür.',
           'Polyester ürünün direkt olarak teninize temas etmemesi lazım. Vücuda direkt temas eden kumaşların çamaşırlar için bambu, diğerleri için pamuk ve keten olmasını tercih edin. %98 pamuk %2 elastan gibi ürünlerde sorun yok.',
           'Skinny giymek istemiyorsan ve baggy çok bol geliyorsa STRAIGHT FIT - RELAXED FIT - TAPERED FIT giyebilirsin.',
+          'Pantolonda özellikle tapered fit chino pantolona bak. Relax tapered, straight fit ve comfort tapered gibi terimler önemli. Bu kalıplarda pamuklu pantolonlara bak.',
+          'T-shirt olarak ribana ya da bisiklet yakalara bak.',
           'Hydrogen peroxide to clean blood off all fabrics. No, it doesn\'t bleach the fabric. Yes, it\'s near instant and 100% total - no scrubbing. Just saturate, wait a few, and rinse.',
           'İyi bir çorap tercih etmiyorsanız en başta ayak kokusu kaçınılmaz. Çorapta kullanılan ipliğin içeriği önemli. Modal veya bambu iplikten yapılmış çorap ilk tercihiniz olsun.',
         ],
