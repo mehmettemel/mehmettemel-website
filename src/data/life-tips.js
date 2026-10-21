@@ -149,22 +149,39 @@ export const tabs = {
     label: 'Giyim',
     emoji: '👔',
     categories: {
-      'Genel': {
-        label: 'Genel',
+      'Kumaş': {
+        label: 'Kumaş',
         items: [
-          'Sıcaklarda keten ve pamuklu kıyafetler. Modal kıyafetler ferahlık sağlıyor ancak içinde polyester akrilik karışımı olmayacak.',
-          'Modal don, modal çorap ve Skechers ayakkabı. Muhteşem yaz 3\'lüsü. Modal çok kırışıyor ütü önemli.',
-          'Takım elbisede 6 drop önemli.',
-          'İpek saten çamaşırlar.',
-          'Kaşmir bir kazak.',
-          'İyi bir ayakkabıya sahip, ucuz bir takım elbise; her zaman ucuz bir ayakkabıya sahip iyi bir takım elbiseden çok daha etkileyici görünecektir. Resmi ortamlarda takım elbiseyle birlikte loafer (mokasen) giyilmez.',
-          'Sentetik kumaşlar (Polyester-Naylon-Akrilik) kontraseptif (doğum kontrol) etkiye sahip. Doğal kumaşlar ise pamuk, ipek ve yündür.',
-          'Polyester ürünün direkt olarak teninize temas etmemesi lazım. Vücuda direkt temas eden kumaşların çamaşırlar için bambu, diğerleri için pamuk ve keten olmasını tercih edin. %98 pamuk %2 elastan gibi ürünlerde sorun yok.',
-          'Skinny giymek istemiyorsan ve baggy çok bol geliyorsa STRAIGHT FIT - RELAXED FIT - TAPERED FIT giyebilirsin.',
-          'Pantolonda özellikle tapered fit chino pantolona bak. Relax tapered, straight fit ve comfort tapered gibi terimler önemli. Bu kalıplarda pamuklu pantolonlara bak.',
+          'Doğal kumaşlar pamuk, ipek ve yündür. Sentetik kumaşlar (polyester, naylon, akrilik) kontraseptif (doğum kontrol) etkiye sahip.',
+          'Polyester ürün direkt olarak tenize temas etmemeli. Vücuda direkt temas eden kumaşlarda çamaşırlar için bambu, diğerleri için pamuk ve keten tercih et. %98 pamuk %2 elastan gibi ürünlerde sorun yok.',
+          'Sıcaklarda keten ve pamuklu kıyafetler giy. Modal kıyafetler de ferahlık sağlıyor ama içinde polyester akrilik karışımı olmayacak. Modal çok kırışıyor, ütü önemli. Muhteşem yaz 3\'lüsü: modal don, modal çorap ve Skechers ayakkabı.',
+        ],
+      },
+      'Pantolon': {
+        label: 'Pantolon',
+        items: [
+          'Skinny giymek istemiyorsan ve baggy çok bol geliyorsa straight fit, relaxed fit veya tapered fit giyebilirsin. Özellikle tapered fit chino pantolona bak. Relax tapered, straight fit ve comfort tapered gibi kalıp terimleri önemli. Bu kalıplarda pamuklu pantolonları tercih et.',
+        ],
+      },
+      'Üst': {
+        label: 'Üst',
+        items: [
           'T-shirt olarak ribana ya da bisiklet yakalara bak.',
-          'Hydrogen peroxide to clean blood off all fabrics. No, it doesn\'t bleach the fabric. Yes, it\'s near instant and 100% total - no scrubbing. Just saturate, wait a few, and rinse.',
-          'İyi bir çorap tercih etmiyorsanız en başta ayak kokusu kaçınılmaz. Çorapta kullanılan ipliğin içeriği önemli. Modal veya bambu iplikten yapılmış çorap ilk tercihiniz olsun.',
+          'Kaşmir bir kazak.',
+        ],
+      },
+      'Takım Elbise': {
+        label: 'Takım Elbise',
+        items: [
+          'Takım elbisede 6 drop önemli.',
+          'İyi bir ayakkabıya sahip, ucuz bir takım elbise; her zaman ucuz bir ayakkabıya sahip iyi bir takım elbiseden çok daha etkileyici görünecektir. Resmi ortamlarda takım elbiseyle birlikte loafer (mokasen) giyilmez.',
+        ],
+      },
+      'İç Giyim & Çorap': {
+        label: 'İç Giyim & Çorap',
+        items: [
+          'İpek saten çamaşırlar.',
+          'İyi bir çorap tercih etmezsen en başta ayak kokusu kaçınılmaz. Çorapta kullanılan ipliğin içeriği önemli. Modal veya bambu iplikten yapılmış çorap ilk tercihin olsun.',
         ],
       },
       'Ayakkabı': {
@@ -179,6 +196,12 @@ export const tabs = {
           'Rahat ve sıcak olmak istiyorsanız katman sanatını öğrenmelisiniz: iç katman (içlik, termal) + orta katman (mont) + dış katman (yağmurluk/rüzgarlık).',
           'İçlikte yün tercih edin çünkü ter veya nem tutmaz ve hava alır. Orta katmanda kaz tüyü en iyi tercih, çünkü hafif, ince ve sıcak tutma performansı inanılmaz.',
           'Dış katmanın özelliği dışarıdan rüzgar ve yağmur gibi faktörleri önlemesi. Bu yüzden gore-tex kullanılıyor: ter buharının dışarı çıkabileceği kadar kalın ama yağmurun ve rüzgarın giremeyeceği kadar ince dokunmuş süper teknolojik bir kumaş.',
+        ],
+      },
+      'Bakım': {
+        label: 'Bakım',
+        items: [
+          'Hydrogen peroxide to clean blood off all fabrics. No, it doesn\'t bleach the fabric. Yes, it\'s near instant and 100% total - no scrubbing. Just saturate, wait a few, and rinse.',
         ],
       },
     },
