@@ -78,6 +78,8 @@ export const categories = {
     'Marriage is not for lovers, its for...forgivers, communicators, sacrificers, servants, builders, protectors and those with patience.',
     'Flört sürecinde baskıyı sıfıra indirmek ve karşı tarafa her zaman zihinsel ile fiziksel bir kaçış alanı (plausible deniability) bırakmak çok önemli. Süreci bir amaca değil, ana odaklayın: "Bize gidelim" demek doğrudan yatak odasını işaret eder ve karşı tarafa "Gelirsen bunu kabul etmiş sayılırsın" baskısı yükler. Bunun yerine odağı sohbetin devamına, evdeki bir plağı dinlemeye, kahve içmeye veya basit bir ev işine (örneğin evcil hayvanla ilgilenmek) çekmek ortamı hafifletir. Sosyal yargılanma riskini ortadan kaldırın: İnsanlar kendilerini "kolay" hissetmek veya öyle görünmek istemez. Masum bir bahane, karşı tarafa hem kendi zihninde hem de çevresine karşı meşru bir zemin sunar: "Sadece köpeğini sevmeye gitmiştim, olaylar kendiliğinden gelişti."',
     'karının güzelliği şöyle söyleyeyim o ama girersem ömrümün uzayacağına inanıyorum',
+    'Sex is the most intimate thing two people can do. If you can repeatedly share that intimacy with strangers and walk away without a second thought, I don\'t believe you have capacity for love and bonding. You basically exist as an animal. I have never understood hookups.',
+    'If she wanted you later, it’s because time humbled her, not because she chose you.',
     ]
   },
 }
