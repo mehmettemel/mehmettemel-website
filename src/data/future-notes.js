@@ -681,6 +681,12 @@ export const nodes = [
     tags: ['fırsat'],
     body: 'Yatırımcı Dean Williams: "Uzmanlık harikadır, ancak kötü bir yan etkisi vardır. Yeni fikirleri kabul etme konusunda bir yetersizlik yaratma eğilimindedir." 70-80\'lerde yatırım yapanlar düşük enflasyonun uzun süreceğine inanamadı. 90\'ların sonunda başlayanlar her yüksek değerlemede balon görüyor. 25 yaş altı blok zincirini 55 yaş üstüne göre daha kolay anlıyor. Gelişen her şeye (piyasalar, teknoloji, kariyer) bir zamanlar harika olan fikirlerin ömrünü doldurabileceği ve onları onarmaya çalışmak yerine çekip gitmenin daha iyi olacağı zihniyetiyle yaklaşılmalıdır.',
   },
+  {
+    id: 'meraktan-gelire-icerik-urun-modeli',
+    title: 'Meraktan Gelire',
+    tags: ['pazarlama'],
+    body: 'Meraktan Gelire: İçerik ve Ürün Modeli\n\n1. Değer Üret & Süreci Paylaş: Uzmanlaşmayı beklemeden, öğrendiklerini ve kendi dönüşüm yolculuğunu içerik olarak aktar.\n2. Kitleyi Kendi Alanına Taşı: Sosyal medyayı bir vitrin olarak kullan; asıl bağı ve güveni kurmak için takipçileri e-posta bültenine çek.\n3. Küçük Başla, Büyüt: İnsanların belirli bir sorununu çözen basit dijital ürünlerle (şablon, rehber) başla; zamanla mentorluk ve danışmanlık gibi hizmetlere evril.\n4. Harekete Geç & YZ Kullan: Fikir bulma ve planlama süreçlerinde yapay zekadan destek alarak düzenli içerik üretmeye başla.',
+  },
 ]
 
 export const links = [
@@ -773,4 +779,7 @@ export const links = [
   { source: 'olumsuz-kosullar-kazanc-zamani', target: 'kriz-ve-kisit-avantaji' },
   { source: 'uzmanlik-kor-nokta', target: 'sentetik-veri-dogrulama' },
   { source: 'uzmanlik-kor-nokta', target: 'kriz-ve-kisit-avantaji' },
+  { source: 'meraktan-gelire-icerik-urun-modeli', target: 'egiterek-sat' },
+  { source: 'meraktan-gelire-icerik-urun-modeli', target: 'utanc-dagi' },
+  { source: 'meraktan-gelire-icerik-urun-modeli', target: 'nis-alan-ve-hobi' },
 ]
