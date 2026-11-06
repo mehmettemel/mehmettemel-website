@@ -687,6 +687,12 @@ export const nodes = [
     tags: ['pazarlama'],
     body: 'Meraktan Gelire: İçerik ve Ürün Modeli\n\n1. Değer Üret & Süreci Paylaş: Uzmanlaşmayı beklemeden, öğrendiklerini ve kendi dönüşüm yolculuğunu içerik olarak aktar.\n2. Kitleyi Kendi Alanına Taşı: Sosyal medyayı bir vitrin olarak kullan; asıl bağı ve güveni kurmak için takipçileri e-posta bültenine çek.\n3. Küçük Başla, Büyüt: İnsanların belirli bir sorununu çözen basit dijital ürünlerle (şablon, rehber) başla; zamanla mentorluk ve danışmanlık gibi hizmetlere evril.\n4. Harekete Geç & YZ Kullan: Fikir bulma ve planlama süreçlerinde yapay zekadan destek alarak düzenli içerik üretmeye başla.',
   },
+  {
+    id: 'satis-bag-guven-ve-kapanis',
+    title: 'Satış: Bağ ve Güven',
+    tags: ['satış'],
+    body: 'Masaya oturur oturmaz doğrudan satışa odaklanmayın. Spor, güncel olaylar veya ortak geçmiş gibi doğal sohbet konularıyla insani temas sağlayın. Satışın %80\'i kurulan bağ ve güvenden, %20\'si ise ticari kapanıştan oluşur.\n\nSatışı satranç gibi ele alarak bir sonraki hamleyi (örneğin takip kahvesi veya yemek) açık uçlu bırakmadan netleştirin.\n\nMüşteri tek başına bir yazılım ya da ürün almaz; elde edeceği nihai sonucu, deneyimi ve hayatındaki/işindeki değişimi satın alır.\n\n"Hayır" yanıtlarını ve reddedilmeleri asla kişisel algılamayın; her itirazı bir öğrenme ve gelişim fırsatı olarak görün.',
+  },
 ]
 
 export const links = [
@@ -782,4 +788,7 @@ export const links = [
   { source: 'meraktan-gelire-icerik-urun-modeli', target: 'egiterek-sat' },
   { source: 'meraktan-gelire-icerik-urun-modeli', target: 'utanc-dagi' },
   { source: 'meraktan-gelire-icerik-urun-modeli', target: 'nis-alan-ve-hobi' },
+  { source: 'satis-bag-guven-ve-kapanis', target: 'musteri-sicakken-bitir' },
+  { source: 'satis-bag-guven-ve-kapanis', target: 'why-how-what' },
+  { source: 'satis-bag-guven-ve-kapanis', target: 'musteriyi-karli-kil' },
 ]

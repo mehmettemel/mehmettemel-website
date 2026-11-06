@@ -69,6 +69,13 @@ export const todoList = [
       { id: 'yeme-icme-8', label: 'Meşhur Yemekler ve Yemeği ile ünlü Restoranlar Listesi' },
     ],
   },
+  {
+    id: 'guvenlik',
+    label: 'GÜVENLİK',
+    children: [
+      { id: 'guvenlik-1', label: 'Ülkedeki yaygın dolandırıcılıkları araştır.' },
+    ],
+  },
 ]
 
 export const packingList = [
@@ -249,7 +256,7 @@ export const tabs = {
           'Accuweather\'dan gideceğiniz ülkenin hava durumuna bakın. Aralık ayında Mısır\'a gittiğimde çok dikkatli bakmamıştım ve gerekenden kalın giyinmiştim. Aynı zamanda Kazakistan gibi ülkelerde gündüz gece arası sıcaklık farkı çok olabiliyor. Buna da dikkat etmek lazım.',
           'Kartınızı yurtdışına açtırın, hattınızı açtırmayın. Günlük ona para ödemek yerine SIM card alın. E-SIM kimi zaman daha ucuz oluyor.',
           'Vizeli bi ülkeye giriyorsan otel rezervasyonları ve dönüş biletini aynı zamanda banka hesap bilgilerini yanında bulundur.',
-          'I find the library to ask where the best local spots are — librarians aren\'t part of the tourism industry so you\'re more likely to get real answers rather than the business run by your waiter/concierge\'s cousin or best friend.',
+          'I find the library to ask where the best local spots are. Librarians aren\'t part of the tourism industry, so you\'re more likely to get real answers rather than the business run by your waiter/concierge\'s cousin or best friend.',
           'If you\'re on a road trip and need a clean place to go to the bathroom, go to a hotel lobby.',
           'Bir mekanda ne meşhursa onu sipariş et ama bir şey değiştirme, olduğu gibi okeysen sipariş ver. Bir ürün buzlu ise buzsuz seçeneği koymamışlarsa buzsuz olsun deme, sonuç hüsran oluyor.',
           'If you\'re lost, go to a hotel for directions, not a gas station. Hotel employees are so knowledgeable, and often have access to maps and Google and can help you with directions, where to eat, etc.',
@@ -265,7 +272,7 @@ export const tabs = {
       'People & Countries': {
         label: 'People & Countries',
         items: [
-          'Women — Best dates: Argentina. Most fun: Brazil. Most beautiful: Colombia, Ecuador. Best to marry: Mexico.',
+          'Women: Best dates: Argentina. Most fun: Brazil. Most beautiful: Colombia, Ecuador. Best to marry: Mexico.',
           'Ruslarla temas zordur zaten. Rusça bilmiyorsan çok çok zor. Bunun dışında geç samimi olurlar ama sağlam arkadaş olurlar, severim Rusları. Hindistanlılardan uzak dur, bu kadar stabil olmayan, kiminle karşılaşacağın belli olmayan millet az bulursun.',
           'İranlılar: Dedikodu, gıybet, arkadan iş çevirme.',
           'Hintliler: Yalakalık, arkadan iş çevirme, yöneticiye yaltaklık.',
@@ -331,7 +338,7 @@ export const tabs = {
           'Boeing 737 MAX uçakları eskiden kalma kazaları var o yüzden binmemekte fayda var. If it\'s Boeing, I am not going.',
           'Dawn and dusk are statistically the safest times to fly.',
           'Stay awake until it\'s time to sleep in their time, zero jet lag. Never failed me.',
-          'Airplane water is dirty. Be careful about drinking coffee or hot tea on planes. Also remember the water you wash your hands with in airplane bathrooms is filthy. Follow up with hand sanitizer — or just try to skip the bathroom on the airplane if possible.',
+          'Airplane water is dirty. Be careful about drinking coffee or hot tea on planes. Also remember the water you wash your hands with in airplane bathrooms is filthy. Follow up with hand sanitizer, or just try to skip the bathroom on the airplane if possible.',
           'Uçuşlarda el çantanı ya da sırt çantanı ayak altına koymadan önce bir çöp poşeti içine koyup öyle koy. O bölge çok pis oluyor.',
         ],
       },
